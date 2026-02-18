@@ -1,0 +1,27 @@
+@import '../../../styles/common';
+@import '../../../styles/mixins';
+
+.Login {
+  @extend .br-0p5;
+  @extend .display-flex;
+  @include boxShadow();
+  overflow: clip;
+
+  border: 1px solid gainsboro;
+
+  .Logo {
+    background-color: #f2f2f2;
+  }
+
+  .Email {
+    width: 250px;
+    @extend .display-inline-flex;
+    @extend .gap-1
+  }
+
+  .Password {
+    width: 250px;
+    @extend .display-inline-flex;
+    @extend .gap-1
+  }
+}

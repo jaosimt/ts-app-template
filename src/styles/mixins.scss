@@ -1,0 +1,7 @@
+@mixin boxShadow($color: #424242, $spread: -1px, $blur: 7px, $h-offset: -1px, $v-offset: 1px) {
+  box-shadow : $h-offset $v-offset $blur $spread $color;
+}
+
+@mixin _invisible {
+  animation : invisible 10ms linear both;
+}

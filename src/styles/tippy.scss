@@ -1,0 +1,18 @@
+@import 'variables';
+@import 'keyframes';
+@import 'mixins';
+
+.tippy-box[data-theme~='error'] {
+  background-color: $errorColor;
+  color: yellow;
+
+  &[data-placement^="top"] {
+    > .tippy-arrow:before {
+      border-top-color: $errorColor;
+    }
+  }
+}
+
+div[data-tippy-root] {
+  animation : fadein 700ms ease-in-out;
+}

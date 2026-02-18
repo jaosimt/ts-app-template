@@ -1,0 +1,33 @@
+@import 'styles/common';
+@import 'styles/keyframes';
+
+.ts-app-template {
+  @extend .display-flex;
+
+  >.header {
+    background-color: #282c34;
+    min-height: 100vh;
+    min-width: 21vw;
+    width: 14%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    >.logo {
+      height: 40vmin;
+      pointer-events: none;
+      animation: spin infinite 20s linear;
+    }
+  }
+
+  .content {
+    @extend .p-1;
+    width: 86%;
+  }
+
+  *.link {
+    color: #61dafb;
+  }
+}
