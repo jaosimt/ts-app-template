@@ -1,11 +1,11 @@
-import { FormFieldProps } from "../../../interafaces";
-import React, { useEffect, useState } from "react";
+import { FormFieldProps } from '../../../interafaces';
+import React, { useEffect, useState } from 'react';
 import './styles.scss';
-import { FaCircleXmark } from "react-icons/fa6";
+import { FaCircleXmark } from 'react-icons/fa6';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 import '../../../styles/tippy.scss';
-import { classNames } from "../../../utils";
+import { classNames } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
 import { ReactIcon } from '../index';
 
@@ -38,17 +38,18 @@ export function InputField(props: FormFieldProps) {
 
         const el = document.getElementById(uid);
         if (!inputRef && el) {
-            setInputRef(el)
+            setInputRef(el);
             setRef?.(el);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
         setStyles({
             zIndex: error ? 1 : -777,
             opacity: error ? 1 : 0
-        })
-    }, [error])
+        });
+    }, [error]);
 
     return (
         <div data-component={'input-field'} className={'display-flex align-items-center'}>
@@ -79,5 +80,5 @@ export function InputField(props: FormFieldProps) {
                 </Tippy>
             </div>
         </div>
-    )
+    );
 }

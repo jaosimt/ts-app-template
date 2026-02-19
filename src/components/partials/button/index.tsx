@@ -31,11 +31,13 @@ export function Button(props: ButtonProps) {
             setButtonRef(el);
             setRef?.(el);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <button {...restProps} id={uid} type={type} data-component={'button'} style={{...style, width: width, justifyContent: align}}>
-            {icon &&  <ReactIcon className={iconClassName} icon={icon}/>}
+        <button {...restProps} id={uid} type={type} data-component={'button'}
+                style={{...style, width: width, justifyContent: align}}>
+            {icon && <ReactIcon className={iconClassName} icon={icon}/>}
             {children}
         </button>
     );

@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
-import ReactDOM from "react-dom";
-import type { WindowPortalProps } from "../../../types";
+import { useEffect, useMemo, useState } from 'react';
+import ReactDOM from 'react-dom';
+import type { WindowPortalProps } from '../../../types';
 
 const WindowPortal = ({children, title = `${window.document.title} portal`, onClose}: WindowPortalProps) => {
     const [, setExternalWindow] = useState<Window | null>(null);
-    const container = useMemo(() => document.createElement("div"), []);
+    const container = useMemo(() => document.createElement('div'), []);
 
     useEffect(() => {
         // 1. Open a new window when the component mounts
@@ -35,16 +35,17 @@ const WindowPortal = ({children, title = `${window.document.title} portal`, onCl
             // Optional: Add a title to the new window
             newWindow.document.title = title;
 
-            newWindow.addEventListener('beforeunload', function (e) {
+            newWindow.addEventListener('beforeunload', () => {
                 onClose && onClose();
             });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); // Run once on mount
 
     return ReactDOM.createPortal(
         children,
         container
     );
-}
+};
 
 export default WindowPortal;
