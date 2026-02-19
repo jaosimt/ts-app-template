@@ -29,8 +29,7 @@ const WindowPortal = ({children, title = `${window.document.title} portal`, onCl
             };
 
             copyStyles(styleTags, newWindow);
-            // @ts-ignore
-            copyStyles(linkTags, newWindow);
+            copyStyles(linkTags as Iterable<HTMLElement>, newWindow);
 
             // Optional: Add a title to the new window
             newWindow.document.title = title;
@@ -39,7 +38,7 @@ const WindowPortal = ({children, title = `${window.document.title} portal`, onCl
                 onClose && onClose();
             });
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
     }, []); // Run once on mount
 
     return ReactDOM.createPortal(

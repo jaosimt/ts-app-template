@@ -58,7 +58,7 @@ export function InputField(props: FormFieldProps) {
                 {icon && <ReactIcon icon={icon} className={'align-self-center'}/>}
                 {label && label}
             </label>
-            <div className={'position-relative'}>
+            <div className={'position-relative display-flex'}>
                 <input
                     type={type || 'text'}
                     placeholder={placeHolder}
@@ -71,8 +71,7 @@ export function InputField(props: FormFieldProps) {
                     theme={'error'}
                 >
                     <span data-popper-arrow className={'error position-absolute'} style={styles} onClick={() => {
-                        // @ts-ignore
-                        inputRef?.select();
+                        (inputRef as HTMLTextAreaElement)?.select();
                         inputRef?.focus();
                     }}>
                         <ReactIcon icon={FaCircleXmark}/>

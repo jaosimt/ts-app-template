@@ -1,0 +1,60 @@
+@import "../../../styles/mixins";
+@import "../../../styles/variables";
+
+.modal-overlay {
+  position         : fixed;
+  top              : 0;
+  left             : 0;
+  width            : 100vw;
+  height           : 100vh;
+  background-color : rgba(0, 0, 0, 0.5);
+  z-index          : 777;
+  transition       : all 150ms ease-in-out;
+  display          : flex;
+  align-items      : center;
+  justify-content  : center;
+  
+  .header {
+    padding         : 0.5rem;
+    border-bottom   : 1px solid $borderColor;
+    display         : flex;
+    align-items     : center;
+    justify-content : space-between;
+    gap             : 0.5rem;
+    
+    > .title {
+      font-weight : 700;
+      white-space : nowrap;
+    }
+    
+    > .btn-close {
+      display     : inline-flex;
+      cursor      : pointer;
+      right       : 3px;
+      
+    }
+  }
+  
+  > [data-component="Modal"] {
+    @include boxShadow();
+    
+    position         : relative;
+    border-radius    : 0.5rem;
+    background-color : white;
+    max-width        : calc(100vw - 3rem);
+    max-height       : calc(100vh - 3rem);
+    opacity          : 0;
+    transition       : all 150ms ease-in-out;
+    
+    > .content {
+      margin        : 1rem 0 1rem 1rem;
+      padding-right : 1rem;
+      height        : calc(100% - 2rem);
+      overflow      : auto;
+    }
+  }
+  
+  ~ .modal-overlay {
+    background-color : transparent;
+  }
+}

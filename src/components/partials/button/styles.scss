@@ -2,24 +2,43 @@
 @import '../../../styles/mixins';
 @import '../../../styles/common';
 
+.btn-icon,
 button,
 [data-component="button"] {
-  @extend .br-0p3;
   @include boxShadow($buttonPrimaryBorderColor);
   
-  display          : inline-flex;
-  width            : fit-content;
-  padding          : 0.49rem 0.56rem;
-  background-color : $buttonPrimaryColor;
-  color            : $buttonPrimaryTextColor;
-  border           : 1px solid $buttonPrimaryBorderColor;
-  cursor           : pointer;
-  transition       : all 150ms ease-in-out;
-  align-items      : center;
-  gap              : 0.5rem;
+  &.btn-icon {
+    border-radius    : 50%;
+    color            : $buttonPrimaryColor;
+    background-color : $buttonPrimaryTextColor;
+  }
+  
+  &:not(.btn-icon) {
+    @extend .br-0p3;
+    padding          : 0.49rem 0.56rem;
+    background-color : $buttonPrimaryColor;
+    color            : $buttonPrimaryTextColor;
+    border-color     : $buttonPrimaryBorderColor;
+  }
+  
+  display      : inline-flex;
+  width        : fit-content;
+  border-width : 1px;
+  border-style : solid;
+  cursor       : pointer;
+  transition   : all 150ms ease-in-out;
+  align-items  : center;
+  gap          : 0.5rem;
   
   &:hover {
-    background-color : $buttonPrimaryHoverColor;
+    &:not(.btn-icon) {
+      background-color : $buttonPrimaryHoverColor;
+    }
+    
+    &.btn-icon {
+      color            : $buttonPrimaryHoverColor;
+      background-color : $buttonPrimaryTextColor;
+    }
     
     &:active { opacity : 0.3; }
   }
