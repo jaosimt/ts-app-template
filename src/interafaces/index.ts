@@ -15,6 +15,16 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLInputElement> {
 
 }
 
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+    type?: 'button' | 'submit' | 'reset';
+    setRef?: Dispatch<SetStateAction<HTMLElement | null>>;
+    align?: 'left' | 'center' | 'right' | 'space-between';
+    icon?: IconType;
+    iconClassName?: string;
+    disabled?: boolean;
+    width?: string | number;
+}
+
 export interface LoginFormInput {
     email: string;
     password: string;

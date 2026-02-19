@@ -1,12 +1,13 @@
-import { FormFieldProps, IconProps } from "../interafaces";
-import React, { useEffect, useState, FC } from "react";
+import { FormFieldProps } from "../../../interafaces";
+import React, { useEffect, useState } from "react";
 import './styles.scss';
 import { FaCircleXmark } from "react-icons/fa6";
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
-import '../styles/tippy.scss';
-import { classNames } from "../utils";
+import '../../../styles/tippy.scss';
+import { classNames } from "../../../utils";
 import { v4 as uuidv4 } from 'uuid';
+import { ReactIcon } from '../index';
 
 export function InputField(props: FormFieldProps) {
     const {
@@ -29,7 +30,7 @@ export function InputField(props: FormFieldProps) {
     });
 
     const [inputRef, setInputRef] = useState(null as HTMLElement | null);
-    const uid = `${fieldRegister.name}-${uuidv4()}`;
+    const [uid] = useState(`${fieldRegister.name}-${uuidv4()}`);
 
     useEffect(() => {
         /* For some reason ref is spewing errors that override the validation errors
@@ -79,9 +80,4 @@ export function InputField(props: FormFieldProps) {
             </div>
         </div>
     )
-}
-
-export const ReactIcon: FC<IconProps> = ({icon: Icon, size, className}) => {
-    // @ts-ignore
-    return <Icon size={size} className={className}/>
 }

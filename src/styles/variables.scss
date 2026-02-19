@@ -1,6 +1,13 @@
-$textColor: #000000;
+$textColor: #61dafb;
 $errorColor: #ff0000;
 $backgroundColor: #ffffff;
 $backgroundColorSelected: rgba(214, 214, 214, 0.49);
 $borderColor: #e9e9e9;
 $borderColorLight: #bcbcbc;
+
+$buttonPrimaryColor: rgba(0, 123, 255, 0.63);
+$buttonPrimaryTextColor: #ffffff;
+$buttonPrimaryHoverColor: rgba(0, 123, 255, 1);
+$buttonPrimaryBorderColor: $buttonPrimaryHoverColor;
+$buttonPrimaryHoverBorderColor: rgb(0, 74, 132);
+$buttonPrimaryDisabledTextColor: rgba(255, 255, 255, 0.49);

@@ -1,0 +1,44 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/common';
+
+[data-component="input-field"] {
+  @extend .display-flex;
+  @extend .gap-0p5;
+  
+  > label {
+    @extend .display-inline-flex;
+    @extend .align-items-center;
+    
+    min-width : fit-content;
+  }
+  
+  > div {
+    > input {
+      @extend .p-0p5;
+      @extend .br-0p3;
+      border : 1px solid $borderColor;
+      
+      &[type="text"] {}
+      
+      &[type="submit"] {}
+      
+      &[type="checkbox"] {}
+      
+      &[type="radio"] {}
+    }
+    
+    > .error {
+      @include boxShadow($errorColor);
+      
+      border-radius : 50%;
+      position      : absolute;
+      cursor        : pointer;
+      color         : $errorColor;
+      transition    : all 100ms ease-in-out;
+      align-self    : center;
+      right         : 7px;
+      height        : 1rem;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 @import 'styles/common';
-@import 'styles/keyframes';
+@import 'styles/animations';
 
 .ts-app-template {
   @extend .display-flex;
@@ -18,7 +18,6 @@
     >.logo {
       height: 40vmin;
       pointer-events: none;
-      animation: spin infinite 20s linear;
     }
   }
 
@@ -30,4 +29,8 @@
   *.link {
     color: #61dafb;
   }
+}
+
+.color-red {
+  color: red;
 }
