@@ -62,8 +62,8 @@ export function InputField(props: FormFieldProps) {
                 <input
                     type={type || 'text'}
                     placeholder={placeHolder}
-                    className={classNames(className, error ? 'border-error' : '')}
-                    id={uid} {...restProps} {...fieldRegister}
+                    className={classNames(className && '', error && 'border-error')}
+                    id={uid} {...fieldRegister} {...restProps}
                 />
                 <Tippy
                     content={error}
