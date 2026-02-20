@@ -1,36 +1,39 @@
 @import 'styles/common';
 @import 'styles/animations';
+@import 'styles/variables';
 
-.ts-app-template {
-  @extend .display-flex;
-
-  >.header {
-    background-color: #282c34;
-    min-height: 100vh;
-    min-width: 21vw;
-    width: 14%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-
-    >.logo {
-      height: 40vmin;
-      pointer-events: none;
-    }
+#ts-app-template {
+  display        : flex;
+  flex-direction : column;
+  
+  header {
+    position         : relative;
+    background-color : #963999;
+    height           : 50px;
+    display          : flex;
+    align-items      : center;
+    justify-content  : space-between;
+    padding          : 0.5rem;
+    gap              : 0.5rem;
   }
-
-  .content {
-    @extend .p-1;
-    width: 86%;
+  
+  main {
+    position         : relative;
+    background-color : $backgroundColor;
+    width            : 100vw;
+    min-height       : calc(100vh - 80px);
+    display          : flex;
+    padding          : 2rem;
   }
-
-  *.link {
-    color: #61dafb;
+  
+  footer {
+    position         : relative;
+    background-color : #963999;
+    height           : 30px;
+    display          : flex;
+    align-items      : center;
+    padding          : 0.5rem;
+    font-size        : small;
+    font-weight      : 700;
   }
-}
-
-.color-red {
-  color: red;
 }

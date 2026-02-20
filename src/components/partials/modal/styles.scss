@@ -8,11 +8,13 @@
   width            : 100vw;
   height           : 100vh;
   background-color : rgba(0, 0, 0, 0.5);
-  z-index          : 777;
   transition       : all 150ms ease-in-out;
   display          : flex;
   align-items      : center;
   justify-content  : center;
+  
+  &.max-z-index { z-index : 2147483647; }
+  &:not(.max-z-index) { z-index : 777; }
   
   .header {
     padding         : 0.5rem;

@@ -1,43 +1,62 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import type { WindowPortalProps } from '../../../types';
 
-const WindowPortal = ({children, title = `${window.document.title} portal`, onClose}: WindowPortalProps) => {
+const WindowPortal = ({openOnNextScreen = false, children, title = `${window.document.title} portal`, onClose}: WindowPortalProps) => {
     const [, setExternalWindow] = useState<Window | null>(null);
     const container = useMemo(() => document.createElement('div'), []);
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        // 1. Open a new window when the component mounts
-        const newWindow = window.open();
-        setExternalWindow(newWindow);
+        // @ts-ignore
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => {
+            const handler = (newWindow: Window | null) => {
+                setExternalWindow(newWindow);
 
-        if (newWindow) {
-            // Create a div in the new window's body to render React content into
-            newWindow.document.body.appendChild(container);
+                if (newWindow) {
+                    newWindow.document.body.appendChild(container);
 
-            // 2. Copy styles from the parent window
-            const styleTags = document.head.getElementsByTagName('style');
-            const linkTags = document.head.querySelectorAll('link[rel="stylesheet"]');
+                    const styleTags = document.head.getElementsByTagName('style');
+                    const linkTags = document.head.querySelectorAll('link[rel="stylesheet"]');
 
-            const copyStyles = (
-                tags: ArrayLike<HTMLElement> | Iterable<HTMLElement>,
-                newWin: Window
-            ): void => {
-                Array.from(tags).forEach((tag: HTMLElement) => {
-                    newWin.document.head.appendChild(tag.cloneNode(true));
+                    const copyStyles = (
+                        tags: ArrayLike<HTMLElement> | Iterable<HTMLElement>,
+                        newWin: Window
+                    ): void => {
+                        Array.from(tags).forEach((tag: HTMLElement) => {
+                            newWin.document.head.appendChild(tag.cloneNode(true));
+                        });
+                    };
+
+                    copyStyles(styleTags, newWindow);
+                    copyStyles(linkTags as Iterable<HTMLElement>, newWindow);
+
+                    newWindow.document.title = title;
+
+                    newWindow.addEventListener('beforeunload', () => {
+                        console.log('[WindowPortal] beforeunload event listener!');
+                        onClose && onClose();
+                    });
+                }
+            }
+
+            if ('getScreenDetails' in window && openOnNextScreen) {
+                // @ts-ignore
+                window.getScreenDetails().then(screenDetails => {
+                    const newWindow = window.open('','',`width=${screenDetails.currentScreen.width}, height=${screenDetails.currentScreen.height}`);
+                    if (screenDetails.screens?.length > 1 && screenDetails.currentScreen === screenDetails.screens[0])
+                        newWindow?.moveTo(screenDetails.currentScreen.width, 0)
+
+                    handler(newWindow);
                 });
-            };
+            } else {
+                const newWindow = window.open('','',`width=${window.screen.availWidth}, height=${window.screen.availWidth}`);
+                newWindow?.moveTo(window.screen.availWidth, 0)
+                handler(newWindow)
+            }
 
-            copyStyles(styleTags, newWindow);
-            copyStyles(linkTags as Iterable<HTMLElement>, newWindow);
-
-            // Optional: Add a title to the new window
-            newWindow.document.title = title;
-
-            newWindow.addEventListener('beforeunload', () => {
-                onClose && onClose();
-            });
-        }
+        }, 700);
         // eslint-disable-next-line
     }, []); // Run once on mount
 

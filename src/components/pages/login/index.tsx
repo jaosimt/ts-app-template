@@ -1,16 +1,15 @@
 import { Button } from '../../partials/button';
-import { InputField } from "../../partials/inputField";
-import { useForm } from "react-hook-form";
-import { LoginFormInput } from "../../../interafaces";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginValidation } from "../../../validations";
+import { InputField } from '../../partials/inputField';
+import { useForm } from 'react-hook-form';
+import { LoginFormInput } from '../../../interafaces';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginValidation } from '../../../validations';
 import styles from './styles.module.scss';
 import logo from '../../../images/logo.svg';
-import { classNames } from "../../../utils";
+import { classNames } from '../../../utils';
 import { FaLock, FaEnvelope, FaUserLock } from 'react-icons/fa6';
-import { ReactNode } from "react";
 
-const Login = ({children, childrenContainerClassName}:{children: ReactNode, childrenContainerClassName: string}) => {
+const Login = () => {
     const {
         register,
         handleSubmit,
@@ -26,48 +25,56 @@ const Login = ({children, childrenContainerClassName}:{children: ReactNode, chil
 
     const onsubmit = (data: LoginFormInput) => {
         console.log(data);
-    }
+    };
 
-    return <div data-component={'login'} className={classNames(styles.Login, 'translate-fixed-center gap-1')}>
-        <div className={classNames(styles.Logo, 'align-content-center')}>
-            <img src={logo} className="m-1 spin" alt="logo" width={150}/>
+    return <div data-component={'login'}>
+        <div className={classNames(styles.Login, 'translate-fixed-center gap-1')}>
+            <div className={classNames(styles.Logo, 'align-content-center')}>
+                <img src={logo} className="m-1" alt="logo" width={150}/>
+            </div>
+            <div className={'display-flex flex-direction-column gap-1 p-1 pl-0'}>
+                <h3 className={'m-0 mb-1'}>Login</h3>
+                <form
+                    className={'display-flex flex-direction-column gap-1'}
+                    onSubmit={handleSubmit(onsubmit)}
+                >
+                    <div className={'display-flex'}>
+                        < InputField
+                            // setRef={setEmailRef}
+                            // labelWith={labelWidth}
+                            // label={'Email'}
+                            icon={FaEnvelope}
+                            className={classNames(styles.Email)}
+                            fieldRegister={register('email')}
+                            placeHolder={'Email'}
+                            error={errors.email?.message}
+                        />
+                    </div>
+                    <div className={'display-flex'}>
+                        <InputField
+                            // setRef={setPasswordRef}
+                            // labelWith={labelWidth}
+                            // label={'Password'}
+                            icon={FaLock}
+                            type={'password'}
+                            className={classNames(styles.Password)}
+                            fieldRegister={register('password')}
+                            placeHolder={'Password'}
+                            error={errors.password?.message}
+                        />
+                    </div>
+                    <Button
+                        align={'space-between'}
+                        width={'50%'} icon={FaUserLock}
+                        type={'submit'}
+                        className={'align-self-end'}
+                    >
+                        Login
+                    </Button>
+                </form>
+            </div>
         </div>
-        <div className={'display-flex flex-direction-column gap-1 p-1 pl-0'}>
-            <h3 className={'m-0 mb-1'}>Login</h3>
-            <form
-                className={'display-flex flex-direction-column gap-1'}
-                onSubmit={handleSubmit(onsubmit)}
-            >
-                <div className={'display-flex'}>
-                    < InputField
-                        // setRef={setEmailRef}
-                        // labelWith={labelWidth}
-                        // label={'Email'}
-                        icon={FaEnvelope}
-                        className={classNames(styles.Email)}
-                        fieldRegister={register('email')}
-                        placeHolder={'Email'}
-                        error={errors.email?.message}/>
-                </div>
-                <div className={'display-flex'}>
-                    <InputField
-                        // setRef={setPasswordRef}
-                        // labelWith={labelWidth}
-                        // label={'Password'}
-                        icon={FaLock}
-                        type={'password'}
-                        className={classNames(styles.Password)}
-                        fieldRegister={register('password')}
-                        placeHolder={'Password'}
-                        error={errors.password?.message}/>
-                </div>
-                <Button align={'space-between'} width={'100%'} icon={FaUserLock} type={'submit'} className={'mt-1'}>Login</Button>
-                {children && <div className={childrenContainerClassName}>
-                    {children}
-                </div>}
-            </form>
-        </div>
-    </div>
-}
+    </div>;
+};
 
 export default Login;

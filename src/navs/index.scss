@@ -1,0 +1,15 @@
+nav[data-component] {
+  display     : flex;
+  align-items : center;
+  gap         : 0.5rem;
+  
+  a {
+    color           : inherit;
+    text-decoration : none;
+    
+    &.active {
+      color: white;
+      cursor: not-allowed;
+    }
+  }
+}

@@ -3,3 +3,11 @@
 .spin {
   animation: spin infinite 20s linear;
 }
+
+.transition-200 {
+  transition : all 200ms ease-in-out;
+}
+
+.transition-300 {
+  transition : all 300ms ease-in-out;
+}
