@@ -23,11 +23,11 @@ export const Demo = () => {
     const [showPortal, setShowPortal] = useState(false);
     const [ctr, setCtr] = React.useState(0);
     const [paletteProps, setPaletteProps] = useState({
-        red: 0, //170,
-        green: 0, //160,
+        red: 150, //0, //170,
+        green: 200, //0, //160,
         blue: 255, //255,
         size: 42, //14,
-        stepShift: 7 //26
+        stepShift: 21 //7 //26
     });
     const [palette, setPalette] = useState<any>(generateAnalogousPalette({
         r: paletteProps.red,
@@ -57,7 +57,7 @@ export const Demo = () => {
         }, paletteProps.size, paletteProps.stepShift))
     }, [paletteProps]);
 
-    return <div data-component={'demo'} className={'width-100p'} style={{minHeight: '300px'}}>
+    return <div data-component={'demo'} className={'width-100p'} style={{minHeight: '490px'}}>
         <h1 className={'mt-0 line-height-1'}>Demo Page</h1>
 
         {
@@ -109,6 +109,7 @@ export const Demo = () => {
 
         <section className={'translate-fixed-center display-flex gap-0p5 flex-direction-column align-items-center'}>
             <Box
+                boxClassName={'background'}
                 width={430}
                 borderRadius={4}
                 borderColor={'rgb(255, 0, 0)'}
