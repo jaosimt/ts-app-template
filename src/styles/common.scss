@@ -1,12 +1,10 @@
-@import 'variables';
+@import "variables";
 
 .font-size-x-small { font-size : x-small; }
 
 .font-size-small { font-size : small; }
 
 .font-weight-bold { font-weight : bold; }
-
-.color-red { color : red; }
 
 .position-relative { position : relative;}
 
@@ -27,7 +25,6 @@
 .align-self-start { align-self : flex-start; }
 
 .align-items-center { align-items : center; }
-
 
 .align-content-center { align-content : center; }
 
@@ -149,22 +146,6 @@
 
 .mb-3 { margin-bottom : 3rem; }
 
-.br-0p2 { border-radius : 0.2rem; }
-
-.br-0p3 { border-radius : 0.3rem; }
-
-.br-0p5 { border-radius : 0.5rem; }
-
-.br-1 { border-radius : 1rem; }
-
-.br-1p5 { border-radius : 1.5rem; }
-
-.br-2 { border-radius : 2rem; }
-
-.br-2p5 { border-radius : 2.5rem; }
-
-.br-3 { border-radius : 3rem; }
-
 .width-100p { width : 100%; }
 
 .height-100p { height : 100%; }
@@ -191,10 +172,17 @@ input {
   }
 }
 
-link {
-  color : #61dafb;
-}
+link { color : #61dafb; }
 
-.color-red {
-  color : red;
-}
+.color-red { color : red; }
+
+/* BORDERS *************************************************/
+.br-0p2 { border-radius : 0.2rem; }
+.br-0p3 { border-radius : 0.3rem; }
+.br-0p5 { border-radius : 0.5rem; }
+.br-1 { border-radius : 1rem; }
+.br-1p5 { border-radius : 1.5rem; }
+.br-2 { border-radius : 2rem; }
+.br-2p5 { border-radius : 2.5rem; }
+.br-3 { border-radius : 3rem; }
+/************************************************* BORDERS */
