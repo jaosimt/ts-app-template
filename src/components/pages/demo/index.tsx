@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
 import { SlScreenDesktop } from 'react-icons/sl';
@@ -14,7 +14,7 @@ interface PaletteProps extends React.HTMLAttributes<HTMLInputElement> {
     red: number;
     green: number;
     blue: number;
-    count: number;
+    size: number;
     stepShift: number;
 }
 
@@ -22,9 +22,40 @@ export const Demo = () => {
     const [showModal, setShowModal] = useState(false);
     const [showPortal, setShowPortal] = useState(false);
     const [ctr, setCtr] = React.useState(0);
-    const [palette] = useState<any>(generateAnalogousPalette({r: 170, g: 160, b: 255}, 14, 26));
+    const [paletteProps, setPaletteProps] = useState({
+        red: 0, //170,
+        green: 0, //160,
+        blue: 255, //255,
+        size: 42, //14,
+        stepShift: 7 //26
+    });
+    const [palette, setPalette] = useState<any>(generateAnalogousPalette({
+        r: paletteProps.red,
+        g: paletteProps.green,
+        b: paletteProps.blue
+    }, paletteProps.size, paletteProps.stepShift));
 
-    const {register} = useForm<PaletteProps>();
+    const {
+        register,
+        formState: {errors}
+    } = useForm<PaletteProps>(
+        /*{
+            resolver: zodResolver(paletteValidation),
+            mode: "onChange"
+        }*/
+    );
+
+    const paletteChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPaletteProps({...paletteProps, [e.target.name]: parseInt(e.target.value)});
+    };
+
+    useEffect(() => {
+        setPalette(generateAnalogousPalette({
+            r: paletteProps.red,
+            g: paletteProps.green,
+            b: paletteProps.blue
+        }, paletteProps.size, paletteProps.stepShift))
+    }, [paletteProps]);
 
     return <div data-component={'demo'} className={'width-100p'} style={{minHeight: '300px'}}>
         <h1 className={'mt-0 line-height-1'}>Demo Page</h1>
@@ -38,7 +69,15 @@ export const Demo = () => {
                 onClose={() => setShowModal(false)}
             >
                 <div className={'display-flex flex-direction-column gap-1'}>
-                    <h1 className={'m-0'}>Hello ctr from a modal {ctr}!</h1>
+                    <h2 className={'m-0 text-align-center color-magenta code'}>Hello ctr [{ctr}] from a modal!</h2>
+                    <div>
+                        <h4 className={'m-0'}>This modal can be close by one of the following ways:</h4>
+                        <ul className={'m-0'} style={{listStyle: 'disc'}}>
+                            <li>Clicking the close button</li>
+                            <li>Clicking outside the modal</li>
+                            <li>Pressing the ESC key</li>
+                        </ul>
+                    </div>
                     <div className={'display-flex gap-0p5'}>
                         <Button
                             align={'space-between'}
@@ -70,7 +109,7 @@ export const Demo = () => {
 
         <section className={'translate-fixed-center display-flex gap-0p5 flex-direction-column align-items-center'}>
             <Box
-                width={'100%'}
+                width={430}
                 borderRadius={4}
                 borderColor={'rgb(255, 0, 0)'}
                 title={'Buttons'}
@@ -113,7 +152,7 @@ export const Demo = () => {
                 </Button>
             </Box>
             <Box
-                width={'100%'}
+                width={430}
                 borderRadius={'4px'}
                 title={'Analogous Palette'}
                 className={classNames(
@@ -123,9 +162,9 @@ export const Demo = () => {
                     'align-items-center',
                     'justify-content-center')}
             >
-                <div className={'display-flex gap-0p5'}>
+                <div className={'display-flex gap-0p5 flex-wrap'}>
                     {palette.map((color: RGBString, index: number) => <span
-                        key={index} className={'color-box'}
+                        key={index} className={'color-box transition-200'}
                         style={{
                             backgroundColor: color,
                             width: '21px',
@@ -133,10 +172,54 @@ export const Demo = () => {
                         }}
                     />)}
                 </div>
-                <InputField
-                    type={'number'}
-                    fieldRegister={register('red')}
-                />
+                <div className="display-flex gap-1">
+                    <InputField
+                        label={'Red:'}
+                        labelColor={'#ff0000'}
+                        min={0}
+                        max={255}
+                        type={'number'}
+                        fieldRegister={register('red', {value: paletteProps.red, onChange: paletteChangeHandler})}
+                        error={errors.red?.message}
+                    />
+                    <InputField
+                        label={'Green:'}
+                        labelColor={'#008000'}
+                        min={0}
+                        max={255}
+                        type={'number'}
+                        fieldRegister={register('green', {value: paletteProps.green, onChange: paletteChangeHandler})}
+                        error={errors.green?.message}
+                    />
+                    <InputField
+                        label={'Blue:'}
+                        labelColor={'#0000ff'}
+                        min={0}
+                        max={255}
+                        type={'number'}
+                        fieldRegister={register('blue', {value: paletteProps.blue, onChange: paletteChangeHandler})}
+                        error={errors.blue?.message}
+                    />
+                </div>
+                <div className="display-flex gap-1">
+                    <InputField
+                        label={'Size:'}
+                        type={'number'}
+                        fieldRegister={register('size', {value: paletteProps.size, onChange: paletteChangeHandler})}
+                        error={errors.size?.message}
+                    />
+                    <InputField
+                        label={'Shift %:'}
+                        min={0}
+                        max={360}
+                        type={'number'}
+                        fieldRegister={register('stepShift', {
+                            value: paletteProps.stepShift,
+                            onChange: paletteChangeHandler
+                        })}
+                        error={errors.stepShift?.message}
+                    />
+                </div>
             </Box>
 
         </section>

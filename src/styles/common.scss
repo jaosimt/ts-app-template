@@ -1,11 +1,23 @@
 @import "variables";
 @import "mixins";
 
-/* COLOR ***************************************************/
-link { color : cyan; }
+/* TEXT ****************************************************/
+.text-align-left { text-align : left; }
+.text-align-center { text-align : center; }
+.text-align-right { text-align : right; }
+.text-align-justify { text-align : justify; }
+/**************************************************** TEXT */
 
-.color-red { color : red; }
+/* COLOR ***************************************************/
+.color-cyan { color : cyan; }
+.color-magenta { color : magenta; }
 .color-yellow { color : yellow; }
+.color-black { color : black; }
+.color-red { color : red; }
+.color-green { color : green; }
+.color-blue { color : blue; }
+
+link { color: $textColor; }
 /*************************************************** COLOR */
 
 /* BACKGROUND- *********************************************/
@@ -151,6 +163,8 @@ link { color : cyan; }
 
 /* FLEX- ***************************************************/
 .flex-direction-column { flex-direction : column; }
+.flex-wrap { flex-wrap : wrap; }
+.flex-wrap-nowrap { flex-wrap : nowrap; }
 /*************************************************** FLEX- */
 
 .box-shadow { @include boxShadow(); }
@@ -173,4 +187,13 @@ input {
   &.border-error {
     border : 1px solid $errorColor !important;
   }
+}
+
+.code {
+  font-family : monospace;
+}
+
+ol,
+ul {
+  padding-inline-start: 1rem;
 }

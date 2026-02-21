@@ -19,6 +19,9 @@ export function InputField(props: FormFieldProps) {
         labelWith = 'auto',
         labelAlign,
         placeHolder,
+        min,
+        max,
+        labelColor,
         fieldRegister,
         error,
         ...restProps
@@ -53,7 +56,7 @@ export function InputField(props: FormFieldProps) {
 
     return (
         <div data-component={'input-field'} className={'display-flex align-items-center'}>
-            <label style={{width: labelWith, justifyContent: labelAlign}} htmlFor={uid}
+            <label style={{width: labelWith, justifyContent: labelAlign, color: labelColor}} htmlFor={uid}
                    className={'display-flex align-items-center gap-0p5'}>
                 {icon && <ReactIcon icon={icon} className={'align-self-center'}/>}
                 {label && label}
@@ -61,6 +64,8 @@ export function InputField(props: FormFieldProps) {
             <div className={'position-relative display-flex'}>
                 <input
                     type={type || 'text'}
+                    min={min}
+                    max={max}
                     placeholder={placeHolder}
                     className={classNames(className && '', error && 'border-error')}
                     id={uid} {...fieldRegister} {...restProps}

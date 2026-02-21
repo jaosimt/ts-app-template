@@ -9,10 +9,13 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     label?: string;
     labelWith?: string;
     labelAlign?: 'left' | 'right' | 'center';
+    labelColor?: HSLString | RGBString | HEXString;
     icon?: IconType;
     placeHolder?: string;
     fieldRegister: UseFormRegisterReturn;
     error?: string;
+    min?: number;
+    max?: number;
 }
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
