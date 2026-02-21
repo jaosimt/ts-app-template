@@ -5,17 +5,17 @@ import { CSSUnit, HEXString, HSLString, RGBString } from '../types';
 
 export interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     error?: string;
-    type?: HTMLInputTypeAttribute;
-    setRef?: Dispatch<SetStateAction<HTMLElement | null>>;
+    fieldRegister: UseFormRegisterReturn;
+    icon?: IconType;
     label?: string;
-    labelWith?: string;
     labelAlign?: 'left' | 'right' | 'center';
     labelColor?: HSLString | RGBString | HEXString;
-    icon?: IconType;
-    placeHolder?: string;
-    fieldRegister: UseFormRegisterReturn;
-    min?: number;
+    labelWith?: CSSUnit;
     max?: number;
+    min?: number;
+    placeHolder?: string;
+    setRef?: Dispatch<SetStateAction<HTMLElement | null>>;
+    type?: HTMLInputTypeAttribute;
 }
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -25,8 +25,8 @@ export const BoxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
                 <strong
                     style={strongPropsStyles}>borderRadius</strong>{' '}{TargetUnicode} {`number | \`\${number}\${string}\``}
                 <ul className={'font-size-small'}>
-                    <li>adds border radius to box's border</li>
-                    <li>adds border/2 radius to box's title - if enabled!</li>
+                    <li>Adds border radius to box's border</li>
+                    <li>Adds border/2 radius to box's title - if enabled!</li>
                 </ul>
             </li>
             <li>

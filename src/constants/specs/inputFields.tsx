@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { SelectedThemeProps, themes } from '../../components/pages/home';
+import { SelectedThemeProps, strongPropsStyles, TargetUnicode, themes } from '../../components/pages/home';
 
 const codeTS = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {
     email: string;
@@ -71,6 +72,40 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
             className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLInputElement>`}</span>]
         </h4>
         <ul className={'m-0 color-black font-monospace font-size-smaller line-height-normal'}>
+            <li>
+                <strong style={strongPropsStyles}>error</strong> {TargetUnicode} string {TargetUnicode} Holds a message
+                for the error tooltip - if any!
+            </li>
+            <li>
+                <strong
+                    style={strongPropsStyles}>fieldRegister</strong> {TargetUnicode} UseFormRegisterReturn {TargetUnicode}
+                <i>
+                    <a href="//react-hook-form.com/docs/useform/register">useForm.register</a></i> {TargetUnicode}{' '}
+                <span>Allows you to register an input or select element and apply validation rules to React Hook Form</span>
+            </li>
+            <li>
+                <strong style={strongPropsStyles}>icon</strong> {TargetUnicode} IconType {TargetUnicode} <i><a
+                className={'link'}
+                href={'//react-icons.github.io/react-icons/'}>react-icons</a></i> {TargetUnicode} Adds icon to the input
+                label
+            </li>
+            <li>
+                <strong style={strongPropsStyles}>label</strong> {TargetUnicode} string {TargetUnicode} Adds label to
+                the input field
+            </li>
+            <li>
+                <strong style={strongPropsStyles}>labelAlign</strong> {TargetUnicode} string {TargetUnicode}
+                <i>left|center|right|space-between</i> {TargetUnicode} Sets the label to the input field
+            </li>
+            <li>
+                <strong style={strongPropsStyles}>labelColor</strong>{' '}{TargetUnicode} HSLString | RGBString |
+                HEXString {TargetUnicode} Sets the color of the label
+            </li>
+            <li>
+                <strong
+                    style={strongPropsStyles}>labelWith</strong>{' '}{TargetUnicode} {`number | \`\${number}\${string}\``} {TargetUnicode} Sets
+                the width of the label
+            </li>
         </ul>
     </>;
 };

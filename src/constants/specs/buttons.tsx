@@ -27,19 +27,23 @@ export const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) =>
                 <strong style={strongPropsStyles}>disabled</strong> {TargetUnicode} boolean {TargetUnicode} Specifies that a button should be disabled
             </li>
             <li>
-                <strong style={strongPropsStyles}>icon</strong> {TargetUnicode} IconType {TargetUnicode} <i><a className={'link'} href={'//react-icons.github.io/react-icons/'}>react-icons</a></i> {TargetUnicode} adds icon to the button
+                <strong style={strongPropsStyles}>icon</strong> {TargetUnicode} IconType {TargetUnicode} <i><a
+                className={'link'}
+                href={'//react-icons.github.io/react-icons/'}>react-icons</a></i> {TargetUnicode} Adds icon to the
+                button
             </li>
             <li>
                 <strong style={strongPropsStyles}>iconClassName</strong>{' '}{TargetUnicode} string {TargetUnicode} CSS
                 classes to be spread to the button element
             </li>
             <li>
-                <strong style={strongPropsStyles}>type</strong> {TargetUnicode} string {TargetUnicode} <i>button|submit|reset</i> {TargetUnicode} specifies the type of the button
+                <strong style={strongPropsStyles}>type</strong> {TargetUnicode} string {TargetUnicode}
+                <i>button|submit|reset</i> {TargetUnicode} Specifies the type of the button
             </li>
             <li>
                 <strong
-                    style={strongPropsStyles}>width</strong>{' '}{TargetUnicode} {`number | \`\${number}\${string}\``} {TargetUnicode} Sets
-                the width of the button
+                    style={strongPropsStyles}>width</strong>{' '}{TargetUnicode} {`number | \`\${number}\${string}\``} {TargetUnicode} Setsthe
+                width of the button
             </li>
         </ul>
     </>;

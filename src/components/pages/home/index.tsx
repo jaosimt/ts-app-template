@@ -88,15 +88,9 @@ const Home: FC = () => {
     };
 
     return <div data-component={'home'} className={'width-100p'}>
-        <h1 className={'mt-0 line-height-1'}>Home</h1>
-        <Box
-            borderColor={'#000000'}
-            className={'p-0p5'}
-            width={'100%'}
-            title={'COMPONENTS'}
-            borderRadius={4}
-        >
-            <div className={'display-flex justify-content-space-between mb-0p3'}>
+        <div className={'display-flex justify-content-space-between align-items-end'}>
+            <h1 className={'mt-0 line-height-1'}>Home</h1>
+            <div className={'display-flex justify-content-space-between'}>
                 &nbsp;
                 <select value={selectedTheme} onChange={handleThemeChange} style={{ marginLeft: '10px' }}>
                     {Object.keys(themes).map((themeName) => (
@@ -106,7 +100,14 @@ const Home: FC = () => {
                     ))}
                 </select>
             </div>
-
+        </div>
+        <Box
+            borderColor={'#000000'}
+            className={'p-0p5'}
+            width={'100%'}
+            title={'COMPONENTS'}
+            borderRadius={4}
+        >
             <BoxComponentSpecs selectedTheme={selectedTheme}/>
             <ButtonComponentSpecs selectedTheme={selectedTheme}/>
             <InputFieldsProps selectedTheme={selectedTheme}/>
