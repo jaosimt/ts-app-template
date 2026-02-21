@@ -1,20 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { lucario } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { strongPropsStyles, TargetUnicode } from '../../components/pages/home';
+import { SelectedThemeProps, strongPropsStyles, TargetUnicode, themes } from '../../components/pages/home';
 
 const code = `<Button>
     Submit
 </Button>`;
-export const ButtonComponentSpecs = () => {
+export const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
-        <h4 className={'m-0 mt-1 border-top pt-1 color-gray mb-0p3'}>Button</h4>
+        <h4 className={'m-0 mt-1 border-top pt-1 color-black mb-0p3'}>Button</h4>
         <SyntaxHighlighter
             codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-            style={lucario}
             showLineNumbers={true}
             language="jsx"
             customStyle={{padding: '0.5rem', margin: 0}}
+            style={themes[selectedTheme]}
         >
             {code}
         </SyntaxHighlighter>

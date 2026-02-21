@@ -1,4 +1,4 @@
-import { FormFieldProps } from '../../../interafaces';
+import { InputFieldProps } from '../../../interafaces';
 import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { FaCircleXmark } from 'react-icons/fa6';
@@ -9,7 +9,7 @@ import { classNames } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
 import { ReactIcon } from '../index';
 
-export function InputField(props: FormFieldProps) {
+export function InputField(props: InputFieldProps) {
     const {
         icon,
         className,

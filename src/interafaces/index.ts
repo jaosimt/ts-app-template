@@ -3,7 +3,7 @@ import React, { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
 import { IconType } from "react-icons";
 import { CSSUnit, HEXString, HSLString, RGBString } from '../types';
 
-export interface FormFieldProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     type?: HTMLInputTypeAttribute;
     setRef?: Dispatch<SetStateAction<HTMLElement | null>>;
     label?: string;

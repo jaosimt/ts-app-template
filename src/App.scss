@@ -7,29 +7,35 @@
   flex-direction : column;
   
   header {
-    position         : relative;
-    background-color : #963999;
-    height           : 50px;
+    position         : sticky;
+    height           : 60px;
+    top              : 0;
     display          : flex;
     align-items      : center;
     justify-content  : space-between;
     padding          : 0.5rem;
+    background-color : #963999;
     gap              : 0.5rem;
+    z-index          : 1;
+    border-bottom    : 10px solid $backgroundColor;
   }
   
   main {
     position         : relative;
     background-color : $backgroundColor;
     width            : 100vw;
-    min-height       : calc(100vh - 80px);
+    min-height       : calc(100vh - 100px);
     display          : flex;
     padding          : 2rem;
   }
   
   footer {
-    position         : relative;
+    border-top       : 10px solid $backgroundColor;
+    position         : sticky;
+    bottom           : 0;
+    z-index          : 1;
     background-color : #963999;
-    height           : 30px;
+    height           : 40px;
     display          : flex;
     align-items      : center;
     padding          : 0.5rem;

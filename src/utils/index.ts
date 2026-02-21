@@ -113,3 +113,18 @@ export const generateAnalogousPalette = (rgb: {
 
     return palette;
 };
+
+export function ProperCase(input: string): string {
+    return input
+        .trim()
+        // convert separators to spaces
+        .replace(/[_-]+/g, " ")
+        // space between lower->upper: "nightOwl" -> "night Owl"
+        .replace(/([a-z\d])([A-Z])/g, "$1 $2")
+        // space between acronym->word: "JSONData" -> "JSON Data"
+        .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2")
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+        .join(" ");
+}
