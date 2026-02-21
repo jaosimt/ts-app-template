@@ -78,7 +78,7 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
             </li>
             <li>
                 <strong
-                    style={strongPropsStyles}>fieldRegister</strong> {TargetUnicode} UseFormRegisterReturn {TargetUnicode}
+                    style={strongPropsStyles}>fieldRegister</strong> {TargetUnicode} UseFormRegisterReturn {TargetUnicode}{' '}
                 <i>
                     <a href="//react-hook-form.com/docs/useform/register">useForm.register</a></i> {TargetUnicode}{' '}
                 <span>Allows you to register an input or select element and apply validation rules to React Hook Form</span>
@@ -94,7 +94,7 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
                 the input field
             </li>
             <li>
-                <strong style={strongPropsStyles}>labelAlign</strong> {TargetUnicode} string {TargetUnicode}
+                <strong style={strongPropsStyles}>labelAlign</strong> {TargetUnicode} string {TargetUnicode}{' '}
                 <i>left|center|right|space-between</i> {TargetUnicode} Sets the label to the input field
             </li>
             <li>

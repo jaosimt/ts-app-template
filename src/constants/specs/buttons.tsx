@@ -37,7 +37,7 @@ export const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) =>
                 classes to be spread to the button element
             </li>
             <li>
-                <strong style={strongPropsStyles}>type</strong> {TargetUnicode} string {TargetUnicode}
+                <strong style={strongPropsStyles}>type</strong> {TargetUnicode} string {TargetUnicode}{' '}
                 <i>button|submit|reset</i> {TargetUnicode} Specifies the type of the button
             </li>
             <li>
