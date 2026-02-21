@@ -13,11 +13,6 @@ body {
   color                   : $textColor
 }
 
-.code,
-code {
-  font-family : $codeFontFamily
-}
-
 * {
   @include customScrollbar();
   box-sizing : border-box;

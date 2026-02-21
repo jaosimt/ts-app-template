@@ -1,0 +1,68 @@
+@import "./variables";
+
+select {
+  padding       : 0.439rem 0.4rem;
+  color         : $inputTextColor;
+  border-color  : $borderColor;
+  border-radius : 4px;
+  
+  &:hover {
+    background-color : $buttonPrimaryHoverColor;
+    color            : $buttonPrimaryTextColor;
+    border-color     : $buttonPrimaryBorderColor;
+    
+    &:active {
+      opacity : 0.3;
+      color   : $inputTextColor;
+    }
+  }
+  
+  &[disabled],
+  &.disabled {
+    pointer-events : none !important;
+    color          : $buttonPrimaryDisabledTextColor;
+    opacity        : 0.3;
+  }
+  
+  &:focus {
+    outline          : none;
+    background-color : $backgroundColorSelected;
+  }
+}
+
+code {
+  font-family      : $codeFontFamily;
+  background-color : black;
+  color            : white;
+  padding          : 0.2rem;
+  display          : block;
+  unicode-bidi     : isolate;
+  white-space      : pre;
+  margin-block     : 1em 1em;
+  font-size        : smaller;
+}
+
+input {
+  color : $inputTextColor;
+  
+  &:focus {
+    outline          : none;
+    background-color : $backgroundColorSelected;
+  }
+  
+  &.border-error {
+    border : 1px solid $errorColor !important;
+  }
+}
+
+ol,
+ul {
+  padding-inline-start : 1rem;
+  
+  > li > ul {
+    margin-bottom : 0.3rem;
+  }
+}
+
+a,
+link { color : $textColor; text-decoration : none; }
