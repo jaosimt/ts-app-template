@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import type { WindowPortalProps } from '../../../types';
 
-const WindowPortal = ({openOnNextScreen = false, children, title = `${window.document.title} portal`, onClose}: WindowPortalProps) => {
+const WindowPortal: FC<WindowPortalProps> = ({openOnNextScreen = false, children, title = `${window.document.title} portal`, onClose}) => {
     const [, setExternalWindow] = useState<Window | null>(null);
     const container = useMemo(() => document.createElement('div'), []);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);

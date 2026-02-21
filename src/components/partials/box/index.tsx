@@ -1,11 +1,19 @@
+import { FC } from 'react';
 import { BoxProps } from '../../../interafaces';
 import { CSSUnit } from '../../../types';
 import { classNames } from '../../../utils';
 import './styles.scss';
 
-export const Box = (props: BoxProps) => {
-    const {children, title, className, boxClassName, borderRadius = 0, width, borderColor, titleColor} = props;
-
+const Box: FC<BoxProps> = ({
+                               children,
+                               title,
+                               className,
+                               boxClassName,
+                               borderRadius = 0,
+                               width,
+                               borderColor,
+                               titleColor
+                           }) => {
     let titleBorderRadius: number | CSSUnit = borderRadius;
     if (borderRadius !== 0) {
         const brSplit = [parseFloat(titleBorderRadius.toString()), titleBorderRadius.toString().replace(/\d*/, '')];
@@ -25,3 +33,5 @@ export const Box = (props: BoxProps) => {
         <div className={classNames(className, title && 'mt-0p5')}>{children}</div>
     </section>;
 };
+
+export default Box;

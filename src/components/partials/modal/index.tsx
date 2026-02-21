@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import './styles.scss';
 import ReactDOM from 'react-dom';
 import { FaCircleXmark } from 'react-icons/fa6';
@@ -6,18 +6,18 @@ import { useKeyPress, useOutsideClick } from '../../../hooks';
 import { ModalProps } from '../../../types';
 import { v4 as uuidv4 } from 'uuid';
 import { classNames } from '../../../utils';
-import { ReactIcon } from '../index';
+import ReactIcon from '../index';
 
-const Modal = ({
-                   children,
-                   title,
-                   showClose,
-                   closeOnOutsideClick,
-                   closeOnEscKey,
-                   onClose,
-                   width,
-                   maxZIndex
-               }: ModalProps) => {
+const Modal: FC<ModalProps> = ({
+                                   children,
+                                   title,
+                                   showClose,
+                                   closeOnOutsideClick,
+                                   closeOnEscKey,
+                                   onClose,
+                                   width,
+                                   maxZIndex
+                               }) => {
     const [show, setShow] = useState(false);
     const [uid] = useState(`modal-${uuidv4()}`);
 

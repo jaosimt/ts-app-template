@@ -1,5 +1,6 @@
-import { Button } from '../../partials/button';
-import { InputField } from '../../partials/inputField';
+import { FC } from 'react';
+import Button from '../../partials/button';
+import InputField from '../../partials/inputField';
 import { useForm } from 'react-hook-form';
 import { LoginFormInput } from '../../../interafaces';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,7 +10,7 @@ import logo from '../../../images/logo.svg';
 import { classNames } from '../../../utils';
 import { FaLock, FaEnvelope, FaUserLock } from 'react-icons/fa6';
 
-const Login = () => {
+const Login: FC = () => {
     const {
         register,
         handleSubmit,

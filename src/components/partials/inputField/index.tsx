@@ -1,5 +1,5 @@
 import { InputFieldProps } from '../../../interafaces';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './styles.scss';
 import { FaCircleXmark } from 'react-icons/fa6';
 import Tippy from '@tippyjs/react';
@@ -7,26 +7,24 @@ import 'tippy.js/dist/tippy.css'; // optional
 import '../../../styles/tippy.scss';
 import { classNames } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
-import { ReactIcon } from '../index';
+import ReactIcon from '../index';
 
-export function InputField(props: InputFieldProps) {
-    const {
-        icon,
-        className,
-        setRef,
-        type,
-        label,
-        labelWith = 'auto',
-        labelAlign,
-        placeHolder,
-        min,
-        max,
-        labelColor,
-        fieldRegister,
-        error,
-        ...restProps
-    } = props;
-
+const InputField: FC<InputFieldProps> = ({
+                                             icon,
+                                             className,
+                                             setRef,
+                                             type,
+                                             label,
+                                             labelWith = 'auto',
+                                             labelAlign,
+                                             placeHolder,
+                                             min,
+                                             max,
+                                             labelColor,
+                                             fieldRegister,
+                                             error,
+                                             ...restProps
+                                         }) => {
     const [styles, setStyles] = useState({
         zIndex: -777,
         opacity: 0
@@ -86,3 +84,5 @@ export function InputField(props: InputFieldProps) {
         </div>
     );
 }
+
+export default InputField;

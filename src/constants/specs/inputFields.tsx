@@ -39,7 +39,7 @@ const codeJSX = `<form onSubmit={handleSubmit(onsubmit)}>
 <Button type={'submit'}>Login</Button>
 `;
 
-export const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
         <h4 className={'m-0 mt-1 border-top pt-1 color-black mb-0p3 display-flex align-items-end justify-content-space-between'}>
             InputField
@@ -74,3 +74,5 @@ export const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
         </ul>
     </>;
 };
+
+export default InputFieldsProps;

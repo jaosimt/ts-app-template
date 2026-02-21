@@ -13,9 +13,9 @@ import {
 import { targetUnicode } from '../../../constants';
 import { BoxComponentSpecs } from '../../../constants/specs/box';
 import { ButtonComponentSpecs } from '../../../constants/specs/buttons';
-import { InputFieldsProps } from '../../../constants/specs/inputFields';
+import InputFieldsProps from '../../../constants/specs/inputFields';
 import { ProperCase } from '../../../utils';
-import { Box } from '../../partials/box';
+import Box from '../../partials/box';
 
 export const TargetUnicode = <span className={'color-magenta'}>{targetUnicode}</span>;
 

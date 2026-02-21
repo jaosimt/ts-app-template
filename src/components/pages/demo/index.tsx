@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
 import { FaMinus } from 'react-icons/fa6';
 import { SlScreenDesktop } from 'react-icons/sl';
 import { RGBString } from '../../../types';
 import { classNames, generateAnalogousPalette } from '../../../utils';
-import { Box } from '../../partials/box';
-import { Button } from '../../partials/button';
-import { InputField } from '../../partials/inputField';
+import Box from '../../partials/box';
+import Button from '../../partials/button';
+import InputField from '../../partials/inputField';
 import Modal from '../../partials/modal';
 import WindowPortal from '../windowPortal';
 
@@ -19,7 +19,7 @@ interface PaletteProps extends React.HTMLAttributes<HTMLInputElement> {
     stepShift: number;
 }
 
-export const Demo = () => {
+const Demo: FC = () => {
     const [showModal, setShowModal] = useState(false);
     const [showPortal, setShowPortal] = useState(false);
     const [ctr, setCtr] = React.useState(0);
@@ -258,3 +258,5 @@ export const Demo = () => {
         </section>
     </div>;
 };
+
+export default Demo;

@@ -6,7 +6,11 @@ select {
   border-color  : $borderColor;
   border-radius : 4px;
   
+  &:focus { outline : none; }
+  
+  &:focus,
   &:hover {
+    cursor           : pointer;
     background-color : $buttonPrimaryHoverColor;
     color            : $buttonPrimaryTextColor;
     border-color     : $buttonPrimaryBorderColor;
@@ -22,11 +26,6 @@ select {
     pointer-events : none !important;
     color          : $buttonPrimaryDisabledTextColor;
     opacity        : 0.3;
-  }
-  
-  &:focus {
-    outline          : none;
-    background-color : $backgroundColorSelected;
   }
 }
 

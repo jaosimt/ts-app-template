@@ -4,6 +4,7 @@ import { IconType } from "react-icons";
 import { CSSUnit, HEXString, HSLString, RGBString } from '../types';
 
 export interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
+    error?: string;
     type?: HTMLInputTypeAttribute;
     setRef?: Dispatch<SetStateAction<HTMLElement | null>>;
     label?: string;
@@ -13,7 +14,6 @@ export interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> 
     icon?: IconType;
     placeHolder?: string;
     fieldRegister: UseFormRegisterReturn;
-    error?: string;
     min?: number;
     max?: number;
 }

@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import './App.scss';
 import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
-import { ReactIcon } from './components/partials';
+import ReactIcon from './components/partials';
 import Modal from './components/partials/modal';
 import { targetUnicode } from './constants';
 import { NavigationMain } from './navs';
-import { ContentRouter } from './routes';
+import ContentRouter from './routes';
 
 const App = () => {
     const [offline, setOffline] = useState(false);
