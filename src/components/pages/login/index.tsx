@@ -28,7 +28,7 @@ const Login = () => {
     };
 
     return <div data-component={'login'}>
-        <div className={classNames(styles.Login, 'translate-fixed-center gap-1')}>
+        <div className={classNames(styles.Login, 'translate fixed-center gap-1')}>
             <div className={classNames(styles.Logo, 'align-content-center')}>
                 <img src={logo} className="m-1" alt="logo" width={150}/>
             </div>

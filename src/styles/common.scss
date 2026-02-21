@@ -169,8 +169,10 @@ link { color: $textColor; }
 
 .box-shadow { @include boxShadow(); }
 
-.translate-fixed-center {
-  position  : fixed;
+.translate {
+  &.absolute-center { position: absolute; }
+  &.fixed-center { position: fixed; }
+  
   top       : 50%;
   left      : 50%;
   transform : translate(-50%, -50%);

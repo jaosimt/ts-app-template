@@ -69,7 +69,7 @@ export const Demo = () => {
                 onClose={() => setShowModal(false)}
             >
                 <div className={'display-flex flex-direction-column gap-1'}>
-                    <h2 className={'m-0 text-align-center color-magenta code'}>Hello ctr [{ctr}] from a modal!</h2>
+                    <h2 className={'m-0 text-align-center color-magenta code'}>Hello ctr [{ctr}] viewed in modal!</h2>
                     <div>
                         <h4 className={'m-0'}>This modal can be close by one of the following ways:</h4>
                         <ul className={'m-0'} style={{listStyle: 'disc'}}>
@@ -102,12 +102,12 @@ export const Demo = () => {
                 onClose={() => setShowPortal(false)}
             >
                 <div className={'p-2'}>
-                    <h1 className={'color-red m-0 mb-2'}>Hello ctr from a new window {ctr}!</h1>
+                    <h1 className={'color-red m-0 mb-2'}>Hello ctr [{ctr}] viewed in new window!</h1>
                 </div>
             </WindowPortal>
         }
 
-        <section className={'translate-fixed-center display-flex gap-0p5 flex-direction-column align-items-center'}>
+        <section className={'translate absolute-center display-flex gap-0p5 flex-direction-column align-items-center'}>
             <Box
                 boxClassName={'background'}
                 width={430}
