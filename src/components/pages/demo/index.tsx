@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
+import { FaMinus } from 'react-icons/fa6';
 import { SlScreenDesktop } from 'react-icons/sl';
 import { RGBString } from '../../../types';
 import { classNames, generateAnalogousPalette } from '../../../utils';
@@ -69,7 +70,7 @@ export const Demo = () => {
                 onClose={() => setShowModal(false)}
             >
                 <div className={'display-flex flex-direction-column gap-1'}>
-                    <h2 className={'m-0 text-align-center color-magenta code'}>Hello ctr [{ctr}] viewed in modal!</h2>
+                    <h2 className={'m-0 text-align-center color-magenta font-monospace'}>Hello ctr [{ctr}] viewed in modal!</h2>
                     <div>
                         <h4 className={'m-0'}>This modal can be close by one of the following ways:</h4>
                         <ul className={'m-0'} style={{listStyle: 'disc'}}>
@@ -78,19 +79,32 @@ export const Demo = () => {
                             <li>Pressing the ESC key</li>
                         </ul>
                     </div>
-                    <div className={'display-flex gap-0p5'}>
+                    <div className={'display-flex gap-0p5 justify-content-space-between'}>
+                        <div className={'display-flex gap-0p5 align-items-center'}>
+                            <Button
+                                align={'space-between'}
+                                icon={FaMinus}
+                                onClick={() => setCtr(ctr - 1)}
+                            />
+                            <strong style={{minWidth: '50px', textAlign: 'center', padding: '6px'}} className="border-radius-0p3 border font-family-monospace">{ctr}</strong>
+                            <Button
+                                align={'space-between'}
+                                icon={FaPlus}
+                                onClick={() => setCtr(ctr + 1)}
+                            />
+                        </div>
+
                         <Button
+                            width={'180px'}
                             align={'space-between'}
+                            icon={SlScreenDesktop}
                             disabled={showPortal}
                             onClick={() => setShowPortal(true)}
                         >
-                            Show Portal
-                        </Button>
-                        <Button
-                            align={'space-between'}
-                            onClick={() => setCtr(ctr + 1)}
-                        >
-                            Increment Counter
+                            <div className={'display-inline-flex flex-direction-column align-items-end'}>
+                                <span>Show Portal</span>
+                                <span className={'font-size-x-small'}>in second screen if available</span>
+                            </div>
                         </Button>
                     </div>
                 </div>
@@ -110,7 +124,7 @@ export const Demo = () => {
         <section className={'translate absolute-center display-flex gap-0p5 flex-direction-column align-items-center'}>
             <Box
                 boxClassName={'background'}
-                width={430}
+                width={416}
                 borderRadius={4}
                 borderColor={'rgb(255, 0, 0)'}
                 title={'Buttons'}
@@ -143,17 +157,23 @@ export const Demo = () => {
                         <span className={'font-size-x-small'}>in second screen if available</span>
                     </div>
                 </Button>
-                <Button
-                    width={'200px'}
-                    align={'space-between'}
-                    icon={FaPlus}
-                    onClick={() => setCtr(ctr + 1)}
-                >
-                    Counter: {ctr}
-                </Button>
+                <div className={'display-flex gap-0p5 align-items-center'}>
+                    <Button
+                        align={'space-between'}
+                        icon={FaMinus}
+                        onClick={() => setCtr(ctr - 1)}
+                    />
+                    <strong style={{minWidth: '118px', textAlign: 'center', padding: '6px'}} className="border-radius-0p3 border font-family-monospace">{ctr}</strong>
+                    <Button
+                        align={'space-between'}
+                        icon={FaPlus}
+                        onClick={() => setCtr(ctr + 1)}
+                    />
+                </div>
             </Box>
+
             <Box
-                width={430}
+                width={416}
                 borderRadius={'4px'}
                 title={'Analogous Palette'}
                 className={classNames(
@@ -173,6 +193,19 @@ export const Demo = () => {
                         }}
                     />)}
                 </div>
+            </Box>
+
+            <Box
+                width={416}
+                borderRadius={'4px'}
+                title={'InputFields'}
+                className={classNames(
+                    'display-flex',
+                    'gap-0p5',
+                    'flex-direction-column',
+                    'align-items-center',
+                    'justify-content-center')}
+            >
                 <div className="display-flex gap-1">
                     <InputField
                         label={'Red:'}
@@ -222,7 +255,6 @@ export const Demo = () => {
                     />
                 </div>
             </Box>
-
         </section>
     </div>;
 };

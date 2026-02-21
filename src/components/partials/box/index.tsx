@@ -21,7 +21,7 @@ export const Box = (props: BoxProps) => {
         className={classNames('p-0p5', boxClassName, 'border', title && 'mt-0p5')}
         style={{borderRadius: parseCSSUnit(String(borderRadius)), width, borderColor}}
     >
-        {title && <h6 className={'title m-0 background border'} style={{borderRadius: titleBorderRadius, borderColor, color: titleColor}}>{title}</h6>}
+        {title && <h5 className={'title m-0 background border'} style={{borderRadius: titleBorderRadius, borderColor, color: titleColor}}>{title}</h5>}
         <div className={classNames(className, title && 'mt-0p5')}>{children}</div>
     </section>;
 };
