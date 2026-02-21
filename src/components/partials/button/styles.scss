@@ -14,7 +14,7 @@ button,
   }
   
   &:not(.btn-icon) {
-    @extend .br-0p3;
+    @extend .border-radius-0p3;
     padding          : 0.49rem 0.56rem;
     background-color : $buttonPrimaryColor;
     color            : $buttonPrimaryTextColor;

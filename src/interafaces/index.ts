@@ -1,6 +1,7 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import React, { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
 import { IconType } from "react-icons";
+import { CSSUnit, HEXString, HSLString, RGBString } from '../types';
 
 export interface FormFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     type?: HTMLInputTypeAttribute;
@@ -12,7 +13,16 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     placeHolder?: string;
     fieldRegister: UseFormRegisterReturn;
     error?: string;
+}
 
+export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
+    children: React.ReactNode;
+    boxClassName?: string;
+    title?: string;
+    borderRadius?: CSSUnit
+    borderColor?: HSLString | RGBString | HEXString;
+    titleColor?: HSLString | RGBString | HEXString;
+    width?: CSSUnit
 }
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -22,7 +32,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     icon?: IconType;
     iconClassName?: string;
     disabled?: boolean;
-    width?: string | number;
+    width?: CSSUnit;
 }
 
 export interface LoginFormInput {

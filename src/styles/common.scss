@@ -1,10 +1,16 @@
 @import "variables";
+@import "mixins";
 
 /* COLOR ***************************************************/
-link { color : #61dafb; }
+link { color : cyan; }
 
 .color-red { color : red; }
+.color-yellow { color : yellow; }
 /*************************************************** COLOR */
+
+/* BACKGROUND- *********************************************/
+.background { background-color : $backgroundColor; }
+/********************************************* BACKGROUND- */
 
 /* BORDER- *************************************************/
 .border { border : 1px solid $borderColor; }
@@ -13,14 +19,20 @@ link { color : #61dafb; }
 .border-bottom { border-bottom : 1px solid $borderColor; }
 .border-left { border-left : 1px solid $borderColor; }
 
+.border-radius-0p1 { border-radius : 0.1rem; }
 .border-radius-0p2 { border-radius : 0.2rem; }
 .border-radius-0p3 { border-radius : 0.3rem; }
+.border-radius-0p4 { border-radius : 0.4rem; }
 .border-radius-0p5 { border-radius : 0.5rem; }
 .border-radius-1 { border-radius : 1rem; }
 .border-radius-1p5 { border-radius : 1.5rem; }
 .border-radius-2 { border-radius : 2rem; }
 .border-radius-2p5 { border-radius : 2.5rem; }
 .border-radius-3 { border-radius : 3rem; }
+
+.border-color-cyan { border-color : cyan; }
+.border-color-red { border-color : red; }
+.border-color-yellow { border-color : yellow; }
 /************************************************* BORDER- */
 
 /* MARGIN- *************************************************/
@@ -140,6 +152,8 @@ link { color : #61dafb; }
 /* FLEX- ***************************************************/
 .flex-direction-column { flex-direction : column; }
 /*************************************************** FLEX- */
+
+.box-shadow { @include boxShadow(); }
 
 .translate-fixed-center {
   position  : fixed;

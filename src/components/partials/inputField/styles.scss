@@ -16,7 +16,7 @@
   > div {
     > input {
       @extend .p-0p5;
-      @extend .br-0p3;
+      @extend .border-radius-0p3;
       border : 1px solid $borderColor;
       
       &[type="text"] {}
