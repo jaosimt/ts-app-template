@@ -1,14 +1,27 @@
 import React from 'react';
+import { targetUnicode } from '../../../constants';
+import { BoxComponentSpecs } from '../../../constants/specs/box';
+import { ButtonComponentSpecs } from '../../../constants/specs/buttons';
 import { Box } from '../../partials/box';
 
+export const strongPropsStyles = {
+    minWidth: '110px',
+    display: 'inline-block'
+}
+export const TargetUnicode = <span className={'color-magenta'}>{targetUnicode}</span>;
+
 const Home = () => {
-    return <div data-component={'home'}>
+    return <div data-component={'home'} className={'width-100p'}>
         <h1 className={'mt-0 line-height-1'}>Home</h1>
         <Box
+            borderColor={'#000000'}
+            className={'p-0p5'}
+            width={'100%'}
             title={'COMPONENTS'}
             borderRadius={4}
         >
-            <p className={'m-0'}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur.</p>
+            <BoxComponentSpecs/>
+            <ButtonComponentSpecs/>
         </Box>
     </div>
 };

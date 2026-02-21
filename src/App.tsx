@@ -3,6 +3,7 @@ import './App.scss';
 import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
 import { ReactIcon } from './components/partials';
 import Modal from './components/partials/modal';
+import { targetUnicode } from './constants';
 import { NavigationMain } from './navs';
 import { ContentRouter } from './routes';
 
@@ -49,7 +50,7 @@ const App = () => {
             <NavigationMain/>
         </header>
         <main>{<ContentRouter/>}</main>
-        <footer>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} ⦿ All rights reserved.
+        <footer>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.
         </footer>
     </>);
 };

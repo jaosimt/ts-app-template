@@ -19,22 +19,20 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLInputElement> {
 }
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
-    children: React.ReactNode;
-    boxClassName?: string;
-    title?: string;
     borderRadius?: CSSUnit
     borderColor?: HSLString | RGBString | HEXString;
+    boxClassName?: string;
+    title?: string;
     titleColor?: HSLString | RGBString | HEXString;
     width?: CSSUnit
 }
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-    type?: 'button' | 'submit' | 'reset';
-    setRef?: Dispatch<SetStateAction<HTMLElement | null>>;
     align?: 'left' | 'center' | 'right' | 'space-between';
+    disabled?: boolean;
     icon?: IconType;
     iconClassName?: string;
-    disabled?: boolean;
+    type?: 'button' | 'submit' | 'reset';
     width?: CSSUnit;
 }
 

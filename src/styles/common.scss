@@ -19,7 +19,8 @@
 .color-blue { color : blue; }
 .color-gray { color : gray; }
 
-link { color: $textColor; }
+a,
+link { color: $textColor; text-decoration: none; }
 /*************************************************** COLOR */
 
 /* BACKGROUND- *********************************************/
