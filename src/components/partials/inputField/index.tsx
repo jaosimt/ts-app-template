@@ -1,5 +1,5 @@
 import { InputFieldProps } from '../../../interafaces';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import './styles.scss';
 import { FaCircleXmark } from 'react-icons/fa6';
 import Tippy from '@tippyjs/react';
@@ -9,40 +9,36 @@ import { classNames } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
 import ReactIcon from '../index';
 
-const InputField: FC<InputFieldProps> = ({
-                                             icon,
-                                             className,
-                                             setRef,
-                                             type,
-                                             label,
-                                             labelWith = 'auto',
-                                             labelAlign,
-                                             placeHolder,
-                                             min,
-                                             max,
-                                             labelColor,
-                                             fieldRegister,
-                                             error,
-                                             ...restProps
-                                         }) => {
+const InputField: FC<InputFieldProps> = (props) => {
+    const {
+        icon,
+        className,
+        setRef,
+        type,
+        label,
+        labelWith = 'auto',
+        labelAlign,
+        placeHolder,
+        min,
+        max,
+        labelColor,
+        fieldRegister,
+        error,
+        ...restProps
+    } = props;
+
+    const {ref, ...restFieldRegister} = fieldRegister;
+
     const [styles, setStyles] = useState({
         zIndex: -777,
         opacity: 0
     });
 
-    const [inputRef, setInputRef] = useState(null as HTMLElement | null);
-    const [uid] = useState(`${fieldRegister.name}-${uuidv4()}`);
+    const idRef = useRef(`${fieldRegister.name}-${uuidv4()}`);
+    const inputRef = useRef(null as HTMLInputElement | null);
 
     useEffect(() => {
-        /* For some reason ref is spewing errors that override the validation errors
-           As elementary as this is, I'm leaving it here for now! */
-
-        const el = document.getElementById(uid);
-        if (!inputRef && el) {
-            setInputRef(el);
-            setRef?.(el);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        setRef && setRef(inputRef.current);
     }, []);
 
     useEffect(() => {
@@ -54,7 +50,7 @@ const InputField: FC<InputFieldProps> = ({
 
     return (
         <div data-component={'input-field'} className={'display-flex align-items-center'}>
-            <label style={{width: labelWith, justifyContent: labelAlign, color: labelColor}} htmlFor={uid}
+            <label style={{width: labelWith, justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
                    className={'display-flex align-items-center gap-0p5'}>
                 {icon && <ReactIcon icon={icon} className={'align-self-center'}/>}
                 {label && label}
@@ -66,7 +62,13 @@ const InputField: FC<InputFieldProps> = ({
                     max={max}
                     placeholder={placeHolder}
                     className={classNames(className && '', error && 'border-error')}
-                    id={uid} {...fieldRegister} {...restProps}
+                    id={idRef.current}
+                    {...restFieldRegister}
+                    {...restProps}
+                    ref={(e) => {
+                        ref(e);
+                        inputRef.current = e;
+                    }}
                 />
                 <Tippy
                     content={error}
@@ -74,8 +76,8 @@ const InputField: FC<InputFieldProps> = ({
                     theme={'error'}
                 >
                     <span data-popper-arrow className={'error position-absolute'} style={styles} onClick={() => {
-                        (inputRef as HTMLTextAreaElement)?.select();
-                        inputRef?.focus();
+                        inputRef.current?.select();
+                        inputRef.current?.focus();
                     }}>
                         <ReactIcon icon={FaCircleXmark}/>
                     </span>

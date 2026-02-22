@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import React, { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
@@ -5,6 +6,7 @@ import { FaMinus } from 'react-icons/fa6';
 import { SlScreenDesktop } from 'react-icons/sl';
 import { RGBString } from '../../../types';
 import { classNames, generateAnalogousPalette } from '../../../utils';
+import { paletteValidation } from '../../../validations';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
 import InputField from '../../partials/inputField';
@@ -40,10 +42,11 @@ const Demo: FC = () => {
         register,
         formState: {errors}
     } = useForm<PaletteProps>(
-        /*{
+        {
+            shouldUseNativeValidation: true,
             resolver: zodResolver(paletteValidation),
             mode: "onChange"
-        }*/
+        }
     );
 
     const paletteChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -213,7 +216,11 @@ const Demo: FC = () => {
                         min={0}
                         max={255}
                         type={'number'}
-                        fieldRegister={register('red', {value: paletteProps.red, onChange: paletteChangeHandler})}
+                        fieldRegister={register('red', {
+                            valueAsNumber: true,
+                            value: paletteProps.red,
+                            onChange: paletteChangeHandler
+                        })}
                         error={errors.red?.message}
                     />
                     <InputField
@@ -222,7 +229,11 @@ const Demo: FC = () => {
                         min={0}
                         max={255}
                         type={'number'}
-                        fieldRegister={register('green', {value: paletteProps.green, onChange: paletteChangeHandler})}
+                        fieldRegister={register('green', {
+                            valueAsNumber: true,
+                            value: paletteProps.green,
+                            onChange: paletteChangeHandler
+                        })}
                         error={errors.green?.message}
                     />
                     <InputField
@@ -231,7 +242,11 @@ const Demo: FC = () => {
                         min={0}
                         max={255}
                         type={'number'}
-                        fieldRegister={register('blue', {value: paletteProps.blue, onChange: paletteChangeHandler})}
+                        fieldRegister={register('blue', {
+                            valueAsNumber: true,
+                            value: paletteProps.blue,
+                            onChange: paletteChangeHandler
+                        })}
                         error={errors.blue?.message}
                     />
                 </div>
@@ -239,7 +254,11 @@ const Demo: FC = () => {
                     <InputField
                         label={'Size:'}
                         type={'number'}
-                        fieldRegister={register('size', {value: paletteProps.size, onChange: paletteChangeHandler})}
+                        fieldRegister={register('size', {
+                            valueAsNumber: true,
+                            value: paletteProps.size,
+                            onChange: paletteChangeHandler
+                        })}
                         error={errors.size?.message}
                     />
                     <InputField
@@ -248,6 +267,7 @@ const Demo: FC = () => {
                         max={360}
                         type={'number'}
                         fieldRegister={register('stepShift', {
+                            valueAsNumber: true,
                             value: paletteProps.stepShift,
                             onChange: paletteChangeHandler
                         })}
