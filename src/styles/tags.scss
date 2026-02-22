@@ -58,8 +58,12 @@ ol,
 ul {
   padding-inline-start : 1rem;
   
-  > li > ul {
-    margin-bottom : 0.3rem;
+  > li {
+    font-family : inherit;
+    
+    > ul {
+      margin-bottom : 0.3rem;
+    }
   }
 }
 

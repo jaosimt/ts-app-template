@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, Fragment, useState } from 'react';
 import {
     a11yDark, atomDark, base16AteliersulphurpoolLight, cb, coldarkCold, coldarkDark, coy,
     coyWithoutShadows, darcula, dark, dracula, duotoneDark, duotoneEarth, duotoneForest, duotoneLight, duotoneSea,
@@ -10,19 +10,11 @@ import {
     tomorrow, twilight, vs, vscDarkPlus, xonokai,
     zTouch
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { targetUnicode } from '../../../constants';
 import { BoxComponentSpecs } from '../../../constants/specs/box';
 import { ButtonComponentSpecs } from '../../../constants/specs/buttons';
 import InputFieldsProps from '../../../constants/specs/inputFields';
-import { ProperCase } from '../../../utils';
+import { classNames, ProperCase } from '../../../utils';
 import Box from '../../partials/box';
-
-export const TargetUnicode = <span className={'color-magenta'}>{targetUnicode}</span>;
-
-export const strongPropsStyles = {
-    minWidth: '110px',
-    display: 'inline-block'
-}
 
 export interface SelectedThemeProps {
     selectedTheme: string;
@@ -117,106 +109,30 @@ const Home: FC = () => {
 
 export default Home;
 
-// const themes = [
-//     'a11yDark', 'atomDark', 'base16AteliersulphurpoolLight', 'cb', 'coldarkCold', 'coldarkDark', 'coyWithoutShadows',
-//     'coy', 'darcula', 'dark', 'dracula', 'duotoneDark', 'duotoneEarth', 'duotoneForest', 'duotoneLight', 'duotoneSea',
-//     'duotoneSpace', 'funky', 'ghcolors', 'gruvboxDark', 'gruvboxLight', 'holiTheme', 'hopscotch', 'lucario',
-//     'materialDark', 'materialLight', 'materialOceanic', 'nightOwl', 'nord', 'okaidia', 'oneDark', 'oneLight',
-//     'pojoaque', 'prism', 'shadesOfPurple', 'solarizedDarkAtom', 'solarizedlight', 'synthwave84', 'tomorrow', 'twilight',
-//     'vs', 'vscDarkPlus', 'xonokai', 'zTouch'
-// ];
-//
-// export function CodeStyles(codeStyle: string) {
-//     switch (codeStyle) {
-//         case 'a11yDark':
-//             return { a11yDark };
-//         case 'atomDark':
-//             return { atomDark };
-//         case 'base16AteliersulphurpoolLight':
-//             return { base16AteliersulphurpoolLight };
-//         case 'cb':
-//             return { cb };
-//         case 'coldarkCold':
-//             return { coldarkCold };
-//         case 'coldarkDark':
-//             return { coldarkDark };
-//         case 'coyWithoutShadows':
-//             return { coyWithoutShadows };
-//         case 'coy':
-//             return { coy };
-//         case 'darcula':
-//             return { darcula };
-//         case 'dark':
-//             return { dark };
-//         case 'dracula':
-//             return { dracula };
-//         case 'duotoneDark':
-//             return { duotoneDark };
-//         case 'duotoneEarth':
-//             return { duotoneEarth };
-//         case 'duotoneForest':
-//             return { duotoneForest };
-//         case 'duotoneLight':
-//             return { duotoneLight };
-//         case 'duotoneSea':
-//             return { duotoneSea };
-//         case 'duotoneSpace':
-//             return { duotoneSpace };
-//         case 'funky':
-//             return { funky };
-//         case 'ghcolors':
-//             return { ghcolors };
-//         case 'gruvboxDark':
-//             return { gruvboxDark };
-//         case 'gruvboxLight':
-//             return { gruvboxLight };
-//         case 'holiTheme':
-//             return { holiTheme };
-//         case 'hopscotch':
-//             return { hopscotch };
-//         case 'lucario':
-//             return { lucario };
-//         case 'materialDark':
-//             return { materialDark };
-//         case 'materialLight':
-//             return { materialLight };
-//         case 'materialOceanic':
-//             return { materialOceanic };
-//         case 'nightOwl':
-//             return { nightOwl };
-//         case 'nord':
-//             return { nord };
-//         case 'okaidia':
-//             return { okaidia };
-//         case 'oneDark':
-//             return { oneDark };
-//         case 'oneLight':
-//             return { oneLight };
-//         case 'pojoaque':
-//             return { pojoaque };
-//         case 'prism':
-//             return { prism };
-//         case 'shadesOfPurple':
-//             return { shadesOfPurple };
-//         case 'solarizedDarkAtom':
-//             return { solarizedDarkAtom };
-//         case 'solarizedlight':
-//             return { solarizedlight };
-//         case 'synthwave84':
-//             return { synthwave84 };
-//         case 'tomorrow':
-//             return { tomorrow };
-//         case 'twilight':
-//             return { twilight };
-//         case 'vs':
-//             return { vs };
-//         case 'vscDarkPlus':
-//             return { vscDarkPlus };
-//         case 'xonokai':
-//             return { xonokai };
-//         case 'zTouch':
-//             return { zTouch };
-//         default:
-//             return { lucario };
-//     }
-// }
+export type PropsListProps = {
+    name: string;
+    types: string;
+    values: any
+    description: any[]
+}
+
+export const propsList: FC<PropsListProps[]> = (props) => <div
+    className={classNames(
+        'grid',
+        'cols-4',
+        'auto',
+        'line-height-normal',
+        'width-fit-content',
+        'font-monospace',
+        'color-black', 'font-size-smaller')}>
+    {
+        props.map(({name, types, values, description}, i) => <Fragment key={i}>
+            <strong>{name}</strong>
+            <span>{types}</span>
+            <i>{values}</i>
+            <span>
+                    {description.map((d, j) => <span key={j} className={'display-block'}>{d}</span>)}
+                </span>
+        </Fragment>)
+    }
+</div>;

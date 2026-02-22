@@ -1,14 +1,48 @@
 import React, { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { SelectedThemeProps, strongPropsStyles, TargetUnicode, themes } from '../../components/pages/home';
+import { propsList, PropsListProps, SelectedThemeProps, themes } from '../../components/pages/home';
 
-export const code = `<Box>
+const code = `<Box>
     <div>Box Content</div>
 </Box>`;
 
+const boxData: PropsListProps[] = [
+    {
+        name: 'borderRadius',
+        types: 'number|`${number}${string}`',
+        values: '',
+        description: ['Adds border radius to box\'s border', 'Adds border/2 radius to box\'s title - if enabled!']
+    }, {
+        name: 'borderColor',
+        types: 'HSLString|RGBString|HEXString',
+        values: '',
+        description: ['Sets the border color of the box']
+    }, {
+        name: 'boxClassName',
+        types: 'string',
+        values: '',
+        description: ['CSS classes to be spread to the box element']
+    }, {
+        name: 'title',
+        types: 'string',
+        values: '',
+        description: ['Adds a title to the box']
+    }, {
+        name: 'titleColor',
+        types: 'string',
+        values: '',
+        description: ['Sets the color of the title - if enabled!']
+    }, {
+        name: 'width',
+        types: 'number|`${number}${string}`',
+        values: '',
+        description: ['Sets the width of the box']
+    }
+];
+
 export const BoxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
-        <h4 className={'m-0 color-black mb-0p3'}>Box</h4>
+        <h3 className={'m-0 color-black mb-0p3'}>Box</h3>
         <SyntaxHighlighter
             codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
             showLineNumbers={true}
@@ -18,38 +52,9 @@ export const BoxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
         >
             {code}
         </SyntaxHighlighter>
-        <h4 className={'mt-1 color-gray mb-0p3 flex align-items-center'}>Properties [<span
-            className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLDivElement>`}</span>]</h4>
-        <ul className={'m-0 color-black font-monospace font-size-smaller line-height-normal'}>
-            <li>
-                <strong
-                    style={strongPropsStyles}>borderRadius</strong>{' '}{TargetUnicode} {`number | \`\${number}\${string}\``}
-                <ul className={'font-size-small'}>
-                    <li>Adds border radius to box's border</li>
-                    <li>Adds border/2 radius to box's title - if enabled!</li>
-                </ul>
-            </li>
-            <li>
-                <strong style={strongPropsStyles}>borderColor</strong>{' '}{TargetUnicode} HSLString | RGBString |
-                HEXString {TargetUnicode} Color to border as implied!
-            </li>
-            <li>
-                <strong style={strongPropsStyles}>boxClassName</strong>{' '}{TargetUnicode} string {TargetUnicode} CSS
-                classes to be spread to the box element
-            </li>
-            <li>
-                <strong style={strongPropsStyles}>title</strong>{' '}{TargetUnicode} string {TargetUnicode} Adds a title
-                to the box
-            </li>
-            <li>
-                <strong style={strongPropsStyles}>titleColor</strong>{' '}{TargetUnicode} string {TargetUnicode} Sets
-                the color of the title - if enabled!
-            </li>
-            <li>
-                <strong
-                    style={strongPropsStyles}>width</strong>{' '}{TargetUnicode} {`number | \`\${number}\${string}\``} {TargetUnicode} Sets
-                the width of the box
-            </li>
-        </ul>
+        <h3 className={'mt-0p5 color-gray mb-0p3 flex align-items-center'}>Properties [<span
+            className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLDivElement>`}</span>]
+        </h3>
+        {propsList(boxData)}
     </>;
 };
