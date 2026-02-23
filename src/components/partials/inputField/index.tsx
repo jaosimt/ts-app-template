@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { InputFieldProps } from '../../../interafaces';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import './styles.scss';
@@ -5,12 +6,13 @@ import { FaCircleXmark } from 'react-icons/fa6';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 import '../../../styles/tippy.scss';
-import { classNames } from '../../../utils';
+import { classNames, parseCSSUnit } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
 import ReactIcon from '../index';
 
 const InputField: FC<InputFieldProps> = (props) => {
     const {
+        width,
         icon,
         className,
         setRef,
@@ -39,6 +41,7 @@ const InputField: FC<InputFieldProps> = (props) => {
 
     useEffect(() => {
         setRef && setRef(inputRef.current);
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -48,6 +51,10 @@ const InputField: FC<InputFieldProps> = (props) => {
         });
     }, [error]);
 
+    const Input = styled.input`
+        width: ${parseCSSUnit(String(width))};
+    `;
+
     return (
         <div data-component={'input-field'} className={'display-flex align-items-center'}>
             <label style={{width: labelWith, justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
@@ -56,7 +63,7 @@ const InputField: FC<InputFieldProps> = (props) => {
                 {label && label}
             </label>
             <div className={'position-relative display-flex'}>
-                <input
+                <Input
                     type={type || 'text'}
                     min={min}
                     max={max}

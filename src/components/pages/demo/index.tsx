@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FaPlus } from 'react-icons/fa';
-import { FaMinus } from 'react-icons/fa6';
-import { SlScreenDesktop } from 'react-icons/sl';
+import { FaPlus, FaMinus } from 'react-icons/fa6';
+import { SlReload, SlScreenDesktop } from 'react-icons/sl';
+import styled from 'styled-components';
 import { RGBString } from '../../../types';
 import { classNames, generateAnalogousPalette } from '../../../utils';
 import { paletteValidation } from '../../../validations';
@@ -61,8 +61,19 @@ const Demo: FC = () => {
         }, paletteProps.size, paletteProps.stepShift))
     }, [paletteProps]);
 
+    const Counter = styled.span`
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    `
     return <div data-component={'demo'} className={'width-100p'} style={{minHeight: '490px'}}>
-        <h1 className={'mt-0 line-height-1'}>Demo Page</h1>
+        <h1 className={'mt-0 display-flex justify-content-space-between line-height-1'}>Demo Page <Counter>{ctr}</Counter></h1>
 
         {
             showModal && <Modal
@@ -73,7 +84,7 @@ const Demo: FC = () => {
                 onClose={() => setShowModal(false)}
             >
                 <div className={'display-flex flex-direction-column gap-1'}>
-                    <h2 className={'m-0 text-align-center color-magenta font-monospace'}>Hello ctr [{ctr}] viewed in modal!</h2>
+                    <h2 className={'m-0 color-magenta font-monospace flex-direction-column align-items-center'}>Hello ctr <Counter>{ctr}</Counter> viewed in modal!</h2>
                     <div>
                         <h4 className={'m-0'}>This modal can be close by one of the following ways:</h4>
                         <ul className={'m-0'} style={{listStyle: 'disc'}}>
@@ -89,7 +100,7 @@ const Demo: FC = () => {
                                 icon={FaMinus}
                                 onClick={() => setCtr(ctr - 1)}
                             />
-                            <strong style={{minWidth: '50px', textAlign: 'center', padding: '6px'}} className="border-radius-0p3 border font-family-monospace">{ctr}</strong>
+                            <Counter>{ctr}</Counter>
                             <Button
                                 align={'space-between'}
                                 icon={FaPlus}
@@ -119,23 +130,21 @@ const Demo: FC = () => {
                 onClose={() => setShowPortal(false)}
             >
                 <div className={'p-2'}>
-                    <h1 className={'color-red m-0 mb-2'}>Hello ctr [{ctr}] viewed in new window!</h1>
+                    <h1 className={'color-red flex-direction-column align-items-center'}>Hello ctr <Counter>{ctr}</Counter> viewed in new window!</h1>
                 </div>
             </WindowPortal>
         }
 
         <section className={'translate absolute-center display-flex gap-0p5 flex-direction-column align-items-center'}>
             <Box
-                boxClassName={'background'}
-                width={416}
+                width={333}
                 borderRadius={4}
                 borderColor={'rgb(255, 0, 0)'}
                 title={'Buttons'}
                 titleColor={'#ff0000'}
                 className={classNames(
-                    'display-flex',
-                    'gap-0p5',
                     'flex-direction-column',
+                    'gap-0p5',
                     'align-items-center',
                     'justify-content-center')}
             >
@@ -166,17 +175,22 @@ const Demo: FC = () => {
                         icon={FaMinus}
                         onClick={() => setCtr(ctr - 1)}
                     />
-                    <strong style={{minWidth: '118px', textAlign: 'center', padding: '6px'}} className="border-radius-0p3 border font-family-monospace">{ctr}</strong>
+                    <Counter>{ctr}</Counter>
                     <Button
                         align={'space-between'}
                         icon={FaPlus}
                         onClick={() => setCtr(ctr + 1)}
                     />
+                    <Button
+                        icon={SlReload}
+                        disabled={ctr === 0}
+                        onClick={() => setCtr(0)}
+                    />
                 </div>
             </Box>
 
             <Box
-                width={416}
+                width={333}
                 borderRadius={'4px'}
                 title={'Analogous Palette'}
                 className={classNames(
@@ -186,7 +200,7 @@ const Demo: FC = () => {
                     'align-items-center',
                     'justify-content-center')}
             >
-                <div className={'display-flex gap-0p5 flex-wrap'}>
+                <div className={'display-flex gap-0p1 flex-wrap'}>
                     {palette.map((color: RGBString, index: number) => <span
                         key={index} className={'color-box transition-200'}
                         style={{
@@ -199,20 +213,17 @@ const Demo: FC = () => {
             </Box>
 
             <Box
-                width={416}
+                width={333}
                 borderRadius={'4px'}
+                backgroundColor={'yellow'}
                 title={'InputFields'}
-                className={classNames(
-                    'display-flex',
-                    'gap-0p5',
-                    'flex-direction-column',
-                    'align-items-center',
-                    'justify-content-center')}
+                titleColor={'#ff0000'}
+                titleBackgroundColor={'white'}
             >
-                <div className="display-flex gap-1">
+                <div className="display-flex flex-wrap gap-0p3-5">
                     <InputField
                         label={'Red:'}
-                        labelColor={'#ff0000'}
+                        labelColor={'red'}
                         min={0}
                         max={255}
                         type={'number'}
@@ -250,10 +261,13 @@ const Demo: FC = () => {
                         error={errors.blue?.message}
                     />
                 </div>
-                <div className="display-flex gap-1">
+                <div
+                    className="mt-0p3 display-flex flex-wrap gap-0p3-5"
+                >
                     <InputField
                         label={'Size:'}
                         type={'number'}
+                        width={`100px`}
                         fieldRegister={register('size', {
                             valueAsNumber: true,
                             value: paletteProps.size,

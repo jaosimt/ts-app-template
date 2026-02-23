@@ -1,7 +1,7 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import React, { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
 import { IconType } from "react-icons";
-import { CSSUnit, HEXString, HSLString, RGBString } from '../types';
+import { CSSColors, CSSUnit } from '../types';
 
 export interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     error?: string;
@@ -9,21 +9,24 @@ export interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> 
     icon?: IconType;
     label?: string;
     labelAlign?: 'left' | 'right' | 'center';
-    labelColor?: HSLString | RGBString | HEXString;
+    labelColor?: CSSColors;
     labelWith?: CSSUnit;
     max?: number;
     min?: number;
     placeHolder?: string;
     setRef?: Dispatch<SetStateAction<HTMLElement | null>>;
     type?: HTMLInputTypeAttribute;
+    width?: CSSUnit;
 }
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
+    backgroundColor?: CSSColors;
     borderRadius?: CSSUnit
-    borderColor?: HSLString | RGBString | HEXString;
+    borderColor?: CSSColors;
     boxClassName?: string;
     title?: string;
-    titleColor?: HSLString | RGBString | HEXString;
+    titleColor?: CSSColors;
+    titleBackgroundColor?: CSSColors;
     width?: CSSUnit
 }
 

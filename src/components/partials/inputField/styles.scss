@@ -3,20 +3,20 @@
 @import '../../../styles/common';
 
 [data-component="input-field"] {
-  @extend .display-flex;
-  @extend .gap-0p5;
+  display : flex;
+  gap     : 0.5rem;
   
   > label {
-    @extend .display-inline-flex;
-    @extend .align-items-center;
+    display     : inline-flex;
+    align-items : center;
     
     min-width : fit-content;
   }
   
   > div {
     > input {
-      @extend .p-0p5;
-      @extend .border-radius-0p3;
+      padding : 0.5rem;
+      border-radius: 0.3rem;
       border : 1px solid $borderColor;
       
       &[type="text"] {}

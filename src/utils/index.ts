@@ -1,5 +1,5 @@
 import { ColorTranslator } from 'colortranslator';
-import { HSLString, RGBString } from '../types';
+import { CSSUnit, HSLString, RGBString } from '../types';
 
 export const isString = (str: unknown, validateNotEmpty: boolean = false): str is string =>
     validateNotEmpty
@@ -127,4 +127,8 @@ export function ProperCase(input: string): string {
         .filter(Boolean)
         .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
         .join(" ");
+}
+
+export function parseCSSUnit(cssUnit: string): CSSUnit {
+    return cssUnit.match(/\d$/) ? `${Math.ceil(parseFloat(cssUnit))}px` : cssUnit as CSSUnit;
 }

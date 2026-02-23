@@ -121,12 +121,18 @@
 
 /* GAP- ****************************************************/
 .gap-0 { gap : 0; }
+.gap-0p1 { gap : 0.1rem; }
+.gap-0p2 { gap : 0.2rem; }
+.gap-0p3 { gap : 0.3rem; }
+.gap-0p4 { gap : 0.4rem; }
 .gap-0p5 { gap : 0.5rem; }
 .gap-1 { gap : 1rem; }
 .gap-1p5 { gap : 1.5rem; }
 .gap-2 { gap : 2rem; }
 .gap-2p5 { gap : 2.5rem; }
 .gap-3 { gap : 3rem; }
+.gap-0-5 { gap : 0 0.5rem; }
+.gap-0p3-5 { gap : 0.3rem 0.5rem; }
 /**************************************************** GAP- */
 
 /* FONT- ***************************************************/
@@ -182,7 +188,7 @@
 /*************************************************** LINE- */
 
 /* FLEX- ***************************************************/
-.flex-direction-column { flex-direction : column; }
+.flex-direction-column { display: flex; flex-direction : column; }
 .flex-wrap { flex-wrap : wrap; }
 .flex-wrap-nowrap { flex-wrap : nowrap; }
 /*************************************************** FLEX- */

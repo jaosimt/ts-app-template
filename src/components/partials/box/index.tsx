@@ -1,37 +1,65 @@
 import { FC } from 'react';
+import styled from 'styled-components';
 import { BoxProps } from '../../../interafaces';
 import { CSSUnit } from '../../../types';
-import { classNames } from '../../../utils';
+import { parseCSSUnit } from '../../../utils';
 import './styles.scss';
 
-const Box: FC<BoxProps> = ({
-                               children,
-                               title,
-                               className,
-                               boxClassName,
-                               borderRadius = 0,
-                               width,
-                               borderColor,
-                               titleColor
-                           }) => {
+const Box: FC<BoxProps> = (props) => {
+    const {
+        children,
+        title,
+        className,
+        boxClassName,
+        borderRadius = 0,
+        width,
+        borderColor,
+        titleColor,
+        backgroundColor,
+        titleBackgroundColor
+    } = props;
+
     let titleBorderRadius: number | CSSUnit = borderRadius;
     if (borderRadius !== 0) {
         const brSplit = [parseFloat(titleBorderRadius.toString()), titleBorderRadius.toString().replace(/\d*/, '')];
         titleBorderRadius = parseCSSUnit(`${brSplit[0] as number / 2}${brSplit[1]}`);
     }
 
-    function parseCSSUnit(cssUnit: string): CSSUnit {
-        return cssUnit.match(/\d$/) ? `${Math.ceil(parseFloat(cssUnit))}px` : cssUnit as CSSUnit;
-    }
+    const Section = styled.section`
+        background: ${backgroundColor || 'white'};
+        border-width: 1px;
+        border-style: solid;
+        border-color: ${borderColor || '#ccc'};
+        border-radius: ${parseCSSUnit(String(borderRadius))};
+        margin-top: ${title ? '0.5rem' : 0};
+        padding: 0.5rem;
+        width: ${parseCSSUnit(String(width))};
+    `;
 
-    return <section
+    const Title = styled.h5`
+        line-height: 1;
+        position: absolute;
+        margin: -0.9rem 0 0 0;
+        padding: 0.1rem 0.17rem;
+        border: inherit;
+        background: ${titleBackgroundColor || 'inherit'};
+        border-radius: ${titleBorderRadius};
+        color: ${titleColor};
+    `;
+
+    const Children = styled.div`
+        margin-top: ${title && '0.5rem'};
+        width: 100%;
+        overflow-x: auto;
+    `;
+
+    return <Section
         data-component={'box'}
-        className={classNames('p-0p5', boxClassName, 'border', title && 'mt-0p5')}
-        style={{borderRadius: parseCSSUnit(String(borderRadius)), width, borderColor}}
+        className={boxClassName}
     >
-        {title && <h5 className={'title m-0 background border'} style={{borderRadius: titleBorderRadius, borderColor, color: titleColor}}>{title}</h5>}
-        <div className={classNames(className, title && 'mt-0p5')}>{children}</div>
-    </section>;
+        {title && <Title>{title}</Title>}
+        <Children className={className}>{children}</Children>
+    </Section>;
 };
 
 export default Box;
