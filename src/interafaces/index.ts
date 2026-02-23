@@ -21,12 +21,16 @@ export interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> 
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
     backgroundColor?: CSSColors;
+    border?: boolean | 'label-only';
     borderRadius?: CSSUnit
     borderColor?: CSSColors;
     boxClassName?: string;
-    title?: string;
-    titleColor?: CSSColors;
-    titleBackgroundColor?: CSSColors;
+    tight?: boolean;
+    label?: string;
+    labelColor?: CSSColors;
+    labelBackgroundColor?: CSSColors;
+    labelPosition?: 'top-center'|'top-right'|'bottom-left'|'bottom-center'|'bottom-right';
+    labelSize?: 'small'|'medium'|'large';
     width?: CSSUnit
 }
 

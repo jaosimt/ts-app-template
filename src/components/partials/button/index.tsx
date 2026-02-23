@@ -1,21 +1,21 @@
 import { ButtonProps } from '../../../interafaces';
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import './styles.scss';
-import 'tippy.js/dist/tippy.css'; // optional
-import '../../../styles/tippy.scss';
 import { v4 as uuidv4 } from 'uuid';
 import ReactIcon from '../index';
 
-const Button: FC<ButtonProps> = ({
-                                     icon,
-                                     iconClassName,
-                                     type = 'button',
-                                     align,
-                                     children,
-                                     width,
-                                     style,
-                                     ...restProps
-                                 }) => {
+const Button: FC<ButtonProps> = (props) => {
+    const {
+        icon,
+        iconClassName,
+        type = 'button',
+        align,
+        children,
+        width,
+        style,
+        ...restProps
+    } = props;
+
     const [uid] = useState(`${type}-${uuidv4()}`);
 
     return (

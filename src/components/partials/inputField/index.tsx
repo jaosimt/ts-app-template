@@ -1,6 +1,5 @@
-import styled from 'styled-components';
 import { InputFieldProps } from '../../../interafaces';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useEffect, useRef, useState } from 'react';
 import './styles.scss';
 import { FaCircleXmark } from 'react-icons/fa6';
 import Tippy from '@tippyjs/react';
@@ -29,6 +28,11 @@ const InputField: FC<InputFieldProps> = (props) => {
         ...restProps
     } = props;
 
+    console.log('name:', fieldRegister.name);
+    if (fieldRegister.name === 'size') {
+        console.log('props:', props);
+    }
+
     const {ref, ...restFieldRegister} = fieldRegister;
 
     const [styles, setStyles] = useState({
@@ -51,10 +55,6 @@ const InputField: FC<InputFieldProps> = (props) => {
         });
     }, [error]);
 
-    const Input = styled.input`
-        width: ${parseCSSUnit(String(width))};
-    `;
-
     return (
         <div data-component={'input-field'} className={'display-flex align-items-center'}>
             <label style={{width: labelWith, justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
@@ -63,7 +63,8 @@ const InputField: FC<InputFieldProps> = (props) => {
                 {label && label}
             </label>
             <div className={'position-relative display-flex'}>
-                <Input
+                <input
+                    style={{width: parseCSSUnit(String(width))}}
                     type={type || 'text'}
                     min={min}
                     max={max}
@@ -77,7 +78,7 @@ const InputField: FC<InputFieldProps> = (props) => {
                         inputRef.current = e;
                     }}
                 />
-                <Tippy
+                {error && <Tippy
                     content={error}
                     animation={true}
                     theme={'error'}
@@ -88,10 +89,10 @@ const InputField: FC<InputFieldProps> = (props) => {
                     }}>
                         <ReactIcon icon={FaCircleXmark}/>
                     </span>
-                </Tippy>
+                </Tippy>}
             </div>
         </div>
     );
 }
 
-export default InputField;
+export default memo(InputField);

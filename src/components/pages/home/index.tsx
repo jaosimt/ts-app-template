@@ -1,4 +1,4 @@
-import { FC, Fragment, useState } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import {
     a11yDark, atomDark, base16AteliersulphurpoolLight, cb, coldarkCold, coldarkDark, coy,
     coyWithoutShadows, darcula, dark, dracula, duotoneDark, duotoneEarth, duotoneForest, duotoneLight, duotoneSea,
@@ -97,7 +97,7 @@ const Home: FC = () => {
             borderColor={'#000000'}
             className={'p-0p5'}
             width={'100%'}
-            title={'COMPONENTS'}
+            label={'COMPONENTS'}
             borderRadius={4}
         >
             <BoxComponentSpecs selectedTheme={selectedTheme}/>

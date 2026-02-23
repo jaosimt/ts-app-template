@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { SlReload, SlScreenDesktop } from 'react-icons/sl';
@@ -13,7 +13,7 @@ import InputField from '../../partials/inputField';
 import Modal from '../../partials/modal';
 import WindowPortal from '../windowPortal';
 
-interface PaletteProps extends React.HTMLAttributes<HTMLInputElement> {
+interface PaletteProps extends HTMLAttributes<HTMLInputElement> {
     red: number;
     green: number;
     blue: number;
@@ -22,9 +22,22 @@ interface PaletteProps extends React.HTMLAttributes<HTMLInputElement> {
 }
 
 const Demo: FC = () => {
+    const {
+        register,
+        formState: {errors}
+    } = useForm<PaletteProps>(
+        {
+            shouldUseNativeValidation: true,
+            resolver: zodResolver(paletteValidation),
+            mode: 'onChange'
+        }
+    );
+
+    const timeoutRef = useRef<any>(0)
+
     const [showModal, setShowModal] = useState(false);
     const [showPortal, setShowPortal] = useState(false);
-    const [ctr, setCtr] = React.useState(0);
+    const [ctr, setCtr] = useState(0);
     const [paletteProps, setPaletteProps] = useState({
         red: 150, //0, //170,
         green: 200, //0, //160,
@@ -38,19 +51,16 @@ const Demo: FC = () => {
         b: paletteProps.blue
     }, paletteProps.size, paletteProps.stepShift));
 
-    const {
-        register,
-        formState: {errors}
-    } = useForm<PaletteProps>(
-        {
-            shouldUseNativeValidation: true,
-            resolver: zodResolver(paletteValidation),
-            mode: "onChange"
-        }
-    );
+    const paletteChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        const {name, value, min, max} = e.target as HTMLInputElement;
+        if (!value) return;
 
-    const paletteChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPaletteProps({...paletteProps, [e.target.name]: parseInt(e.target.value)});
+        if (min && max && (parseFloat(value) >= parseFloat(min) && parseFloat(value) <= parseFloat(max))) {
+            setPaletteProps({...paletteProps, [e.target.name]: parseInt(e.target.value)});
+        }
+
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => (document.querySelector(`[name="${name}"]`) as HTMLInputElement)?.focus(), 100);
     };
 
     useEffect(() => {
@@ -72,6 +82,7 @@ const Demo: FC = () => {
         justify-content: center;
         font-weight: bold;
     `
+
     return <div data-component={'demo'} className={'width-100p'} style={{minHeight: '490px'}}>
         <h1 className={'mt-0 display-flex justify-content-space-between line-height-1'}>Demo Page <Counter>{ctr}</Counter></h1>
 
@@ -140,8 +151,8 @@ const Demo: FC = () => {
                 width={333}
                 borderRadius={4}
                 borderColor={'rgb(255, 0, 0)'}
-                title={'Buttons'}
-                titleColor={'#ff0000'}
+                label={'Buttons'}
+                labelColor={'#ff0000'}
                 className={classNames(
                     'flex-direction-column',
                     'gap-0p5',
@@ -192,7 +203,7 @@ const Demo: FC = () => {
             <Box
                 width={333}
                 borderRadius={'4px'}
-                title={'Analogous Palette'}
+                label={'Analogous Palette'}
                 className={classNames(
                     'display-flex',
                     'gap-0p5',
@@ -216,9 +227,10 @@ const Demo: FC = () => {
                 width={333}
                 borderRadius={'4px'}
                 backgroundColor={'yellow'}
-                title={'InputFields'}
-                titleColor={'#ff0000'}
-                titleBackgroundColor={'white'}
+                label={'InputFields'}
+                labelColor={'#ff0000'}
+                labelPosition={'bottom-right'}
+                labelBackgroundColor={'white'}
             >
                 <div className="display-flex flex-wrap gap-0p3-5">
                     <InputField
@@ -268,6 +280,8 @@ const Demo: FC = () => {
                         label={'Size:'}
                         type={'number'}
                         width={`100px`}
+                        min={1}
+                        max={56}
                         fieldRegister={register('size', {
                             valueAsNumber: true,
                             value: paletteProps.size,

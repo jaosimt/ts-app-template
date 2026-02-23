@@ -6,6 +6,8 @@ import {
     SelectedThemeProps,
     themes
 } from '../../components/pages/home';
+import Box from '../../components/partials/box';
+import { createLink } from '../../utils/ext';
 
 const codeTS = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {
     email: string;
@@ -52,12 +54,12 @@ const inputFieldData: PropsListProps[] = [
     }, {
         name: 'fieldRegister',
         types: 'UseFormRegisterReturn',
-        values: <a target={'_blank'} href="//react-hook-form.com/docs/useform/register">useForm.register</a>,
+        values: createLink('useForm.register', '//react-hook-form.com/docs/useform/register'),
         description: ['Allows you to register an input or select element and apply validation rules to React Hook Form']
     }, {
         name: 'icon',
         types: 'IconType',
-        values: <a target={'_blank'} href={'//react-icons.github.io/react-icons/'}>react-icons</a>,
+        values: createLink('react-icons', '//react-icons.github.io/react-icons/'),
         description: ['Adds icon to the input label']
     }, {
         name: 'label',
@@ -84,35 +86,51 @@ const inputFieldData: PropsListProps[] = [
 
 const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
-        <h3 className={'m-0 mt-1 border-top pt-1 color-black mb-0p3 display-flex align-items-end justify-content-space-between'}>
+        <h3 className={'m-0 mt-1 border-top border-color-gray pt-1 color-black mb-0p3 display-flex align-items-end justify-content-space-between'}>
             InputField
-            <strong className="m-0 color-magenta">typescript</strong>
         </h3>
-        <SyntaxHighlighter
-            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-            showLineNumbers={true}
-            language="typescript"
-            customStyle={{padding: '0.5rem', margin: 0}}
-            style={themes[selectedTheme]}
+        <Box
+            border={false}
+            tight={true}
+            label={'typescript'}
+            labelSize={'large'}
+            labelPosition={'top-right'}
+            backgroundColor={'transparent'}
+            labelColor={'magenta'}
         >
-            {codeTS}
-        </SyntaxHighlighter>
-        <h3 className={'m-0 border-top pt-1 color-black mb-0p3 display-flex align-items-end justify-content-space-between'}>
-            &nbsp;
-            <strong className="m-0 color-magenta">tsx</strong>
-        </h3>
-        <SyntaxHighlighter
-            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-            showLineNumbers={true}
-            language="jsx"
-            customStyle={{padding: '0.5rem', margin: 0}}
-            style={themes[selectedTheme]}
+            <SyntaxHighlighter
+                codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                showLineNumbers={true}
+                language="typescript"
+                customStyle={{padding: '0.5rem', margin: 0}}
+                style={themes[selectedTheme]}
+            >
+                {codeTS}
+            </SyntaxHighlighter>
+        </Box>
+        <br/>
+        <Box
+            border={false}
+            tight={true}
+            label={'tsx'}
+            labelSize={'large'}
+            labelPosition={'top-right'}
+            backgroundColor={'transparent'}
+            labelColor={'magenta'}
         >
-            {codeJSX}
-        </SyntaxHighlighter>
-        <h4 className={'mt-0p5 color-gray mb-0p3 flex align-items-center'}>Properties [<span
+            <SyntaxHighlighter
+                codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                showLineNumbers={true}
+                language="jsx"
+                customStyle={{padding: '0.5rem', margin: 0}}
+                style={themes[selectedTheme]}
+            >
+                {codeJSX}
+            </SyntaxHighlighter>
+        </Box>
+        <h3 className={'mt-0p5 color-gray mb-0p5 flex align-items-center'}>Properties [<span
             className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLInputElement>`}</span>]
-        </h4>
+        </h3>
         {propsList(inputFieldData)}
     </>;
 };

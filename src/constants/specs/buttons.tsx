@@ -6,6 +6,7 @@ import {
     SelectedThemeProps,
     themes
 } from '../../components/pages/home';
+import Box from '../../components/partials/box';
 
 const code = `<Button>
     Submit
@@ -40,24 +41,34 @@ const buttonData: PropsListProps[] = [
     }, {
         name: 'width',
         types: 'number|`${number}${string}`',
-        values: '',
+        values: `e.g. 70|'70px'`,
         description: ['Sets the width of the button']
     }
 ];
 
 export const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
-        <h3 className={'m-0 mt-1 border-top pt-1 color-black mb-0p3'}>Button</h3>
-        <SyntaxHighlighter
-            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-            showLineNumbers={true}
-            language="jsx"
-            customStyle={{padding: '0.5rem', margin: 0}}
-            style={themes[selectedTheme]}
+        <h3 className={'m-0 mt-1 border-top border-color-gray pt-1 color-black mb-0p3'}>Button</h3>
+        <Box
+            border={false}
+            tight={true}
+            label={'tsx'}
+            labelSize={'large'}
+            labelPosition={'top-right'}
+            backgroundColor={'transparent'}
+            labelColor={'magenta'}
         >
-            {code}
-        </SyntaxHighlighter>
-        <h3 className={'mt-0p5 color-gray mb-0p3 flex align-items-center'}>Properties [<span
+            <SyntaxHighlighter
+                codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                showLineNumbers={true}
+                language="tsx"
+                customStyle={{padding: '0.5rem', margin: 0}}
+                style={themes[selectedTheme]}
+            >
+                {code}
+            </SyntaxHighlighter>
+        </Box>
+        <h3 className={'mt-0p5 color-gray mb-0p5 flex align-items-center'}>Properties [<span
             className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLButtonElement>`}</span>]</h3>
         {propsList(buttonData)}
     </>;

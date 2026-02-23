@@ -45,6 +45,7 @@
 .border-color-cyan { border-color : cyan; }
 .border-color-red { border-color : red; }
 .border-color-yellow { border-color : yellow; }
+.border-color-gray { border-color : gray; }
 /************************************************* BORDER- */
 
 /* MARGIN- *************************************************/
@@ -60,6 +61,7 @@
 .mt-0p1 { margin-top : 0.1rem; }
 .mt-0p2 { margin-top : 0.2rem; }
 .mt-0p3 { margin-top : 0.3rem; }
+.mt-0p4 { margin-top : 0.4rem; }
 .mt-0p5 { margin-top : 0.5rem; }
 .mt-1 { margin-top : 1rem; }
 .mt-2 { margin-top : 2rem; }
@@ -72,7 +74,10 @@
 .mr-3 { margin-right : 3rem; }
 
 .mb-0 { margin-bottom : 0; }
+.mb-0p1 { margin-bottom : 0.1rem; }
+.mb-0p2 { margin-bottom : 0.2rem; }
 .mb-0p3 { margin-bottom : 0.3rem; }
+.mb-0p4 { margin-bottom : 0.4rem; }
 .mb-0p5 { margin-bottom : 0.5rem; }
 .mb-1 { margin-bottom : 1rem; }
 .mb-2 { margin-bottom : 2rem; }
@@ -210,7 +215,7 @@
 
 .grid {
   display : grid;
-  gap     : 0.2rem 1rem;
+  gap     : 0.5rem 1rem;
   
   &.cols-2 {
     grid-template-columns : repeat(2, 1fr);
