@@ -41,7 +41,7 @@ const buttonData: PropsListProps[] = [
         description: ['Specifies the type of the button']
     }, {
         name: 'width',
-        // eslint-disable-next-line no-template-curly-in-string
+        // eslint-disable-next-line
         types: 'number|`${number}${string}`',
         values: `e.g. 70|'70px'`,
         description: ['Sets the width of the button']
