@@ -19,11 +19,6 @@ const Login: FC = () => {
         resolver: zodResolver(loginValidation)
     });
 
-    // const [passwordRef, setPasswordRef] = useState<HTMLElement | null>(null);
-    // const [emailRef, setEmailRef] = useState<HTMLElement | null>(null);
-    // const labelWidth = '6rem';
-    // console.log(passwordRef);
-
     const onsubmit = (data: LoginFormInput) => {
         console.log(data);
     };
@@ -41,9 +36,6 @@ const Login: FC = () => {
                 >
                     <div className={'display-flex'}>
                         < InputField
-                            // setRef={setEmailRef}
-                            // labelWith={labelWidth}
-                            // label={'Email'}
                             type={'email'}
                             icon={FaEnvelope}
                             className={classNames(styles.Email)}
@@ -54,9 +46,6 @@ const Login: FC = () => {
                     </div>
                     <div className={'display-flex'}>
                         <InputField
-                            // setRef={setPasswordRef}
-                            // labelWith={labelWidth}
-                            // label={'Password'}
                             icon={FaLock}
                             type={'password'}
                             className={classNames(styles.Password)}
