@@ -7,6 +7,7 @@ import {
     themes
 } from '../../components/pages/home';
 import Box from '../../components/partials/box';
+import { createLink } from '../../utils/ext';
 
 const code = `<Button>
     Submit
@@ -26,7 +27,7 @@ const buttonData: PropsListProps[] = [
     }, {
         name: 'icon',
         types: 'ReactNode',
-        values: <a target={'_blank'} href={'//react-icons.github.io/react-icons/'}>react-icons</a>,
+        values: createLink('react-icons', '//react-icons.github.io/react-icons'),
         description: ['Adds icon to the button']
     }, {
         name: 'iconClassName',
@@ -40,6 +41,7 @@ const buttonData: PropsListProps[] = [
         description: ['Specifies the type of the button']
     }, {
         name: 'width',
+        // eslint-disable-next-line no-template-curly-in-string
         types: 'number|`${number}${string}`',
         values: `e.g. 70|'70px'`,
         description: ['Sets the width of the button']

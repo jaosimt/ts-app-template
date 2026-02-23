@@ -10,6 +10,7 @@ import Box from '../../components/partials/box';
 import { createLink } from '../../utils/ext';
 import { CssColors } from './box';
 
+/* eslint-disable no-unused-vars */
 const codeTS = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {
     email: string;
     password: string;
@@ -79,6 +80,7 @@ const inputFieldData: PropsListProps[] = [
         description: ['Sets the color of the label']
     }, {
         name: 'labelWith',
+        // eslint-disable-next-line no-template-curly-in-string
         types: 'number|`${number}${string}`',
         values: `e.g. 70|'70px'`,
         description: ['Sets the width of the label']
@@ -109,6 +111,7 @@ const inputFieldData: PropsListProps[] = [
         description: ['']
     }, {
         name: 'width',
+        // eslint-disable-next-line no-template-curly-in-string
         types: 'number|`${number}${string}`',
         values: `e.g. 70|'70px'`,
         description: ['Sets the width of the input field']

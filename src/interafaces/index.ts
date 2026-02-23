@@ -1,9 +1,9 @@
 import { UseFormRegisterReturn } from "react-hook-form";
-import React, { HTMLInputTypeAttribute } from "react";
+import { HTMLAttributes, HTMLInputTypeAttribute } from 'react';
 import { IconType } from "react-icons";
 import { CSSColors, CSSUnit } from '../types';
 
-export interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface InputFieldProps extends HTMLAttributes<HTMLInputElement> {
     error?: string;
     fieldRegister: UseFormRegisterReturn;
     icon?: IconType;
@@ -19,7 +19,7 @@ export interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> 
     width?: CSSUnit;
 }
 
-export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
     backgroundColor?: CSSColors;
     border?: boolean | 'label-only';
     borderRadius?: CSSUnit
@@ -34,7 +34,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
     width?: CSSUnit
 }
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     align?: 'left' | 'center' | 'right' | 'space-between';
     disabled?: boolean;
     icon?: IconType;

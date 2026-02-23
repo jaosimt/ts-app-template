@@ -40,6 +40,7 @@ const boxData: PropsListProps[] = [
         description: ['Sets the border of the box', 'If set to \'label-only\', only the label\'s border will be shown!']
     }, {
         name: 'borderRadius',
+        // eslint-disable-next-line no-template-curly-in-string
         types: 'number|`${number}${string}`',
         values: `e.g. 7|'7px'`,
         description: ['Adds border radius to box\'s border', 'Adds border/2 radius to box\'s label - if enabled!']
@@ -85,6 +86,7 @@ const boxData: PropsListProps[] = [
         description: ['Sets the location of the label - if enabled!']
     }, {
         name: 'width',
+        // eslint-disable-next-line no-template-curly-in-string
         types: 'number|`${number}${string}`',
         values: `e.g. 700|'700px'`,
         description: ['Sets the width of the box']
