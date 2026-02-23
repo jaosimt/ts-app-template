@@ -25,7 +25,7 @@ const buttonData: PropsListProps[] = [
         description: ['Specifies that a button should be disabled']
     }, {
         name: 'icon',
-        types: 'IconType',
+        types: 'ReactNode',
         values: <a target={'_blank'} href={'//react-icons.github.io/react-icons/'}>react-icons</a>,
         description: ['Adds icon to the button']
     }, {

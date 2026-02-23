@@ -8,6 +8,7 @@ import {
 } from '../../components/pages/home';
 import Box from '../../components/partials/box';
 import { createLink } from '../../utils/ext';
+import { CssColors } from './box';
 
 const codeTS = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {
     email: string;
@@ -58,8 +59,8 @@ const inputFieldData: PropsListProps[] = [
         description: ['Allows you to register an input or select element and apply validation rules to React Hook Form']
     }, {
         name: 'icon',
-        types: 'IconType',
-        values: createLink('react-icons', '//react-icons.github.io/react-icons/'),
+        types: 'ReactNode',
+        values: createLink('react-icons', '//react-icons.github.io/react-icons'),
         description: ['Adds icon to the input label']
     }, {
         name: 'label',
@@ -73,14 +74,44 @@ const inputFieldData: PropsListProps[] = [
         description: ['Sets the label alignment']
     }, {
         name: 'labelColor',
-        types: 'HSLString|RGBString|HEXString',
-        values: '',
+        types: 'string',
+        values: CssColors,
         description: ['Sets the color of the label']
     }, {
         name: 'labelWith',
         types: 'number|`${number}${string}`',
-        values: '',
+        values: `e.g. 70|'70px'`,
         description: ['Sets the width of the label']
+    }, {
+        name: 'max',
+        types: 'number',
+        values: '',
+        description: ['Sets the maximum value of the input field']
+    }, {
+        name: 'min',
+        types: 'number',
+        values: '',
+        description: ['Sets the minimum value of the input field']
+    }, {
+        name: 'placeHolder',
+        types: 'string',
+        values: '',
+        description: ['Sets the placeholder of the input field']
+    }, {
+        name: 'setRef',
+        types: 'Function',
+        values: 'e.g. (ref: HTMLInputElement) => void',
+        description: ['Allows you to set an access reference to the input field']
+    }, {
+        name: 'type',
+        types: 'string',
+        values: createLink('HTMLInputTypes', '//www.w3schools.com/html/html_form_input_types.asp'),
+        description: ['']
+    }, {
+        name: 'width',
+        types: 'number|`${number}${string}`',
+        values: `e.g. 70|'70px'`,
+        description: ['Sets the width of the input field']
     }
 ];
 

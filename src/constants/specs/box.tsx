@@ -30,7 +30,7 @@ export const CssColors = <span>All {createLink(
 const boxData: PropsListProps[] = [
     {
         name: 'backgroundColor',
-        types: 'CSSColors',
+        types: 'string',
         values: CssColors,
         description: ['Sets the background color of the box']
     }, {
@@ -45,7 +45,7 @@ const boxData: PropsListProps[] = [
         description: ['Adds border radius to box\'s border', 'Adds border/2 radius to box\'s label - if enabled!']
     }, {
         name: 'borderColor',
-        types: 'CSSColors',
+        types: 'string',
         values: 'All CSS Colors',
         description: ['Sets the border color of the box']
     }, {

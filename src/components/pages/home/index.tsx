@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useState } from 'react';
+import { CSSProperties, FC, Fragment, useState } from 'react';
 import {
     a11yDark, atomDark, base16AteliersulphurpoolLight, cb, coldarkCold, coldarkDark, coy,
     coyWithoutShadows, darcula, dark, dracula, duotoneDark, duotoneEarth, duotoneForest, duotoneLight, duotoneSea,
@@ -21,7 +21,7 @@ export interface SelectedThemeProps {
 }
 
 // Define the type for the theme object
-export type Theme = Record<string, React.CSSProperties>;
+export type Theme = Record<string, CSSProperties>;
 
 // Map of theme names to imported theme objects
 export const themes: Record<string, Theme> = {

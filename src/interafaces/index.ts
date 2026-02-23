@@ -1,5 +1,5 @@
 import { UseFormRegisterReturn } from "react-hook-form";
-import React, { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
+import React, { HTMLInputTypeAttribute } from "react";
 import { IconType } from "react-icons";
 import { CSSColors, CSSUnit } from '../types';
 
@@ -14,7 +14,7 @@ export interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> 
     max?: number;
     min?: number;
     placeHolder?: string;
-    setRef?: Dispatch<SetStateAction<HTMLElement | null>>;
+    setRef?: Function;
     type?: HTMLInputTypeAttribute;
     width?: CSSUnit;
 }

@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { SlReload, SlScreenDesktop } from 'react-icons/sl';
@@ -34,6 +34,7 @@ const Demo: FC = () => {
     );
 
     const timeoutRef = useRef<any>(0)
+    const inputRefs = useRef<Record<string, HTMLElement>>({});
 
     const [showModal, setShowModal] = useState(false);
     const [showPortal, setShowPortal] = useState(false);
@@ -60,7 +61,7 @@ const Demo: FC = () => {
         }
 
         clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => (document.querySelector(`[name="${name}"]`) as HTMLInputElement)?.focus(), 100);
+        timeoutRef.current = setTimeout(() => inputRefs.current[name]?.focus(), 100);
     };
 
     useEffect(() => {
@@ -245,6 +246,7 @@ const Demo: FC = () => {
                             onChange: paletteChangeHandler
                         })}
                         error={errors.red?.message}
+                        setRef={(ref: HTMLElement) => inputRefs.current.red = ref}
                     />
                     <InputField
                         label={'Green:'}
@@ -258,6 +260,7 @@ const Demo: FC = () => {
                             onChange: paletteChangeHandler
                         })}
                         error={errors.green?.message}
+                        setRef={(ref: HTMLElement) => inputRefs.current.green = ref}
                     />
                     <InputField
                         label={'Blue:'}
@@ -271,6 +274,7 @@ const Demo: FC = () => {
                             onChange: paletteChangeHandler
                         })}
                         error={errors.blue?.message}
+                        setRef={(ref: HTMLElement) => inputRefs.current.blue = ref}
                     />
                 </div>
                 <div
@@ -288,6 +292,7 @@ const Demo: FC = () => {
                             onChange: paletteChangeHandler
                         })}
                         error={errors.size?.message}
+                        setRef={(ref: HTMLElement) => inputRefs.current.size = ref}
                     />
                     <InputField
                         label={'Shift %:'}
@@ -300,6 +305,7 @@ const Demo: FC = () => {
                             onChange: paletteChangeHandler
                         })}
                         error={errors.stepShift?.message}
+                        setRef={(ref: HTMLElement) => inputRefs.current.stepShift = ref}
                     />
                 </div>
             </Box>

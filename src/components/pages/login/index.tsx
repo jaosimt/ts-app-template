@@ -44,6 +44,7 @@ const Login: FC = () => {
                             // setRef={setEmailRef}
                             // labelWith={labelWidth}
                             // label={'Email'}
+                            type={'email'}
                             icon={FaEnvelope}
                             className={classNames(styles.Email)}
                             fieldRegister={register('email')}
