@@ -8,6 +8,7 @@ import {
 } from '../../components/pages/home';
 import Box from '../../components/partials/box';
 import { createLink, CssColors } from '../../utils/ext';
+import './styles.scss';
 
 const codeJSX = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {
     email: string;
@@ -55,12 +56,12 @@ const inputFieldData: PropsListProps[] = [
         description: ['Holds a message for the error tooltip - if any!']
     }, {
         name: 'fieldRegister',
-        types: 'UseFormRegisterReturn',
-        values: createLink('useForm.register', '//react-hook-form.com/docs/useform/register'),
+        types: createLink('UseFormRegisterReturn', '//react-hook-form.com/docs/useform/register'),
+        values: '',
         description: ['Allows you to register an input or select element and apply validation rules to React Hook Form']
     }, {
         name: 'icon',
-        types: 'ReactNode',
+        types: createLink('ReactNode', '//reactnative.dev/docs/react-node'),
         values: createLink('react-icons', '//react-icons.github.io/react-icons'),
         description: ['Adds icon to the input label']
     }, {
@@ -142,7 +143,7 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
                 {codeJSX}
             </SyntaxHighlighter>
         </Box>
-        <h3 className={'mt-0p5 color-gray mb-0p5 flex align-items-center'}>Properties [<span
+        <h3 className={'properties color-gray flex align-items-center'}>Properties [<span
             className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLInputElement>`}</span>]
         </h3>
         {propsList(inputFieldData)}

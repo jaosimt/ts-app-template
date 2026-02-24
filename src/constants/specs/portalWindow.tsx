@@ -1,0 +1,80 @@
+import { FC } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import {
+    propsList,
+    PropsListProps,
+    SelectedThemeProps,
+    themes
+} from '../../components/pages/home';
+import Box from '../../components/partials/box';
+import { createLink, CssColors } from '../../utils/ext';
+
+const code = `const [showPortal, setShowPortal] = useState<boolean>(false);
+
+return <>
+    <Button onClick={() => setShowPortal(true)} disabled={showPortal}>Show Portal</Button>
+    {
+        showPortal && <WindowPortal openOnNextScreen={true} onClose={() => setShowPortal(false)}>
+            <div style={{padding: '2rem'}}>
+                <h1>Hello, New Window!</h1>
+            </div>
+        </WindowPortal>
+    }
+</>;`;
+
+const portalData: PropsListProps[] = [
+    {
+        name: 'children',
+        types: createLink('ReactNode', '//reactnative.dev/docs/react-node'),
+        values: CssColors,
+        description: ['Sets the background color of the box']
+    }, {
+        name: 'onClose',
+        types: 'Function',
+        values: 'e.g. () => alert("portal is closing!")',
+        description: [
+            'Attaches a callback to be called when the portal window is closing.',
+            'This method takes no arguments and is only intended for whatever cleanup one might need!'
+        ]
+    }, {
+        name: 'openOnNextScreen',
+        types: 'boolean',
+        values: '',
+        description: [
+            'Opens the portal window on the next available monitor',
+            <i>* Tested working in Brave & Chrome browsers only!</i>
+        ]
+    }, {
+        name: 'title',
+        types: 'string',
+        values: '',
+        description: [<span>Sets the {createLink('document title', '//www.w3schools.com/jsref/prop_doc_title.asp')} of the portal window</span>]
+    }
+];
+
+export const PortalWindowSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+    return <>
+        <h3 className={'m-0 mt-1 border-top border-color-gray pt-1 color-black mb-0p3 display-flex align-items-end justify-content-space-between'}>WindowPortal</h3>
+        <Box
+            border={false}
+            tight={true}
+            label={'tsx'}
+            labelSize={'large'}
+            labelPosition={'top-right'}
+            backgroundColor={'transparent'}
+            labelColor={'magenta'}
+        >
+            <SyntaxHighlighter
+                codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                showLineNumbers={true}
+                language="tsx"
+                customStyle={{padding: '0.5rem', margin: 0}}
+                style={themes[selectedTheme]}
+            >
+                {code}
+            </SyntaxHighlighter>
+        </Box>
+        <h3 className={'properties color-gray flex align-items-center'}>Properties</h3>
+        {propsList(portalData)}
+    </>;
+};

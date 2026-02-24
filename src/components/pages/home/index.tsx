@@ -114,8 +114,8 @@ const Home: FC = () => {
 export default Home;
 
 export type PropsListProps = {
-    name: string;
-    types: string;
+    name: any;
+    types: any;
     values: any
     description: any[]
 }
@@ -128,7 +128,11 @@ export const propsList: FC<PropsListProps[]> = (props) => <div
         'line-height-normal',
         'width-fit-content',
         'font-monospace',
-        'color-black', 'font-size-smaller')}>
+        'color-black',
+        'font-size-smaller',
+        'alternating-color'
+    )}
+>
     {
         props.map(({name, types, values, description}, i) => <Fragment key={i}>
             <strong>{name}</strong>

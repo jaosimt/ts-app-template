@@ -26,7 +26,7 @@ const buttonData: PropsListProps[] = [
         description: ['Specifies that a button should be disabled']
     }, {
         name: 'icon',
-        types: 'ReactNode',
+        types: createLink('ReactNode', '//reactnative.dev/docs/react-node'),
         values: createLink('react-icons', '//react-icons.github.io/react-icons'),
         description: ['Adds icon to the button']
     }, {
@@ -70,7 +70,7 @@ export const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) =>
                 {code}
             </SyntaxHighlighter>
         </Box>
-        <h3 className={'mt-0p5 color-gray mb-0p5 flex align-items-center'}>Properties [<span
+        <h3 className={'properties color-gray flex align-items-center'}>Properties [<span
             className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLButtonElement>`}</span>]</h3>
         {propsList(buttonData)}
     </>;
