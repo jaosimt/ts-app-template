@@ -7,25 +7,11 @@ import {
     themes
 } from '../../components/pages/home';
 import Box from '../../components/partials/box';
-import { createLink } from '../../utils/ext';
+import { CssColors } from '../../utils/ext';
 
 const code = `<Box>
     <h1>Hello World!</h1>
 </Box>`;
-
-export const CssColors = <span>All {createLink(
-    'CSS Colors',
-    'https://www.w3schools.com/cssref/css_colors.php'
-)} including {createLink(
-    'HSLs',
-    '//www.w3schools.com/css/css_colors_hsl.asp'
-)}, {createLink(
-    'HEXs',
-    '//www.w3schools.com/css/css_colors_hex.asp'
-)} and {createLink(
-    'RGBs',
-    '//www.w3schools.com/css/css_colors_rgb.asp'
-)}</span>;
 
 const boxData: PropsListProps[] = [
     {

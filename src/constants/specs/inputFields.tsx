@@ -7,8 +7,7 @@ import {
     themes
 } from '../../components/pages/home';
 import Box from '../../components/partials/box';
-import { createLink } from '../../utils/ext';
-import { CssColors } from './box';
+import { createLink, CssColors } from '../../utils/ext';
 
 /* eslint-disable no-unused-vars */
 const codeTS = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {

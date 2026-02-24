@@ -1,4 +1,4 @@
-import { CSSProperties, FC, Fragment, useState } from 'react';
+import React, { CSSProperties, FC, Fragment, useState } from 'react';
 import {
     a11yDark, atomDark, base16AteliersulphurpoolLight, cb, coldarkCold, coldarkDark, coy,
     coyWithoutShadows, darcula, dark, dracula, duotoneDark, duotoneEarth, duotoneForest, duotoneLight, duotoneSea,
@@ -13,6 +13,7 @@ import {
 import { BoxComponentSpecs } from '../../../constants/specs/box';
 import { ButtonComponentSpecs } from '../../../constants/specs/buttons';
 import InputFieldsProps from '../../../constants/specs/inputFields';
+import { ModalComponentSpecs } from '../../../constants/specs/modal';
 import { classNames, ProperCase } from '../../../utils';
 import Box from '../../partials/box';
 
@@ -80,7 +81,7 @@ const Home: FC = () => {
     };
 
     return <div data-component={'home'} className={'width-100p'}>
-        <div className={'display-flex justify-content-space-between align-items-end'}>
+        <div className={'display-flex justify-content-space-between align-items-end background position-sticky'} style={{top: '50px', zIndex: 1}}>
             <h1 className={'mt-0 line-height-1'}>Home</h1>
             <div className={'display-flex justify-content-space-between'}>
                 &nbsp;
@@ -103,6 +104,7 @@ const Home: FC = () => {
             <BoxComponentSpecs selectedTheme={selectedTheme}/>
             <ButtonComponentSpecs selectedTheme={selectedTheme}/>
             <InputFieldsProps selectedTheme={selectedTheme}/>
+            <ModalComponentSpecs selectedTheme={selectedTheme}/>
         </Box>
     </div>
 };

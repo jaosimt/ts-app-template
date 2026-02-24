@@ -53,3 +53,13 @@ export interface IconProps {
     size?: number;
     className?: string;
 }
+
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
+    closeOnEscKey?: boolean;
+    closeOnOutsideClick?: boolean;
+    maxZIndex?: boolean;
+    onClose?: Function
+    showClose?: boolean;
+    title?: string;
+    width?: string | number;
+}

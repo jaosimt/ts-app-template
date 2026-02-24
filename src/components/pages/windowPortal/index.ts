@@ -1,6 +1,12 @@
-import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import type { WindowPortalProps } from '../../../types';
+
+interface WindowPortalProps {
+    children: ReactNode;
+    onClose?: Function;
+    openOnNextScreen?: boolean; // IF AVAILABLE!
+    title?: string;
+}
 
 const WindowPortal: FC<WindowPortalProps> = ({openOnNextScreen = false, children, title = `${window.document.title} portal`, onClose}) => {
     const [, setExternalWindow] = useState<Window | null>(null);

@@ -3,21 +3,22 @@ import './styles.scss';
 import ReactDOM from 'react-dom';
 import { FaCircleXmark } from 'react-icons/fa6';
 import { useKeyPress, useOutsideClick } from '../../../hooks';
-import { ModalProps } from '../../../types';
 import { v4 as uuidv4 } from 'uuid';
+import { ModalProps } from '../../../interafaces';
 import { classNames } from '../../../utils';
 import ReactIcon from '../index';
 
-const Modal: FC<ModalProps> = ({
-                                   children,
-                                   title,
-                                   showClose,
-                                   closeOnOutsideClick,
-                                   closeOnEscKey,
-                                   onClose,
-                                   width,
-                                   maxZIndex
-                               }) => {
+const Modal: FC<ModalProps> = (props) => {
+    const {
+        children,
+        closeOnEscKey,
+        closeOnOutsideClick,
+        maxZIndex,
+        onClose,
+        showClose,
+        title,
+        width
+    } = props;
     const [show, setShow] = useState(false);
     const [uid] = useState(`modal-${uuidv4()}`);
 
