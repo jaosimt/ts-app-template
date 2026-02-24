@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
     propsList,

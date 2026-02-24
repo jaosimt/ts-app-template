@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
     propsList,
@@ -9,8 +9,7 @@ import {
 import Box from '../../components/partials/box';
 import { createLink, CssColors } from '../../utils/ext';
 
-/* eslint-disable no-unused-vars */
-const codeTS = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {
+const codeJSX = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {
     email: string;
     password: string;
 }
@@ -25,26 +24,28 @@ const {
     formState: {errors}
 } = useForm<LoginProps>(
     resolver: zodResolver(loginValidation)
-);
+)
 
 const onsubmit = (data: LoginProps) => {
     console.log(data);
     /* do your stuff here! */
-};`;
+};
 
-const codeJSX = `<form onSubmit={handleSubmit(onsubmit)}>
-    <InputField
-        fieldRegister={register('email')}
-        error={errors.email?.message}
-    />
+return <>
+    <form onSubmit={handleSubmit(onsubmit)}>
+        <InputField
+            fieldRegister={register('email')}
+            error={errors.email?.message}
+        />
+        
+        <InputField
+            fieldRegister={register('password')}
+            error={errors.password?.message}
+        />
+    </form>
     
-    <InputField
-        fieldRegister={register('password')}
-        error={errors.password?.message}
-    />
-</form>
-
-<Button type={'submit'}>Login</Button>`;
+    <Button type={'submit'}>Login</Button>
+</>`;
 
 const inputFieldData: PropsListProps[] = [
     {
@@ -122,26 +123,6 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
         <h3 className={'m-0 mt-1 border-top border-color-gray pt-1 color-black mb-0p3 display-flex align-items-end justify-content-space-between'}>
             InputField
         </h3>
-        <Box
-            border={false}
-            tight={true}
-            label={'typescript'}
-            labelSize={'large'}
-            labelPosition={'top-right'}
-            backgroundColor={'transparent'}
-            labelColor={'magenta'}
-        >
-            <SyntaxHighlighter
-                codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-                showLineNumbers={true}
-                language="typescript"
-                customStyle={{padding: '0.5rem', margin: 0}}
-                style={themes[selectedTheme]}
-            >
-                {codeTS}
-            </SyntaxHighlighter>
-        </Box>
-        <br/>
         <Box
             border={false}
             tight={true}

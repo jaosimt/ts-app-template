@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, Fragment, useState } from 'react';
+import { CSSProperties, FC, Fragment, useState } from 'react';
 import {
     a11yDark, atomDark, base16AteliersulphurpoolLight, cb, coldarkCold, coldarkDark, coy,
     coyWithoutShadows, darcula, dark, dracula, duotoneDark, duotoneEarth, duotoneForest, duotoneLight, duotoneSea,
@@ -14,6 +14,7 @@ import { BoxComponentSpecs } from '../../../constants/specs/box';
 import { ButtonComponentSpecs } from '../../../constants/specs/buttons';
 import InputFieldsProps from '../../../constants/specs/inputFields';
 import { ModalComponentSpecs } from '../../../constants/specs/modal';
+import { PortalWindowSpecs } from '../../../constants/specs/portalWindow';
 import { classNames, ProperCase } from '../../../utils';
 import Box from '../../partials/box';
 
@@ -105,6 +106,7 @@ const Home: FC = () => {
             <ButtonComponentSpecs selectedTheme={selectedTheme}/>
             <InputFieldsProps selectedTheme={selectedTheme}/>
             <ModalComponentSpecs selectedTheme={selectedTheme}/>
+            <PortalWindowSpecs selectedTheme={selectedTheme}/>
         </Box>
     </div>
 };
