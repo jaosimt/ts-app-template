@@ -233,81 +233,83 @@ const Demo: FC = () => {
                 labelPosition={'bottom-right'}
                 labelBackgroundColor={'white'}
             >
-                <div className="display-flex flex-wrap gap-0p3-5">
-                    <InputField
-                        label={'Red:'}
-                        labelColor={'red'}
-                        min={0}
-                        max={255}
-                        type={'number'}
-                        fieldRegister={register('red', {
-                            valueAsNumber: true,
-                            value: paletteProps.red,
-                            onChange: paletteChangeHandler
-                        })}
-                        error={errors.red?.message}
-                        setRef={(ref: HTMLElement) => inputRefs.current.red = ref}
-                    />
-                    <InputField
-                        label={'Green:'}
-                        labelColor={'#008000'}
-                        min={0}
-                        max={255}
-                        type={'number'}
-                        fieldRegister={register('green', {
-                            valueAsNumber: true,
-                            value: paletteProps.green,
-                            onChange: paletteChangeHandler
-                        })}
-                        error={errors.green?.message}
-                        setRef={(ref: HTMLElement) => inputRefs.current.green = ref}
-                    />
-                    <InputField
-                        label={'Blue:'}
-                        labelColor={'#0000ff'}
-                        min={0}
-                        max={255}
-                        type={'number'}
-                        fieldRegister={register('blue', {
-                            valueAsNumber: true,
-                            value: paletteProps.blue,
-                            onChange: paletteChangeHandler
-                        })}
-                        error={errors.blue?.message}
-                        setRef={(ref: HTMLElement) => inputRefs.current.blue = ref}
-                    />
-                </div>
-                <div
-                    className="mt-0p3 display-flex flex-wrap gap-0p3-5"
-                >
-                    <InputField
-                        label={'Size:'}
-                        type={'number'}
-                        width={`100px`}
-                        min={1}
-                        max={56}
-                        fieldRegister={register('size', {
-                            valueAsNumber: true,
-                            value: paletteProps.size,
-                            onChange: paletteChangeHandler
-                        })}
-                        error={errors.size?.message}
-                        setRef={(ref: HTMLElement) => inputRefs.current.size = ref}
-                    />
-                    <InputField
-                        label={'Shift %:'}
-                        min={0}
-                        max={360}
-                        type={'number'}
-                        fieldRegister={register('stepShift', {
-                            valueAsNumber: true,
-                            value: paletteProps.stepShift,
-                            onChange: paletteChangeHandler
-                        })}
-                        error={errors.stepShift?.message}
-                        setRef={(ref: HTMLElement) => inputRefs.current.stepShift = ref}
-                    />
-                </div>
+                <form noValidate>
+                    <div className="display-flex flex-wrap gap-0p3-5">
+                        <InputField
+                            label={'Red:'}
+                            labelColor={'red'}
+                            min={0}
+                            max={255}
+                            type={'number'}
+                            fieldRegister={register('red', {
+                                valueAsNumber: true,
+                                value: paletteProps.red,
+                                onChange: paletteChangeHandler
+                            })}
+                            error={errors.red?.message}
+                            setRef={(ref: HTMLElement) => inputRefs.current.red = ref}
+                        />
+                        <InputField
+                            label={'Green:'}
+                            labelColor={'#008000'}
+                            min={0}
+                            max={255}
+                            type={'number'}
+                            fieldRegister={register('green', {
+                                valueAsNumber: true,
+                                value: paletteProps.green,
+                                onChange: paletteChangeHandler
+                            })}
+                            error={errors.green?.message}
+                            setRef={(ref: HTMLElement) => inputRefs.current.green = ref}
+                        />
+                        <InputField
+                            label={'Blue:'}
+                            labelColor={'#0000ff'}
+                            min={0}
+                            max={255}
+                            type={'number'}
+                            fieldRegister={register('blue', {
+                                valueAsNumber: true,
+                                value: paletteProps.blue,
+                                onChange: paletteChangeHandler
+                            })}
+                            error={errors.blue?.message}
+                            setRef={(ref: HTMLElement) => inputRefs.current.blue = ref}
+                        />
+                    </div>
+                    <div
+                        className="mt-0p3 display-flex flex-wrap gap-0p3-5"
+                    >
+                        <InputField
+                            label={'Size:'}
+                            type={'number'}
+                            width={`100px`}
+                            min={1}
+                            max={56}
+                            fieldRegister={register('size', {
+                                valueAsNumber: true,
+                                value: paletteProps.size,
+                                onChange: paletteChangeHandler
+                            })}
+                            error={errors.size?.message}
+                            setRef={(ref: HTMLElement) => inputRefs.current.size = ref}
+                        />
+                        <InputField
+                            label={'Shift %:'}
+                            min={0}
+                            max={360}
+                            type={'number'}
+                            fieldRegister={register('stepShift', {
+                                valueAsNumber: true,
+                                value: paletteProps.stepShift,
+                                onChange: paletteChangeHandler
+                            })}
+                            error={errors.stepShift?.message}
+                            setRef={(ref: HTMLElement) => inputRefs.current.stepShift = ref}
+                        />
+                    </div>
+                </form>
             </Box>
         </section>
     </div>;

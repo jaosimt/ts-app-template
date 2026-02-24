@@ -25,13 +25,9 @@ const InputField: FC<InputFieldProps> = (props) => {
         labelColor,
         fieldRegister,
         error,
+        onKeyDown,
         ...restProps
     } = props;
-
-    console.log('name:', fieldRegister.name);
-    if (fieldRegister.name === 'size') {
-        console.log('props:', props);
-    }
 
     const {ref, ...restFieldRegister} = fieldRegister;
 
@@ -44,6 +40,7 @@ const InputField: FC<InputFieldProps> = (props) => {
     const inputRef = useRef(null as HTMLInputElement | null);
 
     useEffect(() => {
+        localStorage.removeItem('last-input-focus');
         setRef && setRef(inputRef.current);
         // eslint-disable-next-line
     }, []);
@@ -71,12 +68,17 @@ const InputField: FC<InputFieldProps> = (props) => {
                     placeholder={placeHolder}
                     className={classNames(className && '', error && 'border-error')}
                     id={idRef.current}
-                    {...restFieldRegister}
-                    {...restProps}
                     ref={(e) => {
                         ref(e);
                         inputRef.current = e;
                     }}
+                    onKeyDown={e => {
+                        localStorage.setItem('last-input-focus', fieldRegister.name);
+                        onKeyDown && onKeyDown(e);
+                    }}
+                    autoFocus={localStorage.getItem('last-input-focus') === fieldRegister.name}
+                    {...restFieldRegister}
+                    {...restProps}
                 />
                 {error && <Tippy
                     content={error}

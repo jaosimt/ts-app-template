@@ -20,7 +20,7 @@ const Login: FC = () => {
     });
 
     const onsubmit = (data: LoginFormInput) => {
-        console.log(data);
+        console.log('[onsubmit] data:', data);
     };
 
     return <div data-component={'login'}>
@@ -33,6 +33,7 @@ const Login: FC = () => {
                 <form
                     className={'display-flex flex-direction-column gap-1'}
                     onSubmit={handleSubmit(onsubmit)}
+                    noValidate
                 >
                     <div className={'display-flex'}>
                         < InputField

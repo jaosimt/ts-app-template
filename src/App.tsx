@@ -11,7 +11,6 @@ const App = () => {
     const [offline, setOffline] = useState(false);
 
     const setConnectionStatus = ({type}: { type: string }) => {
-        console.log(type);
         if (!['online', 'offline'].includes(type)) return;
         setOffline(type === 'offline');
     };

@@ -1,4 +1,5 @@
 import { ColorTranslator } from 'colortranslator';
+import { SubmitEvent } from 'react';
 import { CSSUnit, HSLString, RGBString } from '../types';
 
 export const isString = (str: unknown, validateNotEmpty: boolean = false): str is string =>
@@ -132,3 +133,90 @@ export function ProperCase(input: string): string {
 export function parseCSSUnit(cssUnit: string): CSSUnit {
     return cssUnit.match(/\d$/) ? `${Math.ceil(parseFloat(cssUnit))}px` : cssUnit as CSSUnit;
 }
+
+export const getFormData = (event: SubmitEvent<HTMLFormElement>): Record<string, any> => {
+    event.preventDefault(); // Stop default behavior
+
+    // Access the form element via the currentTarget
+    const formData = new FormData(event.currentTarget);
+
+    // Convert to a JavaScript object for easier use
+    return Object.fromEntries(formData.entries());
+};
+
+export const isDate = (arg:string) => {
+    const _date = new Date(arg);
+    return !isNaN(_date.valueOf());
+};
+export const isNumber = (arg:any, matchType?:boolean) =>
+    matchType
+        ? typeof arg === 'number' && Number.isFinite(arg)
+        : Number.isFinite(parseFloat(arg)) &&
+        String(arg)
+            .replace(/,/g, '')
+            ?.match(/^-*\d+(.\d+){0,1}$/) !== null;
+export const parseIfNumberIsString = (arg:string) => (isNumber(arg) ? +arg : arg);
+export const isNull = (arg: any) => arg === null;
+export const isBoolean = (arg: any) => typeof arg === 'boolean';
+export const isFunction = (arg: any) => typeof arg === 'function';
+export const isUndefined = (arg: any) => typeof arg === 'undefined';
+export const isObject = (arg: any) => typeof arg === 'object' && !isNull(arg) && !Array.isArray(arg);
+export const isNullOrUndefined = (arg: any) => isNull(arg) || isUndefined(arg);
+export const isEmpty = (arg: any) => {
+    if (isString(arg)) return arg.trim() === '';
+    else if (isObject(arg)) {
+        if (arg?.constructor?.name === 'DOMRect') return false;
+        return Object.keys(arg).length === 0;
+    } else if (Array.isArray(arg)) return arg.length === 0;
+    else return isNullOrUndefined(arg);
+};
+
+export const snakeCase = (str:string, delimiter = '_', keepNumbers = false) => {
+    if (!isString(str, true)) return str;
+
+    str = str
+        .replace(/\.+/gm, delimiter)
+        .replace(/[/\\]/gm, delimiter)
+        .replace(/[^a-z0-9]+/gim, ' ')
+        .trim()
+        .replace(/([a-z0-9 ])([A-Z])/gm, (w, m1, m2) => `${m1} ${m2}`)
+        .replace(/([0-9 ])([a-z])/gim, (w, m1, m2) => `${m1} ${m2}`)
+        .replace(/([A-Z]{2,})([a-z]{2,})/gm, (w, m1, m2) => `${m1} ${m2}`)
+        .replace(new RegExp(`^${delimiter}+|${delimiter}+$`, 'gm'), '')
+        .toLowerCase();
+
+    if (!keepNumbers) str = str.replace(/[0-9]+/gm, ' ').trim() || 'empty string on snake case';
+    else str = str.replace(/(\d+)/gm, ' $1 ').trim();
+
+    return str.replace(/ +/gm, delimiter);
+};
+
+export const camelCase = (str:string) =>
+    isString(str, true)
+        ? str
+            .replace(/[^a-z0-9]+/gim, ' ')
+            .trim()
+            .replace(/([a-z0-9 ])([A-Z])/gm, (w, m1, m2) => `${m1} ${m2}`)
+            .replace(/([0-9 ])([a-z])/gim, (w, m1, m2) => `${m1} ${m2}`)
+            .replace(/([A-Z]{2,})([a-z]{2,})/gm, (w, m1, m2) => `${m1} ${m2}`)
+            .toLowerCase()
+            .trim()
+            .replace(/ +(\w)/gm, (w, m) => m.toUpperCase())
+        : str;
+
+export const deCamelCase = (str:string) =>
+    isString(str, true)
+        ? str
+            .replace(/ *([A-Z])/gm, ' $1')
+            .replace(/^./, m => m.toUpperCase())
+            .trim()
+        : str;
+
+export const capitalize = (str:string, properCase = true) =>
+    isString(str, true)
+        ? properCase
+            ? str.toLowerCase().replace(/(^|\s)\S/g, m => m.toUpperCase())
+            : str.toLowerCase().replace(/(^|[.!?]) *./gm, m => m.toUpperCase())
+        : str;
+
+export const parseBooleanString = (value:string): boolean => value === 'true';
