@@ -1,7 +1,7 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { HTMLAttributes, HTMLInputTypeAttribute } from 'react';
 import { IconType } from "react-icons";
-import { CSSColors, CSSUnit } from '../types';
+import { CSSColors, CSSUnit, LabelPositionType } from '../types';
 
 export interface InputFieldProps extends HTMLAttributes<HTMLInputElement> {
     error?: string;
@@ -29,7 +29,7 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
     label?: string;
     labelColor?: CSSColors;
     labelBackgroundColor?: CSSColors;
-    labelPosition?: 'top-center'|'top-right'|'bottom-left'|'bottom-center'|'bottom-right';
+    labelPosition?: LabelPositionType;
     labelSize?: 'small'|'medium'|'large';
     width?: CSSUnit
 }

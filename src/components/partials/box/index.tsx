@@ -1,8 +1,8 @@
-import { FC, memo } from 'react';
+import { FC, memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { BoxProps } from '../../../interafaces';
 import { CSSUnit } from '../../../types';
-import { parseCSSUnit } from '../../../utils';
+import { getTextWidth, parseCSSUnit } from '../../../utils';
 import './styles.scss';
 
 const Box: FC<BoxProps> = (props) => {
@@ -22,6 +22,26 @@ const Box: FC<BoxProps> = (props) => {
         tight,
         width
     } = props;
+
+    const labelRef = useRef(null as HTMLInputElement | null);
+    const [labelWidth, setLabelWidth] = useState<number>((() => {
+        if (!label) return 0;
+
+        let labelFont = '-apple-system, "system-ui", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, monospace';
+
+        switch(label) {
+            case 'large':
+                labelFont = '700 18px / 18px ' + labelFont;
+                break;
+            case 'medium':
+                labelFont = '700 16px / 16px ' + labelFont;
+                break;
+            default:
+                labelFont = '700 13px / 13px ' + labelFont;
+        }
+
+        return getTextWidth(label, labelFont);
+    })());
 
     let titleBorderRadius: number | CSSUnit = borderRadius;
     if (borderRadius !== 0) {
@@ -55,13 +75,13 @@ const Box: FC<BoxProps> = (props) => {
         ${(() => {
             switch (labelPosition) {
                 case 'top-center':
-                    return 'right: 50%';
+                    return `right: calc(50% - ${labelWidth/2}px)`;
                 case 'top-right':
                     return `right: ${tight ? 0 : '0.5rem'}`;
                 case 'bottom-left':
                     return `bottom: ${tight ? 0 : '-0.4rem'}`;
                 case 'bottom-center':
-                    return `bottom: ${tight ? 0 : '-0.4rem'}; right: 50%`;
+                    return `bottom: ${tight ? 0 : '-0.4rem'}; right: calc(50% - ${labelWidth/2}px)`;
                 case 'bottom-right':
                     return `bottom: ${tight ? 0 : '-0.4rem'}; right: ${tight ? 0 : '0.5rem'}`;
                 default:
@@ -101,11 +121,19 @@ const Box: FC<BoxProps> = (props) => {
         overflow-x: auto;
     `;
 
+    useEffect(() => {
+        if (label && labelRef.current){
+            const labelWidth = getTextWidth(label, getComputedStyle(labelRef.current)['font']);
+            if (labelWidth > 5) setLabelWidth(labelWidth);
+        }
+        // eslint-disable-next-line
+    }, []);
+
     return <Section
         data-component={'box'}
         className={boxClassName}
     >
-        {label && <Label>{label}</Label>}
+        {label && <Label ref={labelRef}>{label}</Label>}
         <Children className={className}>{children}</Children>
     </Section>;
 };

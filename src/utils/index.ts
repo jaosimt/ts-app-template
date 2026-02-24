@@ -220,3 +220,13 @@ export const capitalize = (str:string, properCase = true) =>
         : str;
 
 export const parseBooleanString = (value:string): boolean => value === 'true';
+
+export const getTextWidth = (text: string, font: string): number => {
+    let canvas = document.querySelector('#app-canvas') as HTMLCanvasElement;
+    const context = canvas.getContext("2d");
+    if (!context) return 0;
+
+    context.font = font; // e.g., "16px Arial"
+    const metrics = context.measureText(text);
+    return metrics.width;
+}

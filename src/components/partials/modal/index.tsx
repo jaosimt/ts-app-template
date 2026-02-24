@@ -11,8 +11,8 @@ import ReactIcon from '../index';
 const Modal: FC<ModalProps> = (props) => {
     const {
         children,
-        closeOnEscKey,
-        closeOnOutsideClick,
+        closeOnEscKey = true,
+        closeOnOutsideClick = true,
         maxZIndex,
         onClose,
         showClose,
@@ -61,7 +61,7 @@ const Modal: FC<ModalProps> = (props) => {
     </>;
 
     const modal = <div id={uid} className={classNames('modal-overlay', maxZIndex && 'max-z-index')}>
-        <div ref={modalRef} data-component={'Modal'} data-escape-key={closeOnEscKey === true}
+        <div ref={modalRef} data-component={'Modal'} data-escape-key={closeOnEscKey}
              style={{width: width, opacity: show ? 1 : 0}}>
             {title && <div className={'header'}><span className={'title'}>{title}</span>{closeButton}</div>}
             {!title && closeButton}

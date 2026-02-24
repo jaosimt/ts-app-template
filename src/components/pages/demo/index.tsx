@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { SlReload, SlScreenDesktop } from 'react-icons/sl';
 import styled from 'styled-components';
-import { RGBString } from '../../../types';
+import { LabelPositionType, RGBString } from '../../../types';
 import { classNames, generateAnalogousPalette } from '../../../utils';
 import { paletteValidation } from '../../../validations';
 import Box from '../../partials/box';
@@ -36,6 +36,7 @@ const Demo: FC = () => {
     const timeoutRef = useRef<any>(0)
     const inputRefs = useRef<Record<string, HTMLElement>>({});
 
+    const [boxLabelPosition, setBoxLabelPosition] = useState<LabelPositionType>('top-left')
     const [showModal, setShowModal] = useState(false);
     const [showPortal, setShowPortal] = useState(false);
     const [ctr, setCtr] = useState(0);
@@ -71,6 +72,13 @@ const Demo: FC = () => {
             b: paletteProps.blue
         }, paletteProps.size, paletteProps.stepShift))
     }, [paletteProps]);
+
+    useEffect(() => {
+        const labelPositions = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'];
+        setBoxLabelPosition(labelPositions[Math.floor(Math.random() * labelPositions.length)] as LabelPositionType)
+
+        // eslint-disable-next-line
+    }, []);
 
     const Counter = styled.span`
         padding: 1rem;
@@ -153,6 +161,7 @@ const Demo: FC = () => {
                 borderRadius={4}
                 borderColor={'rgb(255, 0, 0)'}
                 label={'Buttons'}
+                labelPosition={boxLabelPosition}
                 labelColor={'#ff0000'}
                 className={classNames(
                     'flex-direction-column',
@@ -205,6 +214,7 @@ const Demo: FC = () => {
                 width={333}
                 borderRadius={'4px'}
                 label={'Analogous Palette'}
+                labelPosition={boxLabelPosition}
                 className={classNames(
                     'display-flex',
                     'gap-0p5',
@@ -230,7 +240,7 @@ const Demo: FC = () => {
                 backgroundColor={'yellow'}
                 label={'InputFields'}
                 labelColor={'#ff0000'}
-                labelPosition={'bottom-right'}
+                labelPosition={boxLabelPosition}
                 labelBackgroundColor={'white'}
             >
                 <form noValidate>
