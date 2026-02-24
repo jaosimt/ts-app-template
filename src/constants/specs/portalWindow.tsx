@@ -74,7 +74,7 @@ export const PortalWindowSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
                 {code}
             </SyntaxHighlighter>
         </Box>
-        <h3 className={'properties color-gray flex align-items-center'}>Properties</h3>
+        <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>Properties</h3>
         {propsList(portalData)}
     </>;
 };
