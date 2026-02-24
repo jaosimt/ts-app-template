@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
-    document.getElementById('ts-app-template') as HTMLElement
+    document.getElementById('react-ts-template') as HTMLElement
 );
 
 root.render(

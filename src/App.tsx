@@ -44,7 +44,7 @@ const App = () => {
         <header>
             <div className={'display-flex gap-0p5 align-items-center'}>
                 <ReactIcon size={35} className={'spin font-weight-bold'} icon={IoLogoReact}/>
-                <h3 className={'m-0'}>React JS TypeScript Template</h3>
+                <h3 className={'m-0'}>React TypeScript Template</h3>
             </div>
             <NavigationMain/>
         </header>
