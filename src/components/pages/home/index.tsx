@@ -1,4 +1,4 @@
-import { CSSProperties, FC, Fragment, useState } from 'react';
+import { ChangeEvent, CSSProperties, FC, Fragment, useState } from 'react';
 import {
     a11yDark, atomDark, base16AteliersulphurpoolLight, cb, coldarkCold, coldarkDark, coy,
     coyWithoutShadows, darcula, dark, dracula, duotoneDark, duotoneEarth, duotoneForest, duotoneLight, duotoneSea,
@@ -15,6 +15,7 @@ import { ButtonComponentSpecs } from '../../../constants/specs/buttons';
 import InputFieldsProps from '../../../constants/specs/inputFields';
 import { ModalComponentSpecs } from '../../../constants/specs/modal';
 import { PortalWindowSpecs } from '../../../constants/specs/portalWindow';
+import { TabSpecs } from '../../../constants/specs/tab';
 import { classNames, ProperCase } from '../../../utils';
 import Tab, { TabItemType } from '../../partials/tab';
 
@@ -75,8 +76,9 @@ export const themes: Record<string, Theme> = {
 
 const Home: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState<string>(localStorage.getItem('rshTheme') || 'nightOwl');
+    const [selectedTab, setSelectedTab] = useState<string>(localStorage.getItem('selectedTab') || 'plain');
 
-    const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setSelectedTheme(event.target.value);
         localStorage.setItem('rshTheme', event.target.value);
     };
@@ -84,19 +86,22 @@ const Home: FC = () => {
     const tabData: TabItemType[] = [
         {
             name: 'Box',
-            children: <BoxComponentSpecs selectedTheme={selectedTheme}/>
+            content: <BoxComponentSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'Button',
-            children: <ButtonComponentSpecs selectedTheme={selectedTheme}/>
+            content: <ButtonComponentSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'InputField',
-            children: <InputFieldsProps selectedTheme={selectedTheme}/>
+            content: <InputFieldsProps selectedTheme={selectedTheme}/>
         }, {
             name: 'Modal',
-            children: <ModalComponentSpecs selectedTheme={selectedTheme}/>
+            content: <ModalComponentSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'WindowPortal Component',
-            children: <PortalWindowSpecs selectedTheme={selectedTheme}/>
+            content: <PortalWindowSpecs selectedTheme={selectedTheme}/>
+        }, {
+            name: 'Tab',
+            content: <TabSpecs selectedTheme={selectedTheme}/>
         }
     ];
 
@@ -114,7 +119,10 @@ const Home: FC = () => {
                 </select>
             </div>
         </div>
-        <Tab data={tabData} type={'boxed'}/>
+        <Tab activeTab={selectedTab} data={tabData} type={selectedTab as any} onTabChange={(selected: string) => {
+            setSelectedTab(selected);
+            localStorage.setItem('selectedTab', selected);
+        }}/>
     </div>
 };
 
