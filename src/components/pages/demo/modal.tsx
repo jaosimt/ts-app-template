@@ -93,7 +93,7 @@ const ModalDemo: FC = () => {
     `
 
     return <div data-component={'demo'} className={'width-100p'} style={{minHeight: '490px'}}>
-        <h1 className={'mt-0 display-flex justify-content-space-between line-height-1'}>Modal<Counter>{ctr}</Counter></h1>
+        <h1 className={'mt-0 display-flex justify-content-space-between line-height-1'}>&nbsp;<Counter>{ctr}</Counter></h1>
 
         {
             showModal && <Modal

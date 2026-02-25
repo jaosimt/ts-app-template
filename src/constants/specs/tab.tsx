@@ -62,9 +62,19 @@ const tabData: PropsListProps[] = [
                     <li><i>boxed-content</i> - Bordered content area extending to the active tab item.</li>
                     <li><i>plain</i> - No borders. Only a horizontal line separating tab items and content.</li>
                 </ul>
-                <Link to={{ pathname: "/demo/tabs"}}>See Demo!</Link>
+                <Link to={{ pathname: "/demo/tab"}}>See Demo!</Link>
             </>
         ]
+    }, {
+        name: 'onTabChange',
+        types: 'Function',
+        values: '',
+        description: ['Callback function on tab selection changes']
+    }, {
+        name: 'activeTab',
+        types: 'string',
+        values: '',
+        description: ['Set initial active tab item']
     }
 ];
 

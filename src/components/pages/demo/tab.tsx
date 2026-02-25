@@ -70,8 +70,8 @@ const TabsDemo: FC = () => {
     const [tabType, setTabType] = useState<any>(localStorage.getItem('tabDemoSelectedTab') || 'boxed');
 
     return <div data-component={'demo'} className={'width-100p'}>
-        <h1 className={'mt-0 display-flex justify-content-space-between line-height-1'}>
-            <span>{'<Tab />'} Demo Page</span>
+        <h1 className={'mt-0 mb-0p3 display-flex justify-content-space-between line-height-1'}>
+            &nbsp;
             <select value={tabType} onChange={e => {
                 setTabType(e.currentTarget.value);
                 localStorage.setItem('tabDemoSelectedTab', e.target.value);
