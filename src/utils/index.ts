@@ -229,3 +229,76 @@ export const getTextWidth = (text: string, font: string): number => {
     const metrics = context.measureText(text);
     return metrics.width;
 }
+
+export const Round = (number: number, precision: number = 0) => {
+    const multiplier = Math.pow(10, precision || 0);
+    return Math.round(number * multiplier) / multiplier;
+}
+
+export const numberToWords = (num: number) => {
+    if (num > 999999999999999) return "Number exceeds maximum range!";
+    if (num === 0) return "Zero";
+
+    let decimal = 0;
+
+    if (!Number.isInteger(num)) {
+        const numSplit = String(num).split('.').map(n => +n)
+        num = numSplit[0];
+        decimal = numSplit[1];
+    }
+
+    if (decimal > 999999999999999) return "Decimal digits exceeds maximum range!";
+
+    const units = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+    const teens = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+    const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+    const scales = ["", "Thousand", "Million", "Billion", "Trillion"];
+    const tenths = ["Tenths", "Hundredths", "Thousandths", "Ten-Thousandths", "Hundred-Thousandths", "Millionths", "Ten-Millionths", "Hundred-Millionths", "Billionths", "Ten-Billionths", "Hundred-Billionths", "Trillionth", "Ten-Trillionths", "Hundred-Trillionths"];
+
+    const convertGroup = (n: number) => {
+        let res = "";
+        if (n >= 100) {
+            res += units[Math.floor(n / 100)] + " Hundred ";
+            n %= 100;
+        }
+        if (n >= 10 && n < 20) {
+            res += teens[n - 10] + " ";
+        } else {
+            if (n >= 20) {
+                res += tens[Math.floor(n / 10)] + " ";
+                n %= 10;
+            }
+            if (n > 0) {
+                res += units[n] + " ";
+            }
+        }
+        return res;
+    }
+
+    const convert = (n:number) => {
+        let result = "";
+        let scaleIndex = 0;
+
+        while (n > 0) {
+            let group = n % 1000;
+            if (group !== 0) {
+                result = convertGroup(group) + scales[scaleIndex] + " " + result;
+            }
+            n = Math.floor(n / 1000);
+            scaleIndex++;
+        }
+
+        return result.trim();
+    }
+
+    let result = convert(num);
+    if (decimal > 0) result += `' And ' ${convert(decimal)} ${tenths[String(decimal).length]}`;
+
+    return result;
+}
+
+export const inStringNumberToWords = (str: string) => {
+    const strSplit = str.split(' ');
+    const result = strSplit.map(s => isNumber(s) ? numberToWords(+s) : s);
+    return result.join(' ');
+}

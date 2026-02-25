@@ -1,68 +1,89 @@
 @use '../../../styles/common';
 
-[data-component='tabs'] {
-  width: 30%;
-  overflow: hidden;
-  height: fit-content;
-  border-radius: 0.5rem;
+$br : 0.2rem;
+
+[data-component="tabs"] {
+  border-radius : $br;
+  display       : grid;
+  overflow      : hidden;
+  width         : 100%;
+  grid-template-rows: 42px auto;
   
   > .tab-items {
     @extend .disable-select;
     
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    align-items             : center;
+    background-color        : whitesmoke;
+    border-top-left-radius  : $br;
+    border-top-right-radius : $br;
+    display                 : grid;
     font-weight: bold;
+    grid-template-columns   : 7px auto 7px;
     transition: all 300ms ease-in-out;
-    align-items: center;
-    background-color: whitesmoke;
-    display: grid;
-    grid-template-columns: 23px auto 23px;
+    z-index: 1;
     
     > .scroll-btn-left,
     > .scroll-btn-right {
-      display: flex;
-      background-color: transparent;
       align-items: center;
-      height: 100%;
+      background-color : transparent;
       cursor: pointer;
+      display          : flex;
+      height           : 100%;
       opacity: 0;
       transition: all 200ms ease-in-out;
+      z-index          : 1;
       
-      &.visible {
-        opacity: 0.3;
+      &.scroll-btn-left {
+        justify-content : flex-end;
         
-        &:hover {
-          opacity: 1;
-          
-          &:active {
-            opacity: 0.3;
-          }
+        > svg {
+          margin-right : -16px;
         }
       }
       
-      &.scroll-btn-left { justify-content: flex-end; }
-      &.scroll-btn-right { justify-content: flex-start; }
+      &.scroll-btn-right {
+        justify-content : flex-start;
+        
+        > svg {
+          margin-left : -16px;
+        }
+      }
+      
+      > svg {
+        background-color : white;
+        border-radius    : 50%;
+        opacity          : 1;
+        position         : absolute;
+      }
     }
     
     > .tab-items-wrapper {
+      align-items   : center;
+      border-bottom : none;
       overflow: hidden;
+      padding       : 0.3rem 0 0 0;
       white-space: nowrap;
-      align-items: center;
-      padding: 0.5rem 0;
       
       > .tab-item {
+        border                  : 1px solid transparent;
+        border-top-left-radius  : 0.3rem;
+        border-top-right-radius : 0.3rem;
+        cursor                  : pointer;
+        display                 : inline-flex;
+        opacity                 : 0.5;
+        padding                 : 0.5rem 0.7rem;
+        transition              : all 200ms ease-in-out;
         white-space: nowrap;
-        opacity: 0.5;
-        cursor: pointer;
-        display: inline-flex;
-        border: 1px solid transparent;
-        padding: 0 0.5rem;
-        transition: all 200ms ease-in-out;
         
-        &:not(:last-child) { border-right-color: red; }
+        &.active {
+          background-color    : white;
+          border-color        : #e5e5e5;
+          border-bottom-color : white;
+          color               : red;
+          opacity             : 1;
+        }
         
-        & + * {
-          border-left: none;
+        &:not(.active) {
         }
         
         &:hover {
@@ -75,12 +96,37 @@
         }
       }
     }
+    
+    &:hover {
+      > .scroll-btn-left,
+      > .scroll-btn-right {
+        cursor : pointer;
+        
+        &.visible {
+          opacity : 0.7;
+          
+          &:hover {
+            opacity : 1;
+            
+            &:active {
+              opacity : 0.3;
+            }
+          }
+        }
+      }
+    }
   }
   
   > .tab-content {
-    border: 1px solid whitesmoke;
-    padding: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+    background-color           : white;
+    border                     : 1px solid #e5e5e5;
+    border-bottom-left-radius  : $br;
+    border-bottom-right-radius : $br;
+    margin-top                 : -1px;
+    
+    &:not(.active) { display : none; }
+    
+    > *:first-child { margin-top : 0; }
+    > *:last-child { margin-bottom : 0; }
   }
 }

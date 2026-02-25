@@ -1,165 +1,61 @@
-import { FC, memo, useEffect, useRef, useState } from 'react';
-import { CiCircleChevLeft, CiCircleChevRight } from 'react-icons/ci';
-import { classNames, getTextWidth, snakeCase } from '../../../utils';
-import ReactIcon from '../../partials';
+import { FC } from 'react';
 import '../../partials/tab/styles.scss';
+import Tabs, { TabItemType } from '../../partials/tab';
 
-type TabWidthsProps = {
-    tab: number;
-    tabItems: number,
-}
 
-type TabItemsPos = {
-    lefts: number[];
-    rights: number[];
-}
-
-const Tabs: FC = () => {
-    const tabItemsWrapper = useRef<HTMLDivElement | null>(null);
-    const tabWidths = useRef<TabWidthsProps>({
-        tab: 0,
-        tabItems: 0
-    });
-
-    const [tabOverflow, setTabOverflow] = useState<Record<string, boolean>>({
-        left: false,
-        right: false
-    });
-
-    const getTabWidth = () => parseFloat(getComputedStyle(tabItemsWrapper.current as HTMLElement)['width']);
-
-    const getTabItemsPos = () => {
-        const tabItems: TabItemsPos = {
-            lefts: [],
-            rights: []
-        };
-
-        tabItemsWrapper.current?.querySelectorAll('.tab-item').forEach((t, i) => {
-            const tBCR = t.getBoundingClientRect();
-            tabItems.lefts.push(Math.round(tBCR.left));
-            tabItems.rights.push(Math.round(tBCR.right));
-        });
-
-        return tabItems;
-    };
-
-    useEffect(() => {
-        console.log('tabOverflow:', tabOverflow);
-    }, [tabOverflow]);
-
-    useEffect(() => {
-        localStorage.setItem('scroll-left', '0');
-
-        const tabItems = tabItemsWrapper.current?.querySelectorAll('.tab-item');
-        const tabItemWidths: number[] = [];
-
-        tabItems?.forEach((t: Element) => {
-            const computedStyles = getComputedStyle(t);
-            const paddingLeft = parseFloat(computedStyles['paddingLeft']);
-            const paddingRight = parseFloat(computedStyles['paddingRight']);
-            const borderLeft = parseFloat(computedStyles['borderLeft']);
-            const borderRight = parseFloat(computedStyles['borderRight']);
-
-            const itemWidth = +(getTextWidth(t.textContent as string, computedStyles['font']) + paddingLeft + paddingRight + borderLeft + borderRight).toFixed(2);
-            tabItemWidths.push(itemWidth);
-        });
-
-        tabWidths.current.tab = getTabWidth();
-        tabWidths.current.tabItems = tabItemWidths.reduce((acc: number, currentValue: number) => acc + currentValue, 0);
-
-        updateTabOverflow();
-        // eslint-disable-next-line
-    }, []);
-
-    function getNext(direction: 'left' | 'right', tabItemsPos: number[]) {
-        const tabBCR = tabItemsWrapper.current?.getBoundingClientRect();
-        const tabLeft = Math.round(tabBCR?.left as number);
-        const tabRight = Math.round(tabBCR?.right as number);
-
-        if (direction === 'left') return tabItemsPos.filter(l => l < tabLeft).pop();
-        if (direction === 'right') return tabItemsPos.filter(l => l > tabRight).shift();
-
-        return undefined;
+const tabItems: TabItemType[] = [
+    {
+        name: 'What is Lorem Ipsum',
+        children: <>
+            <p><b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+                the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </>
+    }, {
+        name: 'Why do we use it?',
+        children: <>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+                looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
+                of letters, as opposed to using 'Content here, content here', making it look like readable English. Many
+                desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a
+                search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have
+                evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </>
+    }, {
+        name: 'Where does it come from?',
+        children: <>
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a
+                Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the
+                undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et
+                Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the
+                theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor
+                sit amet..", comes from a line in section 1.10.32.</p>
+            <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections
+                1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact
+                original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+        </>
+    }, {
+        name: 'Where can I get some?',
+        children: <>
+            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
+                in some form, by injected humour, or randomised words which don't look even slightly believable. If you
+                are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden
+                in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks
+                as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200
+                Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks
+                reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or
+                non-characteristic words etc.</p>
+        </>
     }
+];
 
-    const hasHidden = (direction: 'left' | 'right', tabItemsPos: number[]) => getNext(direction, tabItemsPos) !== undefined;
-
-    const scrollLeftHandler = () => {
-        const {lefts} = getTabItemsPos();
-        const nextLeftScrollPos = getNext('left', lefts);
-
-        const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
-
-        if (nextLeftScrollPos !== undefined) {
-            const tabLeft = Math.round(itemsWrapper.getBoundingClientRect()['left'] as number);
-            const storedScrollLeft = parseFloat(localStorage.getItem('scroll-left') || '0');
-
-            tabItemsWrapper.current?.scroll({
-                left: storedScrollLeft - (tabLeft - nextLeftScrollPos),
-                behaviour: 'smooth'
-            } as ScrollOptions);
-
-            localStorage.setItem('scroll-left', String(itemsWrapper.scrollLeft));
-
-            updateTabOverflow();
-        }
-    };
-
-    const scrollRightHandler = () => {
-        const {rights} = getTabItemsPos();
-        const nextRightScrollPos = getNext('right', rights);
-
-        const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
-
-        if (nextRightScrollPos !== undefined) {
-            const tabRight = Math.round(itemsWrapper.getBoundingClientRect()['right'] as number);
-            const storedScrollLeft = parseFloat(localStorage.getItem('scroll-left') || '0');
-
-            itemsWrapper.scroll({
-                left: storedScrollLeft + (nextRightScrollPos - tabRight),
-                behaviour: 'smooth'
-            } as ScrollOptions);
-
-            localStorage.setItem('scroll-left', String(itemsWrapper.scrollLeft));
-
-            updateTabOverflow();
-        }
-    };
-
-    const tabItems = (() => {
-        const arr = [];
-        for (let i = 0; i < 14; i++) arr.push(`Tab ${i + 1}`);
-        return arr;
-    })();
-
-    function updateTabOverflow() {
-        const {lefts, rights} = getTabItemsPos();
-
-        setTabOverflow({
-            left: hasHidden('left', lefts),
-            right: hasHidden('right', rights)
-        });
-    }
-    return <div data-component={'tabs'}>
-        <div className={'tab-items'}>
-            <div className={classNames('scroll-btn-left', tabOverflow.left && 'visible')}>
-                <ReactIcon size={21} icon={CiCircleChevLeft} onClick={scrollLeftHandler}/>
-            </div>
-            <div className={'tab-items-wrapper'} ref={tabItemsWrapper}>
-                {
-                    tabItems.map((t, i) => {
-                        return <div key={`data-item-${i}`} data-name={snakeCase(t)} className={'tab-item'}>{t}</div>;
-                    })
-                }
-            </div>
-            <div className={classNames('scroll-btn-right', tabOverflow.right && 'visible')}>
-                <ReactIcon size={21} icon={CiCircleChevRight} onClick={scrollRightHandler}/>
-            </div>
-        </div>
-        <div className="tab-content">
-            Tab Content
-        </div>
-    </div>;
+const TabsDemo: FC = () => {
+    return <Tabs data={tabItems}/>
 };
 
-export default memo(Tabs);
+export default TabsDemo;

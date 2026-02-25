@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { SlReload, SlScreenDesktop } from 'react-icons/sl';
+import { NavLink } from 'react-router';
 import styled from 'styled-components';
 import { LabelPositionType, RGBString } from '../../../types';
 import { classNames, generateAnalogousPalette } from '../../../utils';
@@ -154,6 +155,8 @@ const Demo: FC = () => {
                 </div>
             </WindowPortal>
         }
+
+        <NavLink to={'/demo/tabs'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Tabs</NavLink>
 
         <section className={'translate absolute-center display-flex gap-0p5 flex-direction-column align-items-center'}>
             <Box
