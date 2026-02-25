@@ -1,6 +1,7 @@
 import { FC, HTMLAttributes, memo, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
 import { BiSolidChevronLeftCircle, BiSolidChevronRightCircle } from 'react-icons/bi';
 import { useResizeObserver } from 'usehooks-ts';
+import { CSSColors, CSSUnit } from '../../../types';
 import { classNames, inStringNumberToWords, parseCSSUnit, Round, snakeCase } from '../../../utils';
 import ReactIcon from '../../partials';
 import './styles.scss';
@@ -10,6 +11,8 @@ export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
     contentPadding?: number | `${number}${string}`;
     type?: 'boxed-content' | 'boxed' | 'plain';
     moveSelectedOnScroll?: boolean;
+    activeItemColor?: CSSColors;
+    minContentHeight?: CSSUnit;
 }
 
 export type TabItemType = {
@@ -27,7 +30,14 @@ const roundPrecision = 0;
 const shiftOffset = 3;
 
 const Tabs: FC<TabItemProps> = (props) => {
-    const {data, contentPadding = '1rem', type = 'active', moveSelectedOnScroll = false} = props;
+    const {
+        data,
+        contentPadding = '1rem',
+        type = 'active',
+        moveSelectedOnScroll = false,
+        activeItemColor = 'magenta',
+        minContentHeight
+    } = props;
 
     const tabItemsWrapper = useRef<HTMLDivElement>(null);
     const resizeTimeoutRef = useRef<any>(null);
@@ -37,6 +47,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         right: false
     });
     const [active, setActive] = useState(snakeCase(inStringNumberToWords(data[0].name), '-'));
+    const [hoveredItem, setHoveredItem] = useState('');
 
     const getTabItemsPos = () => {
         const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
@@ -204,12 +215,19 @@ const Tabs: FC<TabItemProps> = (props) => {
                 {
                     data.map((t, i) => {
                         const itemName = snakeCase(inStringNumberToWords(t.name), '-');
+                        const isActive = active === itemName;
+
                         return <div
                             key={`tab-item-${itemName}`}
                             data-index={i}
                             data-name={itemName}
                             onClick={tabItemClickHandler}
-                            className={classNames('tab-item', active === itemName && 'active')}>
+                            className={classNames('tab-item', isActive && 'active')}
+                            onMouseEnter={() => setHoveredItem(itemName)}
+                            onMouseLeave={() => setHoveredItem('')}
+                            style={{
+                                color: isActive || hoveredItem === itemName ? activeItemColor : ''
+                            }}>
                             {t.name}
                         </div>;
                     })
@@ -224,7 +242,10 @@ const Tabs: FC<TabItemProps> = (props) => {
                 const itemName = snakeCase(inStringNumberToWords(t.name), '-');
                 return <div
                     key={`tab-content-${itemName}`} data-name={itemName}
-                    style={{padding: parseCSSUnit(String(contentPadding))}}
+                    style={{
+                        padding: parseCSSUnit(String(contentPadding)),
+                        minHeight: parseCSSUnit(String(minContentHeight))
+                    }}
                     className={classNames('tab-content', active === itemName && 'active')}>
                     {t.children}
                 </div>;

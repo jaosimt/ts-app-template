@@ -54,8 +54,8 @@ $activeTabItemColor    : magenta;
       
       > svg {
         border-radius    : 50%;
-        opacity          : 1;
         position         : absolute;
+        background-color : white;
       }
     }
     
@@ -72,7 +72,6 @@ $activeTabItemColor    : magenta;
         border-top-right-radius : 0.3rem;
         cursor                  : pointer;
         display                 : inline-flex;
-        opacity                 : 0.5;
         padding                 : 0.5rem 0.7rem;
         transition              : all 200ms ease-in-out;
         white-space: nowrap;
@@ -81,15 +80,12 @@ $activeTabItemColor    : magenta;
           background-color    : $activeBackgroundColor;
           border-color        : $tabBackground;
           border-bottom-color : $activeBackgroundColor;
-          color               : $activeTabItemColor;
-          opacity             : 1;
         }
         
         &:not(.active) {
         }
         
         &:hover:not(.active) {
-          color : $activeTabItemColor;
           opacity: 1;
           
           &:active {
@@ -105,11 +101,9 @@ $activeTabItemColor    : magenta;
         cursor : pointer;
         
         &.visible {
-          opacity : 0.7;
+          opacity : 1;
           
           &:hover {
-            opacity : 1;
-            
             &:active {
               opacity : 0.3;
             }

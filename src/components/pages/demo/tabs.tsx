@@ -68,7 +68,10 @@ const tabItems: TabItemType[] = [
 ];
 
 const TabsDemo: FC = () => {
-    return <Tabs data={tabItems} type={'plain'} moveSelectedOnScroll={false}/>
+    return <div data-component={'demo'} className={'width-100p'}>
+        <h1 className={'mt-0 display-flex justify-content-space-between line-height-1'}>{'<Tab />'} Demo Page</h1>
+        <Tabs data={tabItems} type={'boxed'} moveSelectedOnScroll={true} activeItemColor={'#963999'}/>
+    </div>
 };
 
 export default TabsDemo;
