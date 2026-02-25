@@ -1,9 +1,25 @@
-import { FC, memo, useEffect, useRef, useState } from 'react';
+import { FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { BoxProps } from '../../../interafaces';
-import { CSSUnit } from '../../../types';
+import { CSSColors, CSSUnit } from '../../../types';
 import { getTextWidth, parseCSSUnit } from '../../../utils';
 import './styles.scss';
+
+export type LabelPositionType = 'top-left'|'top-center'|'top-right'|'bottom-left'|'bottom-center'|'bottom-right';
+
+export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
+    backgroundColor?: CSSColors;
+    border?: boolean | 'label-only';
+    borderRadius?: CSSUnit
+    borderColor?: CSSColors;
+    boxClassName?: string;
+    tight?: boolean;
+    label?: string;
+    labelColor?: CSSColors;
+    labelBackgroundColor?: CSSColors;
+    labelPosition?: LabelPositionType;
+    labelSize?: 'small'|'medium'|'large';
+    width?: CSSUnit
+}
 
 const Box: FC<BoxProps> = (props) => {
     const {

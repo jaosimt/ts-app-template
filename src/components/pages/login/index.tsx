@@ -2,13 +2,17 @@ import { FC } from 'react';
 import Button from '../../partials/button';
 import InputField from '../../partials/inputField';
 import { useForm } from 'react-hook-form';
-import { LoginFormInput } from '../../../interafaces';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginValidation } from '../../../validations';
 import styles from './styles.module.scss';
 import logo from '../../../images/logo.svg';
 import { classNames } from '../../../utils';
 import { FaLock, FaEnvelope, FaUserLock } from 'react-icons/fa6';
+
+export interface LoginFormInput {
+    email: string;
+    password: string;
+}
 
 const Login: FC = () => {
     const {

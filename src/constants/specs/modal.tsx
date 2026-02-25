@@ -7,8 +7,7 @@ import {
     themes
 } from '../../components/pages/home';
 import Box from '../../components/partials/box';
-import Modal from '../../components/partials/modal';
-import { ModalProps } from '../../interafaces';
+import Modal, { ModalProps } from '../../components/partials/modal';
 
 const code = `<Modal>
     <h1>Hello, world!</h1>

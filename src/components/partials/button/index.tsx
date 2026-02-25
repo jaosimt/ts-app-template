@@ -1,8 +1,18 @@
-import { ButtonProps } from '../../../interafaces';
-import { FC, useState } from 'react';
+import { FC, HTMLAttributes, useState } from 'react';
 import './styles.scss';
+import { IconType } from 'react-icons';
 import { v4 as uuidv4 } from 'uuid';
+import { CSSUnit } from '../../../types';
 import ReactIcon from '../index';
+
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+    align?: 'left' | 'center' | 'right' | 'space-between';
+    disabled?: boolean;
+    icon?: IconType;
+    iconClassName?: string;
+    type?: 'button' | 'submit' | 'reset';
+    width?: CSSUnit;
+}
 
 const Button: FC<ButtonProps> = (props) => {
     const {

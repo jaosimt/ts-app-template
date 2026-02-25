@@ -1,13 +1,31 @@
-import { InputFieldProps } from '../../../interafaces';
-import React, { FC, memo, useEffect, useRef, useState } from 'react';
+import React, { FC, HTMLAttributes, HTMLInputTypeAttribute, memo, useEffect, useRef, useState } from 'react';
 import './styles.scss';
+import { UseFormRegisterReturn } from 'react-hook-form';
+import { IconType } from 'react-icons';
 import { FaCircleXmark } from 'react-icons/fa6';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 import '../../../styles/tippy.scss';
+import { CSSColors, CSSUnit } from '../../../types';
 import { classNames, parseCSSUnit } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
 import ReactIcon from '../index';
+
+export interface InputFieldProps extends HTMLAttributes<HTMLInputElement> {
+    error?: string;
+    fieldRegister: UseFormRegisterReturn;
+    icon?: IconType;
+    label?: string;
+    labelAlign?: 'left' | 'right' | 'center';
+    labelColor?: CSSColors;
+    labelWith?: CSSUnit;
+    max?: number;
+    min?: number;
+    placeHolder?: string;
+    setRef?: Function;
+    type?: HTMLInputTypeAttribute;
+    width?: CSSUnit;
+}
 
 const InputField: FC<InputFieldProps> = (props) => {
     const {

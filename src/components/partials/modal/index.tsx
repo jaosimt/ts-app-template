@@ -1,12 +1,21 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import { FC, HTMLAttributes, useCallback, useEffect, useState } from 'react';
 import './styles.scss';
 import ReactDOM from 'react-dom';
 import { FaCircleXmark } from 'react-icons/fa6';
 import { useKeyPress, useOutsideClick } from '../../../hooks';
 import { v4 as uuidv4 } from 'uuid';
-import { ModalProps } from '../../../interafaces';
 import { classNames } from '../../../utils';
 import ReactIcon from '../index';
+
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
+    closeOnEscKey?: boolean;
+    closeOnOutsideClick?: boolean;
+    maxZIndex?: boolean;
+    onClose?: Function
+    showClose?: boolean;
+    title?: string;
+    width?: string | number;
+}
 
 const Modal: FC<ModalProps> = (props) => {
     const {
