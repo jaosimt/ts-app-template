@@ -70,19 +70,16 @@ const TabsDemo: FC = () => {
     const [tabType, setTabType] = useState<any>(localStorage.getItem('tabDemoSelectedTab') || 'boxed');
 
     return <div data-component={'demo'} className={'width-100p'}>
-        <h1 className={'mt-0 mb-0p3 display-flex justify-content-space-between line-height-1'}>
-            &nbsp;
-            <select value={tabType} onChange={e => {
-                setTabType(e.currentTarget.value);
-                localStorage.setItem('tabDemoSelectedTab', e.target.value);
-            }} style={{ marginLeft: '10px' }}>
-                {['boxed', 'boxed-content', 'plain'].map((t) => (
-                    <option key={t} value={t}>
-                        {t}
-                    </option>
-                ))}
-            </select>
-        </h1>
+        <select value={tabType} onChange={e => {
+            setTabType(e.currentTarget.value);
+            localStorage.setItem('tabDemoSelectedTab', e.target.value);
+        }} style={{ marginBottom: '10px' }}>
+            {['boxed', 'boxed-content', 'plain'].map((t) => (
+                <option key={t} value={t}>
+                    {t}
+                </option>
+            ))}
+        </select>
         <Tabs data={tabItems} type={tabType} moveSelectedOnScroll={true} activeItemColor={'#963999'}/>
     </div>
 };

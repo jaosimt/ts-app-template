@@ -55,14 +55,13 @@ const tabData: PropsListProps[] = [
         types: 'string',
         values: 'boxed-content|boxed|plain',
         description: [
-            'Sets the type of the tab to be rendered.',
+            <p className={'m-0'}>Set the type of <Link to={{ pathname: "/demo/tab"}}>&lt;Tab /&gt;</Link> to be rendered.</p>,
             <>
                 <ul className={'m-0'}>
                     <li><i>boxed</i> - Renders Tab with border and background colored tab items.</li>
                     <li><i>boxed-content</i> - Bordered content area extending to the active tab item.</li>
                     <li><i>plain</i> - No borders. Only a horizontal line separating tab items and content.</li>
                 </ul>
-                <Link to={{ pathname: "/demo/tab"}}>See Demo!</Link>
             </>
         ]
     }, {
