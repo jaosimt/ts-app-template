@@ -1,12 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import {
-    propsList,
-    PropsListProps,
-    SelectedThemeProps,
-    themes
-} from '../../components/pages/home';
+import { propsList, PropsListProps, SelectedThemeProps, themes } from '../../components/pages/componentSpecs';
 import Box from '../../components/partials/box';
 import { CssColors } from '../../utils/ext';
 

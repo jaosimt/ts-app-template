@@ -1,11 +1,6 @@
 import { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import {
-    propsList,
-    PropsListProps,
-    SelectedThemeProps,
-    themes
-} from '../../components/pages/home';
+import { propsList, PropsListProps, SelectedThemeProps, themes } from '../../components/pages/componentSpecs';
 import Box from '../../components/partials/box';
 import { createLink, CssColors } from '../../utils/ext';
 

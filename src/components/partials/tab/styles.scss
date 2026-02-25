@@ -132,9 +132,17 @@ $activeTabItemColor    : magenta;
       
       > .tab-items-wrapper {
         > .tab-item {
-        
+          &.active {
+            background-color    : $activeBackgroundColor;
+            border-color        : $tabBackground;
+            border-bottom-color : $activeBackgroundColor;
+          }
         }
       }
+    }
+    
+    > .tab-content {
+    
     }
   }
   
@@ -155,6 +163,10 @@ $activeTabItemColor    : magenta;
       border-left-color   : transparent;
       border-right-color  : transparent;
       border-bottom-color : transparent;
+    }
+    
+    > .tab-content {
+      background-color: inherit;
     }
   }
 }
