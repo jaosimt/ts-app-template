@@ -1,12 +1,11 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import '../../partials/tab/styles.scss';
 import Tabs, { TabItemType } from '../../partials/tab';
-
 
 const tabItems: TabItemType[] = [
     {
         name: 'What is Lorem Ipsum',
-        children: <>
+        content: <>
             <p><b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                 the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
                 and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
@@ -16,7 +15,7 @@ const tabItems: TabItemType[] = [
         </>
     }, {
         name: 'Why do we use it?',
-        children: <>
+        content: <>
             <p>It is a long established fact that a reader will be distracted by the readable content of a page when
                 looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
                 of letters, as opposed to using 'Content here, content here', making it look like readable English. Many
@@ -26,7 +25,7 @@ const tabItems: TabItemType[] = [
         </>
     }, {
         name: 'Where does it come from?',
-        children: <>
+        content: <>
             <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
                 Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
                 Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a
@@ -41,7 +40,7 @@ const tabItems: TabItemType[] = [
         </>
     }, {
         name: 'Where can I get some?',
-        children: <>
+        content: <>
             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
                 in some form, by injected humour, or randomised words which don't look even slightly believable. If you
                 are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden
@@ -53,7 +52,7 @@ const tabItems: TabItemType[] = [
         </>
     }, {
         name: 'The 1 brown fox',
-        children: <>
+        content: <>
             <p><b>The quick brown fox jumps over the lazy dog</b> is a famous English pangram—a sentence containing every letter of the alphabet. Coined in the late 19th century (circa 1885), it is used worldwide for typing practice, keyboard testing, and font displays because it uses all 26 letters. </p>
             <p>Key details about this phrase:</p>
             <ul>
@@ -68,9 +67,23 @@ const tabItems: TabItemType[] = [
 ];
 
 const TabsDemo: FC = () => {
+    const [tabType, setTabType] = useState<any>(localStorage.getItem('selectedTab') || 'boxed');
+
     return <div data-component={'demo'} className={'width-100p'}>
-        <h1 className={'mt-0 display-flex justify-content-space-between line-height-1'}>{'<Tab />'} Demo Page</h1>
-        <Tabs data={tabItems} type={'boxed'} moveSelectedOnScroll={true} activeItemColor={'#963999'}/>
+        <h1 className={'mt-0 display-flex justify-content-space-between line-height-1'}>
+            <span>{'<Tab />'} Demo Page</span>
+            <select value={tabType} onChange={e => {
+                setTabType(e.currentTarget.value);
+                localStorage.setItem('selectedTab', e.target.value);
+            }} style={{ marginLeft: '10px' }}>
+                {['boxed', 'boxed-content', 'plain'].map((t) => (
+                    <option key={t} value={t}>
+                        {t}
+                    </option>
+                ))}
+            </select>
+        </h1>
+        <Tabs data={tabItems} type={tabType} moveSelectedOnScroll={true} activeItemColor={'#963999'}/>
     </div>
 };
 

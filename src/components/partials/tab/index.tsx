@@ -7,18 +7,20 @@ import ReactIcon from '../../partials';
 import './styles.scss';
 
 export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
-    data: TabItemType[];
-    contentPadding?: number | `${number}${string}`;
-    type?: 'boxed-content' | 'boxed' | 'plain';
-    moveSelectedOnScroll?: boolean;
     activeItemColor?: CSSColors;
+    contentPadding?: CSSUnit;
+    data: TabItemType[];
     minContentHeight?: CSSUnit;
+    moveSelectedOnScroll?: boolean;
+    type?: 'boxed-content' | 'boxed' | 'plain';
+    onTabChange?: Function,
+    activeTab?: string;
 }
 
 export type TabItemType = {
     id?: string;
     name: string;
-    children: ReactNode;
+    content: ReactNode;
 }
 
 type TabItemsPos = {
@@ -36,7 +38,9 @@ const Tabs: FC<TabItemProps> = (props) => {
         type = 'plain',
         moveSelectedOnScroll = false,
         activeItemColor = 'magenta',
-        minContentHeight
+        minContentHeight,
+        onTabChange,
+        activeTab
     } = props;
 
     const tabItemsWrapper = useRef<HTMLDivElement>(null);
@@ -46,7 +50,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         left: false,
         right: false
     });
-    const [active, setActive] = useState(snakeCase(inStringNumberToWords(data[0].name), '-'));
+    const [selected, setSelected] = useState(activeTab || snakeCase(inStringNumberToWords(data[0].name), '-'));
     const [hoveredItem, setHoveredItem] = useState('');
 
     const getTabItemsPos = () => {
@@ -108,8 +112,11 @@ const Tabs: FC<TabItemProps> = (props) => {
             if (activeElementRight > wrapperRight) scrollRightHandler();
             else if (activeElementLeft < wrapperLeft) scrollLeftHandler();
         }
+
+        onTabChange && onTabChange(selected);
+
         // eslint-disable-next-line
-    }, [active]);
+    }, [selected]);
 
     const getNext = (direction: 'left' | 'right', tabItemsPos: number[]) => {
         const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
@@ -144,7 +151,7 @@ const Tabs: FC<TabItemProps> = (props) => {
 
                 if (nIndex <= data.length && activeElementLeft > wrapperLeft) {
                     const nextTabItem = snakeCase(inStringNumberToWords(data[nIndex].name), '-');
-                    setActive(nextTabItem);
+                    setSelected(nextTabItem);
                 }
             }
 
@@ -176,7 +183,7 @@ const Tabs: FC<TabItemProps> = (props) => {
 
                 if (nIndex <= data.length && activeElementRight < wrapperRight) {
                     const nextTabItem = snakeCase(inStringNumberToWords(data[nIndex].name), '-');
-                    setActive(nextTabItem);
+                    setSelected(nextTabItem);
                 }
             }
 
@@ -192,7 +199,7 @@ const Tabs: FC<TabItemProps> = (props) => {
     const tabItemClickHandler = (e: any) => {
         const {dataset: {name}} = e.currentTarget;
         localStorage.setItem('checkVisibility', 'true');
-        setActive(name);
+        setSelected(name);
     };
 
     function updateTabOverflow() {
@@ -217,7 +224,7 @@ const Tabs: FC<TabItemProps> = (props) => {
                 {
                     data.map((t, i) => {
                         const itemName = t.id || snakeCase(inStringNumberToWords(t.name), '-');
-                        const isActive = active === itemName;
+                        const isActive = selected === itemName;
 
                         return <div
                             key={`tab-item-${itemName}`}
@@ -248,8 +255,8 @@ const Tabs: FC<TabItemProps> = (props) => {
                         padding: parseCSSUnit(String(contentPadding)),
                         minHeight: parseCSSUnit(String(minContentHeight))
                     }}
-                    className={classNames('tab-content', active === itemName && 'active')}>
-                    {t.children}
+                    className={classNames('tab-content', selected === itemName && 'active')}>
+                    {t.content}
                 </div>;
             })
         }

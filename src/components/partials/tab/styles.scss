@@ -118,6 +118,7 @@ $activeTabItemColor    : magenta;
     border-radius    : $tabBorderRadius;
     margin-top       : -2px;
     transition       : all 300ms ease-in-out;
+    position         : relative;
     
     &:not(.active) { display : none; }
     
