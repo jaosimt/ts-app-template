@@ -52,6 +52,7 @@ export interface IconProps {
     icon: IconType;
     size?: number;
     className?: string;
+    onClick?: Function;
 }
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {

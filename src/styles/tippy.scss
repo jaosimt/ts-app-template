@@ -1,6 +1,5 @@
 @import 'variables';
 @import 'keyframes';
-@import 'mixins';
 
 .tippy-box[data-theme~='error'] {
   background-color: $errorColor;

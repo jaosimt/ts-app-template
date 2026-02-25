@@ -159,9 +159,8 @@ export const parseIfNumberIsString = (arg:string) => (isNumber(arg) ? +arg : arg
 export const isNull = (arg: any) => arg === null;
 export const isBoolean = (arg: any) => typeof arg === 'boolean';
 export const isFunction = (arg: any) => typeof arg === 'function';
-export const isUndefined = (arg: any) => typeof arg === 'undefined';
 export const isObject = (arg: any) => typeof arg === 'object' && !isNull(arg) && !Array.isArray(arg);
-export const isNullOrUndefined = (arg: any) => isNull(arg) || isUndefined(arg);
+export const isNullOrUndefined = (arg: any) => isNull(arg) || arg === undefined;
 export const isEmpty = (arg: any) => {
     if (isString(arg)) return arg.trim() === '';
     else if (isObject(arg)) {

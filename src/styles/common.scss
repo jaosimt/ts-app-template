@@ -309,7 +309,16 @@
     }
   }
   
-  > * {
-    padding: 0.25rem 0.5rem;
+  &:not(.no-padding) {
+    > * {
+      padding: 0.25rem 0.5rem;
+    }
   }
+}
+
+.disable-select {
+  user-select: none; /* Standard property for modern browsers */
+  -webkit-user-select: none; /* Safari and older Chrome/Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }

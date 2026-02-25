@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router';
 import NotFound from '../components/pages/404/404';
 import Demo from '../components/pages/demo';
+import Tabs from '../components/pages/demo/tabs';
 import Home from '../components/pages/home';
 import Login from '../components/pages/login';
 
@@ -11,6 +12,7 @@ const ContentRouter = () => {
             <Route path="/" element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/demo" element={<Demo/>}/>
+            <Route path="/demo/tabs" element={<Tabs/>}/>
             <Route path="*" element={<NotFound/>}/>
         </Routes>
     </>;
