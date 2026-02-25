@@ -46,7 +46,7 @@ const App = () => {
     return (<>
         {MemoizedConnectionModal}
         <header>
-            <div className={'display-flex gap-0p5 align-items-center'}>
+            <div className={'display-flex gap-0p5 align-items-center white-space-nowrap'}>
                 <ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')} icon={IoLogoReact}/>
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </div>

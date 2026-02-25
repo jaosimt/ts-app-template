@@ -120,6 +120,8 @@ $activeTabItemColor    : magenta;
     transition       : all 300ms ease-in-out;
     position         : relative;
     
+    > * { animation : fadein 700ms ease-in-out; }
+    
     &:not(.active) { display : none; }
     
     > *:first-child { margin-top : 0; }

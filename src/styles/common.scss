@@ -323,3 +323,7 @@
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
 }
+
+.white-space-nowrap { white-space : nowrap; }
+
+.transition-none { transition : none !important; }
