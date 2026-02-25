@@ -33,7 +33,7 @@ const Tabs: FC<TabItemProps> = (props) => {
     const {
         data,
         contentPadding = '1rem',
-        type = 'active',
+        type = 'plain',
         moveSelectedOnScroll = false,
         activeItemColor = 'magenta',
         minContentHeight
@@ -80,6 +80,8 @@ const Tabs: FC<TabItemProps> = (props) => {
     });
 
     useEffect(() => {
+        console.log('[Tabs] tabItemsWrapper:', tabItemsWrapper.current);
+
         localStorage.setItem('scroll-left', '0');
         updateTabOverflow();
 
@@ -214,7 +216,7 @@ const Tabs: FC<TabItemProps> = (props) => {
             <div className={'tab-items-wrapper'} ref={tabItemsWrapper}>
                 {
                     data.map((t, i) => {
-                        const itemName = snakeCase(inStringNumberToWords(t.name), '-');
+                        const itemName = t.id || snakeCase(inStringNumberToWords(t.name), '-');
                         const isActive = active === itemName;
 
                         return <div

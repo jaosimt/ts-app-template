@@ -158,9 +158,6 @@ export const ModalComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => 
     }, [show]);
 
     return <>
-        <h3 className={'m-0 mt-1 border-top border-color-gray pt-1 color-black mb-0p3 display-flex align-items-end justify-content-space-between'}>
-            Modal
-        </h3>
         <Box
             border={false}
             tight={true}

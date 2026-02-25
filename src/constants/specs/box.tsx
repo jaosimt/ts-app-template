@@ -81,7 +81,6 @@ const boxData: PropsListProps[] = [
 
 export const BoxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
-        <h3 className={'m-0 color-black mb-0p3'}>Box</h3>
         <Box
             border={false}
             tight={true}

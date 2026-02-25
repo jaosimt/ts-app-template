@@ -50,7 +50,6 @@ const buttonData: PropsListProps[] = [
 
 export const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
-        <h3 className={'m-0 mt-1 border-top border-color-gray pt-1 color-black mb-0p3'}>Button</h3>
         <Box
             border={false}
             tight={true}

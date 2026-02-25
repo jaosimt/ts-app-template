@@ -16,7 +16,7 @@ import InputFieldsProps from '../../../constants/specs/inputFields';
 import { ModalComponentSpecs } from '../../../constants/specs/modal';
 import { PortalWindowSpecs } from '../../../constants/specs/portalWindow';
 import { classNames, ProperCase } from '../../../utils';
-import Box from '../../partials/box';
+import Tab, { TabItemType } from '../../partials/tab';
 
 export interface SelectedThemeProps {
     selectedTheme: string;
@@ -81,9 +81,28 @@ const Home: FC = () => {
         localStorage.setItem('rshTheme', event.target.value);
     };
 
+    const tabData: TabItemType[] = [
+        {
+            name: 'Box',
+            children: <BoxComponentSpecs selectedTheme={selectedTheme}/>
+        }, {
+            name: 'Button',
+            children: <ButtonComponentSpecs selectedTheme={selectedTheme}/>
+        }, {
+            name: 'InputField',
+            children: <InputFieldsProps selectedTheme={selectedTheme}/>
+        }, {
+            name: 'Modal',
+            children: <ModalComponentSpecs selectedTheme={selectedTheme}/>
+        }, {
+            name: 'WindowPortal Component',
+            children: <PortalWindowSpecs selectedTheme={selectedTheme}/>
+        }
+    ];
+
     return <div data-component={'home'} className={'width-100p'}>
         <div className={'display-flex justify-content-space-between align-items-end background position-sticky'} style={{top: '50px', zIndex: 1}}>
-            <h1 className={'mt-0 line-height-1'}>Home</h1>
+            <h1 className={'mt-0 line-height-1'}>Custom Component Specs</h1>
             <div className={'display-flex justify-content-space-between'}>
                 &nbsp;
                 <select value={selectedTheme} onChange={handleThemeChange} style={{ marginLeft: '10px' }}>
@@ -95,19 +114,7 @@ const Home: FC = () => {
                 </select>
             </div>
         </div>
-        <Box
-            borderColor={'#000000'}
-            className={'p-0p5'}
-            width={'100%'}
-            label={'COMPONENTS'}
-            borderRadius={4}
-        >
-            <BoxComponentSpecs selectedTheme={selectedTheme}/>
-            <ButtonComponentSpecs selectedTheme={selectedTheme}/>
-            <InputFieldsProps selectedTheme={selectedTheme}/>
-            <ModalComponentSpecs selectedTheme={selectedTheme}/>
-            <PortalWindowSpecs selectedTheme={selectedTheme}/>
-        </Box>
+        <Tab data={tabData}/>
     </div>
 };
 
@@ -115,7 +122,7 @@ export default Home;
 
 export type PropsListProps = {
     name: any;
-    types: any;
+     types: any;
     values: any
     description: any[]
 }

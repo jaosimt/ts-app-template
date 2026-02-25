@@ -16,8 +16,14 @@ const codeJSX = `interface LoginProps extends React.HTMLAttributes<HTMLInputElem
 }
 
 const loginValidation = z.object({
-    email: z.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/, 'Please enter a valid email address!'),
-    password: z.string().regex(/^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~\`!@#$%^&*()_\\-+={[}\\]|\\\\:;"'<,>.?/]).{8,}$/, 'Please enter a strong password!')
+    email: z.string().regex(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/, 
+        'Please enter a valid email address!'
+    ),
+    password: z.string().regex(
+        /^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~\`!@#$%^&*()_\\-+={[}\\]|\\\\:;"'<,>.?/]).{8,}$/,
+        'Please enter a strong password!'
+     )
 }).required();
 
 const {
@@ -121,9 +127,6 @@ const inputFieldData: PropsListProps[] = [
 
 const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
-        <h3 className={'m-0 mt-1 border-top border-color-gray pt-1 color-black mb-0p3 display-flex align-items-end justify-content-space-between'}>
-            InputField
-        </h3>
         <Box
             border={false}
             tight={true}
