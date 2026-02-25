@@ -92,7 +92,7 @@ const ModalDemo: FC = () => {
         font-weight: bold;
     `
 
-    return <div data-component={'demo'} className={'width-100p'} style={{minHeight: '490px'}}>
+    return <div data-component={'modal-demo'} className={'width-100p'} style={{minHeight: '490px'}}>
         <h1 className={'mt-0 display-flex justify-content-space-between line-height-1'}>&nbsp;<Counter>{ctr}</Counter></h1>
 
         {

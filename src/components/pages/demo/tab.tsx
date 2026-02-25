@@ -69,7 +69,7 @@ const tabItems: TabItemType[] = [
 const TabsDemo: FC = () => {
     const [tabType, setTabType] = useState<any>(localStorage.getItem('tabDemoSelectedTab') || 'boxed');
 
-    return <div data-component={'demo'} className={'width-100p'}>
+    return <div data-component={'tab-demo'} className={'width-100p'}>
         <select value={tabType} onChange={e => {
             setTabType(e.currentTarget.value);
             localStorage.setItem('tabDemoSelectedTab', e.target.value);
