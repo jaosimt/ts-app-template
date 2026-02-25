@@ -24,7 +24,7 @@ export const NavigationMain = () => {
             if (!activeNav) return;
 
             const {left, width} = activeNav.getBoundingClientRect();
-            setActiveBar({...activeBar, left, width});
+            setActiveBar({opacity: 1, left, width, transition: 'transition-none'});
         },
     });
 
@@ -60,7 +60,7 @@ export const NavigationMain = () => {
             height: '2px',
             width: `${activeBar.width}px`,
             marginBottom: '-35px',
-            transition: 'all 200ms ease-in-out',
+            transition: 'all 300ms ease-in-out',
             backgroundColor: 'white',
             opacity: `${activeBar.opacity}`
         }}></div>
