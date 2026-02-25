@@ -5,15 +5,17 @@ import { classNames, inStringNumberToWords, parseCSSUnit, Round, snakeCase } fro
 import ReactIcon from '../../partials';
 import './styles.scss';
 
+export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
+    data: TabItemType[];
+    contentPadding?: number | `${number}${string}`;
+    type?: 'boxed-content' | 'boxed' | 'plain';
+    moveSelectedOnScroll?: boolean;
+}
+
 export type TabItemType = {
     id?: string;
     name: string;
     children: ReactNode;
-}
-
-export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
-    data: TabItemType[];
-    contentPadding?: number | `${number}${string}`;
 }
 
 type TabItemsPos = {
@@ -25,7 +27,7 @@ const roundPrecision = 0;
 const shiftOffset = 3;
 
 const Tabs: FC<TabItemProps> = (props) => {
-    const {data, contentPadding = '1rem'} = props;
+    const {data, contentPadding = '1rem', type = 'active', moveSelectedOnScroll = false} = props;
 
     const tabItemsWrapper = useRef<HTMLDivElement>(null);
     const resizeTimeoutRef = useRef<any>(null);
@@ -76,6 +78,26 @@ const Tabs: FC<TabItemProps> = (props) => {
         // eslint-disable-next-line
     }, []);
 
+    useEffect(() => {
+        if (localStorage.getItem('checkVisibility') === 'true') {
+            localStorage.removeItem('checkVisibility');
+            const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
+            const activeElement = itemsWrapper.querySelector('.tab-item.active') as HTMLElement;
+
+            const activeElementBCR = activeElement.getBoundingClientRect();
+            const itemWrapperBCR = itemsWrapper.getBoundingClientRect();
+
+            const activeElementLeft = Math.ceil(activeElementBCR.left);
+            const wrapperLeft = itemWrapperBCR.left;
+            const activeElementRight = Math.ceil(activeElementBCR.right);
+            const wrapperRight = itemWrapperBCR.right;
+
+            if (activeElementRight > wrapperRight) scrollRightHandler();
+            else if (activeElementLeft < wrapperLeft) scrollLeftHandler();
+        }
+        // eslint-disable-next-line
+    }, [active]);
+
     const getNext = (direction: 'left' | 'right', tabItemsPos: number[]) => {
         const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
         const tabBCR = itemsWrapper.getBoundingClientRect();
@@ -99,6 +121,20 @@ const Tabs: FC<TabItemProps> = (props) => {
             const tabLeft = Round(itemsWrapper.getBoundingClientRect()['left'] as number, roundPrecision);
             const storedScrollLeft = parseFloat(localStorage.getItem('scroll-left') || '0');
 
+            const activeElement = itemsWrapper.querySelector('.tab-item.active') as HTMLElement;
+            if (moveSelectedOnScroll && activeElement) {
+                const {dataset: {index}} = activeElement;
+                const nIndex = Number(index) - 1;
+
+                const activeElementLeft = Math.floor(activeElement.getBoundingClientRect().left);
+                const wrapperLeft = itemsWrapper.getBoundingClientRect().left;
+
+                if (nIndex <= data.length && activeElementLeft > wrapperLeft) {
+                    const nextTabItem = snakeCase(inStringNumberToWords(data[nIndex].name), '-');
+                    setActive(nextTabItem);
+                }
+            }
+
             itemsWrapper.scroll({
                 left: storedScrollLeft - (tabLeft - (nextLeftScrollPos - shiftOffset)),
                 behaviour: 'smooth'
@@ -117,6 +153,20 @@ const Tabs: FC<TabItemProps> = (props) => {
             const tabRight = Round(itemsWrapper.getBoundingClientRect()['right'] as number, roundPrecision);
             const storedScrollLeft = parseFloat(localStorage.getItem('scroll-left') || '0');
 
+            const activeElement = itemsWrapper.querySelector('.tab-item.active') as HTMLElement;
+            if (moveSelectedOnScroll && activeElement) {
+                const {dataset: {index}} = activeElement;
+                const nIndex = Number(index) + 1;
+
+                const activeElementRight = Math.ceil(activeElement.getBoundingClientRect().right);
+                const wrapperRight = itemsWrapper.getBoundingClientRect().right;
+
+                if (nIndex <= data.length && activeElementRight < wrapperRight) {
+                    const nextTabItem = snakeCase(inStringNumberToWords(data[nIndex].name), '-');
+                    setActive(nextTabItem);
+                }
+            }
+
             itemsWrapper.scroll({
                 left: storedScrollLeft + ((nextRightScrollPos + shiftOffset) - tabRight),
                 behaviour: 'smooth'
@@ -124,6 +174,12 @@ const Tabs: FC<TabItemProps> = (props) => {
 
             updateTabOverflow();
         }
+    };
+
+    const tabItemClickHandler = (e: any) => {
+        const {dataset: {name}} = e.currentTarget;
+        localStorage.setItem('checkVisibility', 'true');
+        setActive(name);
     };
 
     function updateTabOverflow() {
@@ -139,18 +195,20 @@ const Tabs: FC<TabItemProps> = (props) => {
         });
     }
 
-    return <div data-component={'tabs'}>
+    return <div data-component={'tabs'} className={type}>
         <div className={'tab-items'}>
             <div className={classNames('scroll-btn-left', tabOverflow.left && 'visible')}>
                 <ReactIcon size={21} icon={BiSolidChevronLeftCircle} onClick={scrollLeftHandler}/>
             </div>
             <div className={'tab-items-wrapper'} ref={tabItemsWrapper}>
                 {
-                    data.map(t => {
+                    data.map((t, i) => {
                         const itemName = snakeCase(inStringNumberToWords(t.name), '-');
                         return <div
-                            key={`tab-item-${itemName}`} data-name={itemName}
-                            onClick={() => setActive(itemName)}
+                            key={`tab-item-${itemName}`}
+                            data-index={i}
+                            data-name={itemName}
+                            onClick={tabItemClickHandler}
                             className={classNames('tab-item', active === itemName && 'active')}>
                             {t.name}
                         </div>;

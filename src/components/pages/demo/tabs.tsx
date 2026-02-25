@@ -51,11 +51,24 @@ const tabItems: TabItemType[] = [
                 reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or
                 non-characteristic words etc.</p>
         </>
+    }, {
+        name: 'The 1 brown fox',
+        children: <>
+            <p><b>The quick brown fox jumps over the lazy dog</b> is a famous English pangram—a sentence containing every letter of the alphabet. Coined in the late 19th century (circa 1885), it is used worldwide for typing practice, keyboard testing, and font displays because it uses all 26 letters. </p>
+            <p>Key details about this phrase:</p>
+            <ul>
+                <li><b>Purpose:</b> It is used to test typewriters, computer keyboards, and to display fonts.</li>
+                <li><b>Origin:</b> The earliest known appearance was in The Boston Journal in 1885.</li>
+                <li><b>Usage:</b> It was used for signaling practice, on the Moscow–Washington hotline, and is common in typing tests.</li>
+                <li><b>Pangram:</b> The phrase is famous because it is a short, coherent sentence that uses every letter from A to Z.</li>
+                <li><b>Popularity:</b> It is often used to demonstrate the full character set of a font.</li>
+            </ul>
+        </>
     }
 ];
 
 const TabsDemo: FC = () => {
-    return <Tabs data={tabItems}/>
+    return <Tabs data={tabItems} type={'plain'} moveSelectedOnScroll={false}/>
 };
 
 export default TabsDemo;
