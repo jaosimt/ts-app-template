@@ -1,8 +1,7 @@
 import { FC } from 'react';
-import { MdConstruction } from 'react-icons/md';
 import { NavLink, Outlet, useLocation } from 'react-router';
 import { classNames } from '../../../utils';
-import ReactIcon from '../../partials';
+import UnderConstruction from '../underConstruction';
 
 const Demo: FC = () => {
     const {pathname} = useLocation();
@@ -15,12 +14,7 @@ const Demo: FC = () => {
                 <NavLink to={'/demo/tab'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Tabs</NavLink>
             </nav>
             <div className={'p-1p5 border-radius-0p3 position-relative'} style={{width: 'calc(100% - 150px', backgroundColor: 'whitesmoke'}}>
-                {
-                    pathname === '/demo' && <div className={'translate absolute-center display-flex gap-2'}>
-                        <ReactIcon className={'color-orange'} size={121} icon={MdConstruction} />
-                        <span style={{fontSize: '56px', fontFamily: 'courier new'}} className="monospace font-weight-bold color-yellow">UNDER<br/>CONSTRUCTION</span>
-                    </div>
-                }
+                {pathname === '/demo' && <UnderConstruction/>}
                 <Outlet />
             </div>
         </div>

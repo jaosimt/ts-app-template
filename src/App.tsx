@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import './App.scss';
 import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
+import { useLocation } from 'react-router';
 import ReactIcon from './components/partials';
 import Modal from './components/partials/modal';
 import { targetUnicode } from './constants';
 import { NavigationMain } from './navs';
 import ContentRouter from './routes';
+import { classNames } from './utils';
 
 const App = () => {
     const [offline, setOffline] = useState(false);
@@ -14,6 +16,8 @@ const App = () => {
         if (!['online', 'offline'].includes(type)) return;
         setOffline(type === 'offline');
     };
+
+    const {pathname} = useLocation();
 
     useEffect(() => {
         window.addEventListener('online', setConnectionStatus);
@@ -43,7 +47,7 @@ const App = () => {
         {MemoizedConnectionModal}
         <header>
             <div className={'display-flex gap-0p5 align-items-center'}>
-                <ReactIcon size={35} className={'spin font-weight-bold'} icon={IoLogoReact}/>
+                <ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')} icon={IoLogoReact}/>
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </div>
             <NavigationMain/>
