@@ -76,7 +76,7 @@ export const themes: Record<string, Theme> = {
 
 const Home: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState<string>(localStorage.getItem('rshTheme') || 'nightOwl');
-    const [selectedTab, setSelectedTab] = useState<string>(localStorage.getItem('selectedTab') || 'plain');
+    const [selectedTab, setSelectedTab] = useState<string>(localStorage.getItem('specsSelectedTab') || 'plain');
 
     const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setSelectedTheme(event.target.value);
@@ -121,7 +121,7 @@ const Home: FC = () => {
         </div>
         <Tab activeTab={selectedTab} data={tabData} type={selectedTab as any} onTabChange={(selected: string) => {
             setSelectedTab(selected);
-            localStorage.setItem('selectedTab', selected);
+            localStorage.setItem('specsSelectedTab', selected);
         }}/>
     </div>
 };

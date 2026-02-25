@@ -67,14 +67,14 @@ const tabItems: TabItemType[] = [
 ];
 
 const TabsDemo: FC = () => {
-    const [tabType, setTabType] = useState<any>(localStorage.getItem('selectedTab') || 'boxed');
+    const [tabType, setTabType] = useState<any>(localStorage.getItem('tabDemoSelectedTab') || 'boxed');
 
     return <div data-component={'demo'} className={'width-100p'}>
         <h1 className={'mt-0 display-flex justify-content-space-between line-height-1'}>
             <span>{'<Tab />'} Demo Page</span>
             <select value={tabType} onChange={e => {
                 setTabType(e.currentTarget.value);
-                localStorage.setItem('selectedTab', e.target.value);
+                localStorage.setItem('tabDemoSelectedTab', e.target.value);
             }} style={{ marginLeft: '10px' }}>
                 {['boxed', 'boxed-content', 'plain'].map((t) => (
                     <option key={t} value={t}>
