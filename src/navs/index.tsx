@@ -11,11 +11,12 @@ export const NavigationMain = () => {
         left: 0,
         width: 0,
         opacity: 0,
-        transition: ''
+        transition: 'transition-none'
     });
 
     useResizeObserver({
         ref: navRef as RefObject<HTMLElement>,
+        box:'content-box',
         onResize: () => {
             if (!navRef.current) return;
             const activeNav = navRef.current.querySelector('a.active');
@@ -23,7 +24,7 @@ export const NavigationMain = () => {
             if (!activeNav) return;
 
             const {left, width} = activeNav.getBoundingClientRect();
-            setActiveBar({left, width, opacity: 1, transition: 'transition-none'});
+            setActiveBar({...activeBar, left, width});
         },
     });
 
@@ -59,7 +60,7 @@ export const NavigationMain = () => {
             height: '2px',
             width: `${activeBar.width}px`,
             marginBottom: '-35px',
-            transition: 'all 300ms ease-in-out',
+            transition: 'all 200ms ease-in-out',
             backgroundColor: 'white',
             opacity: `${activeBar.opacity}`
         }}></div>
