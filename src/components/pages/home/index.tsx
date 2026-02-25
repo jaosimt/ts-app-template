@@ -101,7 +101,7 @@ const Home: FC = () => {
     ];
 
     return <div data-component={'home'} className={'width-100p'}>
-        <div className={'display-flex justify-content-space-between align-items-end background position-sticky'} style={{top: '50px', zIndex: 1}}>
+        <div className={'display-flex justify-content-space-between align-items-end background position-sticky'} style={{top: '50px'}}>
             <h1 className={'mt-0 line-height-1'}>Custom Component Specs</h1>
             <div className={'display-flex justify-content-space-between'}>
                 &nbsp;
@@ -114,7 +114,7 @@ const Home: FC = () => {
                 </select>
             </div>
         </div>
-        <Tab data={tabData}/>
+        <Tab data={tabData} type={'boxed'}/>
     </div>
 };
 

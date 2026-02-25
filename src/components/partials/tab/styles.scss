@@ -20,9 +20,10 @@ $activeTabItemColor    : magenta;
     border-top-left-radius  : $tabBorderRadius;
     border-top-right-radius : $tabBorderRadius;
     display                 : grid;
-    font-weight: bold;
+    font-weight             : bold;
     grid-template-columns   : 7px auto 7px;
-    transition: all 300ms ease-in-out;
+    transition              : all 300ms ease-in-out;
+    z-index                 : 1;
     
     > .scroll-btn-left,
     > .scroll-btn-right {
