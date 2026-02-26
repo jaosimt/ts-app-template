@@ -97,11 +97,11 @@ const ComponentSpecs: FC = () => {
             name: 'Modal',
             content: <ModalComponentSpecs selectedTheme={selectedTheme}/>
         }, {
-            name: 'WindowPortal Component',
-            content: <PortalWindowSpecs selectedTheme={selectedTheme}/>
-        }, {
             name: 'Tab',
             content: <TabSpecs selectedTheme={selectedTheme}/>
+        }, {
+            name: 'WindowPortal Component',
+            content: <PortalWindowSpecs selectedTheme={selectedTheme}/>
         }
     ];
 

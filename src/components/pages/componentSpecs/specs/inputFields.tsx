@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import './styles.scss';
 import { createLink, CssColors } from '../../../../utils/ext';
@@ -110,7 +111,7 @@ const inputFieldData: PropsListProps[] = [
         name: 'type',
         types: 'string',
         values: createLink('HTMLInputTypes', '//www.w3schools.com/html/html_form_input_types.asp'),
-        description: ['']
+        description: ['Define the kind or behavior of the input element']
     }, {
         name: 'width',
         // eslint-disable-next-line
@@ -121,15 +122,18 @@ const inputFieldData: PropsListProps[] = [
 ];
 
 const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
+    let navigate = useNavigate();
+
     return <>
         <Box
-            border={false}
+            border={'label-only'}
             tight={true}
-            label={'tsx'}
+            label={'Demo'}
             labelSize={'large'}
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
+            onLabelClick={() => navigate('/demo/login')}
         >
             <SyntaxHighlighter
                 codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}

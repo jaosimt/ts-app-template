@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import './App.scss';
 import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
-import { useLocation } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import ReactIcon from './components/partials';
 import Modal from './components/partials/modal';
 import { targetUnicode } from './constants';
@@ -47,7 +47,7 @@ const App = () => {
         {MemoizedConnectionModal}
         <header>
             <div className={'display-flex gap-0p5 align-items-center white-space-nowrap'}>
-                <ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')} icon={IoLogoReact}/>
+                <Link to={{ pathname: "/"}}><ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')} icon={IoLogoReact}/></Link>
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </div>
             <NavigationMain/>

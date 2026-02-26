@@ -1,11 +1,12 @@
 import { RefObject, useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 import './index.scss';
 import { useResizeObserver } from 'usehooks-ts';
 import { classNames } from '../utils';
 
 export const NavigationMain = () => {
     const navRef = useRef<HTMLDivElement>(null);
+    const location = useLocation();
 
     const [activeBar, setActiveBar] = useState({
         left: 0,
@@ -36,7 +37,7 @@ export const NavigationMain = () => {
 
         const {left, width} = activeNav.getBoundingClientRect();
         setActiveBar({left, width, opacity: 1, transition: ''});
-    }, []);
+    }, [location.pathname]);
 
     const linkClickHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
         const {left, width} = e.currentTarget.getBoundingClientRect();

@@ -17,6 +17,11 @@ $activeTabItemColor    : magenta;
     @extend .disable-select;
     
     align-items             : center;
+    border-width     : 1px;
+    border-style     : solid;
+    background-color : transparent;
+    border-color     : transparent;
+    border-bottom    : none;
     border-top-left-radius  : $tabBorderRadius;
     border-top-right-radius : $tabBorderRadius;
     display                 : grid;
@@ -26,13 +31,14 @@ $activeTabItemColor    : magenta;
     
     > .scroll-btn-left,
     > .scroll-btn-right {
-      align-items: center;
+      align-items : center;
       background-color : transparent;
-      cursor: pointer;
+      cursor      : pointer;
       display          : flex;
       height           : 100%;
-      opacity: 0;
-      transition: all 200ms ease-in-out;
+      opacity     : 0;
+      transition  : all 200ms ease-in-out;
+      z-index     : 2;
       
       &.scroll-btn-left {
         justify-content : flex-end;
@@ -60,10 +66,10 @@ $activeTabItemColor    : magenta;
     > .tab-items-wrapper {
       align-items   : center;
       border-bottom : none;
-      overflow: hidden;
+      overflow    : hidden;
       padding       : 0.3rem 0 0 0;
-      white-space: nowrap;
-      z-index : 1;
+      white-space : nowrap;
+      z-index     : 1;
       
       > .tab-item {
         border                  : 1px solid transparent;
@@ -131,6 +137,7 @@ $activeTabItemColor    : magenta;
   &.boxed {
     > .tab-items {
       background-color : $tabBackground;
+      border-color     : $tabBackground;
       
       > .tab-items-wrapper {
         > .tab-item {
@@ -151,6 +158,7 @@ $activeTabItemColor    : magenta;
   &.plain {
     > .tab-items {
       background-color : transparent;
+      border-color     : transparent;
       
       > .tab-items-wrapper {
         > .tab-item {

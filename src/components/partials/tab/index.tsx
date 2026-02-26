@@ -81,8 +81,6 @@ const Tabs: FC<TabItemProps> = (props) => {
     });
 
     useEffect(() => {
-        console.log('[Tabs] tabItemsWrapper:', tabItemsWrapper.current);
-
         localStorage.setItem('scroll-left', '0');
         updateTabOverflow();
 

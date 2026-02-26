@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Box from '../../../partials/box';
 import Modal, { ModalProps } from '../../../partials/modal';
@@ -21,6 +22,8 @@ const ModalComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     const [show, setShow] = useState(false);
     const [props, setProps] = useState<ModalProps>(defaultProps);
     const [modalMessageList, setModalMessageList] = useState<string[]>([]);
+
+
 
     const onClose = () => setShow(false);
 
@@ -152,15 +155,18 @@ const ModalComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
         setModalMessageList([]);
     }, [show]);
 
+    let navigate = useNavigate();
+
     return <>
         <Box
-            border={false}
+            border={'label-only'}
             tight={true}
-            label={'tsx'}
+            label={'demo'}
             labelSize={'large'}
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
+            onLabelClick={() => navigate('/demo/modal')}
         >
             <SyntaxHighlighter
                 codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
