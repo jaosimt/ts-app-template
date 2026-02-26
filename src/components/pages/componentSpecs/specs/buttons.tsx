@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { propsList, PropsListProps, SelectedThemeProps, themes } from '../../components/pages/componentSpecs';
-import Box from '../../components/partials/box';
-import { createLink } from '../../utils/ext';
+import { createLink } from '../../../../utils/ext';
+import Box from '../../../partials/box';
+import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
 const code = `<Button>
     Submit
@@ -43,7 +43,7 @@ const buttonData: PropsListProps[] = [
     }
 ];
 
-export const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
         <Box
             border={false}
@@ -69,3 +69,5 @@ export const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) =>
         {propsList(buttonData)}
     </>;
 };
+
+export default ButtonComponentSpecs;

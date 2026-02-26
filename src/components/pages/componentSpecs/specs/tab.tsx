@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Link } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { propsList, PropsListProps, SelectedThemeProps, themes } from '../../components/pages/componentSpecs';
-import Box from '../../components/partials/box';
-import { CssColors } from '../../utils/ext';
+import { CssColors } from '../../../../utils/ext';
+import Box from '../../../partials/box';
+import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
 const code = `const tabItems: TabItemType[] = [
     {
@@ -77,7 +77,7 @@ const tabData: PropsListProps[] = [
     }
 ];
 
-export const TabSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const TabSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
         <Box
             border={false}
@@ -102,3 +102,5 @@ export const TabSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
         {propsList(tabData)}
     </>;
 };
+
+export default TabSpecs;

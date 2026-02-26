@@ -10,14 +10,14 @@ import {
     tomorrow, twilight, vs, vscDarkPlus, xonokai,
     zTouch
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { BoxComponentSpecs } from '../../../constants/specs/box';
-import { ButtonComponentSpecs } from '../../../constants/specs/buttons';
-import InputFieldsProps from '../../../constants/specs/inputFields';
-import { ModalComponentSpecs } from '../../../constants/specs/modal';
-import { PortalWindowSpecs } from '../../../constants/specs/portalWindow';
-import { TabSpecs } from '../../../constants/specs/tab';
 import { classNames, ProperCase } from '../../../utils';
 import Tab, { TabItemType } from '../../partials/tab';
+import BoxComponentSpecs from './specs/box';
+import ButtonComponentSpecs from './specs/buttons';
+import InputFieldsProps from './specs/inputFields';
+import ModalComponentSpecs from './specs/modal';
+import PortalWindowSpecs from './specs/portalWindow';
+import TabSpecs from './specs/tab';
 
 export interface SelectedThemeProps {
     selectedTheme: string;

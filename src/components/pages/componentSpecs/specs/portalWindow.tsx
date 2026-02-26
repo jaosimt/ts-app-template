@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { propsList, PropsListProps, SelectedThemeProps, themes } from '../../components/pages/componentSpecs';
-import Box from '../../components/partials/box';
-import { createLink, CssColors } from '../../utils/ext';
+import { createLink, CssColors } from '../../../../utils/ext';
+import Box from '../../../partials/box';
+import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
 const code = `const [showPortal, setShowPortal] = useState<boolean>(false);
 
@@ -47,7 +47,7 @@ const portalData: PropsListProps[] = [
     }
 ];
 
-export const PortalWindowSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const PortalWindowSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
         <Box
             border={false}
@@ -72,3 +72,5 @@ export const PortalWindowSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
         {propsList(portalData)}
     </>;
 };
+
+export default PortalWindowSpecs;

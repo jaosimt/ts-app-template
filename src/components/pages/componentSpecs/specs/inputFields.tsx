@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { propsList, PropsListProps, SelectedThemeProps, themes } from '../../components/pages/componentSpecs';
-import Box from '../../components/partials/box';
-import { createLink, CssColors } from '../../utils/ext';
 import './styles.scss';
+import { createLink, CssColors } from '../../../../utils/ext';
+import Box from '../../../partials/box';
+import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
 const codeJSX = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {
     email: string;

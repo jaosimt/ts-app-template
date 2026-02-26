@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { propsList, PropsListProps, SelectedThemeProps, themes } from '../../components/pages/componentSpecs';
-import Box from '../../components/partials/box';
-import { CssColors } from '../../utils/ext';
+import { CssColors } from '../../../../utils/ext';
+import Box from '../../../partials/box';
+import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
 const code = `<Box>
     <h1>Hello World!</h1>
@@ -74,7 +74,7 @@ const boxData: PropsListProps[] = [
     }
 ];
 
-export const BoxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const BoxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     return <>
         <Box
             border={false}
@@ -101,3 +101,5 @@ export const BoxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
         {propsList(boxData)}
     </>;
 };
+
+export default BoxComponentSpecs;

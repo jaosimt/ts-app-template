@@ -18,7 +18,8 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
     labelBackgroundColor?: CSSColors;
     labelPosition?: LabelPositionType;
     labelSize?: 'small'|'medium'|'large';
-    width?: CSSUnit
+    width?: CSSUnit;
+    onLabelClick?: Function;
 }
 
 const Section = styled.section<{
@@ -50,8 +51,10 @@ const Label = styled.h5<{
     $fontSize: string,
     $labelPosition: LabelPositionType,
     $labelWidth: number,
-    $tight: boolean
+    $tight: boolean,
+    $onLabelClick?: Function
 }>`
+    cursor: ${props => props.$onLabelClick ? 'pointer' : 'default'}
     background: ${props => props.$background};
     border-width: ${props => props.$borderWidth};
     border-style: inherit;
@@ -133,7 +136,8 @@ const Box: FC<BoxProps> = (props) => {
         labelSize = 'small',
         labelPosition = 'top-left',
         tight,
-        width
+        width,
+        onLabelClick,
     } = props;
 
     const labelRef = useRef(null as HTMLInputElement | null);
@@ -170,6 +174,10 @@ const Box: FC<BoxProps> = (props) => {
         // eslint-disable-next-line
     }, []);
 
+    const labelClinkHandler = () => {
+        onLabelClick && onLabelClick()
+    }
+
     return <Section
         data-component={'box'}
         className={boxClassName}
@@ -183,6 +191,7 @@ const Box: FC<BoxProps> = (props) => {
     >
         {label && <Label
             ref={labelRef}
+            onClick={labelClinkHandler}
             $background={labelBackgroundColor || 'inherit'}
             $borderWidth={border === 'label-only' ? '1px' : 'inherit'}
             $borderColor={borderColor}
@@ -193,6 +202,7 @@ const Box: FC<BoxProps> = (props) => {
             $labelPosition={labelPosition}
             $labelWidth={labelWidth}
             $tight={tight || false}
+            $onLabelClick={onLabelClick}
         >{label}</Label>}
         <Children
             className={className}

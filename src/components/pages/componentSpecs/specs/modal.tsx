@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { propsList, PropsListProps, SelectedThemeProps, themes } from '../../components/pages/componentSpecs';
-import Box from '../../components/partials/box';
-import Modal, { ModalProps } from '../../components/partials/modal';
+import Box from '../../../partials/box';
+import Modal, { ModalProps } from '../../../partials/modal';
+import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
 const code = `<Modal>
     <h1>Hello, world!</h1>
@@ -17,7 +17,7 @@ const defaultProps: ModalProps = {
     width: undefined,
 };
 
-export const ModalComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const ModalComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     const [show, setShow] = useState(false);
     const [props, setProps] = useState<ModalProps>(defaultProps);
     const [modalMessageList, setModalMessageList] = useState<string[]>([]);
@@ -199,3 +199,5 @@ export const ModalComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => 
         </Modal>}
     </>;
 };
+
+export default ModalComponentSpecs;
