@@ -74,12 +74,9 @@ const Tabs: FC<TabItemProps> = (props) => {
 
     useResizeObserver({
         ref: tabItemsWrapper as RefObject<HTMLDivElement>, // containerRef is RefObject<HTMLDivElement | null>
-        onResize: (size) => {
+        onResize: () => {
             clearTimeout(resizeTimeoutRef.current);
-            resizeTimeoutRef.current = setTimeout(() => {
-                console.log('useResizeObserver:', size);
-                updateTabOverflow();
-            }, 300);
+            resizeTimeoutRef.current = setTimeout(updateTabOverflow, 300);
         },
     });
 

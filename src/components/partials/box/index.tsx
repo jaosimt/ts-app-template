@@ -21,6 +21,103 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
     width?: CSSUnit
 }
 
+const Section = styled.section<{
+    $backgroundColor?: CSSColors,
+    $border: CSSUnit,
+    $borderColor: CSSColors,
+    $borderRadius: CSSUnit,
+    $marginTop: CSSUnit,
+    $padding: CSSUnit,
+    $width?: CSSUnit
+}>`
+    background: ${props => props.$backgroundColor || 'white'};
+    border-width: ${props => props.$border};
+    border-style: solid;
+    border-color: ${props => props.$borderColor};
+    border-radius: ${props => props.$borderRadius};
+    margin-top: ${props => props.$marginTop};
+    padding: ${props => props.$padding};
+    width: ${props => props.$width || ''};
+`;
+
+const Label = styled.h5<{
+    $background: CSSColors,
+    $borderWidth: CSSUnit | 'inherit',
+    $borderColor: CSSColors,
+    $borderRadius: CSSUnit,
+    $color?: CSSColors,
+    $margin: CSSUnit | `-${number}${string} ${number} ${number} ${number}`,
+    $fontSize: string,
+    $labelPosition: LabelPositionType,
+    $labelWidth: number,
+    $tight: boolean
+}>`
+    background: ${props => props.$background};
+    border-width: ${props => props.$borderWidth};
+    border-style: inherit;
+    border-color: ${props => props.$borderColor};
+    border-radius: ${props => props.$borderRadius};
+    color: ${props => props.$color};
+    line-height: 1;
+    z-index: 1;
+    margin: ${props => props.$margin};
+    position: absolute;
+    padding: 0.1rem 0.3rem;
+    font-size: ${props => props.$fontSize};
+    ${props => (() => {
+        switch (props.$labelPosition) {
+            case 'top-center':
+                return `right: calc(50% - ${props.$labelWidth / 2}px)`;
+            case 'top-right':
+                return `right: ${props.$tight ? 0 : '0.5rem'}`;
+            case 'bottom-left':
+                return `bottom: ${props.$tight ? 0 : '-0.4rem'}`;
+            case 'bottom-center':
+                return `bottom: ${props.$tight ? 0 : '-0.4rem'}; right: calc(50% - ${props.$labelWidth / 2}px)`;
+            case 'bottom-right':
+                return `bottom: ${props.$tight ? 0 : '-0.4rem'}; right: ${props.$tight ? 0 : '0.5rem'}`;
+            default:
+                return null;
+        }
+    })()}
+`;
+
+const Children = styled.div<{
+    $labelPosition: LabelPositionType,
+    $label?: string,
+    $tight: boolean,
+    $labelSize: string
+}>`
+    ${props => (() => {
+        if (props.$label && !props.$tight && !String(props.$labelPosition).includes('bottom')) {
+            switch (props.$labelSize) {
+                case 'large':
+                    return 'margin-top: 1rem';
+                case 'medium':
+                    return 'margin-top: 0.9rem';
+                default:
+                    return 'margin-top: 0.7rem';
+            }
+        }
+        return null;
+    })()};
+    ${props => (() => {
+        if (props.$label && !props.$tight && String(props.$labelPosition).includes('bottom')) {
+            switch (props.$labelSize) {
+                case 'large':
+                    return 'margin-bottom: 1rem';
+                case 'medium':
+                    return 'margin-bottom: 0.9rem';
+                default:
+                    return 'margin-bottom: 0.7rem';
+            }
+        }
+        return null;
+    })()};
+    width: 100%;
+    overflow-x: auto;
+`;
+
 const Box: FC<BoxProps> = (props) => {
     const {
         backgroundColor,
@@ -65,78 +162,6 @@ const Box: FC<BoxProps> = (props) => {
         titleBorderRadius = parseCSSUnit(`${brSplit[0] as number / 2}${brSplit[1]}`);
     }
 
-    const Section = styled.section`
-        background: ${backgroundColor || 'white'};
-        border-width: ${border && border !== 'label-only' ? '1px' : 0};
-        border-style: solid;
-        border-color: ${borderColor};
-        border-radius: ${parseCSSUnit(String(borderRadius))};
-        margin-top: ${label && !tight ? '0.5rem' : 0};
-        padding: ${tight ? 0 : '0.5rem'};
-        width: ${width && parseCSSUnit(String(width))};
-    `;
-
-    const Label = styled.h5`
-        background: ${labelBackgroundColor || 'inherit'};
-        border-width: ${border === 'label-only' ? '1px' : 'inherit'};
-        border-style: inherit;
-        border-color: ${borderColor};
-        border-radius: ${titleBorderRadius};
-        color: ${labelColor};
-        line-height: 1;
-        margin: ${tight ? border === 'label-only' ? 0 : '0.1rem' : '-0.9rem 0 0 0'};
-        position: absolute;
-        padding: 0.1rem 0.3rem;
-        font-size: ${labelSize};
-        ${(() => {
-            switch (labelPosition) {
-                case 'top-center':
-                    return `right: calc(50% - ${labelWidth/2}px)`;
-                case 'top-right':
-                    return `right: ${tight ? 0 : '0.5rem'}`;
-                case 'bottom-left':
-                    return `bottom: ${tight ? 0 : '-0.4rem'}`;
-                case 'bottom-center':
-                    return `bottom: ${tight ? 0 : '-0.4rem'}; right: calc(50% - ${labelWidth/2}px)`;
-                case 'bottom-right':
-                    return `bottom: ${tight ? 0 : '-0.4rem'}; right: ${tight ? 0 : '0.5rem'}`;
-                default:
-                    return null;
-            }
-        })()}
-    `;
-
-    const Children = styled.div`
-        ${(() => {
-            if (label && !tight && !String(labelPosition).includes('bottom')) {
-                switch(labelSize) {
-                    case 'large':
-                        return 'margin-top: 1rem'
-                    case 'medium':
-                        return 'margin-top: 0.9rem'
-                    default:
-                        return 'margin-top: 0.7rem'
-                }
-            }
-            return null
-        })()};
-        ${(() => {
-            if (label && !tight && String(labelPosition).includes('bottom')) {
-                switch(labelSize) {
-                    case 'large':
-                        return 'margin-bottom: 1rem'
-                    case 'medium':
-                        return 'margin-bottom: 0.9rem'
-                    default:
-                        return 'margin-bottom: 0.7rem'
-                }
-            }
-            return null
-        })()};
-        width: 100%;
-        overflow-x: auto;
-    `;
-
     useEffect(() => {
         if (label && labelRef.current){
             const labelWidth = getTextWidth(label, getComputedStyle(labelRef.current)['font']);
@@ -148,9 +173,34 @@ const Box: FC<BoxProps> = (props) => {
     return <Section
         data-component={'box'}
         className={boxClassName}
+        $backgroundColor={backgroundColor}
+        $border={border && border !== 'label-only' ? '1px' : 0}
+        $borderColor={borderColor}
+        $borderRadius={parseCSSUnit(String(borderRadius))}
+        $marginTop={label && !tight ? '0.5rem' : 0}
+        $padding={tight ? 0 : '0.5rem'}
+        $width={width && parseCSSUnit(String(width))}
     >
-        {label && <Label ref={labelRef}>{label}</Label>}
-        <Children className={className}>{children}</Children>
+        {label && <Label
+            ref={labelRef}
+            $background={labelBackgroundColor || 'inherit'}
+            $borderWidth={border === 'label-only' ? '1px' : 'inherit'}
+            $borderColor={borderColor}
+            $borderRadius={titleBorderRadius}
+            $color={labelColor}
+            $margin={tight ? border === 'label-only' ? 0 : '0.1rem' : '-0.9rem 0 0 0'}
+            $fontSize={labelSize}
+            $labelPosition={labelPosition}
+            $labelWidth={labelWidth}
+            $tight={tight || false}
+        >{label}</Label>}
+        <Children
+            className={className}
+            $labelPosition={labelPosition}
+            $tight={tight || false}
+            $label={label}
+            $labelSize={labelSize}
+        >{children}</Children>
     </Section>;
 };
 

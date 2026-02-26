@@ -235,6 +235,8 @@ const ModalDemo: FC = () => {
             </Box>
 
             <Box
+                tight={true}
+                border={'label-only'}
                 width={333}
                 borderRadius={'4px'}
                 backgroundColor={'yellow'}
