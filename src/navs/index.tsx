@@ -39,22 +39,14 @@ export const NavigationMain = () => {
         setActiveBar({left, width, opacity: 1, transition: ''});
     }, [location.pathname]);
 
-    const linkClickHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        const {left, width} = e.currentTarget.getBoundingClientRect();
-        setActiveBar({left, width, opacity: 1, transition: ''});
-    };
-
     return <nav ref={navRef} data-nav={'top'} className={'position-relative'} style={{
         width: '100%',
         justifyContent: 'flex-end'
     }}>
-        <NavLink onClick={linkClickHandler} to={'/'}
-                 className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Home</NavLink>
-        <NavLink onClick={linkClickHandler} to={'/specs'}
-                 className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Component
-            Specs</NavLink>
-        <NavLink onClick={linkClickHandler} to={'/demo'}
-                 className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Demo</NavLink>
+        <NavLink to={'/'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Home</NavLink>
+        <NavLink to={'/specs'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Component Specs</NavLink>
+        <NavLink to={'/demo'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Demo</NavLink>
+
         <div className={activeBar.transition} style={{
             position: 'fixed',
             left: `${activeBar.left}px`,
