@@ -19,4 +19,8 @@ $footerBackgroundColor          : #963999;
 $scrollbarColor                 : #61dafb;
 $scrollbarBackgroundColor       : #transparent;
 $scrollbarBorderRadius          : 0.4rem;
-$codeFontFamily                 : source-code-pro, Menlo, Monaco, Consolas, 'Courier New', 'Roboto Mono', monospace;
+$codeFontFamily            : source-code-pro, Menlo, Monaco, Consolas, "Courier New", "Roboto Mono", monospace;
+
+$alternatingBackgroundOdd  : rgba(150, 57, 153, 0.07);
+$alternatingBackgroundEven : rgba(97, 218, 251, 0.07);
+$gridBorderColor           : rgb(212, 167, 212);

@@ -263,8 +263,8 @@
 
 .grid {
   display : grid;
-  // gap     : 0.5rem 1rem;
-  
+  width   : 100%;
+
   &.cols-2 {
     grid-template-columns : repeat(2, 1fr);
     
@@ -301,18 +301,166 @@
     &.auto { grid-template-columns: auto auto auto auto auto auto auto }
   }
   
-  &.alternating-color {
-    > * {
-      &:nth-child(4n + 1),
-      &:nth-child(4n + 3) {
-        background-color: #f7f7f7;
+  &.cols-2,
+  &.cols-4,
+  &.cols-6 {
+    &.alternating-column-color {
+      > * {
+        /* ALTERNATING COLUMN BACKGROUND COLOR ON EVEN NUMBER OF COLUMNS */
+        
+        /* every other odd column */
+        &:nth-child(2n+1) { background-color : $alternatingBackgroundOdd; }
+        
+        /* every other even column */
+        &:nth-child(2n) { background-color : $alternatingBackgroundEven; }
+      }
+    }
+  }
+  
+  &.cols-2,
+  &.cols-3,
+  &.cols-4,
+  &.cols-5,
+  &.cols-6,
+  &.cols-7 {
+    &.border {
+      > * {
+        /* NON REPEATING GRID BORDER */
+        
+        /* border left and bottom to all elements */
+        border-left   : 1px solid $gridBorderColor;
+        border-bottom : 1px solid $gridBorderColor;
+      }
+    }
+  }
+  
+  &.cols-2 {
+    &.border {
+      > * {
+        &:nth-child(-n+2) { border-top : 1px solid $gridBorderColor; }
+        &:nth-child(2n) { border-right : 1px solid $gridBorderColor; }
+      }
+    }
+  }
+  
+  &.cols-3 {
+    &.alternating-column-color {
+      > * {
+        /* ALTERNATING COLUMN BACKGROUND COLOR ON EVEN NUMBER OF COLUMNS */
+        
+        /* every other odd column */
+        &:nth-child(3n+1) { background-color : $alternatingBackgroundOdd; }
+        &:nth-child(3n+3) { background-color : $alternatingBackgroundOdd; }
+        
+        /* even column */
+        &:nth-child(3n+2) { background-color : $alternatingBackgroundEven; }
+      }
+    }
+    
+    &.border {
+      > * {
+        /* NON REPEATING GRID BORDER */
+        
+        /* border top on the first 3 */
+        &:nth-child(-n+3) { border-top : 1px solid $gridBorderColor; }
+        
+        /* border right on every other 3th element */
+        &:nth-child(3n) { border-right : 1px solid $gridBorderColor; }
+      }
+    }
+  }
+  
+  &.cols-4 {
+    &.border {
+      > * {
+        /* NON REPEATING GRID BORDER */
+        
+        /* border top on the first 4 */
+        &:nth-child(-n+4) { border-top : 1px solid $gridBorderColor; }
+        
+        /* border right on every other 4th element */
+        &:nth-child(4n) { border-right : 1px solid $gridBorderColor; }
+      }
+    }
+  }
+  
+  &.cols-5 {
+    &.alternating-column-color {
+      > * {
+        /* ALTERNATING COLUMN BACKGROUND COLOR ON EVEN NUMBER OF COLUMNS */
+        
+        /* every other odd column */
+        &:nth-child(5n+1) { background-color : $alternatingBackgroundOdd; }
+        &:nth-child(5n+3) { background-color : $alternatingBackgroundOdd; }
+        &:nth-child(5n+5) { background-color : $alternatingBackgroundOdd; }
+        
+        /* every other even column */
+        &:nth-child(5n+2) { background-color : $alternatingBackgroundEven; }
+        &:nth-child(5n+4) { background-color : $alternatingBackgroundEven; }
+      }
+    }
+    
+    &.border {
+      > * {
+        /* NON REPEATING GRID BORDER */
+        
+        /* border top on the first 5 */
+        &:nth-child(-n+5) { border-top : 1px solid $gridBorderColor; }
+        
+        /* border right on every other 5th element */
+        &:nth-child(5n) { border-right : 1px solid $gridBorderColor; }
+      }
+    }
+  }
+  
+  &.cols-6 {
+    &.border {
+      > * {
+        /* NON REPEATING GRID BORDER */
+        
+        /* border top on the first 6 */
+        &:nth-child(-n+6) { border-top : 1px solid $gridBorderColor; }
+        
+        /* border right on every other 6th element */
+        &:nth-child(6n) { border-right : 1px solid $gridBorderColor; }
+      }
+    }
+  }
+  
+  &.cols-7 {
+    &.alternating-column-color {
+      > * {
+        /* ALTERNATING COLUMN BACKGROUND COLOR ON EVEN NUMBER OF COLUMNS */
+        
+        /* every other odd column */
+        &:nth-child(7n+1) { background-color : $alternatingBackgroundOdd; }
+        &:nth-child(7n+3) { background-color : $alternatingBackgroundOdd; }
+        &:nth-child(7n+5) { background-color : $alternatingBackgroundOdd; }
+        &:nth-child(7n+7) { background-color : $alternatingBackgroundOdd; }
+        
+        /* every other even column */
+        &:nth-child(7n+2) { background-color : $alternatingBackgroundEven; }
+        &:nth-child(7n+4) { background-color : $alternatingBackgroundEven; }
+        &:nth-child(7n+6) { background-color : $alternatingBackgroundEven; }
+      }
+    }
+    
+    &.border {
+      > * {
+        /* NON REPEATING GRID BORDER */
+        
+        /* border top on the first 7 */
+        &:nth-child(-n+7) { border-top : 1px solid $gridBorderColor; }
+        
+        /* border right on every other 7th element */
+        &:nth-child(7n) { border-right : 1px solid $gridBorderColor; }
       }
     }
   }
   
   &:not(.no-padding) {
     > * {
-      padding: 0.25rem 0.5rem;
+      padding : 0.7rem;
     }
   }
 }

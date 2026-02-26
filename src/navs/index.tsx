@@ -34,10 +34,6 @@ export const NavigationMain = () => {
         // eslint-disable-next-line
     }, [location.pathname, navRef.current, activeBar.transition]);
 
-    useEffect(() => {
-        console.log('activeBar: ', activeBar);
-    }, [activeBar]);
-
     return <nav ref={navRef} data-nav={'top'} className={'position-relative'} style={{
         width: '100%',
         justifyContent: 'flex-end'

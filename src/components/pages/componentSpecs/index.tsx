@@ -145,7 +145,7 @@ export const propsList: FC<PropsListProps[]> = (props) => <div
         'font-monospace',
         'color-black',
         'font-size-smaller',
-        'alternating-color'
+        'border'
     )}
 >
     {
