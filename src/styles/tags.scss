@@ -1,4 +1,5 @@
 @import "./variables";
+@import "./mixins";
 
 select {
   padding       : 0.439rem 0.4rem;
@@ -70,3 +71,7 @@ ul {
 
 a,
 link { color : $textColor; text-decoration : none; cursor : pointer; font-weight : 700; }
+
+div, body {
+  @include customScrollbar();
+}

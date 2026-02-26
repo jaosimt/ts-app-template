@@ -45,8 +45,8 @@ const App = () => {
 
     return (<>
         {MemoizedConnectionModal}
-        <header>
-            <Link className={'display-flex gap-0p5 align-items-center white-space-nowrap'} to={{ pathname: "/"}}><ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')} icon={IoLogoReact}/>
+        <header className={'grid cols2'}>
+            <Link className={'white-space-nowrap display-flex align-items-center gap-1 pl-0p5'} to={{ pathname: "/"}}><ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')} icon={IoLogoReact}/>
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
             <NavigationMain/>

@@ -15,6 +15,7 @@ export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
     type?: 'boxed-content' | 'boxed' | 'plain';
     onTabChange?: Function,
     activeTab?: string;
+    width?: CSSUnit;
 }
 
 export type TabItemType = {
@@ -40,7 +41,8 @@ const Tabs: FC<TabItemProps> = (props) => {
         activeItemColor = 'magenta',
         minContentHeight,
         onTabChange,
-        activeTab
+        activeTab,
+        width
     } = props;
 
     const tabItemsWrapper = useRef<HTMLDivElement>(null);
@@ -210,7 +212,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         });
     }
 
-    return <div data-component={'tabs'} className={type}>
+    return <div data-component={'tabs'} className={type} style={{width: width ? parseCSSUnit(String(width)) : 'inherit'}}>
         <div className={'tab-items'}>
             <div className={classNames('scroll-btn-left', tabOverflow.left && 'visible')}>
                 <ReactIcon size={21} icon={BiSolidChevronLeftCircle} onClick={scrollLeftHandler}/>

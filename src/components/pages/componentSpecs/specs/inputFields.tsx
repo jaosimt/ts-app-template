@@ -126,6 +126,7 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
 
     return <>
         <Box
+            width={'100%'}
             border={'label-only'}
             tight={true}
             label={'Demo'}
@@ -136,6 +137,8 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
             onLabelClick={() => navigate('/demo/login')}
         >
             <SyntaxHighlighter
+                wrapLines={true}
+                wrapLongLines={true}
                 codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
                 showLineNumbers={true}
                 language="jsx"

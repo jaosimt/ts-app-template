@@ -302,3 +302,6 @@ export const inStringNumberToWords = (str: string) => {
     const result = strSplit.map(s => isNumber(s) ? numberToWords(+s) : s);
     return result.join(' ');
 }
+
+export const getRandStr =
+    (len: number, chars = 'poiuytrewqasdfghjklmnbvcxzMNBVCXZASDFGHJKLPOIUYTREWQ') => Array.from({length: len}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
