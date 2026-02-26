@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { CssColors } from '../../../../utils/ext';
 import Box from '../../../partials/box';
@@ -78,15 +78,18 @@ const tabData: PropsListProps[] = [
 ];
 
 const TabSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+    let navigate = useNavigate();
+
     return <>
         <Box
-            border={false}
+            border={'label-only'}
             tight={true}
-            label={'tsx'}
+            label={'Demo'}
             labelSize={'large'}
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
+            onLabelClick={() => navigate('/demo/tab')}
         >
             <SyntaxHighlighter
                 codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}

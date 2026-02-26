@@ -54,7 +54,7 @@ const Label = styled.h5<{
     $tight: boolean,
     $onLabelClick?: Function
 }>`
-    cursor: ${props => props.$onLabelClick ? 'pointer' : 'default'}
+    cursor: ${props => props.$onLabelClick ? 'pointer' : 'default'};
     background: ${props => props.$background};
     border-width: ${props => props.$borderWidth};
     border-style: inherit;
@@ -197,7 +197,7 @@ const Box: FC<BoxProps> = (props) => {
             $borderColor={borderColor}
             $borderRadius={titleBorderRadius}
             $color={labelColor}
-            $margin={tight ? border === 'label-only' ? 0 : '0.1rem' : '-0.9rem 0 0 0'}
+            $margin={tight ? border === 'label-only' ? '0.1rem' : 0 : '-0.9rem 0 0 0'}
             $fontSize={labelSize}
             $labelPosition={labelPosition}
             $labelWidth={labelWidth}
