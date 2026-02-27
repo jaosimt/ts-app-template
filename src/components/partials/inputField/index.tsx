@@ -11,7 +11,7 @@ import { classNames, parseCSSUnit } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
 import ReactIcon from '../index';
 
-export interface InputFieldProps extends HTMLAttributes<HTMLInputElement> {
+export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTextAreaElement> {
     error?: string;
     fieldRegister: UseFormRegisterReturn;
     icon?: IconType;
@@ -25,6 +25,7 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement> {
     setRef?: Function;
     type?: HTMLInputTypeAttribute;
     width?: CSSUnit;
+    rows?: number;
 }
 
 const InputField: FC<InputFieldProps> = (props) => {
@@ -44,6 +45,8 @@ const InputField: FC<InputFieldProps> = (props) => {
         fieldRegister,
         error,
         onKeyDown,
+        rows,
+        style,
         ...restProps
     } = props;
 
@@ -55,7 +58,7 @@ const InputField: FC<InputFieldProps> = (props) => {
     });
 
     const idRef = useRef(`${fieldRegister.name}-${uuidv4()}`);
-    const inputRef = useRef(null as HTMLInputElement | null);
+    const inputRef = useRef(null as HTMLInputElement | null as HTMLTextAreaElement | null);
 
     useEffect(() => {
         localStorage.removeItem('last-input-focus');
@@ -78,26 +81,48 @@ const InputField: FC<InputFieldProps> = (props) => {
                 {label && label}
             </label>
             <div className={'position-relative display-flex'}>
-                <input
-                    style={{width: width && parseCSSUnit(width)}}
-                    type={type || 'text'}
-                    min={min}
-                    max={max}
-                    placeholder={placeHolder}
-                    className={classNames(className && '', error && 'border-error')}
-                    id={idRef.current}
-                    ref={(e) => {
-                        ref(e);
-                        inputRef.current = e;
-                    }}
-                    onKeyDown={e => {
-                        localStorage.setItem('last-input-focus', fieldRegister.name);
-                        onKeyDown && onKeyDown(e);
-                    }}
-                    autoFocus={localStorage.getItem('last-input-focus') === fieldRegister.name}
-                    {...restFieldRegister}
-                    {...restProps}
-                />
+                {
+                    type !== 'textarea' && <input
+                        style={{...style, width: width && parseCSSUnit(width)}}
+                        type={type || 'text'}
+                        min={min}
+                        max={max}
+                        placeholder={placeHolder}
+                        className={classNames(className && '', error && 'border-error')}
+                        id={idRef.current}
+                        ref={(e:any) => {
+                            ref(e);
+                            inputRef.current = e;
+                        }}
+                        onKeyDown={e => {
+                            localStorage.setItem('last-input-focus', fieldRegister.name);
+                            onKeyDown && onKeyDown(e);
+                        }}
+                        autoFocus={localStorage.getItem('last-input-focus') === fieldRegister.name}
+                        {...restFieldRegister}
+                        {...restProps}
+                    />
+                }
+                {
+                    type === 'textarea' && <textarea
+                        rows={rows || 3}
+                        style={{...style, width: width && parseCSSUnit(width)}}
+                        placeholder={placeHolder}
+                        className={classNames(className && '', error && 'border-error')}
+                        id={idRef.current}
+                        ref={(e:any) => {
+                            ref(e);
+                            inputRef.current = e;
+                        }}
+                        onKeyDown={e => {
+                            localStorage.setItem('last-input-focus', fieldRegister.name);
+                            onKeyDown && onKeyDown(e);
+                        }}
+                        autoFocus={localStorage.getItem('last-input-focus') === fieldRegister.name}
+                        {...restFieldRegister}
+                        {...restProps}
+                    />
+                }
                 {error && <Tippy
                     content={error}
                     animation={true}

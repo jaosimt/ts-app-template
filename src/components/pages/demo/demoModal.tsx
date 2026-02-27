@@ -116,13 +116,11 @@ const ModalDemo: FC = () => {
                     <div className={'display-flex gap-0p5 justify-content-space-between'}>
                         <div className={'display-flex gap-0p5 align-items-center'}>
                             <Button
-                                align={'space-between'}
                                 icon={FaMinus}
                                 onClick={() => setCtr(ctr - 1)}
                             />
                             <Counter>{ctr}</Counter>
                             <Button
-                                align={'space-between'}
                                 icon={FaPlus}
                                 onClick={() => setCtr(ctr + 1)}
                             />

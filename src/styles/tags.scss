@@ -43,12 +43,21 @@ code {
   font-size        : smaller;
 }
 
+textarea {
+  padding       : 0.5rem;
+  border-radius : 3px;
+  /* eslint-disable-next-line */
+  field-sizing  : content;
+  overflow-y: auto;
+}
+
+textarea,
 input {
   color : $inputTextColor;
   
   &:focus {
     outline          : none;
-    background-color : $backgroundColorSelected;
+    border-color : $textColor !important;
   }
   
   &.border-error {

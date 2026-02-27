@@ -23,6 +23,8 @@
 
 /* BACKGROUND- *********************************************/
 .background { background-color : $backgroundColor; }
+.background-light { background-color : #ededed; }
+.background-gray { background-color : gray; }
 /********************************************* BACKGROUND- */
 
 /* BORDER- *************************************************/
@@ -214,6 +216,8 @@
 .font-size-x-small { font-size : x-small; }
 .font-size-small { font-size : small; }
 .font-size-smaller { font-size : smaller; }
+.font-size-medium { font-size : medium; }
+.font-size-large { font-size : large; }
 .font-size-inherit { font-size : inherit; }
 .font-weight-bold { font-weight : bold; }
 .font-monospace { font-family: $codeFontFamily; }
@@ -237,8 +241,9 @@
 .align-self-center { align-self : center; }
 .align-self-end { align-self : flex-end; }
 .align-self-start { align-self : flex-start; }
-.align-items-center { align-items : center; }
 .align-content-center { align-content : center; }
+.align-items-top { align-items : flex-start; }
+.align-items-center { align-items : center; }
 .align-items-end { align-items : flex-end }
 /*************************************************** ALIGN- */
 
@@ -269,6 +274,11 @@
 .flex-wrap-nowrap { flex-wrap : nowrap; }
 /*************************************************** FLEX- */
 
+/* OVERFLOW- ***********************************************/
+.overflow-hidden { overflow : hidden; }
+.overflow-auto { overflow : auto; }
+.overflow-clip { overflow : clip; }
+/*********************************************** OVERFLOW- */
 .link {
   @extend link;
 }
