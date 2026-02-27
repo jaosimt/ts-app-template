@@ -1,6 +1,6 @@
-@import '../../../styles/variables';
-@import '../../../styles/mixins';
-@import '../../../styles/common';
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+@import "../../../styles/common";
 
 .btn-icon,
 button,
@@ -31,11 +31,20 @@ button,
     align-items     : center;
     justify-content : center;
     padding          : 0.35rem 0.42rem;
-    background-color : $buttonPrimaryColor;
-    color            : $buttonPrimaryTextColor;
-    border-color     : $buttonPrimaryBorderColor;
     min-width  : 32px;
     min-height : 32px;
+    
+    &.default {
+      background-color : $buttonDefaultColor;
+      border-color     : $buttonDefaultBorderColor;
+      color            : $buttonDefaultTextColor;
+    }
+    
+    &:not(.default) {
+      background-color : $buttonPrimaryColor;
+      border-color     : $buttonPrimaryBorderColor;
+      color            : $buttonPrimaryTextColor;
+    }
     
     &.no-padding {
       padding         : 0;
@@ -43,13 +52,19 @@ button,
   }
   
   &:hover {
-    &:not(.btn-icon) {
-      background-color : $buttonPrimaryHoverColor;
-    }
-    
     &.btn-icon {
       color            : $buttonPrimaryHoverColor;
       background-color : $buttonPrimaryTextColor;
+    }
+    
+    &:not(.btn-icon) {
+      &.default {
+        background-color : $buttonDefaultHoverColor
+      }
+      
+      &:not(.default) {
+        background-color : $buttonPrimaryHoverColor;
+      }
     }
     
     &:active { opacity : 0.3; }
@@ -58,7 +73,15 @@ button,
   &[disabled],
   &.disabled {
     pointer-events : none !important;
-    color          : $buttonPrimaryDisabledTextColor;
     opacity        : 0.3;
+    
+    &.default {
+      border-color: $buttonDefaultDisabledTextColor;
+      color      : $buttonDefaultDisabledTextColor;;
+    }
+    
+    &:not(.default) {
+      border-color   : $buttonPrimaryDisabledTextColor;
+    }
   }
 }

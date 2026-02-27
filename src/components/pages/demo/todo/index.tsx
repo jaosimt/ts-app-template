@@ -195,7 +195,7 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
                     </div>
                     <div className="display-flex gap-1 mt-0p5 justify-content-right">
                         <Button icon={MdDeleteForever} onClick={() => deleteTodo(deletingToDo)}>Continue</Button>
-                        <Button icon={VscDiscard} onClick={() => setDeletingToDo(null)}>Cancel</Button>
+                        <Button className={'default'} icon={VscDiscard} onClick={() => setDeletingToDo(null)}>Cancel</Button>
                     </div>
                 </Modal>
             }
