@@ -78,11 +78,6 @@ const ComponentSpecs: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState<string>(localStorage.getItem('rshTheme') || 'nightOwl');
     const [selectedTab, setSelectedTab] = useState<string>(localStorage.getItem('specsSelectedTab') || 'plain');
 
-    const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        setSelectedTheme(event.target.value);
-        localStorage.setItem('rshTheme', event.target.value);
-    };
-
     const tabData: TabItemType[] = [
         {
             name: 'Box',
@@ -100,10 +95,15 @@ const ComponentSpecs: FC = () => {
             name: 'Tab',
             content: <TabSpecs selectedTheme={selectedTheme}/>
         }, {
-            name: 'WindowPortal Component',
+            name: 'WindowPortal',
             content: <PortalWindowSpecs selectedTheme={selectedTheme}/>
         }
     ];
+
+    const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        setSelectedTheme(event.target.value);
+        localStorage.setItem('rshTheme', event.target.value);
+    };
 
     return <div data-component={'home'} className={'width-100p'}>
         <div className={'display-flex justify-content-space-between align-items-end background position-sticky'} style={{top: '50px'}}>
@@ -119,10 +119,14 @@ const ComponentSpecs: FC = () => {
                 </select>
             </div>
         </div>
-        <Tab activeTab={selectedTab} data={tabData} type={selectedTab as any} onTabChange={(selected: string) => {
-            setSelectedTab(selected);
-            localStorage.setItem('specsSelectedTab', selected);
-        }}/>
+        <Tab
+            activeTab={selectedTab}
+            data={tabData}
+            onTabChange={(selected: string) => {
+                setSelectedTab(selected);
+                localStorage.setItem('specsSelectedTab', selected);
+            }}
+        />
     </div>
 };
 

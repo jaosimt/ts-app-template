@@ -13,7 +13,7 @@ const Demo: FC = () => {
                 <NavLink to={'/demo/button'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Button</NavLink>
                 <NavLink to={'/demo/login'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>InputField</NavLink>
                 <NavLink to={'/demo/modal'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Modal</NavLink>
-                <NavLink to={'/demo/tab'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Tabs</NavLink>
+                <NavLink to={'/demo/tab'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Tab</NavLink>
                 <NavLink to={'/demo/windowportal'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>WindowPortal</NavLink>
             </nav>
             <div className={'p-1p5 border-radius-0p3 position-relative'} style={{width: 'calc(100% - 150px', backgroundColor: 'whitesmoke'}}>

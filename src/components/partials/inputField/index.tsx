@@ -79,7 +79,7 @@ const InputField: FC<InputFieldProps> = (props) => {
             </label>
             <div className={'position-relative display-flex'}>
                 <input
-                    style={{width: parseCSSUnit(String(width))}}
+                    style={{width: width && parseCSSUnit(width)}}
                     type={type || 'text'}
                     min={min}
                     max={max}

@@ -184,10 +184,10 @@ const Box: FC<BoxProps> = (props) => {
         $backgroundColor={backgroundColor}
         $border={border && border !== 'label-only' ? '1px' : 0}
         $borderColor={borderColor}
-        $borderRadius={parseCSSUnit(String(borderRadius))}
+        $borderRadius={parseCSSUnit(borderRadius)}
         $marginTop={label && !tight ? '0.5rem' : 0}
         $padding={tight ? 0 : '0.5rem'}
-        $width={width && parseCSSUnit(String(width))}
+        $width={width && parseCSSUnit(width)}
     >
         {label && <Label
             ref={labelRef}

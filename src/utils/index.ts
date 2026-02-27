@@ -1,5 +1,5 @@
 import { ColorTranslator } from 'colortranslator';
-import { SubmitEvent } from 'react';
+import { ComponentType, lazy, SubmitEvent } from 'react';
 import { CSSUnit, HSLString, RGBString } from '../types';
 
 export const isString = (str: unknown, validateNotEmpty: boolean = false): str is string =>
@@ -130,8 +130,8 @@ export function ProperCase(input: string): string {
         .join(" ");
 }
 
-export function parseCSSUnit(cssUnit: string): CSSUnit {
-    return cssUnit.match(/\d$/) ? `${Math.ceil(parseFloat(cssUnit))}px` : cssUnit as CSSUnit;
+export function parseCSSUnit(cssUnit: CSSUnit): CSSUnit {
+    return String(cssUnit).match(/\d$/) ? `${parseFloat(String(cssUnit))}px` : cssUnit as CSSUnit;
 }
 
 export const getFormData = (event: SubmitEvent<HTMLFormElement>): Record<string, any> => {
@@ -305,3 +305,33 @@ export const inStringNumberToWords = (str: string) => {
 
 export const getRandStr =
     (len: number, chars = 'poiuytrewqasdfghjklmnbvcxzMNBVCXZASDFGHJKLPOIUYTREWQ') => Array.from({length: len}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+
+/**
+ * Automatically retries a lazy load by refreshing the browser once.
+ * @param componentImport The dynamic import function (e.g., () => import('./MyComp'))
+ * @returns A promise that resolves to the component
+ */
+export function LazyRetry<T extends ComponentType<any>>(
+    componentImport: () => Promise<{ default: T }>
+) {
+    return lazy(() =>
+        componentImport().catch((error) => {
+            // Check if this specific session has already attempted a refresh
+            const hasRefreshed = window.sessionStorage.getItem('retry-lazy-refreshed') === 'true';
+
+            if (!hasRefreshed) {
+                // Mark as refreshed and reload the page
+                window.sessionStorage.setItem('retry-lazy-refreshed', 'true');
+                window.location.reload();
+                return { default: () => null } as unknown as { default: T };
+            }
+
+            // If already refreshed once and still failing, throw the error
+            throw error;
+        }).then((component) => {
+            // If load succeeds (either first try or after refresh), reset the flag
+            window.sessionStorage.setItem('retry-lazy-refreshed', 'false');
+            return component;
+        })
+    );
+}

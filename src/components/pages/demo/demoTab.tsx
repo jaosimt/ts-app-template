@@ -74,7 +74,7 @@ const TabsDemo: FC = () => {
             setTabType(e.currentTarget.value);
             localStorage.setItem('tabDemoSelectedTab', e.target.value);
         }} style={{ marginBottom: '10px' }}>
-            {['boxed', 'boxed-content', 'plain'].map((t) => (
+            {['boxed', 'boxed-content', 'boxed-tabs', 'plain'].map((t) => (
                 <option key={t} value={t}>
                     {t}
                 </option>

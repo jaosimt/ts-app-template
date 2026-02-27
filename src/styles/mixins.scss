@@ -8,6 +8,10 @@
   animation : invisible 10ms linear both;
 }
 
+@mixin spin($speed: 14s) {
+  animation: spin infinite $speed linear;
+}
+
 @mixin customScrollbar($color: $scrollbarColor, $background: $scrollbarBackgroundColor) {
   scrollbar-width : thin;
   scrollbar-color : $color $background;

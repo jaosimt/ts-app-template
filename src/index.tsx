@@ -1,18 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
-import App from './App';
+import Loading from './components/partials/loading';
 import reportWebVitals from './reportWebVitals';
 import './index.scss';
+import { LazyRetry } from './utils';
 
 const root = ReactDOM.createRoot(
     document.getElementById('react-ts-template') as HTMLElement
 );
 
+const LazyAppRetry = LazyRetry(() => import('./App'));
+
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <App/>
+            <React.Suspense fallback={<Loading topText={'Loading application'} bottomText={'Please wait...'} borderColor={'#61dafb'} borderWidth={3}/>}>
+                <LazyAppRetry/>
+            </React.Suspense>
         </BrowserRouter>
     </React.StrictMode>
 );

@@ -12,7 +12,7 @@ export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
     data: TabItemType[];
     minContentHeight?: CSSUnit;
     moveSelectedOnScroll?: boolean;
-    type?: 'boxed-content' | 'boxed' | 'plain';
+    type?: 'boxed' | 'boxed-content' | 'boxed-tabs' | 'plain';
     onTabChange?: Function,
     activeTab?: string;
     width?: CSSUnit;
@@ -212,7 +212,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         });
     }
 
-    return <div data-component={'tabs'} className={type} style={{width: width ? parseCSSUnit(String(width)) : 'inherit'}}>
+    return <div data-component={'tabs'} className={type} style={{width: width ? parseCSSUnit(width) : 'inherit'}}>
         <div className={'tab-items'}>
             <div className={classNames('scroll-btn-left', tabOverflow.left && 'visible')}>
                 <ReactIcon size={21} icon={BiSolidChevronLeftCircle} onClick={scrollLeftHandler}/>
@@ -249,8 +249,8 @@ const Tabs: FC<TabItemProps> = (props) => {
                 return <div
                     key={`tab-content-${itemName}`} data-name={itemName}
                     style={{
-                        padding: parseCSSUnit(String(contentPadding)),
-                        minHeight: parseCSSUnit(String(minContentHeight))
+                        padding: parseCSSUnit(contentPadding),
+                        minHeight: minContentHeight && parseCSSUnit(minContentHeight)
                     }}
                     className={classNames('tab-content', selected === itemName && 'active')}>
                     {t.content}

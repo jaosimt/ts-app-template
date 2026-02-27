@@ -1,8 +1,9 @@
 @import 'keyframes';
+@import 'mixins';
 
-.spin {
-  animation: spin infinite 20s linear;
-}
+.spin { @include spin(); }
+.spin-3 { @include spin(3s); }
+.spin-7 { @include spin(7s); }
 
 .transition-200 {
   transition : all 200ms ease-in-out;
