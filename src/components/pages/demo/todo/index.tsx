@@ -137,21 +137,24 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
     return (
         <div className={classNames(className, 'background-light', 'box-shadow', 'border-radius-0p3')} {...restProps}>
             <div className="m-1">
-                <h1 className={'mt-0'}>To be done...</h1>
-                <form className={'display-flex gap-0p5 justify-content-center align-items-center'}
-                      onSubmit={handleSubmit(onSubmit)}>
-                    <InputField
-                        type={'textarea'}
-                        width={'420px'}
-                        fieldRegister={register('text', {
-                            onChange: textChangeHandler
-                        })}
-                        setRef={(ref: HTMLTextAreaElement) => inputRef.current = ref}
-                    />
-                    <Button disabled={isEmpty(inputValue)} icon={IoIosSave} type="submit"/>
-                    <Button disabled={isEmpty(inputValue)} icon={FaXmark} onClick={cancelButtonHandler}/>
-                </form>
-                <ul className={'mb-0 pl-0'}>
+                <div className={'display-flex gap-0p5 justify-content-space-between align-items-top'}>
+                    <h1 className={'mt-0 mb-0p5'}>TO BE DONE</h1>
+                    <form className={'display-flex gap-0p5 justify-content-center align-items-center'}
+                          onSubmit={handleSubmit(onSubmit)}>
+                        <InputField
+                            type={'textarea'}
+                            width={'420px'}
+                            fieldRegister={register('text', {
+                                onChange: textChangeHandler
+                            })}
+                            setRef={(ref: HTMLTextAreaElement) => inputRef.current = ref}
+                        />
+                        <Button disabled={isEmpty(inputValue)} icon={IoIosSave} type="submit"/>
+                        <Button disabled={isEmpty(inputValue)} icon={FaXmark} onClick={cancelButtonHandler}/>
+                    </form>
+                </div>
+
+                <ul className={'m-0 pl-0'}>
                     {
                         todos.map((todo: ToDoItem, i: number) => (
                             <li key={todo.id}

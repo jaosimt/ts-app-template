@@ -2,7 +2,7 @@ import { FC, HTMLAttributes, memo, ReactNode, RefObject, useEffect, useRef, useS
 import { BiSolidChevronLeftCircle, BiSolidChevronRightCircle } from 'react-icons/bi';
 import { useResizeObserver } from 'usehooks-ts';
 import { CSSColors, CSSUnit } from '../../../types';
-import { classNames, inStringNumberToWords, parseCSSUnit, Round, snakeCase } from '../../../utils';
+import { classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase } from '../../../utils';
 import ReactIcon from '../../partials';
 import './styles.scss';
 
@@ -14,8 +14,9 @@ export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
     moveSelectedOnScroll?: boolean;
     type?: 'boxed' | 'boxed-content' | 'boxed-tabs' | 'plain';
     onTabChange?: Function,
-    activeTab?: string;
     width?: CSSUnit;
+    rememberActiveTab?: boolean;
+    id?: string;
 }
 
 export type TabItemType = {
@@ -41,7 +42,8 @@ const Tabs: FC<TabItemProps> = (props) => {
         activeItemColor = 'magenta',
         minContentHeight,
         onTabChange,
-        activeTab,
+        rememberActiveTab,
+        id,
         width
     } = props;
 
@@ -52,7 +54,26 @@ const Tabs: FC<TabItemProps> = (props) => {
         left: false,
         right: false
     });
-    const [selected, setSelected] = useState(activeTab || snakeCase(inStringNumberToWords(data[0].name), '-'));
+
+    const [selected, setSelected] = useState<string>(() => {
+        if (isString(id, true) && rememberActiveTab) {
+            const saved = getStoredSelection();
+            console.log('data:', data);
+            console.log('saved:', saved);
+            const savedSelection = saved.filter((s:any) => s.id === id)[0];
+            console.log('savedSelection:', savedSelection);
+            const thisSelection = data.filter((d:TabItemType) => {
+                const name = snakeCase(inStringNumberToWords(d.name), '-')
+                console.log('name:', name)
+                return name === savedSelection.name
+            });
+            console.log('thisSelection:', thisSelection);
+
+            if (thisSelection.length) return savedSelection.name;
+        }
+        return snakeCase(inStringNumberToWords(data[0].name), '-')
+    });
+
     const [hoveredItem, setHoveredItem] = useState('');
 
     const getTabItemsPos = () => {
@@ -111,6 +132,11 @@ const Tabs: FC<TabItemProps> = (props) => {
         }
 
         onTabChange && onTabChange(selected);
+
+        if (isString(id, true) && rememberActiveTab) {
+            const saved = getStoredSelection().filter((s: any) => s.id !== id);
+            localStorage.setItem('tabS', JSON.stringify([...saved, {id, name: selected}]));
+        }
 
         // eslint-disable-next-line
     }, [selected]);
@@ -195,6 +221,8 @@ const Tabs: FC<TabItemProps> = (props) => {
 
     const tabItemClickHandler = (e: any) => {
         const {dataset: {name}} = e.currentTarget;
+        // checkVisibility is used to limit checking whether the clicked tab item is fully visible!
+        // otherwise, the selected partially shown tab item will be automatically scrolled
         localStorage.setItem('checkVisibility', 'true');
         setSelected(name);
     };
@@ -210,6 +238,11 @@ const Tabs: FC<TabItemProps> = (props) => {
             left: hasHidden('left', lefts),
             right: hasHidden('right', rights)
         });
+    }
+
+    function getStoredSelection() {
+        const saved = localStorage.getItem('tabS');
+        return saved ? JSON.parse(saved) : [];
     }
 
     return <div data-component={'tabs'} className={type} style={{width: width ? parseCSSUnit(width) : 'inherit'}}>

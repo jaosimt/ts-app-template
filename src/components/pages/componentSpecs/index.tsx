@@ -76,7 +76,6 @@ export const themes: Record<string, Theme> = {
 
 const ComponentSpecs: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState<string>(localStorage.getItem('rshTheme') || 'nightOwl');
-    const [selectedTab, setSelectedTab] = useState<string>(localStorage.getItem('specsSelectedTab') || 'plain');
 
     const tabData: TabItemType[] = [
         {
@@ -119,14 +118,7 @@ const ComponentSpecs: FC = () => {
                 </select>
             </div>
         </div>
-        <Tab
-            activeTab={selectedTab}
-            data={tabData}
-            onTabChange={(selected: string) => {
-                setSelectedTab(selected);
-                localStorage.setItem('specsSelectedTab', selected);
-            }}
-        />
+        <Tab id={'component-specs'} rememberActiveTab={true} data={tabData}/>
     </div>
 };
 
