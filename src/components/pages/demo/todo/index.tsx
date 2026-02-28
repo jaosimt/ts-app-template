@@ -135,7 +135,7 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
     const inputValue = getValues('text');
 
     return (
-        <div className={classNames(className, 'background-light', 'box-shadow', 'border-radius-0p3')} {...restProps}>
+        <div className={classNames(className, 'background-light', 'box-shadow', 'border-radius-0p3', 'p-0p5')} {...restProps}>
             <div className="m-1">
                 <div className={'display-flex gap-0p5 justify-content-space-between align-items-top'}>
                     <h1 className={'mt-0 mb-0p5'}>TO BE DONE</h1>

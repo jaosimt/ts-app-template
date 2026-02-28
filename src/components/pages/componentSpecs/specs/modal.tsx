@@ -68,7 +68,7 @@ const ModalComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
             name: 'onClose',
             types: 'Function',
             values: 'e.g. () => alert("Hello, callback!")',
-            description: [<div className={'flex-direction-column'}>
+            description: [<div className={'display-flex flex-direction-column'}>
                 <span>Attaches a callback to be called when the modal is closed.</span>{' '}
                 <span>This method takes no arguments and is only intended for whatever cleanup one might need!{' '}
                     <b className={'link'} onClick={() => {

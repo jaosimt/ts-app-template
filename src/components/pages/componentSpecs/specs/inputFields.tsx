@@ -82,7 +82,7 @@ const inputFieldData: PropsListProps[] = [
         values: CssColors,
         description: ['Sets the color of the label']
     }, {
-        name: 'labelWith',
+        name: 'labelWidth',
         // eslint-disable-next-line
         types: 'number|`${number}${string}`',
         values: `e.g. 70|'70px'`,

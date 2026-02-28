@@ -107,7 +107,7 @@ export const generateAnalogousPalette = (rgb: {
     const palette: HSLString[] = [];
 
     for (let i = 0; i < count; i++) {
-        // Shift hue by 30 degrees for each step
+        // Shift hue by n degrees for each step
         const newHue = (h + (i * stepShift)) % 360;
         palette.push(`hsl(${Math.round(newHue)},${Math.round(s)}%,${Math.round(l)}%)`);
     }
@@ -334,4 +334,62 @@ export function LazyRetry<T extends ComponentType<any>>(
             return component;
         })
     );
+}
+
+/**
+ * Converts an HSL color value to RGB.
+ * Assumes H is in the range [0, 360], S and L are in the range [0, 100].
+ * @param h Hue
+ * @param s Saturation
+ * @param l Lightness
+ * @returns An array [r, g, b] where R, G, B are in the range [0, 255].
+ */
+export const hslToRgb = (h: number, s: number, l: number): [number, number, number] => {
+    h /= 360;
+    s /= 100;
+    l /= 100;
+    let r: number, g: number, b: number;
+
+    if (s === 0) {
+        r = g = b = l; // Achromatic
+    } else {
+        const hue2rgb = (p: number, q: number, t: number) => {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 1 / 2) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+        };
+
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1 / 3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1 / 3);
+    }
+
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+export const hslToHex = (hsl: HSLString): string => {
+    const match = hsl.match(/^hsl\((\d+), *(\d+)%, *(\d+)%\)$/);
+    if (match && match?.length < 4) return hsl;
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_, h, s, l] = match as [HSLString, `${number}`, `${number}`, `${number}`];
+    const sNormalized = parseFloat(s) / 100;
+    const lNormalized = parseFloat(l) / 100;
+
+    const a = sNormalized * Math.min(lNormalized, 1 - lNormalized);
+    const f = (n: number) => {
+        const k = (n + parseFloat(h) / 30) % 12;
+        const color = lNormalized - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        // Convert to Hex and prefix with "0" if required
+        return Math.round(color * 255)
+            .toString(16)
+            .padStart(2, '0');
+    };
+
+    return `#${f(0)}${f(8)}${f(4)}`;
 }

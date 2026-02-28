@@ -5,6 +5,7 @@ import ComponentSpecs from '../components/pages/componentSpecs';
 import Demo from '../components/pages/demo';
 import DemoBox from '../components/pages/demo/demoBox';
 import DemoButton from '../components/pages/demo/demoButton';
+import DemoInputField from '../components/pages/demo/demoInputField';
 import ModalDemo from '../components/pages/demo/demoModal';
 import TabsDemo from '../components/pages/demo/demoTab';
 import WindowPortalDemo from '../components/pages/demo/demoWindowPortal';
@@ -20,10 +21,11 @@ const ContentRouter = () => {
                 <Route index element={<Navigate to="/demo/box" replace />} />
                 <Route path="/demo/box" element={<DemoBox/>}/>
                 <Route path="/demo/button" element={<DemoButton/>}/>
+                <Route path="/demo/input-field" element={<DemoInputField/>}/>
                 <Route path="/demo/login" element={<Login/>}/>
                 <Route path="/demo/modal" element={<ModalDemo/>}/>
                 <Route path="/demo/tab" element={<TabsDemo/>}/>
-                <Route path="/demo/windowportal" element={<WindowPortalDemo/>}/>
+                <Route path="/demo/window-portal" element={<WindowPortalDemo/>}/>
             </Route>
             <Route path="*" element={<NotFound/>}/>
         </Routes>

@@ -1,77 +1,18 @@
-import { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { FC, useEffect, useState } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { SlReload, SlScreenDesktop } from 'react-icons/sl';
 import styled from 'styled-components';
-import { RGBString } from '../../../types';
-import { classNames, generateAnalogousPalette } from '../../../utils';
-import { paletteValidation } from '../../../validations';
+import { classNames } from '../../../utils';
 import Box, { LabelPositionType } from '../../partials/box';
 import Button from '../../partials/button';
-import InputField from '../../partials/inputField';
 import Modal from '../../partials/modal';
 import WindowPortal from '../windowPortal';
 
-interface PaletteProps extends HTMLAttributes<HTMLInputElement> {
-    red: number;
-    green: number;
-    blue: number;
-    size: number;
-    stepShift: number;
-}
-
 const ModalDemo: FC = () => {
-    const {
-        register,
-        formState: {errors}
-    } = useForm<PaletteProps>(
-        {
-            shouldUseNativeValidation: true,
-            resolver: zodResolver(paletteValidation),
-            mode: 'onChange'
-        }
-    );
-
-    const timeoutRef = useRef<any>(0)
-    const inputRefs = useRef<Record<string, HTMLElement>>({});
-
     const [boxLabelPosition, setBoxLabelPosition] = useState<LabelPositionType>('top-left')
     const [showModal, setShowModal] = useState(false);
     const [showPortal, setShowPortal] = useState(false);
     const [ctr, setCtr] = useState(0);
-    const [paletteProps, setPaletteProps] = useState({
-        red: 150, //0, //170,
-        green: 200, //0, //160,
-        blue: 255, //255,
-        size: 42, //14,
-        stepShift: 21 //7 //26
-    });
-    const [palette, setPalette] = useState<any>(generateAnalogousPalette({
-        r: paletteProps.red,
-        g: paletteProps.green,
-        b: paletteProps.blue
-    }, paletteProps.size, paletteProps.stepShift));
-
-    const paletteChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        const {name, value, min, max} = e.target as HTMLInputElement;
-        if (!value) return;
-
-        if (min && max && (parseFloat(value) >= parseFloat(min) && parseFloat(value) <= parseFloat(max))) {
-            setPaletteProps({...paletteProps, [e.target.name]: parseInt(e.target.value)});
-        }
-
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => inputRefs.current[name]?.focus(), 100);
-    };
-
-    useEffect(() => {
-        setPalette(generateAnalogousPalette({
-            r: paletteProps.red,
-            g: paletteProps.green,
-            b: paletteProps.blue
-        }, paletteProps.size, paletteProps.stepShift))
-    }, [paletteProps]);
 
     useEffect(() => {
         const labelPositions = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'];
@@ -148,7 +89,7 @@ const ModalDemo: FC = () => {
                 onClose={() => setShowPortal(false)}
             >
                 <div className={'p-2'}>
-                    <h1 className={'color-red flex-direction-column align-items-center'}>Hello ctr <Counter>{ctr}</Counter> viewed in new window!</h1>
+                    <h1 className={'color-red display-flex flex-direction-column align-items-center'}>Hello ctr <Counter>{ctr}</Counter> viewed in new window!</h1>
                 </div>
             </WindowPortal>
         }
@@ -162,6 +103,7 @@ const ModalDemo: FC = () => {
                 labelPosition={boxLabelPosition}
                 labelColor={'#ff0000'}
                 className={classNames(
+                    'display-flex',
                     'flex-direction-column',
                     'gap-0p5',
                     'align-items-center',
@@ -206,118 +148,6 @@ const ModalDemo: FC = () => {
                         onClick={() => setCtr(0)}
                     />
                 </div>
-            </Box>
-
-            <Box
-                width={333}
-                borderRadius={'4px'}
-                label={'Analogous Palette'}
-                labelPosition={boxLabelPosition}
-                className={classNames(
-                    'display-flex',
-                    'gap-0p5',
-                    'flex-direction-column',
-                    'align-items-center',
-                    'justify-content-center')}
-            >
-                <div className={'display-flex gap-0p1 flex-wrap'}>
-                    {palette.map((color: RGBString, index: number) => <span
-                        key={index} className={'color-box transition-200'}
-                        style={{
-                            backgroundColor: color,
-                            width: '21px',
-                            height: '21px'
-                        }}
-                    />)}
-                </div>
-            </Box>
-
-            <Box
-                width={333}
-                borderRadius={'4px'}
-                backgroundColor={'yellow'}
-                label={'InputFields'}
-                labelColor={'#ff0000'}
-                labelPosition={boxLabelPosition}
-                labelBackgroundColor={'white'}
-            >
-                <form noValidate>
-                    <div className="display-flex flex-wrap gap-0p3-5">
-                        <InputField
-                            label={'Red:'}
-                            labelColor={'red'}
-                            min={0}
-                            max={255}
-                            type={'number'}
-                            fieldRegister={register('red', {
-                                valueAsNumber: true,
-                                value: paletteProps.red,
-                                onChange: paletteChangeHandler
-                            })}
-                            error={errors.red?.message}
-                            setRef={(ref: HTMLElement) => inputRefs.current.red = ref}
-                        />
-                        <InputField
-                            label={'Green:'}
-                            labelColor={'#008000'}
-                            min={0}
-                            max={255}
-                            type={'number'}
-                            fieldRegister={register('green', {
-                                valueAsNumber: true,
-                                value: paletteProps.green,
-                                onChange: paletteChangeHandler
-                            })}
-                            error={errors.green?.message}
-                            setRef={(ref: HTMLElement) => inputRefs.current.green = ref}
-                        />
-                        <InputField
-                            label={'Blue:'}
-                            labelColor={'#0000ff'}
-                            min={0}
-                            max={255}
-                            type={'number'}
-                            fieldRegister={register('blue', {
-                                valueAsNumber: true,
-                                value: paletteProps.blue,
-                                onChange: paletteChangeHandler
-                            })}
-                            error={errors.blue?.message}
-                            setRef={(ref: HTMLElement) => inputRefs.current.blue = ref}
-                        />
-                    </div>
-                    <div
-                        className="mt-0p3 display-flex flex-wrap gap-0p3-5"
-                    >
-                        <InputField
-                            label={'Size:'}
-                            type={'number'}
-                            width={`100px`}
-                            min={1}
-                            max={56}
-                            fieldRegister={register('size', {
-                                valueAsNumber: true,
-                                value: paletteProps.size,
-                                onChange: paletteChangeHandler
-                            })}
-                            error={errors.size?.message}
-                            setRef={(ref: HTMLElement) => inputRefs.current.size = ref}
-                        />
-                        <InputField
-                            label={'Shift %:'}
-                            min={0}
-                            max={360}
-                            type={'number'}
-                            fieldRegister={register('stepShift', {
-                                valueAsNumber: true,
-                                value: paletteProps.stepShift,
-                                onChange: paletteChangeHandler
-                            })}
-                            error={errors.stepShift?.message}
-                            setRef={(ref: HTMLElement) => inputRefs.current.stepShift = ref}
-                        />
-                    </div>
-                </form>
             </Box>
         </section>
     </div>;

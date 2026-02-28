@@ -18,7 +18,7 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTex
     label?: string;
     labelAlign?: 'left' | 'right' | 'center';
     labelColor?: CSSColors;
-    labelWith?: CSSUnit;
+    labelWidth?: CSSUnit | 'auto';
     max?: number;
     min?: number;
     placeHolder?: string;
@@ -26,6 +26,7 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTex
     type?: HTMLInputTypeAttribute;
     width?: CSSUnit;
     rows?: number;
+    showErrorTooltipOnCreate?: boolean;
 }
 
 const InputField: FC<InputFieldProps> = (props) => {
@@ -36,7 +37,7 @@ const InputField: FC<InputFieldProps> = (props) => {
         setRef,
         type,
         label,
-        labelWith = 'auto',
+        labelWidth = 'auto',
         labelAlign,
         placeHolder,
         min,
@@ -47,6 +48,7 @@ const InputField: FC<InputFieldProps> = (props) => {
         onKeyDown,
         rows,
         style,
+        showErrorTooltipOnCreate = true,
         ...restProps
     } = props;
 
@@ -75,7 +77,7 @@ const InputField: FC<InputFieldProps> = (props) => {
 
     return (
         <div data-component={'input-field'} className={'display-flex align-items-center'}>
-            <label style={{width: labelWith, justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
+            <label style={{width: labelWidth, justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
                    className={'display-flex align-items-center gap-0p5'}>
                 {icon && <ReactIcon icon={icon} className={'align-self-center'}/>}
                 {label && label}
@@ -124,6 +126,7 @@ const InputField: FC<InputFieldProps> = (props) => {
                     />
                 }
                 {error && <Tippy
+                    showOnCreate={showErrorTooltipOnCreate}
                     content={error}
                     animation={true}
                     theme={'error'}

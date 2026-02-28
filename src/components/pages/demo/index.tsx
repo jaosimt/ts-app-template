@@ -11,10 +11,10 @@ const Demo: FC = () => {
             <nav data-nav={'left'} className={'px-0p2 py-0p4'} style={{width: '150px', height: '100%'}}>
                 <NavLink to={'/demo/box'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Box</NavLink>
                 <NavLink to={'/demo/button'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Button</NavLink>
-                <NavLink to={'/demo/login'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>InputField</NavLink>
+                <NavLink to={'/demo/input-field'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>InputFields</NavLink>
                 <NavLink to={'/demo/modal'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Modal</NavLink>
                 <NavLink to={'/demo/tab'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Tab</NavLink>
-                <NavLink to={'/demo/windowportal'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>WindowPortal</NavLink>
+                <NavLink to={'/demo/window-portal'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>WindowPortal</NavLink>
             </nav>
             <div className={'p-1p5 border-radius-0p3 position-relative'} style={{width: 'calc(100% - 150px', backgroundColor: 'whitesmoke'}}>
                 {pathname === '/demo' && <UnderConstruction/>}

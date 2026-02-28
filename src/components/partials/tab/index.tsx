@@ -65,7 +65,7 @@ const Tabs: FC<TabItemProps> = (props) => {
             const thisSelection = data.filter((d:TabItemType) => {
                 const name = snakeCase(inStringNumberToWords(d.name), '-')
                 console.log('name:', name)
-                return name === savedSelection.name
+                return name === savedSelection?.name
             });
             console.log('thisSelection:', thisSelection);
 
