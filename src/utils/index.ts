@@ -319,7 +319,7 @@ export function LazyRetry<T extends ComponentType<any>>(
             // Check if this specific session has already attempted a refresh
             const hasRefreshed = window.sessionStorage.getItem('retry-lazy-refreshed') === 'true';
 
-            if (!hasRefreshed) {
+            if (!hasRefreshed && error.name === 'ChunkLoadError') {
                 // Mark as refreshed and reload the page
                 window.sessionStorage.setItem('retry-lazy-refreshed', 'true');
                 window.location.reload();
