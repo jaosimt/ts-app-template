@@ -8,12 +8,12 @@ $inactiveTabBackgroundColor : #f1f1f1;
 $inactiveTabBorderColor     : #c5c5c5;
 
 [data-component="tabs"] {
-  background-color : transparent;
-  border-radius    : $tabBorderRadius;
-  display          : grid;
-  overflow         : hidden;
-  width            : 100%;
-  grid-template-rows: 42px auto;
+  background-color   : transparent;
+  border-radius      : $tabBorderRadius;
+  display            : grid;
+  overflow           : hidden;
+  width              : 100%;
+  grid-template-rows : 42px auto;
   
   > .tab-items {
     @extend .disable-select;
@@ -49,6 +49,10 @@ $inactiveTabBorderColor     : #c5c5c5;
         border-radius    : 50%;
         background-color : $tabBackground;
         color            : white;
+      }
+      
+      &.visible {
+        opacity : 0.3;
       }
     }
     
@@ -90,15 +94,11 @@ $inactiveTabBorderColor     : #c5c5c5;
     &:hover {
       > .scroll-btn-left,
       > .scroll-btn-right {
-        cursor : pointer;
-        
         &.visible {
           opacity : 1;
           
-          &:hover {
-            &:active {
-              opacity : 0.3;
-            }
+          &:active {
+            opacity : 0.3;
           }
         }
       }
