@@ -1,5 +1,5 @@
 import { FC, HTMLAttributes, memo, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
-import { BiSolidChevronLeftCircle, BiSolidChevronRightCircle } from 'react-icons/bi';
+import { RxChevronLeft, RxChevronRight } from 'react-icons/rx';
 import { useResizeObserver } from 'usehooks-ts';
 import { CSSColors, CSSUnit } from '../../../types';
 import { classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase } from '../../../utils';
@@ -248,7 +248,7 @@ const Tabs: FC<TabItemProps> = (props) => {
     return <div data-component={'tabs'} className={type} style={{width: width ? parseCSSUnit(width) : 'inherit'}}>
         <div className={'tab-items'}>
             <div className={classNames('scroll-btn-left', tabOverflow.left && 'visible')}>
-                <ReactIcon size={21} icon={BiSolidChevronLeftCircle} onClick={scrollLeftHandler}/>
+                <ReactIcon size={21} icon={RxChevronLeft} onClick={scrollLeftHandler}/>
             </div>
             <div className={'tab-items-wrapper'} ref={tabItemsWrapper}>
                 {
@@ -273,7 +273,7 @@ const Tabs: FC<TabItemProps> = (props) => {
                 }
             </div>
             <div className={classNames('scroll-btn-right', tabOverflow.right && 'visible')}>
-                <ReactIcon size={21} icon={BiSolidChevronRightCircle} onClick={scrollRightHandler}/>
+                <ReactIcon size={21} icon={RxChevronRight} onClick={scrollRightHandler}/>
             </div>
         </div>
         {

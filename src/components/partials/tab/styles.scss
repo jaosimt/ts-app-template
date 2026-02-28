@@ -1,75 +1,66 @@
-@use '../../../styles/common';
+@use "../../../styles/common";
 
-$tabBorderRadius       : 0.2rem;
+$tabBorderRadius            : 0.2rem;
 $tabBackground              : #963999;
-$activeBackgroundColor : #ffffff;
-$activeTabItemColor    : magenta;
+$activeBackgroundColor      : #ffffff;
+$activeTabItemColor         : magenta;
 $inactiveTabBackgroundColor : #f1f1f1;
 $inactiveTabBorderColor     : #c5c5c5;
 
 [data-component="tabs"] {
   background-color : transparent;
   border-radius    : $tabBorderRadius;
-  display       : grid;
-  overflow      : hidden;
-  width         : 100%;
+  display          : grid;
+  overflow         : hidden;
+  width            : 100%;
   grid-template-rows: 42px auto;
   
   > .tab-items {
     @extend .disable-select;
     
     align-items             : center;
-    border-width     : 1px;
-    border-style     : solid;
-    background-color : transparent;
-    border-color     : transparent;
-    border-bottom    : none;
+    border-width            : 1px;
+    border-style            : solid;
+    background-color        : transparent;
+    border-color            : transparent;
+    border-bottom           : none;
     border-top-left-radius  : $tabBorderRadius;
     border-top-right-radius : $tabBorderRadius;
     display                 : grid;
     font-weight             : bold;
-    grid-template-columns   : 7px auto 7px;
+    grid-template-columns   : 21px auto 21px;
     
     > .scroll-btn-left,
     > .scroll-btn-right {
-      align-items : center;
-      background-color : transparent;
-      cursor      : pointer;
+      align-items      : center;
+      cursor           : pointer;
       display          : flex;
-      height           : 100%;
-      opacity     : 0;
-      transition  : all 200ms ease-in-out;
-      z-index     : 2;
-      border-radius: 0;
-      
-      &.scroll-btn-left {
-        justify-content : flex-end;
-        
-        > svg { margin-right : -16px; }
-      }
-      
-      &.scroll-btn-right {
-        justify-content : flex-start;
-        
-        > svg { margin-left : -16px; }
-      }
+      opacity          : 0;
+      transition       : all 200ms ease-in-out;
+      z-index          : 2;
+      justify-content  : center;
+      height           : inherit;
+      padding          : 0.4rem 0;
+      margin-top       : 3px;
+      border-bottom    : none;
+      background-color : transparent;
       
       > svg {
         border-radius    : 50%;
-        position         : absolute;
         background-color : $tabBackground;
         color            : white;
       }
     }
     
     > .tab-items-wrapper {
-      display     : flex;
-      align-items : flex-end;
+      display       : flex;
+      height        : 100%;
+      align-items   : flex-end;
       border-bottom : none;
-      overflow    : hidden;
+      overflow      : hidden;
       padding       : 0.3rem 0 0 0;
-      white-space : nowrap;
-      z-index     : 1;
+      white-space   : nowrap;
+      z-index       : 1;
       
       > .tab-item {
         border                  : 1px solid transparent;
@@ -78,8 +69,8 @@ $inactiveTabBorderColor     : #c5c5c5;
         cursor                  : pointer;
         display                 : inline-flex;
         padding                 : 0.5rem 0.7rem;
-        transition : color, background-color, opacity, width, height, padding 100ms ease-in-out;
-        white-space: nowrap;
+        transition              : color, background-color, opacity, width, height, padding 100ms ease-in-out;
+        white-space             : nowrap;
         
         & ~ .tab-item { border-left-width : 0; }
         
@@ -115,12 +106,12 @@ $inactiveTabBorderColor     : #c5c5c5;
   }
   
   > .tab-content {
-    margin-top : 0;
+    margin-top       : -1px;
     background-color : $activeBackgroundColor;
     border           : 1px solid $tabBackground;
     border-radius    : $tabBorderRadius;
     position         : relative;
-    z-index    : 0;
+    z-index          : 0;
     
     > * { animation : fadein 300ms ease-in; }
     
@@ -130,6 +121,7 @@ $inactiveTabBorderColor     : #c5c5c5;
     }
     
     > *:first-child { margin-top : 0; }
+    
     > *:last-child { margin-bottom : 0; }
   }
   
@@ -155,44 +147,19 @@ $inactiveTabBorderColor     : #c5c5c5;
           }
         }
       }
-    }
-    
-    .tab-content {
-      margin-top              : -1px;
-      border-top-left-radius  : 0;
-      border-top-right-radius : 0;
-    }
-  }
-  
-  &.boxed-tabs {
-    > .tab-items {
-      background-color : transparent;
-      border-color     : transparent;
       
-      > .tab-items-wrapper {
-        > .tab-item {
-          &.active {
-            background-color    : $activeBackgroundColor;
-            border-color        : $tabBackground;
-            border-bottom-color : $activeBackgroundColor;
-            border-bottom-width : 2px;
-          }
-          
-          &:not(.active) {
-            border-color        : $inactiveTabBorderColor;
-            border-bottom-color : $tabBackground;
-          }
+      > .scroll-btn-left,
+      > .scroll-btn-right {
+        > svg {
+          background-color : white;
+          color            : $tabBackground;
         }
       }
     }
     
-    > .tab-content {
-      margin-top          : 0;
-      border-radius       : 0;
-      border-left-color   : transparent;
-      border-right-color  : transparent;
-      border-bottom-color : transparent;
-      background          : $activeBackgroundColor;
+    .tab-content {
+      border-top-left-radius  : 0;
+      border-top-right-radius : 0;
     }
   }
   
@@ -221,8 +188,38 @@ $inactiveTabBorderColor     : #c5c5c5;
     
     > .tab-content {
       border-radius : $tabBorderRadius;
-      margin-top    : 0;
       background    : $activeBackgroundColor;
+    }
+  }
+  
+  &.boxed-tabs {
+    > .tab-items {
+      background-color : transparent;
+      border-color     : transparent;
+      
+      > .tab-items-wrapper {
+        > .tab-item {
+          &.active {
+            background-color    : $activeBackgroundColor;
+            border-color        : $tabBackground;
+            border-bottom-color : $activeBackgroundColor;
+            border-bottom-width : 2px;
+          }
+          
+          &:not(.active) {
+            border-color        : $inactiveTabBorderColor;
+            border-bottom-color : $tabBackground;
+          }
+        }
+      }
+    }
+    
+    > .tab-content {
+      border-radius       : 0;
+      border-left-color   : transparent;
+      border-right-color  : transparent;
+      border-bottom-color : transparent;
+      background          : $activeBackgroundColor;
     }
   }
   
@@ -240,12 +237,11 @@ $inactiveTabBorderColor     : #c5c5c5;
     }
     
     > .tab-content {
-      margin-top       : 0;
       border-radius       : 0;
       border-left-color   : transparent;
       border-right-color  : transparent;
       border-bottom-color : transparent;
-      background-color : inherit;
+      background-color    : inherit;
     }
   }
 }

@@ -1,6 +1,6 @@
-@import '../../../styles/variables';
-@import '../../../styles/mixins';
-@import '../../../styles/common';
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+@import "../../../styles/common";
 
 [data-component="input-field"] {
   display : flex;
@@ -9,15 +9,14 @@
   > label {
     display     : inline-flex;
     align-items : center;
-    
-    min-width : fit-content;
+    min-width   : fit-content;
   }
   
   > div {
     > input {
-      padding : 0.5rem;
-      border-radius: 0.3rem;
-      border : 1px solid $borderColor;
+      padding       : 0.5rem;
+      border        : 1px solid $borderColor;
+      border-radius : 0.3rem;
       
       &[type="text"] {}
       
