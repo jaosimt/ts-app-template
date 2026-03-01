@@ -18,7 +18,7 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTex
     label?: string;
     labelAlign?: 'left' | 'right' | 'center';
     labelColor?: CSSColors;
-    labelWidth?: CSSUnit | 'auto';
+    labelWidth?: CSSUnit;
     max?: number;
     min?: number;
     placeHolder?: string;
@@ -77,7 +77,7 @@ const InputField: FC<InputFieldProps> = (props) => {
 
     return (
         <div data-component={'input-field'} className={'display-flex align-items-center'}>
-            <label style={{width: labelWidth, justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
+            <label style={{width: parseCSSUnit(labelWidth as CSSUnit), justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
                    className={'display-flex align-items-center gap-0p5'}>
                 {icon && <ReactIcon icon={icon} className={'align-self-center'}/>}
                 {label && label}

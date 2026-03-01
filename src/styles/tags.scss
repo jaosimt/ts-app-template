@@ -46,7 +46,6 @@ code {
 textarea {
   padding       : 0.5rem;
   border-radius : 3px;
-  /* eslint-disable-next-line */
   field-sizing  : content;
   overflow-y: auto;
 }
@@ -65,15 +64,15 @@ input {
   }
 }
 
-/* This method hides the arrows/tooltip in Chrome, Safari, and Edge: */
-input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-/* For Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
+///* This method hides the arrows/tooltip in Chrome, Safari, and Edge: */
+//input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+//  -webkit-appearance: none;
+//  margin: 0;
+//}
+///* For Firefox */
+//input[type=number] {
+//  -moz-appearance: textfield;
+//}
 
 ol,
 ul {

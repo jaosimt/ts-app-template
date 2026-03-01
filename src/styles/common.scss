@@ -6,6 +6,8 @@
 .text-align-center { text-align : center; }
 .text-align-right { text-align : right; }
 .text-align-justify { text-align : justify; }
+.text-shadow-white { text-shadow : 0 0 1px white; }
+.text-shadow-black { text-shadow : 0 0 1px black; }
 /**************************************************** TEXT */
 
 /* COLOR ***************************************************/
@@ -18,6 +20,7 @@
 .color-green { color : green; }
 .color-blue { color : blue; }
 .color-gray { color : gray; }
+.color-light-gray { color : lightgray; }
 .color-orange { color : orange; }
 /*************************************************** COLOR */
 
@@ -277,6 +280,7 @@
 .overflow-auto { overflow : auto; }
 .overflow-clip { overflow : clip; }
 /*********************************************** OVERFLOW- */
+
 .link {
   @extend link;
 }
