@@ -1,16 +1,21 @@
 import { IoIosConstruct } from 'react-icons/io';
 import styled from 'styled-components';
+import { classNames, parseCSSUnit } from '../../utils';
 import ReactIcon from '../partials';
 import '../../styles/variables.scss';
 
-const UC = styled.div`
+const UC = styled.div<{ $padding: number }>`
     border: 3px solid #61dafb;
-    padding: 3rem;
+    padding: ${props => `${props.$padding}px`};
     border-radius: 01rem;
+    display: inline-flex;
+    gap: 1rem;
 `;
-const UnderConstruction = () => <UC className={'translate absolute-center display-flex gap-2'}>
-    <ReactIcon className={'spin-21'} size={121} icon={IoIosConstruct}/>
-    <span style={{fontSize: '56px', fontFamily: 'courier new'}}
+const UnderConstruction = ({centered = true, fontSize = 56}: { centered?: boolean, fontSize?: number }) => <UC
+    $padding={fontSize / 2}
+    className={classNames(centered && 'translate absolute-center')}>
+    <ReactIcon className={'spin-21'} size={fontSize * 2.2} icon={IoIosConstruct}/>
+    <span style={{fontSize: parseCSSUnit(fontSize), fontFamily: 'courier new'}}
           className="monospace font-weight-bold">UNDER<br/>CONSTRUCTION</span>
 </UC>;
 
