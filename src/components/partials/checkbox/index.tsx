@@ -8,7 +8,7 @@ const CheckboxContainer = styled.div`
 
 const Icon = styled.svg`
     fill: none;
-    stroke: purple;
+    stroke: #fff;
     stroke-width: 2px;
 `;
 // noinspection CssUnknownProperty
@@ -32,7 +32,8 @@ const StyledCheckbox = styled.div<{
     width: 21px;
     height: 21px;
     border-radius: 4px;
-    border: 1px solid gainsboro;
+    border: 1px solid rgb(0, 123, 255);
+    background-color: ${props => props.checked ? 'rgba(0, 123, 255, 0.63)' : 'transparent'};
     transition: all 150ms;
     
     ${Icon} {
@@ -48,6 +49,12 @@ const Label = styled.label`
     
     & + * {
         margin-left: 0.5rem;
+    }
+
+    &:hover {
+        > ${CheckboxContainer} {
+            opacity: 0.7;   
+        }
     }
 `;
 
