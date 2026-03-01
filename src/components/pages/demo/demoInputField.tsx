@@ -5,7 +5,6 @@ import { IconType } from 'react-icons';
 import styled from 'styled-components';
 import { HSLString } from '../../../types';
 import { generateAnalogousPalette, hslToHex } from '../../../utils';
-import ReactIcon from '../../partials';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
 import InputField, { InputFieldProps } from '../../partials/inputField';
@@ -42,7 +41,7 @@ const paletteValidation = z.object({
     labelAlign: z.string().optional()
 })
 
-const icons = [{id: 'react', icon: DiReact}, {id: 'html', icon: DiHtml5}, {id: 'css', icon: DiCss3}, {
+const icons = [{id: 'react', icon: DiReact}, {id: 'html5', icon: DiHtml5}, {id: 'css3', icon: DiCss3}, {
     id: 'javascript',
     icon: DiJsBadge
 }, {id: 'typeScript', icon: SiTypescript}];
