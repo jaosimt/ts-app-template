@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import { FaCircleXmark } from 'react-icons/fa6';
 import { useKeyPress, useOutsideClick } from '../../../hooks';
 import { v4 as uuidv4 } from 'uuid';
-import { classNames } from '../../../utils';
+import { CSSUnit } from '../../../types';
+import { classNames, parseCSSUnit } from '../../../utils';
 import ReactIcon from '../index';
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
@@ -14,7 +15,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
     onClose?: Function
     showClose?: boolean;
     title?: string;
-    width?: string | number;
+    width?: CSSUnit;
 }
 
 const Modal: FC<ModalProps> = (props) => {
@@ -71,7 +72,7 @@ const Modal: FC<ModalProps> = (props) => {
 
     const modal = <div id={uid} className={classNames('modal-overlay', maxZIndex && 'max-z-index')}>
         <div ref={modalRef} data-component={'Modal'} data-escape-key={closeOnEscKey}
-             style={{width: width, opacity: show ? 1 : 0}}>
+             style={{width: parseCSSUnit(width as CSSUnit), opacity: show ? 1 : 0}}>
             {title && <div className={'header'}><span className={'title'}>{title}</span>{closeButton}</div>}
             {!title && closeButton}
             <div className={'content'}>
