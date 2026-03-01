@@ -57,17 +57,15 @@ const WindowPortalDemo: FC = () => {
                 'align-items-center',
                 'justify-content-center')}
         >
-            <div className={'display-flex gap-0p5 align-items-center mb-1'}>
+            <div className={'display-flex gap-0p5 align-items-center'}>
                 <span>Counter</span>
                 <div className={'display-flex gap-0p5 align-items-center'}>
                     <Button
-                        align={'space-between'}
                         icon={FaMinus}
                         onClick={() => setCtr(ctr - 1)}
                     />
                     <Counter>{ctr}</Counter>
                     <Button
-                        align={'space-between'}
                         icon={FaPlus}
                         onClick={() => setCtr(ctr + 1)}
                     />
@@ -90,6 +88,7 @@ const WindowPortalDemo: FC = () => {
                     <span className={'font-size-x-small'}>in second screen if available</span>
                 </div>
             </Button>
+            <b className={'font-size-x-small mt-0p5'}>Above counter will be rendered in the portal window</b>
         </Box>
     </div>;
 };
