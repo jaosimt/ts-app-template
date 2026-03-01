@@ -74,8 +74,8 @@ const inputFieldData: PropsListProps[] = [
     }, {
         name: 'labelAlign',
         types: 'string',
-        values: 'left|center|right',
-        description: ['Sets the label alignment']
+        values: 'left|center|right|space-between',
+        description: ['Sets the label alignment.', <span><b><i>space-between</i></b> is intended for label's with icon only!</span>]
     }, {
         name: 'labelColor',
         types: 'string',

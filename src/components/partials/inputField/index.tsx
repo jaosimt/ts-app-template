@@ -16,7 +16,7 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTex
     fieldRegister: UseFormRegisterReturn;
     icon?: IconType;
     label?: string;
-    labelAlign?: 'left' | 'right' | 'center';
+    labelAlign?: 'left' | 'right' | 'center' | 'space-between';
     labelColor?: CSSColors;
     labelWidth?: CSSUnit;
     max?: number;

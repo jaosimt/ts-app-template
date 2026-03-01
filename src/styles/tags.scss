@@ -26,7 +26,7 @@ select {
   &[disabled],
   &.disabled {
     pointer-events : none !important;
-    color          : $buttonPrimaryDisabledTextColor;
+    color          : rgb(172 172 172);
     opacity        : 0.3;
   }
 }
