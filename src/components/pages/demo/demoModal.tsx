@@ -45,7 +45,7 @@ const ModalDemo: FC = () => {
                 onClose={() => setShowModal(false)}
             >
                 <div className={'display-flex flex-direction-column gap-1'}>
-                    <h2 className={'m-0 color-magenta font-monospace flex-direction-column align-items-center'}>Hello ctr <Counter>{ctr}</Counter> viewed in modal!</h2>
+                    <h2 className={'display-flex m-0 color-magenta font-monospace flex-direction-column align-items-center'}>Hello ctr <Counter>{ctr}</Counter> viewed in modal!</h2>
                     <div>
                         <h4 className={'m-0'}>This modal can be close by one of the following ways:</h4>
                         <ul className={'m-0'} style={{listStyle: 'disc'}}>
