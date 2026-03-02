@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { IoIosSend } from 'react-icons/io';
+import { IoIosSave } from 'react-icons/io';
 import Box from '../../partials/box';
 import Button, { ButtonProps } from '../../partials/button';
 import Checkbox from '../../partials/checkbox';
@@ -34,7 +34,7 @@ const DemoButton: FC = () => {
                 <div className="display-flex gap-0p5 align-items-center">
                     <Checkbox labelWidth={95} label={'icon'} labelPosition={'left'} name={'disabled'}
                               checked={icon} onChange={(e: any) => setIcon(e.currentTarget.checked)}/>
-                    <span className={'font-monospace font-size-small color-light-gray'}>{`<IoIosSend/>`}</span>
+                    <span className={'font-monospace font-size-small color-light-gray'}>{`<IoIosSave/>`}</span>
                 </div>
                 <div className={'display-flex gap-0p3 align-items-center'}>
                     <span style={{width: '95px'}}>labelPosition</span>
@@ -53,16 +53,16 @@ const DemoButton: FC = () => {
         </Box>
         <Box>
             <Button
-                icon={icon ? IoIosSend : undefined}
+                icon={icon ? IoIosSave : undefined}
                 disabled={props.disabled || modal}
                 align={props.align}
                 width={props.width}
                 onClick={() => setModal(true)}
-            >Submit</Button>
+            >Save</Button>
         </Box>
         {
             modal && <Modal onClose={() => setModal(false)} closeOnEscKey={true} closeOnOutsideClick={true} showClose={true} title={'Hello, world!'}>
-                <h3 className={'m-0 color-orange'}>You clicked the submit button!</h3>
+                <h3 className={'m-0 color-orange'}>You clicked the save button!</h3>
             </Modal>
         }
     </div>;
