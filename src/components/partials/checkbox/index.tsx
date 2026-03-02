@@ -1,6 +1,17 @@
+import { FC, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { CSSUnit } from '../../../types';
 import { parseCSSUnit } from '../../../utils';
+
+export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{
+    name: string;
+    checked: boolean|undefined;
+    disabled?: boolean;
+    label?: string;
+    labelWidth?: CSSUnit;
+    className?: string;
+    labelPosition?: 'left' | 'right';
+}
 
 const CheckboxContainer = styled.div<{disabled: boolean}>`
     display: inline-flex;
@@ -60,20 +71,23 @@ const Label = styled.label<{disabled: boolean}>`
     }
 `;
 
-const Checkbox = ({disabled = false, label, labelWidth, name, className, checked, labelPosition, onChange, ...props}: {
-    labelWidth?: CSSUnit,
-    label?: string,
-    labelPosition?: 'left' | 'right',
-    name: string,
-    className?: string,
-    checked: boolean | undefined,
-    onChange?: any,
-    disabled?: boolean
-}) => (
-    <Label disabled={disabled}>
+const Checkbox: FC<CheckboxProps> = (props) => {
+    const {
+        disabled = false,
+        label,
+        labelWidth,
+        name,
+        className,
+        checked,
+        labelPosition,
+        onChange,
+        ...restProps
+    } = props;
+
+    return <Label disabled={disabled}>
         {labelPosition === 'left' && <span style={{width: parseCSSUnit(labelWidth as CSSUnit), marginRight: '0.3rem'}}>{label || name}</span>}
         <CheckboxContainer disabled={disabled} className={className}>
-            <HiddenCheckbox disabled={disabled} name={name} checked={checked} onChange={onChange} {...props} />
+            <HiddenCheckbox disabled={disabled} name={name} checked={checked} onChange={onChange} {...restProps} />
             <StyledCheckbox disabled={disabled} checked={checked}>
                 <Icon viewBox="0 0 24 24">
                     <polyline points="20 6 9 17 4 12"/>
@@ -82,6 +96,6 @@ const Checkbox = ({disabled = false, label, labelWidth, name, className, checked
         </CheckboxContainer>
         {labelPosition !== 'left' && <span style={{width: parseCSSUnit(labelWidth as CSSUnit), marginLeft: '0.3rem'}}>{label || name}</span>}
     </Label>
-);
+}
 
 export default Checkbox;
