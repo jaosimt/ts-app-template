@@ -2,10 +2,10 @@ import { ColorTranslator } from 'colortranslator';
 import { ComponentType, lazy, SubmitEvent } from 'react';
 import { CSSUnit, HSLString, RGBString } from '../types';
 
-export const isString = (str: unknown, validateNotEmpty: boolean = false): str is string =>
-    validateNotEmpty
-        ? typeof str === 'string' && str.trim() !== ''
-        : typeof str === 'string';
+export const isNull = (arg: any) => arg === null;
+export const isNullOrUndefined = (arg: any) => isNull(arg) || arg === undefined;
+
+export const isString = (str: unknown, validateNotEmpty: boolean = false) => typeof str !== 'string' ? false : (validateNotEmpty ? str.trim() !== '' : true);
 
 export const filterDuplicates = <T>(array: readonly T[]): T[] =>
     array.filter((item, index, ar) => ar.findIndex((target) => target === item) === index);
@@ -156,11 +156,9 @@ export const isNumber = (arg:any, matchType?:boolean) =>
             .replace(/,/g, '')
             ?.match(/^-*\d+(.\d+){0,1}$/) !== null;
 export const parseIfNumberIsString = (arg:string) => (isNumber(arg) ? +arg : arg);
-export const isNull = (arg: any) => arg === null;
 export const isBoolean = (arg: any) => typeof arg === 'boolean';
 export const isFunction = (arg: any) => typeof arg === 'function';
 export const isObject = (arg: any) => typeof arg === 'object' && !isNull(arg) && !Array.isArray(arg);
-export const isNullOrUndefined = (arg: any) => isNull(arg) || arg === undefined;
 export const isEmpty = (arg: any) => {
     if (isString(arg)) return arg.trim() === '';
     else if (isObject(arg)) {
