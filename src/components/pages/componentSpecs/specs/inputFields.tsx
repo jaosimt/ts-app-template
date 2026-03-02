@@ -118,6 +118,11 @@ const inputFieldData: PropsListProps[] = [
         types: 'number|`${number}${string}`',
         values: `e.g. 70|'70px'`,
         description: ['Sets the width of the input field']
+    }, {
+        name: 'disabled',
+        types: 'boolean',
+        values: '',
+        description: ['Specifies that an input field should be disabled']
     }
 ];
 
