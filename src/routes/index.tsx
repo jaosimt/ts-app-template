@@ -28,7 +28,7 @@ const ContentRouter = () => {
                 <Route path="/demo/input-field" element={<DemoInputField/>}/>
                 <Route path="/demo/login" element={<Login/>}/>
                 <Route path="/demo/modal" element={<ModalDemo/>}/>
-                <Route path="/demo/tab" element={<TabsDemo/>}/>
+                <Route path="/demo/tabs" element={<TabsDemo/>}/>
                 <Route path="/demo/window-portal" element={<WindowPortalDemo/>}/>
             </Route>
             <Route path="*" element={<NotFound/>}/>

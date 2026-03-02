@@ -55,7 +55,7 @@ const tabData: PropsListProps[] = [
         types: 'string',
         values: 'boxed-content|boxed|plain',
         description: [
-            <p className={'m-0'}>Set the type of <Link to={{ pathname: "/demo/tab"}}>&lt;Tab /&gt;</Link> to be rendered.</p>,
+            <p className={'m-0'}>Set the type of <Link to={{ pathname: "/demo/tabs"}}>&lt;Tab /&gt;</Link> to be rendered.</p>,
             <>
                 <ul className={'m-0'}>
                     <li><i>boxed</i> - Renders Tab with border and background colored tab items.</li>
@@ -89,7 +89,7 @@ const TabSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
-            onLabelClick={() => navigate('/demo/tab')}
+            onLabelClick={() => navigate('/demo/tabs')}
         >
             <SyntaxHighlighter
                 codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}

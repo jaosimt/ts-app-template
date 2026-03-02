@@ -93,13 +93,13 @@ const ComponentSpecs: FC = () => {
             name: 'InputField',
             content: <InputFieldsProps selectedTheme={selectedTheme}/>
         }, {
-            name: 'Loader',
+            name: 'Loading',
             content: <LoadingSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'Modal',
             content: <ModalSpecs selectedTheme={selectedTheme}/>
         }, {
-            name: 'Tab',
+            name: 'Tabs',
             content: <TabSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'WindowPortal',
