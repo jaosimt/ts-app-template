@@ -128,7 +128,7 @@ const Box: FC<BoxProps> = (props) => {
         backgroundColor,
         border = true,
         borderColor = '#ccc',
-        borderRadius = 0,
+        borderRadius = 7,
         boxClassName,
         children,
         className,
@@ -199,7 +199,7 @@ const Box: FC<BoxProps> = (props) => {
             $borderColor={borderColor}
             $borderRadius={titleBorderRadius}
             $color={labelColor}
-            $margin={tight ? border === 'label-only' ? '0.1rem' : 0 : '-0.9rem 0 0 0'}
+            $margin={tight ? border === 'label-only' ? '0.1rem' : '0.1rem' : '-0.9rem 0 0 0'}
             $fontSize={labelSize}
             $labelPosition={labelPosition}
             $labelWidth={labelWidth}
