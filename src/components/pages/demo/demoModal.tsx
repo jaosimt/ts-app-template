@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaRegWindowMaximize } from 'react-icons/fa6';
 import { isString } from '../../../utils';
@@ -22,16 +22,9 @@ const ModalDemo: FC = () => {
         width: 500
     });
 
-    useEffect(() => {
-        console.log(props);
-    }, [props]);
-
     const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, checked, type, value} = e.currentTarget;
-
         const newProps = {...props, [name]: type === 'checkbox' ? checked : value};
-
-        console.log('name:', name, ' checked:', checked, ' newProps:', newProps);
         setProps(newProps);
     };
 

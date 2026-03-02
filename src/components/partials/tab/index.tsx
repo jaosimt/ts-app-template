@@ -58,17 +58,11 @@ const Tabs: FC<TabItemProps> = (props) => {
     const [selected, setSelected] = useState<string>(() => {
         if (isString(id, true) && rememberActiveTab) {
             const saved = getStoredSelection();
-            console.log('data:', data);
-            console.log('saved:', saved);
             const savedSelection = saved.filter((s:any) => s.id === id)[0];
-            console.log('savedSelection:', savedSelection);
             const thisSelection = data.filter((d:TabItemType) => {
                 const name = snakeCase(inStringNumberToWords(d.name), '-')
-                console.log('name:', name)
                 return name === savedSelection?.name
             });
-            console.log('thisSelection:', thisSelection);
-
             if (thisSelection.length) return savedSelection.name;
         }
         return snakeCase(inStringNumberToWords(data[0].name), '-')

@@ -36,13 +36,8 @@ const DemoBox:FC = () => {
 
     useEffect(() => {
         setProps({...props, onLabelClick: onLabelClick ? () => alert('Hello, world!') : undefined});
-        console.log('onLabelClick:', onLabelClick);
         // eslint-disable-next-line
     }, [onLabelClick]);
-
-    useEffect(() => {
-        console.log('props:', props);
-    }, [props]);
 
     return <div data-component={'tab-demo'} className={'width-100p'}>
         <Box label={'Box Props'} boxClassName={'mb-1'}>
