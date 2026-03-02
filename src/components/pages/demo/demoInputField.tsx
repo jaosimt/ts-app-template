@@ -200,7 +200,7 @@ const DemoInputField: FC = () => {
                             </select>
                         </div>
                     </Box>
-                    <Box className={'display-flex gap-0p5'} label={'InputFields'} borderRadius={7} backgroundColor={'#fff'} labelBackgroundColor={'#fff'}>
+                    <Box boxClassName={'width-fit-content'} label={'InputFields'} borderRadius={7} backgroundColor={'#fff'} labelBackgroundColor={'#fff'}>
                         <form noValidate>
                             <GridContainer className="colored-demo-label">
                                 <Red>
