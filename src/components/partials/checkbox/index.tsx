@@ -58,14 +58,16 @@ const Label = styled.label`
     }
 `;
 
-const Checkbox = ({label, name, className, checked, onChange, ...props}: {
+const Checkbox = ({label, name, className, checked, labelPosition, onChange, ...props}: {
     label?: string,
+    labelPosition?: 'left' | 'right',
     name: string,
     className?: string,
     checked: boolean | undefined,
     onChange?: any
 }) => (
     <Label>
+        {labelPosition === 'left' && <span style={{marginRight: '0.3rem'}}>{label || name}</span>}
         <CheckboxContainer className={className}>
             <HiddenCheckbox name={name} checked={checked} onChange={onChange} {...props} />
             <StyledCheckbox checked={checked}>
@@ -74,7 +76,7 @@ const Checkbox = ({label, name, className, checked, onChange, ...props}: {
                 </Icon>
             </StyledCheckbox>
         </CheckboxContainer>
-        <span style={{marginLeft: '0.3rem'}}>{label || name}</span>
+        {labelPosition !== 'left' && <span style={{marginLeft: '0.3rem'}}>{label || name}</span>}
     </Label>
 );
 
