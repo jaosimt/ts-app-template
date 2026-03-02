@@ -72,6 +72,11 @@ const boxData: PropsListProps[] = [
         types: 'number|`${number}${string}`',
         values: `e.g. 700|'700px'`,
         description: ['Sets the width of the box']
+    }, {
+        name: 'onLabelClick',
+        types: 'Function',
+        values: 'e.g. () => alert("Hello, callback!")',
+        description: ['Attaches a callback to be called when the label is clicked.', 'Useful for opening a link or whatever!']
     }
 ];
 
