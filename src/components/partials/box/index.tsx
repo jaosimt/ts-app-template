@@ -38,6 +38,7 @@ const Section = styled.section<{
     margin-top: ${props => props.$marginTop};
     padding: ${props => props.$padding};
     width: ${props => props.$width || ''};
+    position: relative;
 `;
 
 const Label = styled.h5<{
