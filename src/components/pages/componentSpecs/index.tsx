@@ -14,6 +14,7 @@ import { classNames, ProperCase } from '../../../utils';
 import Tab, { TabItemType } from '../../partials/tab';
 import BoxComponentSpecs from './specs/box';
 import ButtonComponentSpecs from './specs/buttons';
+import DemoCheckbox from './specs/checkbox';
 import InputFieldsProps from './specs/inputFields';
 import ModalComponentSpecs from './specs/modal';
 import PortalWindowSpecs from './specs/portalWindow';
@@ -85,6 +86,9 @@ const ComponentSpecs: FC = () => {
             name: 'Button',
             content: <ButtonComponentSpecs selectedTheme={selectedTheme}/>
         }, {
+            name: 'Checkbox',
+            content: <DemoCheckbox selectedTheme={selectedTheme}/>
+        }, {
             name: 'InputField',
             content: <InputFieldsProps selectedTheme={selectedTheme}/>
         }, {
@@ -118,7 +122,7 @@ const ComponentSpecs: FC = () => {
                 </select>
             </div>
         </div>
-        <Tab id={'component-specs'} rememberActiveTab={true} data={tabData}/>
+        <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} data={tabData}/>
     </div>
 };
 
