@@ -27,6 +27,7 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTex
     width?: CSSUnit;
     rows?: number;
     showErrorTooltipOnCreate?: boolean;
+    disabled?: boolean;
 }
 
 const InputField: FC<InputFieldProps> = (props) => {
@@ -49,6 +50,7 @@ const InputField: FC<InputFieldProps> = (props) => {
         rows,
         style,
         showErrorTooltipOnCreate = true,
+        disabled = false,
         ...restProps
     } = props;
 
@@ -75,6 +77,8 @@ const InputField: FC<InputFieldProps> = (props) => {
         });
     }, [error]);
 
+    console.log('disabled:', disabled);
+
     return (
         <div data-component={'input-field'} className={'display-flex align-items-center'}>
             <label style={{width: parseCSSUnit(labelWidth as CSSUnit), justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
@@ -85,6 +89,7 @@ const InputField: FC<InputFieldProps> = (props) => {
             <div className={'position-relative display-flex'}>
                 {
                     type !== 'textarea' && <input
+                        disabled={disabled}
                         style={{...style, width: width && parseCSSUnit(width)}}
                         type={type || 'text'}
                         min={min}
@@ -107,6 +112,7 @@ const InputField: FC<InputFieldProps> = (props) => {
                 }
                 {
                     type === 'textarea' && <textarea
+                        disabled={disabled}
                         rows={rows || 3}
                         style={{...style, width: width && parseCSSUnit(width)}}
                         placeholder={placeHolder}
