@@ -139,7 +139,7 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
-            onLabelClick={() => navigate('/demo/login')}
+            onLabelClick={() => navigate('/demo/input-field')}
         >
             <SyntaxHighlighter
                 wrapLines={true}

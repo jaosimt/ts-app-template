@@ -5,17 +5,34 @@ import { CSSColors } from '../../../types';
 import { classNames } from '../../../utils';
 import ReactIcon from '../index';
 
+export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
+    borderWidth?: CSSUnit;
+    borderColor?: CSSColors;
+    backgroundColor?: CSSColors;
+    padding?: boolean;
+    position?: 'fixed' | 'absolute';
+    size?: number;
+    color?: CSSColors,
+    topText?: string;
+    bottomText?: string;
+    boxShadow?: boolean;
+}
+
 type CSSUnit = number | `${number}${string}`;
+
 const parseCSSUnit = (cssUnit: CSSUnit): CSSUnit => String(cssUnit).match(/\d$/) ? `${parseFloat(String(cssUnit))}px` : cssUnit as CSSUnit;
 
-const Loading = styled.div<{
+const Container = styled.div<{
     $position: 'fixed' | 'absolute';
     $borderColor?: CSSColors;
+    $backgroundColor?: CSSColors;
     $borderWidth?: CSSUnit;
     $padding: boolean;
 }>`
+    z-index: 7;
     left            : 50%;
     position        : ${props => props.$position};
+    background-color: ${props => props.$backgroundColor || 'white'};
     top             : 50%;
     transform       : translate(-50%, -50%);
     border-radius   : 0.5rem;
@@ -28,7 +45,7 @@ const Loading = styled.div<{
     ${props => props.$padding && 'padding: 1.5rem 3rem;'}
 `;
 
-const Spinner = styled.div<{ $color: CSSColors; }>`
+const Spinner = styled.div<{ $color: CSSColors }>`
     color : ${props => props.$color};
     display: flex;
     flex-direction: column;
@@ -36,37 +53,27 @@ const Spinner = styled.div<{ $color: CSSColors; }>`
     align-items: center;
 `;
 
-interface LoaderProps extends HTMLAttributes<HTMLDivElement> {
-    borderWidth?: number;
-    borderColor?: CSSColors;
-    padding?: boolean;
-    position?: 'fixed' | 'absolute';
-    size?: number;
-    color?: CSSColors,
-    topText?: string;
-    bottomText?: string;
-    backShadow?: boolean;
-}
-
-const Loader: FC<LoaderProps> = (props) => {
+const Loading: FC<LoadingProps> = (props) => {
     const {
         borderWidth,
         borderColor,
         padding = true,
-        backShadow = false,
-        position,
+        boxShadow = false,
+        position = 'fixed',
         size = 42,
         color = 'inherit',
         topText,
         bottomText,
-        children
+        children,
+        backgroundColor
     } = props;
 
-    return <Loading
-        className={classNames(backShadow && 'box-shadow')}
-        $position={position || 'fixed'}
+    return <Container
+        $backgroundColor={backgroundColor}
+        className={classNames(boxShadow && 'box-shadow')}
+        $position={position}
         $borderColor={borderColor}
-        $borderWidth={borderWidth}
+        $borderWidth={parseCSSUnit(borderWidth as any)}
         $padding={padding}
     >
         <Spinner $color={color}>
@@ -80,7 +87,7 @@ const Loader: FC<LoaderProps> = (props) => {
                 {children}
             </>
         }
-    </Loading>;
+    </Container>;
 };
 
-export default Loader;
+export default Loading;

@@ -8,7 +8,7 @@ const code = `<Modal>
     <h1>Hello, world!</h1>
 </Modal>`;
 
-const ModalComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const ModalSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     const modalData: PropsListProps[] = [
         {
             name: 'closeOnEscKey',
@@ -79,4 +79,4 @@ const ModalComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default ModalComponentSpecs;
+export default ModalSpecs;

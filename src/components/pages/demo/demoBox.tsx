@@ -41,7 +41,7 @@ const DemoBox:FC = () => {
 
     return <div data-component={'tab-demo'} className={'width-100p'}>
         <Box label={'Box Props'} boxClassName={'mb-1'}>
-            <div className="grid cols-3 no-padding gap-0p5-1">
+            <div className="grid cols-3 no-padding gap-0p5-1 width-fit-content">
                 <InputField labelWidth={163} label={'label'} fieldRegister={register('label', {onChange: propsChangeHandler})}/>
                 <InputField labelWidth={163} disabled={!isString(props.label, true)} label={'labelColor'} fieldRegister={register('labelColor', {onChange: propsChangeHandler})}/>
                 <InputField labelWidth={163} disabled={!isString(props.label, true)} label={'labelBackgroundColor'} fieldRegister={register('labelBackgroundColor', {onChange: propsChangeHandler})}/>
@@ -69,7 +69,8 @@ const DemoBox:FC = () => {
                     <span style={{width: '163px'}}>border</span>
                     <select name={'border'} value={props.border as any} onChange={propsChangeHandler}>
                         {borderOptions.map((t) => (
-                            <option disabled={t === 'label-only' && !isString(props.label)} key={t} value={t}>{t}</option>
+                            <option disabled={t === 'label-only' && !isString(props.label, true)} key={t}
+                                    value={t}>{t}</option>
                         ))}
                     </select>
                 </div>

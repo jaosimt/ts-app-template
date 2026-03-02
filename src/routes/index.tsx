@@ -9,6 +9,7 @@ import DemoInputField from '../components/pages/demo/demoInputField';
 import ModalDemo from '../components/pages/demo/demoModal';
 import TabsDemo from '../components/pages/demo/demoTab';
 import WindowPortalDemo from '../components/pages/demo/demoWindowPortal';
+import LoadingDemo from '../components/pages/demo/loadingDemo';
 import Home from '../components/pages/home';
 import Login from '../components/pages/login';
 
@@ -19,6 +20,7 @@ const ContentRouter = () => {
             <Route path="/specs" element={<ComponentSpecs/>}/>
             <Route path="/demo" element={<Demo/>}>
                 <Route index element={<Navigate to="/demo/box" replace />} />
+                <Route path="/demo/loading" element={<LoadingDemo/>}/>
                 <Route path="/demo/box" element={<DemoBox/>}/>
                 <Route path="/demo/button" element={<DemoButton/>}/>
                 <Route path="/demo/input-field" element={<DemoInputField/>}/>

@@ -46,7 +46,7 @@ const StyledCheckbox = styled.div<{
     width: 21px;
     height: 21px;
     border-radius: 4px;
-    border: 1px solid ${props => props.disabled ? 'whitesmoke' : 'rgb(0, 123, 255)'};
+    border: 1px solid ${props => props.disabled ? 'whitesmoke' : 'gainsboro'};
     background-color: ${props => props.checked ? 'rgba(0, 123, 255, 0.63)' : 'transparent'};
     transition: all 150ms;
     

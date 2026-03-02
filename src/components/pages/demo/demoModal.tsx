@@ -19,7 +19,7 @@ const ModalDemo: FC = () => {
         closeOnOutsideClick: false,
         showClose: false,
         title: undefined,
-        width: 500
+        width: undefined
     });
 
     const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -79,9 +79,8 @@ const ModalDemo: FC = () => {
             <Box
                 className={'display-flex gap-0p3 flex-direction-column'}
                 label={'Modal Props'}
-                borderRadius={4}
             >
-                <div>
+                <div className={'display-flex gap-0p5'}>
                     <Checkbox
                         name={'closeOnEscKey'}
                         checked={props.closeOnEscKey}

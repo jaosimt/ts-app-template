@@ -16,7 +16,8 @@ import BoxComponentSpecs from './specs/box';
 import ButtonComponentSpecs from './specs/buttons';
 import DemoCheckbox from './specs/checkbox';
 import InputFieldsProps from './specs/inputFields';
-import ModalComponentSpecs from './specs/modal';
+import LoadingSpecs from './specs/loading';
+import ModalSpecs from './specs/modal';
 import PortalWindowSpecs from './specs/portalWindow';
 import TabSpecs from './specs/tab';
 
@@ -92,8 +93,11 @@ const ComponentSpecs: FC = () => {
             name: 'InputField',
             content: <InputFieldsProps selectedTheme={selectedTheme}/>
         }, {
+            name: 'Loader',
+            content: <LoadingSpecs selectedTheme={selectedTheme}/>
+        }, {
             name: 'Modal',
-            content: <ModalComponentSpecs selectedTheme={selectedTheme}/>
+            content: <ModalSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'Tab',
             content: <TabSpecs selectedTheme={selectedTheme}/>
