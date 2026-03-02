@@ -77,8 +77,6 @@ const InputField: FC<InputFieldProps> = (props) => {
         });
     }, [error]);
 
-    console.log('disabled:', disabled);
-
     return (
         <div data-component={'input-field'} className={'display-flex align-items-center'}>
             <label style={{width: parseCSSUnit(labelWidth as CSSUnit), justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
