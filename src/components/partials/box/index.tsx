@@ -2,7 +2,6 @@ import { FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { CSSColors, CSSUnit } from '../../../types';
 import { getTextWidth, parseCSSUnit } from '../../../utils';
-import './styles.scss';
 
 export type LabelPositionType = 'top-left'|'top-center'|'top-right'|'bottom-left'|'bottom-center'|'bottom-right';
 
@@ -119,6 +118,8 @@ const Children = styled.div<{
     })()};
     width: 100%;
     overflow-x: auto;
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
 `;
 
 const Box: FC<BoxProps> = (props) => {
