@@ -35,7 +35,7 @@ const StyledCheckbox = styled.div<{
     width: 21px;
     height: 21px;
     border-radius: 4px;
-    border: 1px solid ${props => props.disabled ? 'gainsboro' : 'rgb(0, 123, 255)'};
+    border: 1px solid ${props => props.disabled ? 'whitesmoke' : 'rgb(0, 123, 255)'};
     background-color: ${props => props.checked ? 'rgba(0, 123, 255, 0.63)' : 'transparent'};
     transition: all 150ms;
     
@@ -46,8 +46,8 @@ const StyledCheckbox = styled.div<{
     ${props => props.disabled && 'opacity: 0.7; pointer-events: none;'}
 `;
 
-const Label = styled.label`
-    cursor: pointer;
+const Label = styled.label<{disabled: boolean}>`
+    cursor: ${props => props.disabled ? 'default' : 'pointer'};
     user-select: none;
     display: inline-flex;
     align-items: center;
@@ -55,7 +55,7 @@ const Label = styled.label`
     
     &:hover {
         > ${CheckboxContainer} {
-            opacity: 0.7;   
+            ${props => !props.disabled && 'opacity: 0.7'};   
         }
     }
 `;
@@ -70,7 +70,7 @@ const Checkbox = ({disabled = false, label, labelWidth, name, className, checked
     onChange?: any,
     disabled?: boolean
 }) => (
-    <Label>
+    <Label disabled={disabled}>
         {labelPosition === 'left' && <span style={{width: parseCSSUnit(labelWidth as CSSUnit), marginRight: '0.3rem'}}>{label || name}</span>}
         <CheckboxContainer disabled={disabled} className={className}>
             <HiddenCheckbox disabled={disabled} name={name} checked={checked} onChange={onChange} {...props} />
