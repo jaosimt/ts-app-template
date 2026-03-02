@@ -4,11 +4,11 @@ import { CSSUnit } from '../../../types';
 import { parseCSSUnit } from '../../../utils';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{
-    name: string;
+    name: string|undefined;
     checked: boolean|undefined;
-    disabled?: boolean;
     label?: string;
     labelWidth?: CSSUnit;
+    disabled?: boolean;
     className?: string;
     labelPosition?: 'left' | 'right';
 }
@@ -24,6 +24,7 @@ const Icon = styled.svg`
     stroke: #fff;
     stroke-width: 2px;
 `;
+
 // noinspection CssUnknownProperty
 const HiddenCheckbox = styled.input.attrs({type: 'checkbox'})`
     border: 0;
@@ -80,14 +81,13 @@ const Checkbox: FC<CheckboxProps> = (props) => {
         className,
         checked,
         labelPosition,
-        onChange,
-        ...restProps
+        onChange
     } = props;
 
     return <Label disabled={disabled}>
-        {labelPosition === 'left' && <span style={{width: parseCSSUnit(labelWidth as CSSUnit), marginRight: '0.3rem'}}>{label || name}</span>}
+        {labelPosition === 'left' && <span style={{minWidth: 'fit-content', width: parseCSSUnit(labelWidth as CSSUnit), marginRight: '0.3rem'}}>{label || name}</span>}
         <CheckboxContainer disabled={disabled} className={className}>
-            <HiddenCheckbox disabled={disabled} name={name} checked={checked} onChange={onChange} {...restProps} />
+            <HiddenCheckbox disabled={disabled} name={name} checked={checked} onChange={onChange}/>
             <StyledCheckbox disabled={disabled} checked={checked}>
                 <Icon viewBox="0 0 24 24">
                     <polyline points="20 6 9 17 4 12"/>

@@ -7,7 +7,7 @@ import Loading, { LoadingProps } from '../../partials/loading';
 
 const positionOptions = ['fixed', 'absolute'];
 
-const LoadingDemo: FC = () => {
+const DemoLoading: FC = () => {
     const {register} = useForm();
 
     const [props, setProps] = useState<LoadingProps>({
@@ -28,8 +28,9 @@ const LoadingDemo: FC = () => {
         setProps({...props, [name]: ['padding', 'boxShadow'].includes(name) ? checked : value});
     };
 
-    return <div data-component={'loading-demo'} className={'grid'} style={{gridTemplateRows: 'auto 1fr', height: '100%'}}>
+    return <div data-component={'loading-demo'} className={'display-flex flex-direction-column width-fit-content'}>
         <Box
+            boxClassName={'width-fit-content'}
             className={'display-flex gap-0p3 flex-direction-column width-fit-content'}
             label={'Modal Props'}
         >
@@ -66,7 +67,7 @@ const LoadingDemo: FC = () => {
 
             </div>
         </Box>
-        <div className="position-relative">
+        <div className="position-relative" style={{height: '300px'}}>
             <Loading
                 borderWidth={props.borderWidth}
                 borderColor={props.borderColor}
@@ -83,4 +84,4 @@ const LoadingDemo: FC = () => {
     </div>;
 };
 
-export default LoadingDemo;
+export default DemoLoading;

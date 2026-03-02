@@ -1,12 +1,82 @@
 import { FC } from 'react';
-import UnderConstruction from '../../underConstruction';
-import { SelectedThemeProps } from '../index';
+import { useNavigate } from 'react-router';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import Box from '../../../partials/box';
+import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
-const DemoCheckbox:FC<SelectedThemeProps> = ({selectedTheme}) => {
+const code = `<Checkbox 
+    name={'myCheckbox'} 
+    checked={true} 
+/>`;
+
+const checkboxSpecsData: PropsListProps[] = [
+    {
+        name: 'name',
+        types: 'string',
+        values: '',
+        description: ['Sets the name of the checkbox']
+    }, {
+        name: 'checked',
+        types: 'boolean',
+        values: '',
+        description: ['Sets the state of the checkbox']
+    }, {
+        name: 'label',
+        types: 'string',
+        values: '',
+        description: ['Sets the label of the checkbox.', <span>Defaults to the required prop <b>name</b> if none is provided!</span>]
+    }, {
+        name: 'labelWidth',
+        // eslint-disable-next-line no-template-curly-in-string
+        types: 'number|`${number}${string}`',
+        values: `e.g. 70|'70px'`,
+        description: ['Sets the width of the label.', 'Useful for aligning the label with other elements!']
+    }, {
+        name: 'disabled',
+        types: 'boolean',
+        values: '',
+        description: ['Sets the usability state of the checkbox']
+    }, {
+        name: 'className',
+        types: 'string',
+        values: '',
+        description: ['Class names to be spread to the checkbox container']
+    }, {
+        name: 'labelPosition',
+        types: 'string',
+        values: 'left|right',
+        description: ['Sets the position of the label relative to the checkbox']
+    }
+];
+
+const CheckboxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+    let navigate = useNavigate();
+
     return <>
-        <UnderConstruction />
-    </>
-}
+        <Box
+            border={'label-only'}
+            tight={true}
+            label={'Demo'}
+            labelSize={'large'}
+            labelPosition={'top-right'}
+            backgroundColor={'transparent'}
+            labelColor={'magenta'}
+            onLabelClick={() => navigate('/demo/checkbox')}
+        >
+            <SyntaxHighlighter
+                codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                showLineNumbers={true}
+                language="tsx"
+                customStyle={{padding: '0.5rem', margin: 0}}
+                style={themes[selectedTheme]}
+            >
+                {code}
+            </SyntaxHighlighter>
+        </Box>
+        <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>Properties <span
+            className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLButtonElement>`}</span></h3>
+        {propsList(checkboxSpecsData)}
+    </>;
+};
 
-export default DemoCheckbox;
-
+export default CheckboxComponentSpecs;

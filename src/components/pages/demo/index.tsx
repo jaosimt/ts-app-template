@@ -10,6 +10,7 @@ const Demo: FC = () => {
         <div className="display-flex gap-1" style={{height: '100%'}}>
             <nav data-nav={'left'} className={'px-0p2 py-0p4'} style={{width: '150px', height: '100%'}}>
                 <NavLink to={'/demo/box'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Box</NavLink>
+                <NavLink to={'/demo/checkbox'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Checkbox</NavLink>
                 <NavLink to={'/demo/button'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Button</NavLink>
                 <NavLink to={'/demo/input-field'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>InputFields</NavLink>
                 <NavLink to={'/demo/loading'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Loading</NavLink>

@@ -29,6 +29,7 @@ const Container = styled.div<{
     $borderWidth?: CSSUnit;
     $padding: boolean;
 }>`
+    transition: all 0.3s ease-in-out;
     z-index: 7;
     left            : 50%;
     position        : ${props => props.$position};
