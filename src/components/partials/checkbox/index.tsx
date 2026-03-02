@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { CSSUnit } from '../../../types';
+import { parseCSSUnit } from '../../../utils';
 
 const CheckboxContainer = styled.div`
     display: inline-flex;
@@ -47,10 +49,6 @@ const Label = styled.label`
     display: inline-flex;
     align-items: center;
     
-    & + * {
-        margin-left: 0.5rem;
-    }
-
     &:hover {
         > ${CheckboxContainer} {
             opacity: 0.7;   
@@ -58,7 +56,8 @@ const Label = styled.label`
     }
 `;
 
-const Checkbox = ({label, name, className, checked, labelPosition, onChange, ...props}: {
+const Checkbox = ({label, labelWidth, name, className, checked, labelPosition, onChange, ...props}: {
+    labelWidth?: CSSUnit,
     label?: string,
     labelPosition?: 'left' | 'right',
     name: string,
@@ -67,7 +66,7 @@ const Checkbox = ({label, name, className, checked, labelPosition, onChange, ...
     onChange?: any
 }) => (
     <Label>
-        {labelPosition === 'left' && <span style={{marginRight: '0.3rem'}}>{label || name}</span>}
+        {labelPosition === 'left' && <span style={{width: parseCSSUnit(labelWidth as CSSUnit), marginRight: '0.3rem'}}>{label || name}</span>}
         <CheckboxContainer className={className}>
             <HiddenCheckbox name={name} checked={checked} onChange={onChange} {...props} />
             <StyledCheckbox checked={checked}>
@@ -76,7 +75,7 @@ const Checkbox = ({label, name, className, checked, labelPosition, onChange, ...
                 </Icon>
             </StyledCheckbox>
         </CheckboxContainer>
-        {labelPosition !== 'left' && <span style={{marginLeft: '0.3rem'}}>{label || name}</span>}
+        {labelPosition !== 'left' && <span style={{width: parseCSSUnit(labelWidth as CSSUnit), marginLeft: '0.3rem'}}>{label || name}</span>}
     </Label>
 );
 
