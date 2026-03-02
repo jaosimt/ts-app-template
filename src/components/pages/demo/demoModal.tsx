@@ -85,7 +85,7 @@ const ModalDemo: FC = () => {
         <div className="display-inline-flex flex-direction-column gap-1">
             <Box
                 className={'display-flex gap-0p3 flex-direction-column'}
-                label={'Box props'}
+                label={'Modal Props'}
                 borderRadius={4}
             >
                 <div>
