@@ -5,7 +5,7 @@ import { createLink, CssColors } from '../../../../utils/ext';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
-const code = `const [showPortal, setShowPortal] = useState<boolean>(false);
+const code = `const [showPortal, setShowPortal] = useState(false);
 
 return <>
     <Button onClick={() => setShowPortal(true)} disabled={showPortal}>Show Portal</Button>

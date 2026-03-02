@@ -4,9 +4,16 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
-const code = `<Modal>
-    <h1>Hello, world!</h1>
-</Modal>`;
+const code = `const [showModal, setShowModal] = useState(false);
+
+return <>
+    <Button onClick={() => setShowModal(true)} disabled={showModal}>Show Modal</Button>
+    {>
+        showModal && <Modal>
+            <h1>Hello, world!</h1>
+        </Modal>
+    }
+</>;`;
 
 const ModalSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     const modalData: PropsListProps[] = [
