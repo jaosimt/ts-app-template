@@ -133,11 +133,6 @@ const DemoInputField: FC = () => {
         // eslint-disable-next-line
     }, [icon]);
 
-    useEffect(() => {
-        console.log('option:', option);
-        // eslint-disable-next-line
-    }, [option]);
-
     const optionChangeHandler = (e: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
         const {name, value} = e.target as HTMLInputElement;
         setOption({...option, [name]: value});

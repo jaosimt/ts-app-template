@@ -15,7 +15,7 @@ const LazyAppRetry = LazyRetry(() => import('./App'));
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <React.Suspense fallback={<Loading topText={'Loading application'} bottomText={'Please wait...'} borderColor={'#61dafb'} borderWidth={3}/>}>
+            <React.Suspense fallback={<Loading topText={'Loading application'} bottomText={'Please wait...'} borderColor={'#00cafd'} borderWidth={3}/>}>
                 <LazyAppRetry/>
             </React.Suspense>
         </BrowserRouter>

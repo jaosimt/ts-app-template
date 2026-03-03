@@ -113,8 +113,11 @@ const DemoDropdown: FC = () => {
         <Box label={'Dropdown Props'} boxClassName={'mb-1 with-fit-content'}>
             <div className="grid cols-2 no-padding gap-0p5-1">
                 <div>
-                    <Checkbox onChange={optionChangeHandler} name={'asObj'} label={'options as DropdownObjectOptions[]'}
-                              checked={options.asObj}/>
+                    <div className={'display-flex align-items-center gap-0p5'}>
+                        <Checkbox onChange={optionChangeHandler} name={'asObj'} label={'options'}
+                                  checked={options.asObj}/>
+                        <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as DropdownObjectOptions[]</span>
+                    </div>
                     <SyntaxHighlighter
                         codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
                         showLineNumbers={true}
@@ -126,8 +129,12 @@ const DemoDropdown: FC = () => {
                     </SyntaxHighlighter>
                 </div>
                 <div>
-                    <Checkbox onChange={optionChangeHandler} name={'asStr'} label={'options as string[]'}
-                              checked={options.asStr}/>
+                    <div className={'display-flex align-items-center gap-0p5'}>
+                        <Checkbox onChange={optionChangeHandler} name={'asStr'} label={'options'}
+                                  checked={options.asStr}/>
+                        <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as string[]</span>
+                    </div>
+
                     <SyntaxHighlighter
                         codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
                         showLineNumbers={true}

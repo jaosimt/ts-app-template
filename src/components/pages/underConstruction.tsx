@@ -5,7 +5,7 @@ import '../../styles/variables.scss';
 import { ReactIcon } from '../partials';
 
 const UC = styled.div<{ $padding: number }>`
-    border: 3px solid #61dafb;
+    border: 3px solid #00cafd;
     padding: ${props => `${props.$padding}px`};
     border-radius: 01rem;
     display: inline-flex;

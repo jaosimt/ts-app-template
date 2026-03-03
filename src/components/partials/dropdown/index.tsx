@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { IconType } from 'react-icons';
 import { FaChevronDown } from 'react-icons/fa6';
 import styled from 'styled-components';
-import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
+import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
 import { CSSUnit } from '../../../types';
 import { classNames, isObject, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
@@ -62,6 +62,7 @@ const Wrapper = styled.div<{
 `;
 
 const Input = styled.input<{$hasIcon: boolean}>`
+    min-width: unset;
     border: none;
     background-color: transparent;
     padding-right: 0.1rem;
@@ -128,13 +129,22 @@ const Dropdown: FC<DropdownProps> = (props) => {
     });
 
     useOnClickOutside([listRef, wrapperRef], handleClickOutside);
-    useResizeObserver({
-        ref: wrapperRef,
-        onResize,
-    })
+
+    const { width = 0 } = useWindowSize()
 
     useEffect(() => {
-        onResize();
+       if (!show) return;
+        setShow(false);
+        // eslint-disable-next-line
+    }, [width]);
+
+    useEffect(() => {
+        if (!show) return;
+        updatePos();
+    }, [show]);
+
+    useEffect(() => {
+        updatePos()
         setSelected(props_selected);
     }, [options, props_selected]);
 
@@ -149,9 +159,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
         setShow(!show);
     }
 
-    function onResize() {
-        setShow(false);
-
+    function updatePos() {
         if (wrapperRef.current) {
             const {left, bottom} = wrapperRef.current.getBoundingClientRect();
             setDropdownPos({left, top: bottom});
