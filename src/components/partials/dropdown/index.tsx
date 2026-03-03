@@ -88,6 +88,7 @@ const List = styled.div<{
     ${props => !props.$show && 'visibility: hidden; z-index: -1;'}
 `;
 
+// noinspection CssUnusedSymbol
 const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
     padding: 0.5rem;
     cursor: pointer;
@@ -148,12 +149,14 @@ const Dropdown: FC<DropdownProps> = (props) => {
     }
 
     function onResize() {
-        if (!wrapperRef.current || listRef.current) return;
-
         setShow(false);
-        const {left, bottom} = wrapperRef.current.getBoundingClientRect();
-        setWrapperWidth(`${listRef.current.getBoundingClientRect().width}px`);
-        setDropdownPos({left, top: bottom});
+
+        if (wrapperRef.current) {
+            const {left, bottom} = wrapperRef.current.getBoundingClientRect();
+            setDropdownPos({left, top: bottom});
+        }
+
+        if (listRef.current) setWrapperWidth(`${listRef.current.getBoundingClientRect().width}px`);
     }
 
     const isO = isObject(options[0]);

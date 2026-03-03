@@ -4,6 +4,7 @@ import { isString } from '../../../utils';
 import { createLink } from '../../../utils/ext';
 import Box, { BoxProps } from '../../partials/box';
 import Checkbox from '../../partials/checkbox';
+import Dropdown from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
 
 const borderOptions = ['true', 'false', 'label-only'];
@@ -22,7 +23,7 @@ const DemoBox:FC = () => {
         label: undefined,
         labelColor: undefined,
         labelBackgroundColor: undefined,
-        labelPosition: 'top-left',
+        labelPosition: labelPositionOptions[0] as any,
         labelSize: 'small',
         width: undefined,
         onLabelClick: undefined
@@ -54,6 +55,14 @@ const DemoBox:FC = () => {
                         ))}
                     </select>
                 </div>
+                <Dropdown
+                    options={labelPositionOptions}
+                    selected={props.labelPosition}
+                    label={'labelPosition'}
+                    labelWidth={163}
+                    // disabled={!isString(props.label, true)}
+                />
+
                 <div className={'display-flex gap-0p3 align-items-center'}>
                     <span style={{width: '163px'}}>labelSize</span>
                     <select disabled={!isString(props.label, true)}  name={'labelSize'} value={props.labelSize} onChange={propsChangeHandler}>
