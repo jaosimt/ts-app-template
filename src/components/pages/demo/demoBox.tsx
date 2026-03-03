@@ -35,6 +35,8 @@ const DemoBox:FC = () => {
         setProps({...props, [name]: ['tight'].includes(name) ? checked : value});
     }
 
+    const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
+
     useEffect(() => {
         setProps({...props, onLabelClick: onLabelClick ? () => alert('Hello, world!') : undefined});
         // eslint-disable-next-line
@@ -47,43 +49,35 @@ const DemoBox:FC = () => {
                 <InputField labelWidth={163} label={'label'} fieldRegister={register('label', {onChange: propsChangeHandler})}/>
                 <InputField labelWidth={163} disabled={!isString(props.label, true)} label={'labelColor'} fieldRegister={register('labelColor', {onChange: propsChangeHandler})}/>
                 <InputField labelWidth={163} disabled={!isString(props.label, true)} label={'labelBackgroundColor'} fieldRegister={register('labelBackgroundColor', {onChange: propsChangeHandler})}/>
-                <div className={'display-flex gap-0p3 align-items-center'}>
-                    <span style={{width: '163px'}}>labelPosition</span>
-                    <select disabled={!isString(props.label, true)}  name={'labelPosition'} value={props.labelPosition} onChange={propsChangeHandler}>
-                        {labelPositionOptions.map((t) => (
-                            <option key={t} value={t}>{t}</option>
-                        ))}
-                    </select>
-                </div>
                 <Dropdown
                     options={labelPositionOptions}
                     selected={props.labelPosition}
                     label={'labelPosition'}
                     labelWidth={163}
-                    // disabled={!isString(props.label, true)}
+                    disabled={!isString(props.label, true)}
+                    onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
+                />
+                <Dropdown
+                    options={labelSizeOptions}
+                    selected={props.labelSize}
+                    label={'labelSize'}
+                    labelWidth={163}
+                    disabled={!isString(props.label, true)}
+                    onChange={(value: string) => dropDownChangeHandler('labelSize', value)}
                 />
 
-                <div className={'display-flex gap-0p3 align-items-center'}>
-                    <span style={{width: '163px'}}>labelSize</span>
-                    <select disabled={!isString(props.label, true)}  name={'labelSize'} value={props.labelSize} onChange={propsChangeHandler}>
-                        {labelSizeOptions.map((t) => (
-                            <option key={t} value={t}>{t}</option>
-                        ))}
-                    </select>
-                </div>
                 <div className={'display-flex align-items-center'}>
                     <Checkbox disabled={!isString(props.label, true)} labelWidth={163} label={'onLabelClick'} labelPosition={'left'} name={'onLabelClick'} checked={onLabelClick} onChange={(e: any) => setOnLabelClick(e.currentTarget.checked)}/>
                     <span className={'font-size-small color-light-gray ml-0p5'}>{`() => alert('Hello, world!')`}</span>
                 </div>
-                <div className={'display-flex gap-0p3 align-items-center'}>
-                    <span style={{width: '163px'}}>border</span>
-                    <select name={'border'} value={props.border as any} onChange={propsChangeHandler}>
-                        {borderOptions.map((t) => (
-                            <option disabled={t === 'label-only' && !isString(props.label, true)} key={t}
-                                    value={t}>{t}</option>
-                        ))}
-                    </select>
-                </div>
+                <Dropdown
+                    options={borderOptions}
+                    selected={props.border as any}
+                    label={'border'}
+                    labelWidth={163}
+                    disabled={!isString(props.label, true)}
+                    onChange={(value: string) => dropDownChangeHandler('border', value)}
+                />
                 <InputField labelWidth={163} width={50} disabled={props.border === false} label={'borderRadius'} fieldRegister={register('borderRadius', {value: props.borderRadius, onChange: propsChangeHandler})}/>
                 <InputField labelWidth={163} disabled={props.border === false} label={'borderColor'} fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
                 <Checkbox labelWidth={163} label={'tight'} labelPosition={'left'} name={'tight'} checked={props.tight} onChange={propsChangeHandler}/>

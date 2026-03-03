@@ -2,6 +2,7 @@ import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Box from '../../partials/box';
 import Checkbox from '../../partials/checkbox';
+import Dropdown from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
 import Loading, { LoadingProps } from '../../partials/loading';
 
@@ -28,6 +29,9 @@ const DemoLoading: FC = () => {
         setProps({...props, [name]: ['padding', 'boxShadow'].includes(name) ? checked : value});
     };
 
+    const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
+
+
     return <div data-component={'loading-demo'} className={'display-flex flex-direction-column width-fit-content'}>
         <Box
             boxClassName={'width-fit-content'}
@@ -44,14 +48,13 @@ const DemoLoading: FC = () => {
                             fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
                 <InputField labelWidth={163} label={'backgroundColor'}
                             fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
-                <div className={'display-flex gap-0p3 align-items-center'}>
-                    <span style={{width: '163px'}}>border</span>
-                    <select name={'position'} value={props.position} onChange={propsChangeHandler}>
-                        {positionOptions.map((t) => (
-                            <option key={t} value={t}>{t}</option>
-                        ))}
-                    </select>
-                </div>
+                <Dropdown
+                    options={positionOptions}
+                    selected={props.position}
+                    label={'position'}
+                    labelWidth={163}
+                    onChange={(value: string) => dropDownChangeHandler('position', value)}
+                />
                 <InputField type={'number'} labelWidth={163} width={60} label={'size'}
                             fieldRegister={register('size', {value: props.size, onChange: propsChangeHandler})}/>
                 <InputField labelWidth={163} label={'color'}

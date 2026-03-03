@@ -17,6 +17,7 @@ export interface DropdownProps {
     labelAlign?: 'left' | 'right' | 'center' | 'space-between';
     onChange?: Function,
     disabled?: boolean;
+    className?: string;
 }
 
 export type DropdownObjectOptions = {
@@ -28,7 +29,7 @@ export type DropdownObjectOptions = {
 const Container = styled.div`
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
 `;
 
 const Label = styled.label<{
@@ -74,7 +75,7 @@ const List = styled.div<{
     $pos: Record<'left' | 'top', number>
 }>`
     overflow-y: auto;
-    z-index: 1;
+    z-index: 2;
     user-select: none;
     top: ${props => `${props.$pos.top}px`};
     left: ${props => `${props.$pos.left}px`};
@@ -90,7 +91,7 @@ const List = styled.div<{
 
 // noinspection CssUnusedSymbol
 const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
-    padding: 0.5rem;
+    padding: 0.5rem 0.7rem;
     cursor: pointer;
     transition: color, background-color 0.2s ease-in-out;
     font-size: 0.9rem;
@@ -113,7 +114,7 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
 `;
 
 const Dropdown: FC<DropdownProps> = (props) => {
-    const {name, disabled, label, selected: props_selected, options, labelWidth, labelAlign, icon, onChange} = props;
+    const {className, name, disabled, label, selected: props_selected, options, labelWidth, labelAlign, icon, onChange} = props;
 
     const listRef = useRef<any>(null);
     const wrapperRef = useRef<any>(null);
@@ -163,7 +164,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
     const _selected = String(isO ? (selected as DropdownObjectOptions).value : selected);
     const hasIcon = isO && (selected as DropdownObjectOptions) && (selected as DropdownObjectOptions).icon;
 
-    return <Container data-component={'dropdown'}>
+    return <Container data-component={'dropdown'} className={className}>
         {label && <Label
             $labelAlign={labelAlign}
             $labelWidth={labelWidth}>
@@ -176,7 +177,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
             $width={wrapperWidth}
             $show={show}>
             {
-                hasIcon && <ReactIcon style={{marginLeft: '0.5rem'}} icon={(selected as DropdownObjectOptions).icon as IconType}/>
+                hasIcon && <ReactIcon size={21} style={{marginLeft: '0.5rem'}} icon={(selected as DropdownObjectOptions).icon as IconType}/>
             }
             <Input
                 name={name}

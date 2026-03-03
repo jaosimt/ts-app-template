@@ -5,6 +5,7 @@ import { IoIosSave } from 'react-icons/io';
 import Box from '../../partials/box';
 import Button, { ButtonProps } from '../../partials/button';
 import Checkbox from '../../partials/checkbox';
+import Dropdown from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
 import Modal from '../../partials/modal';
 
@@ -26,6 +27,8 @@ const DemoButton: FC = () => {
         setProps({...props, [name]: ['disabled'].includes(name) ? checked : value});
     };
 
+    const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
+
     return <div data-component={'button-demo'} className={'display-flex gap-1 align-items-center flex-wrap'}>
         <Box
             label={'Button Props'} boxClassName={'mb-1 with-fit-content'}>
@@ -39,14 +42,13 @@ const DemoButton: FC = () => {
                         <span className={'font-monospace font-size-small color-light-gray'}>(IoIosSave)</span>
                     </Tippy>
                 </div>
-                <div className={'display-flex gap-0p3 align-items-center'}>
-                    <span style={{width: '95px'}}>labelPosition</span>
-                    <select name={'align'} value={props.align} onChange={propsChangeHandler}>
-                        {alignOptions.map((t) => (
-                            <option disabled={t === 'space-between' && !icon} key={t} value={t}>{t}</option>
-                        ))}
-                    </select>
-                </div>
+                <Dropdown
+                    options={alignOptions}
+                    selected={props.align}
+                    label={'align'}
+                    labelWidth={95}
+                    onChange={(value: string) => dropDownChangeHandler('align', value)}
+                />
                 <InputField labelWidth={95} label={'width'} type={'number'} width={60}
                             fieldRegister={register('width', {
                                 value: props.width,

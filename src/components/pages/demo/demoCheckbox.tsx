@@ -2,6 +2,7 @@ import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Box from '../../partials/box';
 import Checkbox, { CheckboxProps } from '../../partials/checkbox';
+import Dropdown from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
 
 const positionOptions = ['left', 'right'];
@@ -23,6 +24,8 @@ const DemoCheckbox: FC = () => {
         setProps({...props, [name]: ['checked', 'disabled'].includes(name) ? checked : value});
     };
 
+    const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
+
     return <div data-component={'checkbox-demo'} className={'display-flex gap-1 align-items-center flex-wrap'}>
         <Box
             label={'Checkbox Props'} boxClassName={'mb-1 with-fit-content'}>
@@ -36,14 +39,13 @@ const DemoCheckbox: FC = () => {
                             })}/>
                 <Checkbox labelWidth={95} label={'disabled'} labelPosition={'left'} name={'disabled'}
                           checked={props.disabled} onChange={propsChangeHandler}/>
-                <div className={'display-flex gap-0p3 align-items-center'}>
-                    <span style={{width: '95px'}}>labelPosition</span>
-                    <select name={'labelPosition'} value={props.labelPosition} onChange={propsChangeHandler}>
-                        {positionOptions.map((t) => (
-                            <option key={t} value={t}>{t}</option>
-                        ))}
-                    </select>
-                </div>
+                <Dropdown
+                    options={positionOptions}
+                    selected={props.labelPosition}
+                    label={'labelPosition'}
+                    labelWidth={95}
+                    onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
+                />
             </div>
         </Box>
         <Box>

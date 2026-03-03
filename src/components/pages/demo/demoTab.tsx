@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import '../../partials/tab/styles.scss';
+import Dropdown from '../../partials/dropdown';
 import Tabs, { TabItemType } from '../../partials/tab';
 
 const tabItems: TabItemType[] = [
@@ -70,16 +71,13 @@ const TabsDemo: FC = () => {
     const [tabType, setTabType] = useState<any>(localStorage.getItem('tabDemoSelectedTab') || 'boxed');
 
     return <div data-component={'tab-demo'} className={'width-100p'}>
-        <select value={tabType} onChange={e => {
-            setTabType(e.currentTarget.value);
-            localStorage.setItem('tabDemoSelectedTab', e.target.value);
-        }} style={{ marginBottom: '10px' }}>
-            {['boxed', 'boxed-content', 'boxed-tabs', 'plain'].map((t) => (
-                <option key={t} value={t}>
-                    {t}
-                </option>
-            ))}
-        </select>
+        <Dropdown
+            className={'mb-0p5'}
+            options={['boxed', 'boxed-content', 'boxed-tabs', 'plain']}
+            selected={tabType}
+            label={'Tab Type'}
+            onChange={(value: string) => setTabType(value)}
+        />
         <Tabs data={tabItems} type={tabType} moveSelectedOnScroll={true} activeItemColor={'#963999'}/>
     </div>
 };

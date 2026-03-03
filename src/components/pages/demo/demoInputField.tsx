@@ -1,19 +1,20 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { IconType } from 'react-icons';
+import { TbBrandReact } from 'react-icons/tb';
 import styled from 'styled-components';
 import { HSLString } from '../../../types';
 import { generateAnalogousPalette, hslToHex } from '../../../utils';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
+import Dropdown from '../../partials/dropdown';
 import InputField, { InputFieldProps } from '../../partials/inputField';
 import Tabs, { TabItemType } from '../../partials/tab';
 import * as z from 'zod';
 import Login from '../login';
 import ToDo from './todo';
 import './styles.scss';
-import { DiCss3, DiHtml5, DiJsBadge, DiReact } from 'react-icons/di';
+import { DiCss3, DiHtml5, DiJsBadge } from 'react-icons/di';
 import { SiTypescript } from 'react-icons/si';
 
 
@@ -41,12 +42,13 @@ const paletteValidation = z.object({
     labelAlign: z.string().optional()
 })
 
-const icons = [{id: 'react', icon: DiReact}, {id: 'html5', icon: DiHtml5}, {id: 'css3', icon: DiCss3}, {
-    id: 'javascript',
-    icon: DiJsBadge
-}, {id: 'typeScript', icon: SiTypescript}];
-
-const getIcon = (id: string) => icons.find(x => x.id === id)?.icon as IconType;
+const icons = [
+    {label: 'react', value: 'react', icon: TbBrandReact},
+    {label: 'html5', value: 'html5', icon: DiHtml5},
+    {label: 'css3', value: 'css3', icon: DiCss3},
+    {label: 'javascript', value: 'javascript', icon: DiJsBadge},
+    {label: 'typeScript', value: 'typeScript', icon: SiTypescript}
+];
 
 const GridContainer = styled.div`
     display: grid;
@@ -93,7 +95,7 @@ const DemoInputField: FC = () => {
     const timeoutRef = useRef<any>(0);
     const inputRefs = useRef<Record<string, HTMLElement>>({});
 
-    const [icon, setIcon] = useState('react');
+    const [icon, setIcon] = useState(icons[0]);
     const [enableIcon, setEnableIcon] = useState(false);
     const [paletteProps, setPaletteProps] = useState({
         red: 150,
@@ -111,7 +113,7 @@ const DemoInputField: FC = () => {
 
     const [option, setOption] = useState({
         width: 70,
-        icon: icons[0].icon,
+        icon: icon.icon,
         labelWidth: 130,
         labelAlign: 'left',
         labelColor: 'inherit',
@@ -126,11 +128,22 @@ const DemoInputField: FC = () => {
         }, paletteProps.size, paletteProps.stepShift));
     }, [paletteProps]);
 
+    useEffect(() => {
+        setOption({...option, icon: icon.icon});
+        // eslint-disable-next-line
+    }, [icon]);
+
+    useEffect(() => {
+        console.log('option:', option);
+        // eslint-disable-next-line
+    }, [option]);
+
     const optionChangeHandler = (e: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
         const {name, value} = e.target as HTMLInputElement;
-        if (name === 'icon') setIcon(value);
-        setOption({...option, [name]: name === 'icon' ? getIcon(value) : value});
+        setOption({...option, [name]: value});
     };
+
+    const dropDownChangeHandler = (name: string, value: string) => setOption({...option, [name]: value});
 
     const paletteChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value, min, max} = e.target as HTMLInputElement;
@@ -181,23 +194,21 @@ const DemoInputField: FC = () => {
                                 onChange: optionChangeHandler
                             })}
                         />
-                        <div className={'display-flex gap-0p3 align-items-center'}>
-                            <span>labelAlign</span>
-                            <select name={'labelAlign'} value={option.labelAlign} onChange={optionChangeHandler}>
-                                {['left', 'right', 'center', 'space-between'].map((t) => (
-                                    <option disabled={t === 'space-between' && !enableIcon} key={t} value={t}>
-                                        {t}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                        <Dropdown
+                            options={['left', 'right', 'center', 'space-between']}
+                            selected={option.labelAlign}
+                            label={'labelAlign'}
+                            onChange={(value: string) => dropDownChangeHandler('labelAlign', value)}
+                        />
+
                         <div className={'display-flex gap-0p3 align-items-center'}>
                             <Button onClick={() => setEnableIcon(!enableIcon)}>{enableIcon ? 'Disable' : 'Enable'} icon</Button>
-                            <select disabled={!enableIcon} name={'icon'} value={icon} onChange={optionChangeHandler}>
-                                {icons.map((x: any) => (
-                                    <option key={x.id} value={x.id}>{x.id}</option>
-                                ))}
-                            </select>
+                            <Dropdown
+                                disabled={!enableIcon}
+                                options={icons}
+                                selected={icon}
+                                onChange={(value: any) => setIcon(value)}
+                            />
                         </div>
                     </Box>
                     <Box boxClassName={'width-fit-content'} label={'InputFields'} borderRadius={7} backgroundColor={'#fff'} labelBackgroundColor={'#fff'}>
