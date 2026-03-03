@@ -4,7 +4,7 @@ import { IconType } from 'react-icons';
 import { v4 as uuidv4 } from 'uuid';
 import { CSSUnit } from '../../../types';
 import { parseCSSUnit } from '../../../utils';
-import ReactIcon from '../index';
+import { ReactIcon } from '../index';
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     type?: 'button' | 'submit' | 'reset';

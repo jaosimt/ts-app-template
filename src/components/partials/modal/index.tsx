@@ -6,7 +6,7 @@ import { useKeyPress, useOutsideClick } from '../../../hooks';
 import { v4 as uuidv4 } from 'uuid';
 import { CSSUnit } from '../../../types';
 import { classNames, parseCSSUnit } from '../../../utils';
-import ReactIcon from '../index';
+import { ReactIcon } from '../index';
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
     closeOnEscKey?: boolean;

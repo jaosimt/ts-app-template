@@ -9,7 +9,7 @@ import '../../../styles/tippy.scss';
 import { CSSColors, CSSUnit } from '../../../types';
 import { classNames, parseCSSUnit } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
-import ReactIcon from '../index';
+import { ReactIcon } from '../index';
 
 export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTextAreaElement> {
     error?: string;

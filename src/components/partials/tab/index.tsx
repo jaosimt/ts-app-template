@@ -3,7 +3,7 @@ import { RxChevronLeft, RxChevronRight } from 'react-icons/rx';
 import { useResizeObserver } from 'usehooks-ts';
 import { CSSColors, CSSUnit } from '../../../types';
 import { classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase } from '../../../utils';
-import ReactIcon from '../../partials';
+import { ReactIcon } from '../index';
 import './styles.scss';
 
 export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {

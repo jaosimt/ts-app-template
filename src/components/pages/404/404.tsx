@@ -2,7 +2,7 @@ import { IoHome } from 'react-icons/io5';
 import { TbError404 } from 'react-icons/tb';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
-import ReactIcon from '../../partials';
+import { ReactIcon } from '../../partials';
 import Button from '../../partials/button';
 
 const NF = styled.div`

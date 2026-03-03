@@ -3,7 +3,7 @@ import { ImSpinner } from 'react-icons/im';
 import styled from 'styled-components';
 import { CSSColors } from '../../../types';
 import { classNames } from '../../../utils';
-import ReactIcon from '../index';
+import { ReactIcon } from '../index';
 
 export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
     borderWidth?: CSSUnit;

@@ -1,3 +1,4 @@
+import Tippy from '@tippyjs/react';
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoIosSave } from 'react-icons/io';
@@ -34,7 +35,9 @@ const DemoButton: FC = () => {
                 <div className="display-flex gap-0p5 align-items-center">
                     <Checkbox labelWidth={95} label={'icon'} labelPosition={'left'} name={'disabled'}
                               checked={icon} onChange={(e: any) => setIcon(e.currentTarget.checked)}/>
-                    <span className={'font-monospace font-size-small color-light-gray'}>{`<IoIosSave/>`}</span>
+                    <Tippy content={'react-icon'} placement="top" className={'custom-tippy'}>
+                        <span className={'font-monospace font-size-small color-light-gray'}>{`<IoIosSave/>`}</span>
+                    </Tippy>
                 </div>
                 <div className={'display-flex gap-0p3 align-items-center'}>
                     <span style={{width: '95px'}}>labelPosition</span>

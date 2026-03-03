@@ -5,7 +5,7 @@ import { IoIosSave, IoIosWarning } from 'react-icons/io';
 import { MdDelete, MdDeleteForever, MdEdit } from 'react-icons/md';
 import { VscDiscard } from 'react-icons/vsc';
 import { classNames, getRandStr, isEmpty, isString } from '../../../../utils';
-import ReactIcon from '../../../partials';
+import { ReactIcon } from '../../../partials';
 import Button from '../../../partials/button';
 import InputField from '../../../partials/inputField';
 import Modal from '../../../partials/modal';

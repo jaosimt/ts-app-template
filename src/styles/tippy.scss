@@ -1,17 +1,30 @@
-@import 'variables';
-@import 'keyframes';
+@import "variables";
+@import "keyframes";
 
-.tippy-box[data-theme~='error'] {
-  background-color: $errorColor;
-  color: yellow;
-
-  &[data-placement^="top"] {
+.tippy-box[data-theme~="error"] {
+  background-color : $errorColor;
+  color            : yellow;
+  
+  &[data-placement] {
     > .tippy-arrow:before {
-      border-top-color: $errorColor;
+      border-top-color : $errorColor;
     }
   }
 }
 
 [data-tippy-root] {
   animation : fadein 700ms ease-in-out;
+}
+
+.custom-tippy {
+  background-color : $headerBackgroundColor;
+  color            : #fff;
+  border           : 1px solid #ccc;
+  border-radius    : 4px;
+  
+  &[data-placement] {
+    > .tippy-arrow:before {
+      border-top-color : $headerBackgroundColor;
+    }
+  }
 }

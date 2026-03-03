@@ -11,4 +11,5 @@ export interface ReactIconProps {
 // @ts-ignore // "react": ["./node_modules/@types/react"] could also be added to tsconfig.json
 const ReactIcon: FC<ReactIconProps> = ({icon: Icon, size, className, onClick}) => <Icon onClick={onClick} size={size} className={className}/>;
 
-export default ReactIcon;
+export { ReactIcon };
+

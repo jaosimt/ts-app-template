@@ -1,8 +1,8 @@
 import { IoIosConstruct } from 'react-icons/io';
 import styled from 'styled-components';
 import { classNames, parseCSSUnit } from '../../utils';
-import ReactIcon from '../partials';
 import '../../styles/variables.scss';
+import { ReactIcon } from '../partials';
 
 const UC = styled.div<{ $padding: number }>`
     border: 3px solid #61dafb;
