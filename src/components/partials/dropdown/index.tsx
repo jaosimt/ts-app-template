@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { IconType } from 'react-icons';
 import { FaChevronDown } from 'react-icons/fa6';
 import styled from 'styled-components';
-import { useOnClickOutside } from 'usehooks-ts';
+import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
 import { CSSUnit } from '../../../types';
 import { classNames, isObject, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
@@ -40,28 +40,32 @@ const Label = styled.label<{
     ${props => props.$labelWidth && `width: ${parseCSSUnit(props.$labelWidth)}`}
 `;
 
-const Wrapper = styled.div<{ $show: boolean }>`
+const Wrapper = styled.div<{
+    $show: boolean,
+    $width: number | string
+}>`
     position: relative;
     border: 1px solid #e9e9e9;
     border-radius: 0.3rem;
     background-color: #fff;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: ${props => props.$width};
     ${props => props.$show && '' +
             'border-bottom-left-radius: 0; ' +
-            'border-bottom-right-radius: 0;'}
+            'border-bottom-right-radius: 0; border-bottom-color: transparent;'}
 `;
 
-const Input = styled.input<{ $width: number | string }>`
+const Input = styled.input`
     border: none;
     background-color: transparent;
-    width: ${props => `calc(${props.$width} - 26px)`};
     padding-right: 0.1rem;
     cursor: pointer;
+    width: 100%;
 `;
 
 const List = styled.div<{
-    $width: number | string,
     $show: boolean
     $pos: Record<'left' | 'top', number>
 }>`
@@ -69,7 +73,7 @@ const List = styled.div<{
     z-index: 1;
     user-select: none;
     top: ${props => `${props.$pos.top}px`};
-    left: ${props => `${props.$pos.left - 1}px`};
+    left: ${props => `${props.$pos.left}px`};
     width: fit-content;
     background-color: #fff;
     border: 1px solid #e9e9e9;
@@ -106,7 +110,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
     const {label, selected: props_selected, options, labelWidth, labelAlign, icon, onChange} = props;
 
     const listRef = useRef<any>(null);
-    const inputRef = useRef<any>(null);
+    const wrapperRef = useRef<any>(null);
 
     const [selected, setSelected] = useState<string|DropdownObjectOptions|undefined>(props_selected);
     const [show, setShow] = useState(false);
@@ -116,12 +120,14 @@ const Dropdown: FC<DropdownProps> = (props) => {
         top: 0
     });
 
-    useOnClickOutside([listRef, inputRef], handleClickOutside);
+    useOnClickOutside([listRef, wrapperRef], handleClickOutside);
+    useResizeObserver({
+        ref: wrapperRef,
+        onResize,
+    })
 
     useEffect(() => {
-        const {left, bottom} = inputRef.current.getBoundingClientRect();
-        setWrapperWidth(`${listRef.current.getBoundingClientRect().width}px`);
-        setDropdownPos({left, top: bottom});
+        onResize();
     }, [options]);
 
     useEffect(() => {
@@ -134,6 +140,13 @@ const Dropdown: FC<DropdownProps> = (props) => {
         setShow(!show);
     }
 
+    function onResize() {
+        setShow(false);
+        const {left, bottom} = wrapperRef.current.getBoundingClientRect();
+        setWrapperWidth(`${listRef.current.getBoundingClientRect().width}px`);
+        setDropdownPos({left, top: bottom});
+    }
+
     const isO = isObject(options);
     const _selected = String(isO ? (selected as DropdownObjectOptions).value : selected);
 
@@ -144,13 +157,17 @@ const Dropdown: FC<DropdownProps> = (props) => {
             {icon && <ReactIcon icon={icon}/>}
             {label}
         </Label>}
-        <Wrapper $show={show}>
+        <Wrapper
+            ref={wrapperRef}
+            $width={wrapperWidth}
+            $show={show}>
+            {
+                isO && (selected as DropdownObjectOptions) && <ReactIcon style={{marginLeft: '0.5rem'}} icon={(selected as DropdownObjectOptions).icon as IconType}/>
+            }
             <Input
                 type={'text'}
                 readOnly={true}
-                ref={inputRef}
                 onClick={() => setShow(!show)}
-                $width={wrapperWidth}
                 value={_selected}/>
             <ReactIcon onClick={() => setShow(!show)} icon={FaChevronDown} style={{
                 color: 'gba(0, 123, 255, 0.63)',
@@ -158,18 +175,18 @@ const Dropdown: FC<DropdownProps> = (props) => {
                 marginRight: '0.2rem',
                 width: '21px'
             }}/>
-            <List ref={listRef} $width={wrapperWidth} $show={show} $pos={dropDownPos}>
-                {
-                    options.map((o: any) => <Option
-                        onClick={() => setSelected(o)}
-                        key={isO ? o.value : o}
-                        className={classNames(_selected === (isO ? o.value : o) && 'selected')}>
-                        {isO && o.icon && <ReactIcon icon={o.icon}/>}
-                        {isO ? o.label : o}
-                    </Option>)
-                }
-            </List>
         </Wrapper>
+        <List ref={listRef} $show={show} $pos={dropDownPos}>
+            {
+                options.map((o: any) => <Option
+                    onClick={() => setSelected(o)}
+                    key={isO ? o.value : o}
+                    className={classNames(_selected === (isO ? o.value : o) && 'selected')}>
+                    {isO && o.icon && <ReactIcon icon={o.icon}/>}
+                    {isO ? o.label : o}
+                </Option>)
+            }
+        </List>
     </Container>;
 };
 
