@@ -148,6 +148,8 @@ const Dropdown: FC<DropdownProps> = (props) => {
     }
 
     function onResize() {
+        if (!wrapperRef.current || listRef.current) return;
+
         setShow(false);
         const {left, bottom} = wrapperRef.current.getBoundingClientRect();
         setWrapperWidth(`${listRef.current.getBoundingClientRect().width}px`);
