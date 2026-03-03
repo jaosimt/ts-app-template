@@ -14,7 +14,8 @@ import { classNames, ProperCase } from '../../../utils';
 import Tab, { TabItemType } from '../../partials/tab';
 import BoxComponentSpecs from './specs/box';
 import ButtonComponentSpecs from './specs/buttons';
-import DemoCheckbox from './specs/checkbox';
+import CheckboxComponentSpecs from './specs/checkbox';
+import DropdownComponentSpecs from './specs/dropdown';
 import InputFieldsProps from './specs/inputFields';
 import LoadingSpecs from './specs/loading';
 import ModalSpecs from './specs/modal';
@@ -88,7 +89,10 @@ const ComponentSpecs: FC = () => {
             content: <ButtonComponentSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'Checkbox',
-            content: <DemoCheckbox selectedTheme={selectedTheme}/>
+            content: <CheckboxComponentSpecs selectedTheme={selectedTheme}/>
+        }, {
+            name: 'Dropdown',
+            content: <DropdownComponentSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'InputField',
             content: <InputFieldsProps selectedTheme={selectedTheme}/>

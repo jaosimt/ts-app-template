@@ -158,10 +158,10 @@ export const isNumber = (arg:any, matchType?:boolean) =>
 export const parseIfNumberIsString = (arg:string) => (isNumber(arg) ? +arg : arg);
 export const isBoolean = (arg: any) => typeof arg === 'boolean';
 export const isFunction = (arg: any) => typeof arg === 'function';
-export const isObject = (arg: any) => typeof arg === 'object' && !isNull(arg) && !Array.isArray(arg);
+export const isObject = (arg: any): boolean => typeof arg === 'object' && !isNull(arg);
 export const isEmpty = (arg: any) => {
     if (isString(arg)) return arg.trim() === '';
-    else if (isObject(arg)) {
+    else if (isObject(arg) && !Array.isArray(arg)) {
         if (arg?.constructor?.name === 'DOMRect') return false;
         return Object.keys(arg).length === 0;
     } else if (Array.isArray(arg)) return arg.length === 0;

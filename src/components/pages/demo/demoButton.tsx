@@ -32,11 +32,11 @@ const DemoButton: FC = () => {
             <div className="grid cols-2 no-padding gap-0p5-1">
                 <Checkbox labelWidth={95} label={'disabled'} labelPosition={'left'} name={'disabled'}
                           checked={props.disabled} onChange={propsChangeHandler}/>
-                <div className="display-flex gap-0p5 align-items-center">
+                <div className="display-flex gap-0p1 align-items-center">
                     <Checkbox labelWidth={95} label={'icon'} labelPosition={'left'} name={'disabled'}
                               checked={icon} onChange={(e: any) => setIcon(e.currentTarget.checked)}/>
-                    <Tippy content={'react-icon'} placement="top" className={'custom-tippy'}>
-                        <span className={'font-monospace font-size-small color-light-gray'}>{`<IoIosSave/>`}</span>
+                    <Tippy content={'react-icons'} placement="top" className={'custom-tippy'}>
+                        <span className={'font-monospace font-size-small color-light-gray'}>(IoIosSave)</span>
                     </Tippy>
                 </div>
                 <div className={'display-flex gap-0p3 align-items-center'}>

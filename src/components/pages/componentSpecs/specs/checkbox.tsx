@@ -74,7 +74,7 @@ const CheckboxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
             </SyntaxHighlighter>
         </Box>
         <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>Properties <span
-            className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLButtonElement>`}</span></h3>
+            className={'color font-monospace font-size-smaller'}>extends InputHTMLAttributes{`<HTMLInputElement>`}</span></h3>
         {propsList(checkboxSpecsData)}
     </>;
 };

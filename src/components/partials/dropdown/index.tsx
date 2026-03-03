@@ -8,16 +8,18 @@ import { classNames, isObject, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
 
 export interface DropdownProps {
-    selected?: string|DropdownObjectOptions;
     options: string[]|DropdownObjectOptions[];
-    icon?: IconType;
+    selected: string|DropdownObjectOptions|undefined;
+    name?: string;
     label?: string;
+    icon?: IconType;
     labelWidth?: CSSUnit;
     labelAlign?: 'left' | 'right' | 'center' | 'space-between';
-    onChange?: Function
+    onChange?: Function,
+    disabled?: boolean;
 }
 
-type DropdownObjectOptions = {
+export type DropdownObjectOptions = {
     label: any;
     value: string;
     icon?: IconType;
@@ -37,12 +39,14 @@ const Label = styled.label<{
     gap: 0.5rem;
     justify-content: ${props => props.$labelAlign};
     align-items: center;
+    min-width: fit-content;
     ${props => props.$labelWidth && `width: ${parseCSSUnit(props.$labelWidth)}`}
 `;
 
 const Wrapper = styled.div<{
     $show: boolean,
-    $width: number | string
+    $width: number | string,
+    $disabled?: boolean,
 }>`
     position: relative;
     border: 1px solid #e9e9e9;
@@ -52,17 +56,17 @@ const Wrapper = styled.div<{
     align-items: center;
     justify-content: space-between;
     width: ${props => props.$width};
-    ${props => props.$show && '' +
-            'border-bottom-left-radius: 0; ' +
-            'border-bottom-right-radius: 0; border-bottom-color: transparent;'}
+    ${props => props.$show && 'border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent;'}
+    ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
 `;
 
-const Input = styled.input`
+const Input = styled.input<{$hasIcon: boolean}>`
     border: none;
     background-color: transparent;
     padding-right: 0.1rem;
     cursor: pointer;
     width: 100%;
+    ${props => props.$hasIcon && 'text-align: center;'}
 `;
 
 const List = styled.div<{
@@ -85,12 +89,13 @@ const List = styled.div<{
 `;
 
 const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
-    padding: 0.2rem 0.5rem;
+    padding: 0.5rem;
     cursor: pointer;
     transition: color, background-color 0.2s ease-in-out;
     font-size: 0.9rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0.5rem;
 
     &.selected {
@@ -107,7 +112,7 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
 `;
 
 const Dropdown: FC<DropdownProps> = (props) => {
-    const {label, selected: props_selected, options, labelWidth, labelAlign, icon, onChange} = props;
+    const {name, disabled, label, selected: props_selected, options, labelWidth, labelAlign, icon, onChange} = props;
 
     const listRef = useRef<any>(null);
     const wrapperRef = useRef<any>(null);
@@ -128,12 +133,14 @@ const Dropdown: FC<DropdownProps> = (props) => {
 
     useEffect(() => {
         onResize();
-    }, [options]);
+        setSelected(props_selected);
+    }, [options, props_selected]);
 
     useEffect(() => {
         setShow(false);
         onChange && onChange(selected);
-    }, [onChange, selected]);
+        // eslint-disable-next-line
+    }, [selected]);
 
     function handleClickOutside() {
         if (!show) return;
@@ -147,8 +154,9 @@ const Dropdown: FC<DropdownProps> = (props) => {
         setDropdownPos({left, top: bottom});
     }
 
-    const isO = isObject(options);
+    const isO = isObject(options[0]);
     const _selected = String(isO ? (selected as DropdownObjectOptions).value : selected);
+    const hasIcon = isO && (selected as DropdownObjectOptions) && (selected as DropdownObjectOptions).icon;
 
     return <Container data-component={'dropdown'}>
         {label && <Label
@@ -159,12 +167,15 @@ const Dropdown: FC<DropdownProps> = (props) => {
         </Label>}
         <Wrapper
             ref={wrapperRef}
+            $disabled={disabled}
             $width={wrapperWidth}
             $show={show}>
             {
-                isO && (selected as DropdownObjectOptions) && <ReactIcon style={{marginLeft: '0.5rem'}} icon={(selected as DropdownObjectOptions).icon as IconType}/>
+                hasIcon && <ReactIcon style={{marginLeft: '0.5rem'}} icon={(selected as DropdownObjectOptions).icon as IconType}/>
             }
             <Input
+                name={name}
+                $hasIcon={hasIcon as boolean}
                 type={'text'}
                 readOnly={true}
                 onClick={() => setShow(!show)}

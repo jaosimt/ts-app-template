@@ -6,6 +6,7 @@ import Demo from '../components/pages/demo';
 import DemoBox from '../components/pages/demo/demoBox';
 import DemoButton from '../components/pages/demo/demoButton';
 import DemoCheckbox from '../components/pages/demo/demoCheckbox';
+import DemoDropdown from '../components/pages/demo/demoDropdown';
 import DemoInputField from '../components/pages/demo/demoInputField';
 import ModalDemo from '../components/pages/demo/demoModal';
 import TabsDemo from '../components/pages/demo/demoTab';
@@ -23,6 +24,7 @@ const ContentRouter = () => {
                 <Route index element={<Navigate to="/demo/box" replace />} />
                 <Route path="/demo/loading" element={<DemoLoading/>}/>
                 <Route path="/demo/box" element={<DemoBox/>}/>
+                <Route path="/demo/dropdown" element={<DemoDropdown/>}/>
                 <Route path="/demo/checkbox" element={<DemoCheckbox/>}/>
                 <Route path="/demo/button" element={<DemoButton/>}/>
                 <Route path="/demo/input-field" element={<DemoInputField/>}/>
