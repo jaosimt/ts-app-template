@@ -14,6 +14,7 @@ const ModalDemo: FC = () => {
     } = useForm();
 
     const [showModal, setShowModal] = useState(false);
+    const [showModal2, setShowModal2] = useState(false);
     const [props, setProps] = useState<Partial<ModalProps>>({
         closeOnEscKey: true,
         closeOnOutsideClick: false,
@@ -52,6 +53,49 @@ const ModalDemo: FC = () => {
                 <div className={'display-flex flex-direction-column gap-1'}>
                     <h2 className={'display-flex m-0 color-magenta font-monospace flex-direction-column align-items-center'}>Hello,
                         world!</h2>
+                    {introduction && <h3 className="m-0 text-align-center">{introduction}</h3>}
+                    <div>
+                        {
+                            noCloseProps && <p style={{borderTop: '1px solid gainsboro', paddingTop: '0.5rem'}}
+                                               className={'m-0 color-red font-size-small text-align-center'}>You won't
+                                be able to close this modal except reloading your browser<br/>since you haven't selected a
+                                prop to do so!</p>
+                        }
+                        {
+                            !noCloseProps && <>
+                                <h4 className={'m-0 border-top pt-0p5'}>This modal can be close by:</h4>
+                                <ul className={'m-0'} style={{listStyle: 'disc'}}>
+                                    {props.showClose && <li>Clicking the close button</li>}
+                                    {props.closeOnOutsideClick && <li>Clicking outside the modal</li>}
+                                    {props.closeOnEscKey && <li>Pressing the ESC key</li>}
+                                </ul>
+                            </>
+                        }
+                    </div>
+                    <Button
+                        className={'font-size-large'}
+                        align={'space-between'}
+                        icon={FaRegWindowMaximize}
+                        disabled={showModal2}
+                        onClick={() => setShowModal2(true)}
+                    >
+                        Show Modal 2
+                    </Button>
+                </div>
+            </Modal>
+        }
+        {
+            showModal2 && <Modal
+                width={props.width}
+                closeOnEscKey={props.closeOnEscKey}
+                closeOnOutsideClick={props.closeOnOutsideClick}
+                title={props.title}
+                showClose={props.showClose}
+                onClose={() => setShowModal2(false)}
+            >
+                <div className={'display-flex flex-direction-column gap-1'}>
+                    <h2 className={'display-flex m-0 color-magenta font-monospace flex-direction-column align-items-center'}>Hello,
+                        world x 2!</h2>
                     {introduction && <h3 className="m-0 text-align-center">{introduction}</h3>}
                     <div>
                         {
