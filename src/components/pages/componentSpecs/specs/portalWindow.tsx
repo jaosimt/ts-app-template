@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { createLink, CssColors } from '../../../../utils/ext';
+import { createLink } from '../../../../utils/ext';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
@@ -22,8 +22,8 @@ const portalData: PropsListProps[] = [
     {
         name: 'children',
         types: createLink('ReactNode', '//reactnative.dev/docs/react-node'),
-        values: CssColors,
-        description: ['Sets the background color of the box']
+        values: '',
+        description: ['Content to be rendered inside the portal window']
     }, {
         name: 'onClose',
         types: 'Function',

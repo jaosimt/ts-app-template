@@ -12,6 +12,7 @@ import ModalDemo from '../components/pages/demo/demoModal';
 import TabsDemo from '../components/pages/demo/demoTab';
 import WindowPortalDemo from '../components/pages/demo/demoWindowPortal';
 import DemoLoading from '../components/pages/demo/demoLoading';
+import DemoDrawer from '../components/pages/demo/drawer';
 import Home from '../components/pages/home';
 import Login from '../components/pages/login';
 
@@ -29,6 +30,7 @@ const ContentRouter = () => {
                 <Route path="/demo/button" element={<DemoButton/>}/>
                 <Route path="/demo/input-field" element={<DemoInputField/>}/>
                 <Route path="/demo/login" element={<Login/>}/>
+                <Route path="/demo/drawer" element={<DemoDrawer/>}/>
                 <Route path="/demo/modal" element={<ModalDemo/>}/>
                 <Route path="/demo/tabs" element={<TabsDemo/>}/>
                 <Route path="/demo/window-portal" element={<WindowPortalDemo/>}/>

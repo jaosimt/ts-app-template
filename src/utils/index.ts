@@ -391,3 +391,23 @@ export const hslToHex = (hsl: HSLString): string => {
 
     return `#${f(0)}${f(8)}${f(4)}`;
 }
+
+export const isElementOnTop = (element: HTMLElement): boolean => {
+    if (!element) return false;
+
+    const rect = element.getBoundingClientRect();
+    // Calculate the center coordinates relative to the viewport
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+
+    // Check if the coordinates are within the visible viewport bounds
+    if (x < 0 || x > window.innerWidth || y < 0 || y > window.innerHeight) {
+        return false; // Element is off-screen or not fully visible
+    }
+
+    // Get the topmost element at the center point
+    const topElement = document.elementFromPoint(x, y);
+
+    // Compare the top element with the target element Z
+    return topElement === element || element.contains(topElement);
+};

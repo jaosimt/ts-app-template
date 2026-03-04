@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { CssColors } from '../../../../utils/ext';
+import { createLink, CssColors } from '../../../../utils/ext';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
@@ -26,7 +26,7 @@ const tabData: PropsListProps[] = [
     {
         name: 'data',
         types: 'TabItemType[]',
-        values: '',
+        values: <span>{`{id?: 'string', name: 'string', content: `}{createLink('ReactNode', '//reactnative.dev/docs/react-node')}{`}`}</span>,
         description: ['Sets the active tab item']
     }, {
         name: 'activeItemColor',

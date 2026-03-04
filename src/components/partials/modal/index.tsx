@@ -1,11 +1,11 @@
-import { FC, HTMLAttributes, useCallback, useEffect, useState } from 'react';
+import { FC, HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react';
 import './styles.scss';
 import ReactDOM from 'react-dom';
 import { FaCircleXmark } from 'react-icons/fa6';
 import { useKeyPress, useOutsideClick } from '../../../hooks';
 import { v4 as uuidv4 } from 'uuid';
 import { CSSUnit } from '../../../types';
-import { classNames, parseCSSUnit } from '../../../utils';
+import { classNames, isElementOnTop, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
@@ -32,6 +32,7 @@ const Modal: FC<ModalProps> = (props) => {
     const [show, setShow] = useState(false);
     const [uid] = useState(`modal-${uuidv4()}`);
 
+    const overlayRef = useRef<any>(null);
     const modalRef = useOutsideClick(outsideClickCloseHandler, true);
 
     const closeHandler = useCallback(() => {
@@ -42,7 +43,7 @@ const Modal: FC<ModalProps> = (props) => {
     const escKeyPressHandler = useCallback((pressed: boolean) => {
         if (pressed) {
             const modal = modalRef.current as unknown as HTMLElement;
-            if (modal) {
+            if (isElementOnTop(modal)) {
                 const closeOnEscKeyEnabled = modal.getAttribute('data-escape-key') === 'true';
                 if (closeOnEscKeyEnabled) {
                     const nextModalOverlay = document.querySelector(`#${uid}.modal-overlay ~ .modal-overlay`);
@@ -70,8 +71,8 @@ const Modal: FC<ModalProps> = (props) => {
             icon={FaCircleXmark}/></span>}
     </>;
 
-    const modal = <div id={uid} className={classNames('modal-overlay', maxZIndex && 'max-z-index')}>
-        <div ref={modalRef} data-component={'Modal'} data-escape-key={closeOnEscKey}
+    const modal = <div id={uid} ref={overlayRef} className={classNames('modal-overlay', maxZIndex && 'max-z-index')}>
+        <div ref={modalRef} data-component={'modal'} data-escape-key={closeOnEscKey}
              style={{width: parseCSSUnit(width as CSSUnit), opacity: show ? 1 : 0}}>
             {title && <div className={'header'}><span className={'title'}>{title}</span>{closeButton}</div>}
             {!title && closeButton}
