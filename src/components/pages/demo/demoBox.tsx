@@ -99,25 +99,27 @@ const DemoBox:FC = () => {
             width={props.width}
             onLabelClick={props.onLabelClick}
         >
-            <p><b>The quick brown fox jumps over the lazy dog</b> is a famous English-language pangram—a sentence
-                containing every letter of the alphabet. Coined in the late 19th century, it is widely used for
-                touch-typing practice, testing keyboards, displaying fonts, and inWikipedia says, writing exercises.</p>
-            <p><b>Key Aspects of the Phrase:</b></p>
-            <ul>
-                <li><b>Purpose:</b> It is used to display all 26 letters of the English alphabet in a short, coherent
-                    sentence, making it ideal for testing typewriters, computer keyboards, and displaying font types.
-                </li>
-                <li><b>Origin:</b> The earliest known appearance of this phrase was in The Boston Journal in 1885, often
-                    used for writing practice.
-                </li>
-                <li><b>Content:</b> It is a 35-letter sentence that is frequently used, though sometimes misquoted
-                    (e.g."jumped" instead of "jumps").
-                </li>
-                <li><b>Alternatives:</b> Similar pangrams exist in other languages, such as "Voix ambiguë d'un cœur qui,
-                    au zéphyr, préfère les jattes de kiwis" in French,
-                    as {createLink('Reddit', '//www.reddit.com/r/AskEurope/comments/id8eor/what_is_the_the_quick_brown_fox_jumps_over_the/')} mentions.
-                </li>
-            </ul>
+            <div className="p-0p5 trim">
+                <p><b>The quick brown fox jumps over the lazy dog</b> is a famous English-language pangram—a sentence
+                    containing every letter of the alphabet. Coined in the late 19th century, it is widely used for
+                    touch-typing practice, testing keyboards, displaying fonts, and inWikipedia says, writing exercises.</p>
+                <p><b>Key Aspects of the Phrase:</b></p>
+                <ul>
+                    <li><b>Purpose:</b> It is used to display all 26 letters of the English alphabet in a short, coherent
+                        sentence, making it ideal for testing typewriters, computer keyboards, and displaying font types.
+                    </li>
+                    <li><b>Origin:</b> The earliest known appearance of this phrase was in The Boston Journal in 1885, often
+                        used for writing practice.
+                    </li>
+                    <li><b>Content:</b> It is a 35-letter sentence that is frequently used, though sometimes misquoted
+                        (e.g."jumped" instead of "jumps").
+                    </li>
+                    <li><b>Alternatives:</b> Similar pangrams exist in other languages, such as "Voix ambiguë d'un cœur qui,
+                        au zéphyr, préfère les jattes de kiwis" in French,
+                        as {createLink('Reddit', '//www.reddit.com/r/AskEurope/comments/id8eor/what_is_the_the_quick_brown_fox_jumps_over_the/')} mentions.
+                    </li>
+                </ul>
+            </div>
         </Box>
     </div>
 }

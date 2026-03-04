@@ -195,6 +195,8 @@ const Dropdown: FC<DropdownProps> = (props) => {
                 onClick={() => setShow(!show)}
                 value={_selected}/>
             <ReactIcon onClick={() => setShow(!show)} icon={FaChevronDown} style={{
+                transition: 'transform 300ms ease-in-out',
+                transform: `rotate(${show?-180:0}deg)`,
                 color: 'gba(0, 123, 255, 0.63)',
                 cursor: 'pointer',
                 marginRight: '0.2rem',
