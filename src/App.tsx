@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import './App.scss';
-import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
+import { IoCloseCircleSharp, IoCloudOffline, IoLogoReact } from 'react-icons/io5';
 import { Link, useLocation } from 'react-router';
+import { ToastContainer } from 'react-toastify';
 import { ReactIcon } from './components/partials';
 import Modal from './components/partials/modal';
 import { targetUnicode } from './constants';
 import { NavigationMain } from './navs';
 import ContentRouter from './routes';
+import { $textColor } from './styles/variables';
 import { classNames } from './utils';
 
 const App = () => {
@@ -43,6 +45,8 @@ const App = () => {
         </Modal>
     }, [offline])
 
+    const CloseButton = ({closeToast}: { closeToast: any }) => <ReactIcon style={{color: $textColor, cursor: 'pointer'}} size={42} icon={IoCloseCircleSharp} onClick={closeToast}/>;
+
     return (<>
         {MemoizedConnectionModal}
         <header className={'grid cols-2'}>
@@ -54,6 +58,7 @@ const App = () => {
         <main>{<ContentRouter/>}</main>
         <footer>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.
         </footer>
+        <ToastContainer closeButton={CloseButton}/>
     </>);
 };
 

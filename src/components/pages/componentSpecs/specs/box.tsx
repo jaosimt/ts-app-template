@@ -104,8 +104,9 @@ const BoxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
                 {code}
             </SyntaxHighlighter>
         </Box>
-        <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>Properties <span
-            className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLDivElement>`}</span>
+        <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>
+            Properties
+            <span className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLDivElement>`}</span>
         </h3>
         {propsList(boxData)}
     </>;

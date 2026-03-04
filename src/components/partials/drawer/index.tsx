@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useOnClickOutside } from 'usehooks-ts';
 import { useKeyPress } from '../../../hooks';
 import { CSSColors, CSSUnit } from '../../../types';
-import { isElementOnTop, parseCSSUnit } from '../../../utils';
+import { isElementOnTop, parseCSSUnit, classNames } from '../../../utils';
 import { ReactIcon } from '../index';
 
 export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
@@ -12,6 +12,8 @@ export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
     width?: CSSUnit;
     height?: CSSUnit;
     backgroundColor?: CSSColors;
+    onOpen?: Function;
+    onClose?: Function;
 }
 
 const Container = styled.div<{
@@ -104,7 +106,12 @@ const Drawer: FC<DrawerProps> = (props) => {
         width = 'auto',
         height = 'auto',
         position = 'left',
-        backgroundColor = '#913794c7'
+        backgroundColor = '#913794c7',
+        className,
+        style,
+        onOpen,
+        onClose,
+        ...restProps
     } = props;
 
     const containerRef = useRef<any>(null);
@@ -119,8 +126,14 @@ const Drawer: FC<DrawerProps> = (props) => {
     useKeyPress('Escape', escKeyPressHandler);
 
     useEffect(() => {
-        show && setStyles(drawer[String(position)]);
-        !show && setStyles(drawer.hide[String(position)]);
+        if (show) {
+            setStyles(drawer[String(position)]);
+            onOpen && onOpen();
+        } else {
+            setStyles(drawer.hide[String(position)]);
+            onClose && onClose();
+        }
+        //eslint-disable-next-line
     }, [position, show]);
 
     function escKeyPressHandler(pressed: boolean) {
@@ -133,12 +146,13 @@ const Drawer: FC<DrawerProps> = (props) => {
         <Container
             data-component={'drawer'}
             ref={containerRef}
-            className={'trim'}
-            style={styles}
+            className={classNames(className, 'trim')}
+            style={{...style, ...styles}}
             $position={position}
             $width={width as CSSUnit}
             $height={height as CSSUnit}
             $backgroundColor={backgroundColor}
+            {...restProps}
         >
             <div className={'trim'} style={{
                 border: '1px double gainsboro',

@@ -6,13 +6,13 @@ import Demo from '../components/pages/demo';
 import DemoBox from '../components/pages/demo/demoBox';
 import DemoButton from '../components/pages/demo/demoButton';
 import DemoCheckbox from '../components/pages/demo/demoCheckbox';
+import DemoDrawer from '../components/pages/demo/demoDrawer';
 import DemoDropdown from '../components/pages/demo/demoDropdown';
 import DemoInputField from '../components/pages/demo/demoInputField';
 import ModalDemo from '../components/pages/demo/demoModal';
 import TabsDemo from '../components/pages/demo/demoTab';
 import WindowPortalDemo from '../components/pages/demo/demoWindowPortal';
 import DemoLoading from '../components/pages/demo/demoLoading';
-import DemoDrawer from '../components/pages/demo/drawer';
 import Home from '../components/pages/home';
 import Login from '../components/pages/login';
 

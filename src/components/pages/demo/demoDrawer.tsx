@@ -45,17 +45,15 @@ const DemoDrawer: FC = () => {
         height: 300
     });
 
+    // eslint-disable-next-line
+    useEffect(() => setProps({...props, position: position.value as any}), [position]);
+
     const propsChangeHandler = (e: ChangeEvent<any>) => {
         const {name, value} = e.currentTarget;
         setProps({...props, [name]: value});
     };
 
     const dropDownChangeHandler = (value: DropdownObjectOptions) => setPosition(value);
-
-    // eslint-disable-next-line
-    useEffect(() => setProps({...props, position: position.value as any}), [position]);
-
-    console.log('props:', props);
 
     return <div className={'width-100p position-relative display-flex justify-content-center align-items-center'} style={{height: 'calc(100% - 0.5rem)'}}>
         <Box
