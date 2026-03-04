@@ -2,7 +2,8 @@ import { FC, HTMLAttributes, memo, useCallback, useEffect, useRef, useState } fr
 import './styles.scss';
 import ReactDOM from 'react-dom';
 import { FaCircleXmark } from 'react-icons/fa6';
-import { useKeyPress, useOutsideClick } from '../../../hooks';
+import { useOnClickOutside } from 'usehooks-ts';
+import { useKeyPress } from '../../../hooks';
 import { v4 as uuidv4 } from 'uuid';
 import { CSSUnit } from '../../../types';
 import { classNames, isElementOnTop, parseCSSUnit } from '../../../utils';
@@ -33,7 +34,7 @@ const Modal: FC<ModalProps> = (props) => {
     const [uid] = useState(`modal-${uuidv4()}`);
 
     const overlayRef = useRef<any>(null);
-    const modalRef = useOutsideClick(outsideClickCloseHandler, true);
+    const modalRef = useRef<any>(null);
 
     const closeHandler = useCallback(() => {
         setShow(false);
@@ -42,27 +43,20 @@ const Modal: FC<ModalProps> = (props) => {
 
     const escKeyPressHandler = useCallback((pressed: boolean) => {
         if (pressed) {
-            const modal = modalRef.current as unknown as HTMLElement;
-            if (isElementOnTop(modal)) {
-                const closeOnEscKeyEnabled = modal.getAttribute('data-escape-key') === 'true';
-                if (closeOnEscKeyEnabled) {
-                    const nextModalOverlay = document.querySelector(`#${uid}.modal-overlay ~ .modal-overlay`);
-                    !nextModalOverlay && closeHandler();
-                }
-            }
+            const modal = modalRef.current as HTMLElement;
+            isElementOnTop(modal) && modal.getAttribute('data-escape-key') === 'true' && closeHandler();
         }
-    }, [closeHandler, modalRef, uid]);
+    }, [closeHandler, modalRef]);
 
     useKeyPress('Escape', escKeyPressHandler);
+    useOnClickOutside(modalRef, () => {
+        if (!closeOnOutsideClick || !isElementOnTop(modalRef.current)) return;
+        closeHandler();
+    });
 
     useEffect(() => {
         setShow(true);
     }, []);
-
-    function outsideClickCloseHandler() {
-        if (!closeOnOutsideClick) return;
-        closeHandler();
-    }
 
     const closeButton = <>
         {showClose && <span onClick={closeHandler}
