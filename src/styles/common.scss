@@ -36,11 +36,11 @@
 /********************************************* BACKGROUND- */
 
 /* BORDER- *************************************************/
-.border { border : 1px solid $borderColor; }
-.border-top { border-top : 1px solid $borderColor; }
-.border-right { border-right : 1px solid $borderColor; }
-.border-bottom { border-bottom : 1px solid $borderColor; }
-.border-left { border-left : 1px solid $borderColor; }
+.border { border : 1px solid $borderColorDefault; }
+.border-top { border-top : 1px solid $borderColorDefault; }
+.border-right { border-right : 1px solid $borderColorDefault; }
+.border-bottom { border-bottom : 1px solid $borderColorDefault; }
+.border-left { border-left : 1px solid $borderColorDefault; }
 
 .border-radius-0p1 { border-radius : 0.1rem; }
 .border-radius-0p2 { border-radius : 0.2rem; }

@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import { FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
 import { RiArchiveDrawerFill } from 'react-icons/ri';
 import styled from 'styled-components';
 import { useOnClickOutside } from 'usehooks-ts';
@@ -25,6 +25,7 @@ const Container = styled.div<{
     position: fixed;
     transition: all 700ms ease-in-out;
     background-color: ${props => props.$backgroundColor};
+    opacity: 1;
     color: white;
     padding: 0.2rem;
     box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
@@ -45,6 +46,7 @@ const Container = styled.div<{
 `;
 
 const Handle = styled.div<{
+    $backgroundColor: CSSColors;
     $position: 'top' | 'left' | 'bottom' | 'right';
 }>`
     z-index: 775;
@@ -52,14 +54,14 @@ const Handle = styled.div<{
     width: 1.9rem;
     height: 1.9rem;
     border-radius: 50%;
-    border: 1px solid cyan;
+    border: 1px solid ${props => props.$backgroundColor};
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: opacity 0.1s ease-in-out;
     opacity: 0.3;
-    background-color: cyan;
+    background-color: ${props => props.$backgroundColor};
     color: white;
 
     ${props => {
@@ -160,11 +162,11 @@ const Drawer: FC<DrawerProps> = (props) => {
                 </div>
             </div>
         </Container>
-        {!show && <Handle onClick={() => setShow(true)} $position={position}>
+        {!show && <Handle onClick={() => setShow(true)} $position={position} $backgroundColor={backgroundColor}>
             <ReactIcon icon={RiArchiveDrawerFill}
                        style={{width: '21px', height: '21px', display: 'flex'}}/>
         </Handle>}
     </>;
 };
 
-export default Drawer;
+export default memo(Drawer);

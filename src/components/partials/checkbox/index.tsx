@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes } from 'react';
+import { FC, InputHTMLAttributes, memo } from 'react';
 import styled from 'styled-components';
 import { CSSUnit } from '../../../types';
 import { parseCSSUnit } from '../../../utils';
@@ -98,4 +98,4 @@ const Checkbox: FC<CheckboxProps> = (props) => {
     </Label>
 }
 
-export default Checkbox;
+export default memo(Checkbox);

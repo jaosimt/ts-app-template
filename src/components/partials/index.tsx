@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react';
+import { CSSProperties, FC, memo } from 'react';
 import { IconType } from 'react-icons';
 
 export interface ReactIconProps {
@@ -10,7 +10,6 @@ export interface ReactIconProps {
 }
 
 // @ts-ignore // "react": ["./node_modules/@types/react"] could also be added to tsconfig.json
-const ReactIcon: FC<ReactIconProps> = ({icon: Icon, size, className, onClick, style}) => <Icon onClick={onClick} size={size} className={className} style={style}/>;
-
-export { ReactIcon };
+const _ReactIcon: FC<ReactIconProps> = ({icon: Icon, size, className, onClick, style}) => <Icon onClick={onClick} size={size} className={className} style={style}/>;
+export const ReactIcon = memo(_ReactIcon);
 

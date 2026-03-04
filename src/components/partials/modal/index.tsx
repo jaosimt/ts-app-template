@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useEffect, useRef, useState } from 'react';
 import './styles.scss';
 import ReactDOM from 'react-dom';
 import { FaCircleXmark } from 'react-icons/fa6';
@@ -85,5 +85,5 @@ const Modal: FC<ModalProps> = (props) => {
     return ReactDOM.createPortal(show ? modal : null, document.body);
 };
 
-export default Modal;
+export default memo(Modal);
 

@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, useState } from 'react';
+import { FC, HTMLAttributes, memo, useState } from 'react';
 import './styles.scss';
 import { IconType } from 'react-icons';
 import { v4 as uuidv4 } from 'uuid';
@@ -38,4 +38,4 @@ const Button: FC<ButtonProps> = (props) => {
     );
 }
 
-export default Button;
+export default memo(Button);

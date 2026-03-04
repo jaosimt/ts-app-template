@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 import { ImSpinner } from 'react-icons/im';
 import styled from 'styled-components';
 import { CSSColors } from '../../../types';
@@ -91,4 +91,4 @@ const Loading: FC<LoadingProps> = (props) => {
     </Container>;
 };
 
-export default Loading;
+export default memo(Loading);

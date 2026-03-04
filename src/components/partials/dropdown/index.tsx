@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, memo, useEffect, useRef, useState } from 'react';
 import { IconType } from 'react-icons';
 import { FaChevronDown } from 'react-icons/fa6';
 import styled from 'styled-components';
@@ -6,6 +6,7 @@ import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
 import { CSSUnit } from '../../../types';
 import { classNames, isObject, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
+import { $backgroundColor, $borderColorDefault, $borderColorPrimary, $textColor } from '../../../styles/variables';
 
 export interface DropdownProps {
     options: string[]|DropdownObjectOptions[];
@@ -50,9 +51,9 @@ const Wrapper = styled.div<{
     $disabled?: boolean,
 }>`
     position: relative;
-    border: 1px solid #e9e9e9;
+    border: 1px solid ${props => props.$show ? $borderColorPrimary : $borderColorDefault};
     border-radius: 0.3rem;
-    background-color: #fff;
+    background-color: ${$backgroundColor};
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -82,7 +83,7 @@ const List = styled.div<{
     left: ${props => `${props.$pos.left}px`};
     width: fit-content;
     background-color: #fff;
-    border: 1px solid #e9e9e9;
+    border: 1px solid ${$borderColorPrimary};
     border-bottom-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
     white-space: nowrap;
@@ -94,22 +95,32 @@ const List = styled.div<{
 const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
     padding: 0.5rem 0.7rem;
     cursor: pointer;
-    transition: color, background-color 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     font-size: 0.9rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
+    color: ${$textColor};
 
     &.selected {
         cursor: default;
-        background-color: whitesmoke;
+        color: ${$backgroundColor};
+        background-color: ${$textColor};
+        
+        &:not(:first-child) {
+            border-top: 1px solid ${$backgroundColor};
+        }
+        
+        &:not(:last-child) {
+            border-bottom: 1px solid ${$backgroundColor};
+        }
     }
 
     &:not(.selected) {
         &:hover {
-            color: white;
-            background-color: rgba(0, 123, 255, 0.63);
+            color: ${$backgroundColor};
+            background-color: ${$textColor};
         }
     }
 `;
@@ -217,4 +228,4 @@ const Dropdown: FC<DropdownProps> = (props) => {
     </Container>;
 };
 
-export default Dropdown;
+export default memo(Dropdown);

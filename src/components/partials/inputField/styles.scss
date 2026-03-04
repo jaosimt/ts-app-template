@@ -16,7 +16,7 @@
     > input {
       min-width    : 50px;
       padding       : 0.5rem;
-      border        : 1px solid $borderColor;
+      border        : 1px solid $borderColorDefault;
       border-radius : 0.3rem;
       
       &[type="text"] {}

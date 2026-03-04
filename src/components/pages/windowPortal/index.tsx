@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useMemo, useRef } from 'react';
+import { FC, memo, ReactNode, useEffect, useMemo, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 interface WindowPortalProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -81,4 +81,4 @@ const WindowPortal: FC<WindowPortalProps> = ({openOnNextScreen = false, children
     );
 };
 
-export default WindowPortal;
+export default memo(WindowPortal);

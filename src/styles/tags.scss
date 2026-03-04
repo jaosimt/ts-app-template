@@ -5,7 +5,7 @@ select {
   padding       : 0.439rem 0.4rem;
   color         : $inputTextColor;
   background    : $backgroundColor;
-  border-color  : $borderColor;
+  border-color  : $borderColorDefault;
   border-radius : 4px;
   
   &:focus { outline : none; }
@@ -56,7 +56,7 @@ input {
   color         : $inputTextColor;
   min-width     : 50px;
   padding       : 0.5rem;
-  border        : 1px solid $borderColor;
+  border        : 1px solid $borderColorDefault;
   border-radius : 0.3rem;
   
   &:focus {

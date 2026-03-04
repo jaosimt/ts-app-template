@@ -7,6 +7,7 @@ import {
     MdAlignVerticalTop
 } from 'react-icons/md';
 import { RiArchiveDrawerFill } from 'react-icons/ri';
+import { $textColor } from '../../../styles/variables';
 import { createLink } from '../../../utils/ext';
 import { ReactIcon } from '../../partials';
 import Box from '../../partials/box';
@@ -59,6 +60,7 @@ const DemoDrawer: FC = () => {
     return <div className={'width-100p position-relative display-flex justify-content-center align-items-center'} style={{height: 'calc(100% - 0.5rem)'}}>
         <Box
             label={'Drawer Props'}
+            width={420}
             boxClassName={'display-inline-block'}
             style={{top: '50%', position: 'absolute'}}
         >
@@ -86,12 +88,11 @@ const DemoDrawer: FC = () => {
                         onChange: propsChangeHandler
                     })}/>
             </div>
-            <p className={'display-flex align-items-center mb-0 color-magenta justify-content-center border-top pt-0p5'}>The Drawer's handle (<ReactIcon icon={RiArchiveDrawerFill}/>) should be centered on the&nbsp;<b>{props.position}</b>&nbsp;of your screen!</p>
-            <p className={'mt-0 font-size-small color-gray text-align-center'}>Once opened, you may close it pressing the ESC key or clicking outside of it.</p>
-
+            <p className={'flex-wrap display-flex align-items-center mb-0 color-magenta justify-content-center border-top pt-0p5'}>The Drawer's handle (<ReactIcon icon={RiArchiveDrawerFill}/>) should be centered on the&nbsp;<b>{props.position}</b>&nbsp;of your screen!</p>
+            <p className={'flex-wrap mt-0p3 font-size-small color-gray text-align-center'}>Once opened, you may close it pressing the ESC key or clicking outside of it.</p>
         </Box>
 
-        <Drawer position={props.position} width={props.width} height={props.height}>
+        <Drawer position={props.position} width={props.width} height={props.height} backgroundColor={$textColor}>
             <p><b>The quick brown fox jumps over the lazy dog</b> is a famous English-language pangram—a sentence
                 containing every letter of the alphabet. Coined in the late 19th century, it is widely used for
                 touch-typing practice, testing keyboards, displaying fonts, and inWikipedia says, writing exercises.</p>

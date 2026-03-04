@@ -32,7 +32,7 @@ const DemoLoading: FC = () => {
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
 
 
-    return <div data-component={'loading-demo'} className={'display-flex flex-direction-column width-fit-content'}>
+    return <div data-component={'loading-demo'} className={'display-inline-flex flex-direction-column height-100p gap-0p5'}>
         <Box
             boxClassName={'width-fit-content'}
             className={'display-flex gap-0p3 flex-direction-column width-fit-content'}
@@ -70,7 +70,7 @@ const DemoLoading: FC = () => {
 
             </div>
         </Box>
-        <div className="position-relative" style={{height: '300px'}}>
+        <div className="position-relative border border-radius-0p4 background-light" style={{height: '100%'}}>
             <Loading
                 borderWidth={props.borderWidth}
                 borderColor={props.borderColor}
