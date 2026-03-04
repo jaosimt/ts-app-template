@@ -1,5 +1,4 @@
-@import './styles/variables';
-@import './styles/mixins';
+@use './styles/variables' as v;
 
 html {
   scroll-behavior: smooth;
@@ -13,8 +12,8 @@ html {
     -webkit-font-smoothing  : antialiased;
     -moz-osx-font-smoothing : grayscale;
     
-    background-color        : $backgroundColor;
-    color                   : $textColor
+    background-color        : v.$backgroundColor;
+    color                   : v.$textColor
   }
 }
 

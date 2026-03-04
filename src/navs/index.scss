@@ -1,4 +1,4 @@
-@import "../styles/variables.scss";
+@use "../styles/variables.scss" as v;
 
 nav[data-nav="top"] {
   display     : flex;
@@ -22,9 +22,9 @@ nav[data-nav="left"] {
     padding       : 0.5rem;
     
     &.active {
-      border-bottom-color : $headerBackgroundColor;
-      border-top-color : $headerBackgroundColor;
-      color               : $headerBackgroundColor;
+      border-bottom-color : v.$headerBackgroundColor;
+      border-top-color : v.$headerBackgroundColor;
+      color               : v.$headerBackgroundColor;
     }
   }
 }

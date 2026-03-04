@@ -1,11 +1,11 @@
-@import "./variables";
-@import "./mixins";
+@use "./variables" as v;
+@use "./mixins" as m;
 
 select {
   padding       : 0.439rem 0.4rem;
-  color         : $inputTextColor;
-  background    : $backgroundColor;
-  border-color  : $borderColorDefault;
+  color         : v.$inputTextColor;
+  background    : v.$backgroundColor;
+  border-color  : v.$borderColorDefault;
   border-radius : 4px;
   
   &:focus { outline : none; }
@@ -13,13 +13,13 @@ select {
   &:focus,
   &:hover {
     cursor           : pointer;
-    background-color : $buttonPrimaryHoverColor;
-    color            : $buttonPrimaryTextColor;
-    border-color     : $buttonPrimaryBorderColor;
+    background-color : v.$buttonPrimaryHoverColor;
+    color            : v.$buttonPrimaryTextColor;
+    border-color     : v.$buttonPrimaryBorderColor;
     
     &:active {
       opacity : 0.3;
-      color   : $inputTextColor;
+      color   : v.$inputTextColor;
     }
   }
   
@@ -32,7 +32,7 @@ select {
 }
 
 code {
-  font-family      : $codeFontFamily;
+  font-family      : v.$codeFontFamily;
   background-color : black;
   color            : white;
   padding          : 0.2rem;
@@ -53,19 +53,19 @@ textarea {
 
 textarea,
 input {
-  color         : $inputTextColor;
+  color         : v.$inputTextColor;
   min-width     : 50px;
   padding       : 0.5rem;
-  border        : 1px solid $borderColorDefault;
+  border        : 1px solid v.$borderColorDefault;
   border-radius : 0.3rem;
   
   &:focus {
     outline      : none;
-    border-color : $textColor !important;
+    border-color : v.$textColor !important;
   }
   
   &.border-error {
-    border : 1px solid $errorColor !important;
+    border : 1px solid v.$errorColor !important;
   }
   
   &[disabled],
@@ -104,11 +104,11 @@ link {
   text-decoration : none;
   cursor          : pointer;
   font-weight     : 700;
-  color           : $buttonPrimaryColor;
+  color           : v.$buttonPrimaryColor;
   
   &.color-inherit { color : inherit; }
 }
 
 div, body {
-  @include customScrollbar();
+  @include m.customScrollbar();
 }

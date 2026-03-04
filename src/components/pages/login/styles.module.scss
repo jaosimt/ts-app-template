@@ -1,10 +1,10 @@
-@import '../../../styles/common';
-@import '../../../styles/mixins';
+@use '../../../styles/common';
+@use '../../../styles/mixins' as m;
 
 .Login {
   @extend .border-radius-0p5;
   @extend .display-flex;
-  @include boxShadow();
+  @include m.boxShadow();
   overflow         : clip;
   z-index          : 1;
   background-color : white;

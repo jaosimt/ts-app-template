@@ -1,5 +1,6 @@
-@import "mixins";
-@import "tags";
+@use "mixins" as m;
+@use "variables" as v;
+@use "tags";
 
 .trim {
   > :first-child { margin-top : 0; }
@@ -16,7 +17,7 @@
 /**************************************************** TEXT */
 
 /* COLOR ***************************************************/
-.color { color : $textColor; }
+.color { color : v.$textColor; }
 .color-cyan { color : cyan; }
 .color-magenta { color : magenta; }
 .color-yellow { color : yellow; }
@@ -30,17 +31,17 @@
 /*************************************************** COLOR */
 
 /* BACKGROUND- *********************************************/
-.background { background-color : $backgroundColor; }
+.background { background-color : v.$backgroundColor; }
 .background-light { background-color : #ededed; }
 .background-gray { background-color : gray; }
 /********************************************* BACKGROUND- */
 
 /* BORDER- *************************************************/
-.border { border : 1px solid $borderColorDefault; }
-.border-top { border-top : 1px solid $borderColorDefault; }
-.border-right { border-right : 1px solid $borderColorDefault; }
-.border-bottom { border-bottom : 1px solid $borderColorDefault; }
-.border-left { border-left : 1px solid $borderColorDefault; }
+.border { border : 1px solid v.$borderColorDefault; }
+.border-top { border-top : 1px solid v.$borderColorDefault; }
+.border-right { border-right : 1px solid v.$borderColorDefault; }
+.border-bottom { border-bottom : 1px solid v.$borderColorDefault; }
+.border-left { border-left : 1px solid v.$borderColorDefault; }
 
 .border-radius-0p1 { border-radius : 0.1rem; }
 .border-radius-0p2 { border-radius : 0.2rem; }
@@ -227,7 +228,7 @@
 .font-size-large { font-size : large; }
 .font-size-inherit { font-size : inherit; }
 .font-weight-bold { font-weight : bold; }
-.font-monospace { font-family: $codeFontFamily; }
+.font-monospace { font-family: v.$codeFontFamily; }
 /*************************************************** FONT- */
 
 /* POSITION- ***********************************************/
@@ -292,7 +293,7 @@
   @extend link;
 }
 
-.box-shadow { @include boxShadow(); }
+.box-shadow { @include m.boxShadow(); }
 
 .translate {
   &.absolute-center { position: absolute; }
@@ -356,10 +357,10 @@
         /* ALTERNATING COLUMN BACKGROUND COLOR ON EVEN NUMBER OF COLUMNS */
         
         /* every other odd column */
-        &:nth-child(2n+1) { background-color : $alternatingBackgroundOdd; }
+        &:nth-child(2n+1) { background-color : v.$alternatingBackgroundOdd; }
         
         /* every other even column */
-        &:nth-child(2n) { background-color : $alternatingBackgroundEven; }
+        &:nth-child(2n) { background-color : v.$alternatingBackgroundEven; }
       }
     }
   }
@@ -375,8 +376,8 @@
         /* NON REPEATING GRID BORDER */
         
         /* border left and bottom to all elements */
-        border-left   : 1px solid $gridBorderColor;
-        border-bottom : 1px solid $gridBorderColor;
+        border-left   : 1px solid v.$gridBorderColor;
+        border-bottom : 1px solid v.$gridBorderColor;
       }
     }
   }
@@ -384,8 +385,8 @@
   &.cols-2 {
     &.border {
       > * {
-        &:nth-child(-n+2) { border-top : 1px solid $gridBorderColor; }
-        &:nth-child(2n) { border-right : 1px solid $gridBorderColor; }
+        &:nth-child(-n+2) { border-top : 1px solid v.$gridBorderColor; }
+        &:nth-child(2n) { border-right : 1px solid v.$gridBorderColor; }
       }
     }
   }
@@ -396,11 +397,11 @@
         /* ALTERNATING COLUMN BACKGROUND COLOR ON EVEN NUMBER OF COLUMNS */
         
         /* every other odd column */
-        &:nth-child(3n+1) { background-color : $alternatingBackgroundOdd; }
-        &:nth-child(3n+3) { background-color : $alternatingBackgroundOdd; }
+        &:nth-child(3n+1) { background-color : v.$alternatingBackgroundOdd; }
+        &:nth-child(3n+3) { background-color : v.$alternatingBackgroundOdd; }
         
         /* even column */
-        &:nth-child(3n+2) { background-color : $alternatingBackgroundEven; }
+        &:nth-child(3n+2) { background-color : v.$alternatingBackgroundEven; }
       }
     }
     
@@ -409,10 +410,10 @@
         /* NON REPEATING GRID BORDER */
         
         /* border top on the first 3 */
-        &:nth-child(-n+3) { border-top : 1px solid $gridBorderColor; }
+        &:nth-child(-n+3) { border-top : 1px solid v.$gridBorderColor; }
         
         /* border right on every other 3th element */
-        &:nth-child(3n) { border-right : 1px solid $gridBorderColor; }
+        &:nth-child(3n) { border-right : 1px solid v.$gridBorderColor; }
       }
     }
   }
@@ -423,10 +424,10 @@
         /* NON REPEATING GRID BORDER */
         
         /* border top on the first 4 */
-        &:nth-child(-n+4) { border-top : 1px solid $gridBorderColor; }
+        &:nth-child(-n+4) { border-top : 1px solid v.$gridBorderColor; }
         
         /* border right on every other 4th element */
-        &:nth-child(4n) { border-right : 1px solid $gridBorderColor; }
+        &:nth-child(4n) { border-right : 1px solid v.$gridBorderColor; }
       }
     }
   }
@@ -437,13 +438,13 @@
         /* ALTERNATING COLUMN BACKGROUND COLOR ON EVEN NUMBER OF COLUMNS */
         
         /* every other odd column */
-        &:nth-child(5n+1) { background-color : $alternatingBackgroundOdd; }
-        &:nth-child(5n+3) { background-color : $alternatingBackgroundOdd; }
-        &:nth-child(5n+5) { background-color : $alternatingBackgroundOdd; }
+        &:nth-child(5n+1) { background-color : v.$alternatingBackgroundOdd; }
+        &:nth-child(5n+3) { background-color : v.$alternatingBackgroundOdd; }
+        &:nth-child(5n+5) { background-color : v.$alternatingBackgroundOdd; }
         
         /* every other even column */
-        &:nth-child(5n+2) { background-color : $alternatingBackgroundEven; }
-        &:nth-child(5n+4) { background-color : $alternatingBackgroundEven; }
+        &:nth-child(5n+2) { background-color : v.$alternatingBackgroundEven; }
+        &:nth-child(5n+4) { background-color : v.$alternatingBackgroundEven; }
       }
     }
     
@@ -452,10 +453,10 @@
         /* NON REPEATING GRID BORDER */
         
         /* border top on the first 5 */
-        &:nth-child(-n+5) { border-top : 1px solid $gridBorderColor; }
+        &:nth-child(-n+5) { border-top : 1px solid v.$gridBorderColor; }
         
         /* border right on every other 5th element */
-        &:nth-child(5n) { border-right : 1px solid $gridBorderColor; }
+        &:nth-child(5n) { border-right : 1px solid v.$gridBorderColor; }
       }
     }
   }
@@ -466,10 +467,10 @@
         /* NON REPEATING GRID BORDER */
         
         /* border top on the first 6 */
-        &:nth-child(-n+6) { border-top : 1px solid $gridBorderColor; }
+        &:nth-child(-n+6) { border-top : 1px solid v.$gridBorderColor; }
         
         /* border right on every other 6th element */
-        &:nth-child(6n) { border-right : 1px solid $gridBorderColor; }
+        &:nth-child(6n) { border-right : 1px solid v.$gridBorderColor; }
       }
     }
   }
@@ -480,15 +481,15 @@
         /* ALTERNATING COLUMN BACKGROUND COLOR ON EVEN NUMBER OF COLUMNS */
         
         /* every other odd column */
-        &:nth-child(7n+1) { background-color : $alternatingBackgroundOdd; }
-        &:nth-child(7n+3) { background-color : $alternatingBackgroundOdd; }
-        &:nth-child(7n+5) { background-color : $alternatingBackgroundOdd; }
-        &:nth-child(7n+7) { background-color : $alternatingBackgroundOdd; }
+        &:nth-child(7n+1) { background-color : v.$alternatingBackgroundOdd; }
+        &:nth-child(7n+3) { background-color : v.$alternatingBackgroundOdd; }
+        &:nth-child(7n+5) { background-color : v.$alternatingBackgroundOdd; }
+        &:nth-child(7n+7) { background-color : v.$alternatingBackgroundOdd; }
         
         /* every other even column */
-        &:nth-child(7n+2) { background-color : $alternatingBackgroundEven; }
-        &:nth-child(7n+4) { background-color : $alternatingBackgroundEven; }
-        &:nth-child(7n+6) { background-color : $alternatingBackgroundEven; }
+        &:nth-child(7n+2) { background-color : v.$alternatingBackgroundEven; }
+        &:nth-child(7n+4) { background-color : v.$alternatingBackgroundEven; }
+        &:nth-child(7n+6) { background-color : v.$alternatingBackgroundEven; }
       }
     }
     
@@ -497,10 +498,10 @@
         /* NON REPEATING GRID BORDER */
         
         /* border top on the first 7 */
-        &:nth-child(-n+7) { border-top : 1px solid $gridBorderColor; }
+        &:nth-child(-n+7) { border-top : 1px solid v.$gridBorderColor; }
         
         /* border right on every other 7th element */
-        &:nth-child(7n) { border-right : 1px solid $gridBorderColor; }
+        &:nth-child(7n) { border-right : 1px solid v.$gridBorderColor; }
       }
     }
   }

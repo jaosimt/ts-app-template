@@ -1,30 +1,30 @@
-@import "variables";
-@import "keyframes";
+@use "variables" as v;
+@use "mixins" as m;
 
 .tippy-box[data-theme~="error"] {
-  background-color : $errorColor;
+  background-color : v.$errorColor;
   color            : yellow;
   
   &[data-placement] {
     > .tippy-arrow:before {
-      border-top-color : $errorColor;
+      border-top-color : v.$errorColor;
     }
   }
 }
 
 [data-tippy-root] {
-  animation : fadein 700ms ease-in-out;
+  @include m.spin(0.7)
 }
 
 .custom-tippy {
-  background-color : $headerBackgroundColor;
+  background-color : v.$headerBackgroundColor;
   color            : #fff;
   border           : 1px solid #ccc;
   border-radius    : 4px;
   
   &[data-placement] {
     > .tippy-arrow:before {
-      border-top-color : $headerBackgroundColor;
+      border-top-color : v.$headerBackgroundColor;
     }
   }
 }

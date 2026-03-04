@@ -1,6 +1,5 @@
-@import "../../../styles/variables";
-@import "../../../styles/mixins";
-@import "../../../styles/common";
+@use "../../../styles/variables" as v;
+@use "../../../styles/mixins" as m;
 
 [data-component="input-field"] {
   display : flex;
@@ -16,7 +15,7 @@
     > input {
       min-width    : 50px;
       padding       : 0.5rem;
-      border        : 1px solid $borderColorDefault;
+      border        : 1px solid v.$borderColorDefault;
       border-radius : 0.3rem;
       
       &[type="text"] {}
@@ -29,12 +28,12 @@
     }
     
     > .error {
-      @include boxShadow($errorColor);
+      @include m.boxShadow(v.$errorColor);
       
       border-radius : 50%;
       position      : absolute;
       cursor        : pointer;
-      color         : $errorColor;
+      color         : v.$errorColor;
       transition    : all 100ms ease-in-out;
       align-self    : center;
       right         : 7px;

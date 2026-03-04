@@ -1,11 +1,11 @@
-@import "../../../styles/variables";
-@import "../../../styles/mixins";
-@import "../../../styles/common";
+@use "../../../styles/variables" as v;
+@use "../../../styles/mixins" as m;
+@use "../../../styles/common";
 
 .btn-icon,
 button,
 [data-component="button"] {
-  @include boxShadow($buttonPrimaryBorderColor);
+  @include m.boxShadow(v.$buttonPrimaryBorderColor);
   
   display      : inline-flex;
   min-width    : fit-content;
@@ -20,9 +20,9 @@ button,
   &.btn-icon {
     padding          : 2px;
     border-radius    : 50%;
-    color            : $buttonPrimaryColor;
-    background-color : $buttonPrimaryTextColor;
-    border-color     : $buttonPrimaryBorderColor;
+    color            : v.$buttonPrimaryColor;
+    background-color : v.$buttonPrimaryTextColor;
+    border-color     : v.$buttonPrimaryBorderColor;
   }
   
   &:not(.btn-icon) {
@@ -30,40 +30,40 @@ button,
     display         : inline-flex;
     align-items     : center;
     justify-content : center;
-    padding          : 0.35rem 0.42rem;
-    min-width  : 32px;
-    min-height : 32px;
+    padding         : 0.35rem 0.42rem;
+    min-width       : 32px;
+    min-height      : 32px;
     
     &.default {
-      background-color : $buttonDefaultColor;
-      border-color     : $buttonDefaultBorderColor;
-      color            : $buttonDefaultTextColor;
+      background-color : v.$buttonDefaultColor;
+      border-color     : v.$buttonDefaultBorderColor;
+      color            : v.$buttonDefaultTextColor;
     }
     
     &:not(.default) {
-      background-color : $buttonPrimaryColor;
-      border-color     : $buttonPrimaryBorderColor;
-      color            : $buttonPrimaryTextColor;
+      background-color : v.$buttonPrimaryColor;
+      border-color     : v.$buttonPrimaryBorderColor;
+      color            : v.$buttonPrimaryTextColor;
     }
     
     &.no-padding {
-      padding         : 0;
+      padding : 0;
     }
   }
   
   &:hover {
     &.btn-icon {
-      color            : $buttonPrimaryHoverColor;
-      background-color : $buttonPrimaryTextColor;
+      color            : v.$buttonPrimaryHoverColor;
+      background-color : v.$buttonPrimaryTextColor;
     }
     
     &:not(.btn-icon) {
       &.default {
-        background-color : $buttonDefaultHoverColor
+        background-color : v.$buttonDefaultHoverColor
       }
       
       &:not(.default) {
-        background-color : $buttonPrimaryHoverColor;
+        background-color : v.$buttonPrimaryHoverColor;
       }
     }
     
@@ -76,12 +76,12 @@ button,
     opacity        : 0.3;
     
     &.default {
-      border-color: $buttonDefaultDisabledTextColor;
-      color      : $buttonDefaultDisabledTextColor;;
+      border-color : v.$buttonDefaultDisabledTextColor;
+      color        : v.$buttonDefaultDisabledTextColor;;
     }
     
     &:not(.default) {
-      border-color   : $buttonPrimaryDisabledTextColor;
+      border-color : v.$buttonPrimaryDisabledTextColor;
     }
   }
 }
