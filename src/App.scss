@@ -1,5 +1,4 @@
-@import 'styles/variables';
-@import 'styles/animations';
+@use 'styles/variables' as v;
 
 #react-ts-template {
   display        : flex;
@@ -13,15 +12,15 @@
     align-items      : center;
     justify-content  : space-between;
     padding          : 0.5rem;
-    background-color : $headerBackgroundColor;
+    background-color : v.$headerBackgroundColor;
     gap              : 0.5rem;
     z-index          : 3;
-    border-bottom    : 10px solid $backgroundColor;
+    border-bottom    : 10px solid v.$backgroundColor;
   }
   
   main {
     position         : relative;
-    background-color : $backgroundColor;
+    background-color : v.$backgroundColor;
     width            : 100vw;
     min-height       : calc(100vh - 100px);
     display          : flex;
@@ -29,11 +28,11 @@
   }
   
   footer {
-    border-top       : 10px solid $backgroundColor;
+    border-top       : 10px solid v.$backgroundColor;
     position         : sticky;
     bottom           : 0;
     z-index          : 1;
-    background-color : $footerBackgroundColor;
+    background-color : v.$footerBackgroundColor;
     height           : 40px;
     display          : flex;
     align-items      : center;
