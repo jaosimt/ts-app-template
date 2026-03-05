@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import './App.scss';
 import { IoCloseCircleSharp, IoCloudOffline, IoLogoReact } from 'react-icons/io5';
 import { Link, useLocation } from 'react-router';
 import { ToastContainer } from 'react-toastify';
@@ -10,6 +9,9 @@ import { NavigationMain } from './navs';
 import ContentRouter from './routes';
 import { $textColor } from './styles/variables';
 import { classNames } from './utils';
+import './App.scss';
+import './styles/animations.scss';
+import './styles/tippy.scss';
 
 const App = () => {
     const [offline, setOffline] = useState(false);
@@ -50,7 +52,8 @@ const App = () => {
     return (<>
         {MemoizedConnectionModal}
         <header className={'grid cols-2'}>
-            <Link className={'white-space-nowrap display-flex align-items-center gap-1 pl-0p5 color-inherit'} to={{ pathname: "/"}}><ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')} icon={IoLogoReact}/>
+            <Link className={'white-space-nowrap display-flex align-items-center gap-1 pl-0p5 color-inherit'} to={{ pathname: "/"}}>
+                <ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')} icon={IoLogoReact}/>
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
             <NavigationMain/>
