@@ -79,6 +79,8 @@ const DemoDropdown: FC = () => {
         asStr: false
     });
 
+    const [selected, setSelected] = useState(objectOptions[0]);
+
     useEffect(() => {
         if (options.asObj) setProps({...props, options: objectOptions, selected: objectOptions[0]});
         else setProps({...props, options: stringOptions, selected: stringOptions[0]});
@@ -107,7 +109,7 @@ const DemoDropdown: FC = () => {
     };
 
     const labelAlignChangeHandler = (value: any) => setProps({...props, labelAlign: value.value});
-    const dropdownChangeHandler = (value: any) => console.log(value);
+    const dropdownChangeHandler = (value: any) => setSelected(value);
 
     return <div data-component={'checkbox-demo'} className={'display-flex gap-1 align-items-center flex-wrap'}>
         <Box label={'Dropdown Props'} boxClassName={'mb-1 with-fit-content'}>
@@ -173,18 +175,25 @@ const DemoDropdown: FC = () => {
 
             </div>
         </Box>
-        <Box className={'display-inline-flex width-fit-content'}>
-            <Dropdown
-                options={props.options as string[] | DropdownObjectOptions[]}
-                selected={props.selected}
-                icon={props.icon}
-                label={props.label}
-                labelAlign={props.labelAlign}
-                labelWidth={props.labelWidth}
-                disabled={props.disabled}
-                onChange={dropdownChangeHandler}
-            />
-        </Box>
+        <div className="display-flex align-items-top gap-1">
+            <Box label={'Dropdown'} className={'display-inline-flex width-fit-content'}>
+                <Dropdown
+                    options={props.options as string[] | DropdownObjectOptions[]}
+                    selected={props.selected}
+                    icon={props.icon}
+                    label={props.label}
+                    labelAlign={props.labelAlign}
+                    labelWidth={props.labelWidth}
+                    disabled={props.disabled}
+                    onChange={dropdownChangeHandler}
+                />
+            </Box>
+            <Box label={'selected'} className={'p-0p5'}>
+                <pre>
+                    {JSON.stringify(selected, (k, v) => k.startsWith('_') ? undefined : v, 2)}
+                </pre>
+            </Box>
+        </div>
     </div>;
 };
 

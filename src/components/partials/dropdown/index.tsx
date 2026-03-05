@@ -73,6 +73,7 @@ const Wrapper = styled.div<{
 `;
 
 const Input = styled.input<{ $hasIcon: boolean }>`
+    transition: all 0.2s ease-in-out;
     min-width: unset;
     border: none;
     background-color: transparent;
