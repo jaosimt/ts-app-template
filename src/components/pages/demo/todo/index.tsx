@@ -1,123 +1,109 @@
 import { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaXmark } from 'react-icons/fa6';
+import { FcAddRow } from 'react-icons/fc';
 import { IoIosSave, IoIosWarning } from 'react-icons/io';
 import { MdDelete, MdDeleteForever, MdEdit } from 'react-icons/md';
 import { VscDiscard } from 'react-icons/vsc';
-import { classNames, getRandStr, isEmpty, isString } from '../../../../utils';
+import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { classNames, isEmpty, isString } from '../../../../utils';
 import { ReactIcon } from '../../../partials';
 import Button from '../../../partials/button';
+import Checkbox from '../../../partials/checkbox';
 import InputField from '../../../partials/inputField';
 import Modal from '../../../partials/modal';
+import { addTodo, getTodos, removeTodo, updateTodo } from '../slices/todo';
 
-type ToDoItem = {
+export type ToDoItem = {
     id: string;
     text: string;
     completed: boolean;
 }
 
+type TodoAction = 'add' | 'edit' | 'delete' | 'toggle' | null;
+
+const newTodo = () => ({
+    id: crypto.randomUUID(),
+    text: '',
+    completed: false
+});
+
 const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProps}) => {
+    const dispatch = useAppDispatch();
+    const todos = useAppSelector(getTodos);
+
     const {
         register,
-        handleSubmit,
         reset,
-        setValue,
-        getValues,
-        formState: {isSubmitSuccessful}
+        setValue
     } = useForm<ToDoItem>();
     const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
-    // Lazy initialization: Read from localStorage only on first render
-    const [todos, setTodos] = useState<ToDoItem[]>(getSavedToDos());
-    const [editedIndex, setEditedIndex] = useState<number | null>(null);
-    const [adding, setAdding] = useState<boolean>(false);
-    const [deletingToDo, setDeletingToDo] = useState<string|null>(null);
-
-    // Persist to localStorage whenever todos change
-    useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(todos));
-    }, [todos]);
+    const [todo, setTodo] = useState<ToDoItem | null>(null);
+    const [todoAction, setTodoAction] = useState<TodoAction>(null);
+    const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
     useEffect(() => {
-        if (isSubmitSuccessful) reset();
-    }, [isSubmitSuccessful, reset]);
-
-    const cancelButtonHandler = () => {
-        setEditedIndex(null);
-        setAdding(false);
-        reset();
-    };
-
-    const onSubmit = (data: ToDoItem) => {
-        if (!data.text?.trim()) return;
-
-        let newTodos;
-
-        if (editedIndex !== null) {
-            const editedTodo = todos[editedIndex];
-            newTodos = [...todos];
-            newTodos.splice(editedIndex, 1, {...editedTodo, text: data.text.trim()});
-        } else {
-            const saved = getSavedToDos();
-            let multiplier = 1;
-            let id = getRandStr(3, 'abc');
-            // eslint-disable-next-line no-loop-func
-            while (saved.filter((t: ToDoItem) => t.id === id).length) {
-                let m = multiplier;
-                while (m > 0) {
-                    id += `-${getRandStr(3, 'abc')}`;
-                    m--;
-                }
-                multiplier++;
-            }
-
-            // crypto.randomUUID() <- Modern way to generate unique IDs
-            newTodos = [...todos, {
-                id,
-                text: data.text.trim(),
-                completed: false,
-            }];
+        if (todoAction === null) {
+            setShowConfirmDelete(false);
+            setTodo(null);
+            reset();
+            return;
         }
 
-        setTodos(newTodos);
-        setEditedIndex(null);
-        setAdding(false);
-    };
+        if (todoAction === 'delete') {
+            setShowConfirmDelete(true);
+            return;
+        }
+
+        if (['add', 'edit'].includes(todoAction)) {
+            inputRef.current?.focus();
+            return;
+        }
+
+        alert('xxxx');
+
+        saveChanges();
+        reset();
+        // eslint-disable-next-line
+    }, [todoAction]);
+
+    useEffect(() => {
+        setValue('text', todo === null ? '' : todo.text);
+        // eslint-disable-next-line
+    }, [todo]);
 
     const textChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        const {value} = e.target;
-        isString(value, true) && !adding && setAdding(true);
-        !isString(value, true) && adding && setAdding(false);
+        setTodo({...todo, text: e.currentTarget.value} as ToDoItem);
     };
 
-    const toggleTodo = (id: string) => {
-        setTodos(todos.map(todo =>
-            todo.id === id ? {...todo, completed: !todo.completed} : todo
-        ));
-    };
+    const textareaKeyPressHandler = (e: any) => {
+        const { keyCode, metaKey } = e;
+        if (keyCode === 13 && metaKey) saveChanges();
+    }
 
-    const editTodo = (id: string) => {
-        const index = todos.findIndex(t => t.id === id);
-        if (index < 0) return;
+    function saveChanges() {
+        if (todo === null || !isString(todo.text, true)) {
+            !todo && setTodo(newTodo());
+            toast('Todo is empty!', {type: 'error'});
+            return;
+        }
 
-        setEditedIndex(index);
-        setValue('text', todos[index].text);
-        inputRef.current?.focus();
-    };
+        switch (todoAction) {
+            case 'delete':
+                dispatch(removeTodo(todo.id));
+                break;
+            case 'edit':
+            case 'toggle':
+                dispatch(updateTodo(todo));
+                break;
+            default:
+                // crypto.randomUUID() <- Modern way to generate unique IDs
+                dispatch(addTodo(todo));
+        }
 
-    const deleteTodo = (id: string) => {
-        setTodos(todos.filter(todo => todo.id !== id));
-        setDeletingToDo(null);
-    };
-
-    const handleDelete = (t: ToDoItem) => {
-        if (!t.completed) setDeletingToDo(t.id);
-        else deleteTodo(t.id);
-    };
-
-    function getSavedToDos() {
-        const saved = localStorage.getItem('todos');
-        return saved ? JSON.parse(saved) : [];
+        setTodoAction(null);
     }
 
     function parseNested(todo: string, id: string) {
@@ -132,63 +118,80 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
         </>;
     }
 
-    const inputValue = getValues('text');
-
     return (
         <div className={classNames(className, 'background-light', 'box-shadow', 'border-radius-0p3', 'p-0p5')} {...restProps}>
             <div className="m-1">
                 <div className={'display-flex gap-0p5 justify-content-space-between align-items-top'}>
-                    <h1 className={'mt-0 mb-0p5'}>TO BE DONE</h1>
-                    <form className={'display-flex gap-0p5 justify-content-center align-items-center'}
-                          onSubmit={handleSubmit(onSubmit)}>
+                    <h1 className={'m-0'}>TO BE DONE</h1>
+                    <div className={'display-flex gap-0p5 justify-content-center align-items-center'}>
                         <InputField
                             type={'textarea'}
                             width={'420px'}
+                            disabled={todoAction === null || !['add', 'edit'].includes(todoAction)}
                             fieldRegister={register('text', {
-                                onChange: textChangeHandler
+                                onChange: textChangeHandler,
                             })}
                             setRef={(ref: HTMLTextAreaElement) => inputRef.current = ref}
+                            onKeyDown={textareaKeyPressHandler}
                         />
-                        <Button disabled={isEmpty(inputValue)} icon={IoIosSave} type="submit"/>
-                        <Button disabled={isEmpty(inputValue)} icon={FaXmark} onClick={cancelButtonHandler}/>
-                    </form>
+                        {
+                            todoAction === null &&
+                            <Button icon={FcAddRow} onClick={() => {
+                                setTodo(newTodo());
+                                setTodoAction('add');
+                            }}/>
+                        }
+                        {
+                            todoAction !== null && <>
+                                <Button disabled={isEmpty(todo?.text)} icon={IoIosSave} onClick={saveChanges}/>
+                                <Button icon={FaXmark} onClick={() => setTodoAction(null)}/>
+                            </>
+                        }
+
+                    </div>
                 </div>
 
                 <ul className={'m-0 pl-0'}>
                     {
-                        todos.map((todo: ToDoItem, i: number) => (
-                            <li key={todo.id}
-                                className={'display-flex gap-1 justify-content-space-between align-items-center py-0p2'}>
-                                <div className={'display-flex gap-0p2 align-items-top'}>
-                                    <input
-                                        disabled={i === editedIndex}
-                                        type="checkbox"
-                                        checked={todo.completed}
-                                        onChange={() => toggleTodo(todo.id)}
-                                    />
+                        todos.map((t: ToDoItem) => {
+                            const edited = (todoAction === 'edit' && t.id === todo?.id) || todoAction === 'add';
+
+                            return <li key={t.id}
+                                       className={'display-flex gap-1 justify-content-space-between align-items-center py-0p2'}>
+                                <div className={'display-flex gap-0p5 align-items-center'}>
+                                    <Checkbox name={'toggleTodo'} checked={t.completed}
+                                              onChange={(e) => dispatch(updateTodo({
+                                                  ...t,
+                                                  completed: e.currentTarget.checked
+                                              }))}/>
                                     <span style={{
-                                        textDecoration: todo.completed ? 'line-through' : 'none',
-                                        color: i === editedIndex ? 'gainsboro' : 'initial'
+                                        textDecoration: t.completed ? 'line-through' : 'none',
+                                        color: edited ? 'gainsboro' : 'initial'
                                     }}>
-                                        {parseNested(todo.text, todo.id)}
+                                        {parseNested(t.text, t.id)}
                                         </span>
                                 </div>
                                 <div className={'display-flex gap-0p2'}>
-                                    <Button disabled={i === editedIndex || todo.completed} className={'btn-icon'}
-                                            icon={MdEdit} onClick={() => editTodo(todo.id)}/>
-                                    <Button disabled={i === editedIndex} className={'btn-icon'} icon={MdDelete}
-                                            onClick={() => handleDelete(todo)}/>
+                                    <Button disabled={edited || t.completed} className={'btn-icon'} icon={MdEdit}
+                                            onClick={() => {
+                                                setTodo(t);
+                                                setTodoAction('edit');
+                                            }}/>
+                                    <Button disabled={edited} className={'btn-icon'} icon={MdDelete}
+                                            onClick={() => {
+                                                setTodo(t);
+                                                setTodoAction('delete');
+                                            }}/>
                                 </div>
                             </li>
-                        ))
+                        })
                     }
                 </ul>
             </div>
             {
-                deletingToDo && <Modal
+                showConfirmDelete && <Modal
                     closeOnEscKey={false}
-                    closeOnOutsideClick={false}
-                    onClose={() => setDeletingToDo(null)}>
+                    closeOnOutsideClick={false}>
                     <div className="display-flex gap-0p5 align-items-end">
                         <span className="color-red"><ReactIcon size={70} icon={IoIosWarning}/></span>
                         <div className={'mb-1'}>
@@ -197,8 +200,12 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
                         </div>
                     </div>
                     <div className="display-flex gap-1 mt-0p5 justify-content-right">
-                        <Button icon={MdDeleteForever} onClick={() => deleteTodo(deletingToDo)}>Continue</Button>
-                        <Button className={'default'} icon={VscDiscard} onClick={() => setDeletingToDo(null)}>Cancel</Button>
+                        <Button icon={MdDeleteForever} onClick={saveChanges}>Continue</Button>
+                        <Button className={'default'} icon={VscDiscard}
+                                onClick={() => setTodoAction(null)}
+                        >
+                            Cancel
+                        </Button>
                     </div>
                 </Modal>
             }

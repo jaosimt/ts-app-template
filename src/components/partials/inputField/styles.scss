@@ -12,8 +12,10 @@
   }
   
   > div {
+    > textarea,
     > input {
       min-width     : 50px;
+      min-height    : 33px;
       padding       : 0.5rem;
       border        : 1px solid v.$borderColorDefault;
       border-radius : 0.3rem;

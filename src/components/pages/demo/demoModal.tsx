@@ -126,16 +126,19 @@ const ModalDemo: FC = () => {
             >
                 <div className={'display-flex gap-0p5'}>
                     <Checkbox
+                        label={'closeOnEscKey'}
                         name={'closeOnEscKey'}
                         checked={props.closeOnEscKey}
                         onChange={changeHandler}
                     />
                     <Checkbox
+                        label={'closeOnOutsideClick'}
                         name={'closeOnOutsideClick'}
                         checked={props.closeOnOutsideClick}
                         onChange={changeHandler}
                     />
                     <Checkbox
+                        label={'showClose'}
                         name={'showClose'}
                         checked={props.showClose}
                         onChange={changeHandler}

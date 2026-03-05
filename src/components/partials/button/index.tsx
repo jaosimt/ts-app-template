@@ -18,6 +18,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 const Button: FC<ButtonProps> = (props) => {
     const {
         icon,
+        className,
         iconClassName,
         type = 'button',
         align,
@@ -28,11 +29,16 @@ const Button: FC<ButtonProps> = (props) => {
     } = props;
 
     const [uid] = useState(`${type}-${uuidv4()}`);
+    const isBtnIcon = className?.includes('btn-icon');
 
     return (
-        <button {...restProps} id={uid} type={type} data-component={'button'}
-                style={{...style, minWidth: parseCSSUnit(width as CSSUnit), justifyContent: align}}>
-            {icon && <ReactIcon className={iconClassName} icon={icon}/>}
+        <button className={className} id={uid} type={type} data-component={'button'}
+                style={{...style, minWidth: parseCSSUnit(width as CSSUnit), justifyContent: align}} {...restProps}>
+            {
+                icon &&
+                <ReactIcon className={iconClassName} style={{position: !isBtnIcon && !children ? 'absolute' : 'relative'}} size={!isBtnIcon && !children ? 21 : 14}
+                           icon={icon}/>
+            }
             {children}
         </button>
     );

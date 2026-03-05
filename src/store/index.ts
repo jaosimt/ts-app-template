@@ -2,17 +2,19 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import loggerMiddleware from 'redux-logger';
-import counterReducer from '../slices/counter';
+import todo from '../components/pages/demo/slices/todo';
+import counter from '../slices/counter';
 
 const persistConfig = {
     key: 'js',
     version: 1,
     storage,
-    whitelist: ['counter']
+    whitelist: ['todo']
 };
 
 const reducer = combineReducers({
-    counter: counterReducer,
+    counter,
+    todo
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

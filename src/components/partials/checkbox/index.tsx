@@ -85,7 +85,7 @@ const Checkbox: FC<CheckboxProps> = (props) => {
     } = props;
 
     return <Label disabled={disabled}>
-        {labelPosition === 'left' && <span style={{minWidth: 'fit-content', width: parseCSSUnit(labelWidth as CSSUnit), marginRight: '0.3rem'}}>{label || name}</span>}
+        {label && labelPosition === 'left' && <span style={{minWidth: 'fit-content', width: parseCSSUnit(labelWidth as CSSUnit), marginRight: '0.3rem'}}>{label}</span>}
         <CheckboxContainer disabled={disabled} className={className}>
             <HiddenCheckbox disabled={disabled} name={name} checked={checked} onChange={onChange}/>
             <StyledCheckbox disabled={disabled} checked={checked}>
@@ -94,7 +94,7 @@ const Checkbox: FC<CheckboxProps> = (props) => {
                 </Icon>
             </StyledCheckbox>
         </CheckboxContainer>
-        {labelPosition !== 'left' && <span style={{width: parseCSSUnit(labelWidth as CSSUnit), marginLeft: '0.3rem'}}>{label || name}</span>}
+        {label && labelPosition !== 'left' && <span style={{width: parseCSSUnit(labelWidth as CSSUnit), marginLeft: '0.3rem'}}>{label}</span>}
     </Label>
 }
 
