@@ -49,6 +49,12 @@ const dropdownSpecsData: PropsListProps[] = [
         values: `e.g. 70|'70px'`,
         description: ['Sets the width of the label.', 'Useful for aligning the label with other elements!']
     }, {
+        name: 'maxDropdownHeight',
+        // eslint-disable-next-line no-template-curly-in-string
+        types: 'number|`${number}${string}`',
+        values: `e.g. 300|'300px'`,
+        description: ['Sets the max height of the dropdown menu']
+    }, {
         name: 'labelAlign',
         types: 'string',
         values: 'left|right|center|space-between',
