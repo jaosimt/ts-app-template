@@ -31,23 +31,23 @@ const Container = styled.div<{
 }>`
     transition: all 0.3s ease-in-out;
     z-index: 7;
-    left            : 50%;
-    position        : ${props => props.$position};
+    left: 50%;
+    position: ${props => props.$position};
     background-color: ${props => props.$backgroundColor || 'white'};
-    top             : 50%;
-    transform       : translate(-50%, -50%);
-    border-radius   : 0.5rem;
-    display         : flex;
-    flex-direction  : column;
-    justify-content : center;
-    align-items     : center;
-    line-height     : 1;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
     ${props => (props.$borderWidth || props.$borderColor) && `border: ${parseCSSUnit(props.$borderWidth || 1)} solid ${props.$borderColor || 'whitesmoke'};`}
     ${props => props.$padding && 'padding: 1.5rem 3rem;'}
 `;
 
 const Spinner = styled.div<{ $color: CSSColors }>`
-    color : ${props => props.$color};
+    color: ${props => props.$color};
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,7 +79,8 @@ const Loading: FC<LoadingProps> = (props) => {
     >
         <Spinner $color={color}>
             {topText && <h4 className={'m-0'}>{topText}</h4>}
-            <ReactIcon className={classNames('spin-3', topText && 'mt-1', bottomText && 'mb-1')} size={size} icon={ImSpinner}/>
+            <ReactIcon className={classNames('spin-3', topText && 'mt-1', bottomText && 'mb-1')} size={size}
+                       icon={ImSpinner}/>
             {bottomText && <h6 className={'m-0'}>{bottomText}</h6>}
         </Spinner>
         {

@@ -7,7 +7,6 @@ import {
     MdAlignVerticalTop
 } from 'react-icons/md';
 import { RiArchiveDrawerFill } from 'react-icons/ri';
-import { $textColor } from '../../../styles/variables';
 import { createLink } from '../../../utils/ext';
 import { ReactIcon } from '../../partials';
 import Box from '../../partials/box';
@@ -42,7 +41,8 @@ const DemoDrawer: FC = () => {
     const [props, setProps] = useState<DrawerProps>({
         position: position.value as any,
         width: 300,
-        height: 300
+        height: 300,
+        backgroundColor: undefined
     });
 
     // eslint-disable-next-line
@@ -58,18 +58,21 @@ const DemoDrawer: FC = () => {
     return <div className={'width-100p position-relative display-flex justify-content-center align-items-center'} style={{height: 'calc(100% - 0.5rem)'}}>
         <Box
             label={'Drawer Props'}
-            width={420}
+            width={525}
             boxClassName={'display-inline-block'}
             style={{top: '50%', position: 'absolute'}}
         >
-            <div className={'display-inline-flex gap-0p5-1'}>
-                <Dropdown
-                    options={positionOptions}
-                    selected={position}
-                    label={'align'}
-                    onChange={(value: DropdownObjectOptions) => dropDownChangeHandler(value)}
-                />
+            <div className={'grid cols-2'}>
                 <InputField
+                    labelWidth={126}
+                    width={100}
+                    label={'backgroundColor'}
+                    fieldRegister={register('backgroundColor', {
+                        value: props.backgroundColor,
+                        onChange: propsChangeHandler
+                    })}/>
+                <InputField
+                    labelWidth={126}
                     width={70}
                     label={'width'}
                     type={'number'}
@@ -77,7 +80,15 @@ const DemoDrawer: FC = () => {
                         value: props.width,
                         onChange: propsChangeHandler
                     })}/>
+                <Dropdown
+                    labelWidth={126}
+                    options={positionOptions}
+                    selected={position}
+                    label={'position'}
+                    onChange={(value: DropdownObjectOptions) => dropDownChangeHandler(value)}
+                />
                 <InputField
+                    labelWidth={126}
                     width={70}
                     label={'height'}
                     type={'number'}
@@ -87,10 +98,10 @@ const DemoDrawer: FC = () => {
                     })}/>
             </div>
             <p className={'flex-wrap display-flex align-items-center mb-0 color-magenta justify-content-center border-top pt-0p5'}>The Drawer's handle (<ReactIcon icon={RiArchiveDrawerFill}/>) should be centered on the&nbsp;<b>{props.position}</b>&nbsp;of your screen!</p>
-            <p className={'flex-wrap mt-0p3 font-size-small color-gray text-align-center'}>Once opened, you may close it pressing the ESC key or clicking outside of it.</p>
+            <p className={'flex-wrap mt-0p3 font-size-small color-gray text-align-center'}>Once opened, you may close it by pressing the ESC key or clicking outside of it.</p>
         </Box>
 
-        <Drawer position={props.position} width={props.width} height={props.height} backgroundColor={$textColor}>
+        <Drawer position={props.position} width={props.width} height={props.height} backgroundColor={props.backgroundColor}>
             <p><b>The quick brown fox jumps over the lazy dog</b> is a famous English-language pangram—a sentence
                 containing every letter of the alphabet. Coined in the late 19th century, it is widely used for
                 touch-typing practice, testing keyboards, displaying fonts, and inWikipedia says, writing exercises.</p>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useOnClickOutside } from 'usehooks-ts';
 import { useKeyPress } from '../../../hooks';
 import { CSSColors, CSSUnit } from '../../../types';
-import { isElementOnTop, parseCSSUnit, classNames } from '../../../utils';
+import { isElementOnTop, parseCSSUnit, classNames, isString } from '../../../utils';
 import { ReactIcon } from '../index';
 
 export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
@@ -17,7 +17,7 @@ export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Container = styled.div<{
-    $backgroundColor: CSSColors;
+    $backgroundColor?: CSSColors;
     $position: 'top' | 'left' | 'bottom' | 'right';
     $width: CSSUnit;
     $height: CSSUnit;
@@ -101,7 +101,7 @@ const drawer: Record<string, any> = {
 };
 
 const Drawer: FC<DrawerProps> = (props) => {
-    const {
+    let {
         children,
         width = 'auto',
         height = 'auto',
@@ -113,6 +113,8 @@ const Drawer: FC<DrawerProps> = (props) => {
         onClose,
         ...restProps
     } = props;
+
+    if (!isString(backgroundColor, true)) backgroundColor = '#913794c7';
 
     const containerRef = useRef<any>(null);
 
@@ -164,10 +166,10 @@ const Drawer: FC<DrawerProps> = (props) => {
                 <div className={'trim'} style={{
                     width: 'calc(100% - 1.2rem)',
                     height: 'calc(100% - 2rem)',
-                    margin: position === 'left' ? '1rem 1rem 1rem 0.2rem' : '1rem 0.2rem 1rem 1rem',
+                    margin: position === 'left' ? '1rem 1rem 1rem 0' : '1rem 0 1rem 1rem',
                     overflow: 'auto',
-                    paddingRight: position === 'left' ? 0 : '0.8rem',
-                    paddingLeft: position === 'left' ? '0.8rem' : 0,
+                    paddingRight: position === 'left' ? 0 : '1rem',
+                    paddingLeft: position === 'left' ? '1rem' : 0,
                     direction: position === 'left' ? 'rtl' : 'ltr'
                 }}>
                     <div className={'trim'} style={{direction: 'ltr'}}>

@@ -19,7 +19,7 @@ export const $buttonDefaultDisabledTextColor = '#beb7b7';
 export const $headerBackgroundColor = '#963999';
 export const $footerBackgroundColor = '#963999';
 
-export const $scrollbarColor = '#00cafd';
+export const $scrollbarColor = '#963999';
 export const $scrollbarBackgroundColor = 'transparent';
 export const $scrollbarBorderRadius = '0.4rem';
 
