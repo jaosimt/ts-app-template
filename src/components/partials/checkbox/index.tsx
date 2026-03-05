@@ -48,7 +48,7 @@ const StyledCheckbox = styled.div<{
     height: 21px;
     border-radius: 4px;
     border: 1px solid ${props => props.disabled ? 'whitesmoke' : 'gainsboro'};
-    background-color: ${props => props.checked ? 'rgba(0, 123, 255, 0.63)' : 'transparent'};
+    background-color: ${props => props.checked ? 'rgba(0, 123, 255, 0.63)' : 'white'};
     transition: all 150ms;
     
     ${Icon} {
