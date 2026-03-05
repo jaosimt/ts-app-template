@@ -1,4 +1,4 @@
-import { ChangeEvent, CSSProperties, FC, Fragment, useState } from 'react';
+import { CSSProperties, FC, Fragment, useState } from 'react';
 import {
     a11yDark, atomDark, base16AteliersulphurpoolLight, cb, coldarkCold, coldarkDark, coy,
     coyWithoutShadows, darcula, dark, dracula, duotoneDark, duotoneEarth, duotoneForest, duotoneLight, duotoneSea,
@@ -10,7 +10,8 @@ import {
     tomorrow, twilight, vs, vscDarkPlus, xonokai,
     zTouch
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { classNames, ProperCase } from '../../../utils';
+import { classNames } from '../../../utils';
+import Dropdown from '../../partials/dropdown';
 import Tab, { TabItemType } from '../../partials/tab';
 import BoxComponentSpecs from './specs/box';
 import ButtonComponentSpecs from './specs/buttons';
@@ -115,24 +116,15 @@ const ComponentSpecs: FC = () => {
         }
     ];
 
-    const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        setSelectedTheme(event.target.value);
-        localStorage.setItem('rshTheme', event.target.value);
+    const handleThemeChange = (value:string) => {
+        setSelectedTheme(value);
+        localStorage.setItem('rshTheme', value);
     };
 
     return <div data-component={'home'} className={'width-100p'}>
-        <div className={'display-flex justify-content-space-between align-items-end background position-sticky'} style={{top: '50px'}}>
+        <div className={'display-flex justify-content-space-between align-items-end background'} style={{top: '50px'}}>
             <h1 className={'mt-0 line-height-1'}>Custom Component Specs</h1>
-            <div className={'display-flex justify-content-space-between'}>
-                &nbsp;
-                <select value={selectedTheme} onChange={handleThemeChange} style={{ marginLeft: '10px' }}>
-                    {Object.keys(themes).map((themeName) => (
-                        <option key={themeName} value={themeName}>
-                            {ProperCase(themeName)}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme} onChange={handleThemeChange} />
         </div>
         <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} data={tabData}/>
     </div>
