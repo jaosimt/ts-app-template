@@ -47,6 +47,18 @@ export const useKeyPress = (targetKey: string, callback: Function) => {
     }, [keyUpHandler]);
 };
 
+export const useOnScroll = (callback: EventListener, element: HTMLElement | Window = window) => {
+    useEffect(() => {
+        // Add the event listener when the component mounts
+        element.addEventListener('scroll', callback);
+
+        // Remove the event listener when the component unmounts (cleanup function)
+        return () => {
+            element.removeEventListener('scroll', callback);
+        };
+        // eslint-disable-next-line
+    }, []);
+}
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 export const useAppSelector = useSelector.withTypes<RootState>()
 export const useAppStore = useStore.withTypes<AppStore>()
