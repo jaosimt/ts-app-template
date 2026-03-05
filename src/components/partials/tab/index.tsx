@@ -98,7 +98,7 @@ const Tabs: FC<TabItemProps> = (props) => {
     });
 
     useEffect(() => {
-        localStorage.setItem('scroll-left', '0');
+        sessionStorage.setItem('scroll-left', '0');
         updateTabOverflow();
 
         return () => {
@@ -108,8 +108,8 @@ const Tabs: FC<TabItemProps> = (props) => {
     }, []);
 
     useEffect(() => {
-        if (localStorage.getItem('checkVisibility') === 'true') {
-            localStorage.removeItem('checkVisibility');
+        if (sessionStorage.getItem('checkVisibility') === 'true') {
+            sessionStorage.removeItem('checkVisibility');
             const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
             const activeElement = itemsWrapper.querySelector('.tab-item.active') as HTMLElement;
 
@@ -129,7 +129,7 @@ const Tabs: FC<TabItemProps> = (props) => {
 
         if (isString(id, true) && rememberActiveTab) {
             const saved = getStoredSelection().filter((s: any) => s.id !== id);
-            localStorage.setItem('tabS', JSON.stringify([...saved, {id, name: selected}]));
+            sessionStorage.setItem('tabS', JSON.stringify([...saved, {id, name: selected}]));
         }
 
         // eslint-disable-next-line
@@ -156,7 +156,7 @@ const Tabs: FC<TabItemProps> = (props) => {
 
         if (nextLeftScrollPos !== undefined) {
             const tabLeft = Round(itemsWrapper.getBoundingClientRect()['left'] as number, roundPrecision);
-            const storedScrollLeft = parseFloat(localStorage.getItem('scroll-left') || '0');
+            const storedScrollLeft = parseFloat(sessionStorage.getItem('scroll-left') || '0');
 
             const activeElement = itemsWrapper.querySelector('.tab-item.active') as HTMLElement;
             if (moveSelectedOnScroll && activeElement) {
@@ -188,7 +188,7 @@ const Tabs: FC<TabItemProps> = (props) => {
 
         if (nextRightScrollPos !== undefined) {
             const tabRight = Round(itemsWrapper.getBoundingClientRect()['right'] as number, roundPrecision);
-            const storedScrollLeft = parseFloat(localStorage.getItem('scroll-left') || '0');
+            const storedScrollLeft = parseFloat(sessionStorage.getItem('scroll-left') || '0');
 
             const activeElement = itemsWrapper.querySelector('.tab-item.active') as HTMLElement;
             if (moveSelectedOnScroll && activeElement) {
@@ -217,7 +217,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         const {dataset: {name}} = e.currentTarget;
         // checkVisibility is used to limit checking whether the clicked tab item is fully visible!
         // otherwise, the selected partially shown tab item will be automatically scrolled
-        localStorage.setItem('checkVisibility', 'true');
+        sessionStorage.setItem('checkVisibility', 'true');
         setSelected(name);
     };
 
@@ -227,7 +227,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
         if (!itemsWrapper) return;
 
-        localStorage.setItem('scroll-left', String(Round(itemsWrapper.scrollLeft, roundPrecision)));
+        sessionStorage.setItem('scroll-left', String(Round(itemsWrapper.scrollLeft, roundPrecision)));
         setTabOverflow({
             left: hasHidden('left', lefts),
             right: hasHidden('right', rights)
@@ -235,7 +235,7 @@ const Tabs: FC<TabItemProps> = (props) => {
     }
 
     function getStoredSelection() {
-        const saved = localStorage.getItem('tabS');
+        const saved = sessionStorage.getItem('tabS');
         return saved ? JSON.parse(saved) : [];
     }
 

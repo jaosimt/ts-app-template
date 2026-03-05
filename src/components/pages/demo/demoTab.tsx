@@ -68,7 +68,7 @@ const tabItems: TabItemType[] = [
 ];
 
 const TabsDemo: FC = () => {
-    const [tabType, setTabType] = useState<any>(localStorage.getItem('tabDemoSelectedTab') || 'boxed');
+    const [tabType, setTabType] = useState<any>(sessionStorage.getItem('tabDemoSelectedTab') || 'boxed');
 
     return <div data-component={'tab-demo'} className={'width-100p'}>
         <Dropdown

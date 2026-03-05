@@ -80,7 +80,7 @@ export const themes: Record<string, Theme> = {
 };
 
 const ComponentSpecs: FC = () => {
-    const [selectedTheme, setSelectedTheme] = useState<string>(localStorage.getItem('rshTheme') || 'nightOwl');
+    const [selectedTheme, setSelectedTheme] = useState<string>(sessionStorage.getItem('rshTheme') || 'nightOwl');
 
     const tabData: TabItemType[] = [
         {
@@ -118,7 +118,7 @@ const ComponentSpecs: FC = () => {
 
     const handleThemeChange = (value:string) => {
         setSelectedTheme(value);
-        localStorage.setItem('rshTheme', value);
+        sessionStorage.setItem('rshTheme', value);
     };
 
     return <div data-component={'home'} className={'width-100p'}>

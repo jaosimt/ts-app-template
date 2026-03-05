@@ -2,6 +2,8 @@ import { FC, useState } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { SlReload, SlScreenDesktop } from 'react-icons/sl';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { decrement, reset, increment, getCounterValue } from '../../../slices/counter';
 import { classNames } from '../../../utils';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
@@ -34,8 +36,10 @@ const Header = styled.h1`
 `
 
 const WindowPortalDemo: FC = () => {
+    const dispatch = useAppDispatch();
+    const ctr = useAppSelector(getCounterValue);
+
     const [showPortal, setShowPortal] = useState(false);
-    const [ctr, setCtr] = useState(0);
 
     return <div data-component={'window-portal-demo'} className={'width-100p'} style={{minHeight: '490px'}}>
         {showPortal && <WindowPortal
@@ -62,17 +66,17 @@ const WindowPortalDemo: FC = () => {
                 <div className={'display-flex gap-0p5 align-items-center'}>
                     <Button
                         icon={FaMinus}
-                        onClick={() => setCtr(ctr - 1)}
+                        onClick={() => dispatch(decrement())}
                     />
                     <Counter>{ctr}</Counter>
                     <Button
                         icon={FaPlus}
-                        onClick={() => setCtr(ctr + 1)}
+                        onClick={() => dispatch(increment())}
                     />
                     <Button
                         icon={SlReload}
                         disabled={ctr === 0}
-                        onClick={() => setCtr(0)}
+                        onClick={() => dispatch(reset())}
                     />
                 </div>
             </div>

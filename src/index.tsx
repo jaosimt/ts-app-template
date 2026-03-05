@@ -1,24 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router';
+import { PersistGate } from 'redux-persist/integration/react';
 import Loading from './components/partials/loading';
 import reportWebVitals from './reportWebVitals';
 import './index.scss';
 import { LazyRetry } from './utils';
+import { persistor, store } from './store';
 
 const root = ReactDOM.createRoot(
     document.getElementById('react-ts-template') as HTMLElement
 );
 
 const LazyAppRetry = LazyRetry(() => import('./App'));
-
+const loading = <Loading topText={'Loading application'} bottomText={'Please wait...'}
+                         borderColor={'#00cafd'}/>;
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <React.Suspense fallback={<Loading topText={'Loading application'} bottomText={'Please wait...'} borderColor={'#00cafd'} borderWidth={3}/>}>
-                <LazyAppRetry/>
-            </React.Suspense>
-        </BrowserRouter>
+        <Provider store={store}>
+            <PersistGate loading={loading} persistor={persistor}>
+                <BrowserRouter>
+                    <React.Suspense fallback={loading}>
+                        <LazyAppRetry/>
+                    </React.Suspense>
+                </BrowserRouter>
+            </PersistGate>
+        </Provider>
     </React.StrictMode>
 );
 
