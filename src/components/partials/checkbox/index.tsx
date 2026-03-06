@@ -16,7 +16,7 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{
 const CheckboxContainer = styled.div<{disabled: boolean}>`
     display: inline-flex;
     align-items: center;
-    height: 33px;
+    overflow: hidden;
 `;
 
 const Icon = styled.svg`

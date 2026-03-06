@@ -46,7 +46,8 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
         }
 
         if (todoAction === 'delete') {
-            setShowConfirmDelete(true);
+            if (todo?.completed) saveChanges();
+            else setShowConfirmDelete(true);
             return;
         }
 
@@ -54,6 +55,8 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
             inputRef.current?.focus();
             return;
         }
+
+        // eslint-disable-next-line
     }, [todoAction]);
 
 
@@ -139,7 +142,7 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
 
                             return <li key={t.id}
                                        className={'display-flex gap-1 justify-content-space-between align-items-center py-0p2'}>
-                                <div className={'display-flex gap-0p5 align-items-center'}>
+                                <div className={'display-flex gap-0p5 align-items-center'} style={{lineHeight: 1}}>
                                     <Checkbox name={'toggleTodo'} checked={t.completed}
                                               onChange={(e) => dispatch(updateTodo({
                                                   ...t,
