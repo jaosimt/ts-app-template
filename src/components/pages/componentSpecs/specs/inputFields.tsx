@@ -179,7 +179,7 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
             className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLInputElement>`}</span>
         </h3>
         {propsList(inputFieldData)}
-        <h3 className={'alternate-properties color-gray mb-0p5'}>fieldRegister alternate</h3>
+        <h3 className={'alternate-properties color-gray mb-0p5'}>fieldRegister prop alternate</h3>
         {propsList(fieldRegisterAlternative)}
     </>;
 };
