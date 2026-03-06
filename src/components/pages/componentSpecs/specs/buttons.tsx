@@ -44,7 +44,7 @@ const buttonData: PropsListProps[] = [
     }
 ];
 
-const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const ButtonSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -74,4 +74,4 @@ const ButtonComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default ButtonComponentSpecs;
+export default ButtonSpecs;

@@ -80,7 +80,7 @@ const boxData: PropsListProps[] = [
     }
 ];
 
-const BoxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const BoxSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -112,4 +112,4 @@ const BoxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default BoxComponentSpecs;
+export default BoxSpecs;

@@ -23,6 +23,8 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTex
     labelWidth?: CSSUnit;
     max?: number;
     min?: number;
+    step?: number;
+    readOnly?: boolean;
     placeHolder?: string;
     setRef?: Function;
     type?: HTMLInputTypeAttribute;

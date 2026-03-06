@@ -8,7 +8,7 @@ import Checkbox from '../../partials/checkbox';
 import InputField from '../../partials/inputField';
 import Modal, { ModalProps } from '../../partials/modal';
 
-const ModalDemo: FC = () => {
+const DemoModal: FC = () => {
     const {
         register,
     } = useForm();
@@ -176,4 +176,4 @@ const ModalDemo: FC = () => {
     </div>;
 };
 
-export default ModalDemo;
+export default DemoModal;

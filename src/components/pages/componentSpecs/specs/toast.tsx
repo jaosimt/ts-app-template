@@ -10,7 +10,7 @@ const code = `<Drawer>
 </Drawer>
 `;
 
-const drawerSpecsData: PropsListProps[] = [
+const toastSpecsData: PropsListProps[] = [
     {
         name: 'position',
         types: 'string',
@@ -36,7 +36,7 @@ const drawerSpecsData: PropsListProps[] = [
     }
 ];
 
-const DrawerSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const ToastSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -48,7 +48,7 @@ const DrawerSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
-            onLabelClick={() => navigate('/demo/drawer')}
+            onLabelClick={() => navigate('/demo/toast')}
         >
             <SyntaxHighlighter
                 codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
@@ -64,8 +64,8 @@ const DrawerSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
             Properties
             <span className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLDivElement>`}</span>
         </h3>
-        {propsList(drawerSpecsData)}
+        {propsList(toastSpecsData)}
     </>;
 };
 
-export default DrawerSpecs;
+export default ToastSpecs;

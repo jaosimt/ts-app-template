@@ -9,7 +9,7 @@ const code = `<Checkbox
     checked={true} 
 />`;
 
-const checkboxSpecsData: PropsListProps[] = [
+const CheckboxSpecsData: PropsListProps[] = [
     {
         name: 'name',
         types: 'string',
@@ -49,7 +49,7 @@ const checkboxSpecsData: PropsListProps[] = [
     }
 ];
 
-const CheckboxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const CheckboxSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -75,8 +75,8 @@ const CheckboxComponentSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
         </Box>
         <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>Properties <span
             className={'color font-monospace font-size-smaller'}>extends InputHTMLAttributes{`<HTMLInputElement>`}</span></h3>
-        {propsList(checkboxSpecsData)}
+        {propsList(CheckboxSpecsData)}
     </>;
 };
 
-export default CheckboxComponentSpecs;
+export default CheckboxSpecs;

@@ -18,6 +18,7 @@ const Demo: FC = () => {
                 <NavLink to={'/demo/loading'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Loading</NavLink>
                 <NavLink to={'/demo/modal'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Modal</NavLink>
                 <NavLink to={'/demo/tabs'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Tabs</NavLink>
+                <NavLink to={'/demo/toast'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Toast</NavLink>
                 <NavLink to={'/demo/window-portal'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>WindowPortal</NavLink>
             </nav>
             <div className={'p-1p5 border-radius-0p3 position-relative'} style={{width: 'calc(100% - 150px', backgroundColor: '#f8f8f8'}}>

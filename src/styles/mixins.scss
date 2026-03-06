@@ -13,6 +13,10 @@
   animation: spin infinite $speed linear;
 }
 
+@mixin bounce {
+  animation : bounceIn 1000ms ease-in-out 3;
+}
+
 @mixin customScrollbar($color: v.$scrollbarColor, $background: v.$scrollbarBackgroundColor) {
   scrollbar-width : thin;
   scrollbar-color : $color $background;

@@ -148,7 +148,7 @@ const fieldRegisterAlternative: PropsListProps[] = [
     }
 ];
 
-const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const InputFieldsSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -184,4 +184,4 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default InputFieldsProps;
+export default InputFieldsSpecs;

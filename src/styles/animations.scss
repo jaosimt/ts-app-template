@@ -11,3 +11,7 @@
 .transition-300 {
   transition : all 300ms ease-in-out;
 }
+
+.bounce {
+  @include m.bounce();
+}

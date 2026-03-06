@@ -67,7 +67,7 @@ const tabItems: TabItemType[] = [
     }
 ];
 
-const TabsDemo: FC = () => {
+const DemoTabs: FC = () => {
     const [tabType, setTabType] = useState<any>(sessionStorage.getItem('tabDemoSelectedTab') || 'boxed');
 
     return <div data-component={'tab-demo'} className={'width-100p'}>
@@ -82,4 +82,4 @@ const TabsDemo: FC = () => {
     </div>
 };
 
-export default TabsDemo;
+export default DemoTabs;

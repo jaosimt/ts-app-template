@@ -13,16 +13,17 @@ import {
 import { classNames } from '../../../utils';
 import Dropdown from '../../partials/dropdown';
 import Tab, { TabItemType } from '../../partials/tab';
-import BoxComponentSpecs from './specs/box';
-import ButtonComponentSpecs from './specs/buttons';
-import CheckboxComponentSpecs from './specs/checkbox';
-import DrawerComponentSpecs from './specs/drawer';
-import DropdownComponentSpecs from './specs/dropdown';
-import InputFieldsProps from './specs/inputFields';
+import BoxSpecs from './specs/box';
+import ButtonSpecs from './specs/buttons';
+import CheckboxSpecs from './specs/checkbox';
+import DrawerSpecs from './specs/drawer';
+import DropdownSpecs from './specs/dropdown';
+import InputFieldsSpecs from './specs/inputFields';
 import LoadingSpecs from './specs/loading';
 import ModalSpecs from './specs/modal';
 import PortalWindowSpecs from './specs/portalWindow';
 import TabSpecs from './specs/tab';
+import ToastSpecs from './specs/toast';
 
 export interface SelectedThemeProps {
     selectedTheme: string;
@@ -85,22 +86,22 @@ const ComponentSpecs: FC = () => {
     const tabData: TabItemType[] = [
         {
             name: 'Box',
-            content: <BoxComponentSpecs selectedTheme={selectedTheme}/>
+            content: <BoxSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'Button',
-            content: <ButtonComponentSpecs selectedTheme={selectedTheme}/>
+            content: <ButtonSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'Checkbox',
-            content: <CheckboxComponentSpecs selectedTheme={selectedTheme}/>
+            content: <CheckboxSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'Drawer',
-            content: <DrawerComponentSpecs selectedTheme={selectedTheme}/>
+            content: <DrawerSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'Dropdown',
-            content: <DropdownComponentSpecs selectedTheme={selectedTheme}/>
+            content: <DropdownSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'InputField',
-            content: <InputFieldsProps selectedTheme={selectedTheme}/>
+            content: <InputFieldsSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'Loading',
             content: <LoadingSpecs selectedTheme={selectedTheme}/>
@@ -110,6 +111,9 @@ const ComponentSpecs: FC = () => {
         }, {
             name: 'Tabs',
             content: <TabSpecs selectedTheme={selectedTheme}/>
+        }, {
+            name: 'Toast',
+            content: <ToastSpecs selectedTheme={selectedTheme}/>
         }, {
             name: 'WindowPortal',
             content: <PortalWindowSpecs selectedTheme={selectedTheme}/>
