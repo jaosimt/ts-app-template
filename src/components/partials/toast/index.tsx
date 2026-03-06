@@ -23,7 +23,7 @@ export type ToastType = 'success' | 'error' | 'info' | 'warning';
 export type ToastPosition = 'top-right'; // 'top-left' | 'bottom-left' | 'bottom-right';
 export type ToastTheme = 'default' | 'vibrant'; // 'top-left' | 'bottom-left' | 'bottom-right';
 
-export const firstToastTop = 64;
+export const firstToastTop = 71;
 export const toastGap = 21;
 
 const Container = styled.div`
