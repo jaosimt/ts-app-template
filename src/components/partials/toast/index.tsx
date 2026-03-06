@@ -24,6 +24,7 @@ export type ToastPosition = 'top-right'; // 'top-left' | 'bottom-left' | 'bottom
 export type ToastTheme = 'default' | 'vibrant'; // 'top-left' | 'bottom-left' | 'bottom-right';
 
 export const firstToastTop = 64;
+export const toastGap = 21;
 
 const Container = styled.div`
     position: fixed;
@@ -57,7 +58,7 @@ const ToastContainer: FC<any> = (props) => {
                 const top = parseFloat(getComputedStyle(t)['top']);
                 if (top < window.innerHeight && top !== b) t.style.top = `${b}px`;
                 t.setAttribute('data-index', `${i+1}:${toasts.length}`);
-                b += 7;
+                b += toastGap;
             });
         }
     }
