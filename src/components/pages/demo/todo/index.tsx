@@ -91,7 +91,7 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
                 dispatch(addTodo(todo));
                 dispatch(toast({
                     message: `ToDo "${todo.text}" successfully added!`,
-                    options: {duration: 7000, type: 'success'}
+                    options: {type: 'success', duration: 7000}
                 }));
         }
 

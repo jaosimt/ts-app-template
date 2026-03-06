@@ -15,11 +15,13 @@ export interface ToastProps {
 export interface ToastOptions {
     type?: ToastType;
     position?: ToastPosition;
+    theme?: ToastTheme;
     duration?: number;
 }
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning';
 export type ToastPosition = 'top-right'; // 'top-left' | 'bottom-left' | 'bottom-right';
+export type ToastTheme = 'default' | 'vibrant'; // 'top-left' | 'bottom-left' | 'bottom-right';
 
 export const firstToastTop = 64;
 

@@ -11,10 +11,11 @@ import { useAppDispatch } from '../../../hooks';
 import { CSSUnit } from '../../../types';
 import { ReactIcon } from '../index';
 import { removeToast } from '../slices/toast';
-import { ToastPosition, ToastType } from './index';
+import { ToastPosition, ToastTheme, ToastType } from './index';
 
 const Container = styled.div<{
     $type: ToastType,
+    $theme: ToastTheme,
     $position: ToastPosition
 }>`
     overflow: hidden;
@@ -23,18 +24,17 @@ const Container = styled.div<{
     padding: 0.5rem 0.1rem 0.5rem 0.5rem;
     border: 1px solid whitesmoke;
     border-radius: 0.5rem;
-    color: white;
     box-shadow: -1px 1px 7px 0 rgba(0, 0, 0, 0.2);
     ${props => {
         switch(props.$type) {
             case 'success':
-                return 'background-color: #8de4a0;';
+                return props.$theme === 'vibrant' ? 'color: white; background-color: #8de4a0;' : 'color: #8de4a0; background-color: white;';
             case 'warning':
-                return 'background-color: #e9de81;';
+                return props.$theme === 'vibrant' ? 'color: white; background-color: #e9de81;' : 'color: #e9de81; background-color: white;';
             case 'error':
-                return 'background-color: #ec76a4;';
+                return props.$theme === 'vibrant' ? 'color: white; background-color: #ec76a4;' : 'color: #ec76a4; background-color: white;';
             default:
-                return 'background-color: #85c9e9;';
+                return props.$theme === 'vibrant' ? 'color: white; background-color: #85c9e9;' : 'color: #85c9e9; background-color: white;';
         }
     }};
     ${props => {
@@ -59,14 +59,28 @@ const IconWrapper = styled.span`
     width: 16px;
 `;
 
-const ProgressBar = styled.div`
+const ProgressBar = styled.div<{
+    $type: ToastType,
+    $theme: ToastTheme,
+}>`
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 0.2rem;
-    background-color: #fff;
     transition: all 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    background-color: ${props => {
+        switch(props.$type) {
+            case 'success':
+                return props.$theme !== 'vibrant' ? '#8de4a0;' : 'white;';
+            case 'warning':
+                return props.$theme !== 'vibrant' ? '#e9de81;' : 'white;';
+            case 'error':
+                return props.$theme !== 'vibrant' ? '#ec76a4;' : 'white;';
+            default:
+                return props.$theme !== 'vibrant' ? '#85c9e9;' : 'white;';
+        }
+    }};
 `;
 
 const topZIndex = 7777778;
@@ -76,7 +90,7 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused}) => {
     const dispatch = useAppDispatch();
 
     const {message, options} = toast;
-    const {type = 'info', position = 'top-right', duration = 0} = options || {};
+    const {theme = 'default', type = 'info', position = 'top-right', duration = 0} = options || {};
 
     const progressRef = useRef<HTMLDivElement>(null);
     const hovered = useRef(false);
@@ -156,6 +170,7 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused}) => {
         key={elId}
         id={elId}
         $type={type}
+        $theme={theme}
         $position={position}
         style={{top: top, zIndex: zIndex, opacity: opacity}}
         className={'trim display-flex gap-0p5 align-items-start'}
@@ -168,7 +183,10 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused}) => {
         <IconWrapper className="hover-scale">
             <ReactIcon className={'cursor-pointer'} onClick={closeHandler} icon={IoIosCloseCircle}/>
         </IconWrapper>
-        {type !== 'error' && duration > 0 && <ProgressBar ref={progressRef}/>}
+        {type !== 'error' && duration > 0 && <ProgressBar
+            $type={type}
+            $theme={theme}
+            ref={progressRef}/>}
     </Container>;
 };
 
