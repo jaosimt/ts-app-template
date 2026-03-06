@@ -1,10 +1,9 @@
 import { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
-import { FcAddRow } from 'react-icons/fc';
 import { IoIosSave, IoIosWarning } from 'react-icons/io';
 import { MdDelete, MdDeleteForever, MdEdit } from 'react-icons/md';
+import { RiAddLargeFill } from 'react-icons/ri';
 import { VscDiscard } from 'react-icons/vsc';
-import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { classNames, isEmpty } from '../../../../utils';
 import { ReactIcon } from '../../../partials';
@@ -12,6 +11,7 @@ import Button from '../../../partials/button';
 import Checkbox from '../../../partials/checkbox';
 import InputField from '../../../partials/inputField';
 import Modal from '../../../partials/modal';
+import { toast } from '../../../partials/slices/toast';
 import { addTodo, getTodos, removeTodo, updateTodo } from '../slices/todo';
 
 export type ToDoItem = {
@@ -71,7 +71,8 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
 
     function saveChanges() {
         if (todo === null) {
-            toast('Todo is empty!', {type: 'error'});
+            // toast('Todo is empty!', {type: 'error'});
+            alert('Todo is empty!');
             return;
         }
 
@@ -106,44 +107,42 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
     return (
         <div className={classNames(className, 'background-light', 'box-shadow', 'border-radius-0p3', 'p-0p5')} {...restProps}>
             <div className="m-1">
-                <div className={'display-flex gap-0p5 justify-content-space-between align-items-top'}>
-                    <h1 className={'m-0'}>TO BE DONE</h1>
-                    <div className={'display-flex gap-0p5 justify-content-center align-items-center'}>
-                        <InputField
-                            type={'textarea'}
-                            width={'420px'}
-                            disabled={todoAction === null || !['add', 'edit'].includes(todoAction)}
-                            value={todo?.text || ''}
-                            onChange={textChangeHandler}
-                            setRef={(ref: HTMLTextAreaElement) => inputRef.current = ref}
-                            onKeyDown={textareaKeyPressHandler}
-                        />
-                        {
-                            todoAction === null &&
-                            <Button icon={FcAddRow} onClick={() => {
-                                setTodo(newTodo());
-                                setTodoAction('add');
-                            }}/>
-                        }
-                        {
-                            todoAction !== null && <>
-                                <Button disabled={isEmpty(todo?.text)} icon={IoIosSave} onClick={saveChanges}/>
-                                <Button icon={FaXmark} onClick={() => setTodoAction(null)}/>
-                            </>
-                        }
-
-                    </div>
+                <h1 className={'m-0 mb-0p3'}>TO BE DONE</h1>
+                <div className={'display-flex gap-0p5 justify-content-center align-items-center width-100p mb-0p5'}>
+                    {
+                        todoAction === null &&
+                        <Button icon={RiAddLargeFill} onClick={() => {
+                            setTodo(newTodo());
+                            setTodoAction('add');
+                        }}/>
+                    }
+                    <InputField
+                        wrapperClassName={'width-100p'}
+                        type={'textarea'}
+                        width={'100%'}
+                        disabled={todoAction === null || !['add', 'edit'].includes(todoAction)}
+                        value={todo?.text || ''}
+                        onChange={textChangeHandler}
+                        setRef={(ref: HTMLTextAreaElement) => inputRef.current = ref}
+                        onKeyDown={textareaKeyPressHandler}
+                    />
+                    {
+                        todoAction !== null && <>
+                            <Button disabled={isEmpty(todo?.text)} icon={IoIosSave} onClick={saveChanges}/>
+                            <Button icon={FaXmark} onClick={() => setTodoAction(null)}/>
+                        </>
+                    }
                 </div>
-
                 <ul className={'m-0 pl-0'}>
                     {
                         todos.map((t: ToDoItem) => {
-                            const edited = (todoAction === 'edit' && t.id === todo?.id) || todoAction === 'add';
+                            const editing = todoAction === 'edit';
+                            const edited = (editing && t.id === todo?.id) || todoAction === 'add';
 
                             return <li key={t.id}
                                        className={'display-flex gap-1 justify-content-space-between align-items-center py-0p2'}>
                                 <div className={'display-flex gap-0p5 align-items-center'} style={{lineHeight: 1}}>
-                                    <Checkbox name={'toggleTodo'} checked={t.completed}
+                                    <Checkbox disabled={editing} name={'toggleTodo'} checked={t.completed}
                                               onChange={(e) => dispatch(updateTodo({
                                                   ...t,
                                                   completed: e.currentTarget.checked
@@ -156,12 +155,12 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
                                         </span>
                                 </div>
                                 <div className={'display-flex gap-0p2'}>
-                                    <Button disabled={edited || t.completed} className={'btn-icon'} icon={MdEdit}
+                                    <Button disabled={editing || t.completed} className={'btn-icon'} icon={MdEdit}
                                             onClick={() => {
                                                 setTodo(t);
                                                 setTodoAction('edit');
                                             }}/>
-                                    <Button disabled={edited} className={'btn-icon'} icon={MdDelete}
+                                    <Button disabled={editing} className={'btn-icon'} icon={MdDelete}
                                             onClick={() => {
                                                 setTodo(t);
                                                 setTodoAction('delete');
@@ -193,6 +192,8 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
                     </div>
                 </Modal>
             }
+            <Button onClick={() => dispatch(toast({message: 'This is a test', options: {type: 'warning'}}))}>Show
+                Toast</Button>
         </div>
     );
 };

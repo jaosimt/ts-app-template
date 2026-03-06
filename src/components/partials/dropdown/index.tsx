@@ -217,7 +217,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
     >
         {label && <Label
             $labelAlign={labelAlign}
-            $labelWidth={labelWidth}>
+            $labelWidth={labelWidth as any}>
             {icon && <ReactIcon icon={icon}/>}
             {label}
         </Label>}

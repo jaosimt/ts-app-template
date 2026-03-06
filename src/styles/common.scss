@@ -259,6 +259,7 @@
 
 /* WIDTH ****************************************************/
 .width-100p { width : 100%; }
+.width-inherit { width : inherit; }
 .width-fit-content { width : fit-content; }
 /*************************************************** WIDTH */
 
@@ -289,6 +290,14 @@
 .cursor-default { cursor : default; }
 .cursor-not-allowed { cursor : not-allowed; }
 /************************************************* CURSOR- */
+
+.hover-scale {
+  transition : all 0.2s ease-in-out;
+  
+  &:hover {
+    transform : scale(1.05);
+  }
+}
 
 .link {
   @extend link;

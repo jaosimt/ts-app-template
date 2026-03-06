@@ -30,10 +30,12 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTex
     rows?: number;
     showErrorTooltipOnCreate?: boolean;
     disabled?: boolean;
+    wrapperClassName?: string;
 }
 
 const InputField: FC<InputFieldProps> = (props) => {
     const {
+        wrapperClassName,
         width,
         icon,
         className,
@@ -81,13 +83,15 @@ const InputField: FC<InputFieldProps> = (props) => {
     }, [error]);
 
     return (
-        <div data-component={'input-field'} className={'display-flex align-items-center'}>
-            <label style={{width: parseCSSUnit(labelWidth as CSSUnit), justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
-                   className={'display-flex align-items-center gap-0p5'}>
-                {icon && <ReactIcon icon={icon} className={'align-self-center'}/>}
-                {label && label}
-            </label>
-            <div className={'position-relative display-flex'}>
+        <div data-component={'input-field'} className={classNames(wrapperClassName, 'display-flex', 'align-items-center')}>
+            {
+                (icon || label) && <label style={{width: parseCSSUnit(labelWidth as CSSUnit), justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
+                                        className={'display-flex align-items-center gap-0p5'}>
+                    {icon && <ReactIcon icon={icon} className={'align-self-center'}/>}
+                    {label && label}
+                </label>
+            }
+            <div className={'position-relative display-flex width-inherit'}>
                 {
                     type !== 'textarea' && <input
                         disabled={disabled}

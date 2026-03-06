@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import loggerMiddleware from 'redux-logger';
 import todo from '../components/pages/demo/slices/todo';
+import toast from '../components/partials/slices/toast';
 import counter from '../slices/counter';
 
 const persistConfig = {
@@ -14,7 +15,8 @@ const persistConfig = {
 
 const reducer = combineReducers({
     counter,
-    todo
+    todo,
+    toast
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
