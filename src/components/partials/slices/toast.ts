@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ToastProps } from '../toast';
+import { firstToastTop, ToastProps } from '../toast';
 
 const initialState: ToastProps[] = [];
 
@@ -10,7 +10,14 @@ const toastSlice = createSlice({
         toast: (state, action: PayloadAction<ToastProps>) => {
             const {id} = action.payload;
             if (state.find(toast => toast.id === action.payload.id)) return state;
-            state.push({...action.payload, isClosed: false, id: id || crypto.randomUUID()});
+
+            let top = firstToastTop - 7;
+            state.map(t => {
+                top += 7;
+                return {...t, top}
+            });
+
+            state.push({...action.payload, id: id || `t-${crypto.randomUUID()}`, top: top + 7});
         },
         updateToast: (state, action: PayloadAction<ToastProps>) => {
             const index = state.findIndex(toast => toast.id === action.payload.id);
@@ -22,7 +29,7 @@ const toastSlice = createSlice({
         }
     },
     selectors: {
-        getToasts: (state) => state.filter(toast => !toast.isClosed)
+        getToasts: (state) => state
     }
 });
 

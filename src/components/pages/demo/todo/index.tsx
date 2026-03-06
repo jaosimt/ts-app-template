@@ -71,22 +71,28 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
 
     function saveChanges() {
         if (todo === null) {
-            // toast('Todo is empty!', {type: 'error'});
-            alert('Todo is empty!');
+            dispatch(toast({message: 'Todo is empty!'}));
             return;
         }
 
         switch (todoAction) {
             case 'delete':
                 dispatch(removeTodo(todo.id));
+                dispatch(toast({
+                    message: `ToDo "${todo.text}" successfully removed!`,
+                    options: {duration: 7000}
+                }));
                 break;
             case 'edit':
             case 'toggle':
                 dispatch(updateTodo(todo));
                 break;
             default:
-                // crypto.randomUUID() <- Modern way to generate unique IDs
                 dispatch(addTodo(todo));
+                dispatch(toast({
+                    message: `ToDo "${todo.text}" successfully added!`,
+                    options: {duration: 7000, type: 'success'}
+                }));
         }
 
         setTodoAction(null);
@@ -192,8 +198,6 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
                     </div>
                 </Modal>
             }
-            <Button onClick={() => dispatch(toast({message: 'This is a test', options: {type: 'warning'}}))}>Show
-                Toast</Button>
         </div>
     );
 };

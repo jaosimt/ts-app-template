@@ -1,5 +1,11 @@
-import { FC, useEffect, useState } from 'react';
-import { IoIosCloseCircle, IoIosWarning } from 'react-icons/io';
+import { FC, useEffect, useRef, useState } from 'react';
+import {
+    IoIosCloseCircle,
+    IoIosWarning,
+    IoIosInformationCircle,
+    IoIosAlert,
+    IoIosCheckmarkCircle
+} from 'react-icons/io';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../../hooks';
 import { CSSUnit } from '../../../types';
@@ -11,56 +17,158 @@ const Container = styled.div<{
     $type: ToastType,
     $position: ToastPosition
 }>`
+    overflow: hidden;
     position: fixed;
-    z-index: 7777;
-    transition: all 300ms ease-in-out;
-    padding: 0.5rem 0.1rem 0.5rem 1rem;
+    transition: all 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    padding: 0.5rem 0.1rem 0.5rem 0.5rem;
     border: 1px solid whitesmoke;
     border-radius: 0.5rem;
     color: white;
     box-shadow: -1px 1px 7px 0 rgba(0, 0, 0, 0.2);
     ${props => {
         switch(props.$type) {
-            case 'success': return 'background-color: #32bc50;';
-            case 'error': return 'background-color:  #ff0063;';
-            case 'info': return 'background-color:  #00adff;';
-            case 'warning': return 'background-color:  #ffe300; color: inherit;';
+            case 'success':
+                return 'background-color: #8de4a0;';
+            case 'warning':
+                return 'background-color: #e9de81;';
+            case 'error':
+                return 'background-color: #ec76a4;';
+            default:
+                return 'background-color: #85c9e9;';
         }
     }};
     ${props => {
-        if (['top-right', 'bottom-right'].includes(props.$position)) return 'right: 1rem;';
+        if (['top-right', 'top-right'].includes(props.$position)) return 'right: 1rem;';
         else return 'left: 1rem;';
     }}
 `;
 
-const Toast: FC<any> = ({id: elId, toast}) => {
+const Message = styled.div`
+    width: 196px;
+    font-size: smaller;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    overflow-wrap: anywhere;
+`;
+
+const IconWrapper = styled.span`
+    margin-top: -0.3rem;
+    margin-right: 0.1rem;
+    height: 16px;
+    width: 16px;
+`;
+
+const ProgressBar = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.2rem;
+    background-color: #fff;
+    transition: all 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+`;
+
+const topZIndex = 7777778;
+const defaultZIndex = 7777777;
+
+const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused}) => {
     const dispatch = useAppDispatch();
 
     const {message, options} = toast;
-    const {type = 'info', position = 'top-right', duration = 3} = options || {};
+    const {type = 'info', position = 'top-right', duration = 0} = options || {};
 
-    const [bottom, setBottom] = useState<CSSUnit>('-3rem');
+    const progressRef = useRef<HTMLDivElement>(null);
+    const hovered = useRef(false);
+
+    const [icon] = useState(() => {
+        switch (type) {
+            case 'success':
+                return IoIosCheckmarkCircle;
+            case 'warning':
+                return IoIosWarning;
+            case 'error':
+                return IoIosAlert;
+            default:
+                return IoIosInformationCircle;
+        }
+    });
+    const [top, setTop] = useState<CSSUnit>('-7em');
+    const [opacity, setOpacity] = useState<number>(1);
+    const [zIndex, setZIndex] = useState<number>(defaultZIndex);
 
     useEffect(() => {
-        setBottom('3rem')
+        setTop(`${toast.top}px`);
+        // eslint-disable-next-line
     }, []);
 
-    const closeHandler = () => {
-        setBottom('-7rem');
-        setTimeout(() => dispatch(removeToast(toast.id)), 700);
+    useEffect(() => {
+        if (type === 'error' || duration === 0 || top === '-7em' || progressRef.current === null) return;
+        const elem: HTMLDivElement = progressRef.current;
+
+        let width = 100;
+        let intervalId: any = null;
+
+        const frame = () => {
+            if (hovered.current) return;
+
+            const el: any = document.querySelector(`#${elId}`);
+            if (el) {
+                const idx = el.getAttribute('data-index');
+                const zIndex = el.style.zIndex;
+                if (idx) {
+                    const sIdx = idx.split(':');
+                    if (sIdx[0] !== sIdx[1] && +zIndex !== topZIndex) return;
+                }
+            }
+
+            if (width <= 0) {
+                clearInterval(intervalId);
+                closeHandler();
+            } else {
+                width--;
+                elem.style.width = width + '%';
+            }
+        };
+
+        intervalId = setInterval(frame, (duration / 100));
+
+
+        return () => clearInterval(intervalId);
+
+        // eslint-disable-next-line
+    }, [top]);
+
+    function closeHandler() {
+        setIntervalIsPaused(true);
+
+        setTop('110%');
+        setOpacity(0);
+
+        setTimeout(() => {
+            dispatch(removeToast(toast.id));
+            setIntervalIsPaused(false);
+        }, 700);
     }
 
     return <Container
+        data-component={'toast'}
         key={elId}
         id={elId}
         $type={type}
         $position={position}
-        style={{bottom: bottom}}
+        style={{top: top, zIndex: zIndex, opacity: opacity}}
         className={'trim display-flex gap-0p5 align-items-start'}
+        onClick={() => setZIndex(topZIndex)}
+        onMouseEnter={() => hovered.current = true}
+        onMouseLeave={() => hovered.current = false}
     >
-        <ReactIcon icon={IoIosWarning} size={42}/>
-        <div style={{marginTop: '0.6rem', width: '175px'}}>{message}</div>
-        <ReactIcon className={'cursor-pointer hover-scale'} onClick={closeHandler} style={{marginTop: '-0.3rem'}} icon={IoIosCloseCircle}/>
+        <ReactIcon icon={icon} size={42}/>
+        <Message>{message}</Message>
+        <IconWrapper className="hover-scale">
+            <ReactIcon className={'cursor-pointer'} onClick={closeHandler} icon={IoIosCloseCircle}/>
+        </IconWrapper>
+        {type !== 'error' && duration > 0 && <ProgressBar ref={progressRef}/>}
     </Container>;
 };
 
