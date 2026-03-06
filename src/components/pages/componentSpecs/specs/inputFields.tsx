@@ -1,8 +1,11 @@
+import Tippy from '@tippyjs/react';
 import { FC } from 'react';
+import { FaCircleInfo } from 'react-icons/fa6';
 import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import './styles.scss';
 import { createLink, CssColors } from '../../../../utils/ext';
+import { ReactIcon } from '../../../partials';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
@@ -57,7 +60,12 @@ const inputFieldData: PropsListProps[] = [
         values: '',
         description: ['Holds a message for the error tooltip - if any!']
     }, {
-        name: 'fieldRegister',
+        name: <Tippy
+            content={'Can be opted with bellow alternative props!'}
+            placement="right"
+            className={'custom-tippy'}>
+            <span className={'cursor-pointer'}>fieldRegister <ReactIcon className={'color-magenta'} icon={FaCircleInfo}/></span>
+        </Tippy>,
         types: createLink('UseFormRegisterReturn', '//react-hook-form.com/docs/useform/register'),
         values: '',
         description: ['Allows you to register an input or select element and apply validation rules to React Hook Form']
@@ -126,6 +134,20 @@ const inputFieldData: PropsListProps[] = [
     }
 ];
 
+const fieldRegisterAlternative: PropsListProps[] = [
+    {
+        name: 'name',
+        types: 'string',
+        values: '',
+        description: ['Sets the name of the input field']
+    }, {
+        name: 'value',
+        types: 'string',
+        values: '',
+        description: ['Sets the value of the input field']
+    }
+];
+
 const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
@@ -157,6 +179,8 @@ const InputFieldsProps: FC<SelectedThemeProps> = ({selectedTheme}) => {
             className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLInputElement>`}</span>
         </h3>
         {propsList(inputFieldData)}
+        <h3 className={'alternate-properties color-gray mb-0p5'}>fieldRegister alternate</h3>
+        {propsList(fieldRegisterAlternative)}
     </>;
 };
 

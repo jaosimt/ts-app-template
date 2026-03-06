@@ -2,11 +2,6 @@
 @use "variables" as v;
 @use "tags";
 
-.trim {
-  > :first-child { margin-top : 0; }
-  > :last-child { margin-bottom : 0; }
-}
-
 /* TEXT ****************************************************/
 .text-align-left { text-align : left; }
 .text-align-center { text-align : center; }
@@ -289,6 +284,12 @@
 .overflow-clip { overflow : clip; }
 /*********************************************** OVERFLOW- */
 
+/* CURSOR- *************************************************/
+.cursor-pointer { cursor : pointer; }
+.cursor-default { cursor : default; }
+.cursor-not-allowed { cursor : not-allowed; }
+/************************************************* CURSOR- */
+
 .link {
   @extend link;
 }
@@ -523,3 +524,8 @@
 .white-space-nowrap { white-space : nowrap; }
 
 .transition-none { transition : none !important; }
+
+.trim {
+  > :first-child { margin-top : 0; }
+  > :last-child { margin-bottom : 0; }
+}

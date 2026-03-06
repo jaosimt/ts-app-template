@@ -1,5 +1,4 @@
 import { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { FaXmark } from 'react-icons/fa6';
 import { FcAddRow } from 'react-icons/fc';
 import { IoIosSave, IoIosWarning } from 'react-icons/io';
@@ -7,7 +6,7 @@ import { MdDelete, MdDeleteForever, MdEdit } from 'react-icons/md';
 import { VscDiscard } from 'react-icons/vsc';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { classNames, isEmpty, isString } from '../../../../utils';
+import { classNames, isEmpty } from '../../../../utils';
 import { ReactIcon } from '../../../partials';
 import Button from '../../../partials/button';
 import Checkbox from '../../../partials/checkbox';
@@ -33,11 +32,6 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
     const dispatch = useAppDispatch();
     const todos = useAppSelector(getTodos);
 
-    const {
-        register,
-        reset,
-        setValue
-    } = useForm<ToDoItem>();
     const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
     const [todo, setTodo] = useState<ToDoItem | null>(null);
@@ -48,7 +42,6 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
         if (todoAction === null) {
             setShowConfirmDelete(false);
             setTodo(null);
-            reset();
             return;
         }
 
@@ -61,18 +54,8 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
             inputRef.current?.focus();
             return;
         }
-
-        alert('xxxx');
-
-        saveChanges();
-        reset();
-        // eslint-disable-next-line
     }, [todoAction]);
 
-    useEffect(() => {
-        setValue('text', todo === null ? '' : todo.text);
-        // eslint-disable-next-line
-    }, [todo]);
 
     const textChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTodo({...todo, text: e.currentTarget.value} as ToDoItem);
@@ -84,8 +67,7 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
     }
 
     function saveChanges() {
-        if (todo === null || !isString(todo.text, true)) {
-            !todo && setTodo(newTodo());
+        if (todo === null) {
             toast('Todo is empty!', {type: 'error'});
             return;
         }
@@ -128,9 +110,8 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
                             type={'textarea'}
                             width={'420px'}
                             disabled={todoAction === null || !['add', 'edit'].includes(todoAction)}
-                            fieldRegister={register('text', {
-                                onChange: textChangeHandler,
-                            })}
+                            value={todo?.text || ''}
+                            onChange={textChangeHandler}
                             setRef={(ref: HTMLTextAreaElement) => inputRef.current = ref}
                             onKeyDown={textareaKeyPressHandler}
                         />

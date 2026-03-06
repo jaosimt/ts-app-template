@@ -13,9 +13,11 @@ import { ReactIcon } from '../index';
 
 export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTextAreaElement> {
     error?: string;
-    fieldRegister: UseFormRegisterReturn;
+    fieldRegister?: UseFormRegisterReturn;
     icon?: IconType;
     label?: string;
+    name?: string;
+    value?: string;
     labelAlign?: 'left' | 'right' | 'center' | 'space-between';
     labelColor?: CSSColors;
     labelWidth?: CSSUnit;
@@ -54,14 +56,15 @@ const InputField: FC<InputFieldProps> = (props) => {
         ...restProps
     } = props;
 
-    const {ref, ...restFieldRegister} = fieldRegister;
+    const {ref, ...restFieldRegister} = fieldRegister || {};
 
     const [styles, setStyles] = useState({
         zIndex: -777,
         opacity: 0
     });
 
-    const idRef = useRef(`${fieldRegister.name}-${uuidv4()}`);
+    const fieldName = fieldRegister?.name || restProps?.name || 'unnamed';
+    const idRef = useRef(`${fieldName}-${uuidv4()}`);
     const inputRef = useRef(null as HTMLInputElement | null as HTMLTextAreaElement | null);
 
     useEffect(() => {
@@ -96,14 +99,14 @@ const InputField: FC<InputFieldProps> = (props) => {
                         className={classNames(className && '', error && 'border-error')}
                         id={idRef.current}
                         ref={(e:any) => {
-                            ref(e);
+                            ref && ref(e);
                             inputRef.current = e;
                         }}
                         onKeyDown={e => {
-                            sessionStorage.setItem('last-input-focus', fieldRegister.name);
+                            sessionStorage.setItem('last-input-focus', fieldName);
                             onKeyDown && onKeyDown(e);
                         }}
-                        autoFocus={sessionStorage.getItem('last-input-focus') === fieldRegister.name}
+                        autoFocus={sessionStorage.getItem('last-input-focus') === fieldName}
                         {...restFieldRegister}
                         {...restProps}
                     />
@@ -117,14 +120,14 @@ const InputField: FC<InputFieldProps> = (props) => {
                         className={classNames(className && '', error && 'border-error')}
                         id={idRef.current}
                         ref={(e:any) => {
-                            ref(e);
+                            ref && ref(e);
                             inputRef.current = e;
                         }}
                         onKeyDown={e => {
-                            sessionStorage.setItem('last-input-focus', fieldRegister.name);
+                            sessionStorage.setItem('last-input-focus', fieldName);
                             onKeyDown && onKeyDown(e);
                         }}
-                        autoFocus={sessionStorage.getItem('last-input-focus') === fieldRegister.name}
+                        autoFocus={sessionStorage.getItem('last-input-focus') === fieldName}
                         {...restFieldRegister}
                         {...restProps}
                     />

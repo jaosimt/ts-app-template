@@ -22,9 +22,16 @@
   border           : 1px solid #ccc;
   border-radius    : 4px;
   
-  &[data-placement] {
-    > .tippy-arrow:before {
-      border-top-color : v.$headerBackgroundColor;
-    }
+  &[data-placement^="top"] .tippy-arrow::before {
+    border-top-color : v.$headerBackgroundColor;
+  }
+  &[data-placement^="right"] .tippy-arrow::before {
+    border-right-color  : v.$headerBackgroundColor;
+  }
+  &[data-placement^="bottom"] .tippy-arrow::before {
+    border-bottom-color : v.$headerBackgroundColor;
+  }
+  &[data-placement^="left"] .tippy-arrow::before {
+    border-left-color : v.$headerBackgroundColor;
   }
 }
