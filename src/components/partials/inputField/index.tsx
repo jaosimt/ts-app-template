@@ -114,8 +114,8 @@ const InputField: FC<InputFieldProps> = (props) => {
                 {
                     type === 'textarea' && <textarea
                         disabled={disabled}
-                        rows={rows || 3}
                         style={{...style, width: width && parseCSSUnit(width)}}
+                        rows={rows || 3}
                         placeholder={placeHolder}
                         className={classNames(className && '', error && 'border-error')}
                         id={idRef.current}
