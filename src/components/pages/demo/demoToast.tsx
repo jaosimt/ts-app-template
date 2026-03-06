@@ -1,3 +1,4 @@
+import Tippy from '@tippyjs/react';
 import { FC, useEffect, useState } from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
 import { RiResetLeftLine } from 'react-icons/ri';
@@ -61,8 +62,10 @@ const DemoToast: FC = () => {
                     <Dropdown labelWidth={110} label={'Toast Theme'} selected={selectedTheme} onChange={(value: ToastTheme) => setSelectedTheme(value)} options={['default', 'vibrant']}/>
                     <div className={'display-flex gap-0p3 align-items-center justify-content-space-between'}>
                         <div className="display-flex gap-0p3 align-items-center">
-                            <InputField readOnly={true} disabled={selectedType.value === 'error'} labelWidth={110} label={'Duration'} type={'number'} width={70} step={1000} value={String(toastProp.options?.duration)}
-                                        onChange={(e) => setToastProp({...toastProp, options: {...toastProp.options, duration: Number(e.currentTarget.value)}})}/>
+                            <Tippy showOnCreate={false} content={'InputField is readonly.  Use the provided plus/minus buttons!'} className={'custom-tippy'}>
+                                <InputField readOnly={true} disabled={selectedType.value === 'error'} labelWidth={110} label={'Duration'} type={'number'} width={70} step={1000} value={String(toastProp.options?.duration)}
+                                            onChange={(e) => setToastProp({...toastProp, options: {...toastProp.options, duration: Number(e.currentTarget.value)}})}/>
+                            </Tippy>
                             <Button disabled={toastProp.options?.duration === 0 || selectedType.value === 'error'} icon={FaMinus} onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: (toastProp.options?.duration || 0) - 1000}})}/>
                             <Button disabled={selectedType.value === 'error'} icon={FaPlus} onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: (toastProp.options?.duration || 0) + 1000}})}/>
                             <span className="color-gray">milliseconds</span>
