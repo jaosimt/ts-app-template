@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { RootState } from '../../../store';
@@ -32,32 +32,58 @@ const Container = styled.div`
     z-index: 77777;
 `;
 
+export const toastTopZIndex = 7777778;
+export const toastDefaultZIndex = 7777777;
+
 const ToastContainer: FC<any> = (props) => {
     const {toasts = []} = props;
 
+    const delay = useRef(1400);
     const paused = useRef(false);
     const toastRef = useRef<HTMLDivElement>(null);
 
+    const [zIndexes, setZIndexes] = useState<any>([]);
+
     useEffect(() => {
-        const intervalId = setInterval(updatePosition, 1400);
+        const intervalId = setInterval(updatePosition, delay.current);
         return () => clearInterval(intervalId);
 
         // eslint-disable-next-line
     }, []);
 
-    const setIntervalIsPaused = (pause: boolean) => paused.current = pause
-    ;
+    useEffect(() => {
+        setZIndexes(
+            toasts.map((toast: ToastProps, i: number) => {
+                const existing = zIndexes.find((zi: any) => zi.id === toast.id);
+                const thisZIndex = (i+1 === toasts.length) ? toastTopZIndex : toastDefaultZIndex
+                return existing ? {...existing, zIndex: thisZIndex} : {id: toast.id, zIndex: thisZIndex}
+            })
+        );
+
+        // eslint-disable-next-line
+    }, [toasts]);
+
+    const setIntervalIsPaused = (pause: boolean) => paused.current = pause;
+
+    const selectElementOnTop = (id: string) => {
+        console.log('[selectElementOnTop] id:', id);
+        setZIndexes(zIndexes.map((zI: any) => ({...zI, zIndex: id === zI.id ? toastTopZIndex : toastDefaultZIndex})));
+    };
 
     function updatePosition() {
-        if (paused.current) return;
+        if (paused.current) {
+            delay.current = 100;
+            return;
+        }
+
+        delay.current = 1400;
 
         const toasts = toastRef.current?.querySelectorAll('[data-component="toast"]');
         if (toasts?.length) {
             let b: number = firstToastTop;
-            toasts.forEach((t: any, i: number) => {
+            toasts.forEach((t: any) => {
                 const top = parseFloat(getComputedStyle(t)['top']);
                 if (top < window.innerHeight && top !== b) t.style.top = `${b}px`;
-                t.setAttribute('data-index', `${i+1}:${toasts.length}`);
                 b += toastGap;
             });
         }
@@ -65,7 +91,8 @@ const ToastContainer: FC<any> = (props) => {
 
     return <Container ref={toastRef} data-component={'toast-container'}>
         {toasts.map((toast: ToastProps) => {
-            return <Toast key={toast.id} id={toast.id} toast={toast} setIntervalIsPaused={setIntervalIsPaused}/>;
+            return <Toast key={toast.id} id={toast.id} toast={toast} zIndex={zIndexes.find((zi: any) => zi.id === toast.id)?.zIndex}
+                          selectElementOnTop={selectElementOnTop} setIntervalIsPaused={setIntervalIsPaused}/>;
         })}
     </Container>;
 };

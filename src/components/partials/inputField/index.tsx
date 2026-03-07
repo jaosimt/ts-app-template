@@ -17,7 +17,7 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement|HTMLTex
     icon?: IconType;
     label?: string;
     name?: string;
-    value?: string;
+    value?: string | number;
     labelAlign?: 'left' | 'right' | 'center' | 'space-between';
     labelColor?: CSSColors;
     labelWidth?: CSSUnit;

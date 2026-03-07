@@ -11,7 +11,7 @@ import { useAppDispatch } from '../../../hooks';
 import { CSSUnit } from '../../../types';
 import { ReactIcon } from '../index';
 import { removeToast } from '../slices/toast';
-import { ToastPosition, ToastTheme, ToastType } from './index';
+import { ToastPosition, ToastTheme, ToastType, toastTopZIndex } from './index';
 
 const Container = styled.div<{
     $type: ToastType,
@@ -28,13 +28,13 @@ const Container = styled.div<{
     ${props => {
         switch(props.$type) {
             case 'success':
-                return props.$theme === 'vibrant' ? 'color: white; background-color: #8de4a0;' : 'color: #8de4a0; background-color: white;';
+                return props.$theme === 'vibrant' ? 'color: white; background-color: #1acb1a;' : 'color: #1acb1a; background-color: white;';
             case 'warning':
-                return props.$theme === 'vibrant' ? 'color: white; background-color: #e9de81;' : 'color: #e9de81; background-color: white;';
+                return props.$theme === 'vibrant' ? 'color: white; background-color: #f2f22b;' : 'color: #f2f22b; background-color: white;';
             case 'error':
-                return props.$theme === 'vibrant' ? 'color: white; background-color: #ec76a4;' : 'color: #ec76a4; background-color: white;';
+                return props.$theme === 'vibrant' ? 'color: white; background-color: #ff7979;' : 'color: #ff7979; background-color: white;';
             default:
-                return props.$theme === 'vibrant' ? 'color: white; background-color: #85c9e9;' : 'color: #85c9e9; background-color: white;';
+                return props.$theme === 'vibrant' ? 'color: white; background-color: #459eff;' : 'color: #459eff; background-color: white;';
         }
     }};
     ${props => {
@@ -71,21 +71,18 @@ const ProgressBar = styled.div<{
     background-color: ${props => {
         switch(props.$type) {
             case 'success':
-                return props.$theme !== 'vibrant' ? '#8de4a0;' : 'white;';
+                return props.$theme !== 'vibrant' ? '#1acb1a;' : 'white;';
             case 'warning':
-                return props.$theme !== 'vibrant' ? '#e9de81;' : 'white;';
+                return props.$theme !== 'vibrant' ? '#f2f22b;' : 'white;';
             case 'error':
-                return props.$theme !== 'vibrant' ? '#ec76a4;' : 'white;';
+                return props.$theme !== 'vibrant' ? '#ff7979;' : 'white;';
             default:
-                return props.$theme !== 'vibrant' ? '#85c9e9;' : 'white;';
+                return props.$theme !== 'vibrant' ? '#459eff;' : 'white;';
         }
     }};
 `;
 
-const topZIndex = 7777778;
-const defaultZIndex = 7777777;
-
-const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused}) => {
+const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused, zIndex, selectElementOnTop}) => {
     const dispatch = useAppDispatch();
 
     const {message, options} = toast;
@@ -108,7 +105,6 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused}) => {
     });
     const [top, setTop] = useState<CSSUnit>('-7em');
     const [opacity, setOpacity] = useState<number>(1);
-    const [zIndex, setZIndex] = useState<number>(defaultZIndex);
 
     useEffect(() => {
         setTop(`${toast.top}px`);
@@ -126,14 +122,7 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused}) => {
             if (hovered.current) return;
 
             const el: any = document.querySelector(`#${elId}`);
-            if (el) {
-                const idx = el.getAttribute('data-index');
-                const zIndex = el.style.zIndex;
-                if (idx) {
-                    const sIdx = idx.split(':');
-                    if (sIdx[0] !== sIdx[1] && +zIndex !== topZIndex) return;
-                }
-            }
+            if (el && +el.style.zIndex !== toastTopZIndex) return;
 
             if (width <= 0) {
                 clearInterval(intervalId);
@@ -173,7 +162,7 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused}) => {
         $position={position}
         style={{top: top, zIndex: zIndex, opacity: opacity}}
         className={'trim display-flex gap-0p5 align-items-start'}
-        onClick={() => setZIndex(topZIndex)}
+        onClick={() => selectElementOnTop(elId) }
         onMouseEnter={() => hovered.current = true}
         onMouseLeave={() => hovered.current = false}
     >
