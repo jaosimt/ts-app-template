@@ -20,8 +20,8 @@ export interface ToastOptions {
 }
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning';
-export type ToastPosition = 'top-right' | 'bottom-right'; // 'top-left' | 'bottom-left';
-export type ToastTheme = 'default' | 'vibrant'; // 'top-left' | 'bottom-left' | 'bottom-right';
+export type ToastPosition = 'top-right' | 'top-left'; // | 'bottom-right' | 'bottom-left';
+export type ToastTheme = 'outlined' | 'filled';
 
 export const firstToastTop = 71;
 export const toastGap = 21;
@@ -38,7 +38,7 @@ export const toastDefaultZIndex = 7777777;
 const ToastContainer: FC<any> = (props) => {
     const {toasts = []} = props;
 
-    const delay = useRef(1400);
+    const delay = useRef(700);
     const paused = useRef(false);
     const toastRef = useRef<HTMLDivElement>(null);
 
@@ -76,15 +76,25 @@ const ToastContainer: FC<any> = (props) => {
             return;
         }
 
-        delay.current = 1400;
+        delay.current = 700;
 
         const toasts = toastRef.current?.querySelectorAll('[data-component="toast"]');
         if (toasts?.length) {
-            let b: number = firstToastTop;
+            let topRight: number = firstToastTop;
+            let topLeft: number = firstToastTop;
+            let thisTop = topRight;
             toasts.forEach((t: any) => {
                 const top = parseFloat(getComputedStyle(t)['top']);
-                if (top < window.innerHeight && top !== b) t.style.top = `${b}px`;
-                b += toastGap;
+                switch(t.getAttribute('data-position') || 'top-right') {
+                    case 'top-left':
+                        thisTop = topLeft;
+                        topLeft += toastGap;
+                        break;
+                    default: // top-right
+                        thisTop = topRight;
+                        topRight += toastGap;
+                }
+                if (top < window.innerHeight) t.style.top = `${thisTop}px`;
             });
         }
     }

@@ -27,7 +27,7 @@ const SpecsToastData: PropsListProps[] = [
     }, {
         name: 'options',
         types: 'ToastOptions',
-        values: <pre className={'m-0 font-monospace font-size-small'}>{JSON.stringify({type: 'string', theme: 'string', duration: 'number'}, null, 2)}</pre>,
+        values: <pre className={'m-0 font-monospace font-size-small'}>{JSON.stringify({type: 'string', position: 'string', theme: 'string', duration: 'number'}, null, 2)}</pre>,
         description: ['Sets the toast options']
     }
 ];
@@ -39,9 +39,14 @@ const toastOptions: PropsListProps[] = [
         values: 'info|success|warning|error',
         description: ['Sets the type of the toast message']
     }, {
+        name: 'position',
+        types: 'string',
+        values: 'top-right|top-left',
+        description: ['Sets the position of the toast message']
+    }, {
         name: 'theme',
         types: 'string',
-        values: 'default|vibrant',
+        values: 'outlined|filled',
         description: ['Sets the toast message theme']
     }, {
         name: 'duration',

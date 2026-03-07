@@ -11,13 +11,23 @@ const toastSlice = createSlice({
             const {id} = action.payload;
             if (state.find(toast => toast.id === action.payload.id)) return state;
 
-            let top = firstToastTop - toastGap;
+            let topRight = firstToastTop - toastGap;
+            let topLeft = firstToastTop - toastGap;
+            let thisTop = topRight;
             state.map(t => {
-                top += toastGap;
-                return {...t, top}
+                switch(t.options?.position || 'top-right') {
+                    case 'top-left':
+                        topLeft += toastGap;
+                        thisTop = topLeft;
+                        return {...t, topLeft}
+                    default: // top-right
+                        topRight += toastGap;
+                        thisTop = topRight;
+                        return {...t, topRight}
+                }
             });
 
-            state.push({...action.payload, id: id || `t-${crypto.randomUUID()}`, top: top + toastGap});
+            state.push({...action.payload, id: id || `t-${crypto.randomUUID()}`, top: thisTop + toastGap});
         },
         updateToast: (state, action: PayloadAction<ToastProps>) => {
             const index = state.findIndex(toast => toast.id === action.payload.id);

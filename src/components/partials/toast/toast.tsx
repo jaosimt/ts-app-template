@@ -28,13 +28,13 @@ const Container = styled.div<{
     ${props => {
         switch(props.$type) {
             case 'success':
-                return props.$theme === 'vibrant' ? 'color: white; background-color: #1acb1a;' : 'color: #1acb1a; background-color: white;';
+                return props.$theme === 'filled' ? 'color: white; background-color: #1acb1a;' : 'color: #1acb1a; background-color: white;';
             case 'warning':
-                return props.$theme === 'vibrant' ? 'color: white; background-color: #f2f22b;' : 'color: #f2f22b; background-color: white;';
+                return props.$theme === 'filled' ? 'color: white; background-color: #f2f22b;' : 'color: #f2f22b; background-color: white;';
             case 'error':
-                return props.$theme === 'vibrant' ? 'color: white; background-color: #ff7979;' : 'color: #ff7979; background-color: white;';
+                return props.$theme === 'filled' ? 'color: white; background-color: #ff7979;' : 'color: #ff7979; background-color: white;';
             default:
-                return props.$theme === 'vibrant' ? 'color: white; background-color: #459eff;' : 'color: #459eff; background-color: white;';
+                return props.$theme === 'filled' ? 'color: white; background-color: #459eff;' : 'color: #459eff; background-color: white;';
         }
     }};
     ${props => {
@@ -71,13 +71,13 @@ const ProgressBar = styled.div<{
     background-color: ${props => {
         switch(props.$type) {
             case 'success':
-                return props.$theme !== 'vibrant' ? '#1acb1a;' : 'white;';
+                return props.$theme !== 'filled' ? '#1acb1a;' : 'white;';
             case 'warning':
-                return props.$theme !== 'vibrant' ? '#f2f22b;' : 'white;';
+                return props.$theme !== 'filled' ? '#f2f22b;' : 'white;';
             case 'error':
-                return props.$theme !== 'vibrant' ? '#ff7979;' : 'white;';
+                return props.$theme !== 'filled' ? '#ff7979;' : 'white;';
             default:
-                return props.$theme !== 'vibrant' ? '#459eff;' : 'white;';
+                return props.$theme !== 'filled' ? '#459eff;' : 'white;';
         }
     }};
 `;
@@ -155,6 +155,7 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused, zIndex, selectEle
 
     return <Container
         data-component={'toast'}
+        data-position={position}
         key={elId}
         id={elId}
         $type={type}
