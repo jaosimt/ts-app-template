@@ -44,11 +44,39 @@ const ToastContainer: FC<any> = (props) => {
     const [zIndexes, setZIndexes] = useState<any>([]);
 
     useEffect(() => {
+        const topRights = toasts.filter((t:any) => ['top-right', '', undefined, null].includes(t.options?.position));
+        const topLefts = toasts.filter((t:any) => t.options?.position === 'top-left');
+        const bottomRights = toasts.filter((t:any) => t.options?.position === 'bottom-right');
+        const bottomLefts = toasts.filter((t:any) => t.options?.position === 'bottom-left');
+
+        let countTR = 0;
+        let countTL = 0;
+        let countBR = 0;
+        let countBL = 0;
+
         setZIndexes(
-            toasts.map((toast: ToastProps, i: number) => {
-                const existing = zIndexes.find((zi: any) => zi.id === toast.id);
-                const thisZIndex = (i+1 === toasts.length) ? toastTopZIndex : toastDefaultZIndex
-                return existing ? {...existing, zIndex: thisZIndex} : {id: toast.id, zIndex: thisZIndex}
+            toasts.map((toast: ToastProps) => {
+                const position = toast.options?.position || 'top-right';
+                // const thisZIndex = (i+1 === toasts.length) ? toastTopZIndex : toastDefaultZIndex
+
+                const thisZIndex = (() => {
+                    switch(position) {
+                        case 'bottom-left':
+                            countBL++;
+                            return countBL === bottomLefts.length ? toastTopZIndex : toastDefaultZIndex
+                        case 'bottom-right':
+                            countBR++;
+                            return countBR === bottomRights.length ? toastTopZIndex : toastDefaultZIndex
+                        case 'top-left':
+                            countTL++;
+                            return countTL === topLefts.length ? toastTopZIndex : toastDefaultZIndex
+                        default: // top-right
+                            countTR++;
+                            return countTR === topRights.length ? toastTopZIndex : toastDefaultZIndex
+                    }
+                })();
+
+                return {id: toast.id, position, zIndex: thisZIndex}
             })
         );
 
@@ -58,8 +86,10 @@ const ToastContainer: FC<any> = (props) => {
     const setIntervalIsPaused = (pause: boolean) => paused.current = pause;
 
     const selectElementOnTop = (id: string) => {
-        console.log('[selectElementOnTop] id:', id);
-        setZIndexes(zIndexes.map((zI: any) => ({...zI, zIndex: id === zI.id ? toastTopZIndex : toastDefaultZIndex})));
+        const position = zIndexes.find((z:any) => z.id === id).position;
+        setZIndexes(zIndexes.map((zI: any) => {
+            return zI.position !== position ? zI : {...zI, zIndex: id === zI.id ? toastTopZIndex : toastDefaultZIndex}
+        }));
     };
 
     return <Container ref={toastRef} data-component={'toast-container'}>

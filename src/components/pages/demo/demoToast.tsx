@@ -87,6 +87,8 @@ const DemoToast: FC = () => {
                 <div className={'border-bottom pb-0p5 display-flex flex-direction-column gap-0p5'}>
                     <InputField type={'textarea'} labelWidth={110} width={300} label={'Toast Message'} value={toastProp.message}
                                 onChange={(e) => setToastProp({...toastProp, message: e.currentTarget.value})}/>
+
+                    <h4 className={'m-0 border-bottom pb-0p3'}>Options:</h4>
                     <Dropdown labelWidth={110} label={'Toast Type'} selected={selectedType} onChange={(value: DropdownObjectOptions) => setSelectedType(value)} options={toastTypes}/>
                     <Dropdown labelWidth={110} label={'Toast Position'} selected={selectedPosition} onChange={(value: DropdownObjectOptions) => setSelectedPosition(value)} options={toastPosition}/>
                     <Dropdown labelWidth={110} label={'Toast Theme'} selected={selectedTheme} onChange={(value: DropdownObjectOptions) => setSelectedTheme(value)} options={toastTheme}/>
@@ -103,7 +105,10 @@ const DemoToast: FC = () => {
                         <Button disabled={toastProp.options?.duration === 0} icon={RiResetLeftLine} onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: 0}})}/>
                     </div>
                 </div>
-                <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => dispatch(toast(toastProp))}>Show Toast Message</Button>
+                <div className="display-flex gap-0p5 justify-content-center">
+                    <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => dispatch(toast(toastProp))}>Show Toast Message</Button>
+                    <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => dispatch(toast({message: toastProp.message}))}>Show Non-optioned Toast message</Button>
+                </div>
             </div>
         </Box>
     </div>;

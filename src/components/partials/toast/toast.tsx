@@ -18,6 +18,9 @@ const Container = styled.div<{
     $theme: ToastTheme,
     $position: ToastPosition
 }>`
+    display: flex;
+    gap: 0.5rem;
+    align-items: start;
     overflow: hidden;
     position: fixed;
     transition: all 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -37,10 +40,15 @@ const Container = styled.div<{
                 return props.$theme === 'filled' ? 'color: white; background-color: #459eff;' : 'color: #459eff; background-color: white;';
         }
     }};
+
     ${props => {
         if (['bottom-right', 'top-right'].includes(props.$position)) return 'right: 1rem;';
         else return 'left: 1rem;';
-    }}
+    }};
+
+    & > :first-child { margin-top: 0; }
+
+    & > :last-child { margin-bottom: 0; }
 `;
 
 const Message = styled.div`
@@ -86,7 +94,7 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused, zIndex, selectEle
     const dispatch = useAppDispatch();
 
     const {message, options} = toast;
-    const {theme = 'default', type = 'info', position = 'top-right', duration = 0} = options || {};
+    const {theme = 'outlined', type = 'info', position = 'top-right', duration = 0} = options || {};
 
     const progressRef = useRef<HTMLDivElement>(null);
     const hovered = useRef(false);
@@ -166,7 +174,6 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused, zIndex, selectEle
         $theme={theme}
         $position={position}
         style={styles}
-        className={'trim display-flex gap-0p5 align-items-start'}
         onClick={() => selectElementOnTop(elId) }
         onMouseEnter={() => hovered.current = true}
         onMouseLeave={() => hovered.current = false}
