@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getRandStr } from '../../../utils';
 import { firstToastTop, toastGap, ToastProps } from '../toast';
 
 const initialState: ToastProps[] = [];
@@ -11,7 +12,8 @@ const toastSlice = createSlice({
             const {id} = action.payload;
             if (state.find(toast => toast.id === action.payload.id)) return state;
 
-            state.push({...action.payload, id: id || `t-${crypto.randomUUID()}`});
+            // state.push({...action.payload, id: id || `t-${crypto.randomUUID()}`}); // to long!!!
+            state.push({...action.payload, id: id || `${getRandStr(3)}-${getRandStr(7)}`});
         },
         updateToast: (state, action: PayloadAction<ToastProps>) => {
             const index = state.findIndex(toast => toast.id === action.payload.id);
