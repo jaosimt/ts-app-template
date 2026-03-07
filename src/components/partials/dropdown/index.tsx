@@ -88,7 +88,7 @@ const List = styled.div<{
     $pos: PosProp;
     $maxDropdownHeight: CSSUnit;
 }>`
-    transition: all 0.2s ease-in-out;
+    transition: border 0.2s ease-in-out;
     overflow-y: auto;
     z-index: 2;
     user-select: none;
