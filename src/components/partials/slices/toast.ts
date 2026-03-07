@@ -11,23 +11,7 @@ const toastSlice = createSlice({
             const {id} = action.payload;
             if (state.find(toast => toast.id === action.payload.id)) return state;
 
-            let topRight = firstToastTop - toastGap;
-            let topLeft = firstToastTop - toastGap;
-            let thisTop = topRight;
-            state.map(t => {
-                switch(t.options?.position || 'top-right') {
-                    case 'top-left':
-                        topLeft += toastGap;
-                        thisTop = topLeft;
-                        return {...t, topLeft}
-                    default: // top-right
-                        topRight += toastGap;
-                        thisTop = topRight;
-                        return {...t, topRight}
-                }
-            });
-
-            state.push({...action.payload, id: id || `t-${crypto.randomUUID()}`, top: thisTop + toastGap});
+            state.push({...action.payload, id: id || `t-${crypto.randomUUID()}`});
         },
         updateToast: (state, action: PayloadAction<ToastProps>) => {
             const index = state.findIndex(toast => toast.id === action.payload.id);
@@ -39,7 +23,30 @@ const toastSlice = createSlice({
         }
     },
     selectors: {
-        getToasts: (state) => state
+        getToasts: (state) => {
+            let topRight = firstToastTop - toastGap;
+            let topLeft = firstToastTop - toastGap;
+            let bottomRight = firstToastTop - toastGap;
+            let bottomLeft = firstToastTop - toastGap;
+
+            return state.map(t => {
+                const position = t.options?.position || 'top-right';
+                switch(position) {
+                    case 'bottom-left':
+                        bottomLeft += toastGap;
+                        return {...t, top: bottomLeft}
+                    case 'bottom-right':
+                        bottomRight += toastGap;
+                        return {...t, top: bottomRight}
+                    case 'top-left':
+                        topLeft += toastGap;
+                        return {...t, top: topLeft}
+                    default: // top-right
+                        topRight += toastGap;
+                        return {...t, top: topRight}
+                }
+            });
+        }
     }
 });
 

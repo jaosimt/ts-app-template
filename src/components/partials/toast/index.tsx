@@ -20,7 +20,7 @@ export interface ToastOptions {
 }
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning';
-export type ToastPosition = 'top-right' | 'top-left'; // | 'bottom-right' | 'bottom-left';
+export type ToastPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 export type ToastTheme = 'outlined' | 'filled';
 
 export const firstToastTop = 71;
@@ -38,18 +38,10 @@ export const toastDefaultZIndex = 7777777;
 const ToastContainer: FC<any> = (props) => {
     const {toasts = []} = props;
 
-    const delay = useRef(700);
     const paused = useRef(false);
     const toastRef = useRef<HTMLDivElement>(null);
 
     const [zIndexes, setZIndexes] = useState<any>([]);
-
-    useEffect(() => {
-        const intervalId = setInterval(updatePosition, delay.current);
-        return () => clearInterval(intervalId);
-
-        // eslint-disable-next-line
-    }, []);
 
     useEffect(() => {
         setZIndexes(
@@ -69,35 +61,6 @@ const ToastContainer: FC<any> = (props) => {
         console.log('[selectElementOnTop] id:', id);
         setZIndexes(zIndexes.map((zI: any) => ({...zI, zIndex: id === zI.id ? toastTopZIndex : toastDefaultZIndex})));
     };
-
-    function updatePosition() {
-        if (paused.current) {
-            delay.current = 100;
-            return;
-        }
-
-        delay.current = 700;
-
-        const toasts = toastRef.current?.querySelectorAll('[data-component="toast"]');
-        if (toasts?.length) {
-            let topRight: number = firstToastTop;
-            let topLeft: number = firstToastTop;
-            let thisTop = topRight;
-            toasts.forEach((t: any) => {
-                const top = parseFloat(getComputedStyle(t)['top']);
-                switch(t.getAttribute('data-position') || 'top-right') {
-                    case 'top-left':
-                        thisTop = topLeft;
-                        topLeft += toastGap;
-                        break;
-                    default: // top-right
-                        thisTop = topRight;
-                        topRight += toastGap;
-                }
-                if (top < window.innerHeight) t.style.top = `${thisTop}px`;
-            });
-        }
-    }
 
     return <Container ref={toastRef} data-component={'toast-container'}>
         {toasts.map((toast: ToastProps) => {

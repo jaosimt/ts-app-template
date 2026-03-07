@@ -3,7 +3,12 @@ import { FC, useEffect, useState } from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
 import { IoColorFill, IoColorFillOutline } from 'react-icons/io5';
 import { RiResetLeftLine } from 'react-icons/ri';
-import { TbBoxAlignTopLeftFilled, TbBoxAlignTopRightFilled } from 'react-icons/tb';
+import {
+    TbBoxAlignBottomLeftFilled,
+    TbBoxAlignBottomRightFilled,
+    TbBoxAlignTopLeftFilled,
+    TbBoxAlignTopRightFilled
+} from 'react-icons/tb';
 import { useAppDispatch } from '../../../hooks';
 import { isString } from '../../../utils';
 import Box from '../../partials/box';
@@ -29,6 +34,8 @@ const toastTypes: DropdownObjectOptions[] = [
 const toastPosition: DropdownObjectOptions[] = [
     {label: 'top-right', value: 'top-right', icon: TbBoxAlignTopRightFilled},
     {label: 'top-left', value: 'top-left', icon: TbBoxAlignTopLeftFilled},
+    {label: 'bottom-left', value: 'bottom-left', icon: TbBoxAlignBottomLeftFilled},
+    {label: 'bottom-right', value: 'bottom-right', icon: TbBoxAlignBottomRightFilled},
 ];
 
 const toastTheme: DropdownObjectOptions[] = [
@@ -43,7 +50,7 @@ const DemoToast: FC = () => {
     const [selectedPosition, setSelectedPosition] = useState<DropdownObjectOptions>(toastPosition[0]);
     const [selectedTheme, setSelectedTheme] = useState<DropdownObjectOptions>(toastTheme[0]);
 
-    const [toastProp, setToastProp] = useState<Partial<ToastProps>>({
+    const [toastProp, setToastProp] = useState<ToastProps>({
         message: 'The quick brown fox jumps over the lazy dog near the bunk of the river!',
         options: {
             type: toastTypes[0].value as ToastType,
@@ -96,11 +103,7 @@ const DemoToast: FC = () => {
                         <Button disabled={toastProp.options?.duration === 0} icon={RiResetLeftLine} onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: 0}})}/>
                     </div>
                 </div>
-                <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => dispatch(toast({
-                        message: toastProp.message as string,
-                        options: toastProp.options
-                    })
-                )}>Show Toast Message</Button>
+                <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => dispatch(toast(toastProp))}>Show Toast Message</Button>
             </div>
         </Box>
     </div>;

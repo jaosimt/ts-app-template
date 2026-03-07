@@ -38,7 +38,7 @@ const Container = styled.div<{
         }
     }};
     ${props => {
-        if (['top-right', 'top-right'].includes(props.$position)) return 'right: 1rem;';
+        if (['bottom-right', 'top-right'].includes(props.$position)) return 'right: 1rem;';
         else return 'left: 1rem;';
     }}
 `;
@@ -109,7 +109,7 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused, zIndex, selectEle
     useEffect(() => {
         setTop(`${toast.top}px`);
         // eslint-disable-next-line
-    }, []);
+    }, [toast]);
 
     useEffect(() => {
         if (type === 'error' || duration === 0 || top === '-7em' || progressRef.current === null) return;
@@ -153,6 +153,10 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused, zIndex, selectEle
         }, 700);
     }
 
+    const styles:{top?: number|string, bottom?: number|string, zIndex: number, opacity: number} = {zIndex: zIndex, opacity: opacity};
+    if (position.startsWith('top')) styles.top = top;
+    else styles.bottom = top;
+
     return <Container
         data-component={'toast'}
         data-position={position}
@@ -161,7 +165,7 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused, zIndex, selectEle
         $type={type}
         $theme={theme}
         $position={position}
-        style={{top: top, zIndex: zIndex, opacity: opacity}}
+        style={styles}
         className={'trim display-flex gap-0p5 align-items-start'}
         onClick={() => selectElementOnTop(elId) }
         onMouseEnter={() => hovered.current = true}
