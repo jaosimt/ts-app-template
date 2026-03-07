@@ -48,7 +48,7 @@ const portalData: PropsListProps[] = [
     }
 ];
 
-const PortalWindowSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsPortalWindow: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -77,4 +77,4 @@ const PortalWindowSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default PortalWindowSpecs;
+export default SpecsPortalWindow;

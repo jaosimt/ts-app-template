@@ -20,7 +20,7 @@ export interface ToastOptions {
 }
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning';
-export type ToastPosition = 'top-right'; // 'top-left' | 'bottom-left' | 'bottom-right';
+export type ToastPosition = 'top-right' | 'bottom-right'; // 'top-left' | 'bottom-left';
 export type ToastTheme = 'default' | 'vibrant'; // 'top-left' | 'bottom-left' | 'bottom-right';
 
 export const firstToastTop = 71;

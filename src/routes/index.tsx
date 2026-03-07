@@ -12,7 +12,7 @@ import DemoInputField from '../components/pages/demo/demoInputField';
 import DemoModal from '../components/pages/demo/demoModal';
 import DemoTabs from '../components/pages/demo/demoTab';
 import DemoToast from '../components/pages/demo/demoToast';
-import WindowPortalDemo from '../components/pages/demo/demoWindowPortal';
+import DemoWindowPortal from '../components/pages/demo/demoWindowPortal';
 import DemoLoading from '../components/pages/demo/demoLoading';
 import Home from '../components/pages/home';
 import Login from '../components/pages/login';
@@ -35,7 +35,7 @@ const ContentRouter = () => {
                 <Route path="/demo/modal" element={<DemoModal/>}/>
                 <Route path="/demo/toast" element={<DemoToast/>}/>
                 <Route path="/demo/tabs" element={<DemoTabs/>}/>
-                <Route path="/demo/window-portal" element={<WindowPortalDemo/>}/>
+                <Route path="/demo/window-portal" element={<DemoWindowPortal/>}/>
             </Route>
             <Route path="*" element={<NotFound/>}/>
         </Routes>

@@ -49,7 +49,7 @@ const CheckboxSpecsData: PropsListProps[] = [
     }
 ];
 
-const CheckboxSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsCheckbox: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -79,4 +79,4 @@ const CheckboxSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default CheckboxSpecs;
+export default SpecsCheckbox;

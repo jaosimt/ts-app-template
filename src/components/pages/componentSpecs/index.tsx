@@ -13,17 +13,17 @@ import {
 import { classNames } from '../../../utils';
 import Dropdown from '../../partials/dropdown';
 import Tab, { TabItemType } from '../../partials/tab';
-import BoxSpecs from './specs/box';
-import ButtonSpecs from './specs/buttons';
-import CheckboxSpecs from './specs/checkbox';
-import DrawerSpecs from './specs/drawer';
-import DropdownSpecs from './specs/dropdown';
-import InputFieldsSpecs from './specs/inputFields';
-import LoadingSpecs from './specs/loading';
-import ModalSpecs from './specs/modal';
-import PortalWindowSpecs from './specs/portalWindow';
-import TabSpecs from './specs/tab';
-import ToastSpecs from './specs/toast';
+import SpecsBox from './specs/box';
+import SpecsButton from './specs/buttons';
+import SpecsCheckbox from './specs/checkbox';
+import SpecsDrawer from './specs/drawer';
+import SpecsDropdown from './specs/dropdown';
+import SpecsInputField from './specs/inputFields';
+import SpecsLoading from './specs/loading';
+import SpecsModal from './specs/modal';
+import SpecsPortalWindow from './specs/portalWindow';
+import SpecsTab from './specs/tab';
+import SpecsToast from './specs/toast';
 
 export interface SelectedThemeProps {
     selectedTheme: string;
@@ -86,37 +86,37 @@ const ComponentSpecs: FC = () => {
     const tabData: TabItemType[] = [
         {
             name: 'Box',
-            content: <BoxSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsBox selectedTheme={selectedTheme}/>
         }, {
             name: 'Button',
-            content: <ButtonSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsButton selectedTheme={selectedTheme}/>
         }, {
             name: 'Checkbox',
-            content: <CheckboxSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsCheckbox selectedTheme={selectedTheme}/>
         }, {
             name: 'Drawer',
-            content: <DrawerSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsDrawer selectedTheme={selectedTheme}/>
         }, {
             name: 'Dropdown',
-            content: <DropdownSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsDropdown selectedTheme={selectedTheme}/>
         }, {
             name: 'InputField',
-            content: <InputFieldsSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsInputField selectedTheme={selectedTheme}/>
         }, {
             name: 'Loading',
-            content: <LoadingSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsLoading selectedTheme={selectedTheme}/>
         }, {
             name: 'Modal',
-            content: <ModalSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsModal selectedTheme={selectedTheme}/>
         }, {
             name: 'Tabs',
-            content: <TabSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsTab selectedTheme={selectedTheme}/>
         }, {
             name: 'Toast',
-            content: <ToastSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsToast selectedTheme={selectedTheme}/>
         }, {
             name: 'WindowPortal',
-            content: <PortalWindowSpecs selectedTheme={selectedTheme}/>
+            content: <SpecsPortalWindow selectedTheme={selectedTheme}/>
         }
     ];
 

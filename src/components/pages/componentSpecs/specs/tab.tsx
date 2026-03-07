@@ -77,7 +77,7 @@ const tabData: PropsListProps[] = [
     }
 ];
 
-const TabSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsTab: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -106,4 +106,4 @@ const TabSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default TabSpecs;
+export default SpecsTab;

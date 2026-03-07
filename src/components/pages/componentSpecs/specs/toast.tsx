@@ -13,7 +13,7 @@ const dispatch = useAppDispatch();
 dispatch(toast({message: 'Hello, world!'})
 `;
 
-const toastSpecsData: PropsListProps[] = [
+const SpecsToastData: PropsListProps[] = [
     {
         name: 'id',
         types: 'string',
@@ -51,7 +51,7 @@ const toastOptions: PropsListProps[] = [
     }
 ];
 
-const ToastSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsToast: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -78,7 +78,7 @@ const ToastSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
         <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>
             Properties
         </h3>
-        {propsList(toastSpecsData)}
+        {propsList(SpecsToastData)}
         <h3 className={'mb-0p5 color-gray display-flex justify-content-space-between align-items-center'}>
             options
         </h3>
@@ -86,4 +86,4 @@ const ToastSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default ToastSpecs;
+export default SpecsToast;

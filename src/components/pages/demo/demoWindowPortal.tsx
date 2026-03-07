@@ -35,7 +35,7 @@ const Header = styled.h1`
     align-items: center;
 `
 
-const WindowPortalDemo: FC = () => {
+const DemoWindowPortal: FC = () => {
     const dispatch = useAppDispatch();
     const ctr = useAppSelector(getCounter);
 
@@ -97,4 +97,4 @@ const WindowPortalDemo: FC = () => {
     </div>;
 };
 
-export default WindowPortalDemo;
+export default DemoWindowPortal;

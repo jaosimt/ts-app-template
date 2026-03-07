@@ -64,7 +64,7 @@ const loadingData: PropsListProps[] = [
     }
 ];
 
-const LoadingSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsLoading: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -93,4 +93,4 @@ const LoadingSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default LoadingSpecs;
+export default SpecsLoading;

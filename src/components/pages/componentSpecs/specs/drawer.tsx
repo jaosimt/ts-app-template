@@ -36,7 +36,7 @@ const drawerSpecsData: PropsListProps[] = [
     }
 ];
 
-const DrawerSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsDrawer: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -68,4 +68,4 @@ const DrawerSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default DrawerSpecs;
+export default SpecsDrawer;

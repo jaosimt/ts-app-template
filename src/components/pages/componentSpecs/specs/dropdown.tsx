@@ -72,7 +72,7 @@ const dropdownSpecsData: PropsListProps[] = [
     }
 ];
 
-const DropdownSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsDropdown: FC<SelectedThemeProps> = ({selectedTheme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -101,4 +101,4 @@ const DropdownSpecs: FC<SelectedThemeProps> = ({selectedTheme}) => {
     </>;
 };
 
-export default DropdownSpecs;
+export default SpecsDropdown;
