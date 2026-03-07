@@ -1,8 +1,8 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { RootState } from '../../../store';
-import { getToasts } from '../slices/toast';
+import { RootState, store } from '../../../store';
+import { addToast, getToasts } from '../slices/toast';
 import Toast from './toast';
 
 export interface ToastProps {
@@ -34,6 +34,8 @@ const Container = styled.div`
 
 export const toastTopZIndex = 7777778;
 export const toastDefaultZIndex = 7777777;
+
+export const toast = (toastProps: ToastProps) => store.dispatch(addToast(toastProps));
 
 const ToastContainer: FC<any> = (props) => {
     const {toasts = []} = props;

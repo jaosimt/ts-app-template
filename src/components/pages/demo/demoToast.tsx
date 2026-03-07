@@ -9,14 +9,12 @@ import {
     TbBoxAlignTopLeftFilled,
     TbBoxAlignTopRightFilled
 } from 'react-icons/tb';
-import { useAppDispatch } from '../../../hooks';
 import { isString } from '../../../utils';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
 import Dropdown, { DropdownObjectOptions } from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
-import { toast } from '../../partials/slices/toast';
-import { ToastPosition, ToastProps, ToastTheme, ToastType } from '../../partials/toast';
+import { toast, ToastPosition, ToastProps, ToastTheme, ToastType } from '../../partials/toast';
 import {
     IoIosWarning,
     IoIosInformationCircle,
@@ -44,8 +42,6 @@ const toastTheme: DropdownObjectOptions[] = [
 ];
 
 const DemoToast: FC = () => {
-    const dispatch = useAppDispatch();
-
     const [selectedType, setSelectedType] = useState<DropdownObjectOptions>(toastTypes[0]);
     const [selectedPosition, setSelectedPosition] = useState<DropdownObjectOptions>(toastPosition[0]);
     const [selectedTheme, setSelectedTheme] = useState<DropdownObjectOptions>(toastTheme[0]);
@@ -106,8 +102,8 @@ const DemoToast: FC = () => {
                     </div>
                 </div>
                 <div className="display-flex gap-0p5 justify-content-center">
-                    <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => dispatch(toast(toastProp))}>Show Toast Message</Button>
-                    <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => dispatch(toast({message: toastProp.message}))}>Show Non-optioned Toast message</Button>
+                    <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => toast(toastProp)}>Show Toast Message</Button>
+                    <Button className={'align-self-center default'} disabled={!isString(toastProp.message, true)} onClick={() => toast({message: toastProp.message})}>Show Non-optioned Toast message</Button>
                 </div>
             </div>
         </Box>

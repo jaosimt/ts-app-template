@@ -11,7 +11,7 @@ import Button from '../../../partials/button';
 import Checkbox from '../../../partials/checkbox';
 import InputField from '../../../partials/inputField';
 import Modal from '../../../partials/modal';
-import { toast } from '../../../partials/slices/toast';
+import { toast } from '../../../partials/toast';
 import { addTodo, getTodos, removeTodo, updateTodo } from '../slices/todo';
 
 export type ToDoItem = {
@@ -71,17 +71,17 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
 
     function saveChanges() {
         if (todo === null) {
-            dispatch(toast({message: 'Todo is empty!'}));
+            toast({message: 'Todo is empty!'});
             return;
         }
 
         switch (todoAction) {
             case 'delete':
                 dispatch(removeTodo(todo.id));
-                dispatch(toast({
+                toast({
                     message: `ToDo "${todo.text}" successfully removed!`,
                     options: {duration: 7000}
-                }));
+                });
                 break;
             case 'edit':
             case 'toggle':
@@ -89,10 +89,10 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
                 break;
             default:
                 dispatch(addTodo(todo));
-                dispatch(toast({
+                toast({
                     message: `ToDo "${todo.text}" successfully added!`,
                     options: {type: 'success', duration: 7000}
-                }));
+                });
         }
 
         setTodoAction(null);

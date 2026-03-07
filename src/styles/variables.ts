@@ -13,7 +13,7 @@ export const $buttonPrimaryDisabledTextColor = 'rgba(255, 255, 255, 0.49)';
 export const $buttonDefaultColor = '#ffffff';
 export const $buttonDefaultTextColor = '#218cd9';
 export const $buttonDefaultBorderColor = '#218cd9';
-export const $buttonDefaultHoverColor = '#f1ecec';
+export const $buttonDefaultHoverColor = '#218cd952';
 export const $buttonDefaultDisabledTextColor = '#beb7b7';
 
 export const $headerBackgroundColor = '#963999';

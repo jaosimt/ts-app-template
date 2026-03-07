@@ -59,7 +59,8 @@ button,
     
     &:not(.btn-icon) {
       &.default {
-        background-color : v.$buttonDefaultHoverColor
+        background-color : v.$buttonDefaultHoverColor;
+        color            : v.$buttonDefaultColor
       }
       
       &:not(.default) {

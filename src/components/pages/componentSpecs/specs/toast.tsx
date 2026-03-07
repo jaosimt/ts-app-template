@@ -4,13 +4,11 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
-const code = `import { toast } from './components/partials/slices/toast'; /* assuming the call is initiated inside src */
+const code = `import { toast } from './components/partials/toast'; /* assuming the call is initiated inside src */
 
 ...
 
-const dispatch = useAppDispatch();
-
-dispatch(toast({message: 'Hello, world!'})
+<Button onClick={() => toast({message: 'Hello, world!'};}></Button>
 `;
 
 const SpecsToastData: PropsListProps[] = [
@@ -41,7 +39,7 @@ const toastOptions: PropsListProps[] = [
     }, {
         name: 'position',
         types: 'string',
-        values: 'top-right|top-left',
+        values: 'top-right|top-left|bottom-right|bottom-left',
         description: ['Sets the position of the toast message']
     }, {
         name: 'theme',
