@@ -59,8 +59,6 @@ const ToastContainer: FC<any> = (props) => {
         setZIndexes(
             toasts.map((toast: ToastProps) => {
                 const position = toast.options?.position || 'top-right';
-                // const thisZIndex = (i+1 === toasts.length) ? toastTopZIndex : toastDefaultZIndex
-
                 const thisZIndex = (() => {
                     switch(position) {
                         case 'bottom-left':
