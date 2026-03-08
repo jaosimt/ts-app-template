@@ -90,7 +90,7 @@ const ProgressBar = styled.div<{
     }};
 `;
 
-const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused, zIndex, selectElementOnTop}) => {
+const Toast: FC<any> = ({id: elId, toast, zIndex, selectElementOnTop}) => {
     const dispatch = useAppDispatch();
 
     const {message, options} = toast;
@@ -150,15 +150,9 @@ const Toast: FC<any> = ({id: elId, toast, setIntervalIsPaused, zIndex, selectEle
     }, [top]);
 
     function closeHandler() {
-        setIntervalIsPaused(true);
-
         setTop('110%');
         setOpacity(0);
-
-        setTimeout(() => {
-            dispatch(removeToast(toast.id));
-            setIntervalIsPaused(false);
-        }, 700);
+        setTimeout(() => dispatch(removeToast(toast.id)), 700);
     }
 
     const styles:{top?: number|string, bottom?: number|string, zIndex: number, opacity: number} = {zIndex: zIndex, opacity: opacity};

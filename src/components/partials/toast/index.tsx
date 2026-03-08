@@ -40,7 +40,6 @@ export const toast = (toastProps: ToastProps) => store.dispatch(addToast(toastPr
 const ToastContainer: FC<any> = (props) => {
     const {toasts = []} = props;
 
-    const paused = useRef(false);
     const toastRef = useRef<HTMLDivElement>(null);
 
     const [zIndexes, setZIndexes] = useState<any>([]);
@@ -83,8 +82,6 @@ const ToastContainer: FC<any> = (props) => {
         // eslint-disable-next-line
     }, [toasts]);
 
-    const setIntervalIsPaused = (pause: boolean) => paused.current = pause;
-
     const selectElementOnTop = (id: string) => {
         const position = zIndexes.find((z:any) => z.id === id).position;
         setZIndexes(zIndexes.map((zI: any) => {
@@ -95,7 +92,7 @@ const ToastContainer: FC<any> = (props) => {
     return <Container ref={toastRef} data-component={'toast-container'}>
         {toasts.map((toast: ToastProps) => {
             return <Toast key={toast.id} id={toast.id} toast={toast} zIndex={zIndexes.find((zi: any) => zi.id === toast.id)?.zIndex}
-                          selectElementOnTop={selectElementOnTop} setIntervalIsPaused={setIntervalIsPaused}/>;
+                          selectElementOnTop={selectElementOnTop}/>;
         })}
     </Container>;
 };
