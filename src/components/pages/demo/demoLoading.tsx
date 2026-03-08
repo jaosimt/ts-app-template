@@ -1,10 +1,12 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDebounceCallback } from 'usehooks-ts';
 import Box from '../../partials/box';
 import Checkbox from '../../partials/checkbox';
 import Dropdown from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
 import Loading, { LoadingProps } from '../../partials/loading';
+import { toast } from '../../partials/toast';
 
 const positionOptions = ['fixed', 'absolute'];
 
@@ -24,13 +26,20 @@ const DemoLoading: FC = () => {
         boxShadow: false
     });
 
-    const propsChangeHandler = (e: ChangeEvent<any>) => {
+    const debDropdownChange = useDebounceCallback(dropDownChangeHandler, 300);
+
+    function propsChangeHandler(e: ChangeEvent<any>) {
         const {name, value, checked} = e.currentTarget;
         setProps({...props, [name]: ['padding', 'boxShadow'].includes(name) ? checked : value});
-    };
+    }
 
-    const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
-
+    function dropDownChangeHandler(name: string, value: string) {
+        setProps({...props, [name]: value});
+        toast({
+            message: `Loading element is centered relative to ${value === 'fixed' ? 'window/document' : 'parent'} element!`,
+            options: {duration: 7000}
+        });
+    }
 
     return <div data-component={'loading-demo'} className={'display-inline-flex flex-direction-column height-100p gap-0p5'}>
         <Box
@@ -53,7 +62,7 @@ const DemoLoading: FC = () => {
                     selected={props.position}
                     label={'position'}
                     labelWidth={163}
-                    onChange={(value: string) => dropDownChangeHandler('position', value)}
+                    onChange={(value: string) => debDropdownChange('position', value)}
                 />
                 <InputField type={'number'} labelWidth={163} width={60} label={'size'}
                             fieldRegister={register('size', {value: props.size, onChange: propsChangeHandler})}/>

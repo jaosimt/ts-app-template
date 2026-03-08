@@ -1,6 +1,15 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import { AppDispatch, AppStore, RootState } from '../store';
+
+export const useDebounce = (callback: Function, delay: number = 700) => {
+    const ref = useRef<any>(null);
+    useEffect(() => {
+        ref.current = setTimeout(callback, delay);
+
+        return () => clearTimeout(ref.current);
+    }, [callback, delay])
+}
 
 // export const useOutsideClick = (callback: () => void, parentTarget = false) => {
 //     const ref = useRef(null);
