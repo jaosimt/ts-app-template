@@ -42,14 +42,14 @@ const toastTheme: DropdownObjectOptions[] = [
 ];
 
 const DemoToast: FC = () => {
-    const [selectedType, setSelectedType] = useState<DropdownObjectOptions>(toastTypes[0]);
+    const [selectedType, setSelectedType] = useState<DropdownObjectOptions>(toastTypes[3]);
     const [selectedPosition, setSelectedPosition] = useState<DropdownObjectOptions>(toastPosition[0]);
-    const [selectedTheme, setSelectedTheme] = useState<DropdownObjectOptions>(toastTheme[0]);
+    const [selectedTheme, setSelectedTheme] = useState<DropdownObjectOptions>(toastTheme[1]);
 
     const [toastProp, setToastProp] = useState<ToastProps>({
         message: 'The quick brown fox jumps over the lazy dog near the bunk of the river!',
         options: {
-            type: toastTypes[0].value as ToastType,
+            type: toastTypes[3].value as ToastType,
             theme: toastTheme[0].value as ToastTheme,
             position: toastPosition[0].value as ToastPosition,
             duration: 0
@@ -80,7 +80,7 @@ const DemoToast: FC = () => {
     return <div data-component={'toast-demo'} className={'width-100p height-100p display-flex align-items-center justify-content-center'}>
         <Box>
             <div className="display-flex flex-direction-column gap-0p5">
-                <div className={'border-bottom pb-0p5 display-flex flex-direction-column gap-0p5'}>
+                <div className={'pb-0p5 display-flex flex-direction-column gap-0p5'}>
                     <InputField type={'textarea'} labelWidth={110} width={300} label={'Toast Message'} value={toastProp.message}
                                 onChange={(e) => setToastProp({...toastProp, message: e.currentTarget.value})}/>
 
@@ -101,9 +101,11 @@ const DemoToast: FC = () => {
                         <Button disabled={toastProp.options?.duration === 0} icon={RiResetLeftLine} onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: 0}})}/>
                     </div>
                 </div>
-                <div className="display-flex gap-0p5 justify-content-center">
-                    <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => toast(toastProp)}>Show Toast Message</Button>
-                    <Button className={'align-self-center default'} disabled={!isString(toastProp.message, true)} onClick={() => toast({message: toastProp.message})}>Show Non-optioned Toast message</Button>
+                <div className="display-flex flex-direction-column gap-0p5 justify-content-center">
+                    <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => toast(toastProp)}>Show Toast</Button>
+                </div>
+                <div className={'text-align-center border-top pt-0p5'}>
+                    <Button className={'align-self-center default'} disabled={!isString(toastProp.message, true)} onClick={() => toast({message: toastProp.message})}>Show Non-optioned Toast</Button>
                 </div>
             </div>
         </Box>
