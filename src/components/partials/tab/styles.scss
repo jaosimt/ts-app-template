@@ -159,6 +159,7 @@ $inactiveTabBorderColor     : #c5c5c5;
     }
     
     .tab-content {
+      padding                 : 0.7rem;
       border-top-left-radius  : 0;
       border-top-right-radius : 0;
     }
@@ -188,6 +189,7 @@ $inactiveTabBorderColor     : #c5c5c5;
     }
     
     > .tab-content {
+      padding       : 0.7rem;
       border-radius : $tabBorderRadius;
       background    : $activeBackgroundColor;
     }
@@ -216,11 +218,9 @@ $inactiveTabBorderColor     : #c5c5c5;
     }
     
     > .tab-content {
-      border-radius       : 0;
-      border-left-color   : transparent;
-      border-right-color  : transparent;
-      border-bottom-color : transparent;
-      background          : $activeBackgroundColor;
+      padding       : 0.7rem;
+      border-radius : $tabBorderRadius;
+      background    : $activeBackgroundColor;
     }
   }
   
@@ -238,6 +238,7 @@ $inactiveTabBorderColor     : #c5c5c5;
     }
     
     > .tab-content {
+      padding             : 0.7rem 0 0 0;
       border-radius       : 0;
       border-left-color   : transparent;
       border-right-color  : transparent;
@@ -246,7 +247,6 @@ $inactiveTabBorderColor     : #c5c5c5;
     }
   }
 }
-
 
 @media (max-width : 768px) {
   //[data-component="tabs"] {

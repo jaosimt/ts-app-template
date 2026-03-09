@@ -49,8 +49,13 @@
 @media (max-width : 768px) {
   #react-ts-template {
     header > a {
+      gap: 0.2rem;
       
-      > h3 { display : none;}
+      > h3 {
+        white-space: pre-wrap;
+        width: 114px;
+        line-height: 0.9;
+      }
     }
     
     main {
