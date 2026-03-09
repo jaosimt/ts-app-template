@@ -197,7 +197,7 @@ const ComponentSpecs: FC = () => {
             <Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme}
                       onChange={handleThemeChange}/>
         </Header>
-        <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} data={tabData}/>
+        <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} moveSelectedOnScroll={true} data={tabData}/>
     </div>;
 };
 

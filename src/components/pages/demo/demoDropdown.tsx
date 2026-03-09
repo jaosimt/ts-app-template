@@ -6,6 +6,7 @@ import { GiFox, GiRiver } from 'react-icons/gi';
 import { RxSpaceBetweenHorizontally } from 'react-icons/rx';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { xonokai } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import styled from 'styled-components';
 import { isNullOrUndefined, isString } from '../../../utils';
 import Box from '../../partials/box';
 import Checkbox from '../../partials/checkbox';
@@ -61,6 +62,20 @@ const alignOptions = [
     }
 ];
 
+const DropdownBox = styled.div`
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        
+        > * {
+            width: 100%;
+        }
+    }
+`;
+
 const DemoDropdown: FC = () => {
     const {register} = useForm();
 
@@ -112,8 +127,8 @@ const DemoDropdown: FC = () => {
     const dropdownChangeHandler = (value: any) => setSelected(value);
 
     return <div data-component={'checkbox-demo'} className={'width-100p'}>
-        <Box label={'Dropdown Props'} boxClassName={'mb-1 with-fit-content'}>
-            <div className="grid cols-2 no-padding gap-0p5-1">
+        <Box label={'Dropdown Props'} boxClassName={'mb-1 with-fit-content'} className={'mb-0 pb-0'}>
+            <div className="grid cols-2 no-padding gap-0p5-1 pb-0">
                 <div>
                     <div className={'display-flex align-items-center gap-0p5'}>
                         <Checkbox onChange={optionChangeHandler} name={'asObj'} label={'options'}
@@ -175,7 +190,7 @@ const DemoDropdown: FC = () => {
 
             </div>
         </Box>
-        <div className="display-flex align-items-top gap-1">
+        <DropdownBox>
             <Box label={'Dropdown'} className={'display-inline-flex width-fit-content'}>
                 <Dropdown
                     options={props.options as string[] | DropdownObjectOptions[]}
@@ -193,7 +208,7 @@ const DemoDropdown: FC = () => {
                     {JSON.stringify(selected, (k, v) => k.startsWith('_') ? undefined : v, 2)}
                 </pre>
             </Box>
-        </div>
+        </DropdownBox>
     </div>;
 };
 

@@ -9,6 +9,7 @@ import {
     TbBoxAlignTopLeftFilled,
     TbBoxAlignTopRightFilled
 } from 'react-icons/tb';
+import styled from 'styled-components';
 import { isString } from '../../../utils';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
@@ -40,6 +41,19 @@ const toastTheme: DropdownObjectOptions[] = [
     {label: 'outlined', value: 'outlined', icon: IoColorFillOutline},
     {label: 'filled', value: 'filled', icon: IoColorFill},
 ];
+
+const Container = styled.div`
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto auto;
+    
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+`;
 
 const DemoToast: FC = () => {
     const [selectedType, setSelectedType] = useState<DropdownObjectOptions>(toastTypes[3]);
@@ -77,7 +91,7 @@ const DemoToast: FC = () => {
         // eslint-disable-next-line
     }, [selectedTheme]);
 
-    return <div data-component={'toast-demo'} className={'width-100p height-100p display-flex align-items-center justify-content-center'}>
+    return <Container data-component={'toast-demo'}>
         <Box boxClassName={'width-100p'}>
             <div className="display-flex flex-direction-column gap-0p5">
                 <div className={'pb-0p5 display-flex flex-direction-column gap-0p5'}>
@@ -122,7 +136,7 @@ const DemoToast: FC = () => {
                 </div>
             </div>
         </Box>
-    </div>;
+    </Container>;
 };
 
 export default DemoToast;
