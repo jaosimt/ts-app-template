@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { createLink } from '../../../../utils/ext';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 
@@ -19,13 +20,23 @@ const SpecsToastData: PropsListProps[] = [
         description: ['Specifies id of the toast message']
     }, {
         name: 'message',
-        types: 'string',
+        types: <span>string|{createLink('ReactNode', '//reactnative.dev/docs/react-node')}</span>,
         values: '',
         description: ['Sets the toast message to be displayed']
     }, {
         name: 'options',
         types: 'ToastOptions',
-        values: <pre className={'m-0 font-monospace font-size-small'}>{JSON.stringify({type: 'string', position: 'string', theme: 'string', duration: 'number'}, null, 2)}</pre>,
+        values: <pre className={'m-0 font-monospace font-size-small'}>{
+            JSON.stringify({
+                type: 'string',
+                position: 'string',
+                theme: 'string',
+                duration: 'number',
+                // eslint-disable-next-line no-template-curly-in-string
+                width: 'number|`${number}${string}`',
+                omitIcon: 'boolean'
+            }, null, 2)
+        }</pre>,
         description: ['Sets the toast options']
     }
 ];
@@ -50,7 +61,21 @@ const toastOptions: PropsListProps[] = [
         name: 'duration',
         types: <span>number <i>(in milliseconds)</i></span>,
         values: 'e.g. 5000',
-        description: ['Sets the display duration of the toast message']
+        description: ['Sets the display duration of the toast message.',<ul className={'m-0'}><li>Disregarded when toast <b>type</b> is set to <b>error</b>!</li></ul>]
+    }, {
+        name: 'omitIcon',
+        types: 'boolean',
+        values: '',
+        description: ['Show/Hide Toast Icon']
+    }, {
+        name: 'width',
+        // eslint-disable-next-line no-template-curly-in-string
+        types: 'number|`${number}${string}`',
+        values: `e.g. 200|'200px'`,
+        description: [`Sets the toast message's container width.`, <ul className="m-0">
+            <li>A couple pixels are automatically added if <b>omitIcon</b> is set to <b>true</b> to match the width's!</li>
+            <li>Except of course if toasts messages are set with different widths!</li>
+        </ul>]
     }
 ];
 

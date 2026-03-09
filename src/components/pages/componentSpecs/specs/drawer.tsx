@@ -21,13 +21,13 @@ const drawerSpecsData: PropsListProps[] = [
         // eslint-disable-next-line no-template-curly-in-string
         types: 'number|`${number}${string}`',
         values: `e.g. '300px'`,
-        description: ['Sets the width of the drawer.', <span><b>Take Note:</b> This will be overwritten by '100%' if position is either <i>top</i> or <i>bottom</i>.</span>]
+        description: ['Sets the width of the drawer.', <ul className="m-0"><li><b>Will be overwritten</b> by <b>'100%'</b> if position is set either <i><b>top</b></i> or <i><b>bottom</b></i>.</li></ul>]
     }, {
         name: 'height',
         // eslint-disable-next-line no-template-curly-in-string
         types: 'number|`${number}${string}`',
         values: `e.g. '300px'`,
-        description: ['Sets the height of the drawer.', <span><b>Take Note:</b> This will be overwritten by '100%' if position is either <i>left</i> or <i>right</i>.</span>]
+        description: ['Sets the height of the drawer.', <ul className="m-0"><li><b>Will be overwritten</b> by <b>'100%'</b> if position is set either <i><b>left</b></i> or <i><b>right</b></i>.</li></ul>]
     }, {
         name: 'backgroundColor',
         types: 'string',

@@ -28,9 +28,13 @@ const loadingData: PropsListProps[] = [
         name: 'position',
         types: 'string',
         values: 'fixed|absolute',
-        description: ['Defines where the loading box will be centered from.',
-            <span><i>fixed</i> - loading will be centered in the entire document.</span>,
-            <span><i>absolute</i> - loading will be centered in the parent element.</span>]
+        description: [
+            'Defines where the loading box will be centered from.',
+            <ul className="m-0">
+                <li><i>fixed</i> - loading will be centered in the entire document.</li>
+                <li><i>absolute</i> - loading will be centered in the parent element.</li>
+            </ul>
+        ]
     }, {
         name: 'size',
         types: 'number',

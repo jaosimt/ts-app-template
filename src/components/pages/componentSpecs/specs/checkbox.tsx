@@ -24,13 +24,13 @@ const CheckboxSpecsData: PropsListProps[] = [
         name: 'label',
         types: 'string',
         values: '',
-        description: ['Sets the label of the checkbox.', <span>Defaults to the required prop <b>name</b> if none is provided!</span>]
+        description: ['Sets the label of the checkbox.', <ul className="m-0"><li>Defaults to the required prop <b>name</b> if none is provided!</li></ul>]
     }, {
         name: 'labelWidth',
         // eslint-disable-next-line no-template-curly-in-string
         types: 'number|`${number}${string}`',
         values: `e.g. 70|'70px'`,
-        description: ['Sets the width of the label.', 'Useful for aligning the label with other elements!']
+        description: ['Sets the width of the label.', <ul className="m-0"><li>Useful for aligning the label with other elements!</li></ul>]
     }, {
         name: 'disabled',
         types: 'boolean',

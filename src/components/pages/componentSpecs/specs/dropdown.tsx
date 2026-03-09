@@ -26,7 +26,13 @@ const dropdownSpecsData: PropsListProps[] = [
         name: 'selected',
         types: 'string|DropdownObjectOptions',
         values: 'Any from your options !',
-        description: ['Sets the selected dropdown option.', <span>Just remember, if your options is <b>string[]</b>, then this is a string.</span>, <span>Otherwise, this is an object of custom type <b>DropdownObjectOptions</b>!</span>]
+        description: [
+            'Sets the selected dropdown option.',
+            <ul className="m-0">
+                <li>Just remember, if your options is <b>string[]</b>, then this is a string.</li>
+                <li>Otherwise, this is an object of custom type <b>DropdownObjectOptions</b>!</li>
+            </ul>
+        ]
     }, {
         name: 'name',
         types: 'string',
@@ -47,7 +53,7 @@ const dropdownSpecsData: PropsListProps[] = [
         // eslint-disable-next-line no-template-curly-in-string
         types: 'number|`${number}${string}`',
         values: `e.g. 70|'70px'`,
-        description: ['Sets the width of the label.', 'Useful for aligning the label with other elements!']
+        description: ['Sets the width of the label.', <ul className="m-0"><li>Useful for aligning the label with other elements!</li></ul>]
     }, {
         name: 'maxDropdownHeight',
         // eslint-disable-next-line no-template-curly-in-string

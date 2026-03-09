@@ -21,7 +21,7 @@ import SpecsDropdown from './specs/dropdown';
 import SpecsInputField from './specs/inputFields';
 import SpecsLoading from './specs/loading';
 import SpecsModal from './specs/modal';
-import SpecsPortalWindow from './specs/portalWindow';
+import SpecsPortalWindow from './specs/windowPortal';
 import SpecsTab from './specs/tab';
 import SpecsToast from './specs/toast';
 

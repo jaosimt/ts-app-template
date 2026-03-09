@@ -19,13 +19,13 @@ const boxData: PropsListProps[] = [
         name: 'border',
         types: `boolean|string`,
         values: 'true|false|\'label-only\'',
-        description: ['Sets the border of the box', 'If set to \'label-only\', only the label\'s border will be shown!']
+        description: ['Sets the border of the box', <ul className="m-0"><li>If set to <b>label-only</b>, only the label's border will be shown!</li></ul>]
     }, {
         name: 'borderRadius',
         // eslint-disable-next-line
         types: 'number|`${number}${string}`',
         values: `e.g. 7|'7px'`,
-        description: ['Adds border radius to box\'s border', 'Adds border/2 radius to box\'s label - if enabled!']
+        description: [<ul className="m-0"><li>Adds border radius to box's border</li></ul>, <ul className="m-0"><li>Adds border/2 radius to box's label - if enabled!</li></ul>]
     }, {
         name: 'borderColor',
         types: 'string',
@@ -40,7 +40,7 @@ const boxData: PropsListProps[] = [
         name: 'tight',
         types: 'boolean',
         values: '',
-        description: ['Creates a padding-less box', 'Sets the label inside - if enabled!']
+        description: ['Creates a padding-less box.', <ul className="m-0"><li>Sets the label inside - if enabled!</li></ul>]
     }, {
         name: 'label',
         types: 'string',
@@ -76,7 +76,7 @@ const boxData: PropsListProps[] = [
         name: 'onLabelClick',
         types: 'Function',
         values: 'e.g. () => alert("Hello, callback!")',
-        description: ['Attaches a callback to be called when the label is clicked.', 'Useful for opening a link or whatever!']
+        description: ['Attaches a callback to be called when the label is clicked.', <ul className="m-0"><li>Useful for opening a link or whatever!</li></ul>]
     }
 ];
 

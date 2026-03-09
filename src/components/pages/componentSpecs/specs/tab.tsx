@@ -49,7 +49,7 @@ const tabData: PropsListProps[] = [
         name: 'moveSelectedOnScroll',
         types: 'boolean',
         values: '',
-        description: ['Changes active tab selection following the left/right tab item nav click.', 'Only if tab items are longer than the actual tab\'s width and tab items are scrolled off view!']
+        description: ['Changes active tab selection following the left/right tab item nav click.', <ul className="m-0"><li>Only if tab items are longer than the actual tab's width and tab items are scrolled off view!</li></ul>]
     }, {
         name: 'type',
         types: 'string',

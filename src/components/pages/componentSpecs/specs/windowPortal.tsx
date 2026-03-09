@@ -30,15 +30,15 @@ const portalData: PropsListProps[] = [
         values: 'e.g. () => alert("portal is closing!")',
         description: [
             'Attaches a callback to be called when the portal window is closing.',
-            'This method takes no arguments and is only intended for whatever cleanup one might need!'
+            <ul className="m-0"><li>This method takes no arguments and is only intended for whatever cleanup one might need!</li></ul>
         ]
     }, {
         name: 'openOnNextScreen',
         types: 'boolean',
         values: '',
         description: [
-            'Opens the portal window on the next available monitor',
-            <i>* Tested working in Brave & Chrome browsers only!</i>
+            'Opens the portal window on the next available monitor.',
+            <ul className="m-0"><li>Tested working in Brave & Chrome browsers only!</li></ul>
         ]
     }, {
         name: 'title',

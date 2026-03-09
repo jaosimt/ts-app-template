@@ -35,7 +35,7 @@ const modalData: PropsListProps[] = [
         name: 'onClose',
         types: 'Function',
         values: 'e.g. () => alert("Hello, callback!")',
-        description: ['Attaches a callback to be called when the modal is closed.', 'This method takes no arguments and is only intended for whatever cleanup one might need!']
+        description: ['Attaches a callback to be called when the modal is closed.', <ul className="m-0"><li>This method takes no arguments and is only intended for whatever cleanup one might need!</li></ul>]
     }, {
         name: 'title',
         types: 'string',
@@ -51,7 +51,7 @@ const modalData: PropsListProps[] = [
         name: 'maxZIndex',
         types: 'boolean',
         values: ``,
-        description: [`Sets the modal's z-index to the highest value possible`, `This is useful when you have multiple modals on the page!`]
+        description: [`Sets the modal's z-index to the highest value possible.`, <ul className="m-0"><li>This is useful when you have multiple modals on the page!</li></ul>]
     }
 ];
 
