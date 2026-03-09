@@ -47,7 +47,7 @@ export const NavigationMain = () => {
             left: `${activeBar.left}px`,
             height: '2px',
             width: `${activeBar.width}px`,
-            marginBottom: '-35px',
+            marginBottom: '-21px',
             transition: 'all 300ms ease-in-out, opacity 1400ms ease-in-out',
             backgroundColor: 'white',
             opacity: `${activeBar.opacity}`

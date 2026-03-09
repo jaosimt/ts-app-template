@@ -1,4 +1,16 @@
 .properties {
   margin: 0;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+@media(max-width: 768px) {
+  .properties {
+    > span {
+      font-size : 0.7rem;
+      text-align: right;
+      line-height: 0.9;
+    }
+  }
 }

@@ -10,6 +10,7 @@ import {
     tomorrow, twilight, vs, vscDarkPlus, xonokai,
     zTouch
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import styled from 'styled-components';
 import { classNames } from '../../../utils';
 import Dropdown from '../../partials/dropdown';
 import Tab, { TabItemType } from '../../partials/tab';
@@ -24,6 +25,8 @@ import SpecsModal from './specs/modal';
 import SpecsPortalWindow from './specs/windowPortal';
 import SpecsTab from './specs/tab';
 import SpecsToast from './specs/toast';
+
+import { $gridBorderColor } from '../../../styles/variables';
 
 export interface SelectedThemeProps {
     selectedTheme: string;
@@ -80,6 +83,57 @@ export const themes: Record<string, Theme> = {
     'zTouch': zTouch
 };
 
+const Header = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        h1 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        [data-component="dropdown"] {
+        }
+    }
+`;
+
+// noinspection CssUnusedSymbol
+const Grid = styled.div`
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto auto auto auto;
+
+    > * {
+        padding: 0.5rem;
+        border-left: 1px solid ${$gridBorderColor};
+        border-bottom: 1px solid ${$gridBorderColor};
+
+        &:nth-child(-n+4) { border-top: 1px solid ${$gridBorderColor}; }
+
+        &:nth-child(4n) { border-right: 1px solid ${$gridBorderColor}; }
+    }
+    
+    @media (max-width: 768px) {
+        grid-template-columns: auto;
+        > * {
+            padding: 0.25rem;
+            border: unset !important;
+            
+            &.description {
+                margin-bottom: 1rem;
+            }
+            
+            &.indent-row {
+                padding-left: 1rem;
+            }
+        }
+    }
+`;
+
 const ComponentSpecs: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState<string>(sessionStorage.getItem('rshTheme') || 'nightOwl');
 
@@ -120,18 +174,19 @@ const ComponentSpecs: FC = () => {
         }
     ];
 
-    const handleThemeChange = (value:string) => {
+    const handleThemeChange = (value: string) => {
         setSelectedTheme(value);
         sessionStorage.setItem('rshTheme', value);
     };
 
     return <div data-component={'home'} className={'width-100p'}>
-        <div className={'display-flex justify-content-space-between align-items-end background'} style={{top: '50px'}}>
-            <h1 className={'mt-0 line-height-1'}>Custom Component Specs</h1>
-            <Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme} onChange={handleThemeChange} />
-        </div>
+        <Header className={'background'}>
+            <h1 className={'m-0 line-height-1'}>Custom Component Specs</h1>
+            <Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme}
+                      onChange={handleThemeChange}/>
+        </Header>
         <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} data={tabData}/>
-    </div>
+    </div>;
 };
 
 export default ComponentSpecs;
@@ -143,27 +198,22 @@ export type PropsListProps = {
     description: any[]
 }
 
-export const propsList: FC<PropsListProps[]> = (props) => <div
+export const propsList: FC<PropsListProps[]> = (props) => <Grid
     className={classNames(
-        'grid',
-        'cols-4',
-        'auto',
         'line-height-normal',
-        'width-fit-content',
         'font-monospace',
         'color-black',
         'font-size-smaller',
-        'border'
     )}
 >
     {
         props.map(({name, types, values, description}, i) => <Fragment key={i}>
             <strong>{name}</strong>
-            <span>{types}</span>
-            <i>{values}</i>
-            <span>
+            <span className={'indent-row'}>{types}</span>
+            <i className={'indent-row'}>{values}</i>
+            <span className={'description indent-row'}>
                     {description.map((d, j) => <span key={j} className={'display-block'}>{d}</span>)}
                 </span>
         </Fragment>)
     }
-</div>;
+</Grid>;

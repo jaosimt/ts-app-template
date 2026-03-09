@@ -4,6 +4,7 @@ import { IoIosSave, IoIosWarning } from 'react-icons/io';
 import { MdDelete, MdDeleteForever, MdEdit } from 'react-icons/md';
 import { RiAddLargeFill } from 'react-icons/ri';
 import { VscDiscard } from 'react-icons/vsc';
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { classNames, isEmpty } from '../../../../utils';
 import { ReactIcon } from '../../../partials';
@@ -27,6 +28,12 @@ const newTodo = () => ({
     text: '',
     completed: false
 });
+
+const Container = styled.div`
+    @media (max-width: 768px) {
+        width: 95%;
+    }
+`;
 
 const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProps}) => {
     const dispatch = useAppDispatch();
@@ -111,7 +118,7 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
     }
 
     return (
-        <div className={classNames(className, 'background-light', 'box-shadow', 'border-radius-0p3', 'p-0p5')} {...restProps}>
+        <Container data-component={'todo'} className={classNames(className, 'background-light', 'box-shadow', 'border-radius-0p3', 'p-0p5')} {...restProps}>
             <div className="m-1">
                 <h1 className={'m-0 mb-0p3'}>TO BE DONE</h1>
                 <div className={'display-flex gap-0p5 justify-content-center align-items-center width-100p mb-0p5'}>
@@ -198,7 +205,7 @@ const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProp
                     </div>
                 </Modal>
             }
-        </div>
+        </Container>
     );
 };
 

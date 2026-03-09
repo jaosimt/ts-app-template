@@ -1,4 +1,4 @@
-@use 'styles/variables' as v;
+@use "styles/variables" as v;
 
 #react-ts-template {
   display        : flex;
@@ -16,6 +16,10 @@
     gap              : 0.5rem;
     z-index          : 3;
     border-bottom    : 10px solid v.$backgroundColor;
+    
+    > a {
+      padding : 0;
+    }
   }
   
   main {
@@ -39,5 +43,18 @@
     padding          : 0.5rem;
     font-size        : small;
     font-weight      : 700;
+  }
+}
+
+@media (max-width : 768px) {
+  #react-ts-template {
+    header > a {
+      
+      > h3 { display : none;}
+    }
+    
+    main {
+      padding : 0 1rem 1rem;
+    }
   }
 }

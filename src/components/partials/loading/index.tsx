@@ -78,10 +78,10 @@ const Loading: FC<LoadingProps> = (props) => {
         $padding={padding}
     >
         <Spinner $color={color}>
-            {topText && <h4 className={'m-0'}>{topText}</h4>}
+            {topText && <h4 className={'m-0 text-align-center'}>{topText}</h4>}
             <ReactIcon className={classNames('spin-3', topText && 'mt-1', bottomText && 'mb-1')} size={size}
                        icon={ImSpinner}/>
-            {bottomText && <h6 className={'m-0'}>{bottomText}</h6>}
+            {bottomText && <h6 className={'m-0 text-align-center'}>{bottomText}</h6>}
         </Spinner>
         {
             children && <>

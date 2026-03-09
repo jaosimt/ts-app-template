@@ -6,25 +6,35 @@ nav[data-nav="top"] {
   gap         : 1rem;
   
   a {
-    color           : inherit;
+    color : inherit;
     
     &.active { color : white; }
   }
 }
 
 nav[data-nav="left"] {
-  display          : flex;
-  flex-direction   : column;
+  display        : flex;
+  flex-direction : column;
   
   a {
-    border        : 1px solid transparent;
-    color         : inherit;
-    padding       : 0.5rem;
+    border  : 1px solid transparent;
+    color   : inherit;
+    padding : 0.5rem;
     
     &.active {
       border-bottom-color : v.$headerBackgroundColor;
-      border-top-color : v.$headerBackgroundColor;
+      border-top-color    : v.$headerBackgroundColor;
       color               : v.$headerBackgroundColor;
     }
+  }
+}
+
+@media (max-width : 768px) {
+  nav[data-nav="top"] {
+    width           : 100%;
+    align-self      : center;
+    justify-content : flex-end;
+    font-size       : smaller;
+    gap             : 0.5rem;
   }
 }

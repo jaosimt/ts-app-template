@@ -8,7 +8,7 @@ import './styles.scss';
 
 export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
     activeItemColor?: CSSColors;
-    contentPadding?: CSSUnit;
+    contentPadding?: CSSUnit|undefined;
     data: TabItemType[];
     minContentHeight?: CSSUnit;
     moveSelectedOnScroll?: boolean;
@@ -36,7 +36,7 @@ const shiftOffset = 3;
 const Tabs: FC<TabItemProps> = (props) => {
     const {
         data,
-        contentPadding = '1rem',
+        contentPadding,
         type = 'plain',
         moveSelectedOnScroll = false,
         activeItemColor = 'magenta',
@@ -276,8 +276,10 @@ const Tabs: FC<TabItemProps> = (props) => {
                 return <div
                     key={`tab-content-${itemName}`} data-name={itemName}
                     style={{
-                        padding: parseCSSUnit(contentPadding),
-                        minHeight: minContentHeight && parseCSSUnit(minContentHeight)
+                        padding: contentPadding && parseCSSUnit(contentPadding),
+                        minHeight: minContentHeight && parseCSSUnit(minContentHeight),
+                        width: '100%',
+                        overflow: 'auto'
                     }}
                     className={classNames('tab-content', selected === itemName && 'active')}>
                     {t.content}
