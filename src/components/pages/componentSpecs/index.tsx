@@ -115,6 +115,8 @@ const Grid = styled.div`
         &:nth-child(-n+4) { border-top: 1px solid ${$gridBorderColor}; }
 
         &:nth-child(4n) { border-right: 1px solid ${$gridBorderColor}; }
+        
+        .mobile-only { display: none; }
     }
     
     @media (max-width: 768px) {
@@ -129,6 +131,16 @@ const Grid = styled.div`
             
             &.indent-row {
                 padding-left: 1rem;
+                align-items: flex-start;
+                display: flex;
+                flex-direction: column;
+                
+                .mobile-only {
+                    display: inline;
+                    padding-right: 0.3rem;
+                    color: #999;
+                    font-size: 0.5rem;
+                }
             }
         }
     }
@@ -209,11 +221,9 @@ export const propsList: FC<PropsListProps[]> = (props) => <Grid
     {
         props.map(({name, types, values, description}, i) => <Fragment key={i}>
             <strong>{name}</strong>
-            <span className={'indent-row'}>{types}</span>
-            <i className={'indent-row'}>{values}</i>
-            <span className={'description indent-row'}>
-                    {description.map((d, j) => <span key={j} className={'display-block'}>{d}</span>)}
-                </span>
+            <span className={'indent-row'}><span className="mobile-only">Type:</span>{types}</span>
+            <span className={'indent-row'}><span className="mobile-only">Value:</span><i>{values}</i></span>
+            <span className={'description indent-row'}><span className="mobile-only">Description:</span>{description.map((d, j) => <span key={j} className={'display-block'}>{d}</span>)}</span>
         </Fragment>)
     }
 </Grid>;
