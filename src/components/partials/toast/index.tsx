@@ -1,15 +1,15 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { RootState, store } from '../../../store';
+import { CSSUnit } from '../../../types';
 import { addToast, getToasts } from '../slices/toast';
 import Toast from './toast';
 
 export interface ToastProps {
     id?: string;
-    message: string;
+    message: string|ReactNode;
     options?: ToastOptions;
-    top?: number;
 }
 
 export interface ToastOptions {
@@ -17,6 +17,8 @@ export interface ToastOptions {
     position?: ToastPosition;
     theme?: ToastTheme;
     duration?: number;
+    width?: CSSUnit;
+    omitIcon?: boolean;
 }
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning';

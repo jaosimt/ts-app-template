@@ -9,6 +9,7 @@ import {
 import styled from 'styled-components';
 import { useAppDispatch } from '../../../hooks';
 import { CSSUnit } from '../../../types';
+import { isString, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
 import { removeToast } from '../slices/toast';
 import { ToastPosition, ToastTheme, ToastType, toastTopZIndex } from './index';
@@ -19,7 +20,7 @@ const Container = styled.div<{
     $position: ToastPosition
 }>`
     display: flex;
-    gap: 0.5rem;
+    gap: 0.3rem;
     align-items: start;
     overflow: hidden;
     position: fixed;
@@ -33,11 +34,11 @@ const Container = styled.div<{
             case 'success':
                 return props.$theme === 'filled' ? 'color: white; background-color: #1acb1a;' : 'color: #1acb1a; background-color: white;';
             case 'warning':
-                return props.$theme === 'filled' ? 'color: white; background-color: #f2f22b;' : 'color: #f2f22b; background-color: white;';
+                return props.$theme === 'filled' ? 'color: white; background-color: #dada00;' : 'color: #dada00; background-color: white;';
             case 'error':
                 return props.$theme === 'filled' ? 'color: white; background-color: #ff7979;' : 'color: #ff7979; background-color: white;';
             default:
-                return props.$theme === 'filled' ? 'color: white; background-color: #459eff;' : 'color: #459eff; background-color: white;';
+                return props.$theme === 'filled' ? 'color: white; background-color: #44a5ea;' : 'color: #44a5ea; background-color: white;';
         }
     }};
 
@@ -51,13 +52,18 @@ const Container = styled.div<{
     & > :last-child { margin-bottom: 0; }
 `;
 
-const Message = styled.div`
-    width: 196px;
-    font-size: smaller;
+const Message = styled.div<{
+    $omitIcon: boolean,
+    $messageIsString: boolean,
+    $width: CSSUnit,
+}>`
+    width: ${props => !props.$omitIcon ? parseCSSUnit(props.$width) : `calc(${parseCSSUnit(props.$width)} + 63px)`};
+    font-size: small;
     font-weight: 700;
     display: inline-flex;
-    align-items: center;
+    align-self: center;
     overflow-wrap: anywhere;
+    ${props => !props.$messageIsString && `flex-direction: column; ${props.$omitIcon ? 'margin-right: -1rem;' : ''} > :first-child { margin-top: 0; } > :last-child { margin-bottom: 0; }`}
 `;
 
 const IconWrapper = styled.span`
@@ -81,11 +87,11 @@ const ProgressBar = styled.div<{
             case 'success':
                 return props.$theme !== 'filled' ? '#1acb1a;' : 'white;';
             case 'warning':
-                return props.$theme !== 'filled' ? '#f2f22b;' : 'white;';
+                return props.$theme !== 'filled' ? '#dada00;' : 'white;';
             case 'error':
                 return props.$theme !== 'filled' ? '#ff7979;' : 'white;';
             default:
-                return props.$theme !== 'filled' ? '#459eff;' : 'white;';
+                return props.$theme !== 'filled' ? '#44a5ea;' : 'white;';
         }
     }};
 `;
@@ -94,7 +100,7 @@ const Toast: FC<any> = ({id: elId, toast, zIndex, selectElementOnTop}) => {
     const dispatch = useAppDispatch();
 
     const {message, options} = toast;
-    const {theme = 'outlined', type = 'info', position = 'top-right', duration = 0} = options || {};
+    const {theme = 'outlined', type = 'info', position = 'top-right', duration = 0, width = 200, omitIcon = false} = options || {};
 
     const progressRef = useRef<HTMLDivElement>(null);
     const hovered = useRef(false);
@@ -172,8 +178,8 @@ const Toast: FC<any> = ({id: elId, toast, zIndex, selectElementOnTop}) => {
         onMouseEnter={() => hovered.current = true}
         onMouseLeave={() => hovered.current = false}
     >
-        <ReactIcon icon={icon} size={42}/>
-        <Message>{message}</Message>
+        {!omitIcon && <ReactIcon icon={icon} size={42}/>}
+        <Message $width={width} $messageIsString={isString(message)} $omitIcon={omitIcon}>{message}</Message>
         <IconWrapper className="hover-scale">
             <ReactIcon className={'cursor-pointer'} onClick={closeHandler} icon={IoIosCloseCircle}/>
         </IconWrapper>

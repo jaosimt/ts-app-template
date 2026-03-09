@@ -81,7 +81,8 @@ const DemoToast: FC = () => {
         <Box>
             <div className="display-flex flex-direction-column gap-0p5">
                 <div className={'pb-0p5 display-flex flex-direction-column gap-0p5'}>
-                    <InputField type={'textarea'} labelWidth={110} width={300} label={'Toast Message'} value={toastProp.message}
+                    <InputField type={'textarea'} labelWidth={110} width={300} label={'Toast Message'}
+                                value={toastProp.message as string}
                                 onChange={(e) => setToastProp({...toastProp, message: e.currentTarget.value})}/>
 
                     <h4 className={'m-0 border-bottom pb-0p3'}>Options:</h4>
@@ -105,7 +106,19 @@ const DemoToast: FC = () => {
                     <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => toast(toastProp)}>Show Toast</Button>
                 </div>
                 <div className={'text-align-center border-top pt-0p5'}>
-                    <Button className={'align-self-center default'} disabled={!isString(toastProp.message, true)} onClick={() => toast({message: toastProp.message})}>Show Non-optioned Toast</Button>
+                    <Button
+                        className={'align-self-center default'}
+                        disabled={!isString(toastProp.message, true)}
+                        onClick={
+                            () => {
+                                toast({
+                                    message: <>
+                                        <b>Test</b>
+                                        <p>{toastProp.message}</p>
+                                    </>
+                                });
+                            }
+                        }>Show Non-optioned Toast</Button>
                 </div>
             </div>
         </Box>

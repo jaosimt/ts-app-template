@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getRandStr } from '../../../utils';
+import { getRandStr, isString } from '../../../utils';
 import { firstToastTop, toastGap, ToastProps } from '../toast';
 
 const initialState: ToastProps[] = [];
@@ -9,11 +9,14 @@ const toastSlice = createSlice({
     initialState,
     reducers: {
         addToast: (state, action: PayloadAction<ToastProps>) => {
-            const {id} = action.payload;
+            let {id, options, message} = action.payload;
             if (state.find(toast => toast.id === action.payload.id)) return state;
 
+            if (!options) options = {};
+            if (!isString(message) && options.omitIcon === undefined) options.omitIcon = true;
+
             // state.push({...action.payload, id: id || `t-${crypto.randomUUID()}`}); // to long!!!
-            state.push({...action.payload, id: id || `${getRandStr(3)}-${getRandStr(7)}`});
+            state.push({...action.payload, options, id: id || `${getRandStr(3)}-${getRandStr(7)}`});
         },
         removeToast: (state, action: PayloadAction<string>) => {
             return state.filter(toast => toast.id !== action.payload);
