@@ -26,7 +26,7 @@ const DemoCheckbox: FC = () => {
 
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
 
-    return <div data-component={'checkbox-demo'} className={'display-flex gap-1 align-items-center flex-wrap'}>
+    return <div data-component={'checkbox-demo'} className={'width-100p'}>
         <Box
             label={'Checkbox Props'} boxClassName={'mb-1 with-fit-content'}>
             <div className="grid cols-2 no-padding gap-0p5-1">

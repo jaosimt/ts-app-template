@@ -55,11 +55,11 @@ const DemoDrawer: FC = () => {
 
     const dropDownChangeHandler = (value: DropdownObjectOptions) => setPosition(value);
 
-    return <div className={'width-100p position-relative display-flex justify-content-center align-items-center'} style={{height: 'calc(100% - 0.5rem)'}}>
+    return <div className={'width-100p'}>
         <Box
             label={'Drawer Props'}
             width={525}
-            boxClassName={'display-inline-block'}
+            boxClassName={'display-inline-block width-100p'}
             style={{top: '50%', position: 'absolute'}}
         >
             <div className={'grid cols-2'}>

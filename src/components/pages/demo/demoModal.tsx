@@ -119,7 +119,7 @@ const DemoModal: FC = () => {
             </Modal>
         }
 
-        <div className="display-inline-flex flex-direction-column gap-1">
+        <div className="display-inline-flex flex-direction-column gap-1 width-inherit">
             <Box
                 className={'display-flex gap-0p3 flex-direction-column'}
                 label={'Modal Props'}

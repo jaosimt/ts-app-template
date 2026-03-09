@@ -14,7 +14,7 @@ const DemoLoading: FC = () => {
     const {register} = useForm();
 
     const [props, setProps] = useState<LoadingProps>({
-        borderWidth: undefined,
+        borderWidth: 1,
         borderColor: undefined,
         backgroundColor: 'white',
         padding: true,
@@ -41,10 +41,10 @@ const DemoLoading: FC = () => {
         });
     }
 
-    return <div data-component={'loading-demo'} className={'display-inline-flex flex-direction-column height-100p gap-0p5'}>
+    return <div data-component={'loading-demo'} className={'display-inline-flex flex-direction-column height-100p gap-0p5 width-100p'}>
         <Box
-            boxClassName={'width-fit-content'}
-            className={'display-flex gap-0p3 flex-direction-column width-fit-content'}
+            boxClassName={'width-100p'}
+            className={'display-flex gap-0p3 flex-direction-column width-100p'}
             label={'Modal Props'}
         >
             <div className="grid cols-3 no-padding gap-0p5-1">

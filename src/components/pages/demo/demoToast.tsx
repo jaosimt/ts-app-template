@@ -78,7 +78,7 @@ const DemoToast: FC = () => {
     }, [selectedTheme]);
 
     return <div data-component={'toast-demo'} className={'width-100p height-100p display-flex align-items-center justify-content-center'}>
-        <Box>
+        <Box boxClassName={'width-100p'}>
             <div className="display-flex flex-direction-column gap-0p5">
                 <div className={'pb-0p5 display-flex flex-direction-column gap-0p5'}>
                     <InputField type={'textarea'} labelWidth={110} width={300} label={'Toast Message'}
