@@ -40,6 +40,13 @@ const Container = styled.div<{}>`
     align-items: center;
     gap: 0.3rem;
     position: relative;
+    height: 33px;
+    
+    @media (max-width: 768px) {
+        height: 28px;
+        gap: 0.1rem;
+        font-size: small;
+    }
 `;
 
 const Label = styled.label<{
@@ -51,7 +58,12 @@ const Label = styled.label<{
     justify-content: ${props => props.$labelAlign};
     align-items: center;
     min-width: fit-content;
-    ${props => props.$labelWidth && `width: ${parseCSSUnit(props.$labelWidth)}`}
+    ${props => props.$labelWidth && `width: ${parseCSSUnit(props.$labelWidth)}`};
+    
+    @media (max-width: 768px) {
+        gap: 0.1rem;
+    }
+}
 `;
 
 const Wrapper = styled.div<{
@@ -136,6 +148,10 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
             color: ${$backgroundColor};
             background-color: ${$textColor};
         }
+    }
+    
+    @media (max-width: 768px) {
+        padding: 0.3rem 0.5rem;
     }
 `;
 

@@ -43,3 +43,31 @@
     }
   }
 }
+
+@media (max-width : 768px) {
+  [data-component="input-field"] {
+    font-size: small;
+    gap     : 0.1rem;
+    
+    > label {}
+    
+    > div {
+      > textarea,
+      > input {
+        min-width     : 30px;
+        min-height    : 28px;
+        padding       : 0.3rem;
+        
+        &[type="text"] {}
+        
+        &[type="submit"] {}
+        
+        &[type="checkbox"] {}
+        
+        &[type="radio"] {}
+      }
+      
+      > .error {}
+    }
+  }
+}

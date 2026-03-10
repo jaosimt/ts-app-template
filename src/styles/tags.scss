@@ -44,7 +44,6 @@ code {
 }
 
 textarea {
-  padding       : 0.5rem;
   border-radius : 3px;
   //noinspection CssUnknownProperty
   field-sizing  : content;
@@ -58,6 +57,7 @@ input {
   padding       : 0.5rem;
   border        : 1px solid v.$borderColorDefault;
   border-radius : 0.3rem;
+  min-height    : 33px;
   
   &:focus {
     outline      : none;
@@ -73,6 +73,11 @@ input {
     pointer-events : none !important;
     color          : rgb(172 172 172);
     opacity        : 0.3;
+  }
+  
+  @media (max-width : 768px) {
+    min-height : 28px;
+    padding    : 0.3rem;
   }
 }
 
