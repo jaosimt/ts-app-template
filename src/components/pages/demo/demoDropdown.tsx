@@ -126,10 +126,10 @@ const DemoDropdown: FC = () => {
     const labelAlignChangeHandler = (value: any) => setProps({...props, labelAlign: value.value});
     const dropdownChangeHandler = (value: any) => setSelected(value);
 
-    return <div data-component={'checkbox-demo'} className={'width-100p'}>
-        <Box label={'Dropdown Props'} boxClassName={'mb-1 with-fit-content pb-0'}>
-            <div className="pb-0p5">
-                <div className="display-flex flex-wrap gap-0p5-1">
+    return <div data-component={'checkbox-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+        <Box label={'Dropdown Props'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+            <div className="pb-0p5 overflow-auto width-100p">
+                <div className={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
                     <div>
                         <div className={'display-flex align-items-center gap-0p5'}>
                             <Checkbox onChange={optionChangeHandler} name={'asStr'} label={'options'}
@@ -193,7 +193,7 @@ const DemoDropdown: FC = () => {
             </div>
         </Box>
         <DropdownBox>
-            <Box label={'Dropdown'} className={'display-inline-flex'} boxClassName={'pb-0'}>
+            <Box label={'Dropdown'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
                 <div className="pb-0p5">
                     <Dropdown
                         options={props.options as string[] | DropdownObjectOptions[]}
@@ -207,8 +207,8 @@ const DemoDropdown: FC = () => {
                     />
                 </div>
             </Box>
-            <Box label={'selected'} className={'p-0p5'}>
-                <pre>
+            <Box label={'selected'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+                <pre className={'pb-0p5'}>
                     {JSON.stringify(selected, (k, v) => k.startsWith('_') ? undefined : v, 2)}
                 </pre>
             </Box>

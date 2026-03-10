@@ -26,10 +26,9 @@ const DemoCheckbox: FC = () => {
 
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
 
-    return <div data-component={'checkbox-demo'} className={'width-100p'}>
-        <Box
-            label={'Checkbox Props'} boxClassName={'mb-1 with-fit-content pb-0'}>
-            <div className="display-flex flex-wrap gap-0p5-1 pb-0p5">
+    return <div data-component={'checkbox-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+        <Box label={'Checkbox Props'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+            <div className="display-flex flex-wrap justify-content-center gap-0p5-1 pb-0p5">
                 <InputField label={'label'}
                             fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
                 <InputField label={'labelWidth'} type={'number'} width={60}
@@ -47,7 +46,7 @@ const DemoCheckbox: FC = () => {
                 />
             </div>
         </Box>
-        <Box>
+        <Box label={'Button'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'} boxClassName={'width-fit-100p justify-self-center'}>
             <Checkbox
                 name={'myCheckbox'}
                 checked={myCheckbox}

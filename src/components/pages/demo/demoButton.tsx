@@ -30,8 +30,7 @@ const DemoButton: FC = () => {
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
 
     return <div data-component={'button-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-        <Box
-            label={'Button Props'} boxClassName={'mb-1 pb-0'}>
+        <Box label={'Button Props'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
             <div className="display-flex flex-wrap gap-0p5-1 pb-0p5 justify-content-center">
                 <Checkbox label={'disabled'} labelPosition={'left'} name={'disabled'}
                           checked={props.disabled} onChange={propsChangeHandler}/>
@@ -55,7 +54,7 @@ const DemoButton: FC = () => {
                             })}/>
             </div>
         </Box>
-        <Box label={'Button'} boxClassName={'mb-1'}>
+        <Box label={'Button'} boxClassName={'width-fit-100p justify-self-center'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
             <Button
                 icon={icon ? IoIosSave : undefined}
                 disabled={props.disabled || modal}

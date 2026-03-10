@@ -55,15 +55,12 @@ const DemoDrawer: FC = () => {
 
     const dropDownChangeHandler = (value: DropdownObjectOptions) => setPosition(value);
 
-    return <div className={'width-100p'}>
+    return <div data-name={'modal-demo'} className={'flex-wrap justify-content-center gap-0p5-1'}>
         <Box
             label={'Drawer Props'}
-            width={525}
-            boxClassName={'display-inline-block width-100p pb-0'}
-            style={{top: '50%', position: 'absolute'}}
-        >
+            boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
             <div className="pb-05">
-                <div className={'display-flex flex-wrap gap-0p5-1'}>
+                <div className={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
                     <InputField
                         width={100}
                         label={'backgroundColor'}

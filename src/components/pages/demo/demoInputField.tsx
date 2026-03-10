@@ -153,12 +153,9 @@ const DemoInputField: FC = () => {
         {
             name: 'Color Palette Generator',
             content: <>
-                <div className={'display-flex flex-direction-column gap-1 height-100p width-100p'}>
-                    <Box
-                        boxClassName={'width-100p pb-0'}
-                        className={'display-flex gap-0p5'} label={'InputField Props'} borderRadius={7}
-                        backgroundColor={'#fff'} labelBackgroundColor={'#fff'}
-                    >
+                <div className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+                    <Box label={'InputField Props'} borderRadius={7} backgroundColor={'#fff'} labelBackgroundColor={'#fff'}
+                         boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
                         <div className={'display-flex justify-content-center flex-wrap gap-0p5-1 pb-0p5'}>
                             <InputField
                                 type={'number'}
@@ -208,8 +205,8 @@ const DemoInputField: FC = () => {
                         </div>
                     </Box>
 
-                    <Box boxClassName={'width-100p pb-0'} label={'InputFields'} borderRadius={7}
-                         backgroundColor={'#fff'} labelBackgroundColor={'#fff'}>
+                    <Box label={'InputFields'} borderRadius={7} backgroundColor={'#fff'} labelBackgroundColor={'#fff'}
+                         boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
                         <div className="pb-0p5">
                             <form noValidate>
                                 <GridContainer className="colored-demo-label">

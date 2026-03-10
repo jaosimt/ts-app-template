@@ -40,7 +40,7 @@ const DemoModal: FC = () => {
         return str;
     })();
 
-    return <div data-component={'modal-demo'} style={{height: '100%', width: '100%'}}>
+    return <div data-component={'modal-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
         {
             showModal && <Modal
                 width={props.width}
@@ -119,12 +119,8 @@ const DemoModal: FC = () => {
             </Modal>
         }
 
-        <div className="display-inline-flex flex-direction-column gap-1 width-inherit">
-            <Box
-                className={'display-flex gap-0p3 flex-direction-column'}
-                boxClassName={'pb-0'}
-                label={'Modal Props'}
-            >
+        <div className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+            <Box label={'Modal Props'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
                 <div className="pb-0p5">
                     <div className={'display-flex justify-content-center gap-0p5-1 flex-wrap'}>
                         <Checkbox

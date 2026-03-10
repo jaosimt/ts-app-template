@@ -42,10 +42,9 @@ const DemoBox:FC = () => {
         // eslint-disable-next-line
     }, [onLabelClick]);
 
-    return <div data-component={'tab-demo'} className={'width-100p'}>
-        <Box
-            label={'Box Props'} boxClassName={'pb-0 mb-1 with-fit-content'}>
-            <div className="gap-0p5-1 display-flex flex-wrap pb-0p5">
+    return <div data-component={'tab-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+        <Box label={'Box Props'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+            <div className="gap-0p5-1 display-flex justify-content-center flex-wrap pb-0p5">
                 <InputField label={'label'} fieldRegister={register('label', {onChange: propsChangeHandler})}/>
                 <InputField disabled={!isString(props.label, true)} label={'labelColor'} fieldRegister={register('labelColor', {onChange: propsChangeHandler})}/>
                 <InputField disabled={!isString(props.label, true)} label={'labelBackgroundColor'} fieldRegister={register('labelBackgroundColor', {onChange: propsChangeHandler})}/>
@@ -95,7 +94,7 @@ const DemoBox:FC = () => {
             labelSize={props.labelSize}
             width={props.width}
             onLabelClick={props.onLabelClick}
-        >
+            boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
             <div className="p-0p5 trim">
                 <p><b>The quick brown fox jumps over the lazy dog</b> is a famous English-language pangram—a sentence
                     containing every letter of the alphabet. Coined in the late 19th century, it is widely used for

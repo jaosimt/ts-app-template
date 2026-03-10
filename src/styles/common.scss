@@ -265,11 +265,16 @@
 .width-100p { width : 100%; }
 .width-inherit { width : inherit; }
 .width-fit-content { width : fit-content; }
+.width-fit-100p { width : fit-content; }
 /*************************************************** WIDTH */
 
 /* MIN-WIDTH ***********************************************/
 .min-width-fit-content { min-width : fit-content; }
 /*********************************************** MIN-WIDTH */
+
+/* MAX-WIDTH ***********************************************/
+.max-width-100p { max-width : 100%; }
+/*********************************************** MAX-WIDTH */
 
 /* HEIGHT ***************************************************/
 .height-100p { height : 100%; }
@@ -548,6 +553,8 @@
 }
 
 @media(max-width: 768px) {
+  .width-fit-100p { width : 100%; }
+  
   .grid {
     &:not(.no-padding) {
       > * {
