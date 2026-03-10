@@ -92,8 +92,8 @@ const DemoToast: FC = () => {
     }, [selectedTheme]);
 
     return <Container data-component={'toast-demo'}>
-        <Box boxClassName={'width-100p pb-0'}>
-            <div className="display-flex flex-direction-column gap-0p5 pb-0p5">
+        <Box className={'justify-self-center'}>
+            <div className="display-flex flex-direction-column justify-content-center flex-wrap gap-0p5-1">
                 <div className={'pb-0p5 display-flex flex-direction-column gap-0p5'}>
                     <InputField wrapperClassName={'flex-direction-column align-items-top-i'} type={'textarea'} labelWidth={110} width={'100%'} label={'Toast Message'} style={{flexDirection: 'column'}}
                                 value={toastProp.message as string}

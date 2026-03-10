@@ -30,31 +30,29 @@ const DemoButton: FC = () => {
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
 
     return <div data-component={'button-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-        <Box label={'Button Props'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-            <div className="display-flex flex-wrap gap-0p5-1 pb-0p5 justify-content-center">
-                <Checkbox label={'disabled'} labelPosition={'left'} name={'disabled'}
-                          checked={props.disabled} onChange={propsChangeHandler}/>
-                <div className="display-flex gap-0p1 align-items-center">
-                    <Checkbox label={'icon'} labelPosition={'left'} name={'disabled'}
-                              checked={icon} onChange={(e: any) => setIcon(e.currentTarget.checked)}/>
-                    <Tippy content={'react-icons'} placement="top" className={'custom-tippy'}>
-                        <span className={'font-monospace font-size-small color-light-gray'}>(IoIosSave)</span>
-                    </Tippy>
-                </div>
-                <Dropdown
-                    options={alignOptions}
-                    selected={props.align}
-                    label={'align'}
-                    onChange={(value: string) => dropDownChangeHandler('align', value)}
-                />
-                <InputField label={'width'} type={'number'} width={60}
-                            fieldRegister={register('width', {
-                                value: props.width,
-                                onChange: propsChangeHandler
-                            })}/>
+        <Box label={'Button Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+            <Checkbox label={'disabled'} labelPosition={'left'} name={'disabled'}
+                      checked={props.disabled} onChange={propsChangeHandler}/>
+            <div className="display-flex gap-0p1 align-items-center">
+                <Checkbox label={'icon'} labelPosition={'left'} name={'disabled'}
+                          checked={icon} onChange={(e: any) => setIcon(e.currentTarget.checked)}/>
+                <Tippy content={'react-icons'} placement="top" className={'custom-tippy'}>
+                    <span className={'font-monospace font-size-small color-light-gray'}>(IoIosSave)</span>
+                </Tippy>
             </div>
+            <Dropdown
+                options={alignOptions}
+                selected={props.align}
+                label={'align'}
+                onChange={(value: string) => dropDownChangeHandler('align', value)}
+            />
+            <InputField label={'width'} type={'number'} width={60}
+                        fieldRegister={register('width', {
+                            value: props.width,
+                            onChange: propsChangeHandler
+                        })}/>
         </Box>
-        <Box label={'Button'} boxClassName={'width-fit-100p justify-self-center'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+        <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-self-center flex-wrap gap-0p5-1'}>
             <Button
                 icon={icon ? IoIosSave : undefined}
                 disabled={props.disabled || modal}

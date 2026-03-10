@@ -58,7 +58,7 @@ const DemoDrawer: FC = () => {
     return <div data-name={'modal-demo'} className={'flex-wrap justify-content-center gap-0p5-1'}>
         <Box
             label={'Drawer Props'}
-            boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+            className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
             <div className="pb-05">
                 <div className={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
                     <InputField

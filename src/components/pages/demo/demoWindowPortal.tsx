@@ -4,7 +4,6 @@ import { SlReload, SlScreenDesktop } from 'react-icons/sl';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { decrementCounter, getCounter, incrementCounter, resetCounter } from '../../../slices/counter';
-import { classNames } from '../../../utils';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
 import WindowPortal from '../windowPortal';
@@ -41,7 +40,7 @@ const DemoWindowPortal: FC = () => {
 
     const [showPortal, setShowPortal] = useState(false);
 
-    return <div data-component={'window-portal-demo'} className={'width-100p'} style={{minHeight: '490px'}}>
+    return <div data-component={'window-portal-demo'}>
         {showPortal && <WindowPortal
             openOnNextScreen={true}
             onClose={() => setShowPortal(false)}
@@ -51,17 +50,8 @@ const DemoWindowPortal: FC = () => {
             </PortalContainer>
         </WindowPortal>}
 
-        <Box
-            boxClassName={'translate absolute-center'}
-            borderRadius={4}
-            className={classNames(
-                'display-flex',
-                'flex-direction-column',
-                'gap-0p5',
-                'align-items-center',
-                'justify-content-center')}
-        >
-            <div className={'display-flex gap-0p5 align-items-center'}>
+        <Box className={'translate absolute-center'} contentClassName={'display-flex flex-direction-column justify-self-center'}>
+            <div className={'display-flex justify-content-center align-items-center gap-0p5-1'}>
                 <span>Counter</span>
                 <div className={'display-flex gap-0p5 align-items-center'}>
                     <Button
@@ -80,19 +70,21 @@ const DemoWindowPortal: FC = () => {
                     />
                 </div>
             </div>
-            <Button
-                width={'90%'}
-                align={'space-between'}
-                icon={SlScreenDesktop}
-                disabled={showPortal}
-                onClick={() => setShowPortal(true)}
-            >
-                <div className={'display-inline-flex flex-direction-column align-items-end'}>
-                    <span>Show Portal</span>
-                    <span className={'font-size-x-small'}>in second screen if available</span>
-                </div>
-            </Button>
-            <b className={'font-size-x-small mt-0p5'}>Above counter will be rendered in the portal window</b>
+            <div className={'display-flex flex-direction-column align-items-center mt-0p5'}>
+                <Button
+                    width={'90%'}
+                    align={'space-between'}
+                    icon={SlScreenDesktop}
+                    disabled={showPortal}
+                    onClick={() => setShowPortal(true)}
+                >
+                    <div className={'display-inline-flex flex-direction-column align-items-end'}>
+                        <span>Show Portal</span>
+                        <span className={'font-size-x-small'}>in second screen if available</span>
+                    </div>
+                </Button>
+                <b className={'font-size-x-small mt-0p5'}>Above counter will be rendered in the portal window</b>
+            </div>
         </Box>
     </div>;
 };

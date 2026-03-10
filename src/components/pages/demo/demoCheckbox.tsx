@@ -27,26 +27,24 @@ const DemoCheckbox: FC = () => {
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
 
     return <div data-component={'checkbox-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-        <Box label={'Checkbox Props'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-            <div className="display-flex flex-wrap justify-content-center gap-0p5-1 pb-0p5">
-                <InputField label={'label'}
-                            fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
-                <InputField label={'labelWidth'} type={'number'} width={60}
-                            fieldRegister={register('labelWidth', {
-                                value: props.labelWidth,
-                                onChange: propsChangeHandler
-                            })}/>
-                <Checkbox label={'disabled'} labelPosition={'left'} name={'disabled'}
-                          checked={props.disabled} onChange={propsChangeHandler}/>
-                <Dropdown
-                    options={positionOptions}
-                    selected={props.labelPosition}
-                    label={'labelPosition'}
-                    onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
-                />
-            </div>
+        <Box label={'Checkbox Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+            <InputField label={'label'}
+                        fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
+            <InputField label={'labelWidth'} type={'number'} width={60}
+                        fieldRegister={register('labelWidth', {
+                            value: props.labelWidth,
+                            onChange: propsChangeHandler
+                        })}/>
+            <Checkbox label={'disabled'} labelPosition={'left'} name={'disabled'}
+                      checked={props.disabled} onChange={propsChangeHandler}/>
+            <Dropdown
+                options={positionOptions}
+                selected={props.labelPosition}
+                label={'labelPosition'}
+                onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
+            />
         </Box>
-        <Box label={'Button'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'} boxClassName={'width-fit-100p justify-self-center'}>
+        <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
             <Checkbox
                 name={'myCheckbox'}
                 checked={myCheckbox}

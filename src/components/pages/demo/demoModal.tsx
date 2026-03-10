@@ -119,57 +119,55 @@ const DemoModal: FC = () => {
             </Modal>
         }
 
-        <div className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-            <Box label={'Modal Props'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-                <div className="pb-0p5">
-                    <div className={'display-flex justify-content-center gap-0p5-1 flex-wrap'}>
-                        <Checkbox
-                            label={'closeOnEscKey'}
-                            name={'closeOnEscKey'}
-                            checked={props.closeOnEscKey}
-                            onChange={changeHandler}
-                        />
-                        <Checkbox
-                            label={'closeOnOutsideClick'}
-                            name={'closeOnOutsideClick'}
-                            checked={props.closeOnOutsideClick}
-                            onChange={changeHandler}
-                        />
-                        <Checkbox
-                            label={'showClose'}
-                            name={'showClose'}
-                            checked={props.showClose}
-                            onChange={changeHandler}
-                        />
-                        <InputField
-                            label={'title'}
-                            fieldRegister={register('title', {
-                                value: props.title,
-                                onChange: changeHandler
-                            })}
-                        />
+        <div className={'display-flex flex-wrap justify-content-center align-items-center gap-0p5-1'}>
+            <Box label={'Modal Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+                <Checkbox
+                    label={'closeOnEscKey'}
+                    name={'closeOnEscKey'}
+                    checked={props.closeOnEscKey}
+                    onChange={changeHandler}
+                />
+                <Checkbox
+                    label={'closeOnOutsideClick'}
+                    name={'closeOnOutsideClick'}
+                    checked={props.closeOnOutsideClick}
+                    onChange={changeHandler}
+                />
+                <Checkbox
+                    label={'showClose'}
+                    name={'showClose'}
+                    checked={props.showClose}
+                    onChange={changeHandler}
+                />
+                <InputField
+                    label={'title'}
+                    fieldRegister={register('title', {
+                        value: props.title,
+                        onChange: changeHandler
+                    })}
+                />
 
-                        <InputField
-                            type={'number'}
-                            label={'width'}
-                            fieldRegister={register('width', {
-                                value: props.width,
-                                onChange: changeHandler
-                            })}
-                        />
-                    </div>
-                </div>
+                <InputField
+                    type={'number'}
+                    label={'width'}
+                    fieldRegister={register('width', {
+                        value: props.width,
+                        onChange: changeHandler
+                    })}
+                />
             </Box>
-            <Button
-                style={{margin: 'auto auto'}}
-                className={'font-size-large'}
-                align={'space-between'}
-                icon={FaRegWindowMaximize}
-                disabled={showModal}
-                onClick={() => setShowModal(true)}
-            >
-                Show Modal
-            </Button>
+            <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-self-center flex-wrap gap-0p5-1'}>
+                <Button
+                    style={{margin: 'auto auto'}}
+                    className={'font-size-large'}
+                    align={'space-between'}
+                    icon={FaRegWindowMaximize}
+                    disabled={showModal}
+                    onClick={() => setShowModal(true)}
+                >
+                    Show Modal
+                </Button>
+            </Box>
         </div>
     </div>;
 };

@@ -42,37 +42,34 @@ const DemoLoading: FC = () => {
     }
 
     return <div data-component={'loading-demo'} className={'display-inline-flex flex-direction-column height-100p gap-0p5 width-100p'}>
-        <Box label={'Modal Props'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-            <div className="display-flex justify-content-center flex-wrap gap-0p5-1 pb-0p5">
-                <InputField type={'number'} width={60} label={'borderWidth'}
-                            fieldRegister={register('borderWidth', {
-                                value: props.borderWidth,
-                                onChange: propsChangeHandler
-                            })}/>
-                <InputField label={'borderColor'}
-                            fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
-                <InputField label={'backgroundColor'}
-                            fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
-                <Dropdown
-                    options={positionOptions}
-                    selected={props.position}
-                    label={'position'}
-                    onChange={(value: string) => debDropdownChange('position', value)}
-                />
-                <InputField type={'number'} width={60} label={'size'}
-                            fieldRegister={register('size', {value: props.size, onChange: propsChangeHandler})}/>
-                <InputField label={'color'}
-                            fieldRegister={register('color', {onChange: propsChangeHandler})}/>
-                <InputField label={'topText'}
-                            fieldRegister={register('topText', {onChange: propsChangeHandler})}/>
-                <InputField label={'bottomText'}
-                            fieldRegister={register('bottomText', {onChange: propsChangeHandler})}/>
-                <Checkbox label={'padding'} labelPosition={'left'} name={'padding'}
-                          checked={props.padding} onChange={propsChangeHandler}/>
-                <Checkbox label={'boxShadow'} labelPosition={'left'} name={'boxShadow'}
-                          checked={props.boxShadow} onChange={propsChangeHandler}/>
-
-            </div>
+        <Box label={'Modal Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+            <InputField type={'number'} width={60} label={'borderWidth'}
+                        fieldRegister={register('borderWidth', {
+                            value: props.borderWidth,
+                            onChange: propsChangeHandler
+                        })}/>
+            <InputField label={'borderColor'}
+                        fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
+            <InputField label={'backgroundColor'}
+                        fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
+            <Dropdown
+                options={positionOptions}
+                selected={props.position}
+                label={'position'}
+                onChange={(value: string) => debDropdownChange('position', value)}
+            />
+            <InputField type={'number'} width={60} label={'size'}
+                        fieldRegister={register('size', {value: props.size, onChange: propsChangeHandler})}/>
+            <InputField label={'color'}
+                        fieldRegister={register('color', {onChange: propsChangeHandler})}/>
+            <InputField label={'topText'}
+                        fieldRegister={register('topText', {onChange: propsChangeHandler})}/>
+            <InputField label={'bottomText'}
+                        fieldRegister={register('bottomText', {onChange: propsChangeHandler})}/>
+            <Checkbox label={'padding'} labelPosition={'left'} name={'padding'}
+                      checked={props.padding} onChange={propsChangeHandler}/>
+            <Checkbox label={'boxShadow'} labelPosition={'left'} name={'boxShadow'}
+                      checked={props.boxShadow} onChange={propsChangeHandler}/>
         </Box>
         <div className="position-relative border border-radius-0p4 background-light" style={{height: '100%'}}>
             <Loading

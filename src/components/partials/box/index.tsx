@@ -3,25 +3,32 @@ import styled from 'styled-components';
 import { CSSColors, CSSUnit } from '../../../types';
 import { getTextWidth, parseCSSUnit } from '../../../utils';
 
-export type LabelPositionType = 'top-left'|'top-center'|'top-right'|'bottom-left'|'bottom-center'|'bottom-right';
+export type LabelPositionType =
+    'top-left'
+    | 'top-center'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-center'
+    | 'bottom-right';
 
 export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
     backgroundColor?: CSSColors;
     border?: boolean | 'label-only';
-    borderRadius?: CSSUnit
+    borderRadius?: CSSUnit;
+    padding?: CSSUnit;
     borderColor?: CSSColors;
-    boxClassName?: string;
+    contentClassName?: string;
     tight?: boolean;
     label?: string;
     labelColor?: CSSColors;
     labelBackgroundColor?: CSSColors;
     labelPosition?: LabelPositionType;
-    labelSize?: 'small'|'medium'|'large';
+    labelSize?: 'small' | 'medium' | 'large';
     width?: CSSUnit;
     onLabelClick?: Function;
 }
 
-const Section = styled.section<{
+const Container = styled.section<{
     $backgroundColor?: CSSColors,
     $border: CSSUnit,
     $borderColor: CSSColors,
@@ -36,9 +43,12 @@ const Section = styled.section<{
     border-color: ${props => props.$borderColor};
     border-radius: ${props => props.$borderRadius};
     margin-top: ${props => props.$marginTop};
-    padding: ${props => props.$padding};
-    width: ${props => props.$width || ''};
+    width: ${props => props.$width ? `${parseCSSUnit(props.$width as CSSUnit)}` : 'fit-content'};
     position: relative;
+
+    @media (max-width: 768px) {
+        width: ${props => props.$width ? `${parseCSSUnit(props.$width as CSSUnit)}` : '100%'};
+    }
 `;
 
 const Label = styled.h5<{
@@ -74,19 +84,27 @@ const Label = styled.h5<{
             case 'top-right':
                 return `right: ${props.$tight ? 0 : '0.5rem'}`;
             case 'bottom-left':
-                return `bottom: ${props.$tight ? 0 : '-0.4rem'}`;
+                return `left: 0.5rem; bottom: ${props.$tight ? 0 : '-0.4rem'}`;
             case 'bottom-center':
                 return `bottom: ${props.$tight ? 0 : '-0.4rem'}; right: calc(50% - ${props.$labelWidth / 2}px)`;
             case 'bottom-right':
                 return `bottom: ${props.$tight ? 0 : '-0.4rem'}; right: ${props.$tight ? 0 : '0.5rem'}`;
             default:
-                return null;
+                return 'left: 0.5rem';
         }
     })()}
 `;
 
-const Children = styled.div<{
+const Scroller = styled.div<{
+    $padding?: CSSUnit
+}>`
+    margin: ${props => `${parseCSSUnit(props.$padding as CSSUnit)} ${parseCSSUnit(props.$padding as CSSUnit)} 0`};
+    overflow: auto;
+`;
+
+const Content = styled.div<{
     $labelPosition: LabelPositionType,
+    $padding?: CSSUnit,
     $label?: string,
     $tight: boolean,
     $labelSize: string
@@ -117,9 +135,11 @@ const Children = styled.div<{
         }
         return null;
     })()};
-    width: 100%;
-    overflow-x: auto;
+    width: fit-content;
+    padding-bottom: ${props => `${parseCSSUnit(props.$padding as CSSUnit)}`};
+
     > :first-child { margin-top: 0; }
+
     > :last-child { margin-bottom: 0; }
 `;
 
@@ -129,9 +149,9 @@ const Box: FC<BoxProps> = (props) => {
         border = true,
         borderColor = '#ccc',
         borderRadius = 7,
-        boxClassName,
         children,
         className,
+        contentClassName,
         label,
         labelColor,
         labelBackgroundColor,
@@ -139,6 +159,7 @@ const Box: FC<BoxProps> = (props) => {
         labelPosition = 'top-left',
         tight,
         width,
+        padding = '0.5rem',
         onLabelClick,
     } = props;
 
@@ -148,7 +169,7 @@ const Box: FC<BoxProps> = (props) => {
 
         let labelFont = '-apple-system, "system-ui", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, monospace';
 
-        switch(label) {
+        switch (label) {
             case 'large':
                 labelFont = '700 18px / 18px ' + labelFont;
                 break;
@@ -169,7 +190,7 @@ const Box: FC<BoxProps> = (props) => {
     }
 
     useEffect(() => {
-        if (label && labelRef.current){
+        if (label && labelRef.current) {
             const labelWidth = getTextWidth(label, getComputedStyle(labelRef.current)['font']);
             if (labelWidth > 5) setLabelWidth(labelWidth);
         }
@@ -177,19 +198,19 @@ const Box: FC<BoxProps> = (props) => {
     }, []);
 
     const labelClinkHandler = () => {
-        onLabelClick && onLabelClick()
-    }
+        onLabelClick && onLabelClick();
+    };
 
-    return <Section
+    return <Container
         data-component={'box'}
-        className={boxClassName}
+        className={className}
         $backgroundColor={backgroundColor}
         $border={border && border !== 'label-only' ? '1px' : 0}
         $borderColor={borderColor}
         $borderRadius={parseCSSUnit(borderRadius)}
         $marginTop={label && !tight ? '0.5rem' : 0}
-        $padding={tight ? 0 : '0.5rem'}
-        $width={width && parseCSSUnit(width)}
+        $padding={tight ? 0 : padding}
+        $width={width}
     >
         {label && <Label
             ref={labelRef}
@@ -199,21 +220,27 @@ const Box: FC<BoxProps> = (props) => {
             $borderColor={borderColor}
             $borderRadius={titleBorderRadius}
             $color={labelColor}
-            $margin={tight ? border === 'label-only' ? '0.1rem' : '0.1rem' : '-0.9rem 0 0 0'}
+            $margin={tight ? border === 'label-only' ? '0.1rem' : '0.1rem' : '-0.4rem 0 0 0'}
             $fontSize={labelSize}
             $labelPosition={labelPosition}
             $labelWidth={labelWidth}
             $tight={tight || false}
             $onLabelClick={onLabelClick}
         >{label}</Label>}
-        <Children
-            className={className}
-            $labelPosition={labelPosition}
-            $tight={tight || false}
-            $label={label}
-            $labelSize={labelSize}
-        >{children}</Children>
-    </Section>;
+        <Scroller data-name={'content-scroller'} $padding={padding}>
+            <Content
+                data-name={'content'}
+                className={contentClassName}
+                $padding={padding}
+                $labelPosition={labelPosition}
+                $tight={tight || false}
+                $label={label}
+                $labelSize={labelSize}
+            >
+                {children}
+            </Content>
+        </Scroller>
+    </Container>;
 };
 
 export default memo(Box);

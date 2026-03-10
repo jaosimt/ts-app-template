@@ -43,43 +43,41 @@ const DemoBox:FC = () => {
     }, [onLabelClick]);
 
     return <div data-component={'tab-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-        <Box label={'Box Props'} boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-            <div className="gap-0p5-1 display-flex justify-content-center flex-wrap pb-0p5">
-                <InputField label={'label'} fieldRegister={register('label', {onChange: propsChangeHandler})}/>
-                <InputField disabled={!isString(props.label, true)} label={'labelColor'} fieldRegister={register('labelColor', {onChange: propsChangeHandler})}/>
-                <InputField disabled={!isString(props.label, true)} label={'labelBackgroundColor'} fieldRegister={register('labelBackgroundColor', {onChange: propsChangeHandler})}/>
-                <Dropdown
-                    options={labelPositionOptions}
-                    selected={props.labelPosition}
-                    label={'labelPosition'}
-                    disabled={!isString(props.label, true)}
-                    onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
-                />
-                <Dropdown
-                    options={labelSizeOptions}
-                    selected={props.labelSize}
-                    label={'labelSize'}
-                    disabled={!isString(props.label, true)}
-                    onChange={(value: string) => dropDownChangeHandler('labelSize', value)}
-                />
+        <Box label={'Box Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+            <InputField label={'label'} fieldRegister={register('label', {onChange: propsChangeHandler})}/>
+            <InputField disabled={!isString(props.label, true)} label={'labelColor'} fieldRegister={register('labelColor', {onChange: propsChangeHandler})}/>
+            <InputField disabled={!isString(props.label, true)} label={'labelBackgroundColor'} fieldRegister={register('labelBackgroundColor', {onChange: propsChangeHandler})}/>
+            <Dropdown
+                options={labelPositionOptions}
+                selected={props.labelPosition}
+                label={'labelPosition'}
+                disabled={!isString(props.label, true)}
+                onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
+            />
+            <Dropdown
+                options={labelSizeOptions}
+                selected={props.labelSize}
+                label={'labelSize'}
+                disabled={!isString(props.label, true)}
+                onChange={(value: string) => dropDownChangeHandler('labelSize', value)}
+            />
 
-                <div className={'display-flex align-items-center'}>
-                    <Checkbox disabled={!isString(props.label, true)} label={'onLabelClick'} labelPosition={'left'} name={'onLabelClick'} checked={onLabelClick} onChange={(e: any) => setOnLabelClick(e.currentTarget.checked)}/>
-                    <span className={'font-size-small color-light-gray ml-0p5'}>{`() => alert('Hello, world!')`}</span>
-                </div>
-                <Dropdown
-                    options={borderOptions}
-                    selected={props.border as any}
-                    label={'border'}
-                    disabled={!isString(props.label, true)}
-                    onChange={(value: string) => dropDownChangeHandler('border', value)}
-                />
-                <InputField width={50} disabled={props.border === false} label={'borderRadius'} fieldRegister={register('borderRadius', {value: props.borderRadius, onChange: propsChangeHandler})}/>
-                <InputField disabled={props.border === false} label={'borderColor'} fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
-                <Checkbox label={'tight'} labelPosition={'left'} name={'tight'} checked={props.tight} onChange={propsChangeHandler}/>
-                <InputField label={'backgroundColor'} fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
-                <InputField width={50} label={'width'} fieldRegister={register('width', {onChange: propsChangeHandler})}/>
+            <div className={'display-flex align-items-center'}>
+                <Checkbox disabled={!isString(props.label, true)} label={'onLabelClick'} labelPosition={'left'} name={'onLabelClick'} checked={onLabelClick} onChange={(e: any) => setOnLabelClick(e.currentTarget.checked)}/>
+                <span className={'font-size-small color-light-gray ml-0p5'}>{`() => alert('Hello, world!')`}</span>
             </div>
+            <Dropdown
+                options={borderOptions}
+                selected={props.border as any}
+                label={'border'}
+                disabled={!isString(props.label, true)}
+                onChange={(value: string) => dropDownChangeHandler('border', value)}
+            />
+            <InputField width={50} disabled={props.border === false} label={'borderRadius'} fieldRegister={register('borderRadius', {value: props.borderRadius, onChange: propsChangeHandler})}/>
+            <InputField disabled={props.border === false} label={'borderColor'} fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
+            <Checkbox label={'tight'} labelPosition={'left'} name={'tight'} checked={props.tight} onChange={propsChangeHandler}/>
+            <InputField label={'backgroundColor'} fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
+            <InputField width={50} label={'width'} fieldRegister={register('width', {onChange: propsChangeHandler})}/>
         </Box>
         <Box
             backgroundColor={props.backgroundColor}
@@ -94,7 +92,9 @@ const DemoBox:FC = () => {
             labelSize={props.labelSize}
             width={props.width}
             onLabelClick={props.onLabelClick}
-            boxClassName={'width-fit-100p justify-self-center pb-0'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+            className={'justify-self-center'}
+            contentClassName={'display-flex flex-wrap justify-content-center gap-0p5-1'}
+        >
             <div className="p-0p5 trim">
                 <p><b>The quick brown fox jumps over the lazy dog</b> is a famous English-language pangram—a sentence
                     containing every letter of the alphabet. Coined in the late 19th century, it is widely used for
