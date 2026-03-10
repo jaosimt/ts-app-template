@@ -40,7 +40,7 @@ const paletteValidation = z.object({
     labelWidth: z.number().optional(),
     width: z.number().min(50),
     labelAlign: z.string().optional()
-})
+});
 
 const icons = [
     {label: 'react', value: 'react', icon: TbBrandReact},
@@ -51,30 +51,27 @@ const icons = [
 ];
 
 const GridContainer = styled.div`
-    display: grid;
-    gap: 0 0.5rem;
-    grid-template-areas: 
-        "red green blue size stepShift"
-        "note note note note note";
-    grid-template-columns: auto auto auto auto auto 100%;
+    display: flex;
+    gap: 0.5rem 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
 `;
 
 const Red = styled.div`
-    grid-area: red;
 `;
 const Green = styled.div`
-    grid-area: green;
 `;
 const Blue = styled.div`
-    grid-area: blue;
 `;
 const Size = styled.div`
-    grid-area: size;
 `;
 const StepShift = styled.div`
-    grid-area: stepShift;
 `;
+
 const Note = styled.i`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 1rem;
     padding-top: 0.3rem;
     border-top: 1px solid #ccc;
@@ -133,7 +130,7 @@ const DemoInputField: FC = () => {
         // eslint-disable-next-line
     }, [icon]);
 
-    const optionChangeHandler = (e: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
+    const optionChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target as HTMLInputElement;
         setOption({...option, [name]: value});
     };
@@ -160,9 +157,9 @@ const DemoInputField: FC = () => {
                     <Box
                         boxClassName={'width-100p pb-0'}
                         className={'display-flex gap-0p5'} label={'InputField Props'} borderRadius={7}
-                         backgroundColor={'#fff'} labelBackgroundColor={'#fff'}
+                        backgroundColor={'#fff'} labelBackgroundColor={'#fff'}
                     >
-                        <div className={'display-flex gap-0p3 -mb-0p5 pb-0p5'}>
+                        <div className={'display-flex justify-content-center flex-wrap gap-0p5-1 pb-0p5'}>
                             <InputField
                                 type={'number'}
                                 label={'width'}
@@ -199,7 +196,8 @@ const DemoInputField: FC = () => {
                             />
 
                             <div className={'display-flex gap-0p3 align-items-center'}>
-                                <Button className={'white-space-nowrap'} onClick={() => setEnableIcon(!enableIcon)}>{enableIcon ? 'Disable' : 'Enable'} icon</Button>
+                                <Button className={'white-space-nowrap'}
+                                        onClick={() => setEnableIcon(!enableIcon)}>{enableIcon ? 'Disable' : 'Enable'} icon</Button>
                                 <Dropdown
                                     disabled={!enableIcon}
                                     options={icons}
@@ -209,121 +207,127 @@ const DemoInputField: FC = () => {
                             </div>
                         </div>
                     </Box>
-                    <Box boxClassName={'width-100p pb-0'} label={'InputFields'} borderRadius={7} backgroundColor={'#fff'} labelBackgroundColor={'#fff'}>
-                        <form noValidate>
-                            <GridContainer className="colored-demo-label pb-0p5">
-                                <Red>
-                                    <InputField
-                                        icon={enableIcon ? option.icon : undefined}
-                                        showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
-                                        width={option.width}
-                                        labelWidth={option.labelWidth}
-                                        labelAlign={option.labelAlign}
-                                        label={'Red'}
-                                        labelColor={option.labelColor}
-                                        min={0}
-                                        max={255}
-                                        type={'number'}
-                                        fieldRegister={register('red', {
-                                            valueAsNumber: true,
-                                            value: paletteProps.red,
-                                            onChange: paletteChangeHandler
-                                        })}
-                                        error={errors.red?.message}
-                                        setRef={(ref: HTMLElement) => inputRefs.current.red = ref}
-                                    />
-                                </Red>
-                                <Green>
-                                    <InputField
-                                        icon={enableIcon ? option.icon : undefined}
-                                        showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
-                                        width={option.width}
-                                        labelWidth={option.labelWidth}
-                                        labelAlign={option.labelAlign}
-                                        label={'Green'}
-                                        labelColor={option.labelColor}
-                                        min={0}
-                                        max={255}
-                                        type={'number'}
-                                        fieldRegister={register('green', {
-                                            valueAsNumber: true,
-                                            value: paletteProps.green,
-                                            onChange: paletteChangeHandler
-                                        })}
-                                        error={errors.green?.message}
-                                        setRef={(ref: HTMLElement) => inputRefs.current.green = ref}
-                                    />
-                                </Green>
-                                <Blue>
-                                    <InputField
-                                        icon={enableIcon ? option.icon : undefined}
-                                        showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
-                                        width={option.width}
-                                        labelWidth={option.labelWidth}
-                                        labelAlign={option.labelAlign}
-                                        label={'Blue'}
-                                        labelColor={option.labelColor}
-                                        min={0}
-                                        max={255}
-                                        type={'number'}
-                                        fieldRegister={register('blue', {
-                                            valueAsNumber: true,
-                                            value: paletteProps.blue,
-                                            onChange: paletteChangeHandler
-                                        })}
-                                        error={errors.blue?.message}
-                                        setRef={(ref: HTMLElement) => inputRefs.current.blue = ref}
-                                    />
-                                </Blue>
-                                <Size>
-                                    <InputField
-                                        icon={enableIcon ? option.icon : undefined}
-                                        showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
-                                        width={option.width}
-                                        labelWidth={option.labelWidth}
-                                        labelAlign={option.labelAlign}
-                                        label={'Size'}
-                                        labelColor={option.labelColor}
-                                        type={'number'}
-                                        min={1}
-                                        max={56}
-                                        fieldRegister={register('size', {
-                                            valueAsNumber: true,
-                                            value: paletteProps.size,
-                                            onChange: paletteChangeHandler
-                                        })}
-                                        error={errors.size?.message}
-                                        setRef={(ref: HTMLElement) => inputRefs.current.size = ref}
-                                    />
-                                </Size>
-                                <StepShift>
-                                    <InputField
-                                        icon={enableIcon ? option.icon : undefined}
-                                        showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
-                                        width={option.width}
-                                        labelWidth={option.labelWidth}
-                                        labelAlign={option.labelAlign}
-                                        label={'Shift degrees'}
-                                        labelColor={option.labelColor}
-                                        min={0}
-                                        max={360}
-                                        type={'number'}
-                                        fieldRegister={register('stepShift', {
-                                            valueAsNumber: true,
-                                            value: paletteProps.stepShift,
-                                            onChange: paletteChangeHandler
-                                        })}
-                                        error={errors.stepShift?.message}
-                                        setRef={(ref: HTMLElement) => inputRefs.current.stepShift = ref}
-                                    />
-                                </StepShift>
-                                <Note className={'color-red font-size-small'}>
-                                    * Above label's are background-colored for the purpose of this demo! Otherwise, filters <b>labelAlign</b> & <b>labelWidth</b> won't make much sense.
-                                </Note>
-                            </GridContainer>
-                        </form>
+
+                    <Box boxClassName={'width-100p pb-0'} label={'InputFields'} borderRadius={7}
+                         backgroundColor={'#fff'} labelBackgroundColor={'#fff'}>
+                        <div className="pb-0p5">
+                            <form noValidate>
+                                <GridContainer className="colored-demo-label">
+                                    <Red>
+                                        <InputField
+                                            icon={enableIcon ? option.icon : undefined}
+                                            showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
+                                            width={option.width}
+                                            labelWidth={option.labelWidth}
+                                            labelAlign={option.labelAlign}
+                                            label={'Red'}
+                                            labelColor={option.labelColor}
+                                            min={0}
+                                            max={255}
+                                            type={'number'}
+                                            fieldRegister={register('red', {
+                                                valueAsNumber: true,
+                                                value: paletteProps.red,
+                                                onChange: paletteChangeHandler
+                                            })}
+                                            error={errors.red?.message}
+                                            setRef={(ref: HTMLElement) => inputRefs.current.red = ref}
+                                        />
+                                    </Red>
+                                    <Green>
+                                        <InputField
+                                            icon={enableIcon ? option.icon : undefined}
+                                            showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
+                                            width={option.width}
+                                            labelWidth={option.labelWidth}
+                                            labelAlign={option.labelAlign}
+                                            label={'Green'}
+                                            labelColor={option.labelColor}
+                                            min={0}
+                                            max={255}
+                                            type={'number'}
+                                            fieldRegister={register('green', {
+                                                valueAsNumber: true,
+                                                value: paletteProps.green,
+                                                onChange: paletteChangeHandler
+                                            })}
+                                            error={errors.green?.message}
+                                            setRef={(ref: HTMLElement) => inputRefs.current.green = ref}
+                                        />
+                                    </Green>
+                                    <Blue>
+                                        <InputField
+                                            icon={enableIcon ? option.icon : undefined}
+                                            showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
+                                            width={option.width}
+                                            labelWidth={option.labelWidth}
+                                            labelAlign={option.labelAlign}
+                                            label={'Blue'}
+                                            labelColor={option.labelColor}
+                                            min={0}
+                                            max={255}
+                                            type={'number'}
+                                            fieldRegister={register('blue', {
+                                                valueAsNumber: true,
+                                                value: paletteProps.blue,
+                                                onChange: paletteChangeHandler
+                                            })}
+                                            error={errors.blue?.message}
+                                            setRef={(ref: HTMLElement) => inputRefs.current.blue = ref}
+                                        />
+                                    </Blue>
+                                    <Size>
+                                        <InputField
+                                            icon={enableIcon ? option.icon : undefined}
+                                            showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
+                                            width={option.width}
+                                            labelWidth={option.labelWidth}
+                                            labelAlign={option.labelAlign}
+                                            label={'Size'}
+                                            labelColor={option.labelColor}
+                                            type={'number'}
+                                            min={1}
+                                            max={56}
+                                            fieldRegister={register('size', {
+                                                valueAsNumber: true,
+                                                value: paletteProps.size,
+                                                onChange: paletteChangeHandler
+                                            })}
+                                            error={errors.size?.message}
+                                            setRef={(ref: HTMLElement) => inputRefs.current.size = ref}
+                                        />
+                                    </Size>
+                                    <StepShift>
+                                        <InputField
+                                            icon={enableIcon ? option.icon : undefined}
+                                            showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
+                                            width={option.width}
+                                            labelWidth={option.labelWidth}
+                                            labelAlign={option.labelAlign}
+                                            label={'Shift degrees'}
+                                            labelColor={option.labelColor}
+                                            min={0}
+                                            max={360}
+                                            type={'number'}
+                                            fieldRegister={register('stepShift', {
+                                                valueAsNumber: true,
+                                                value: paletteProps.stepShift,
+                                                onChange: paletteChangeHandler
+                                            })}
+                                            error={errors.stepShift?.message}
+                                            setRef={(ref: HTMLElement) => inputRefs.current.stepShift = ref}
+                                        />
+                                    </StepShift>
+                                </GridContainer>
+                            </form>
+                            <Note className={'color-red font-size-small pt-0p5 mt-0p5'}>
+                                <span className={'text-align-center'}>* Above label's are background-colored for the purpose of this demo! Otherwise,
+                                filters <b>labelAlign</b> & <b>labelWidth</b> won't make much sense.</span>
+                            </Note>
+                        </div>
                     </Box>
-                    <div className={'display-inline-flex gap-0p1 flex-wrap'} style={{maxWidth: '647px', margin: '0 auto'}}>
+                    <div className={'display-inline-flex gap-0p1 flex-wrap'}
+                         style={{maxWidth: '647px', margin: '0 auto'}}>
                         {palette.map((color: HSLString, index: number) => <span
                             key={index}
                             className={'color-box transition-200 display-inline-flex justify-content-center align-items-center'}

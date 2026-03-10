@@ -29,21 +29,20 @@ const DemoCheckbox: FC = () => {
     return <div data-component={'checkbox-demo'} className={'width-100p'}>
         <Box
             label={'Checkbox Props'} boxClassName={'mb-1 with-fit-content pb-0'}>
-            <div className="grid cols-2 no-padding gap-0p5-1 pb-0p5">
-                <InputField labelWidth={95} label={'label'}
+            <div className="display-flex flex-wrap gap-0p5-1 pb-0p5">
+                <InputField label={'label'}
                             fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
-                <InputField labelWidth={95} label={'labelWidth'} type={'number'} width={60}
+                <InputField label={'labelWidth'} type={'number'} width={60}
                             fieldRegister={register('labelWidth', {
                                 value: props.labelWidth,
                                 onChange: propsChangeHandler
                             })}/>
-                <Checkbox labelWidth={95} label={'disabled'} labelPosition={'left'} name={'disabled'}
+                <Checkbox label={'disabled'} labelPosition={'left'} name={'disabled'}
                           checked={props.disabled} onChange={propsChangeHandler}/>
                 <Dropdown
                     options={positionOptions}
                     selected={props.labelPosition}
                     label={'labelPosition'}
-                    labelWidth={95}
                     onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
                 />
             </div>

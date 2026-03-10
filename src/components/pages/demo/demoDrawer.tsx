@@ -63,9 +63,8 @@ const DemoDrawer: FC = () => {
             style={{top: '50%', position: 'absolute'}}
         >
             <div className="pb-05">
-                <div className={'grid cols-2'}>
+                <div className={'display-flex flex-wrap gap-0p5-1'}>
                     <InputField
-                        labelWidth={126}
                         width={100}
                         label={'backgroundColor'}
                         fieldRegister={register('backgroundColor', {
@@ -73,7 +72,6 @@ const DemoDrawer: FC = () => {
                             onChange: propsChangeHandler
                         })}/>
                     <InputField
-                        labelWidth={126}
                         width={70}
                         label={'width'}
                         type={'number'}
@@ -82,14 +80,12 @@ const DemoDrawer: FC = () => {
                             onChange: propsChangeHandler
                         })}/>
                     <Dropdown
-                        labelWidth={126}
                         options={positionOptions}
                         selected={position}
                         label={'position'}
                         onChange={(value: DropdownObjectOptions) => dropDownChangeHandler(value)}
                     />
                     <InputField
-                        labelWidth={126}
                         width={70}
                         label={'height'}
                         type={'number'}
@@ -98,7 +94,7 @@ const DemoDrawer: FC = () => {
                             onChange: propsChangeHandler
                         })}/>
                 </div>
-                <p className={'flex-wrap display-flex align-items-center mb-0 color-magenta justify-content-center border-top pt-0p5'}>The Drawer's handle (<ReactIcon icon={RiArchiveDrawerFill}/>) should be centered on the&nbsp;<b>{props.position}</b>&nbsp;of your screen!</p>
+                <p className={'flex-wrap display-flex align-items-center mb-0 color-magenta justify-content-center border-top pt-0p5'}>The Drawer's handle <span className={'white-space-nowrap'}>(<ReactIcon className={'-mb-0p2'} icon={RiArchiveDrawerFill}/>)</span> should be centered on the&nbsp;<b>{props.position}</b>&nbsp;of your screen!</p>
                 <p className={'flex-wrap mt-0p3 font-size-small color-gray text-align-center'}>Once opened, you may close it by pressing the ESC key or clicking outside of it.</p>
             </div>
         </Box>

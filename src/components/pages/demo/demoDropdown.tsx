@@ -129,23 +129,7 @@ const DemoDropdown: FC = () => {
     return <div data-component={'checkbox-demo'} className={'width-100p'}>
         <Box label={'Dropdown Props'} boxClassName={'mb-1 with-fit-content pb-0'}>
             <div className="pb-0p5">
-                <div className="grid cols-2 no-padding gap-0p5-1 pb-0">
-                    <div>
-                        <div className={'display-flex align-items-center gap-0p5'}>
-                            <Checkbox onChange={optionChangeHandler} name={'asObj'} label={'options'}
-                                      checked={options.asObj}/>
-                            <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as DropdownObjectOptions[]</span>
-                        </div>
-                        <SyntaxHighlighter
-                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-                            showLineNumbers={true}
-                            language="js"
-                            customStyle={{padding: '0.5rem', margin: 0}}
-                            style={xonokai}
-                        >
-                            {objectOptionsCode}
-                        </SyntaxHighlighter>
-                    </div>
+                <div className="display-flex flex-wrap gap-0p5-1">
                     <div>
                         <div className={'display-flex align-items-center gap-0p5'}>
                             <Checkbox onChange={optionChangeHandler} name={'asStr'} label={'options'}
@@ -163,8 +147,24 @@ const DemoDropdown: FC = () => {
                             {stringOptionsCode}
                         </SyntaxHighlighter>
                     </div>
+                    <div>
+                        <div className={'display-flex align-items-center gap-0p5'}>
+                            <Checkbox onChange={optionChangeHandler} name={'asObj'} label={'options'}
+                                      checked={options.asObj}/>
+                            <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as DropdownObjectOptions[]</span>
+                        </div>
+                        <SyntaxHighlighter
+                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                            showLineNumbers={true}
+                            language="js"
+                            customStyle={{padding: '0.5rem', margin: 0}}
+                            style={xonokai}
+                        >
+                            {objectOptionsCode}
+                        </SyntaxHighlighter>
+                    </div>
                 </div>
-                <div className="display-flex gap-0p5-1 mt-0p5">
+                <div className="display-flex flex-wrap gap-0p5-1 mt-0p5">
                     <InputField label={'label'}
                                 fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
                     <div className={'display-inline-flex gap-0p1 align-items-center'}>

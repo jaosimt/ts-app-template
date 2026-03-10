@@ -47,34 +47,33 @@ const DemoLoading: FC = () => {
             className={'display-flex gap-0p3 flex-direction-column width-100p'}
             label={'Modal Props'}
         >
-            <div className="grid cols-3 no-padding gap-0p5-1 pb-0p5">
-                <InputField type={'number'} labelWidth={163} width={60} label={'borderWidth'}
+            <div className="display-flex justify-content-center flex-wrap gap-0p5-1 pb-0p5">
+                <InputField type={'number'} width={60} label={'borderWidth'}
                             fieldRegister={register('borderWidth', {
                                 value: props.borderWidth,
                                 onChange: propsChangeHandler
                             })}/>
-                <InputField labelWidth={163} label={'borderColor'}
+                <InputField label={'borderColor'}
                             fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
-                <InputField labelWidth={163} label={'backgroundColor'}
+                <InputField label={'backgroundColor'}
                             fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
                 <Dropdown
                     options={positionOptions}
                     selected={props.position}
                     label={'position'}
-                    labelWidth={163}
                     onChange={(value: string) => debDropdownChange('position', value)}
                 />
-                <InputField type={'number'} labelWidth={163} width={60} label={'size'}
+                <InputField type={'number'} width={60} label={'size'}
                             fieldRegister={register('size', {value: props.size, onChange: propsChangeHandler})}/>
-                <InputField labelWidth={163} label={'color'}
+                <InputField label={'color'}
                             fieldRegister={register('color', {onChange: propsChangeHandler})}/>
-                <InputField labelWidth={163} label={'topText'}
+                <InputField label={'topText'}
                             fieldRegister={register('topText', {onChange: propsChangeHandler})}/>
-                <InputField labelWidth={163} label={'bottomText'}
+                <InputField label={'bottomText'}
                             fieldRegister={register('bottomText', {onChange: propsChangeHandler})}/>
-                <Checkbox labelWidth={163} label={'padding'} labelPosition={'left'} name={'padding'}
+                <Checkbox label={'padding'} labelPosition={'left'} name={'padding'}
                           checked={props.padding} onChange={propsChangeHandler}/>
-                <Checkbox labelWidth={163} label={'boxShadow'} labelPosition={'left'} name={'boxShadow'}
+                <Checkbox label={'boxShadow'} labelPosition={'left'} name={'boxShadow'}
                           checked={props.boxShadow} onChange={propsChangeHandler}/>
 
             </div>

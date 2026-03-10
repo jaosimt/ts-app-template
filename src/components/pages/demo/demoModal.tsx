@@ -126,7 +126,7 @@ const DemoModal: FC = () => {
                 label={'Modal Props'}
             >
                 <div className="pb-0p5">
-                    <div className={'display-flex gap-0p5-1 flex-wrap'}>
+                    <div className={'display-flex justify-content-center gap-0p5-1 flex-wrap'}>
                         <Checkbox
                             label={'closeOnEscKey'}
                             name={'closeOnEscKey'}
@@ -165,6 +165,7 @@ const DemoModal: FC = () => {
                 </div>
             </Box>
             <Button
+                style={{margin: 'auto auto'}}
                 className={'font-size-large'}
                 align={'space-between'}
                 icon={FaRegWindowMaximize}

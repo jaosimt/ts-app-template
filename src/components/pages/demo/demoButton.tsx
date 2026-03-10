@@ -29,14 +29,14 @@ const DemoButton: FC = () => {
 
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
 
-    return <div data-component={'button-demo'} className={'width-100p'}>
+    return <div data-component={'button-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
         <Box
-            label={'Button Props'} boxClassName={'mb-1 with-fit-content pb-0'}>
-            <div className="grid cols-2 no-padding gap-0p5-1 pb-0p5">
-                <Checkbox labelWidth={95} label={'disabled'} labelPosition={'left'} name={'disabled'}
+            label={'Button Props'} boxClassName={'mb-1 pb-0'}>
+            <div className="display-flex flex-wrap gap-0p5-1 pb-0p5 justify-content-center">
+                <Checkbox label={'disabled'} labelPosition={'left'} name={'disabled'}
                           checked={props.disabled} onChange={propsChangeHandler}/>
                 <div className="display-flex gap-0p1 align-items-center">
-                    <Checkbox labelWidth={95} label={'icon'} labelPosition={'left'} name={'disabled'}
+                    <Checkbox label={'icon'} labelPosition={'left'} name={'disabled'}
                               checked={icon} onChange={(e: any) => setIcon(e.currentTarget.checked)}/>
                     <Tippy content={'react-icons'} placement="top" className={'custom-tippy'}>
                         <span className={'font-monospace font-size-small color-light-gray'}>(IoIosSave)</span>
@@ -46,24 +46,25 @@ const DemoButton: FC = () => {
                     options={alignOptions}
                     selected={props.align}
                     label={'align'}
-                    labelWidth={95}
                     onChange={(value: string) => dropDownChangeHandler('align', value)}
                 />
-                <InputField labelWidth={95} label={'width'} type={'number'} width={60}
+                <InputField label={'width'} type={'number'} width={60}
                             fieldRegister={register('width', {
                                 value: props.width,
                                 onChange: propsChangeHandler
                             })}/>
             </div>
         </Box>
-        <Box>
+        <Box label={'Button'} boxClassName={'mb-1'}>
             <Button
                 icon={icon ? IoIosSave : undefined}
                 disabled={props.disabled || modal}
                 align={props.align}
                 width={props.width}
                 onClick={() => setModal(true)}
-            >Save</Button>
+            >
+                Save
+            </Button>
         </Box>
         {
             modal && <Modal onClose={() => setModal(false)} closeOnEscKey={true} closeOnOutsideClick={true} showClose={true} title={'Hello, world!'}>
