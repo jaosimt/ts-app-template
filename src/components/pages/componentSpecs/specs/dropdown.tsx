@@ -86,8 +86,8 @@ const SpecsDropdown: FC<SelectedThemeProps> = ({selectedTheme}) => {
             width={'100%'}
             border={'label-only'}
             tight={true}
+            labelBackgroundColor={'#fff'}
             label={'Demo'}
-            labelSize={'large'}
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}

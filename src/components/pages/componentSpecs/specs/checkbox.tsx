@@ -56,8 +56,8 @@ const SpecsCheckbox: FC<SelectedThemeProps> = ({selectedTheme}) => {
         <Box
             border={'label-only'}
             tight={true}
+            labelBackgroundColor={'#fff'}
             label={'Demo'}
-            labelSize={'large'}
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
