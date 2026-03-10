@@ -32,10 +32,15 @@ const boxData: PropsListProps[] = [
         values: 'All CSS Colors',
         description: ['Sets the border color of the box']
     }, {
-        name: 'boxClassName',
+        name: 'className',
         types: 'string',
         values: '',
-        description: ['CSS classes to be spread to the box element']
+        description: ['CSS classes to be spread to the box container']
+    }, {
+        name: 'contentClassName',
+        types: 'string',
+        values: '',
+        description: ['CSS classes to be spread to the box\'s content container']
     }, {
         name: 'tight',
         types: 'boolean',
@@ -72,6 +77,12 @@ const boxData: PropsListProps[] = [
         types: 'number|`${number}${string}`',
         values: `e.g. 700|'700px'`,
         description: ['Sets the width of the box']
+    }, {
+        name: 'padding',
+        // eslint-disable-next-line
+        types: 'number|`${number}${string}`',
+        values: `e.g. 14|'14px'`,
+        description: ['Sets the padding of the box\'s content container']
     }, {
         name: 'onLabelClick',
         types: 'Function',
