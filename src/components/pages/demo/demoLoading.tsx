@@ -18,7 +18,7 @@ const DemoLoading: FC = () => {
         borderColor: undefined,
         backgroundColor: 'white',
         padding: true,
-        position: 'fixed',
+        position: 'absolute',
         size: 42,
         color: undefined,
         topText: undefined,

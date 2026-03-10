@@ -249,6 +249,8 @@
 .align-self-end { align-self : flex-end; }
 .align-self-start { align-self : flex-start; }
 .align-content-center { align-content : center; }
+.align-content-start { align-content : flex-start; }
+.align-items-top-i { align-items : flex-start !important; }
 .align-items-top { align-items : flex-start; }
 .align-items-center { align-items : center; }
 .align-items-end { align-items : flex-end }

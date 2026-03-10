@@ -85,7 +85,7 @@ const InputField: FC<InputFieldProps> = (props) => {
     }, [error]);
 
     return (
-        <div data-component={'input-field'} className={classNames(wrapperClassName, 'display-flex', 'align-items-center')}>
+        <div data-component={'input-field'} className={classNames('display-flex', 'align-items-center', wrapperClassName)}>
             {
                 (icon || label) && <label style={{width: parseCSSUnit(labelWidth as CSSUnit), justifyContent: labelAlign, color: labelColor}} htmlFor={idRef.current}
                                         className={'display-flex align-items-center gap-0p5'}>
