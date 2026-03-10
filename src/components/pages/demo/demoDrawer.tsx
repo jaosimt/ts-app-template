@@ -59,46 +59,48 @@ const DemoDrawer: FC = () => {
         <Box
             label={'Drawer Props'}
             width={525}
-            boxClassName={'display-inline-block width-100p'}
+            boxClassName={'display-inline-block width-100p pb-0'}
             style={{top: '50%', position: 'absolute'}}
         >
-            <div className={'grid cols-2'}>
-                <InputField
-                    labelWidth={126}
-                    width={100}
-                    label={'backgroundColor'}
-                    fieldRegister={register('backgroundColor', {
-                        value: props.backgroundColor,
-                        onChange: propsChangeHandler
-                    })}/>
-                <InputField
-                    labelWidth={126}
-                    width={70}
-                    label={'width'}
-                    type={'number'}
-                    fieldRegister={register('width', {
-                        value: props.width,
-                        onChange: propsChangeHandler
-                    })}/>
-                <Dropdown
-                    labelWidth={126}
-                    options={positionOptions}
-                    selected={position}
-                    label={'position'}
-                    onChange={(value: DropdownObjectOptions) => dropDownChangeHandler(value)}
-                />
-                <InputField
-                    labelWidth={126}
-                    width={70}
-                    label={'height'}
-                    type={'number'}
-                    fieldRegister={register('height', {
-                        value: props.height,
-                        onChange: propsChangeHandler
-                    })}/>
+            <div className="pb-05">
+                <div className={'grid cols-2'}>
+                    <InputField
+                        labelWidth={126}
+                        width={100}
+                        label={'backgroundColor'}
+                        fieldRegister={register('backgroundColor', {
+                            value: props.backgroundColor,
+                            onChange: propsChangeHandler
+                        })}/>
+                    <InputField
+                        labelWidth={126}
+                        width={70}
+                        label={'width'}
+                        type={'number'}
+                        fieldRegister={register('width', {
+                            value: props.width,
+                            onChange: propsChangeHandler
+                        })}/>
+                    <Dropdown
+                        labelWidth={126}
+                        options={positionOptions}
+                        selected={position}
+                        label={'position'}
+                        onChange={(value: DropdownObjectOptions) => dropDownChangeHandler(value)}
+                    />
+                    <InputField
+                        labelWidth={126}
+                        width={70}
+                        label={'height'}
+                        type={'number'}
+                        fieldRegister={register('height', {
+                            value: props.height,
+                            onChange: propsChangeHandler
+                        })}/>
+                </div>
+                <p className={'flex-wrap display-flex align-items-center mb-0 color-magenta justify-content-center border-top pt-0p5'}>The Drawer's handle (<ReactIcon icon={RiArchiveDrawerFill}/>) should be centered on the&nbsp;<b>{props.position}</b>&nbsp;of your screen!</p>
+                <p className={'flex-wrap mt-0p3 font-size-small color-gray text-align-center'}>Once opened, you may close it by pressing the ESC key or clicking outside of it.</p>
             </div>
-            <p className={'flex-wrap display-flex align-items-center mb-0 color-magenta justify-content-center border-top pt-0p5'}>The Drawer's handle (<ReactIcon icon={RiArchiveDrawerFill}/>) should be centered on the&nbsp;<b>{props.position}</b>&nbsp;of your screen!</p>
-            <p className={'flex-wrap mt-0p3 font-size-small color-gray text-align-center'}>Once opened, you may close it by pressing the ESC key or clicking outside of it.</p>
         </Box>
 
         <Drawer position={props.position} width={props.width} height={props.height} backgroundColor={props.backgroundColor}>

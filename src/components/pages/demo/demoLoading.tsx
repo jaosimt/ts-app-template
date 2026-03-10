@@ -43,11 +43,11 @@ const DemoLoading: FC = () => {
 
     return <div data-component={'loading-demo'} className={'display-inline-flex flex-direction-column height-100p gap-0p5 width-100p'}>
         <Box
-            boxClassName={'width-100p'}
+            boxClassName={'width-100p pb-0'}
             className={'display-flex gap-0p3 flex-direction-column width-100p'}
             label={'Modal Props'}
         >
-            <div className="grid cols-3 no-padding gap-0p5-1">
+            <div className="grid cols-3 no-padding gap-0p5-1 pb-0p5">
                 <InputField type={'number'} labelWidth={163} width={60} label={'borderWidth'}
                             fieldRegister={register('borderWidth', {
                                 value: props.borderWidth,

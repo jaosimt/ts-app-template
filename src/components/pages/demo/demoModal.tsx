@@ -122,45 +122,46 @@ const DemoModal: FC = () => {
         <div className="display-inline-flex flex-direction-column gap-1 width-inherit">
             <Box
                 className={'display-flex gap-0p3 flex-direction-column'}
+                boxClassName={'pb-0'}
                 label={'Modal Props'}
             >
-                <div className={'display-flex gap-0p5'}>
-                    <Checkbox
-                        label={'closeOnEscKey'}
-                        name={'closeOnEscKey'}
-                        checked={props.closeOnEscKey}
-                        onChange={changeHandler}
-                    />
-                    <Checkbox
-                        label={'closeOnOutsideClick'}
-                        name={'closeOnOutsideClick'}
-                        checked={props.closeOnOutsideClick}
-                        onChange={changeHandler}
-                    />
-                    <Checkbox
-                        label={'showClose'}
-                        name={'showClose'}
-                        checked={props.showClose}
-                        onChange={changeHandler}
-                    />
-                </div>
-                <div className={'display-inline-flex gap-0p5'}>
-                    <InputField
-                        label={'title'}
-                        fieldRegister={register('title', {
-                            value: props.title,
-                            onChange: changeHandler
-                        })}
-                    />
+                <div className="pb-0p5">
+                    <div className={'display-flex gap-0p5-1 flex-wrap'}>
+                        <Checkbox
+                            label={'closeOnEscKey'}
+                            name={'closeOnEscKey'}
+                            checked={props.closeOnEscKey}
+                            onChange={changeHandler}
+                        />
+                        <Checkbox
+                            label={'closeOnOutsideClick'}
+                            name={'closeOnOutsideClick'}
+                            checked={props.closeOnOutsideClick}
+                            onChange={changeHandler}
+                        />
+                        <Checkbox
+                            label={'showClose'}
+                            name={'showClose'}
+                            checked={props.showClose}
+                            onChange={changeHandler}
+                        />
+                        <InputField
+                            label={'title'}
+                            fieldRegister={register('title', {
+                                value: props.title,
+                                onChange: changeHandler
+                            })}
+                        />
 
-                    <InputField
-                        type={'number'}
-                        label={'width'}
-                        fieldRegister={register('width', {
-                            value: props.width,
-                            onChange: changeHandler
-                        })}
-                    />
+                        <InputField
+                            type={'number'}
+                            label={'width'}
+                            fieldRegister={register('width', {
+                                value: props.width,
+                                onChange: changeHandler
+                            })}
+                        />
+                    </div>
                 </div>
             </Box>
             <Button

@@ -28,8 +28,8 @@ const DemoCheckbox: FC = () => {
 
     return <div data-component={'checkbox-demo'} className={'width-100p'}>
         <Box
-            label={'Checkbox Props'} boxClassName={'mb-1 with-fit-content'}>
-            <div className="grid cols-2 no-padding gap-0p5-1">
+            label={'Checkbox Props'} boxClassName={'mb-1 with-fit-content pb-0'}>
+            <div className="grid cols-2 no-padding gap-0p5-1 pb-0p5">
                 <InputField labelWidth={95} label={'label'}
                             fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
                 <InputField labelWidth={95} label={'labelWidth'} type={'number'} width={60}

@@ -31,8 +31,8 @@ const DemoButton: FC = () => {
 
     return <div data-component={'button-demo'} className={'width-100p'}>
         <Box
-            label={'Button Props'} boxClassName={'mb-1 with-fit-content'}>
-            <div className="grid cols-2 no-padding gap-0p5-1">
+            label={'Button Props'} boxClassName={'mb-1 with-fit-content pb-0'}>
+            <div className="grid cols-2 no-padding gap-0p5-1 pb-0p5">
                 <Checkbox labelWidth={95} label={'disabled'} labelPosition={'left'} name={'disabled'}
                           checked={props.disabled} onChange={propsChangeHandler}/>
                 <div className="display-flex gap-0p1 align-items-center">

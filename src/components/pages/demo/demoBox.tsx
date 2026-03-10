@@ -44,8 +44,8 @@ const DemoBox:FC = () => {
 
     return <div data-component={'tab-demo'} className={'width-100p'}>
         <Box
-            label={'Box Props'} boxClassName={'mb-1 with-fit-content'}>
-            <div className="grid cols-3 no-padding gap-0p5-1 width-fit-content">
+            label={'Box Props'} boxClassName={'pb-0 mb-1 with-fit-content'}>
+            <div className="grid cols-3 no-padding gap-0p5-1 width-fit-content pb-0p5">
                 <InputField labelWidth={'10.5em'} label={'label'} fieldRegister={register('label', {onChange: propsChangeHandler})}/>
                 <InputField labelWidth={'10.5em'} disabled={!isString(props.label, true)} label={'labelColor'} fieldRegister={register('labelColor', {onChange: propsChangeHandler})}/>
                 <InputField labelWidth={'10.5em'} disabled={!isString(props.label, true)} label={'labelBackgroundColor'} fieldRegister={register('labelBackgroundColor', {onChange: propsChangeHandler})}/>

@@ -92,8 +92,8 @@ const DemoToast: FC = () => {
     }, [selectedTheme]);
 
     return <Container data-component={'toast-demo'}>
-        <Box boxClassName={'width-100p'}>
-            <div className="display-flex flex-direction-column gap-0p5">
+        <Box boxClassName={'width-100p pb-0'}>
+            <div className="display-flex flex-direction-column gap-0p5 pb-0p5">
                 <div className={'pb-0p5 display-flex flex-direction-column gap-0p5'}>
                     <InputField type={'textarea'} labelWidth={110} width={300} label={'Toast Message'}
                                 value={toastProp.message as string}

@@ -158,57 +158,60 @@ const DemoInputField: FC = () => {
             content: <>
                 <div className={'display-flex flex-direction-column gap-1 height-100p width-100p'}>
                     <Box
-                        boxClassName={'width-100p'}
+                        boxClassName={'width-100p pb-0'}
                         className={'display-flex gap-0p5'} label={'InputField Props'} borderRadius={7}
-                         backgroundColor={'#fff'} labelBackgroundColor={'#fff'}>
-                        <InputField
-                            type={'number'}
-                            label={'width'}
-                            width={70}
-                            min={50}
-                            fieldRegister={register('width', {
-                                valueAsNumber: true,
-                                value: option.width as number,
-                                onChange: optionChangeHandler
-                            })}
-                        />
-                        <InputField
-                            type={'number'}
-                            label={'labelWidth'}
-                            width={70}
-                            fieldRegister={register('labelWidth', {
-                                valueAsNumber: true,
-                                value: option.labelWidth as number,
-                                onChange: optionChangeHandler
-                            })}
-                        />
-                        <InputField
-                            label={'labelColor'}
-                            fieldRegister={register('labelColor', {
-                                value: option.labelColor,
-                                onChange: optionChangeHandler
-                            })}
-                        />
-                        <Dropdown
-                            options={['left', 'right', 'center', 'space-between']}
-                            selected={option.labelAlign}
-                            label={'labelAlign'}
-                            onChange={(value: string) => dropDownChangeHandler('labelAlign', value)}
-                        />
-
-                        <div className={'display-flex gap-0p3 align-items-center'}>
-                            <Button className={'white-space-nowrap'} onClick={() => setEnableIcon(!enableIcon)}>{enableIcon ? 'Disable' : 'Enable'} icon</Button>
-                            <Dropdown
-                                disabled={!enableIcon}
-                                options={icons}
-                                selected={icon}
-                                onChange={(value: any) => setIcon(value)}
+                         backgroundColor={'#fff'} labelBackgroundColor={'#fff'}
+                    >
+                        <div className={'display-flex gap-0p3 -mb-0p5 pb-0p5'}>
+                            <InputField
+                                type={'number'}
+                                label={'width'}
+                                width={70}
+                                min={50}
+                                fieldRegister={register('width', {
+                                    valueAsNumber: true,
+                                    value: option.width as number,
+                                    onChange: optionChangeHandler
+                                })}
                             />
+                            <InputField
+                                type={'number'}
+                                label={'labelWidth'}
+                                width={70}
+                                fieldRegister={register('labelWidth', {
+                                    valueAsNumber: true,
+                                    value: option.labelWidth as number,
+                                    onChange: optionChangeHandler
+                                })}
+                            />
+                            <InputField
+                                label={'labelColor'}
+                                fieldRegister={register('labelColor', {
+                                    value: option.labelColor,
+                                    onChange: optionChangeHandler
+                                })}
+                            />
+                            <Dropdown
+                                options={['left', 'right', 'center', 'space-between']}
+                                selected={option.labelAlign}
+                                label={'labelAlign'}
+                                onChange={(value: string) => dropDownChangeHandler('labelAlign', value)}
+                            />
+
+                            <div className={'display-flex gap-0p3 align-items-center'}>
+                                <Button className={'white-space-nowrap'} onClick={() => setEnableIcon(!enableIcon)}>{enableIcon ? 'Disable' : 'Enable'} icon</Button>
+                                <Dropdown
+                                    disabled={!enableIcon}
+                                    options={icons}
+                                    selected={icon}
+                                    onChange={(value: any) => setIcon(value)}
+                                />
+                            </div>
                         </div>
                     </Box>
-                    <Box boxClassName={'width-100p'} label={'InputFields'} borderRadius={7} backgroundColor={'#fff'} labelBackgroundColor={'#fff'}>
+                    <Box boxClassName={'width-100p pb-0'} label={'InputFields'} borderRadius={7} backgroundColor={'#fff'} labelBackgroundColor={'#fff'}>
                         <form noValidate>
-                            <GridContainer className="colored-demo-label">
+                            <GridContainer className="colored-demo-label pb-0p5">
                                 <Red>
                                     <InputField
                                         icon={enableIcon ? option.icon : undefined}
