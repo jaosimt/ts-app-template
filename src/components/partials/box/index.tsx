@@ -96,9 +96,10 @@ const Label = styled.h5<{
 `;
 
 const Scroller = styled.div<{
-    $padding?: CSSUnit
+    $padding?: CSSUnit,
+    $tight: boolean,
 }>`
-    margin: ${props => `${parseCSSUnit(props.$padding as CSSUnit)} ${parseCSSUnit(props.$padding as CSSUnit)} 0`};
+    margin: ${props => props.$tight ? 0 : `${parseCSSUnit(props.$padding as CSSUnit)} ${parseCSSUnit(props.$padding as CSSUnit)} 0`};
     overflow: auto;
 `;
 
@@ -135,7 +136,8 @@ const Content = styled.div<{
         }
         return null;
     })()};
-    width: fit-content;
+    min-width: fit-content;
+    width: 100%;
     padding-bottom: ${props => `${parseCSSUnit(props.$padding as CSSUnit)}`};
 
     > :first-child { margin-top: 0; }
@@ -227,7 +229,7 @@ const Box: FC<BoxProps> = (props) => {
             $tight={tight || false}
             $onLabelClick={onLabelClick}
         >{label}</Label>}
-        <Scroller data-name={'content-scroller'} $padding={padding}>
+        <Scroller data-name={'content-scroller'} $tight={tight || false} $padding={padding}>
             <Content
                 data-name={'content'}
                 className={contentClassName}

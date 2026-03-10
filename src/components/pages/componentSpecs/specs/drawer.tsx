@@ -41,6 +41,7 @@ const SpecsDrawer: FC<SelectedThemeProps> = ({selectedTheme}) => {
 
     return <>
         <Box
+            width={'100%'}
             border={'label-only'}
             tight={true}
             labelBackgroundColor={'#fff'}

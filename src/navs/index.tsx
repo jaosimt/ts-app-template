@@ -2,12 +2,15 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router';
 import './index.scss';
 import { useResizeObserver } from 'usehooks-ts';
+import { useOnScroll } from '../hooks';
 import { classNames, getRandStr } from '../utils';
 
 export const NavigationMain = () => {
     const navRef = useRef<HTMLElement>(null);
+
     const location = useLocation();
 
+    const [abVisible, setAbVisible] = useState(true);
     const [activeBar, setActiveBar] = useState({
         left: 0,
         width: 0,
@@ -17,8 +20,16 @@ export const NavigationMain = () => {
 
     useResizeObserver({
         ref: navRef as RefObject<HTMLElement>,
-        box:'content-box',
+        box: 'content-box',
         onResize: () => setActiveBar({...activeBar, transition: getRandStr(7)})
+    });
+
+    useOnScroll(() => {
+        if (!navRef.current) return;
+        console.log(navRef.current.getBoundingClientRect().top);
+
+        if (navRef.current.getBoundingClientRect().top < 0) setAbVisible(false);
+        else setAbVisible(true);
     });
 
     useEffect(() => {
@@ -39,19 +50,23 @@ export const NavigationMain = () => {
         justifyContent: 'flex-end'
     }}>
         <NavLink to={'/'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Home</NavLink>
-        <NavLink to={'/specs'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Component Specs</NavLink>
-        <NavLink to={'/demo'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Demo</NavLink>
+        <NavLink to={'/specs'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Component
+            Specs</NavLink>
+        <NavLink to={'/demo'}
+                 className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Demo</NavLink>
 
-        <div className={activeBar.transition} style={{
-            position: 'fixed',
-            left: `${activeBar.left}px`,
-            height: '2px',
-            width: `${activeBar.width}px`,
-            marginBottom: '-21px',
-            transition: 'all 300ms ease-in-out, opacity 1400ms ease-in-out',
-            backgroundColor: 'white',
-            opacity: `${activeBar.opacity}`
-        }}></div>
+        {abVisible &&
+            <div className={activeBar.transition} style={{
+                position: 'fixed',
+                left: `${activeBar.left}px`,
+                height: '2px',
+                width: `${activeBar.width}px`,
+                marginBottom: '-21px',
+                transition: 'all 300ms ease-in-out, opacity 1400ms ease-in-out',
+                backgroundColor: 'white',
+                opacity: `${activeBar.opacity}`
+            }}></div>
+        }
     </nav>;
 };
 
