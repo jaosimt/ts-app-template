@@ -29,6 +29,7 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Container = styled.section<{
+    $labelWidth: number,
     $backgroundColor?: CSSColors,
     $border: CSSUnit,
     $borderColor: CSSColors,
@@ -43,6 +44,7 @@ const Container = styled.section<{
     border-color: ${props => props.$borderColor};
     border-radius: ${props => props.$borderRadius};
     margin-top: ${props => props.$marginTop};
+    min-width: ${props => `calc(${props.$labelWidth}px + 1rem + (${props.$padding} * 2))`};
     width: ${props => props.$width ? `${parseCSSUnit(props.$width as CSSUnit)}` : 'fit-content'};
     position: relative;
 
@@ -77,6 +79,7 @@ const Label = styled.h5<{
     position: absolute;
     padding: 0.1rem 0.3rem;
     font-size: ${props => props.$fontSize};
+    white-space: nowrap;
     ${props => (() => {
         switch (props.$labelPosition) {
             case 'top-center':
@@ -213,6 +216,7 @@ const Box: FC<BoxProps> = (props) => {
         $marginTop={label && !tight ? '0.5rem' : 0}
         $padding={tight ? 0 : padding}
         $width={width}
+        $labelWidth={labelWidth}
     >
         {label && <Label
             ref={labelRef}
