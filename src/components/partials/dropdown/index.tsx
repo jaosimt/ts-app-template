@@ -80,6 +80,7 @@ const Wrapper = styled.div<{
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
+    height: inherit;
     ${props => props.$show && 'border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent;'}
     ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
 `;

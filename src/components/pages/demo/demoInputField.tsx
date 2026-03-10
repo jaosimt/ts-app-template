@@ -197,7 +197,7 @@ const DemoInputField: FC = () => {
                         />
 
                         <div className={'display-flex gap-0p3 align-items-center'}>
-                            <Button onClick={() => setEnableIcon(!enableIcon)}>{enableIcon ? 'Disable' : 'Enable'} icon</Button>
+                            <Button className={'white-space-nowrap'} onClick={() => setEnableIcon(!enableIcon)}>{enableIcon ? 'Disable' : 'Enable'} icon</Button>
                             <Dropdown
                                 disabled={!enableIcon}
                                 options={icons}

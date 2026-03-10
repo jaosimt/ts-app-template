@@ -17,6 +17,11 @@ const CheckboxContainer = styled.div<{disabled: boolean}>`
     display: inline-flex;
     align-items: center;
     overflow: hidden;
+    height: 33px;
+    
+    @media (max-width: 768px) {
+        height: 28px;
+    }
 `;
 
 const Icon = styled.svg`
@@ -69,6 +74,10 @@ const Label = styled.label<{disabled: boolean}>`
         > ${CheckboxContainer} {
             ${props => !props.disabled && 'opacity: 0.7'};   
         }
+    }
+
+    @media (max-width: 768px) {
+        font-size: small;
     }
 `;
 

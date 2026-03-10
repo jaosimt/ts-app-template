@@ -46,14 +46,14 @@ const DemoBox:FC = () => {
         <Box
             label={'Box Props'} boxClassName={'mb-1 with-fit-content'}>
             <div className="grid cols-3 no-padding gap-0p5-1 width-fit-content">
-                <InputField labelWidth={163} label={'label'} fieldRegister={register('label', {onChange: propsChangeHandler})}/>
-                <InputField labelWidth={163} disabled={!isString(props.label, true)} label={'labelColor'} fieldRegister={register('labelColor', {onChange: propsChangeHandler})}/>
-                <InputField labelWidth={163} disabled={!isString(props.label, true)} label={'labelBackgroundColor'} fieldRegister={register('labelBackgroundColor', {onChange: propsChangeHandler})}/>
+                <InputField labelWidth={'10.5em'} label={'label'} fieldRegister={register('label', {onChange: propsChangeHandler})}/>
+                <InputField labelWidth={'10.5em'} disabled={!isString(props.label, true)} label={'labelColor'} fieldRegister={register('labelColor', {onChange: propsChangeHandler})}/>
+                <InputField labelWidth={'10.5em'} disabled={!isString(props.label, true)} label={'labelBackgroundColor'} fieldRegister={register('labelBackgroundColor', {onChange: propsChangeHandler})}/>
                 <Dropdown
                     options={labelPositionOptions}
                     selected={props.labelPosition}
                     label={'labelPosition'}
-                    labelWidth={163}
+                    labelWidth={'10.5em'}
                     disabled={!isString(props.label, true)}
                     onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
                 />
@@ -61,28 +61,28 @@ const DemoBox:FC = () => {
                     options={labelSizeOptions}
                     selected={props.labelSize}
                     label={'labelSize'}
-                    labelWidth={163}
+                    labelWidth={'10.5em'}
                     disabled={!isString(props.label, true)}
                     onChange={(value: string) => dropDownChangeHandler('labelSize', value)}
                 />
 
                 <div className={'display-flex align-items-center'}>
-                    <Checkbox disabled={!isString(props.label, true)} labelWidth={163} label={'onLabelClick'} labelPosition={'left'} name={'onLabelClick'} checked={onLabelClick} onChange={(e: any) => setOnLabelClick(e.currentTarget.checked)}/>
+                    <Checkbox disabled={!isString(props.label, true)} labelWidth={'10.5em'} label={'onLabelClick'} labelPosition={'left'} name={'onLabelClick'} checked={onLabelClick} onChange={(e: any) => setOnLabelClick(e.currentTarget.checked)}/>
                     <span className={'font-size-small color-light-gray ml-0p5'}>{`() => alert('Hello, world!')`}</span>
                 </div>
                 <Dropdown
                     options={borderOptions}
                     selected={props.border as any}
                     label={'border'}
-                    labelWidth={163}
+                    labelWidth={'10.5em'}
                     disabled={!isString(props.label, true)}
                     onChange={(value: string) => dropDownChangeHandler('border', value)}
                 />
-                <InputField labelWidth={163} width={50} disabled={props.border === false} label={'borderRadius'} fieldRegister={register('borderRadius', {value: props.borderRadius, onChange: propsChangeHandler})}/>
-                <InputField labelWidth={163} disabled={props.border === false} label={'borderColor'} fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
-                <Checkbox labelWidth={163} label={'tight'} labelPosition={'left'} name={'tight'} checked={props.tight} onChange={propsChangeHandler}/>
-                <InputField labelWidth={163} label={'backgroundColor'} fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
-                <InputField labelWidth={163} width={50} label={'width'} fieldRegister={register('width', {onChange: propsChangeHandler})}/>
+                <InputField labelWidth={'10.5em'} width={50} disabled={props.border === false} label={'borderRadius'} fieldRegister={register('borderRadius', {value: props.borderRadius, onChange: propsChangeHandler})}/>
+                <InputField labelWidth={'10.5em'} disabled={props.border === false} label={'borderColor'} fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
+                <Checkbox labelWidth={'10.5em'} label={'tight'} labelPosition={'left'} name={'tight'} checked={props.tight} onChange={propsChangeHandler}/>
+                <InputField labelWidth={'10.5em'} label={'backgroundColor'} fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
+                <InputField labelWidth={'10.5em'} width={50} label={'width'} fieldRegister={register('width', {onChange: propsChangeHandler})}/>
             </div>
         </Box>
         <Box

@@ -31,8 +31,8 @@ button,
     align-items     : center;
     justify-content : center;
     padding         : 0.35rem 0.42rem;
-    min-width       : 32px;
-    min-height      : 32px;
+    min-width       : 33px;
+    min-height      : 33px;
     
     &.default {
       background-color : v.$buttonDefaultColor;
@@ -83,6 +83,31 @@ button,
     
     &:not(.default) {
       border-color : v.$buttonPrimaryDisabledTextColor;
+    }
+  }
+}
+
+@media (max-width : 768px) {
+  .btn-icon,
+  button,
+  [data-component="button"] {
+    font-size : small;
+    gap : 0.3rem;
+    
+    &.btn-icon {
+      padding : 1px;
+    }
+    
+    &:not(.btn-icon) {
+      padding    : 0.1rem 0.4rem;
+      min-width  : 28px;
+      min-height : 28px;
+      
+      &.default {}
+      
+      &:not(.default) {}
+      
+      &.no-padding {}
     }
   }
 }
