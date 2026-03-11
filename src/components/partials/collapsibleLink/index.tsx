@@ -11,7 +11,7 @@ const CollapsibleLink:FC<CollapsibleLinkProps> = ({linkText, details, detailsCla
     const [show, setShow] = useState(false);
 
     return <span className={'display-flex flex-direction-column trim'}>
-        <b className={'link font-size-x-small'} onClick={() => setShow(!show)}>{linkText}</b>
+        <b className={'link'} onClick={() => setShow(!show)}>{linkText}</b>
         {show && <pre className={classNames(detailsClassName, 'm-0 mt-0p1', 'overflow-auto', 'color-gray', 'font-size-x-small')}>{details}</pre>}
     </span>
 }

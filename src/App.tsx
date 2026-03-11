@@ -38,13 +38,15 @@ const App = ({error}: { error: any }) => {
     }, []);
 
     useEffect(() => {
-        if (isObject(error)) {
+        if (error) {
             toast({
-                id: `${error.code || 'unknown-error-code'}-${hashCode(error.message || error || 'unknown error')}`,
+                id: `${error?.code || 'unknown-error-code'}-${hashCode(error?.message || error || 'unknown error')}`,
                 message: error?.stack ? <span className={'display-flex flex-direction-column'}>
-                    <span>{error.message || error}</span>
-                    <CollapsibleLink detailsClassName={'background p-0p3 border-radius-0p2'} linkText={'Details'} details={error.stack}/>
-                </span> : error.message || error,
+                    <span>{error?.message || error}</span>
+                    <span className="font-size-smaller">
+                        <CollapsibleLink detailsClassName={'background p-0p3 border-radius-0p2'} linkText={'Details'} details={error?.stack}/>
+                    </span>
+                </span> : error?.message || error,
                 options: {type: 'error', omitIcon: false, theme: 'filled'}
             });
         }
