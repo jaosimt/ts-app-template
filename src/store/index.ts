@@ -5,6 +5,7 @@ import loggerMiddleware from 'redux-logger';
 import todo from '../components/pages/demo/slices/todo';
 import toast from '../components/partials/slices/toast';
 import counter from '../slices/counter';
+import error from '../slices/error';
 
 const persistConfig = {
     key: 'js',
@@ -16,7 +17,8 @@ const persistConfig = {
 const reducer = combineReducers({
     counter,
     todo,
-    toast
+    toast,
+    error
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
@@ -29,21 +31,24 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredPaths: [
                     'toast.0.message.$$typeof',
-                    'toast.1.message.$$typeof',
-                    'toast.2.message.$$typeof',
                     'toast.0.message.type',
-                    'toast.1.message.type',
-                    'toast.2.message.type',
                     'toast.0.message.props.children.0.$$typeof',
                     'toast.0.message.props.children.1.$$typeof',
+                    'toast.0.message.props.children.1.type',
+                    'toast.1.message.$$typeof',
+                    'toast.1.message.type',
                     'toast.1.message.props.children.0.$$typeof',
                     'toast.1.message.props.children.1.$$typeof',
+                    'toast.2.message.type',
+                    'toast.2.message.$$typeof',
                     'toast.2.message.props.children.0.$$typeof',
-                    'toast.2.message.props.children.1.$$typeof'
+                    'toast.2.message.props.children.1.$$typeof',
+                    'error.error'
                 ],
                 ignoredActions: [
                     'persist/PERSIST',
-                    'toast/addToast'
+                    'toast/addToast',
+                    'error/setError',
                 ]
             }
         }).concat(loggerMiddleware),

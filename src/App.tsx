@@ -1,18 +1,21 @@
 import { useEffect, useMemo, useState } from 'react';
 import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
+import { connect } from 'react-redux';
 import { Link, useLocation } from 'react-router';
 import { ReactIcon } from './components/partials';
+import CollapsibleLink from './components/partials/collapsibleLink';
 import Modal from './components/partials/modal';
-import ToastContainer from './components/partials/toast';
+import ToastContainer, { toast } from './components/partials/toast';
 import { targetUnicode } from './constants';
 import { NavigationMain } from './navs';
 import ContentRouter from './routes';
-import { classNames } from './utils';
+import { getError } from './slices/error';
+import { classNames, hashCode, isObject } from './utils';
 import './App.scss';
 import './styles/animations.scss';
 import './styles/tippy.scss';
 
-const App = () => {
+const App = ({error}: { error: any }) => {
     const [offline, setOffline] = useState(false);
 
     const setConnectionStatus = ({type}: { type: string }) => {
@@ -30,10 +33,25 @@ const App = () => {
             window.removeEventListener('online', setConnectionStatus);
             window.removeEventListener('offline', setConnectionStatus);
         };
+
+        // eslint-disable-next-line
     }, []);
 
+    useEffect(() => {
+        if (isObject(error)) {
+            toast({
+                id: `${error.code || 'unknown-error-code'}-${hashCode(error.message || error || 'unknown error')}`,
+                message: error?.stack ? <span className={'display-flex flex-direction-column'}>
+                    <span>{error.message || error}</span>
+                    <CollapsibleLink detailsClassName={'background p-0p3 border-radius-0p2'} linkText={'Details'} details={error.stack}/>
+                </span> : error.message || error,
+                options: {type: 'error', omitIcon: false, theme: 'filled'}
+            });
+        }
+    }, [error]);
+
     const MemoizedConnectionModal = useMemo(() => {
-        return offline && <Modal maxZIndex={true}>
+        return offline && <Modal closeOnEscKey={false} closeOnOutsideClick={false} showClose={false} maxZIndex={true}>
             <div className={'display-flex gap-1 align-content-center'} style={{width: '15rem'}}>
                 <ReactIcon size={42} className={'color-red'} icon={IoCloudOffline}/>
                 <div className={'display-flex flex-direction-column justify-content-center'}>
@@ -49,8 +67,10 @@ const App = () => {
     return (<>
         {MemoizedConnectionModal}
         <header className={'grid cols-2'}>
-            <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit'} to={{ pathname: "/"}}>
-                <ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')} icon={IoLogoReact}/>
+            <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit'}
+                  to={{pathname: '/'}}>
+                <ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')}
+                           icon={IoLogoReact}/>
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
             <NavigationMain/>
@@ -62,4 +82,7 @@ const App = () => {
     </>);
 };
 
-export default App;
+const mapStateToProps = (state: any) => ({
+    error: getError(state)
+});
+export default connect(mapStateToProps)(App);

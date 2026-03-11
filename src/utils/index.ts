@@ -119,15 +119,15 @@ export function ProperCase(input: string): string {
     return input
         .trim()
         // convert separators to spaces
-        .replace(/[_-]+/g, " ")
+        .replace(/[_-]+/g, ' ')
         // space between lower->upper: "nightOwl" -> "night Owl"
-        .replace(/([a-z\d])([A-Z])/g, "$1 $2")
+        .replace(/([a-z\d])([A-Z])/g, '$1 $2')
         // space between acronym->word: "JSONData" -> "JSON Data"
-        .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2")
+        .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
         .split(/\s+/)
         .filter(Boolean)
         .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
-        .join(" ");
+        .join(' ');
 }
 
 export function parseCSSUnit(cssUnit: CSSUnit): CSSUnit {
@@ -144,18 +144,18 @@ export const getFormData = (event: SubmitEvent<HTMLFormElement>): Record<string,
     return Object.fromEntries(formData.entries());
 };
 
-export const isDate = (arg:string) => {
+export const isDate = (arg: string) => {
     const _date = new Date(arg);
     return !isNaN(_date.valueOf());
 };
-export const isNumber = (arg:any, matchType?:boolean) =>
+export const isNumber = (arg: any, matchType?: boolean) =>
     matchType
         ? typeof arg === 'number' && Number.isFinite(arg)
         : Number.isFinite(parseFloat(arg)) &&
         String(arg)
             .replace(/,/g, '')
             ?.match(/^-*\d+(.\d+){0,1}$/) !== null;
-export const parseIfNumberIsString = (arg:string) => (isNumber(arg) ? +arg : arg);
+export const parseIfNumberIsString = (arg: string) => (isNumber(arg) ? +arg : arg);
 export const isBoolean = (arg: any) => typeof arg === 'boolean';
 export const isFunction = (arg: any) => typeof arg === 'function';
 export const isObject = (arg: any): boolean => typeof arg === 'object' && !isNull(arg);
@@ -168,7 +168,7 @@ export const isEmpty = (arg: any) => {
     else return isNullOrUndefined(arg);
 };
 
-export const snakeCase = (str:string, delimiter = '_', keepNumbers = false) => {
+export const snakeCase = (str: string, delimiter = '_', keepNumbers = false) => {
     if (!isString(str, true)) return str;
 
     str = str
@@ -188,7 +188,7 @@ export const snakeCase = (str:string, delimiter = '_', keepNumbers = false) => {
     return str.replace(/ +/gm, delimiter);
 };
 
-export const camelCase = (str:string) =>
+export const camelCase = (str: string) =>
     isString(str, true)
         ? str
             .replace(/[^a-z0-9]+/gim, ' ')
@@ -201,7 +201,7 @@ export const camelCase = (str:string) =>
             .replace(/ +(\w)/gm, (w, m) => m.toUpperCase())
         : str;
 
-export const deCamelCase = (str:string) =>
+export const deCamelCase = (str: string) =>
     isString(str, true)
         ? str
             .replace(/ *([A-Z])/gm, ' $1')
@@ -209,97 +209,97 @@ export const deCamelCase = (str:string) =>
             .trim()
         : str;
 
-export const capitalize = (str:string, properCase = true) =>
+export const capitalize = (str: string, properCase = true) =>
     isString(str, true)
         ? properCase
             ? str.toLowerCase().replace(/(^|\s)\S/g, m => m.toUpperCase())
             : str.toLowerCase().replace(/(^|[.!?]) *./gm, m => m.toUpperCase())
         : str;
 
-export const parseBooleanString = (value:string): boolean => value === 'true';
+export const parseBooleanString = (value: string): boolean => value === 'true';
 
 export const getTextWidth = (text: string, font: string): number => {
     let canvas = document.querySelector('#app-canvas') as HTMLCanvasElement;
-    const context = canvas.getContext("2d");
+    const context = canvas.getContext('2d');
     if (!context) return 0;
 
     context.font = font; // e.g., "16px Arial"
     const metrics = context.measureText(text);
     return metrics.width;
-}
+};
 
 export const Round = (number: number, precision: number = 0) => {
     const multiplier = Math.pow(10, precision || 0);
     return Math.round(number * multiplier) / multiplier;
-}
+};
 
 export const numberToWords = (num: number) => {
-    if (num > 999999999999999) return "Number exceeds maximum range!";
-    if (num === 0) return "Zero";
+    if (num > 999999999999999) return 'Number exceeds maximum range!';
+    if (num === 0) return 'Zero';
 
     let decimal = 0;
 
     if (!Number.isInteger(num)) {
-        const numSplit = String(num).split('.').map(n => +n)
+        const numSplit = String(num).split('.').map(n => +n);
         num = numSplit[0];
         decimal = numSplit[1];
     }
 
-    if (decimal > 999999999999999) return "Decimal digits exceeds maximum range!";
+    if (decimal > 999999999999999) return 'Decimal digits exceeds maximum range!';
 
-    const units = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
-    const teens = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
-    const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
-    const scales = ["", "Thousand", "Million", "Billion", "Trillion"];
-    const tenths = ["Tenths", "Hundredths", "Thousandths", "Ten-Thousandths", "Hundred-Thousandths", "Millionths", "Ten-Millionths", "Hundred-Millionths", "Billionths", "Ten-Billionths", "Hundred-Billionths", "Trillionth", "Ten-Trillionths", "Hundred-Trillionths"];
+    const units = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+    const teens = ['Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+    const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+    const scales = ['', 'Thousand', 'Million', 'Billion', 'Trillion'];
+    const tenths = ['Tenths', 'Hundredths', 'Thousandths', 'Ten-Thousandths', 'Hundred-Thousandths', 'Millionths', 'Ten-Millionths', 'Hundred-Millionths', 'Billionths', 'Ten-Billionths', 'Hundred-Billionths', 'Trillionth', 'Ten-Trillionths', 'Hundred-Trillionths'];
 
     const convertGroup = (n: number) => {
-        let res = "";
+        let res = '';
         if (n >= 100) {
-            res += units[Math.floor(n / 100)] + " Hundred ";
+            res += units[Math.floor(n / 100)] + ' Hundred ';
             n %= 100;
         }
         if (n >= 10 && n < 20) {
-            res += teens[n - 10] + " ";
+            res += teens[n - 10] + ' ';
         } else {
             if (n >= 20) {
-                res += tens[Math.floor(n / 10)] + " ";
+                res += tens[Math.floor(n / 10)] + ' ';
                 n %= 10;
             }
             if (n > 0) {
-                res += units[n] + " ";
+                res += units[n] + ' ';
             }
         }
         return res;
-    }
+    };
 
-    const convert = (n:number) => {
-        let result = "";
+    const convert = (n: number) => {
+        let result = '';
         let scaleIndex = 0;
 
         while (n > 0) {
             let group = n % 1000;
             if (group !== 0) {
-                result = convertGroup(group) + scales[scaleIndex] + " " + result;
+                result = convertGroup(group) + scales[scaleIndex] + ' ' + result;
             }
             n = Math.floor(n / 1000);
             scaleIndex++;
         }
 
         return result.trim();
-    }
+    };
 
     let result = convert(num);
     if (decimal > 0) result += `' And ' ${convert(decimal)} ${tenths[String(decimal).length]}`;
 
     return result;
-}
+};
 
 export const inStringNumberToWords = (str: string) => {
     const strSplit = str.split(' ');
     const result = strSplit.map(s => isNumber(s) ? numberToWords(+s) : s);
     return result.join(' ');
-}
+};
 
 export const getRandStr =
     (len: number, chars = 'poiuytrewqasdfghjklmnbvcxzMNBVCXZASDFGHJKLPOIUYTREWQ') => Array.from({length: len}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
@@ -321,7 +321,7 @@ export function LazyRetry<T extends ComponentType<any>>(
                 // Mark as refreshed and reload the page
                 window.sessionStorage.setItem('retry-lazy-refreshed', 'true');
                 window.location.reload();
-                return { default: () => null } as unknown as { default: T };
+                return {default: () => null} as unknown as { default: T };
             }
 
             // If already refreshed once and still failing, throw the error
@@ -368,7 +368,7 @@ export const hslToRgb = (h: number, s: number, l: number): [number, number, numb
     }
 
     return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
-}
+};
 
 export const hslToHex = (hsl: HSLString): string => {
     const match = hsl.match(/^hsl\((\d+), *(\d+)%, *(\d+)%\)$/);
@@ -390,7 +390,7 @@ export const hslToHex = (hsl: HSLString): string => {
     };
 
     return `#${f(0)}${f(8)}${f(4)}`;
-}
+};
 
 export const isElementOnTop = (element: HTMLElement): boolean => {
     if (!element) return false;
@@ -411,3 +411,11 @@ export const isElementOnTop = (element: HTMLElement): boolean => {
     // Compare the top element with the target element Z
     return topElement === element || element.contains(topElement);
 };
+
+export const hashCode = (s: any) =>
+    String(s)
+        .split('')
+        .reduce((a, b) => {
+            a = (a << 5) - a + b.charCodeAt(0);
+            return a & a;
+        }, 0);
