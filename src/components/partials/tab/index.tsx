@@ -69,6 +69,7 @@ const Tabs: FC<TabItemProps> = (props) => {
     });
 
     const [hoveredItem, setHoveredItem] = useState('');
+    const [minWidth, setMinWidth] = useState<CSSUnit|'auto'>('auto');
 
     const getTabItemsPos = () => {
         const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
@@ -99,6 +100,17 @@ const Tabs: FC<TabItemProps> = (props) => {
 
     useEffect(() => {
         sessionStorage.setItem('scroll-left', '0');
+
+        const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
+        let maxWidth = 50;
+        if (itemsWrapper) {
+            Array.from(itemsWrapper.querySelectorAll('.tab-item')).forEach(t => {
+                maxWidth = Math.max(maxWidth, t.getBoundingClientRect().width);
+            })
+        }
+
+        setMinWidth(maxWidth + 42);
+
         updateTabOverflow();
 
         return () => {
@@ -239,7 +251,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         return saved ? JSON.parse(saved) : [];
     }
 
-    return <div data-component={'tabs'} className={type} style={{width: width ? parseCSSUnit(width) : 'inherit'}}>
+    return <div data-component={'tabs'} className={type} style={{minWidth: parseCSSUnit(minWidth as CSSUnit), width: width ? parseCSSUnit(width) : 'inherit'}}>
         <div className={'tab-items'}>
             <div className={classNames('scroll-btn-left', tabOverflow.left && 'visible')}>
                 <ReactIcon size={21} icon={RxChevronLeft} onClick={scrollLeftHandler}/>

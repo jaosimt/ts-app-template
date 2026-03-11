@@ -1,10 +1,10 @@
-@use './styles/variables' as v;
+@use "./styles/variables" as v;
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior : smooth;
   
   body {
-    overflow-x : hidden;
+    overflow-x              : hidden;
     margin                  : 0;
     font-family             : -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -13,7 +13,8 @@ html {
     -moz-osx-font-smoothing : grayscale;
     
     background-color        : v.$backgroundColor;
-    color                   : v.$textColor
+    color                   : v.$textColor;
+    min-width               : 375px;
   }
 }
 

@@ -26,7 +26,6 @@ export const NavigationMain = () => {
 
     useOnScroll(() => {
         if (!navRef.current) return;
-        console.log(navRef.current.getBoundingClientRect().top);
 
         if (navRef.current.getBoundingClientRect().top < 0) setAbVisible(false);
         else setAbVisible(true);
