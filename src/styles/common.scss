@@ -217,6 +217,7 @@
 .gap-2p5 { gap : 2.5rem; }
 .gap-3 { gap : 3rem; }
 .gap-0p5-1 { gap: 0.5rem 1rem; }
+.gap-0p5-2 { gap: 0.5rem 2rem; }
 /**************************************************** GAP- */
 
 /* FONT- ***************************************************/
@@ -281,6 +282,7 @@
 /* HEIGHT ***************************************************/
 .height-100p { height : 100%; }
 .height-inherit { height : inherit; }
+.height-auto { height : auto; }
 /*************************************************** HEIGHT */
 
 /* LINE- ***************************************************/
@@ -305,6 +307,15 @@
 .cursor-default { cursor : default; }
 .cursor-not-allowed { cursor : not-allowed; }
 /************************************************* CURSOR- */
+
+/* OPACITY *************************************************/
+.opacity-0 { opacity : 0; }
+.opacity-0-15 { opacity : 0.15; }
+.opacity-0-25 { opacity : 0.25; }
+.opacity-0-5 { opacity : 0.5; }
+.opacity-0-75 { opacity : 0.75; }
+.opacity-1 { opacity : 1; }
+/************************************************* OPACITY */
 
 .hover-scale {
   transition : all 0.2s ease-in-out;

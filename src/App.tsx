@@ -10,7 +10,7 @@ import { targetUnicode } from './constants';
 import { NavigationMain } from './navs';
 import ContentRouter from './routes';
 import { getError } from './slices/error';
-import { classNames, hashCode, isObject } from './utils';
+import { classNames, hashCode } from './utils';
 import './App.scss';
 import './styles/animations.scss';
 import './styles/tippy.scss';
