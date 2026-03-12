@@ -38,7 +38,7 @@ const App = ({error, theme}: { error: any, theme: string }) => {
                 <p className={'mb-0'}>Please bear with us, Thank you very much!</p>
                 <p className={'m-0'}>&nbsp;</p>
             </>,
-            options: {theme: 'filled', type: 'info', omitIcon: false, duration: 7000}
+            options: {theme: 'filled', type: 'info', omitIcon: false, duration: 21000}
         });
         window.addEventListener('online', setConnectionStatus);
         window.addEventListener('offline', setConnectionStatus);
