@@ -74,31 +74,31 @@ const Demo: FC = () => {
 
     return <Container data-component={'demo'}>
         <Nav>
-            <NavLink to={'/demo/box'}
+            <NavLink to={`/demo/box`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Box</NavLink>
-            <NavLink to={'/demo/checkbox'}
+            <NavLink to={`/demo/checkbox`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Checkbox</NavLink>
-            <NavLink to={'/demo/button'}
+            <NavLink to={`/demo/button`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Button</NavLink>
-            <NavLink to={'/demo/drawer'}
+            <NavLink to={`/demo/drawer`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Drawer</NavLink>
-            <NavLink to={'/demo/dropdown'}
+            <NavLink to={`/demo/dropdown`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Dropdown</NavLink>
-            <NavLink to={'/demo/input-field'}
+            <NavLink to={`/demo/input-field`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>InputFields</NavLink>
-            <NavLink to={'/demo/loading'}
+            <NavLink to={`/demo/loading`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Loading</NavLink>
-            <NavLink to={'/demo/modal'}
+            <NavLink to={`/demo/modal`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Modal</NavLink>
-            <NavLink to={'/demo/tabs'}
+            <NavLink to={`/demo/tabs`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Tabs</NavLink>
-            <NavLink to={'/demo/toast'}
+            <NavLink to={`/demo/toast`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Toast</NavLink>
-            <NavLink to={'/demo/window-portal'}
+            <NavLink to={`/demo/window-portal`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>WindowPortal</NavLink>
         </Nav>
         <Wrapper>
-            {pathname === '/demo' && <UnderConstruction/>}
+            {pathname === `/demo` && <UnderConstruction/>}
             <InnerWrapper>
                 <Outlet/>
             </InnerWrapper>

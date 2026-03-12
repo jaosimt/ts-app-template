@@ -161,7 +161,7 @@ const SpecsInputField: FC<SelectedThemeProps> = ({selectedTheme}) => {
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
-            onLabelClick={() => navigate('/demo/input-field')}
+            onLabelClick={() => navigate(`/demo/input-field`)}
         >
             <SyntaxHighlighter
                 wrapLines={true}

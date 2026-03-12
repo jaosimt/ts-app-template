@@ -20,7 +20,7 @@ const NotFound = () => {
         <ReactIcon className={'color-magenta'} icon={TbError404} size={300}/>
         <h4 className="mt-0 text-align-center">The page you are looking for might have been removed, has its named
             changed or just temporarily unavailable.</h4>
-        <Button icon={IoHome} onClick={() => navigate('/')}>Go to Home</Button>
+        <Button icon={IoHome} onClick={() => navigate(`/`)}>Go to Home</Button>
     </NF>
 }
 

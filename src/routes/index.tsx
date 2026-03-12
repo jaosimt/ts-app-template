@@ -20,22 +20,22 @@ import Login from '../components/pages/login';
 const ContentRouter = () => {
     return <>
         <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/specs" element={<ComponentSpecs/>}/>
-            <Route path="/demo" element={<Demo/>}>
-                <Route index element={<Navigate to="/demo/box" replace />} />
-                <Route path="/demo/loading" element={<DemoLoading/>}/>
-                <Route path="/demo/box" element={<DemoBox/>}/>
-                <Route path="/demo/dropdown" element={<DemoDropdown/>}/>
-                <Route path="/demo/checkbox" element={<DemoCheckbox/>}/>
-                <Route path="/demo/button" element={<DemoButton/>}/>
-                <Route path="/demo/input-field" element={<DemoInputField/>}/>
-                <Route path="/demo/login" element={<Login/>}/>
-                <Route path="/demo/drawer" element={<DemoDrawer/>}/>
-                <Route path="/demo/modal" element={<DemoModal/>}/>
-                <Route path="/demo/toast" element={<DemoToast/>}/>
-                <Route path="/demo/tabs" element={<DemoTabs/>}/>
-                <Route path="/demo/window-portal" element={<DemoWindowPortal/>}/>
+            <Route path={`/`} element={<Home/>}/>
+            <Route path={`/specs`} element={<ComponentSpecs/>}/>
+            <Route path={`/demo`} element={<Demo/>}>
+                <Route index element={<Navigate to={`/demo/box`} replace />} />
+                <Route path={`/demo/loading`} element={<DemoLoading/>}/>
+                <Route path={`/demo/box`} element={<DemoBox/>}/>
+                <Route path={`/demo/dropdown`} element={<DemoDropdown/>}/>
+                <Route path={`/demo/checkbox`} element={<DemoCheckbox/>}/>
+                <Route path={`/demo/button`} element={<DemoButton/>}/>
+                <Route path={`/demo/input-field`} element={<DemoInputField/>}/>
+                <Route path={`/demo/login`} element={<Login/>}/>
+                <Route path={`/demo/drawer`} element={<DemoDrawer/>}/>
+                <Route path={`/demo/modal`} element={<DemoModal/>}/>
+                <Route path={`/demo/toast`} element={<DemoToast/>}/>
+                <Route path={`/demo/tabs`} element={<DemoTabs/>}/>
+                <Route path={`/demo/window-portal`} element={<DemoWindowPortal/>}/>
             </Route>
             <Route path="*" element={<NotFound/>}/>
         </Routes>
