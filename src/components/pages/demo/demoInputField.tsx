@@ -154,7 +154,7 @@ const DemoInputField: FC = () => {
             name: 'Color Palette Generator',
             content: <>
                 <div className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-                    <Box label={'InputField Props'} borderRadius={7} backgroundColor={'#fff'} labelBackgroundColor={'#fff'}
+                    <Box label={'InputField Props'} borderRadius={7}
                          className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
                         <InputField
                             type={'number'}
@@ -203,7 +203,7 @@ const DemoInputField: FC = () => {
                         </div>
                     </Box>
 
-                    <Box label={'InputFields'} borderRadius={7} backgroundColor={'#fff'} labelBackgroundColor={'#fff'}
+                    <Box label={'InputFields'} borderRadius={7}
                          className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
                         <div>
                             <form noValidate>
