@@ -111,3 +111,63 @@ button,
     }
   }
 }
+
+#react-ts-template {
+  &.dark {
+    .btn-icon,
+    button,
+    [data-component="button"] {
+      @include m.boxShadow(v.$buttonPrimaryBorderColor);
+
+      &.btn-icon {
+        color            : red;
+        background-color : red;
+        border-color     : v.$buttonPrimaryBorderColor;
+      }
+
+      &:not(.btn-icon) {
+        &.default {
+          background-color : red;
+          border-color     : v.$buttonDefaultBorderColor;
+          color            : v.$buttonDefaultTextColor;
+        }
+
+        &:not(.default) {
+          background-color : v.$buttonPrimaryColor;
+          border-color     : v.$buttonPrimaryBorderColor;
+          color            : v.$buttonPrimaryTextColor;
+        }
+      }
+
+      &:hover {
+        &.btn-icon {
+          color            : v.$buttonPrimaryHoverColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+
+        &:not(.btn-icon) {
+          &.default {
+            background-color : v.$buttonDefaultHoverColor;
+            color            : v.$buttonDefaultColor
+          }
+
+          &:not(.default) {
+            background-color : v.$buttonPrimaryHoverColor;
+          }
+        }
+      }
+
+      &[disabled],
+      &.disabled {
+        &.default {
+          border-color : v.$buttonDefaultDisabledTextColor;
+          color        : v.$buttonDefaultDisabledTextColor;;
+        }
+
+        &:not(.default) {
+          border-color : v.$buttonPrimaryDisabledTextColor;
+        }
+      }
+    }
+  }
+}

@@ -14,8 +14,13 @@ import { classNames, hashCode } from './utils';
 import './App.scss';
 import './styles/animations.scss';
 import './styles/tippy.scss';
+import {getTheme, toggleTheme} from "./slices/theme";
+import {MdOutlineInvertColors} from "react-icons/md";
+import {useAppDispatch} from "./hooks";
 
-const App = ({error}: { error: any }) => {
+const App = ({error, theme}: { error: any, theme: string }) => {
+    const dispatch = useAppDispatch();
+
     const [offline, setOffline] = useState(false);
 
     const setConnectionStatus = ({type}: { type: string }) => {
@@ -36,6 +41,11 @@ const App = ({error}: { error: any }) => {
 
         // eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        const root = document.getElementById('react-ts-template');
+        if (root) root.className = theme;
+    }, [theme]);
 
     useEffect(() => {
         if (error) {
@@ -66,6 +76,8 @@ const App = ({error}: { error: any }) => {
         </Modal>;
     }, [offline]);
 
+    console.log('theme:', theme);
+
     return (<>
         {MemoizedConnectionModal}
         <header className={'grid cols-2'}>
@@ -78,13 +90,16 @@ const App = ({error}: { error: any }) => {
             <NavigationMain/>
         </header>
         <main>{<ContentRouter/>}</main>
-        <footer>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.
+        <footer className={'display-flex justify-content-space-between align-items-center'}>
+            <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
+            <ReactIcon icon={MdOutlineInvertColors} size={28} onClick={()=> dispatch(toggleTheme())}/>
         </footer>
         <ToastContainer/>
     </>);
 };
 
 const mapStateToProps = (state: any) => ({
-    error: getError(state)
+    error: getError(state),
+    theme: getTheme(state),
 });
 export default connect(mapStateToProps)(App);

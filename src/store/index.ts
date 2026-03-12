@@ -5,20 +5,22 @@ import loggerMiddleware from 'redux-logger';
 import todo from '../components/pages/demo/slices/todo';
 import toast from '../components/partials/slices/toast';
 import counter from '../slices/counter';
+import theme from '../slices/theme';
 import error from '../slices/error';
 
 const persistConfig = {
     key: 'js',
     version: 1,
     storage,
-    whitelist: ['todo']
+    whitelist: ['todo', 'theme'],
 };
 
 const reducer = combineReducers({
     counter,
     todo,
     toast,
-    error
+    error,
+    theme,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
