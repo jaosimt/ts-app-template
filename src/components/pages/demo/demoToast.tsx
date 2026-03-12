@@ -10,6 +10,9 @@ import {
     TbBoxAlignTopRightFilled
 } from 'react-icons/tb';
 import styled from 'styled-components';
+import { ApplicationError } from '../../../class';
+import { useAppDispatch } from '../../../hooks';
+import { setError } from '../../../slices/error';
 import { isString } from '../../../utils';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
@@ -56,6 +59,8 @@ const Container = styled.div`
 `;
 
 const DemoToast: FC = () => {
+    const dispatch = useAppDispatch();
+
     const [selectedType, setSelectedType] = useState<DropdownObjectOptions>(toastTypes[3]);
     const [selectedPosition, setSelectedPosition] = useState<DropdownObjectOptions>(toastPosition[0]);
     const [selectedTheme, setSelectedTheme] = useState<DropdownObjectOptions>(toastTheme[1]);
@@ -119,9 +124,9 @@ const DemoToast: FC = () => {
                 <div className="display-flex flex-direction-column gap-0p5 justify-content-center">
                     <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => toast(toastProp)}>Show Toast</Button>
                 </div>
-                <div className={'text-align-center border-top pt-0p5'}>
+                <div className={'border-top pt-0p5 gap-0p5 display-flex justify-content-center'}>
                     <Button
-                        className={'align-self-center default'}
+                        className={'default'}
                         disabled={!isString(toastProp.message, true)}
                         onClick={
                             () => {
@@ -133,6 +138,7 @@ const DemoToast: FC = () => {
                                 });
                             }
                         }>Show Non-optioned Toast</Button>
+                    <Button className={'default'} onClick={() => dispatch(setError(new ApplicationError('Test Error')))}>Trigger a Test Error</Button>
                 </div>
             </div>
         </Box>
