@@ -2,7 +2,7 @@
 
 html {
   scroll-behavior : smooth;
-
+  
   body {
     overflow-x              : hidden;
     margin                  : 0;
@@ -10,18 +10,19 @@ html {
     -webkit-font-smoothing  : antialiased;
     -moz-osx-font-smoothing : grayscale;
     min-width               : 375px;
-
+    line-height             : 1.5;
+    
     &.dark {
       background-color : v.$backgroundColorDark;
       color            : v.$textColorDark;
     }
-
+    
     &.light {
       background-color : v.$backgroundColor;
       color            : v.$textColor;
     }
   }
-
+  
 }
 
 * {

@@ -82,6 +82,7 @@ const ProgressBar = styled.div<{
     left: 0;
     width: 100%;
     height: 0.2rem;
+    transition: width 300ms linear;
     background-color: ${props => {
         switch(props.$type) {
             case 'success':

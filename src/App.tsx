@@ -30,6 +30,16 @@ const App = ({error, theme}: { error: any, theme: string }) => {
     const {pathname} = useLocation();
 
     useEffect(() => {
+        toast({
+            id: 'under-construction-toast',
+            message: <>
+                <h4 className="m-0">Welcome to the React + TypeScript started app template!</h4>
+                <p className={'mb-0'}>However, this site is still <b>Under Construction!</b> So you might be seeing some undesirables especially the color combinations as the theme feature is currently on going!</p>
+                <p className={'mb-0'}>Please bear with us, Thank you very much!</p>
+                <p className={'m-0'}>&nbsp;</p>
+            </>,
+            options: {theme: 'filled', type: 'info', omitIcon: false, duration: 7000}
+        });
         window.addEventListener('online', setConnectionStatus);
         window.addEventListener('offline', setConnectionStatus);
 
