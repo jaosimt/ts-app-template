@@ -1,9 +1,10 @@
-import {FC, HTMLAttributes, memo, useEffect, useRef, useState} from 'react';
+import { FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import {CSSColors, CSSUnit} from '../../../types';
-import {getTextWidth, isString, parseCSSUnit} from '../../../utils';
-import {getTheme} from "../../../slices/theme";
-import {connect} from "react-redux";
+import { CSSColors, CSSUnit } from '../../../types';
+import { getTextWidth, parseCSSUnit } from '../../../utils';
+import { getTheme } from '../../../slices/theme';
+import { connect } from 'react-redux';
+import { $secondaryBackgroundColor, $secondaryBackgroundColorDark } from '../../../styles/variables';
 
 export type LabelPositionType =
     'top-left'
@@ -41,18 +42,18 @@ const Container = styled.section<{
     $padding: CSSUnit,
     $width?: CSSUnit
 }>`
-    background    : ${props => props.$backgroundColor || 'transparent'};
-    border-width  : ${props => props.$border};
-    border-style  : solid;
-    border-color  : ${props => props.$borderColor};
-    border-radius : ${props => props.$borderRadius};
-    margin-top    : ${props => props.$marginTop};
-    min-width     : ${props => `calc(${props.$labelWidth}px + 1rem + (${props.$padding} * 2))`};
-    width         : ${props => props.$width ? `${parseCSSUnit(props.$width as CSSUnit)}` : 'fit-content'};
-    position      : relative;
+    background: ${props => props.$backgroundColor || 'transparent'};
+    border-width: ${props => props.$border};
+    border-style: solid;
+    border-color: ${props => props.$borderColor};
+    border-radius: ${props => props.$borderRadius};
+    margin-top: ${props => props.$marginTop};
+    min-width: ${props => `calc(${props.$labelWidth}px + 1rem + (${props.$padding} * 2))`};
+    width: ${props => props.$width ? `${parseCSSUnit(props.$width as CSSUnit)}` : 'fit-content'};
+    position: relative;
 
-    @media (max-width : 768px) {
-        width : ${props => props.$width ? `${parseCSSUnit(props.$width as CSSUnit)}` : '100%'};
+    @media (max-width: 768px) {
+        width: ${props => props.$width ? `${parseCSSUnit(props.$width as CSSUnit)}` : '100%'};
     }
 `;
 
@@ -68,22 +69,21 @@ const Label = styled.h5<{
     $labelWidth: number,
     $tight: boolean,
     $onLabelClick?: Function,
-    $theme?: string
 }>`
-    cursor        : ${props => props.$onLabelClick ? 'pointer' : 'default'};
-    background    : ${props => isString(props.$background, true) ? props.$background : 'inherit'};
-    border-width  : ${props => props.$borderWidth};
-    border-style  : inherit;
-    border-color  : ${props => props.$borderColor};
-    border-radius : ${props => props.$borderRadius};
-    color         : ${props => props.$color};
-    line-height   : 1;
-    z-index       : 1;
-    margin        : ${props => props.$margin};
-    position      : absolute;
-    padding       : 0.1rem 0.3rem;
-    font-size     : ${props => props.$fontSize};
-    white-space   : nowrap;
+    cursor: ${props => props.$onLabelClick ? 'pointer' : 'default'};
+    background-color: ${props => props.$background};
+    border-width: ${props => props.$borderWidth};
+    border-style: inherit;
+    border-color: ${props => props.$borderColor};
+    border-radius: ${props => props.$borderRadius};
+    color: ${props => props.$color};
+    line-height: 1;
+    z-index: 1;
+    margin: ${props => props.$margin};
+    position: absolute;
+    padding: 0.1rem 0.3rem;
+    font-size: ${props => props.$fontSize};
+    white-space: nowrap;
     ${props => (() => {
         switch (props.$labelPosition) {
             case 'top-center':
@@ -106,8 +106,8 @@ const Scroller = styled.div<{
     $padding?: CSSUnit,
     $tight: boolean,
 }>`
-    margin   : ${props => props.$tight ? 0 : `${parseCSSUnit(props.$padding as CSSUnit)} ${parseCSSUnit(props.$padding as CSSUnit)} 0`};
-    overflow : auto;
+    margin: ${props => props.$tight ? 0 : `${parseCSSUnit(props.$padding as CSSUnit)} ${parseCSSUnit(props.$padding as CSSUnit)} 0`};
+    overflow: auto;
 `;
 
 const Content = styled.div<{
@@ -143,16 +143,16 @@ const Content = styled.div<{
         }
         return null;
     })()};
-    min-width      : fit-content;
-    width          : 100%;
-    padding-bottom : ${props => `${parseCSSUnit(props.$padding as CSSUnit)}`};
+    min-width: fit-content;
+    width: 100%;
+    padding-bottom: ${props => `${parseCSSUnit(props.$padding as CSSUnit)}`};
 
     > :first-child {
-        margin-top : 0;
+        margin-top: 0;
     }
 
     > :last-child {
-        margin-bottom : 0;
+        margin-bottom: 0;
     }
 `;
 
@@ -215,6 +215,8 @@ const Box: FC<BoxProps> = (props) => {
         onLabelClick && onLabelClick();
     };
 
+    console.log('labelBackgroundColor:', labelBackgroundColor);
+
     return <Container
         data-component={'box'}
         className={className}
@@ -230,7 +232,7 @@ const Box: FC<BoxProps> = (props) => {
         {label && <Label
             ref={labelRef}
             onClick={labelClinkHandler}
-            $background={labelBackgroundColor || 'inherit'}
+            $background={labelBackgroundColor || (theme === 'dark' ? $secondaryBackgroundColorDark : $secondaryBackgroundColor)}
             $borderWidth={border === 'label-only' ? '1px' : 'inherit'}
             $borderColor={borderColor}
             $borderRadius={titleBorderRadius}
@@ -241,7 +243,6 @@ const Box: FC<BoxProps> = (props) => {
             $labelWidth={labelWidth}
             $tight={tight || false}
             $onLabelClick={onLabelClick}
-            $theme={theme}
         >{label}</Label>}
         <Scroller data-name={'content-scroller'} $tight={tight || false} $padding={padding}>
             <Content

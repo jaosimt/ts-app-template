@@ -1,8 +1,11 @@
 export const $textColor = '#00cafd';
 export const $inputTextColor = '#252a2b';
 export const $errorColor = '#ff0000';
-export const $backgroundColor = '#ffffff';
-export const $secondaryBackgroundColor = '#F8F5FA';
+
+export const $backgroundColor = '#fefcff';
+export const $backgroundColorDark = '#292030';
+
+export const $secondaryBackgroundColor = '#f8f5fa';
 export const $secondaryBackgroundColorDark = '#332838';
 export const $backgroundColorSelected = 'rgba(214, 214, 214, 0.49)';
 
