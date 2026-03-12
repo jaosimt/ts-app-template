@@ -2,6 +2,7 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router';
 import './index.scss';
 import { useResizeObserver } from 'usehooks-ts';
+import { deploymentRoot } from '../App';
 import { useOnScroll } from '../hooks';
 import { classNames, getRandStr } from '../utils';
 
@@ -48,10 +49,10 @@ export const NavigationMain = () => {
         width: '100%',
         justifyContent: 'flex-end'
     }}>
-        <NavLink to={'/'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Home</NavLink>
-        <NavLink to={'/specs'} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Component
+        <NavLink to={`${deploymentRoot}/`} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Home</NavLink>
+        <NavLink to={`${deploymentRoot}/specs`} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Component
             Specs</NavLink>
-        <NavLink to={'/demo'}
+        <NavLink to={`${deploymentRoot}/demo`}
                  className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Demo</NavLink>
 
         {abVisible &&

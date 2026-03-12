@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router';
 import styled from 'styled-components';
+import { deploymentRoot } from '../../../App';
 import { classNames } from '../../../utils';
 import UnderConstruction from '../underConstruction';
 import { $headerBackgroundColor } from '../../../styles/variables';
@@ -74,31 +75,31 @@ const Demo: FC = () => {
 
     return <Container data-component={'demo'}>
         <Nav>
-            <NavLink to={'/demo/box'}
+            <NavLink to={`${deploymentRoot}/demo/box`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Box</NavLink>
-            <NavLink to={'/demo/checkbox'}
+            <NavLink to={`${deploymentRoot}/demo/checkbox`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Checkbox</NavLink>
-            <NavLink to={'/demo/button'}
+            <NavLink to={`${deploymentRoot}/demo/button`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Button</NavLink>
-            <NavLink to={'/demo/drawer'}
+            <NavLink to={`${deploymentRoot}/demo/drawer`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Drawer</NavLink>
-            <NavLink to={'/demo/dropdown'}
+            <NavLink to={`${deploymentRoot}/demo/dropdown`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Dropdown</NavLink>
-            <NavLink to={'/demo/input-field'}
+            <NavLink to={`${deploymentRoot}/demo/input-field`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>InputFields</NavLink>
-            <NavLink to={'/demo/loading'}
+            <NavLink to={`${deploymentRoot}/demo/loading`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Loading</NavLink>
-            <NavLink to={'/demo/modal'}
+            <NavLink to={`${deploymentRoot}/demo/modal`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Modal</NavLink>
-            <NavLink to={'/demo/tabs'}
+            <NavLink to={`${deploymentRoot}/demo/tabs`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Tabs</NavLink>
-            <NavLink to={'/demo/toast'}
+            <NavLink to={`${deploymentRoot}/demo/toast`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Toast</NavLink>
-            <NavLink to={'/demo/window-portal'}
+            <NavLink to={`${deploymentRoot}/demo/window-portal`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>WindowPortal</NavLink>
         </Nav>
         <Wrapper>
-            {pathname === '/demo' && <UnderConstruction/>}
+            {pathname === `${deploymentRoot}/demo` && <UnderConstruction/>}
             <InnerWrapper>
                 <Outlet/>
             </InnerWrapper>

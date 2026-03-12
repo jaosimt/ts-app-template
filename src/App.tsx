@@ -71,7 +71,7 @@ const App = ({error}: { error: any }) => {
         <header className={'grid cols-2'}>
             <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit'}
                   to={{pathname: `${deploymentRoot}/`}}>
-                <ReactIcon size={35} className={classNames(pathname === '/' && 'spin', 'font-weight-bold')}
+                <ReactIcon size={35} className={classNames(pathname === `${deploymentRoot}/` && 'spin', 'font-weight-bold')}
                            icon={IoLogoReact}/>
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
