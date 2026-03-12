@@ -9,10 +9,17 @@ html {
     font-family             : -apple-system, BlinkMacSystemFont, "Inter", "Roboto", "Open Sans", "Montserrat", "Poppins", "Segoe UI", "Oxygen",  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing  : antialiased;
     -moz-osx-font-smoothing : grayscale;
-    
-    background-color        : v.$backgroundColor;
-    color                   : v.$textColor;
     min-width               : 375px;
+    
+    &.dark {
+      background-color        : v.$backgroundColor;
+      color                   : red;
+    }
+    
+    &.light {
+      background-color        : v.$backgroundColor;
+      color                   : v.$textColor;
+    }
   }
 }
 

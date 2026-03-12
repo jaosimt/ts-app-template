@@ -43,8 +43,7 @@ const App = ({error, theme}: { error: any, theme: string }) => {
     }, []);
 
     useEffect(() => {
-        const root = document.getElementById('react-ts-template');
-        if (root) root.className = theme;
+        document.body.setAttribute('class', theme);
     }, [theme]);
 
     useEffect(() => {

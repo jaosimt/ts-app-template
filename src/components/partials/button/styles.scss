@@ -114,6 +114,8 @@ button,
 
 #react-ts-template {
   &.dark {
+    color: red;
+    
     .btn-icon,
     button,
     [data-component="button"] {
