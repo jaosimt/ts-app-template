@@ -1,6 +1,7 @@
+import Tippy from '@tippyjs/react';
 import { FC } from 'react';
 import { BiLogoTypescript } from 'react-icons/bi';
-import { FaReact } from 'react-icons/fa6';
+import { FaCircleInfo, FaReact } from 'react-icons/fa6';
 import { Link } from 'react-router';
 import styled from 'styled-components';
 import logo from '../../../images/logo.svg';
@@ -21,9 +22,9 @@ const WrappingDiv = styled.div`
     gap: 0.5rem 1rem;
     justify-content: space-between;
 
-    > :first-child { width: 50%; }
+    > :first-child { width: 70%; }
 
-    > :last-child { width: 40%; }
+    > :last-child { width: 30%; }
 
     & + div {justify-content: center}
 
@@ -44,9 +45,10 @@ const Home: FC = () => {
             </div>
             <WrappingDiv>
                 <div>
-                    <h3 className={'m-0 color-magenta'}>Apart from the libraries listed below, this app template also
-                        contains custom components that you might need:</h3>
-                    <pre className={'display-flex gap-0p5-1 flex-wrap font-weight-bold'}>
+                    <div>
+                        <h3 className={'m-0 color-magenta'}>In addition to the bundled libraries listed below, this app template also
+                            contains custom components that you might need:</h3>
+                        <pre className={'display-flex gap-0p3-1 flex-wrap font-weight-bold m-0'}>
                         <span>{`<Box/>`}</span>
                         <span>{`<Button/>`}</span>
                         <span>{`<Checkbox/>`}</span>
@@ -60,14 +62,75 @@ const Home: FC = () => {
                         <span>{`<WindowPortal/>`}</span>
                         <span>{`<CollapsibleLink/>`}</span>
                     </pre>
-                    <h5 className={'color-magenta'}>Checkout <Link className={'white-space-nowrap'}
-                                                                   to={{pathname: '/specs'}}>Component
-                        Specs</Link> and/or <Link className={'white-space-nowrap'}
-                                                  to={{pathname: '/demo'}}>Demo</Link> pages for more details.</h5>
-
+                        <h5 className={'color-gray font-weight-normal mt-0p2 mb-0'}>Checkout <Link className={'white-space-nowrap'}
+                                                                       to={{pathname: '/specs'}}>Component
+                            Specs</Link> and/or <Link className={'white-space-nowrap'}
+                                                      to={{pathname: '/demo'}}>Demo</Link> pages for more details.</h5>
+                    </div>
+                    <div className={'mt-1'}>
+                        <h4 className={'m-0 color-magenta'}>Furthermore, the following bundled libraries are setup more than enough i think 😎:</h4>
+                        <ul className={'m-0'}>
+                            <li>
+                                <b>redux</b>
+                                <ul className="m-0">
+                                    <li>
+                                        <Tippy className={'custom-tippy'} content={<span>Located in folder <b>src/store</b></span>}>
+                                            <span className={'cursor-pointer'}>store is already configured according to suggested settings! <ReactIcon className={'color-magenta font-size-small'} icon={FaCircleInfo} /></span>
+                                        </Tippy>
+                                    </li>
+                                    <li>
+                                        <Tippy className={'custom-tippy'} content={<span>Located in folder <b>src/slices</b></span>}>
+                                            <span className={'cursor-pointer'}>top level reducers <ReactIcon className={'color-magenta font-size-small'} icon={FaCircleInfo} /></span>
+                                        </Tippy>
+                                        <ul className="m-0">
+                                            <li>
+                                                <b><i>counter</i></b> - currently use in <Link className={'white-space-nowrap'} to={{pathname: '/demo/window-portal'}}>windowPortal demo</Link>
+                                                <ul className="m-0 font-size-small color-gray">
+                                                    <li>chances are you're not gonna be needing this and so of course feel free to remove it along with whatever is using it...  or not, this won't bother you anyway! 😁</li>
+                                                    <li>if you do, be sure   to remove 'counter' as well in combinedReducer's object in <pre className="m-0 display-inline">src/store/index.ts</pre></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <b><i>error</i></b> - use in TSAPI error handler
+                                                <ul className="m-0 font-size-small color-gray">
+                                                    <li><b>best not to remove</b> as this will be populated with any http error 400 and up from the axios interceptor service!</li>
+                                                    <li>once populated, a top level toast will handle the rest to inform you whatever the error is.</li>
+                                                    <li>however, if you do need to filter the kind of errors to handle, you can proceed and tweak the axios response interceptor in <pre className={'m-0 display-inline'}>lines 53 to 57 of the file src/services/TSAPI.ts</pre></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        component level reducers
+                                        <ul className="m-0">
+                                            <li>
+                                                <Tippy className={'custom-tippy'} content={<span>Located in folder <b>src/components/pages/demo/slices</b></span>}>
+                                                    <span className={'cursor-pointer'}><b><i>todo</i></b> - currently use in <pre className="m-0 display-inline">src/components/pages/demo/todo</pre> <ReactIcon className={'color-magenta font-size-small'} icon={FaCircleInfo} /></span>
+                                                </Tippy>
+                                                <ul className="m-0 font-size-small color-gray">
+                                                    <li>feel free to remove this including the demo component Todo</li>
+                                                    <li>in <pre className="m-0 display-inline">src/store/index.ts</pre>, make sure to remove 'todo' as well in the following:</li>
+                                                    <ul className="m-0">
+                                                        <li>combinedReducer's object</li>
+                                                        <li>persistConfig's whitelist</li>
+                                                    </ul>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <Tippy className={'custom-tippy'} content={<span>Located in folder <b>src/components/partials/slices</b></span>}>
+                                                    <span className={'cursor-pointer'}><b><i>toast</i></b> - use in <Link className={'white-space-nowrap'} to={{pathname: '/demo/toast'}}>toast</Link> and <b>MUST NOT be remove</b>! <ReactIcon className={'color-magenta font-size-small'} icon={FaCircleInfo} /></span>
+                                                </Tippy>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><b>axios</b></li>
+                        </ul>
+                    </div>
                 </div>
-                <div className={'display-flex justify-content-center align-items-center'}>
-                    <img className={'spin-700'} src={logo} alt=""/>
+                <div className={'display-flex justify-content-right align-items-center'}>
+                    <img width={'100%'} className={'spin-700'} src={logo} alt=""/>
                 </div>
             </WrappingDiv>
             <div className={'display-flex gap-0p5-2 flex-wrap'}>

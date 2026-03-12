@@ -51,8 +51,10 @@ axios.interceptors.response.use(
 
         if (
             error?.code === 'ERR_NETWORK' ||
-            [429, 500].includes(Number(error?.code)) ||
-            [429, 500].includes(error?.statusCode)
+            Number(error?.code) >= 400 ||
+            Number(error?.statusCode) >= 400
+            // [429, 500].includes(Number(error?.code)) ||
+            // [429, 500].includes(error?.statusCode)
         ) {
             store.dispatch(setError(error));
         }

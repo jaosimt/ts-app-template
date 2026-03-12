@@ -216,6 +216,7 @@
 .gap-2 { gap : 2rem; }
 .gap-2p5 { gap : 2.5rem; }
 .gap-3 { gap : 3rem; }
+.gap-0p3-1 { gap: 0.3rem 1rem; }
 .gap-0p5-1 { gap: 0.5rem 1rem; }
 .gap-0p5-2 { gap: 0.5rem 2rem; }
 /**************************************************** GAP- */
@@ -227,6 +228,7 @@
 .font-size-medium { font-size : medium; }
 .font-size-large { font-size : large; }
 .font-size-inherit { font-size : inherit; }
+.font-weight-normal { font-weight : normal; }
 .font-weight-bold { font-weight : bold; }
 .font-monospace { font-family: v.$codeFontFamily; }
 /*************************************************** FONT- */
@@ -240,6 +242,7 @@
 
 /* DISPLAY- ************************************************/
 .display-block { display : block; }
+.display-inline { display : inline; }
 .display-inline-block { display : inline-block; }
 .display-flex { display : flex; }
 .display-inline-flex { display : inline-flex; }
