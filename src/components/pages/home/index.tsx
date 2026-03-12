@@ -156,7 +156,22 @@ const Home: FC = () => {
                                     </li>
                                 </ul>
                             </li>
-                            <li><b>axios</b></li>
+                            <li>
+                                <Tippy className={'custom-tippy'} content={
+                                    <span>Located in folder <b>src/services</b></span>}>
+                                    <span className={'cursor-pointer'}><b>axios</b> <ReactIcon
+                                        className={'color-magenta font-size-small'}
+                                        icon={FaCircleInfo}/></span>
+                                </Tippy>
+                                <ul className="m-0">
+                                    <li>
+                                        <b><i>class User</i></b> - a sample api class showcasing the usage of the provided TSAPI, APIService and APIPromise handlers that works for me and might work for you <span className="white-space-nowrap">too 😎</span>
+                                        <ul className="m-0 font-size-small color-gray">
+                                            <li>of course, feel free to modify whatever suits your needs!</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
