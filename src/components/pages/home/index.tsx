@@ -46,8 +46,9 @@ const Home: FC = () => {
             <WrappingDiv>
                 <div>
                     <div>
-                        <h3 className={'m-0 color-magenta'}>In addition to the bundled libraries listed below, this app template also
-                            contains custom components that you might need:</h3>
+                        <h4 className={'m-0 color-magenta'}>In addition to the bundled libraries listed below, this app
+                            template also
+                            contains custom components that you might need:</h4>
                         <pre className={'display-flex gap-0p3-1 flex-wrap font-weight-bold m-0'}>
                         <span>{`<Box/>`}</span>
                         <span>{`<Button/>`}</span>
@@ -61,41 +62,61 @@ const Home: FC = () => {
                         <span>{`<Toast/>`}</span>
                         <span>{`<WindowPortal/>`}</span>
                         <span>{`<CollapsibleLink/>`}</span>
+                        <h4 className={'color-gray font-weight-normal m-0'}>
+                            Checkout <Link className={'white-space-nowrap'}
+                                           to={{pathname: '/specs'}}>ComponentSpecs</Link> and/or <Link
+                            className={'white-space-nowrap'} to={{pathname: '/demo'}}>Demo</Link> pages for more details.
+                        </h4>
                     </pre>
-                        <h5 className={'color-gray font-weight-normal mt-0p2 mb-0'}>Checkout <Link className={'white-space-nowrap'}
-                                                                       to={{pathname: '/specs'}}>Component
-                            Specs</Link> and/or <Link className={'white-space-nowrap'}
-                                                      to={{pathname: '/demo'}}>Demo</Link> pages for more details.</h5>
                     </div>
                     <div className={'mt-1'}>
-                        <h4 className={'m-0 color-magenta'}>Furthermore, the following bundled libraries are setup more than enough i think 😎:</h4>
+                        <h4 className={'m-0 color-magenta'}>Furthermore, the following bundled libraries are setup more
+                            than enough i think 😎:</h4>
                         <ul className={'m-0'}>
                             <li>
                                 <b>redux</b>
                                 <ul className="m-0">
                                     <li>
-                                        <Tippy className={'custom-tippy'} content={<span>Located in folder <b>src/store</b></span>}>
-                                            <span className={'cursor-pointer'}>store is already configured according to suggested settings! <ReactIcon className={'color-magenta font-size-small'} icon={FaCircleInfo} /></span>
+                                        <Tippy className={'custom-tippy'}
+                                               content={<span>Located in folder <b>src/store</b></span>}>
+                                            <span className={'cursor-pointer'}>store is already configured according to suggested settings! <ReactIcon
+                                                className={'color-magenta font-size-small'} icon={FaCircleInfo}/></span>
                                         </Tippy>
                                     </li>
                                     <li>
-                                        <Tippy className={'custom-tippy'} content={<span>Located in folder <b>src/slices</b></span>}>
-                                            <span className={'cursor-pointer'}>top level reducers <ReactIcon className={'color-magenta font-size-small'} icon={FaCircleInfo} /></span>
+                                        <Tippy className={'custom-tippy'}
+                                               content={<span>Located in folder <b>src/slices</b></span>}>
+                                            <span className={'cursor-pointer'}>top level reducers <ReactIcon
+                                                className={'color-magenta font-size-small'} icon={FaCircleInfo}/></span>
                                         </Tippy>
                                         <ul className="m-0">
                                             <li>
-                                                <b><i>counter</i></b> - currently use in <Link className={'white-space-nowrap'} to={{pathname: '/demo/window-portal'}}>windowPortal demo</Link>
+                                                <b><i>counter</i></b> - currently use in <Link
+                                                className={'white-space-nowrap'} to={{pathname: '/demo/window-portal'}}>windowPortal
+                                                demo</Link>
                                                 <ul className="m-0 font-size-small color-gray">
-                                                    <li>chances are you're not gonna be needing this and so of course feel free to remove it along with whatever is using it...  or not, this won't bother you anyway! 😁</li>
-                                                    <li>if you do, be sure   to remove 'counter' as well in combinedReducer's object in <pre className="m-0 display-inline">src/store/index.ts</pre></li>
+                                                    <li>chances are you're not gonna be needing this and so of course
+                                                        feel free to remove it along with whatever is using it... or
+                                                        not, this won't bother you anyway! 😁
+                                                    </li>
+                                                    <li>if you do, be sure to remove 'counter' as well in
+                                                        combinedReducer's object in <pre
+                                                            className="m-0 display-inline">src/store/index.ts</pre></li>
                                                 </ul>
                                             </li>
                                             <li>
                                                 <b><i>error</i></b> - use in TSAPI error handler
                                                 <ul className="m-0 font-size-small color-gray">
-                                                    <li><b>best not to remove</b> as this will be populated with any http error 400 and up from the axios interceptor service!</li>
-                                                    <li>once populated, a top level toast will handle the rest to inform you whatever the error is.</li>
-                                                    <li>however, if you do need to filter the kind of errors to handle, you can proceed and tweak the axios response interceptor in <pre className={'m-0 display-inline'}>lines 53 to 57 of the file src/services/TSAPI.ts</pre></li>
+                                                    <li><b>best not to remove</b> as this will be populated with any
+                                                        http error 400 and up from the axios interceptor service!
+                                                    </li>
+                                                    <li>once populated, a top level toast will handle the rest to inform
+                                                        you whatever the error is.
+                                                    </li>
+                                                    <li>however, if you do need to filter the kind of errors to handle,
+                                                        you can proceed and tweak the axios response interceptor in <pre
+                                                            className={'m-0 display-inline'}>lines 53 to 57 of the file src/services/TSAPI.ts</pre>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -104,12 +125,18 @@ const Home: FC = () => {
                                         component level reducers
                                         <ul className="m-0">
                                             <li>
-                                                <Tippy className={'custom-tippy'} content={<span>Located in folder <b>src/components/pages/demo/slices</b></span>}>
-                                                    <span className={'cursor-pointer'}><b><i>todo</i></b> - currently use in <pre className="m-0 display-inline">src/components/pages/demo/todo</pre> <ReactIcon className={'color-magenta font-size-small'} icon={FaCircleInfo} /></span>
+                                                <Tippy className={'custom-tippy'} content={
+                                                    <span>Located in folder <b>src/components/pages/demo/slices</b></span>}>
+                                                    <span className={'cursor-pointer'}><b><i>todo</i></b> - currently use in <pre
+                                                        className="m-0 display-inline">src/components/pages/demo/todo</pre> <ReactIcon
+                                                        className={'color-magenta font-size-small'}
+                                                        icon={FaCircleInfo}/></span>
                                                 </Tippy>
                                                 <ul className="m-0 font-size-small color-gray">
                                                     <li>feel free to remove this including the demo component Todo</li>
-                                                    <li>in <pre className="m-0 display-inline">src/store/index.ts</pre>, make sure to remove 'todo' as well in the following:</li>
+                                                    <li>in <pre className="m-0 display-inline">src/store/index.ts</pre>,
+                                                        make sure to remove 'todo' as well in the following:
+                                                    </li>
                                                     <ul className="m-0">
                                                         <li>combinedReducer's object</li>
                                                         <li>persistConfig's whitelist</li>
@@ -117,8 +144,14 @@ const Home: FC = () => {
                                                 </ul>
                                             </li>
                                             <li>
-                                                <Tippy className={'custom-tippy'} content={<span>Located in folder <b>src/components/partials/slices</b></span>}>
-                                                    <span className={'cursor-pointer'}><b><i>toast</i></b> - use in <Link className={'white-space-nowrap'} to={{pathname: '/demo/toast'}}>toast</Link> and <b>MUST NOT be remove</b>! <ReactIcon className={'color-magenta font-size-small'} icon={FaCircleInfo} /></span>
+                                                <Tippy className={'custom-tippy'} content={
+                                                    <span>Located in folder <b>src/components/partials/slices</b></span>}>
+                                                    <span
+                                                        className={'cursor-pointer'}><b><i>toast</i></b> - use in <Link
+                                                        className={'white-space-nowrap'}
+                                                        to={{pathname: '/demo/toast'}}>toast</Link> and <b>MUST NOT be remove</b>! <ReactIcon
+                                                        className={'color-magenta font-size-small'}
+                                                        icon={FaCircleInfo}/></span>
                                                 </Tippy>
                                             </li>
                                         </ul>
