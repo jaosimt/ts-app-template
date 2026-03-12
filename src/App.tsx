@@ -89,4 +89,4 @@ const mapStateToProps = (state: any) => ({
 });
 
 export default connect(mapStateToProps)(App);
-export const deploymentRoot = window.location.host.includes('github.io') ? '/ts-app-template/' : '';
+export const deploymentRoot = window.location.host.includes('github.io') ? '/ts-app-template' : '';
