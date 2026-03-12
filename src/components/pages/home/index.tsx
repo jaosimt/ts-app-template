@@ -113,7 +113,7 @@ const Home: FC = () => {
                                                     </li>
                                                     <li>however, if you do need to filter the kind of errors to handle,
                                                         you can proceed and tweak the axios response interceptor in <pre
-                                                            className={'m-0 display-inline'}>lines 53 to 57 of the file src/services/TSAPI.ts</pre>
+                                                            className={'m-0 display-inline'}>lines 52 to 56 of the file src/services/TSAPI.ts</pre>
                                                     </li>
                                                 </ul>
                                             </li>
