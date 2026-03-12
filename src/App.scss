@@ -4,7 +4,7 @@
   display        : flex;
   flex-direction : column;
   overflow       : hidden;
-  
+
   header {
     position         : sticky;
     height           : 60px;
@@ -13,31 +13,26 @@
     align-items      : center;
     justify-content  : space-between;
     padding          : 0.5rem;
-    background-color : v.$headerBackgroundColor;
     gap              : 0.5rem;
     z-index          : 3;
-    border-bottom    : 10px solid v.$backgroundColor;
-    
+
     > a {
       padding : 0;
     }
   }
-  
+
   main {
     position         : relative;
-    background-color : v.$backgroundColor;
     width            : 100vw;
     min-height       : calc(100vh - 100px);
     display          : flex;
     padding          : 2rem;
   }
-  
+
   footer {
-    border-top       : 10px solid v.$backgroundColor;
     position         : sticky;
     bottom           : 0;
     z-index          : 1;
-    background-color : v.$footerBackgroundColor;
     height           : 40px;
     display          : flex;
     align-items      : center;
@@ -47,18 +42,56 @@
   }
 }
 
+body {
+  &.dark {
+    #react-ts-template {
+      header {
+        background-color : v.$headerBackgroundColor;
+        border-bottom    : 10px solid v.$backgroundColorDark;
+
+        main {
+          //background-color : v.$backgroundColorDark;
+        }
+
+        footer {
+          border-top       : 10px solid v.$backgroundColorDark;
+          background-color : v.$footerBackgroundColor;
+        }
+      }
+    }
+
+    &.light {
+      #react-ts-template {
+        header {
+          background-color : v.$headerBackgroundColor;
+          border-bottom    : 10px solid v.$backgroundColor;
+
+          main {
+            //background-color : v.$backgroundColor;
+          }
+
+          footer {
+            border-top       : 10px solid v.$backgroundColor;
+            background-color : v.$footerBackgroundColor !important;
+          }
+        }
+      }
+    }
+  }
+}
+
 @media (max-width : 768px) {
   #react-ts-template {
     header > a {
       gap : 0.2rem;
-      
+
       > h3 {
         white-space : pre-wrap;
         width       : 114px;
         line-height : 0.9;
       }
     }
-    
+
     main {
       padding : 0 1rem 1rem;
     }
