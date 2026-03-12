@@ -26,7 +26,7 @@ const WrappingDiv = styled.div`
 
     > :last-child { width: 30%; }
 
-    & + div {justify-content: center}
+    & + div {justify-content: space-between}
 
     @media (max-width: 1000px) {
         flex-direction: column;
