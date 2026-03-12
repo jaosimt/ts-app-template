@@ -48,32 +48,32 @@ body {
       header {
         background-color : v.$headerBackgroundColor;
         border-bottom    : 10px solid v.$backgroundColorDark;
-
-        main {
-          //background-color : v.$backgroundColorDark;
-        }
-
-        footer {
-          border-top       : 10px solid v.$backgroundColorDark;
-          background-color : v.$footerBackgroundColor;
-        }
+      }
+      
+      main {
+        //background-color : v.$backgroundColorDark;
+      }
+      
+      footer {
+        border-top       : 10px solid v.$backgroundColorDark;
+        background-color : v.$footerBackgroundColor;
       }
     }
-
-    &.light {
-      #react-ts-template {
-        header {
-          background-color : v.$headerBackgroundColor;
-          border-bottom    : 10px solid v.$backgroundColor;
-
-          main {
-            //background-color : v.$backgroundColor;
-          }
-
-          footer {
-            border-top       : 10px solid v.$backgroundColor;
-            background-color : v.$footerBackgroundColor !important;
-          }
+  }
+  
+  &.light {
+    #react-ts-template {
+      header {
+        background-color : v.$headerBackgroundColor;
+        border-bottom    : 10px solid v.$backgroundColor;
+        
+        main {
+          //background-color : v.$backgroundColor;
+        }
+        
+        footer {
+          border-top       : 10px solid v.$backgroundColor;
+          background-color : v.$footerBackgroundColor !important;
         }
       }
     }
