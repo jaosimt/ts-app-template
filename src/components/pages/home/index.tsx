@@ -126,7 +126,7 @@ const Home: FC = () => {
                                             <li>
                                                 <Tippy className={'custom-tippy'} content={
                                                     <span>Located in folder <b>src/components/pages/demo/slices</b></span>}>
-                                                    <span className={'cursor-pointer'}><b><i>todo</i></b> - currently use in <pre
+                                                    <span className={'cursor-pointer'}><b><i><Link className={'white-space-nowrap'} to={{pathname: '/demo/drawer', search: 'showOnCreate=true'}}>todo</Link></i></b> - currently use in <pre
                                                         className="m-0 display-inline">src/components/pages/demo/todo</pre> <ReactIcon
                                                         className={'secondary-color font-size-small'}
                                                         icon={FaCircleInfo}/></span>

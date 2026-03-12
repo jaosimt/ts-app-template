@@ -35,7 +35,7 @@ const Container = styled.div`
     }
 `;
 
-const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({style, className, ...restProps}) => {
+const ToDo: FC<HTMLAttributes<HTMLDivElement>> = ({className, ...restProps}) => {
     const dispatch = useAppDispatch();
     const todos = useAppSelector(getTodos);
 

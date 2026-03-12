@@ -14,6 +14,7 @@ export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
     backgroundColor?: CSSColors;
     onOpen?: Function;
     onClose?: Function;
+    showOnCreate?: boolean;
 }
 
 const Container = styled.div<{
@@ -109,6 +110,7 @@ const Drawer: FC<DrawerProps> = (props) => {
         backgroundColor = '#913794c7',
         className,
         style,
+        showOnCreate = false,
         onOpen,
         onClose,
         ...restProps
@@ -118,7 +120,7 @@ const Drawer: FC<DrawerProps> = (props) => {
 
     const containerRef = useRef<any>(null);
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(showOnCreate);
     const [styles, setStyles] = useState<any>({});
 
     useOnClickOutside([containerRef], () => {

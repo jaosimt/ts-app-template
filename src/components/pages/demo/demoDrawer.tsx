@@ -7,12 +7,13 @@ import {
     MdAlignVerticalTop
 } from 'react-icons/md';
 import { RiArchiveDrawerFill } from 'react-icons/ri';
-import { createLink } from '../../../utils/ext';
+import { useSearchParams } from 'react-router';
 import { ReactIcon } from '../../partials';
 import Box from '../../partials/box';
 import Drawer, { DrawerProps } from '../../partials/drawer';
 import Dropdown, { DropdownObjectOptions } from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
+import Todo from './todo';
 
 const positionOptions = [
     {
@@ -36,13 +37,15 @@ const positionOptions = [
 
 const DemoDrawer: FC = () => {
     const {register} = useForm();
+    const [searchParams] = useSearchParams();
 
     const [position, setPosition] = useState<DropdownObjectOptions>(positionOptions[1]);
     const [props, setProps] = useState<DrawerProps>({
         position: position.value as any,
-        width: 300,
-        height: 300,
-        backgroundColor: undefined
+        width: 700,
+        height: 500,
+        backgroundColor: undefined,
+        showOnCreate: searchParams.get('showOnCreate') === 'true'
     });
 
     // eslint-disable-next-line
@@ -96,26 +99,27 @@ const DemoDrawer: FC = () => {
             </div>
         </Box>
 
-        <Drawer position={props.position} width={props.width} height={props.height} backgroundColor={props.backgroundColor}>
-            <p><b>The quick brown fox jumps over the lazy dog</b> is a famous English-language pangram—a sentence
-                containing every letter of the alphabet. Coined in the late 19th century, it is widely used for
-                touch-typing practice, testing keyboards, displaying fonts, and inWikipedia says, writing exercises.</p>
-            <p><b>Key Aspects of the Phrase:</b></p>
-            <ul>
-                <li><b>Purpose:</b> It is used to display all 26 letters of the English alphabet in a short, coherent
-                    sentence, making it ideal for testing typewriters, computer keyboards, and displaying font types.
-                </li>
-                <li><b>Origin:</b> The earliest known appearance of this phrase was in The Boston Journal in 1885, often
-                    used for writing practice.
-                </li>
-                <li><b>Content:</b> It is a 35-letter sentence that is frequently used, though sometimes misquoted
-                    (e.g."jumped" instead of "jumps").
-                </li>
-                <li><b>Alternatives:</b> Similar pangrams exist in other languages, such as "Voix ambiguë d'un cœur qui,
-                    au zéphyr, préfère les jattes de kiwis" in French,
-                    as {createLink('Reddit', '//www.reddit.com/r/AskEurope/comments/id8eor/what_is_the_the_quick_brown_fox_jumps_over_the/')} mentions.
-                </li>
-            </ul>
+        <Drawer showOnCreate={props.showOnCreate} position={props.position} width={props.width} height={props.height} backgroundColor={props.backgroundColor}>
+            {/*<p><b>The quick brown fox jumps over the lazy dog</b> is a famous English-language pangram—a sentence*/}
+            {/*    containing every letter of the alphabet. Coined in the late 19th century, it is widely used for*/}
+            {/*    touch-typing practice, testing keyboards, displaying fonts, and inWikipedia says, writing exercises.</p>*/}
+            {/*<p><b>Key Aspects of the Phrase:</b></p>*/}
+            {/*<ul>*/}
+            {/*    <li><b>Purpose:</b> It is used to display all 26 letters of the English alphabet in a short, coherent*/}
+            {/*        sentence, making it ideal for testing typewriters, computer keyboards, and displaying font types.*/}
+            {/*    </li>*/}
+            {/*    <li><b>Origin:</b> The earliest known appearance of this phrase was in The Boston Journal in 1885, often*/}
+            {/*        used for writing practice.*/}
+            {/*    </li>*/}
+            {/*    <li><b>Content:</b> It is a 35-letter sentence that is frequently used, though sometimes misquoted*/}
+            {/*        (e.g."jumped" instead of "jumps").*/}
+            {/*    </li>*/}
+            {/*    <li><b>Alternatives:</b> Similar pangrams exist in other languages, such as "Voix ambiguë d'un cœur qui,*/}
+            {/*        au zéphyr, préfère les jattes de kiwis" in French,*/}
+            {/*        as {createLink('Reddit', '//www.reddit.com/r/AskEurope/comments/id8eor/what_is_the_the_quick_brown_fox_jumps_over_the/')} mentions.*/}
+            {/*    </li>*/}
+            {/*</ul>*/}
+            <Todo className={'translate absolute-center'} style={{width: '95%'}} />
         </Drawer>
     </div>;
 };
