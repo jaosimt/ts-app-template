@@ -39,7 +39,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         contentPadding,
         type = 'plain',
         moveSelectedOnScroll = false,
-        activeItemColor = 'magenta',
+        activeItemColor = '#00cafd',
         minContentHeight,
         onTabChange,
         rememberActiveTab,

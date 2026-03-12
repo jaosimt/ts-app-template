@@ -1,0 +1,15 @@
+@use "../../../styles/variables" as v;
+
+body {
+  &.dark {
+    .secondary-color {
+      color : v.$secondaryColorDark;
+    }
+  }
+
+  &.light {
+    .secondary-color {
+      color : v.$secondaryColor;
+    }
+  }
+}

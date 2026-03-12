@@ -38,7 +38,7 @@ const Container = styled.section<{
     $padding: CSSUnit,
     $width?: CSSUnit
 }>`
-    background: ${props => props.$backgroundColor || 'white'};
+    background: ${props => props.$backgroundColor || 'transparent'};
     border-width: ${props => props.$border};
     border-style: solid;
     border-color: ${props => props.$borderColor};

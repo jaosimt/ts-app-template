@@ -1,75 +1,83 @@
-import { FC } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router';
+import {FC} from 'react';
+import {NavLink, Outlet, useLocation} from 'react-router';
 import styled from 'styled-components';
-import { classNames } from '../../../utils';
+import {classNames} from '../../../utils';
 import UnderConstruction from '../underConstruction';
-import { $headerBackgroundColor } from '../../../styles/variables';
+import {
+    $headerBackgroundColor,
+    $secondaryBackgroundColor,
+    $secondaryBackgroundColorDark
+} from '../../../styles/variables';
+import {connect} from "react-redux";
+import {getTheme} from "../../../slices/theme";
 
 const Container = styled.div`
-    display: flex;
-    gap: 1rem;
-    width: 100%;
-    min-height: 490px;
+    display    : flex;
+    gap        : 1rem;
+    width      : 100%;
+    min-height : 490px;
 
-    @media (max-width: 768px) {
-        flex-direction: column;
-        gap: 0.5rem;
+    @media (max-width : 768px) {
+        flex-direction : column;
+        gap            : 0.5rem;
     }
 `;
 
 // noinspection CssUnusedSymbol
 const Nav = styled.nav`
-    display: flex;
-    flex-direction: column;
+    display        : flex;
+    flex-direction : column;
 
     a {
-        border: 1px solid transparent;
-        color: inherit;
-        padding: 0.5rem;
+        border  : 1px solid transparent;
+        color   : inherit;
+        padding : 0.5rem;
 
         &.active {
-            border-bottom-color: ${$headerBackgroundColor};
-            border-top-color: ${$headerBackgroundColor};
-            color: ${$headerBackgroundColor};
+            border-bottom-color : ${$headerBackgroundColor};
+            border-top-color    : ${$headerBackgroundColor};
+            color               : ${$headerBackgroundColor};
         }
     }
 
-    @media (max-width: 768px) {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        font-size: small;
+    @media (max-width : 768px) {
+        display               : grid;
+        grid-template-columns : repeat(4, 1fr);
+        font-size             : small;
 
         a {
-            padding: 0.1rem;
-            text-align: center;
+            padding    : 0.1rem;
+            text-align : center;
         }
     }
 `;
 
-const Wrapper = styled.div`
-    padding: 1.5rem;
-    border-radius: 0.3rem;
-    position: relative;
-    width: calc(100% - 150px);
-    background-color: #f8f8f8;
+const Wrapper = styled.div<{
+    $theme:string;
+}>`
+    padding          : 1.5rem;
+    border-radius    : 0.3rem;
+    position         : relative;
+    width            : calc(100% - 150px);
+    background-color : ${props=>props.$theme === 'dark' ? $secondaryBackgroundColorDark : $secondaryBackgroundColor};
 
-    @media (max-width: 768px) {
-        width: 100%;
-        height: 100%;
-        padding: 0;
-        background-color: transparent;
+    @media (max-width : 768px) {
+        width            : 100%;
+        height           : 100%;
+        padding          : 0;
+        background-color : transparent;
     }
 `;
 
 const InnerWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    height: 100%;
+    display        : flex;
+    flex-direction : column;
+    gap            : 1rem;
+    width          : 100%;
+    height         : 100%;
 `;
 
-const Demo: FC = () => {
+const Demo: FC<{ theme: string }> = ({theme}) => {
     const {pathname} = useLocation();
 
     return <Container data-component={'demo'}>
@@ -97,7 +105,7 @@ const Demo: FC = () => {
             <NavLink to={`/demo/window-portal`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>WindowPortal</NavLink>
         </Nav>
-        <Wrapper>
+        <Wrapper $theme={theme}>
             {pathname === `/demo` && <UnderConstruction/>}
             <InnerWrapper>
                 <Outlet/>
@@ -106,4 +114,8 @@ const Demo: FC = () => {
     </Container>;
 };
 
-export default Demo;
+const mapStateToProps = (state: any) => ({
+    theme: getTheme(state),
+});
+
+export default connect(mapStateToProps)(Demo);

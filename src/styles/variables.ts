@@ -2,6 +2,8 @@ export const $textColor = '#00cafd';
 export const $inputTextColor = '#252a2b';
 export const $errorColor = '#ff0000';
 export const $backgroundColor = '#ffffff';
+export const $secondaryBackgroundColor = '#F8F5FA';
+export const $secondaryBackgroundColorDark = '#332838';
 export const $backgroundColorSelected = 'rgba(214, 214, 214, 0.49)';
 
 export const $buttonPrimaryColor = 'rgba(0, 123, 255, 0.63)';

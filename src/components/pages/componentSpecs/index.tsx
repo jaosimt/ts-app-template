@@ -192,7 +192,7 @@ const ComponentSpecs: FC = () => {
     };
 
     return <div data-component={'home'} className={'width-100p'}>
-        <Header className={'background'}>
+        <Header>
             <h1 className={'m-0 line-height-1'}>Custom Component Specs</h1>
             <Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme}
                       onChange={handleThemeChange}/>
@@ -214,7 +214,7 @@ export const propsList: FC<PropsListProps[]> = (props) => <Grid
     className={classNames(
         'line-height-normal',
         'font-monospace',
-        'color-black',
+        // 'color-black',
         'font-size-smaller',
     )}
 >
