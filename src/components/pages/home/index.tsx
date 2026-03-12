@@ -26,8 +26,6 @@ const WrappingDiv = styled.div`
 
     > :last-child { width: 30%; }
 
-    & + div {justify-content: space-between}
-
     @media (max-width: 1000px) {
         flex-direction: column;
         > :first-child,
@@ -50,24 +48,24 @@ const Home: FC = () => {
                             template also
                             contains custom components that you might need:</h4>
                         <pre className={'display-flex gap-0p3-1 flex-wrap font-weight-bold m-0'}>
-                        <span>{`<Box/>`}</span>
-                        <span>{`<Button/>`}</span>
-                        <span>{`<Checkbox/>`}</span>
-                        <span>{`<Drawer/>`}</span>
-                        <span>{`<Dropdown/>`}</span>
-                        <span>{`<InputFied/>`}</span>
-                        <span>{`<Loading/>`}</span>
-                        <span>{`<Modal/>`}</span>
-                        <span>{`<Tabs/>`}</span>
-                        <span>{`<Toast/>`}</span>
-                        <span>{`<WindowPortal/>`}</span>
-                        <span>{`<CollapsibleLink/>`}</span>
-                        <h4 className={'color-gray font-weight-normal m-0'}>
-                            Checkout <Link className={'white-space-nowrap'}
-                                           to={{pathname: '/specs'}}>ComponentSpecs</Link> and/or <Link
-                            className={'white-space-nowrap'} to={{pathname: '/demo'}}>Demo</Link> pages for more details.
-                        </h4>
-                    </pre>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/box'}}>{`<Box/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/button'}}>{`<Button/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/checkbox'}}>{`<Checkbox/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/drawer'}}>{`<Drawer/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/dropdown'}}>{`<Dropdown/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/input-field'}}>{`<InputFied/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/loading'}}>{`<Loading/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/modal'}}>{`<Modal/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/tabs'}}>{`<Tabs/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/toast'}}>{`<Toast/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/window-portal'}}>{`<WindowPortal/>`}</Link>
+                            <span>{`<CollapsibleLink/>`}</span>
+                            <h4 className={'color-gray font-weight-normal m-0'}>
+                                Checkout <Link className={'white-space-nowrap'}
+                                               to={{pathname: '/specs'}}>ComponentSpecs</Link> and/or <Link
+                                className={'white-space-nowrap'} to={{pathname: '/demo'}}>Demo</Link> pages for more details.
+                            </h4>
+                        </pre>
                     </div>
                     <div className={'mt-1'}>
                         <h4 className={'m-0 color-magenta'}>Furthermore, the following bundled libraries are setup more
@@ -79,7 +77,7 @@ const Home: FC = () => {
                                     <li>
                                         <Tippy className={'custom-tippy'}
                                                content={<span>Located in folder <b>src/store</b></span>}>
-                                            <span className={'cursor-pointer'}>store is already configured according to suggested settings! <ReactIcon
+                                            <span className={'cursor-pointer'}>store is already configured according to suggested settings <ReactIcon
                                                 className={'color-magenta font-size-small'} icon={FaCircleInfo}/></span>
                                         </Tippy>
                                     </li>
@@ -166,7 +164,7 @@ const Home: FC = () => {
                     <img width={'100%'} className={'spin-700'} src={logo} alt=""/>
                 </div>
             </WrappingDiv>
-            <div className={'display-flex gap-0p5-2 flex-wrap'}>
+            <div className={'display-flex gap-0p5-2 flex-wrap justify-content-space-between'}>
                 <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><ReactIcon size={35}
                                                                                                      icon={FaReact}/><h3
                     className={'m-0'}>React</h3></>, '//react.dev/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
