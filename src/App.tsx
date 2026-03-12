@@ -86,7 +86,7 @@ const App = ({error, theme}: { error: any, theme: string }) => {
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
             <NavigationMain/>
-            <ReactIcon icon={theme === 'dark' ? IoSunny : IoMoon} size={54} onClick={()=> dispatch(toggleTheme())}/>
+            <ReactIcon icon={theme === 'dark' ? IoMoon : IoSunny } size={54} onClick={()=> dispatch(toggleTheme())}/>
         </header>
         <main>{<ContentRouter/>}</main>
         <footer className={'display-flex justify-content-space-between align-items-center'}>
