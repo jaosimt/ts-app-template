@@ -74,8 +74,6 @@ const App = ({error, theme}: { error: any, theme: string }) => {
         </Modal>;
     }, [offline]);
 
-    console.log('theme:', theme);
-
     return (<>
         {MemoizedConnectionModal}
         <header className={'grid cols-2'}>

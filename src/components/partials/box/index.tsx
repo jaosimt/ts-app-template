@@ -215,8 +215,6 @@ const Box: FC<BoxProps> = (props) => {
         onLabelClick && onLabelClick();
     };
 
-    console.log('labelBackgroundColor:', labelBackgroundColor);
-
     return <Container
         data-component={'box'}
         className={className}
