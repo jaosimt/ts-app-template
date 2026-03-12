@@ -70,8 +70,8 @@ const App = ({error}: { error: any }) => {
         {MemoizedConnectionModal}
         <header className={'grid cols-2'}>
             <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit'}
-                  to={{pathname: `${deploymentRoot}/`}}>
-                <ReactIcon size={35} className={classNames(pathname === `${deploymentRoot}/` && 'spin', 'font-weight-bold')}
+                  to={{pathname: `/`}}>
+                <ReactIcon size={35} className={classNames(pathname === `/` && 'spin', 'font-weight-bold')}
                            icon={IoLogoReact}/>
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
@@ -89,4 +89,3 @@ const mapStateToProps = (state: any) => ({
 });
 
 export default connect(mapStateToProps)(App);
-export const deploymentRoot = window.location.host.includes('github.io') ? '/ts-app-template' : '';

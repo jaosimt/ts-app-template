@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { deploymentRoot } from '../../../../App';
 import { createLink } from '../../../../utils/ext';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
@@ -62,7 +61,7 @@ const SpecsPortalWindow: FC<SelectedThemeProps> = ({selectedTheme}) => {
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
-            onLabelClick={() => navigate(`${deploymentRoot}/demo/window-portal`)}
+            onLabelClick={() => navigate(`/demo/window-portal`)}
         >
             <SyntaxHighlighter
                 codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
