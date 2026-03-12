@@ -8,8 +8,7 @@ import { isString } from '../utils';
 axios.defaults.withCredentials = true; // A must for Backend's express-session
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.timeout = 30000;
-// axios.defaults.baseURL = 'https://pos.jaosimt.com:8181/api'; // Production
-axios.defaults.baseURL = 'http://127.0.0.1:7777/api'; // Local
+// axios.defaults.baseURL = 'http://127.0.0.1:7777/api'; // Local - Do replace with yours
 
 /*
  * --- Request interceptor ---
