@@ -46,7 +46,7 @@ body {
   &.dark {
     #react-ts-template {
       header {
-        background-color : v.$headerBackgroundColor;
+        background-color : v.$headerBackgroundColorDark;
         border-bottom    : 10px solid v.$backgroundColorDark;
       }
       
@@ -56,7 +56,7 @@ body {
       
       footer {
         border-top       : 10px solid v.$backgroundColorDark;
-        background-color : v.$footerBackgroundColor;
+        background-color : v.$footerBackgroundColorDark;
       }
     }
   }
@@ -66,15 +66,15 @@ body {
       header {
         background-color : v.$headerBackgroundColor;
         border-bottom    : 10px solid v.$backgroundColor;
-        
-        main {
-          //background-color : v.$backgroundColor;
-        }
-        
-        footer {
-          border-top       : 10px solid v.$backgroundColor;
-          background-color : v.$footerBackgroundColor !important;
-        }
+      }
+
+      main {
+        //background-color : v.$backgroundColor;
+      }
+
+      footer {
+        border-top       : 10px solid v.$backgroundColor;
+        background-color : v.$footerBackgroundColor !important;
       }
     }
   }

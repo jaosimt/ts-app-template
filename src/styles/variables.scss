@@ -1,9 +1,16 @@
-$textColor                      : #00cafd;
-$textColorDark                  : #ffffff;
+$textColor                      : #292030;
+$textColorDark                  : #FEFCFF;
+//$textColor                      : #00cafd;
+
+$secondaryColor             : #963999;
+$secondaryColorDark         : #CE7BD1;
+
 $inputTextColor                 : #252a2b;
 $errorColor                     : #ff0000;
-$backgroundColor                : #ffffff;
-$backgroundColorDark            : #000000;
+
+$backgroundColor                : #FEFCFF;
+$backgroundColorDark            : #292030;
+
 $backgroundColorSelected        : rgba(214, 214, 214, 0.49);
 
 $buttonPrimaryColor             : rgba(0, 123, 255, 0.63);
@@ -18,8 +25,10 @@ $buttonDefaultBorderColor       : #218cd9;
 $buttonDefaultHoverColor        : #218cd952;
 $buttonDefaultDisabledTextColor : #beb7b7;
 
-$headerBackgroundColor          : #963999;
-$footerBackgroundColor          : #963999;
+$headerBackgroundColor          : #CE7BD1;
+$footerBackgroundColor          : #CE7BD1;
+$headerBackgroundColorDark      : #963999;
+$footerBackgroundColorDark      : #963999;
 
 $scrollbarColor                 : #963999;
 $scrollbarBackgroundColor       : transparent;

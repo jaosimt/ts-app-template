@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
+import {IoCloudOffline, IoLogoReact, IoMoon, IoSunny} from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { Link, useLocation } from 'react-router';
 import { ReactIcon } from './components/partials';
@@ -15,7 +15,6 @@ import './App.scss';
 import './styles/animations.scss';
 import './styles/tippy.scss';
 import {getTheme, toggleTheme} from "./slices/theme";
-import {MdOutlineInvertColors} from "react-icons/md";
 import {useAppDispatch} from "./hooks";
 
 const App = ({error, theme}: { error: any, theme: string }) => {
@@ -87,11 +86,11 @@ const App = ({error, theme}: { error: any, theme: string }) => {
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
             <NavigationMain/>
+            <ReactIcon icon={theme === 'dark' ? IoSunny : IoMoon} size={54} onClick={()=> dispatch(toggleTheme())}/>
         </header>
         <main>{<ContentRouter/>}</main>
         <footer className={'display-flex justify-content-space-between align-items-center'}>
             <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
-            <ReactIcon icon={MdOutlineInvertColors} size={28} onClick={()=> dispatch(toggleTheme())}/>
         </footer>
         <ToastContainer/>
     </>);

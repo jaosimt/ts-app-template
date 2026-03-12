@@ -15,6 +15,7 @@ import styledComponents from '../../../images/styled-components.png';
 import reactRouter from '../../../images/react-router.png';
 import { createLink } from '../../../utils/ext';
 import { ReactIcon } from '../../partials';
+import './style.scss';
 
 const WrappingDiv = styled.div`
     display: flex;
@@ -38,13 +39,13 @@ const Home: FC = () => {
                 className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-auto'}>
         <div className={'display-flex flex-direction-column gap-1 justify-content-space-between'}>
             <div>
-                <h1 className={'m-0 color-magenta'}>Templates are good!</h1>
+                <h1 className={'m-0 secondary-color'}>Templates are good!</h1>
                 <h5 className={'m-0'}>Why start from scratch? Templates will save a good amount of your time!</h5>
             </div>
             <WrappingDiv>
                 <div>
                     <div>
-                        <h4 className={'m-0 color-magenta'}>In addition to the bundled libraries listed below, this app
+                        <h4 className={'m-0 secondary-color'}>In addition to the bundled libraries listed below, this app
                             template also
                             contains custom components that you might need:</h4>
                         <pre className={'display-flex gap-0p3-1 flex-wrap font-weight-bold m-0'}>
@@ -68,7 +69,7 @@ const Home: FC = () => {
                         </pre>
                     </div>
                     <div className={'mt-1'}>
-                        <h4 className={'m-0 color-magenta'}>Furthermore, the following bundled libraries are setup more
+                        <h4 className={'m-0 secondary-color'}>Furthermore, the following bundled libraries are setup more
                             than enough i think 😎:</h4>
                         <ul className={'m-0'}>
                             <li>
@@ -78,14 +79,14 @@ const Home: FC = () => {
                                         <Tippy className={'custom-tippy'}
                                                content={<span>Located in folder <b>src/store</b></span>}>
                                             <span className={'cursor-pointer'}>store is already configured according to suggested settings <ReactIcon
-                                                className={'color-magenta font-size-small'} icon={FaCircleInfo}/></span>
+                                                className={'secondary-color font-size-small'} icon={FaCircleInfo}/></span>
                                         </Tippy>
                                     </li>
                                     <li>
                                         <Tippy className={'custom-tippy'}
                                                content={<span>Located in folder <b>src/slices</b></span>}>
                                             <span className={'cursor-pointer'}>top level reducers <ReactIcon
-                                                className={'color-magenta font-size-small'} icon={FaCircleInfo}/></span>
+                                                className={'secondary-color font-size-small'} icon={FaCircleInfo}/></span>
                                         </Tippy>
                                         <ul className="m-0">
                                             <li>
@@ -127,7 +128,7 @@ const Home: FC = () => {
                                                     <span>Located in folder <b>src/components/pages/demo/slices</b></span>}>
                                                     <span className={'cursor-pointer'}><b><i>todo</i></b> - currently use in <pre
                                                         className="m-0 display-inline">src/components/pages/demo/todo</pre> <ReactIcon
-                                                        className={'color-magenta font-size-small'}
+                                                        className={'secondary-color font-size-small'}
                                                         icon={FaCircleInfo}/></span>
                                                 </Tippy>
                                                 <ul className="m-0 font-size-small color-gray">
@@ -148,7 +149,7 @@ const Home: FC = () => {
                                                         className={'cursor-pointer'}><b><i>toast</i></b> - use in <Link
                                                         className={'white-space-nowrap'}
                                                         to={{pathname: `/demo/toast`}}>toast</Link> and <b>MUST NOT be remove</b>! <ReactIcon
-                                                        className={'color-magenta font-size-small'}
+                                                        className={'secondary-color font-size-small'}
                                                         icon={FaCircleInfo}/></span>
                                                 </Tippy>
                                             </li>
@@ -160,7 +161,7 @@ const Home: FC = () => {
                                 <Tippy className={'custom-tippy'} content={
                                     <span>Located in folder <b>src/services</b></span>}>
                                     <span className={'cursor-pointer'}><b>axios</b> <ReactIcon
-                                        className={'color-magenta font-size-small'}
+                                        className={'secondary-color font-size-small'}
                                         icon={FaCircleInfo}/></span>
                                 </Tippy>
                                 <ul className="m-0">

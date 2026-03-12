@@ -62,7 +62,7 @@ export const NavigationMain = () => {
                 width: `${activeBar.width}px`,
                 marginBottom: '-21px',
                 transition: 'all 300ms ease-in-out, opacity 1400ms ease-in-out',
-                backgroundColor: 'white',
+                backgroundColor: '#00cafd',
                 opacity: `${activeBar.opacity}`
             }}></div>
         }
