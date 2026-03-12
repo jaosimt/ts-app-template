@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { deploymentRoot } from '../../../../App';
 import { CssColors } from '../../../../utils/ext';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
@@ -81,7 +82,7 @@ const SpecsLoading: FC<SelectedThemeProps> = ({selectedTheme}) => {
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
-            onLabelClick={() => navigate('/demo/loading')}
+            onLabelClick={() => navigate(`${deploymentRoot}/demo/loading`)}
         >
             <SyntaxHighlighter
                 codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}

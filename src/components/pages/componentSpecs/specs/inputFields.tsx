@@ -4,6 +4,7 @@ import { FaCircleInfo } from 'react-icons/fa6';
 import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import './styles.scss';
+import { deploymentRoot } from '../../../../App';
 import { createLink, CssColors } from '../../../../utils/ext';
 import { ReactIcon } from '../../../partials';
 import Box from '../../../partials/box';
@@ -161,7 +162,7 @@ const SpecsInputField: FC<SelectedThemeProps> = ({selectedTheme}) => {
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
-            onLabelClick={() => navigate('/demo/input-field')}
+            onLabelClick={() => navigate(`${deploymentRoot}/demo/input-field`)}
         >
             <SyntaxHighlighter
                 wrapLines={true}

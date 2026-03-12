@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { deploymentRoot } from '../../../../App';
 import { createLink, CssColors } from '../../../../utils/ext';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
@@ -55,7 +56,8 @@ const tabData: PropsListProps[] = [
         types: 'string',
         values: 'boxed-content|boxed|plain',
         description: [
-            <p className={'m-0'}>Set the type of <Link to={{ pathname: "/demo/tabs"}}>&lt;Tab /&gt;</Link> to be rendered.</p>,
+            // eslint-disable-next-line no-template-curly-in-string
+            <p className={'m-0'}>Set the type of <Link to={{ pathname: '${deploymentRoot}/demo/tabs'}}>&lt;Tab /&gt;</Link> to be rendered.</p>,
             <>
                 <ul className={'m-0'}>
                     <li><i>boxed</i> - Renders Tab with border and background colored tab items.</li>
@@ -90,7 +92,7 @@ const SpecsTab: FC<SelectedThemeProps> = ({selectedTheme}) => {
             labelPosition={'top-right'}
             backgroundColor={'transparent'}
             labelColor={'magenta'}
-            onLabelClick={() => navigate('/demo/tabs')}
+            onLabelClick={() => navigate(`${deploymentRoot}/demo/tabs`)}
         >
             <SyntaxHighlighter
                 codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}

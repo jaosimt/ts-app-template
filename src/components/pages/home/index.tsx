@@ -4,6 +4,7 @@ import { BiLogoTypescript } from 'react-icons/bi';
 import { FaCircleInfo, FaReact } from 'react-icons/fa6';
 import { Link } from 'react-router';
 import styled from 'styled-components';
+import { deploymentRoot } from '../../../App';
 import logo from '../../../images/logo.svg';
 import redux from '../../../images/redux.svg';
 import sass from '../../../images/sass.svg';
@@ -48,22 +49,22 @@ const Home: FC = () => {
                             template also
                             contains custom components that you might need:</h4>
                         <pre className={'display-flex gap-0p3-1 flex-wrap font-weight-bold m-0'}>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/box'}}>{`<Box/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/button'}}>{`<Button/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/checkbox'}}>{`<Checkbox/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/drawer'}}>{`<Drawer/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/dropdown'}}>{`<Dropdown/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/input-field'}}>{`<InputFied/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/loading'}}>{`<Loading/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/modal'}}>{`<Modal/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/tabs'}}>{`<Tabs/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/toast'}}>{`<Toast/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: '/demo/window-portal'}}>{`<WindowPortal/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/box`}}>{`<Box/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/button`}}>{`<Button/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/checkbox`}}>{`<Checkbox/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/drawer`}}>{`<Drawer/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/dropdown`}}>{`<Dropdown/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/input-field`}}>{`<InputFied/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/loading`}}>{`<Loading/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/modal`}}>{`<Modal/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/tabs`}}>{`<Tabs/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/toast`}}>{`<Toast/>`}</Link>
+                            <Link className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/window-portal`}}>{`<WindowPortal/>`}</Link>
                             <span>{`<CollapsibleLink/>`}</span>
                             <h4 className={'color-gray font-weight-normal m-0'}>
                                 Checkout <Link className={'white-space-nowrap'}
-                                               to={{pathname: '/specs'}}>ComponentSpecs</Link> and/or <Link
-                                className={'white-space-nowrap'} to={{pathname: '/demo'}}>Demo</Link> pages for more details.
+                                               to={{pathname: `${deploymentRoot}/specs`}}>ComponentSpecs</Link> and/or <Link
+                                className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo`}}>Demo</Link> pages for more details.
                             </h4>
                         </pre>
                     </div>
@@ -90,7 +91,7 @@ const Home: FC = () => {
                                         <ul className="m-0">
                                             <li>
                                                 <b><i>counter</i></b> - currently use in <Link
-                                                className={'white-space-nowrap'} to={{pathname: '/demo/window-portal'}}>windowPortal
+                                                className={'white-space-nowrap'} to={{pathname: `${deploymentRoot}/demo/window-portal`}}>windowPortal
                                                 demo</Link>
                                                 <ul className="m-0 font-size-small color-gray">
                                                     <li>chances are you're not gonna be needing this and so of course
@@ -147,7 +148,7 @@ const Home: FC = () => {
                                                     <span
                                                         className={'cursor-pointer'}><b><i>toast</i></b> - use in <Link
                                                         className={'white-space-nowrap'}
-                                                        to={{pathname: '/demo/toast'}}>toast</Link> and <b>MUST NOT be remove</b>! <ReactIcon
+                                                        to={{pathname: `${deploymentRoot}/demo/toast`}}>toast</Link> and <b>MUST NOT be remove</b>! <ReactIcon
                                                         className={'color-magenta font-size-small'}
                                                         icon={FaCircleInfo}/></span>
                                                 </Tippy>
