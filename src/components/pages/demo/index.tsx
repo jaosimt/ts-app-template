@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {classNames} from '../../../utils';
 import UnderConstruction from '../underConstruction';
 import {
-    $headerBackgroundColor, $secondaryBaseColor, $secondaryBaseColorDark
+    $primaryColor, $primaryColorDark, $secondaryBaseColor, $secondaryBaseColorDark, $textColor, $textColorDark
 } from '../../../styles/variables';
 import {ThemeProp} from "../../../App";
 
@@ -21,19 +21,25 @@ const Container = styled.div`
 `;
 
 // noinspection CssUnusedSymbol
-const Nav = styled.nav`
+const Nav = styled.nav<{
+    $theme: ThemeProp;
+}>`
     display        : flex;
     flex-direction : column;
 
     a {
         border  : 1px solid transparent;
-        color   : inherit;
         padding : 0.5rem;
+        color   : ${props => props.$theme === 'dark' as any ? $textColorDark : $textColor} !important;
+
+        &:hover {
+            color : ${props => props.$theme === 'dark' as any ? $primaryColorDark : $primaryColor} !important;
+        }
 
         &.active {
-            border-bottom-color : ${$headerBackgroundColor};
-            border-top-color    : ${$headerBackgroundColor};
-            color               : ${$headerBackgroundColor};
+            border-bottom-color : ${props => props.$theme === 'dark' as any ? $primaryColorDark : $primaryColor};
+            border-top-color    : ${props => props.$theme === 'dark' as any ? $primaryColorDark : $primaryColor};
+            color               : ${props => props.$theme === 'dark' as any ? $primaryColorDark : $primaryColor} !important;
         }
     }
 
@@ -78,7 +84,9 @@ const Demo: FC<{ theme: ThemeProp }> = ({theme}) => {
     const {pathname} = useLocation();
 
     return <Container data-component={'demo'}>
-        <Nav>
+        <Nav
+            $theme={theme}
+        >
             <NavLink to={`/demo/box`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Box</NavLink>
             <NavLink to={`/demo/checkbox`}
