@@ -4,6 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { createLink } from '../../../../utils/ext';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
+import {$baseColor, $baseColorDark, $primaryColor, $primaryColorDark} from "../../../../styles/variables";
 
 const code = `const options = ['Option 1', 'Option 2', 'Option 3'];
 const [selected, setSelected] = useState(options[0]);
@@ -78,7 +79,7 @@ const dropdownSpecsData: PropsListProps[] = [
     }
 ];
 
-const SpecsDropdown: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsDropdown: FC<SelectedThemeProps> = ({selectedTheme, theme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -86,11 +87,11 @@ const SpecsDropdown: FC<SelectedThemeProps> = ({selectedTheme}) => {
             width={'100%'}
             border={'label-only'}
             tight={true}
-            labelBackgroundColor={'#fff'}
+            labelBackgroundColor={theme === 'dark' as any ? $baseColorDark : $baseColor}
+            labelColor={theme === 'dark' as any ? $primaryColorDark : $primaryColor}
             label={'Demo'}
             labelPosition={'top-right'}
-            backgroundColor={'transparent'}
-            labelColor={'magenta'}
+            // backgroundColor={'transparent'}
             onLabelClick={() => navigate(`/demo/dropdown`)}
         >
             <SyntaxHighlighter
@@ -103,8 +104,8 @@ const SpecsDropdown: FC<SelectedThemeProps> = ({selectedTheme}) => {
                 {code}
             </SyntaxHighlighter>
         </Box>
-        <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>Properties</h3>
-        {propsList(dropdownSpecsData)}
+        <h3 className={'properties display-flex justify-content-space-between align-items-center'}>Properties</h3>
+        {propsList(dropdownSpecsData, theme)}
     </>;
 };
 

@@ -1,4 +1,4 @@
-import { CSSProperties, FC, Fragment, useState } from 'react';
+import {CSSProperties, FC, Fragment, useState} from 'react';
 import {
     a11yDark, atomDark, base16AteliersulphurpoolLight, cb, coldarkCold, coldarkDark, coy,
     coyWithoutShadows, darcula, dark, dracula, duotoneDark, duotoneEarth, duotoneForest, duotoneLight, duotoneSea,
@@ -11,9 +11,9 @@ import {
     zTouch
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import styled from 'styled-components';
-import { classNames } from '../../../utils';
+import {classNames} from '../../../utils';
 import Dropdown from '../../partials/dropdown';
-import Tab, { TabItemType } from '../../partials/tab';
+import Tab, {TabItemType} from '../../partials/tab';
 import SpecsBox from './specs/box';
 import SpecsButton from './specs/buttons';
 import SpecsCheckbox from './specs/checkbox';
@@ -26,11 +26,15 @@ import SpecsPortalWindow from './specs/windowPortal';
 import SpecsTab from './specs/tab';
 import SpecsToast from './specs/toast';
 
-import { $gridBorderColor } from '../../../styles/variables';
+import {
+    $secondaryBaseColor,
+    $secondaryBaseColorDark
+} from '../../../styles/variables';
 import {ThemeProp} from "../../../App";
 
 export interface SelectedThemeProps {
     selectedTheme: string;
+    theme: ThemeProp;
 }
 
 // Define the type for the theme object
@@ -85,16 +89,16 @@ export const themes: Record<string, Theme> = {
 };
 
 const Header = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    display         : flex;
+    justify-content : space-between;
+    align-items     : flex-end;
 
-    @media (max-width: 768px) {
-        flex-direction: column;
-        align-items: flex-start;
+    @media (max-width : 768px) {
+        flex-direction : column;
+        align-items    : flex-start;
         h1 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-size     : 1.2rem;
+            margin-bottom : 0.5rem;
         }
 
         [data-component="dropdown"] {
@@ -103,87 +107,95 @@ const Header = styled.div`
 `;
 
 // noinspection CssUnusedSymbol
-const Grid = styled.div`
-    display: grid;
-    width: 100%;
-    grid-template-columns: auto auto auto auto;
+const Grid = styled.div<{
+    $theme: ThemeProp;
+}>`
+    display               : grid;
+    width                 : 100%;
+    grid-template-columns : auto auto auto auto;
 
     > * {
-        padding: 0.5rem;
-        border-left: 1px solid ${$gridBorderColor};
-        border-bottom: 1px solid ${$gridBorderColor};
+        padding       : 0.5rem;
+        border-left   : ${props => `1px solid ${props.$theme === 'dark' as any ? $secondaryBaseColorDark : $secondaryBaseColor}`};
+        border-bottom : ${props => `1px solid ${props.$theme === 'dark' as any ? $secondaryBaseColorDark : $secondaryBaseColor}`};
 
-        &:nth-child(-n+4) { border-top: 1px solid ${$gridBorderColor}; }
+        &:nth-child(-n+4) {
+            border-top : ${props => `1px solid ${props.$theme === 'dark' as any ? $secondaryBaseColorDark : $secondaryBaseColor}`};
+        }
 
-        &:nth-child(4n) { border-right: 1px solid ${$gridBorderColor}; }
-        
-        .mobile-only { display: none; }
+        &:nth-child(4n) {
+            border-right : ${props => `1px solid ${props.$theme === 'dark' as any ? $secondaryBaseColorDark : $secondaryBaseColor}`};
+        }
+
+        .mobile-only {
+            display : none;
+        }
     }
-    
-    @media (max-width: 768px) {
-        grid-template-columns: auto;
+
+    @media (max-width : 768px) {
+        grid-template-columns : auto;
         > * {
-            padding: 0.25rem;
-            border: unset !important;
-            
+            padding : 0.25rem;
+            border  : unset !important;
+
             &.description {
-                margin-bottom: 1rem;
+                margin-bottom : 1rem;
             }
-            
+
             &.indent-row {
-                padding-left: 1rem;
-                align-items: flex-start;
-                display: flex;
-                flex-direction: column;
-                
+                padding-left   : 1rem;
+                align-items    : flex-start;
+                display        : flex;
+                flex-direction : column;
+
                 .mobile-only {
-                    display: inline;
-                    padding-right: 0.3rem;
-                    color: #999;
-                    font-size: 0.5rem;
+                    display       : inline;
+                    padding-right : 0.3rem;
+                    color         : #999;
+                    font-size     : 0.5rem;
                 }
             }
         }
     }
 `;
 
-const ComponentSpecs: FC<{theme:ThemeProp}> = ({theme}) => {
+const ComponentSpecs: FC<{ theme: ThemeProp }> = ({theme}) => {
     const [selectedTheme, setSelectedTheme] = useState<string>(sessionStorage.getItem('rshTheme') || 'nightOwl');
 
     const tabData: TabItemType[] = [
         {
             name: 'Box',
-            content: <SpecsBox selectedTheme={selectedTheme}/>
+            content: <SpecsBox selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'Button',
-            content: <SpecsButton selectedTheme={selectedTheme}/>
+            content: <SpecsButton selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'Checkbox',
-            content: <SpecsCheckbox selectedTheme={selectedTheme}/>
+            content: <SpecsCheckbox selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'Drawer',
-            content: <SpecsDrawer selectedTheme={selectedTheme}/>
+            content: <SpecsDrawer selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'Dropdown',
-            content: <SpecsDropdown selectedTheme={selectedTheme}/>
+            content: <SpecsDropdown selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'InputField',
-            content: <SpecsInputField selectedTheme={selectedTheme}/>
+            content: <SpecsInputField selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'Loading',
-            content: <SpecsLoading selectedTheme={selectedTheme}/>
+            content: <SpecsLoading selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'Modal',
-            content: <SpecsModal selectedTheme={selectedTheme}/>
+            content: <SpecsModal selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'Tabs',
-            content: <SpecsTab selectedTheme={selectedTheme}/>
+            content: <SpecsTab selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'Toast',
-            content: <SpecsToast selectedTheme={selectedTheme}/>
+            content: <SpecsToast selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'WindowPortal',
-            content: <SpecsPortalWindow selectedTheme={selectedTheme}/>
+            content: <SpecsPortalWindow selectedTheme={selectedTheme} theme={theme}/>
         }
     ];
 
@@ -198,7 +210,8 @@ const ComponentSpecs: FC<{theme:ThemeProp}> = ({theme}) => {
             <Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme}
                       onChange={handleThemeChange}/>
         </Header>
-        <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} moveSelectedOnScroll={true} data={tabData} theme={theme}/>
+        <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} moveSelectedOnScroll={true}
+             data={tabData} theme={theme}/>
     </div>;
 };
 
@@ -211,20 +224,25 @@ export type PropsListProps = {
     description: any[]
 }
 
-export const propsList: FC<PropsListProps[]> = (props) => <Grid
-    className={classNames(
-        'line-height-normal',
-        'font-monospace',
-        // 'color-black',
-        'font-size-smaller',
-    )}
->
-    {
-        props.map(({name, types, values, description}, i) => <Fragment key={i}>
-            <strong>{name}</strong>
-            <span className={'indent-row'}><span className="mobile-only">Type:</span>{types}</span>
-            <span className={'indent-row'}><span className="mobile-only">Value:</span><i>{values}</i></span>
-            <span className={'description indent-row'}><span className="mobile-only">Description:</span>{description.map((d, j) => <span key={j} className={'display-block'}>{d}</span>)}</span>
-        </Fragment>)
-    }
-</Grid>;
+export const propsList = (props: PropsListProps[], theme: ThemeProp) => {
+    return <Grid
+        className={classNames(
+            'line-height-normal',
+            'font-monospace',
+            // 'color-black',
+            'font-size-smaller',
+        )}
+        $theme={theme}
+    >
+        {
+            props.map(({name, types, values, description}, i) => <Fragment key={i}>
+                <strong>{name}</strong>
+                <span className={'indent-row'}><span className="mobile-only">Type:</span>{types}</span>
+                <span className={'indent-row'}><span className="mobile-only">Value:</span><i>{values}</i></span>
+                <span className={'description indent-row'}><span
+                    className="mobile-only">Description:</span>{description.map((d, j) => <span key={j}
+                                                                                                className={'display-block'}>{d}</span>)}</span>
+            </Fragment>)
+        }
+    </Grid>;
+}

@@ -4,6 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { CssColors } from '../../../../utils/ext';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
+import {$baseColor, $baseColorDark, $primaryColor, $primaryColorDark} from "../../../../styles/variables";
 
 const code = `<Loading/>`;
 
@@ -68,7 +69,7 @@ const loadingData: PropsListProps[] = [
     }
 ];
 
-const SpecsLoading: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsLoading: FC<SelectedThemeProps> = ({selectedTheme, theme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -76,11 +77,11 @@ const SpecsLoading: FC<SelectedThemeProps> = ({selectedTheme}) => {
             width={'100%'}
             border={'label-only'}
             tight={true}
-            labelBackgroundColor={'#fff'}
+            labelBackgroundColor={theme === 'dark' as any ? $baseColorDark : $baseColor}
+            labelColor={theme === 'dark' as any ? $primaryColorDark : $primaryColor}
             label={'Demo'}
             labelPosition={'top-right'}
-            backgroundColor={'transparent'}
-            labelColor={'magenta'}
+            // backgroundColor={'transparent'}
             onLabelClick={() => navigate(`/demo/loading`)}
         >
             <SyntaxHighlighter
@@ -93,8 +94,8 @@ const SpecsLoading: FC<SelectedThemeProps> = ({selectedTheme}) => {
                 {code}
             </SyntaxHighlighter>
         </Box>
-        <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>Properties</h3>
-        {propsList(loadingData)}
+        <h3 className={'properties display-flex justify-content-space-between align-items-center'}>Properties</h3>
+        {propsList(loadingData, theme)}
     </>;
 };
 

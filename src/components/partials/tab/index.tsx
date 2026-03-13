@@ -1,16 +1,16 @@
-import { FC, HTMLAttributes, memo, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
-import { RxChevronLeft, RxChevronRight } from 'react-icons/rx';
-import { useResizeObserver } from 'usehooks-ts';
-import { CSSColors, CSSUnit } from '../../../types';
-import { classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase } from '../../../utils';
-import { ReactIcon } from '../index';
+import {FC, HTMLAttributes, memo, ReactNode, RefObject, useEffect, useRef, useState} from 'react';
+import {RxChevronLeft, RxChevronRight} from 'react-icons/rx';
+import {useResizeObserver} from 'usehooks-ts';
+import {CSSColors, CSSUnit} from '../../../types';
+import {classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase} from '../../../utils';
+import {ReactIcon} from '../index';
 import './styles.scss';
 import {ThemeProp} from "../../../App";
 import {$accentColor, $accentColorDark} from "../../../styles/variables";
 
 export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
     activeItemColor?: CSSColors;
-    contentPadding?: CSSUnit|undefined;
+    contentPadding?: CSSUnit | undefined;
     data: TabItemType[];
     minContentHeight?: CSSUnit;
     moveSelectedOnScroll?: boolean;
@@ -61,8 +61,8 @@ const Tabs: FC<TabItemProps> = (props) => {
     const [selected, setSelected] = useState<string>(() => {
         if (isString(id, true) && rememberActiveTab) {
             const saved = getStoredSelection();
-            const savedSelection = saved.filter((s:any) => s.id === id)[0];
-            const thisSelection = data.filter((d:TabItemType) => {
+            const savedSelection = saved.filter((s: any) => s.id === id)[0];
+            const thisSelection = data.filter((d: TabItemType) => {
                 const name = snakeCase(inStringNumberToWords(d.name), '-')
                 return name === savedSelection?.name
             });
@@ -72,7 +72,7 @@ const Tabs: FC<TabItemProps> = (props) => {
     });
 
     const [hoveredItem, setHoveredItem] = useState('');
-    const [minWidth, setMinWidth] = useState<CSSUnit|'auto'>('auto');
+    const [minWidth, setMinWidth] = useState<CSSUnit | 'auto'>('auto');
 
     const getTabItemsPos = () => {
         const itemsWrapper = tabItemsWrapper.current as HTMLDivElement;
@@ -254,7 +254,10 @@ const Tabs: FC<TabItemProps> = (props) => {
         return saved ? JSON.parse(saved) : [];
     }
 
-    return <div data-component={'tabs'} className={type} style={{minWidth: parseCSSUnit(minWidth as CSSUnit), width: width ? parseCSSUnit(width) : 'inherit'}}>
+    const selectedTab = data.find((d: any) => snakeCase(inStringNumberToWords(d.name), '-') === selected);
+
+    return <div data-component={'tabs'} className={type}
+                style={{minWidth: parseCSSUnit(minWidth as CSSUnit), width: width ? parseCSSUnit(width) : 'inherit'}}>
         <div className={'tab-items'}>
             <div className={classNames('scroll-btn-left', tabOverflow.left && 'visible')}>
                 <ReactIcon size={21} icon={RxChevronLeft} onClick={scrollLeftHandler}/>
@@ -285,22 +288,17 @@ const Tabs: FC<TabItemProps> = (props) => {
                 <ReactIcon size={21} icon={RxChevronRight} onClick={scrollRightHandler}/>
             </div>
         </div>
-        {
-            data.map(t => {
-                const itemName = snakeCase(inStringNumberToWords(t.name), '-');
-                return <div
-                    key={`tab-content-${itemName}`} data-name={itemName}
-                    style={{
-                        padding: contentPadding && parseCSSUnit(contentPadding),
-                        minHeight: minContentHeight && parseCSSUnit(minContentHeight),
-                        width: '100%',
-                        overflow: 'auto'
-                    }}
-                    className={classNames('tab-content', selected === itemName && 'active')}>
-                    {t.content}
-                </div>;
-            })
-        }
+        <div
+            key={`tab-content-${selectedTab?.name}`} data-name={selectedTab?.name}
+            style={{
+                padding: contentPadding && parseCSSUnit(contentPadding),
+                minHeight: minContentHeight && parseCSSUnit(minContentHeight),
+                width: '100%',
+                overflow: 'auto'
+            }}
+            className={classNames('tab-content', 'active')}>
+            {selectedTab?.content}
+        </div>
     </div>;
 };
 

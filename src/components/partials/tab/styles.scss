@@ -2,9 +2,13 @@
 @use "../../../styles/variables" as v;
 
 $tabBorderRadius            : 0.2rem;
-$tabBackground              : #963999;
-$activeBackgroundColor      : #ffffff;
-$activeTabItemColor         : #00cafd;
+$tabAccentColor : #ff6500;
+$tabAccentColorDark : #9B3922;
+
+$tabBaseColor      : #F3F2F2;
+$tabBaseColorDark      : #171515;
+
+//$activeTabItemColor         : #00cafd;
 $inactiveTabBackgroundColor : #f1f1f1;
 $inactiveTabBorderColor     : #c5c5c5;
 
@@ -49,8 +53,6 @@ $inactiveTabBorderColor     : #c5c5c5;
       
       > svg {
         border-radius    : 50%;
-        background-color : $tabBackground;
-        color            : white;
       }
       
       &.visible {
@@ -86,10 +88,10 @@ $inactiveTabBorderColor     : #c5c5c5;
           z-index           : 1;
         }
         
-        &:not(.active) {
-          z-index          : -1;
-          background-color : $inactiveTabBackgroundColor;
-        }
+        //&:not(.active) {
+        //  z-index          : -1;
+        //  background-color : $inactiveTabBackgroundColor;
+        //}
       }
     }
     
@@ -109,8 +111,6 @@ $inactiveTabBorderColor     : #c5c5c5;
   
   > .tab-content {
     margin-top       : -1px;
-    background-color : $activeBackgroundColor;
-    border           : 1px solid $tabBackground;
     border-radius    : $tabBorderRadius;
     position         : relative;
     z-index          : 0;
@@ -126,25 +126,27 @@ $inactiveTabBorderColor     : #c5c5c5;
     
     > *:last-child { margin-bottom : 0; }
   }
-  
+
+
+  // Demo
   &.boxed {
     > .tab-items {
-      background-color : $tabBackground;
-      border-color     : $tabBackground;
+      background-color : $tabAccentColor;
+      border-color     : $tabAccentColor;
       
       > .tab-items-wrapper {
         > .tab-item {
           &.active {
-            background-color    : $activeBackgroundColor;
-            border-color        : $tabBackground;
-            border-bottom-color : $activeBackgroundColor;
+            background-color    : $tabBaseColor;
+            border-color        : $tabAccentColor;
+            border-bottom-color : $tabBaseColor;
           }
           
           &:not(.active) {
             background-color : transparent;
             
             &:hover {
-              color : $activeBackgroundColor !important;
+              color : $tabBaseColor !important;
             }
           }
         }
@@ -154,7 +156,7 @@ $inactiveTabBorderColor     : #c5c5c5;
       > .scroll-btn-right {
         > svg {
           background-color : white;
-          color            : $tabBackground;
+          color            : $tabAccentColor;
         }
       }
     }
@@ -174,16 +176,16 @@ $inactiveTabBorderColor     : #c5c5c5;
       > .tab-items-wrapper {
         > .tab-item {
           &.active {
-            background-color    : $activeBackgroundColor;
-            border-color        : $tabBackground;
-            border-bottom-color : $activeBackgroundColor;
+            background-color    : $tabBaseColor;
+            border-color        : $tabAccentColor;
+            border-bottom-color : $tabBaseColor;
             border-bottom-width : 2px;
           }
           
           &:not(.active) {
             background-color    : transparent;
             border-color        : transparent;
-            border-bottom-color : $tabBackground;
+            border-bottom-color : $tabAccentColor;
           }
         }
       }
@@ -192,7 +194,7 @@ $inactiveTabBorderColor     : #c5c5c5;
     > .tab-content {
       padding       : 0.7rem;
       border-radius : $tabBorderRadius;
-      background    : $activeBackgroundColor;
+      background    : $tabBaseColor;
     }
   }
   
@@ -204,15 +206,15 @@ $inactiveTabBorderColor     : #c5c5c5;
       > .tab-items-wrapper {
         > .tab-item {
           &.active {
-            background-color    : $activeBackgroundColor;
-            border-color        : $tabBackground;
-            border-bottom-color : $activeBackgroundColor;
+            background-color    : $tabBaseColor;
+            border-color        : $tabAccentColor;
+            border-bottom-color : $tabBaseColor;
             border-bottom-width : 2px;
           }
           
           &:not(.active) {
             border-color        : $inactiveTabBorderColor;
-            border-bottom-color : $tabBackground;
+            border-bottom-color : $tabAccentColor;
           }
         }
       }
@@ -221,7 +223,7 @@ $inactiveTabBorderColor     : #c5c5c5;
     > .tab-content {
       padding       : 0.7rem;
       border-radius : $tabBorderRadius;
-      background    : $activeBackgroundColor;
+      background    : $tabBaseColor;
     }
   }
   
@@ -241,9 +243,6 @@ $inactiveTabBorderColor     : #c5c5c5;
     > .tab-content {
       padding             : 0.7rem 0 0 0;
       border-radius       : 0;
-      border-left-color   : transparent;
-      border-right-color  : transparent;
-      border-bottom-color : transparent;
       background-color    : inherit;
     }
   }
@@ -252,10 +251,49 @@ $inactiveTabBorderColor     : #c5c5c5;
 body {
   &.dark {
     [data-component="tabs"] {
-      > .scroll-btn-left,
-      > .scroll-btn-right {
-        > svg {
-          background-color : red;
+
+      //componentSpecs arrows
+      > .tab-items {
+        > .scroll-btn-left,
+        > .scroll-btn-right {
+          > svg {
+            border-radius    : 50%;
+            background-color : $tabAccentColorDark;
+            color            : $tabBaseColorDark;
+          }
+        }
+      }
+
+      &.plain {
+        > .tab-content {
+          border           : 1px solid $tabAccentColorDark;
+          border-left-color   : transparent;
+          border-right-color  : transparent;
+          border-bottom-color : transparent;
+        }
+      }
+    }
+  }
+
+  &.light {
+    [data-component="tabs"] {
+      > .tab-items {
+        > .scroll-btn-left,
+        > .scroll-btn-right {
+          > svg {
+            border-radius    : 50%;
+            background-color : $tabAccentColor;
+            color            : $tabBaseColor;
+          }
+        }
+      }
+
+      &.plain {
+        > .tab-content {
+          border           : 1px solid $tabAccentColor;
+          border-left-color   : transparent;
+          border-right-color  : transparent;
+          border-bottom-color : transparent;
         }
       }
     }
