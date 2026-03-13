@@ -45,7 +45,7 @@ export const useDebounce = (callback: Function, delay: number = 700) => {
 
 export const useKeyPress = (targetKey: string, callback: Function) => {
     const keyUpHandler = useCallback(({key}: { key: string }) => {
-        console.log('[useKeyPress] keyUpHandler');
+        console.log(`[useKeyPress][${key}] keyUpHandler`);
 
         if (key === targetKey) callback(true);
     }, [targetKey, callback]);
