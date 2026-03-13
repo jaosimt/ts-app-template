@@ -3,11 +3,17 @@ import { IconType } from 'react-icons';
 import { FaChevronDown } from 'react-icons/fa6';
 import styled from 'styled-components';
 import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
-import { useOnScroll } from '../../../hooks';
+import { useKeyPress, useOnScroll } from '../../../hooks';
 import { CSSUnit } from '../../../types';
 import { classNames, isObject, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
-import { $backgroundColor, $borderColorDefault, $borderColorPrimary, $textColor } from '../../../styles/variables';
+import {
+    $backgroundColor,
+    $borderColorDefault,
+    $borderColorPrimary,
+    $buttonDefaultHoverColor,
+    $textColor
+} from '../../../styles/variables';
 
 export interface DropdownProps {
     options: string[] | DropdownObjectOptions[];
@@ -145,9 +151,10 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
     }
 
     &:not(.selected) {
+        &.scrolled,
         &:hover {
             color: ${$backgroundColor};
-            background-color: ${$textColor};
+            background-color: ${$buttonDefaultHoverColor};
         }
     }
     
@@ -174,6 +181,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
     const listRef = useRef<any>(null);
     const wrapperRef = useRef<any>(null);
 
+    const [scrolled, setScrolled] = useState<string | DropdownObjectOptions | undefined>(props_selected);
     const [selected, setSelected] = useState<string | DropdownObjectOptions | undefined>(props_selected);
     const [show, setShow] = useState(false);
     const [dropDownPos, setDropdownPos] = useState<PosProp>({
@@ -206,9 +214,56 @@ const Dropdown: FC<DropdownProps> = (props) => {
 
     useEffect(() => {
         setShow(false);
+        if (JSON.stringify(selected) !== JSON.stringify(scrolled)) setScrolled(selected);
         onChange && onChange(selected);
         // eslint-disable-next-line
     }, [selected]);
+
+    useKeyPress('ArrowDown', (pressed: boolean) => arrowDownUpHandler(pressed, 'ArrowDown'));
+    useKeyPress('ArrowUp', (pressed: boolean) => arrowDownUpHandler(pressed, 'ArrowUp'));
+    useKeyPress('Enter', enterKeyHandler);
+
+    const isO = isObject(options[0]);
+
+    function enterKeyHandler(pressed: boolean) {
+        if (options.length === 0) return;
+
+        if (pressed && listRef.current && show) {
+            const selectedIndex = isO
+                ? options.findIndex((o: any) => o.value === (selected as DropdownObjectOptions).value)
+                : options.findIndex(o => o === selected);
+            const nextIndex = isO
+                ? options.findIndex((o: any) => o.value === (scrolled as DropdownObjectOptions).value)
+                : options.findIndex(o => o === scrolled);
+
+            if (selectedIndex !== nextIndex) setSelected(options[nextIndex]);
+            else setShow(false);
+        }
+    }
+
+    function arrowDownUpHandler(pressed: boolean, key: string) {
+        if (options.length === 0) return;
+
+        if (pressed && listRef.current && show) {
+            const optionsSize = options.length;
+            let nextIndex = isO
+                ? options.findIndex((o: any) => o.value === (scrolled as DropdownObjectOptions).value)
+                : options.findIndex(o => o === scrolled);
+
+            switch (key) {
+                case 'ArrowDown':
+                    nextIndex = (nextIndex + 1) > (optionsSize - 1) ? 0 : nextIndex + 1;
+                    break;
+                case 'ArrowUp':
+                    nextIndex = (nextIndex - 1) < 0 ? (optionsSize - 1) : nextIndex - 1;
+                    break;
+                default:
+                // do nothing
+            }
+
+            setScrolled(options[nextIndex]);
+        }
+    }
 
     function handleClickOutside() {
         if (!show) return;
@@ -224,8 +279,8 @@ const Dropdown: FC<DropdownProps> = (props) => {
         setDropdownPos({left, width, top: bottom});
     }
 
-    const isO = isObject(options[0]);
     const _selected = String(isO ? (selected as DropdownObjectOptions).value : selected);
+    const _scrolled = String(isO ? (scrolled as DropdownObjectOptions).value : scrolled);
     const hasIcon = isO && (selected as DropdownObjectOptions) && (selected as DropdownObjectOptions).icon;
 
     return <Container
@@ -275,7 +330,10 @@ const Dropdown: FC<DropdownProps> = (props) => {
                     options.map((o: any) => <Option
                         onClick={() => setSelected(o)}
                         key={isO ? o.value : o}
-                        className={classNames(_selected === (isO ? o.value : o) && 'selected')}>
+                        className={classNames(
+                            _selected === (isO ? o.value : o) && 'selected',
+                            _scrolled === (isO ? o.value : o) && 'scrolled'
+                        )}>
                         {isO && o.icon && <ReactIcon icon={o.icon}/>}
                         {isO ? o.label : o}
                     </Option>)
