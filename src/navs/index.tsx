@@ -1,11 +1,13 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
-import { NavLink, useLocation } from 'react-router';
+import {RefObject, useEffect, useRef, useState} from 'react';
+import {NavLink, useLocation} from 'react-router';
 import './index.scss';
-import { useResizeObserver } from 'usehooks-ts';
-import { useOnScroll } from '../hooks';
-import { classNames, getRandStr } from '../utils';
+import {useResizeObserver} from 'usehooks-ts';
+import {useOnScroll} from '../hooks';
+import {classNames, getRandStr} from '../utils';
+import {$secondaryColor, $secondaryColorDark} from "../styles/variables";
+import {ThemeProp} from "../App";
 
-export const NavigationMain = () => {
+export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
     const navRef = useRef<HTMLElement>(null);
 
     const location = useLocation();
@@ -48,11 +50,13 @@ export const NavigationMain = () => {
         width: '100%',
         justifyContent: 'flex-end'
     }}>
-        <NavLink to={`/`} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Home</NavLink>
-        <NavLink to={`/specs`} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Component
+        <NavLink to={`/`}
+                 className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Home</NavLink>
+        <NavLink to={`/specs`}
+                 className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Component
             Specs</NavLink>
         <NavLink to={`/demo`}
-                 className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Demo</NavLink>
+                 className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Demo</NavLink>
 
         {abVisible &&
             <div className={activeBar.transition} style={{
@@ -62,7 +66,7 @@ export const NavigationMain = () => {
                 width: `${activeBar.width}px`,
                 marginBottom: '-21px',
                 transition: 'all 300ms ease-in-out, opacity 1400ms ease-in-out',
-                backgroundColor: '#00cafd',
+                backgroundColor: theme === 'dark' as any ? $secondaryColorDark : $secondaryColor,
                 opacity: `${activeBar.opacity}`
             }}></div>
         }

@@ -8,8 +8,7 @@ import {
     $secondaryBackgroundColor,
     $secondaryBackgroundColorDark
 } from '../../../styles/variables';
-import {connect} from "react-redux";
-import {getTheme} from "../../../slices/theme";
+import {ThemeProp} from "../../../App";
 
 const Container = styled.div`
     display    : flex;
@@ -53,13 +52,13 @@ const Nav = styled.nav`
 `;
 
 const Wrapper = styled.div<{
-    $theme:string;
+    $theme: ThemeProp;
 }>`
     padding          : 1.5rem;
     border-radius    : 0.3rem;
     position         : relative;
     width            : calc(100% - 150px);
-    background-color : ${props=>props.$theme === 'dark' ? $secondaryBackgroundColorDark : $secondaryBackgroundColor};
+    background-color : ${props => props.$theme === 'dark' as any ? $secondaryBackgroundColorDark : $secondaryBackgroundColor};
 
     @media (max-width : 768px) {
         width            : 100%;
@@ -77,7 +76,7 @@ const InnerWrapper = styled.div`
     height         : 100%;
 `;
 
-const Demo: FC<{ theme: string }> = ({theme}) => {
+const Demo: FC<{ theme: ThemeProp }> = ({theme}) => {
     const {pathname} = useLocation();
 
     return <Container data-component={'demo'}>
@@ -114,8 +113,4 @@ const Demo: FC<{ theme: string }> = ({theme}) => {
     </Container>;
 };
 
-const mapStateToProps = (state: any) => ({
-    theme: getTheme(state),
-});
-
-export default connect(mapStateToProps)(Demo);
+export default Demo;

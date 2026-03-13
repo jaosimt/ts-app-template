@@ -13,12 +13,12 @@ html {
     line-height             : 1.5;
     
     &.dark {
-      background-color : v.$backgroundColorDark;
+      background-color : v.$baseColorDark;
       color            : v.$textColorDark;
     }
     
     &.light {
-      background-color : v.$backgroundColor;
+      background-color : v.$baseColor;
       color            : v.$textColor;
     }
   }

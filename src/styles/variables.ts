@@ -2,6 +2,12 @@ export const $textColor = '#00cafd';
 export const $inputTextColor = '#252a2b';
 export const $errorColor = '#ff0000';
 
+export const $accentColor = '#ff6500';
+export const $accentColorDark = '#9B3922';
+
+export const $secondaryColor = '#ffe500';
+export const $secondaryColorDark = '#ffc300';
+
 export const $backgroundColor = '#fefcff';
 export const $backgroundColorDark = '#292030';
 

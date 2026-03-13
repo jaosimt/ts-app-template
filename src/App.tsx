@@ -17,7 +17,11 @@ import './styles/tippy.scss';
 import {getTheme, toggleTheme} from "./slices/theme";
 import {useAppDispatch} from "./hooks";
 
-const App = ({error, theme}: { error: any, theme: string }) => {
+export interface ThemeProp {
+    theme: 'dark' | 'light';
+}
+
+const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     const dispatch = useAppDispatch();
 
     const [offline, setOffline] = useState(false);
@@ -56,7 +60,7 @@ const App = ({error, theme}: { error: any, theme: string }) => {
     }, []);
 
     useEffect(() => {
-        document.body.setAttribute('class', theme);
+        document.body.setAttribute('class', String(theme));
     }, [theme]);
 
     useEffect(() => {
@@ -91,16 +95,16 @@ const App = ({error, theme}: { error: any, theme: string }) => {
     return (<>
         {MemoizedConnectionModal}
         <header className={'grid cols-2'}>
-            <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit'}
+            <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit nav-link'}
                   to={{pathname: `/`}}>
                 <ReactIcon size={35} className={classNames(pathname === `/` && 'spin', 'font-weight-bold')}
                            icon={IoLogoReact}/>
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
-            <NavigationMain/>
-            <ReactIcon icon={theme === 'dark' ? IoMoon : IoSunny } size={54} onClick={()=> dispatch(toggleTheme())}/>
+            <NavigationMain theme={theme}/>
+            <ReactIcon icon={theme === ('dark' as any) ? IoMoon : IoSunny } size={54} onClick={()=> dispatch(toggleTheme())}/>
         </header>
-        <main>{<ContentRouter/>}</main>
+        <main>{<ContentRouter theme={theme}/>}</main>
         <footer className={'display-flex justify-content-space-between align-items-center'}>
             <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
         </footer>

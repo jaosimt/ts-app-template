@@ -7,8 +7,6 @@ nav[data-nav="top"] {
   
   a {
     color : inherit;
-    
-    &.active { color : #00cafd; }
   }
 }
 
@@ -36,5 +34,23 @@ nav[data-nav="left"] {
     justify-content : flex-end;
     font-size       : smaller;
     gap             : 0.5rem;
+  }
+}
+
+body {
+  &.dark {
+    nav[data-nav="top"] {
+      a {
+        &.active { color : v.$secondaryColorDark; }
+      }
+    }
+  }
+
+  &.light {
+    nav[data-nav="top"] {
+      a {
+        &.active { color : v.$secondaryColor; }
+      }
+    }
   }
 }
