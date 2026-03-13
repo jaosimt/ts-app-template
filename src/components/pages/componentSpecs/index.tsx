@@ -25,11 +25,7 @@ import SpecsModal from './specs/modal';
 import SpecsPortalWindow from './specs/windowPortal';
 import SpecsTab from './specs/tab';
 import SpecsToast from './specs/toast';
-
-import {
-    $secondaryBaseColor,
-    $secondaryBaseColorDark
-} from '../../../styles/variables';
+import { $secondaryBaseColor, $secondaryBaseColorDark} from '../../../styles/variables';
 import {ThemeProp} from "../../../App";
 
 export interface SelectedThemeProps {
