@@ -17,8 +17,7 @@ import reactRouter from '../../../images/react-router.png';
 import {createLink} from '../../../utils/ext';
 import {ReactIcon} from '../../partials';
 import './style.scss';
-import {getTheme} from "../../../slices/theme";
-import {connect} from "react-redux";
+import {ThemeProp} from "../../../App";
 
 const WrappingDiv = styled.div`
     display: flex;
@@ -118,7 +117,7 @@ const bundledLibs = () => <>
     </div>
 </>;
 
-const Home: FC<{ theme: string }> = ({theme}) => {
+const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
     return <div data-component={'home'}
                 className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-auto'}>
         <div className={'display-flex flex-direction-column gap-1 justify-content-space-between'}>
@@ -272,7 +271,7 @@ const Home: FC<{ theme: string }> = ({theme}) => {
                     </div>
                 </div>
                 <div className={'display-flex justify-content-right align-items-center'}>
-                    <img width={'100%'} className={'spin-700'} src={theme === 'dark' ? logoDark : logo} alt=""/>
+                    <img width={'100%'} className={'spin-700'} src={theme === 'dark' as any ? logoDark : logo} alt=""/>
                 </div>
             </WrappingDiv>
 
@@ -286,8 +285,4 @@ const Home: FC<{ theme: string }> = ({theme}) => {
     </div>;
 };
 
-const mapStateToProps = (state: any) => ({
-    theme: getTheme(state),
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;

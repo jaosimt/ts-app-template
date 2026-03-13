@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router';
+import {Navigate, Route, Routes} from 'react-router';
 import NotFound from '../components/pages/404/404';
 import ComponentSpecs from '../components/pages/componentSpecs';
 import Demo from '../components/pages/demo';
@@ -16,14 +16,15 @@ import DemoWindowPortal from '../components/pages/demo/demoWindowPortal';
 import DemoLoading from '../components/pages/demo/demoLoading';
 import Home from '../components/pages/home';
 import Login from '../components/pages/login';
+import {ThemeProp} from "../App";
 
-const ContentRouter = () => {
+const ContentRouter = ({theme}: { theme: ThemeProp }) => {
     return <>
         <Routes>
-            <Route path={`/`} element={<Home/>}/>
-            <Route path={`/specs`} element={<ComponentSpecs/>}/>
-            <Route path={`/demo`} element={<Demo/>}>
-                <Route index element={<Navigate to={`/demo/box`} replace />} />
+            <Route path={`/`} element={<Home theme={theme}/>}/>
+            <Route path={`/specs`} element={<ComponentSpecs theme={theme}/>}/>
+            <Route path={`/demo`} element={<Demo theme={theme}/>}>
+                <Route index element={<Navigate to={`/demo/box`} replace/>}/>
                 <Route path={`/demo/loading`} element={<DemoLoading/>}/>
                 <Route path={`/demo/box`} element={<DemoBox/>}/>
                 <Route path={`/demo/dropdown`} element={<DemoDropdown/>}/>

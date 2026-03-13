@@ -2,9 +2,8 @@ import { FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { CSSColors, CSSUnit } from '../../../types';
 import { getTextWidth, parseCSSUnit } from '../../../utils';
-import { getTheme } from '../../../slices/theme';
-import { connect } from 'react-redux';
 import { $secondaryBackgroundColor, $secondaryBackgroundColorDark } from '../../../styles/variables';
+import {ThemeProp} from "../../../App";
 
 export type LabelPositionType =
     'top-left'
@@ -29,7 +28,7 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
     labelSize?: 'small' | 'medium' | 'large';
     width?: CSSUnit;
     onLabelClick?: Function;
-    theme?: string;
+    theme?: ThemeProp;
 }
 
 const Container = styled.section<{
@@ -230,7 +229,7 @@ const Box: FC<BoxProps> = (props) => {
         {label && <Label
             ref={labelRef}
             onClick={labelClinkHandler}
-            $background={labelBackgroundColor || (theme === 'dark' ? $secondaryBackgroundColorDark : $secondaryBackgroundColor)}
+            $background={labelBackgroundColor || (theme === 'dark' as any ? $secondaryBackgroundColorDark : $secondaryBackgroundColor)}
             $borderWidth={border === 'label-only' ? '1px' : 'inherit'}
             $borderColor={borderColor}
             $borderRadius={titleBorderRadius}
@@ -258,8 +257,5 @@ const Box: FC<BoxProps> = (props) => {
     </Container>;
 };
 
-const mapStateToProps = (state: any) => ({
-    theme: getTheme(state),
-});
 
-export default connect(mapStateToProps)(memo(Box));
+export default memo(Box);

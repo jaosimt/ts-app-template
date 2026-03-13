@@ -5,8 +5,9 @@ import {useResizeObserver} from 'usehooks-ts';
 import {useOnScroll} from '../hooks';
 import {classNames, getRandStr} from '../utils';
 import {$secondaryColor, $secondaryColorDark} from "../styles/variables";
+import {ThemeProp} from "../App";
 
-export const NavigationMain = ({theme}: { theme: string }) => {
+export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
     const navRef = useRef<HTMLElement>(null);
 
     const location = useLocation();
@@ -65,7 +66,7 @@ export const NavigationMain = ({theme}: { theme: string }) => {
                 width: `${activeBar.width}px`,
                 marginBottom: '-21px',
                 transition: 'all 300ms ease-in-out, opacity 1400ms ease-in-out',
-                backgroundColor: theme === 'dark' ? $secondaryColorDark : $secondaryColor,
+                backgroundColor: theme === 'dark' as any ? $secondaryColorDark : $secondaryColor,
                 opacity: `${activeBar.opacity}`
             }}></div>
         }

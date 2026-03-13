@@ -27,6 +27,7 @@ import SpecsTab from './specs/tab';
 import SpecsToast from './specs/toast';
 
 import { $gridBorderColor } from '../../../styles/variables';
+import {ThemeProp} from "../../../App";
 
 export interface SelectedThemeProps {
     selectedTheme: string;
@@ -146,7 +147,7 @@ const Grid = styled.div`
     }
 `;
 
-const ComponentSpecs: FC = () => {
+const ComponentSpecs: FC<{theme:ThemeProp}> = ({theme}) => {
     const [selectedTheme, setSelectedTheme] = useState<string>(sessionStorage.getItem('rshTheme') || 'nightOwl');
 
     const tabData: TabItemType[] = [
@@ -197,7 +198,7 @@ const ComponentSpecs: FC = () => {
             <Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme}
                       onChange={handleThemeChange}/>
         </Header>
-        <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} moveSelectedOnScroll={true} data={tabData}/>
+        <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} moveSelectedOnScroll={true} data={tabData} theme={theme}/>
     </div>;
 };
 
