@@ -33,6 +33,21 @@ const drawerSpecsData: PropsListProps[] = [
         types: 'string',
         values: CssColors,
         description: ['Sets the background color of the drawer']
+    }, {
+        name: 'onOpen',
+        types: 'Function',
+        values: `() => void`,
+        description: ['Callback function to be called when the drawer is opened']
+    }, {
+        name: 'onClose',
+        types: 'Function',
+        values: `() => void`,
+        description: ['Callback function to be called when the drawer is closed']
+    }, {
+        name: 'showOnCreate',
+        types: 'boolean',
+        values: ``,
+        description: [`Set's the initial state of the drawer`]
     }
 ];
 
