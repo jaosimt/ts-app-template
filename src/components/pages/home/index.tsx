@@ -34,6 +34,80 @@ const WrappingDiv = styled.div`
     }
 `;
 
+const bundledLibs = () => <>
+    <div className={'display-flex gap-0p5 align-items-center '}>
+        {
+            createLink(
+                <><ReactIcon size={35} icon={FaReact}/><h3 className={'m-0'}>React</h3></>,
+                '//react.dev/', 'display-flex white-space-nowrap gap-0p5 align-items-center'
+            )
+        }
+    </div>
+    <div className={'display-flex gap-0p5 align-items-center '}>
+        {
+            createLink(
+                <><ReactIcon size={35} icon={BiLogoTypescript}/><h3 className={'m-0'}>TypeScript</h3></>,
+                '//www.typescriptlang.org/', 'display-flex white-space-nowrap gap-0p5 align-items-center')
+        }
+    </div>
+    <div className={'display-flex gap-0p5 align-items-center '}>
+        {
+            createLink(
+                <><img height={30} src={reactRouter} alt=""/><h3 className={'m-0'}>React Router</h3></>,
+                '//reactrouter.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')
+        }
+    </div>
+    <div className={'display-flex gap-0p5 align-items-center '}>
+        {
+            createLink(
+                <><img height={30} src={redux} alt=""/><h3 className={'m-0'}>Redux</h3></>,
+                '//redux.js.org/', 'display-flex white-space-nowrap gap-0p5 align-items-center')
+        }
+    </div>
+    <div className={'display-flex gap-0p5 align-items-center '}>
+        {
+            createLink(
+                <><img height={30} src={sass} alt=""/><h3 className={'m-0'}>Sass</h3></>,
+                '//sass-lang.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')
+        }
+    </div>
+    <div className={'display-flex gap-0p5 align-items-center '}>
+        {
+            createLink(
+                <><img height={30} src={usehooks} alt=""/><h3 className={'m-0'}>UseHooks</h3></>,
+                '//usehooks-ts.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')
+        }
+    </div>
+    <div className={'display-flex gap-0p5 align-items-center '}>
+        {
+            createLink(
+                <><img height={30} src={axios} alt=""/><h3 className={'m-0'}>Axios</h3></>,
+                '//axios-http.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')
+        }
+    </div>
+    <div className={'display-flex gap-0p5 align-items-center '}>
+        {
+            createLink(
+                <><img height={30} src={reactHookForm} alt=""/><h3 className={'m-0'}>ReactHookForm</h3></>,
+                '//react-hook-form.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')
+        }
+    </div>
+    <div className={'display-flex gap-0p5 align-items-center '}>
+        {
+            createLink(
+                <><img height={30} src={tippyjs} alt=""/><h3 className={'m-0'}>TippyJS</h3></>,
+                '//atomiks.github.io/tippyjs/', 'display-flex white-space-nowrap gap-0p5 align-items-center')
+        }
+    </div>
+    <div className={'display-flex gap-0p5 align-items-center '}>
+        {
+            createLink(
+                <><img height={30} src={styledComponents} alt=""/><h3 className={'m-0'}>Styled Components</h3></>,
+                '//styled-components.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')
+        }
+    </div>
+</>;
+
 const Home: FC = () => {
     return <div data-component={'home'}
                 className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-auto'}>
@@ -180,42 +254,12 @@ const Home: FC = () => {
                     <img width={'100%'} className={'spin-700'} src={logo} alt=""/>
                 </div>
             </WrappingDiv>
-            <div className={'display-flex gap-0p5-2 flex-wrap justify-content-space-between'}>
-                <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><ReactIcon size={35}
-                                                                                                     icon={FaReact}/><h3
-                    className={'m-0'}>React</h3></>, '//react.dev/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
-                <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><ReactIcon size={35}
-                                                                                                     icon={BiLogoTypescript}/>
-                    <h3 className={'m-0'}>TypeScript</h3></>, '//www.typescriptlang.org/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
-                <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><img height={30}
-                                                                                               src={reactRouter}
-                                                                                               alt=""/><h3
-                    className={'m-0'}>React
-                    Router</h3></>, '//reactrouter.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
-                <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><img height={30} src={redux}
-                                                                                               alt=""/><h3
-                    className={'m-0'}>Redux</h3></>, '//redux.js.org/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
-                <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><img height={30} src={sass}
-                                                                                               alt=""/><h3
-                    className={'m-0'}>Sass</h3></>, '//sass-lang.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
-                <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><img height={30}
-                                                                                               src={usehooks} alt=""/>
-                    <h3 className={'m-0'}>UseHooks</h3></>, '//usehooks-ts.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
-                <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><img height={30} src={axios}
-                                                                                               alt=""/><h3
-                    className={'m-0'}>Axios</h3></>, '//axios-http.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
-                <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><img height={30}
-                                                                                               src={reactHookForm}
-                                                                                               alt=""/><h3
-                    className={'m-0'}>ReactHookForm</h3></>, '//react-hook-form.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
-                <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><img height={30} src={tippyjs}
-                                                                                               alt=""/><h3
-                    className={'m-0'}>TippyJS</h3></>, '//atomiks.github.io/tippyjs/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
-                <div className={'display-flex gap-0p5 align-items-center '}>{createLink(<><img height={30}
-                                                                                               src={styledComponents}
-                                                                                               alt=""/><h3
-                    className={'m-0'}>Styled
-                    Components</h3></>, '//styled-components.com/', 'display-flex white-space-nowrap gap-0p5 align-items-center')}</div>
+
+            <div className="marquee">
+                <div className={'display-flex gap-0p5-2 justify-content-space-between'}>
+                    {bundledLibs()}
+                    {bundledLibs()}
+                </div>
             </div>
         </div>
     </div>;

@@ -22,3 +22,18 @@
 .bounce {
   @include m.bounce();
 }
+
+.marquee {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+  height: 35px;
+  
+  > div {
+    position: absolute;
+    //white-space: nowrap;
+    will-change: transform;
+    animation: marquee 49s linear infinite;
+  }
+}
