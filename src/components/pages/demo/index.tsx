@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import {classNames} from '../../../utils';
 import UnderConstruction from '../underConstruction';
 import {
-    $headerBackgroundColor,
-    $secondaryBackgroundColor,
-    $secondaryBackgroundColorDark
+    $headerBackgroundColor, $secondaryBaseColor, $secondaryBaseColorDark
 } from '../../../styles/variables';
 import {ThemeProp} from "../../../App";
 
@@ -58,7 +56,7 @@ const Wrapper = styled.div<{
     border-radius    : 0.3rem;
     position         : relative;
     width            : calc(100% - 150px);
-    background-color : ${props => props.$theme === 'dark' as any ? $secondaryBackgroundColorDark : $secondaryBackgroundColor};
+    background-color : ${props => props.$theme === 'dark' as any ? $secondaryBaseColorDark : $secondaryBaseColor};
 
     @media (max-width : 768px) {
         width            : 100%;

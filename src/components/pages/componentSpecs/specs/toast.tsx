@@ -4,6 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { createLink } from '../../../../utils/ext';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
+import {$baseColor, $baseColorDark, $primaryColor, $primaryColorDark} from "../../../../styles/variables";
 
 const code = `import { toast } from './components/partials/toast'; /* assuming the call is initiated inside src */
 
@@ -79,7 +80,7 @@ const toastOptions: PropsListProps[] = [
     }
 ];
 
-const SpecsToast: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsToast: FC<SelectedThemeProps> = ({selectedTheme, theme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -87,11 +88,11 @@ const SpecsToast: FC<SelectedThemeProps> = ({selectedTheme}) => {
             width={'100%'}
             border={'label-only'}
             tight={true}
-            labelBackgroundColor={'#fff'}
+            labelBackgroundColor={theme === 'dark' as any ? $baseColorDark : $baseColor}
+            labelColor={theme === 'dark' as any ? $primaryColorDark : $primaryColor}
             label={'Demo'}
             labelPosition={'top-right'}
-            backgroundColor={'transparent'}
-            labelColor={'magenta'}
+            // backgroundColor={'transparent'}
             onLabelClick={() => navigate(`/demo/toast`)}
         >
             <SyntaxHighlighter
@@ -104,14 +105,14 @@ const SpecsToast: FC<SelectedThemeProps> = ({selectedTheme}) => {
                 {code}
             </SyntaxHighlighter>
         </Box>
-        <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>
+        <h3 className={'properties display-flex justify-content-space-between align-items-center'}>
             Properties
         </h3>
-        {propsList(SpecsToastData)}
-        <h3 className={'mb-0p5 color-gray display-flex justify-content-space-between align-items-center'}>
+        {propsList(SpecsToastData, theme)}
+        <h3 className={'mb-0p5 display-flex justify-content-space-between align-items-center'}>
             options
         </h3>
-        {propsList(toastOptions)}
+        {propsList(toastOptions, theme)}
     </>;
 };
 

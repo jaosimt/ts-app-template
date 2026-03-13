@@ -8,6 +8,7 @@ import { createLink, CssColors } from '../../../../utils/ext';
 import { ReactIcon } from '../../../partials';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
+import {$baseColor, $baseColorDark, $primaryColor, $primaryColorDark} from "../../../../styles/variables";
 
 const codeJSX = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {
     email: string;
@@ -148,7 +149,7 @@ const fieldRegisterAlternative: PropsListProps[] = [
     }
 ];
 
-const SpecsInputField: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsInputField: FC<SelectedThemeProps> = ({selectedTheme, theme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -156,11 +157,11 @@ const SpecsInputField: FC<SelectedThemeProps> = ({selectedTheme}) => {
             width={'100%'}
             border={'label-only'}
             tight={true}
-            labelBackgroundColor={'#fff'}
+            labelBackgroundColor={theme === 'dark' as any ? $baseColorDark : $baseColor}
+            labelColor={theme === 'dark' as any ? $primaryColorDark : $primaryColor}
             label={'Demo'}
             labelPosition={'top-right'}
-            backgroundColor={'transparent'}
-            labelColor={'magenta'}
+            // backgroundColor={'transparent'}
             onLabelClick={() => navigate(`/demo/input-field`)}
         >
             <SyntaxHighlighter
@@ -175,12 +176,12 @@ const SpecsInputField: FC<SelectedThemeProps> = ({selectedTheme}) => {
                 {codeJSX}
             </SyntaxHighlighter>
         </Box>
-        <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>Properties <span
-            className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLInputElement>`}</span>
+        <h3 className={'properties display-flex justify-content-space-between align-items-center'}>Properties <span
+            className={'extends font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLInputElement>`}</span>
         </h3>
-        {propsList(inputFieldData)}
-        <h3 className={'alternate-properties color-gray mb-0p5'}>fieldRegister prop alternate</h3>
-        {propsList(fieldRegisterAlternative)}
+        {propsList(inputFieldData, theme)}
+        <h3 className={'alternate-properties mb-0p5'}>fieldRegister prop alternate</h3>
+        {propsList(fieldRegisterAlternative, theme)}
     </>;
 };
 

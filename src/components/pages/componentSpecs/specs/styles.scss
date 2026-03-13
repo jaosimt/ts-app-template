@@ -1,3 +1,5 @@
+@use "../../../../styles/variables" as v;
+
 .properties {
   margin: 0;
   padding: 0.5rem 0;
@@ -11,6 +13,20 @@
       font-size : 0.7rem;
       text-align: right;
       line-height: 0.9;
+    }
+  }
+}
+
+body {
+  &.dark {
+    .extends {
+      color: v.$secondaryTextColorDark;
+    }
+  }
+
+  &.light {
+    .extends {
+      color: v.$secondaryTextColor;
     }
   }
 }

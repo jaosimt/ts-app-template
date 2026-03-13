@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
+import {$baseColor, $baseColorDark, $primaryColor, $primaryColorDark} from "../../../../styles/variables";
 
 const code = `const [showModal, setShowModal] = useState(false);
 
@@ -55,7 +56,7 @@ const modalData: PropsListProps[] = [
     }
 ];
 
-const SpecsModal: FC<SelectedThemeProps> = ({selectedTheme}) => {
+const SpecsModal: FC<SelectedThemeProps> = ({selectedTheme, theme}) => {
     let navigate = useNavigate();
 
     return <>
@@ -63,11 +64,11 @@ const SpecsModal: FC<SelectedThemeProps> = ({selectedTheme}) => {
             width={'100%'}
             border={'label-only'}
             tight={true}
-            label={'demo'}
-            labelSize={'large'}
+            labelBackgroundColor={theme === 'dark' as any ? $baseColorDark : $baseColor}
+            labelColor={theme === 'dark' as any ? $primaryColorDark : $primaryColor}
+            label={'Demo'}
             labelPosition={'top-right'}
-            backgroundColor={'transparent'}
-            labelColor={'magenta'}
+            // backgroundColor={'transparent'}
             onLabelClick={() => navigate(`/demo/modal`)}
         >
             <SyntaxHighlighter
@@ -80,10 +81,10 @@ const SpecsModal: FC<SelectedThemeProps> = ({selectedTheme}) => {
                 {code}
             </SyntaxHighlighter>
         </Box>
-        <h3 className={'properties color-gray display-flex justify-content-space-between align-items-center'}>Properties <span
-            className={'color font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLDivElement>`}</span>
+        <h3 className={'properties display-flex justify-content-space-between align-items-center'}>Properties <span
+            className={'extends font-monospace font-size-smaller'}>extends HTMLAttributes{`<HTMLDivElement>`}</span>
         </h3>
-        {propsList(modalData)}
+        {propsList(modalData, theme)}
     </>;
 };
 

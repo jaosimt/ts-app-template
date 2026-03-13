@@ -5,6 +5,15 @@ export const $errorColor = '#ff0000';
 export const $accentColor = '#ff6500';
 export const $accentColorDark = '#9B3922';
 
+export const $baseColor                      = '#F3F2F2';
+export const $baseColorDark                  = '#171515';
+
+export const $secondaryBaseColor                      = '#dddada';
+export const $secondaryBaseColorDark                  = '#2f2b2b';
+
+export const $primaryColor                   = '#0099ff';
+export const $primaryColorDark               = '#22859b';
+
 export const $secondaryColor = '#ffe500';
 export const $secondaryColorDark = '#ffc300';
 
