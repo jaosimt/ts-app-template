@@ -97,7 +97,7 @@ const App = ({error, theme}: { error: any, theme: string }) => {
                            icon={IoLogoReact}/>
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
-            <NavigationMain/>
+            <NavigationMain theme={theme}/>
             <ReactIcon icon={theme === 'dark' ? IoMoon : IoSunny } size={54} onClick={()=> dispatch(toggleTheme())}/>
         </header>
         <main>{<ContentRouter/>}</main>
