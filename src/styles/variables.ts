@@ -15,6 +15,7 @@ export const $buttonPrimaryHoverColor = 'rgba(0, 123, 255, 1)';
 export const $buttonPrimaryBorderColor = 'export const $buttonPrimaryHoverColor';
 export const $buttonPrimaryDisabledTextColor = 'rgba(255, 255, 255, 0.49)';
 
+
 export const $buttonDefaultColor = '#ffffff';
 export const $buttonDefaultTextColor = '#218cd9';
 export const $buttonDefaultBorderColor = '#218cd9';
