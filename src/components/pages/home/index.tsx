@@ -21,10 +21,11 @@ import {getTheme} from "../../../slices/theme";
 import {connect} from "react-redux";
 
 const WrappingDiv = styled.div`
-    display         : flex;
-    align-items     : center;
-    gap             : 0.5rem 1rem;
-    justify-content : space-between;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    justify-content: space-between;
+    width: calc(100% - 4rem);
 
     > :first-child {
         width : 70%;
