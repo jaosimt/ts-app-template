@@ -1,17 +1,23 @@
-$textColor                      : #292030;
-$textColorDark                  : #FEFCFF;
-//$textColor                      : #00cafd;
+$textColor                      : #171515;
+$secondaryTextColor             : #8B7E7E;
+$baseColor                      : #F3F2F2;
+$accentColor                    : #ff6500;
+$primaryColor                   : #0099ff;
+
+$textColorDark                  : #F3F2F2;
+$secondaryTextColorDark         : #B4ADAD;
+$baseColorDark                  : #171515;
+$accentColorDark                : #9B3922;
+$primaryColorDark               : #22859B;
 
 $secondaryColor                 : #963999;
 $secondaryColorDark             : #CE7BD1;
 
+$secondaryBackgroundColor       : #F8F5FA;
 $inputTextColor                 : #252a2b;
 $errorColor                     : #ff0000;
 
-$backgroundColor                : #FEFCFF;
-$secondaryBackgroundColor       : #F8F5FA;
 
-$backgroundColorDark            : #292030;
 $secondaryBackgroundColorDark   : #34283B;
 
 $backgroundColorSelected        : rgba(214, 214, 214, 0.49);

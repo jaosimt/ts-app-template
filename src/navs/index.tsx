@@ -48,11 +48,11 @@ export const NavigationMain = () => {
         width: '100%',
         justifyContent: 'flex-end'
     }}>
-        <NavLink to={`/`} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Home</NavLink>
-        <NavLink to={`/specs`} className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Component
+        <NavLink to={`/`} className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Home</NavLink>
+        <NavLink to={`/specs`} className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Component
             Specs</NavLink>
         <NavLink to={`/demo`}
-                 className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Demo</NavLink>
+                 className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Demo</NavLink>
 
         {abVisible &&
             <div className={activeBar.transition} style={{

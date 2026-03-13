@@ -46,17 +46,15 @@ body {
   &.dark {
     #react-ts-template {
       header {
-        background-color : v.$headerBackgroundColorDark;
-        border-bottom    : 10px solid v.$backgroundColorDark;
+        border-bottom    : 10px solid v.$baseColorDark;
       }
-      
-      main {
-        //background-color : v.$backgroundColorDark;
-      }
-      
+
       footer {
-        border-top       : 10px solid v.$backgroundColorDark;
-        background-color : v.$footerBackgroundColorDark;
+        border-top       : 10px solid v.$baseColorDark;
+      }
+
+      header, footer {
+        background-color : v.$accentColorDark;
       }
     }
   }
@@ -64,17 +62,15 @@ body {
   &.light {
     #react-ts-template {
       header {
-        background-color : v.$headerBackgroundColor;
-        border-bottom    : 10px solid v.$backgroundColor;
-      }
-
-      main {
-        //background-color : v.$backgroundColor;
+        border-bottom    : 10px solid v.$baseColor;
       }
 
       footer {
-        border-top       : 10px solid v.$backgroundColor;
-        background-color : v.$footerBackgroundColor !important;
+        border-top       : 10px solid v.$baseColor;
+      }
+
+      header, footer {
+        background-color : v.$accentColor;
       }
     }
   }

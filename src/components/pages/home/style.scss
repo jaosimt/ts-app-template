@@ -2,14 +2,22 @@
 
 body {
   &.dark {
-    .secondary-color {
-      color : v.$secondaryColorDark;
+    .accent-text {
+      color : v.$accentColorDark;
+    }
+
+    .secondary-text {
+      color: v.$secondaryTextColorDark;
     }
   }
 
   &.light {
-    .secondary-color {
-      color : v.$secondaryColor;
+    .accent-text {
+      color : v.$accentColor;
+    }
+
+    .secondary-text {
+      color: v.$secondaryTextColor;
     }
   }
 }

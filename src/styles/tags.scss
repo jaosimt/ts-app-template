@@ -4,25 +4,27 @@
 select {
   padding       : 0.439rem 0.4rem;
   color         : v.$inputTextColor;
-  background    : v.$backgroundColor;
+  background    : v.$baseColor;
   border-color  : v.$borderColorDefault;
   border-radius : 4px;
-  
-  &:focus { outline : none; }
-  
+
+  &:focus {
+    outline : none;
+  }
+
   &:focus,
   &:hover {
     cursor           : pointer;
     background-color : v.$buttonPrimaryHoverColor;
     color            : v.$buttonPrimaryTextColor;
     border-color     : v.$buttonPrimaryBorderColor;
-    
+
     &:active {
       opacity : 0.3;
       color   : v.$inputTextColor;
     }
   }
-  
+
   &[disabled],
   &.disabled {
     pointer-events : none !important;
@@ -58,23 +60,23 @@ input {
   border        : 1px solid v.$borderColorDefault;
   border-radius : 0.3rem;
   min-height    : 33px;
-  
+
   &:focus {
     outline      : none;
     border-color : v.$textColor !important;
   }
-  
+
   &.border-error {
     border : 1px solid v.$errorColor !important;
   }
-  
+
   &[disabled],
   &.disabled {
     pointer-events : none !important;
     color          : rgb(172 172 172);
     opacity        : 0.3;
   }
-  
+
   @media (max-width : 768px) {
     min-height : 28px;
     padding    : 0.3rem;
@@ -94,10 +96,10 @@ input {
 ol,
 ul {
   padding-inline-start : 1rem;
-  
+
   > li {
     font-family : inherit;
-    
+
     > ul {
       margin-bottom : 0.3rem;
     }
@@ -109,11 +111,32 @@ link {
   text-decoration : none;
   cursor          : pointer;
   font-weight     : 700;
-  color           : v.$buttonPrimaryColor;
-  
-  &.color-inherit { color : inherit; }
+
+  &.color-inherit {
+    color : inherit;
+  }
 }
 
 div, body {
   @include m.customScrollbar();
+}
+
+body {
+  &.dark {
+    a,
+    link {
+      &:not(.nav-link) {
+        color : v.$primaryColorDark;
+      }
+    }
+  }
+
+  &.light {
+    a,
+    link {
+      &:not(.nav-link) {
+        color : v.$primaryColor;
+      }
+    }
+  }
 }
