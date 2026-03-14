@@ -171,7 +171,7 @@ const Box: FC<BoxProps> = (props) => {
         labelPosition = 'top-left',
         tight,
         width,
-        padding = '0.5rem',
+        padding = '1rem',
         onLabelClick,
         theme
     } = props;

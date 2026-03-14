@@ -9,10 +9,10 @@ import { classNames, isObject, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
 import {
     $backgroundColor,
-    $borderColorDefault,
-    $borderColorPrimary,
+    $buttonPrimaryTextColor,
+    $buttonDefaultBorderColor,
     $buttonDefaultHoverColor,
-    $textColor
+    $buttonDefaultTextColor
 } from '../../../styles/variables';
 
 export interface DropdownProps {
@@ -80,13 +80,14 @@ const Wrapper = styled.div<{
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
-    border: 1px solid ${props => props.$show ? $borderColorPrimary : $borderColorDefault};
+    border: 1px solid ${$buttonDefaultBorderColor};
     border-radius: 0.3rem;
     background-color: ${$backgroundColor};
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     height: inherit;
+    color: ${$buttonDefaultBorderColor};
     ${props => props.$show && 'border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent;'}
     ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
 `;
@@ -113,7 +114,7 @@ const List = styled.div<{
     user-select: none;
     width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
     background-color: #fff;
-    border: 1px solid ${$borderColorPrimary};
+    border: 1px solid ${$buttonDefaultBorderColor};
     border-bottom-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
     white-space: nowrap;
@@ -134,12 +135,12 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
-    color: ${$textColor};
+    color: ${$buttonDefaultTextColor};
 
     &.selected {
         cursor: default;
-        color: ${$backgroundColor};
-        background-color: ${$textColor};
+        color: ${$buttonPrimaryTextColor};
+        background-color: ${$buttonDefaultBorderColor};
 
         &:not(:first-child) {
             border-top: 1px solid ${$backgroundColor};

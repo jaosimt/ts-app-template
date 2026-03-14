@@ -35,8 +35,6 @@ select {
 
 code {
   font-family      : v.$codeFontFamily;
-  background-color : black;
-  color            : white;
   padding          : 0.2rem;
   display          : block;
   unicode-bidi     : isolate;
@@ -60,7 +58,11 @@ input {
   border        : 1px solid v.$borderColorDefault;
   border-radius : 0.3rem;
   min-height    : 33px;
-
+  
+  &::placeholder {
+    opacity: 0.3;
+  }
+  
   &:focus {
     outline      : none;
     border-color : v.$textColor !important;

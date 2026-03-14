@@ -46,7 +46,7 @@ const InputField: FC<InputFieldProps> = (props) => {
         label,
         labelWidth = 'auto',
         labelAlign,
-        placeHolder,
+        placeHolder = !props.label ? (props.fieldRegister?.name || props.name) : undefined,
         min,
         max,
         labelColor,
