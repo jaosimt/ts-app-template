@@ -6,8 +6,8 @@ import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 import {$baseColor, $baseColorDark, $primaryColor, $primaryColorDark} from "../../../../styles/variables";
 
-const code = `// noinspection JSFileReferences
-import { toast } from './components/partials/toast'; /* assuming the call is initiated inside src */
+// noinspection JSFileReferences
+const code = `import { toast } from './components/partials/toast'; /* assuming the call is initiated inside src */
 
 ...
 
