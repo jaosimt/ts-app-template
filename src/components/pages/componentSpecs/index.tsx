@@ -32,16 +32,16 @@ export const themes: Record<string, Theme> = {
 };
 
 const Header = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    display         : flex;
+    justify-content : space-between;
+    align-items     : flex-end;
 
-    @media (max-width: 768px) {
-        flex-direction: column;
-        align-items: flex-start;
+    @media (max-width : 768px) {
+        flex-direction : column;
+        align-items    : flex-start;
         h1 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-size     : 1.2rem;
+            margin-bottom : 0.5rem;
         }
 
         [data-component="dropdown"] {
@@ -82,7 +82,7 @@ const Grid = styled.div<{
             border: unset !important;
 
             &.description {
-                margin-bottom: 1rem;
+                margin-bottom : 1rem;
             }
 
             &.indent-row {
@@ -92,10 +92,10 @@ const Grid = styled.div<{
                 flex-direction: column;
 
                 .mobile-only {
-                    display: inline;
-                    padding-right: 0.3rem;
-                    color: #999;
-                    font-size: 0.5rem;
+                    display       : inline;
+                    padding-right : 0.3rem;
+                    color         : #999;
+                    font-size     : 0.5rem;
                 }
             }
         }
