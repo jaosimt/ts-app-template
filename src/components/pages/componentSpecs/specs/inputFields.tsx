@@ -1,3 +1,5 @@
+// noinspection JSUnresolvedReference,JSXUnresolvedComponent
+
 import Tippy from '@tippyjs/react';
 import { FC } from 'react';
 import { FaCircleInfo } from 'react-icons/fa6';
@@ -10,7 +12,7 @@ import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 import {$baseColor, $baseColorDark, $primaryColor, $primaryColorDark} from "../../../../styles/variables";
 
-const codeJSX = `interface LoginProps extends React.HTMLAttributes<HTMLInputElement> {
+const codeJSX = `interface LoginProps extends HTMLAttributes<HTMLInputElement> {
     email: string;
     password: string;
 }
@@ -29,9 +31,9 @@ const loginValidation = z.object({
 const {
     register,
     formState: {errors}
-} = useForm<LoginProps>(
+} = useForm<LoginProps>({
     resolver: zodResolver(loginValidation)
-)
+})
 
 const onsubmit = (data: LoginProps) => {
     console.log(data);
