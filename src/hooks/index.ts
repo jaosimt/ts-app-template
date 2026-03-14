@@ -68,6 +68,16 @@ export const useOnScroll = (callback: EventListener, element: HTMLElement | Wind
         // eslint-disable-next-line
     }, []);
 }
+
+export const usePrevious = (value: any) => {
+    const ref = useRef<any>(null);
+    useEffect(() => {
+        ref.current = value;
+    });
+
+    return ref.current;
+};
+
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 export const useAppSelector = useSelector.withTypes<RootState>()
 export const useAppStore = useStore.withTypes<AppStore>()

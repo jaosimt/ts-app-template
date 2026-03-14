@@ -6,7 +6,8 @@ import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 import {$baseColor, $baseColorDark, $primaryColor, $primaryColorDark} from "../../../../styles/variables";
 
-const code = `import { toast } from './components/partials/toast'; /* assuming the call is initiated inside src */
+const code = `// noinspection JSFileReferences
+import { toast } from './components/partials/toast'; /* assuming the call is initiated inside src */
 
 ...
 
@@ -35,7 +36,8 @@ const SpecsToastData: PropsListProps[] = [
                 duration: 'number',
                 // eslint-disable-next-line no-template-curly-in-string
                 width: 'number|`${number}${string}`',
-                omitIcon: 'boolean'
+                omitIcon: 'boolean',
+                closeOnPageChange: 'boolean'
             }, null, 2)
         }</pre>,
         description: ['Sets the toast options']
@@ -68,6 +70,11 @@ const toastOptions: PropsListProps[] = [
         types: 'boolean',
         values: '',
         description: ['Show/Hide Toast Icon']
+    }, {
+        name: 'closeOnPageChange',
+        types: 'boolean',
+        values: '',
+        description: [<span>If set to <b>true</b>, closes the toast message(s) when navigating to a new page.</span>, <ul className="m-0"><li>Except for toast type <b>error</b></li></ul>]
     }, {
         name: 'width',
         // eslint-disable-next-line no-template-curly-in-string

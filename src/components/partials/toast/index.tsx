@@ -17,6 +17,7 @@ export interface ToastOptions {
     position?: ToastPosition;
     theme?: ToastTheme;
     duration?: number;
+    closeOnPageChange?: boolean;
     width?: CSSUnit;
     omitIcon?: boolean;
 }
