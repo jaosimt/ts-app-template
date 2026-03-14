@@ -1,6 +1,9 @@
 import { FC, HTMLAttributes, memo } from 'react';
 import { ImSpinner } from 'react-icons/im';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { ThemeProp } from '../../../App';
+import { $accentColor, $accentColorDark } from '../../../styles/variables';
 import { CSSColors } from '../../../types';
 import { classNames } from '../../../utils';
 import { ReactIcon } from '../index';
@@ -15,7 +18,8 @@ export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
     color?: CSSColors,
     topText?: string;
     bottomText?: string;
-    boxShadow?: boolean;
+    boxShadow?: boolean
+    theme?: ThemeProp;
 }
 
 type CSSUnit = number | `${number}${string}`;
@@ -57,12 +61,12 @@ const Spinner = styled.div<{ $color: CSSColors }>`
 const Loading: FC<LoadingProps> = (props) => {
     const {
         borderWidth,
-        borderColor,
         padding = true,
         boxShadow = false,
         position = 'fixed',
         size = 42,
-        color = 'inherit',
+        borderColor = props.theme === ('dark' as any) ? $accentColorDark : $accentColor,
+        color = props.theme === ('dark' as any) ? $accentColorDark : $accentColor,
         topText,
         bottomText,
         children,
@@ -92,4 +96,8 @@ const Loading: FC<LoadingProps> = (props) => {
     </Container>;
 };
 
-export default memo(Loading);
+const mapStateToProps = (state: any) => ({
+    theme: state.theme,
+})
+
+export default connect(mapStateToProps)(memo(Loading));
