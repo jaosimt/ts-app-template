@@ -59,7 +59,7 @@ const DemoDrawer: FC<{theme: ThemeProp}> = ({theme}) => {
     };
 
     const dropDownChangeHandler = (value: DropdownObjectOptions) => setPosition(value);
-    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
 
     return <div data-name={'modal-demo'} className={'flex-wrap justify-content-center gap-0p5-1'}>
         <Box

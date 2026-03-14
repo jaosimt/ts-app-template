@@ -43,7 +43,7 @@ const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
         });
     }
 
-    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
 
     return <div data-component={'loading-demo'} className={'display-inline-flex flex-direction-column height-100p gap-0p5 width-100p'}>
         <Box label={'Modal Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>

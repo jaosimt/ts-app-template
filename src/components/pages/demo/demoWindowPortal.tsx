@@ -42,7 +42,7 @@ const DemoWindowPortal: FC<{theme: ThemeProp}> = ({theme}) => {
 
     const [showPortal, setShowPortal] = useState(false);
 
-    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
 
     return <div data-component={'window-portal-demo'}>
         {showPortal && <WindowPortal

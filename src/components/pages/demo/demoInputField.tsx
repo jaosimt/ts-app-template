@@ -151,7 +151,7 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
         timeoutRef.current = setTimeout(() => inputRefs.current[name]?.focus(), 100);
     };
 
-    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
 
     const tabItems: TabItemType[] = [
         {
