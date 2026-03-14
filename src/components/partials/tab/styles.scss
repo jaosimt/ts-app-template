@@ -2,24 +2,24 @@
 @use "../../../styles/variables" as v;
 
 $tabBorderRadius            : 0.2rem;
-$tabAccentColor : #ff6500;
-$tabAccentColorDark : #9B3922;
+$tabAccentColor             : #ff6500;
+$tabAccentColorDark         : #9b3922;
 
-$tabBaseColor      : #F3F2F2;
-$tabBaseColorDark      : #171515;
+$tabBaseColor               : #f3f2f2;
+$tabBaseColorDark           : #171515;
 
 //$activeTabItemColor         : #00cafd;
 $inactiveTabBackgroundColor : #f1f1f1;
-$inactiveTabBorderColor     : #c5c5c5;
+$inactiveTabBorderColor     : #a6a6a6;
 
 [data-component="tabs"] {
-  background-color   : transparent;
-  border-radius      : $tabBorderRadius;
-  display            : grid;
+  background-color : transparent;
+  border-radius    : $tabBorderRadius;
+  display          : flex;
+  flex-direction   : column;
   //overflow           : hidden;
-  overflow           : auto;
-  width              : 100%;
-  grid-template-rows : 42px auto;
+  overflow         : auto;
+  width            : 100%;
   
   > .tab-items {
     @extend .disable-select;
@@ -52,7 +52,7 @@ $inactiveTabBorderColor     : #c5c5c5;
       background-color : transparent;
       
       > svg {
-        border-radius    : 50%;
+        border-radius : 50%;
       }
       
       &.visible {
@@ -62,11 +62,9 @@ $inactiveTabBorderColor     : #c5c5c5;
     
     > .tab-items-wrapper {
       display       : flex;
-      height        : 100%;
       align-items   : flex-end;
       border-bottom : none;
       overflow      : hidden;
-      padding       : 0.3rem 0 0 0;
       white-space   : nowrap;
       z-index       : 1;
       
@@ -80,7 +78,10 @@ $inactiveTabBorderColor     : #c5c5c5;
         transition              : color, background-color, opacity, width, height, padding 100ms ease-in-out;
         white-space             : nowrap;
         
-        & ~ .tab-item { border-left-width : 0; }
+        &:first-child:not(.active),
+        & ~ .tab-item:not(.active):not(:last-child) { border-right-width : 0; }
+        
+        &.active + .tab-item { border-left-width : 0; }
         
         &.active {
           border-left-width : 1px;
@@ -88,10 +89,9 @@ $inactiveTabBorderColor     : #c5c5c5;
           z-index           : 1;
         }
         
-        //&:not(.active) {
-        //  z-index          : -1;
-        //  background-color : $inactiveTabBackgroundColor;
-        //}
+        &:not(.active) {
+          z-index : -1;
+        }
       }
     }
     
@@ -110,10 +110,10 @@ $inactiveTabBorderColor     : #c5c5c5;
   }
   
   > .tab-content {
-    margin-top       : -1px;
-    border-radius    : $tabBorderRadius;
-    position         : relative;
-    z-index          : 0;
+    margin-top    : -1px;
+    border-radius : $tabBorderRadius;
+    position      : relative;
+    z-index       : 0;
     
     > * { animation : fadein 300ms ease-in; }
     
@@ -126,8 +126,7 @@ $inactiveTabBorderColor     : #c5c5c5;
     
     > *:last-child { margin-bottom : 0; }
   }
-
-
+  
   // Demo
   &.boxed {
     > .tab-items {
@@ -162,6 +161,8 @@ $inactiveTabBorderColor     : #c5c5c5;
     }
     
     .tab-content {
+      color                   : $tabBaseColorDark;
+      background-color        : $tabBaseColor;
       padding                 : 0.7rem;
       border-top-left-radius  : 0;
       border-top-right-radius : 0;
@@ -183,18 +184,19 @@ $inactiveTabBorderColor     : #c5c5c5;
           }
           
           &:not(.active) {
-            background-color    : transparent;
-            border-color        : transparent;
-            border-bottom-color : $tabAccentColor;
+            background-color : transparent;
+            border-color     : transparent;
           }
         }
       }
     }
     
     > .tab-content {
-      padding       : 0.7rem;
-      border-radius : $tabBorderRadius;
-      background    : $tabBaseColor;
+      padding          : 0.7rem;
+      border-radius    : $tabBorderRadius;
+      border           : 1px solid $tabAccentColor;
+      color            : $tabBaseColorDark;
+      background-color : $tabBaseColor;
     }
   }
   
@@ -214,16 +216,18 @@ $inactiveTabBorderColor     : #c5c5c5;
           
           &:not(.active) {
             border-color        : $inactiveTabBorderColor;
-            border-bottom-color : $tabAccentColor;
+            border-bottom-color : transparent;
           }
         }
       }
     }
     
     > .tab-content {
-      padding       : 0.7rem;
-      border-radius : $tabBorderRadius;
-      background    : $tabBaseColor;
+      padding          : 0.7rem;
+      border-radius    : $tabBorderRadius;
+      border           : 1px solid $tabAccentColor;
+      color            : $tabBaseColorDark;
+      background-color : $tabBaseColor;
     }
   }
   
@@ -241,79 +245,10 @@ $inactiveTabBorderColor     : #c5c5c5;
     }
     
     > .tab-content {
-      padding             : 0.7rem 0 0 0;
-      border-radius       : 0;
-      background-color    : inherit;
+      padding          : 0.7rem 0 0 0;
+      border-radius    : 0;
+      background-color : inherit;
+      border-top       : 1px solid $tabAccentColor;
     }
   }
-}
-
-body {
-  &.dark {
-    [data-component="tabs"] {
-
-      //componentSpecs arrows
-      > .tab-items {
-        > .scroll-btn-left,
-        > .scroll-btn-right {
-          > svg {
-            border-radius    : 50%;
-            background-color : $tabAccentColorDark;
-            color            : $tabBaseColorDark;
-          }
-        }
-      }
-
-      &.plain {
-        > .tab-content {
-          border           : 1px solid $tabAccentColorDark;
-          border-left-color   : transparent;
-          border-right-color  : transparent;
-          border-bottom-color : transparent;
-        }
-      }
-    }
-  }
-
-  &.light {
-    [data-component="tabs"] {
-      > .tab-items {
-        > .scroll-btn-left,
-        > .scroll-btn-right {
-          > svg {
-            border-radius    : 50%;
-            background-color : $tabAccentColor;
-            color            : $tabBaseColor;
-          }
-        }
-      }
-
-      &.plain {
-        > .tab-content {
-          border           : 1px solid $tabAccentColor;
-          border-left-color   : transparent;
-          border-right-color  : transparent;
-          border-bottom-color : transparent;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width : 768px) {
-  //[data-component="tabs"] {
-  //  > .tab-items {
-  //    > .scroll-btn-left,
-  //    > .scroll-btn-right {
-  //      &.visible {
-  //        opacity : 1;
-  //
-  //        &:active {
-  //          opacity : 0.3;
-  //        }
-  //      }
-  //    }
-  //  }
-  //}
-
 }
