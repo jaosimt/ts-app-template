@@ -7,10 +7,11 @@ import { ReactIcon } from './components/partials';
 import CollapsibleLink from './components/partials/collapsibleLink';
 import Modal from './components/partials/modal';
 import ToastContainer, { toast } from './components/partials/toast';
-import { targetUnicode } from './constants';
+import { targetUnicode, Theme } from './constants';
 import { NavigationMain } from './navs';
 import ContentRouter from './routes';
 import { getError } from './slices/error';
+import { RootState } from './store';
 import { classNames, hashCode } from './utils';
 import './App.scss';
 import './styles/animations.scss';
@@ -103,7 +104,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
             <NavigationMain theme={theme}/>
-            <ReactIcon className={'hover-scale'} style={{padding: 0, cursor: 'pointer'}} icon={theme === ('dark' as any) ? IoIosMoon : IoSunny}
+            <ReactIcon className={'hover-scale'} style={{padding: 0, cursor: 'pointer'}} icon={theme === Theme.DARK ? IoIosMoon : IoSunny}
                        size={28} onClick={() => dispatch(toggleTheme())}/>
         </header>
         <main>{<ContentRouter theme={theme}/>}</main>
@@ -114,7 +115,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     </>);
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
     error: getError(state),
     theme: getTheme(state),
 });

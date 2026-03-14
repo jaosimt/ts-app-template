@@ -8,6 +8,8 @@ import {
 } from 'react-icons/md';
 import { RiArchiveDrawerFill } from 'react-icons/ri';
 import { useSearchParams } from 'react-router';
+import { ThemeProp } from '../../../App';
+import { Theme } from '../../../constants';
 import { ReactIcon } from '../../partials';
 import Box from '../../partials/box';
 import Drawer, { DrawerProps } from '../../partials/drawer';
@@ -35,7 +37,7 @@ const positionOptions = [
     }
 ];
 
-const DemoDrawer: FC = () => {
+const DemoDrawer: FC<{theme: ThemeProp}> = ({theme}) => {
     const {register} = useForm();
     const [searchParams] = useSearchParams();
 
@@ -57,11 +59,12 @@ const DemoDrawer: FC = () => {
     };
 
     const dropDownChangeHandler = (value: DropdownObjectOptions) => setPosition(value);
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
 
     return <div data-name={'modal-demo'} className={'flex-wrap justify-content-center gap-0p5-1'}>
         <Box
             label={'Drawer Props'}
-            className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+            className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
             <div className="pb-05">
                 <div className={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
                     <InputField

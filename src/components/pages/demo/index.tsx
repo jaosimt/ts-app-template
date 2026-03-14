@@ -1,10 +1,11 @@
 import {FC} from 'react';
 import {NavLink, Outlet, useLocation} from 'react-router';
 import styled from 'styled-components';
+import { Theme } from '../../../constants';
 import {classNames} from '../../../utils';
 import UnderConstruction from '../underConstruction';
 import {
-    $primaryColor, $primaryColorDark, $secondaryBaseColor, $secondaryBaseColorDark, $textColor, $textColorDark
+    $primaryColor, $primaryColorDark, $textColor, $textColorDark
 } from '../../../styles/variables';
 import {ThemeProp} from "../../../App";
 
@@ -30,16 +31,16 @@ const Nav = styled.nav<{
     a {
         border  : 1px solid transparent;
         padding : 0.5rem;
-        color   : ${props => props.$theme === 'dark' as any ? $textColorDark : $textColor} !important;
+        color   : ${props => props.$theme === Theme.DARK ? $textColorDark : $textColor} !important;
 
         &:hover {
-            color : ${props => props.$theme === 'dark' as any ? $primaryColorDark : $primaryColor} !important;
+            color : ${props => props.$theme === Theme.DARK ? $primaryColorDark : $primaryColor} !important;
         }
 
         &.active {
-            border-bottom-color : ${props => props.$theme === 'dark' as any ? $primaryColorDark : $primaryColor};
-            border-top-color    : ${props => props.$theme === 'dark' as any ? $primaryColorDark : $primaryColor};
-            color               : ${props => props.$theme === 'dark' as any ? $primaryColorDark : $primaryColor} !important;
+            border-bottom-color : ${props => props.$theme === Theme.DARK ? $primaryColorDark : $primaryColor};
+            border-top-color    : ${props => props.$theme === Theme.DARK ? $primaryColorDark : $primaryColor};
+            color               : ${props => props.$theme === Theme.DARK ? $primaryColorDark : $primaryColor} !important;
         }
     }
 
@@ -62,7 +63,8 @@ const Wrapper = styled.div<{
     border-radius    : 0.3rem;
     position         : relative;
     width            : calc(100% - 150px);
-    background-color : ${props => props.$theme === 'dark' as any ? $secondaryBaseColorDark : $secondaryBaseColor};
+    background-color : ${props => props.$theme === Theme.DARK ? '#221614' : '#f7e9e2'};
+    opacity          : 0.9;
 
     @media (max-width : 768px) {
         width            : 100%;

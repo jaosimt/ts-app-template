@@ -1,6 +1,8 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaRegWindowMaximize } from 'react-icons/fa6';
+import { ThemeProp } from '../../../App';
+import { Theme } from '../../../constants';
 import { isString } from '../../../utils';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
@@ -8,7 +10,7 @@ import Checkbox from '../../partials/checkbox';
 import InputField from '../../partials/inputField';
 import Modal, { ModalProps } from '../../partials/modal';
 
-const DemoModal: FC = () => {
+const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
     const {
         register,
     } = useForm();
@@ -39,6 +41,8 @@ const DemoModal: FC = () => {
 
         return str;
     })();
+
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
 
     return <div data-component={'modal-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
         {
@@ -120,7 +124,7 @@ const DemoModal: FC = () => {
         }
 
         <div className={'display-flex flex-wrap justify-content-center align-items-center gap-0p5-1'}>
-            <Box label={'Modal Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+            <Box label={'Modal Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
                 <Checkbox
                     label={'closeOnEscKey'}
                     name={'closeOnEscKey'}
@@ -156,7 +160,7 @@ const DemoModal: FC = () => {
                     })}
                 />
             </Box>
-            <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+            <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
                 <Button
                     style={{margin: 'auto auto'}}
                     className={'font-size-large'}

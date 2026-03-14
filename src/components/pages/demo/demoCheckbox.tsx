@@ -1,5 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { ThemeProp } from '../../../App';
+import { Theme } from '../../../constants';
 import Box from '../../partials/box';
 import Checkbox, { CheckboxProps } from '../../partials/checkbox';
 import Dropdown from '../../partials/dropdown';
@@ -7,7 +9,7 @@ import InputField from '../../partials/inputField';
 
 const positionOptions = ['left', 'right'];
 
-const DemoCheckbox: FC = () => {
+const DemoCheckbox: FC<{theme: ThemeProp}> = ({theme}) => {
     const {register} = useForm();
 
     const [myCheckbox, setMyCheckbox] = useState(false);
@@ -25,9 +27,10 @@ const DemoCheckbox: FC = () => {
     };
 
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
 
     return <div data-component={'checkbox-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-        <Box label={'Checkbox Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+        <Box label={'Checkbox Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
             <InputField label={'label'}
                         fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
             <InputField label={'labelWidth'} type={'number'} width={60}
@@ -44,7 +47,7 @@ const DemoCheckbox: FC = () => {
                 onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
             />
         </Box>
-        <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+        <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
             <Checkbox
                 name={'myCheckbox'}
                 checked={myCheckbox}

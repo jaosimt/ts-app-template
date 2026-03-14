@@ -2,10 +2,11 @@ import {RefObject, useEffect, useRef, useState} from 'react';
 import {NavLink, useLocation} from 'react-router';
 import './index.scss';
 import {useResizeObserver} from 'usehooks-ts';
+import { Theme } from '../constants';
 import {useOnScroll} from '../hooks';
 import {classNames, getRandStr} from '../utils';
 import {$secondaryColor, $secondaryColorDark} from "../styles/variables";
-import {ThemeProp} from "../App";
+import { ThemeProp } from '../App';
 
 export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
     const navRef = useRef<HTMLElement>(null);
@@ -66,7 +67,7 @@ export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
                 width: `${activeBar.width}px`,
                 marginBottom: '-21px',
                 transition: 'all 300ms ease-in-out, opacity 1400ms ease-in-out',
-                backgroundColor: theme === 'dark' as any ? $secondaryColorDark : $secondaryColor,
+                backgroundColor: theme === Theme.DARK ? $secondaryColorDark : $secondaryColor,
                 opacity: `${activeBar.opacity}`
             }}></div>
         }

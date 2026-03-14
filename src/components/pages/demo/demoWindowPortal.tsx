@@ -2,6 +2,8 @@ import { FC, useState } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { SlReload, SlScreenDesktop } from 'react-icons/sl';
 import styled from 'styled-components';
+import { ThemeProp } from '../../../App';
+import { Theme } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { decrementCounter, getCounter, incrementCounter, resetCounter } from '../../../slices/counter';
 import Box from '../../partials/box';
@@ -34,11 +36,13 @@ const Header = styled.h1`
     align-items: center;
 `
 
-const DemoWindowPortal: FC = () => {
+const DemoWindowPortal: FC<{theme: ThemeProp}> = ({theme}) => {
     const dispatch = useAppDispatch();
     const ctr = useAppSelector(getCounter);
 
     const [showPortal, setShowPortal] = useState(false);
+
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
 
     return <div data-component={'window-portal-demo'}>
         {showPortal && <WindowPortal
@@ -50,7 +54,7 @@ const DemoWindowPortal: FC = () => {
             </PortalContainer>
         </WindowPortal>}
 
-        <Box className={'translate absolute-center'} contentClassName={'display-flex flex-direction-column justify-self-center'}>
+        <Box className={'translate absolute-center'} contentClassName={'display-flex flex-direction-column justify-self-center'} borderColor={themedBoxBorderColor}>
             <div className={'display-flex justify-content-center align-items-center gap-0p5-1'}>
                 <span>Counter</span>
                 <div className={'display-flex gap-0p5 align-items-center'}>

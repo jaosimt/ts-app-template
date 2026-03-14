@@ -1,6 +1,7 @@
 import {FC, HTMLAttributes, memo, ReactNode, RefObject, useEffect, useRef, useState} from 'react';
 import {RxChevronLeft, RxChevronRight} from 'react-icons/rx';
 import {useResizeObserver} from 'usehooks-ts';
+import { Theme } from '../../../constants';
 import {CSSColors, CSSUnit} from '../../../types';
 import {classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase} from '../../../utils';
 import {ReactIcon} from '../index';
@@ -42,7 +43,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         contentPadding,
         type = 'plain',
         moveSelectedOnScroll = false,
-        activeItemColor = props.theme === 'dark' as any ? $accentColorDark : $accentColor,
+        activeItemColor = props.theme === Theme.DARK ? $accentColorDark : $accentColor,
         minContentHeight,
         onTabChange,
         rememberActiveTab,

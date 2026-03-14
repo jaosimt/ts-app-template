@@ -3,6 +3,9 @@ import { ImSpinner } from 'react-icons/im';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { ThemeProp } from '../../../App';
+import { Theme } from '../../../constants';
+import { getTheme } from '../../../slices/theme';
+import { RootState } from '../../../store';
 import { $accentColor, $accentColorDark } from '../../../styles/variables';
 import { CSSColors } from '../../../types';
 import { classNames } from '../../../utils';
@@ -59,7 +62,7 @@ const Spinner = styled.div<{ $color: CSSColors }>`
 `;
 
 const Loading: FC<LoadingProps> = (props) => {
-    const themed = props.theme ? props.theme === ('dark' as any) ? $accentColorDark : $accentColor : undefined;
+    const themed = props.theme ? props.theme === Theme.DARK ? $accentColorDark : $accentColor : undefined;
     const {
         borderWidth = undefined,
         padding = themed !== undefined,
@@ -97,8 +100,8 @@ const Loading: FC<LoadingProps> = (props) => {
     </Container>;
 };
 
-const mapStateToProps = (state: any) => ({
-    theme: state.theme,
+const mapStateToProps = (state: RootState) => ({
+    theme: getTheme(state)
 })
 
 export default connect(mapStateToProps)(memo(Loading));

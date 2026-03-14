@@ -3,6 +3,8 @@ import { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 're
 import { useForm } from 'react-hook-form';
 import { TbBrandReact } from 'react-icons/tb';
 import styled from 'styled-components';
+import { ThemeProp } from '../../../App';
+import { Theme } from '../../../constants';
 import { HSLString } from '../../../types';
 import { generateAnalogousPalette, hslToHex } from '../../../utils';
 import Box from '../../partials/box';
@@ -78,7 +80,7 @@ const Note = styled.i`
     grid-area: note;
 `;
 
-const DemoInputField: FC = () => {
+const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
     const {
         register,
         formState: {errors}
@@ -149,13 +151,15 @@ const DemoInputField: FC = () => {
         timeoutRef.current = setTimeout(() => inputRefs.current[name]?.focus(), 100);
     };
 
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+
     const tabItems: TabItemType[] = [
         {
             name: 'Color Palette Generator',
             content: <>
                 <div className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
                     <Box label={'InputField Props'} borderRadius={7}
-                         className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+                         className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
                         <InputField
                             type={'number'}
                             label={'width'}
@@ -204,7 +208,7 @@ const DemoInputField: FC = () => {
                     </Box>
 
                     <Box label={'InputFields'} borderRadius={7}
-                         className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+                         className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
                         <div>
                             <form noValidate>
                                 <GridContainer className="colored-demo-label">

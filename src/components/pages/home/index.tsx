@@ -4,6 +4,7 @@ import {BiLogoTypescript} from 'react-icons/bi';
 import {FaCircleInfo, FaReact} from 'react-icons/fa6';
 import {Link} from 'react-router';
 import styled from 'styled-components';
+import { Theme } from '../../../constants';
 import logo from '../../../images/logo.svg';
 import logoDark from '../../../images/logoDark.svg';
 import redux from '../../../images/redux.svg';
@@ -271,7 +272,7 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                     </div>
                 </div>
                 <div className={'display-flex justify-content-right align-items-center'}>
-                    <img width={'100%'} className={'spin-700'} src={theme === 'dark' as any ? logoDark : logo} alt=""/>
+                    <img width={'100%'} className={'spin-700'} src={theme === Theme.DARK ? logoDark : logo} alt=""/>
                 </div>
             </WrappingDiv>
 

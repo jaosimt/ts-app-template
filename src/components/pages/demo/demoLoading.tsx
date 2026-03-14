@@ -1,6 +1,8 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDebounceCallback } from 'usehooks-ts';
+import { ThemeProp } from '../../../App';
+import { Theme } from '../../../constants';
 import Box from '../../partials/box';
 import Checkbox from '../../partials/checkbox';
 import Dropdown from '../../partials/dropdown';
@@ -10,7 +12,7 @@ import { toast } from '../../partials/toast';
 
 const positionOptions = ['fixed', 'absolute'];
 
-const DemoLoading: FC = () => {
+const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
     const {register} = useForm();
 
     const [props, setProps] = useState<LoadingProps>({
@@ -41,8 +43,10 @@ const DemoLoading: FC = () => {
         });
     }
 
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+
     return <div data-component={'loading-demo'} className={'display-inline-flex flex-direction-column height-100p gap-0p5 width-100p'}>
-        <Box label={'Modal Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+        <Box label={'Modal Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
             <InputField type={'number'} width={60} label={'borderWidth'}
                         fieldRegister={register('borderWidth', {
                             value: props.borderWidth,
