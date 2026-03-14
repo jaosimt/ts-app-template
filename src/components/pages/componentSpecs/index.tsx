@@ -1,6 +1,7 @@
 import { CSSProperties, FC, Fragment } from 'react';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import styled from 'styled-components';
+import { Theme } from '../../../constants';
 import { classNames } from '../../../utils';
 import Tab, { TabItemType } from '../../partials/tab';
 import SpecsBox from './specs/box';
@@ -23,10 +24,10 @@ export interface SelectedThemeProps {
 }
 
 // Define the type for the theme object
-type Theme = Record<string, CSSProperties>;
+type ThemeType = Record<string, CSSProperties>;
 
 // Map of theme names to imported theme objects
-export const themes: Record<string, Theme> = {
+export const themes: Record<string, ThemeType> = {
     'oneLight': oneLight,
     'oneDark': oneDark,
 };
@@ -59,15 +60,15 @@ const Grid = styled.div<{
 
     > * {
         padding: 0.5rem;
-        border-left: ${props => `1px solid ${props.$theme === 'dark' as any ? $secondaryBaseColorDark : $secondaryBaseColor}`};
-        border-bottom: ${props => `1px solid ${props.$theme === 'dark' as any ? $secondaryBaseColorDark : $secondaryBaseColor}`};
+        border-left: ${props => `1px solid ${props.$theme === Theme.DARK ? $secondaryBaseColorDark : $secondaryBaseColor}`};
+        border-bottom: ${props => `1px solid ${props.$theme === Theme.DARK ? $secondaryBaseColorDark : $secondaryBaseColor}`};
 
         &:nth-child(-n+4) {
-            border-top: ${props => `1px solid ${props.$theme === 'dark' as any ? $secondaryBaseColorDark : $secondaryBaseColor}`};
+            border-top: ${props => `1px solid ${props.$theme === Theme.DARK ? $secondaryBaseColorDark : $secondaryBaseColor}`};
         }
 
         &:nth-child(4n) {
-            border-right: ${props => `1px solid ${props.$theme === 'dark' as any ? $secondaryBaseColorDark : $secondaryBaseColor}`};
+            border-right: ${props => `1px solid ${props.$theme === Theme.DARK ? $secondaryBaseColorDark : $secondaryBaseColor}`};
         }
 
         .mobile-only {
@@ -104,7 +105,7 @@ const Grid = styled.div<{
 
 const ComponentSpecs: FC<{ theme: ThemeProp }> = ({theme}) => {
     // const [selectedTheme, setSelectedTheme] = useState<string>(sessionStorage.getItem('rshTheme') || 'nightOwl');
-    const selectedTheme = theme === ('dark' as any) ? 'oneLight' : 'oneDark';
+    const selectedTheme = theme === Theme.DARK ? 'oneLight' : 'oneDark';
 
     const tabData: TabItemType[] = [
         {

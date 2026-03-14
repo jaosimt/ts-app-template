@@ -2,6 +2,8 @@ import Tippy from '@tippyjs/react';
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoIosSave } from 'react-icons/io';
+import { ThemeProp } from '../../../App';
+import { Theme } from '../../../constants';
 import Box from '../../partials/box';
 import Button, { ButtonProps } from '../../partials/button';
 import Checkbox from '../../partials/checkbox';
@@ -11,7 +13,7 @@ import Modal from '../../partials/modal';
 
 const alignOptions = ['left', 'center', 'right', 'space-between'];
 
-const DemoButton: FC = () => {
+const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
     const {register} = useForm();
 
     const [modal, setModal] = useState(false);
@@ -28,9 +30,10 @@ const DemoButton: FC = () => {
     };
 
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
 
     return <div data-component={'button-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-        <Box label={'Button Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+        <Box label={'Button Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
             <Checkbox label={'disabled'} labelPosition={'left'} name={'disabled'}
                       checked={props.disabled} onChange={propsChangeHandler}/>
             <div className="display-flex gap-0p1 align-items-center">
@@ -52,7 +55,7 @@ const DemoButton: FC = () => {
                             onChange: propsChangeHandler
                         })}/>
         </Box>
-        <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+        <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
             <Button
                 icon={icon ? IoIosSave : undefined}
                 disabled={props.disabled || modal}

@@ -1,9 +1,17 @@
 import { FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { Theme } from '../../../constants';
+import { getTheme } from '../../../slices/theme';
+import { RootState } from '../../../store';
 import { CSSColors, CSSUnit } from '../../../types';
-import { getTextWidth, parseCSSUnit } from '../../../utils';
-import { $secondaryBackgroundColor, $secondaryBackgroundColorDark } from '../../../styles/variables';
-import {ThemeProp} from "../../../App";
+import { getTextWidth, isString, parseCSSUnit } from '../../../utils';
+import {
+    $secondaryBackgroundColor,
+    $secondaryBackgroundColorDark,
+    $secondaryBaseColor, $secondaryBaseColorDark
+} from '../../../styles/variables';
+import { ThemeProp } from '../../../App';
 
 export type LabelPositionType =
     'top-left'
@@ -57,7 +65,7 @@ const Container = styled.section<{
 `;
 
 const Label = styled.h5<{
-    $background: CSSColors,
+    $labelBackgroundColor: CSSColors,
     $borderWidth: CSSUnit | 'inherit',
     $borderColor: CSSColors,
     $borderRadius: CSSUnit,
@@ -70,9 +78,9 @@ const Label = styled.h5<{
     $onLabelClick?: Function,
 }>`
     cursor: ${props => props.$onLabelClick ? 'pointer' : 'default'};
-    background-color: ${props => props.$background};
+    background-color: ${props => props.$labelBackgroundColor};
     border-width: ${props => props.$borderWidth};
-    border-style: inherit;
+    border-style: solid;
     border-color: ${props => props.$borderColor};
     border-radius: ${props => props.$borderRadius};
     color: ${props => props.$color};
@@ -159,7 +167,7 @@ const Box: FC<BoxProps> = (props) => {
     const {
         backgroundColor,
         border = true,
-        borderColor = '#ccc',
+        borderColor,
         borderRadius = 7,
         children,
         className,
@@ -214,12 +222,15 @@ const Box: FC<BoxProps> = (props) => {
         onLabelClick && onLabelClick();
     };
 
+    const themedBorderColor = isString(borderColor, true) ? borderColor as CSSColors : (theme === Theme.DARK ? $secondaryBaseColorDark : $secondaryBaseColor);
+    const themedLabelBackgroundColor = isString(labelBackgroundColor, true) ? labelBackgroundColor as CSSColors : (theme === Theme.DARK ? $secondaryBackgroundColorDark : $secondaryBackgroundColor);
+
     return <Container
         data-component={'box'}
         className={className}
         $backgroundColor={backgroundColor}
         $border={border && border !== 'label-only' ? '1px' : 0}
-        $borderColor={borderColor}
+        $borderColor={themedBorderColor}
         $borderRadius={parseCSSUnit(borderRadius)}
         $marginTop={label && !tight ? '0.5rem' : 0}
         $padding={tight ? 0 : padding}
@@ -230,11 +241,11 @@ const Box: FC<BoxProps> = (props) => {
             {label && <Label
                 ref={labelRef}
                 onClick={labelClinkHandler}
-                $background={labelBackgroundColor || (theme === 'dark' as any ? $secondaryBackgroundColorDark : $secondaryBackgroundColor)}
-                $borderWidth={border === 'label-only' ? '1px' : 'inherit'}
-                $borderColor={borderColor}
+                $labelBackgroundColor={themedLabelBackgroundColor}
+                $borderWidth={!border ? 0 : '1px'}
+                $borderColor={themedBorderColor}
                 $borderRadius={titleBorderRadius}
-                $color={labelColor}
+                $color={labelColor || (theme === Theme.DARK ? $secondaryBackgroundColor : $secondaryBackgroundColorDark)}
                 $margin={tight ? border === 'label-only' ? '0.1rem' : '0.1rem' : '-0.4rem 0 0 0'}
                 $fontSize={labelSize}
                 $labelPosition={labelPosition}
@@ -260,4 +271,7 @@ const Box: FC<BoxProps> = (props) => {
 };
 
 
-export default memo(Box);
+const mapStateToProps = (state: RootState) => ({
+    theme: getTheme(state),
+});
+export default connect(mapStateToProps)(memo(Box));

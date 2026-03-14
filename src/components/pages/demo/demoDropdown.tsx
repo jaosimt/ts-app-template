@@ -8,6 +8,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight, oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import styled from 'styled-components';
 import { ThemeProp } from '../../../App';
+import { Theme } from '../../../constants';
 import { isNullOrUndefined, isString } from '../../../utils';
 import Box from '../../partials/box';
 import Checkbox from '../../partials/checkbox';
@@ -127,8 +128,8 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
 
     const labelAlignChangeHandler = (value: any) => setProps({...props, labelAlign: value.value});
     const dropdownChangeHandler = (value: any) => setSelected(value);
-    const selectedTheme = theme === ('dark' as any) ? oneLight : oneDark;
-    const themedBoxBorderColor = theme === 'light' as any ? '#000' : '#fff';
+    const selectedTheme = theme === Theme.DARK ? oneLight : oneDark;
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
 
     return <div data-component={'checkbox-demo'} className={'display-flex align-items-center flex-direction-column gap-0p5-1'}>
         <Box label={'Dropdown Props'} className={'justify-self-center'} borderColor={themedBoxBorderColor}>

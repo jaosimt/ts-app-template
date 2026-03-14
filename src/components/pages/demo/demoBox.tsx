@@ -1,5 +1,7 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { ThemeProp } from '../../../App';
+import { Theme } from '../../../constants';
 import { isString } from '../../../utils';
 import { createLink } from '../../../utils/ext';
 import Box, { BoxProps } from '../../partials/box';
@@ -11,7 +13,7 @@ const borderOptions = ['true', 'false', 'label-only'];
 const labelPositionOptions = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'];
 const labelSizeOptions = ['small', 'medium', 'large'];
 
-const DemoBox:FC = () => {
+const DemoBox:FC<{theme: ThemeProp}> = ({theme}) => {
     const {register} = useForm();
 
     const [props, setProps] = useState<Partial<BoxProps>>({
@@ -42,8 +44,10 @@ const DemoBox:FC = () => {
         // eslint-disable-next-line
     }, [onLabelClick]);
 
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+
     return <div data-component={'tab-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-        <Box label={'Box Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+        <Box label={'Box Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
             <InputField label={'label'} fieldRegister={register('label', {onChange: propsChangeHandler})}/>
             <InputField disabled={!isString(props.label, true)} label={'labelColor'} fieldRegister={register('labelColor', {onChange: propsChangeHandler})}/>
             <InputField disabled={!isString(props.label, true)} label={'labelBackgroundColor'} fieldRegister={register('labelBackgroundColor', {onChange: propsChangeHandler})}/>
@@ -70,7 +74,6 @@ const DemoBox:FC = () => {
                 options={borderOptions}
                 selected={props.border as any}
                 label={'border'}
-                disabled={!isString(props.label, true)}
                 onChange={(value: string) => dropDownChangeHandler('border', value)}
             />
             <InputField width={50} disabled={props.border === false} label={'borderRadius'} fieldRegister={register('borderRadius', {value: props.borderRadius, onChange: propsChangeHandler})}/>

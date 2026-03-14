@@ -25,18 +25,18 @@ const ContentRouter = ({theme}: { theme: ThemeProp }) => {
             <Route path={`/specs`} element={<ComponentSpecs theme={theme}/>}/>
             <Route path={`/demo`} element={<Demo theme={theme}/>}>
                 <Route index element={<Navigate to={`/demo/box`} replace/>}/>
-                <Route path={`/demo/loading`} element={<DemoLoading/>}/>
-                <Route path={`/demo/box`} element={<DemoBox/>}/>
+                <Route path={`/demo/loading`} element={<DemoLoading theme={theme}/>}/>
+                <Route path={`/demo/box`} element={<DemoBox theme={theme}/>}/>
                 <Route path={`/demo/dropdown`} element={<DemoDropdown theme={theme}/>}/>
-                <Route path={`/demo/checkbox`} element={<DemoCheckbox/>}/>
-                <Route path={`/demo/button`} element={<DemoButton/>}/>
-                <Route path={`/demo/input-field`} element={<DemoInputField/>}/>
+                <Route path={`/demo/checkbox`} element={<DemoCheckbox theme={theme}/>}/>
+                <Route path={`/demo/button`} element={<DemoButton theme={theme}/>}/>
+                <Route path={`/demo/input-field`} element={<DemoInputField theme={theme}/>}/>
                 <Route path={`/demo/login`} element={<Login/>}/>
-                <Route path={`/demo/drawer`} element={<DemoDrawer/>}/>
-                <Route path={`/demo/modal`} element={<DemoModal/>}/>
-                <Route path={`/demo/toast`} element={<DemoToast/>}/>
+                <Route path={`/demo/drawer`} element={<DemoDrawer theme={theme}/>}/>
+                <Route path={`/demo/modal`} element={<DemoModal theme={theme}/>}/>
+                <Route path={`/demo/toast`} element={<DemoToast theme={theme}/>}/>
                 <Route path={`/demo/tabs`} element={<DemoTabs/>}/>
-                <Route path={`/demo/window-portal`} element={<DemoWindowPortal/>}/>
+                <Route path={`/demo/window-portal`} element={<DemoWindowPortal theme={theme}/>}/>
             </Route>
             <Route path="*" element={<NotFound/>}/>
         </Routes>

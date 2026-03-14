@@ -10,7 +10,9 @@ import {
     TbBoxAlignTopRightFilled
 } from 'react-icons/tb';
 import styled from 'styled-components';
+import { ThemeProp } from '../../../App';
 import { ApplicationError } from '../../../class';
+import { Theme } from '../../../constants';
 import { useAppDispatch } from '../../../hooks';
 import { setError } from '../../../slices/error';
 import { isString } from '../../../utils';
@@ -58,7 +60,7 @@ const Container = styled.div`
     }
 `;
 
-const DemoToast: FC = () => {
+const DemoToast: FC<{theme: ThemeProp}> = ({theme}) => {
     const dispatch = useAppDispatch();
 
     const [selectedType, setSelectedType] = useState<DropdownObjectOptions>(toastTypes[3]);
@@ -96,8 +98,10 @@ const DemoToast: FC = () => {
         // eslint-disable-next-line
     }, [selectedTheme]);
 
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+
     return <Container data-component={'toast-demo'}>
-        <Box className={'justify-self-center'}>
+        <Box className={'justify-self-center'} borderColor={themedBoxBorderColor}>
             <div className="display-flex flex-direction-column justify-content-center flex-wrap gap-0p5-1">
                 <div className={'pb-0p5 display-flex flex-direction-column gap-0p5'}>
                     <InputField wrapperClassName={'flex-direction-column align-items-top-i'} type={'textarea'} labelWidth={110} width={'100%'} label={'Toast Message'} style={{flexDirection: 'column'}}
