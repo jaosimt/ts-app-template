@@ -6,10 +6,11 @@ import {
     IoIosAlert,
     IoIosCheckmarkCircle
 } from 'react-icons/io';
+import { useLocation } from 'react-router';
 import styled from 'styled-components';
-import { useAppDispatch } from '../../../hooks';
+import { useAppDispatch, usePrevious } from '../../../hooks';
 import { CSSUnit } from '../../../types';
-import { isString, parseCSSUnit } from '../../../utils';
+import { isNullOrUndefined, isString, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
 import { removeToast } from '../slices/toast';
 import { ToastPosition, ToastTheme, ToastType, toastTopZIndex } from './index';
@@ -99,9 +100,11 @@ const ProgressBar = styled.div<{
 
 const Toast: FC<any> = ({id: elId, toast, zIndex, selectElementOnTop}) => {
     const dispatch = useAppDispatch();
+    const location = useLocation();
 
     const {message, options} = toast;
     const {theme = 'outlined', type = 'info', position = 'top-right', duration = 0, width = 200, omitIcon = false} = options || {};
+    const {closeOnPageChange = type !== 'error'} = options || {};
 
     const progressRef = useRef<HTMLDivElement>(null);
     const hovered = useRef(false);
@@ -120,6 +123,14 @@ const Toast: FC<any> = ({id: elId, toast, zIndex, selectElementOnTop}) => {
     });
     const [top, setTop] = useState<CSSUnit>('-7em');
     const [opacity, setOpacity] = useState<number>(1);
+
+    const prevPathname = usePrevious(location.pathname);
+
+    useEffect(() => {
+        if (isNullOrUndefined(prevPathname) || !closeOnPageChange) return;
+        if (location.pathname !== prevPathname) closeHandler();
+        // eslint-disable-next-line
+    }, [location.pathname]);
 
     useEffect(() => {
         setTop(`${toast.top}px`);

@@ -5,6 +5,7 @@ import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 import {$baseColor, $baseColorDark, $primaryColor, $primaryColorDark} from "../../../../styles/variables";
 
+// noinspection JSXUnresolvedComponent
 const code = `<Checkbox 
     name={'myCheckbox'} 
     checked={true} 

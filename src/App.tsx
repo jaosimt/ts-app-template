@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import {IoCloudOffline, IoLogoReact, IoMoon, IoSunny} from 'react-icons/io5';
+import { IoIosMoon } from 'react-icons/io';
+import {IoCloudOffline, IoLogoReact, IoSunny} from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { Link, useLocation } from 'react-router';
 import { ReactIcon } from './components/partials';
@@ -102,7 +103,8 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
             <NavigationMain theme={theme}/>
-            <ReactIcon icon={theme === ('dark' as any) ? IoMoon : IoSunny } size={54} onClick={()=> dispatch(toggleTheme())}/>
+            <ReactIcon className={'hover-scale'} style={{padding: 0, cursor: 'pointer'}} icon={theme === ('dark' as any) ? IoIosMoon : IoSunny}
+                       size={28} onClick={() => dispatch(toggleTheme())}/>
         </header>
         <main>{<ContentRouter theme={theme}/>}</main>
         <footer className={'display-flex justify-content-space-between align-items-center'}>

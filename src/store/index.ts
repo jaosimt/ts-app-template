@@ -32,21 +32,7 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredPaths: [
-                    'toast.0.message.$$typeof',
-                    'toast.0.message.type',
-                    'toast.0.message.props.children.0.$$typeof',
-                    'toast.0.message.props.children.1.$$typeof',
-                    'toast.0.message.props.children.1.type',
-                    'toast.0.message.props.children.1.props.children.$$typeof',
-                    'toast.0.message.props.children.1.props.children.type',
-                    'toast.1.message.$$typeof',
-                    'toast.1.message.type',
-                    'toast.1.message.props.children.0.$$typeof',
-                    'toast.1.message.props.children.1.$$typeof',
-                    'toast.2.message.type',
-                    'toast.2.message.$$typeof',
-                    'toast.2.message.props.children.0.$$typeof',
-                    'toast.2.message.props.children.1.$$typeof',
+                    /^toast.\d*/,
                     'error.error'
                 ],
                 ignoredActions: [

@@ -1,3 +1,5 @@
+// noinspection JSUnresolvedReference,JSXUnresolvedComponent
+
 import { FC } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
