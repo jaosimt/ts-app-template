@@ -27,7 +27,7 @@ const ContentRouter = ({theme}: { theme: ThemeProp }) => {
                 <Route index element={<Navigate to={`/demo/box`} replace/>}/>
                 <Route path={`/demo/loading`} element={<DemoLoading/>}/>
                 <Route path={`/demo/box`} element={<DemoBox/>}/>
-                <Route path={`/demo/dropdown`} element={<DemoDropdown/>}/>
+                <Route path={`/demo/dropdown`} element={<DemoDropdown theme={theme}/>}/>
                 <Route path={`/demo/checkbox`} element={<DemoCheckbox/>}/>
                 <Route path={`/demo/button`} element={<DemoButton/>}/>
                 <Route path={`/demo/input-field`} element={<DemoInputField/>}/>
