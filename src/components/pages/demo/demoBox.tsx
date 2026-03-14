@@ -71,6 +71,7 @@ const DemoBox:FC<{theme: ThemeProp}> = ({theme}) => {
                 <span className={'font-size-small color-light-gray ml-0p5'}>{`() => alert('Hello, world!')`}</span>
             </div>
             <Dropdown
+                disablePredicate={(option: string) => option === 'label-only' && !isString(props.label, true)}
                 options={borderOptions}
                 selected={props.border as any}
                 label={'border'}

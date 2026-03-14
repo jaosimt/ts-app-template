@@ -3,6 +3,7 @@ import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaAlignCenter, FaAlignLeft, FaAlignRight, FaDog, FaReact } from 'react-icons/fa6';
 import { GiFox, GiRiver } from 'react-icons/gi';
+import { LiaPoopSolid } from 'react-icons/lia';
 import { RxSpaceBetweenHorizontally } from 'react-icons/rx';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight, oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -18,13 +19,23 @@ import InputField from '../../partials/inputField';
 const objectOptionsCode = `[
     {label: <span className={'color-red'}>The quick brown fox</span>, value: 'The quick brown fox', icon: GiFox},
     {label: <span className={'color-green'}>jumps over the lazy dog</span>, value: 'jumps over the lazy dog', icon: FaDog},
-    {label: <span className={'color-blue'}>near the bunk of the river</span>, value: 'near the bunk of the river', icon: GiRiver}
+    {label: <span className={'color-blue'}>near the bunk of the river</span>, value: 'near the bunk of the river', icon: GiRiver},
+    {label: <span className={'color-blue'}>and I wonder who cares!</span>, value: 'and I wonder who cares!', icon: LiaPoopSolid}
 ]`;
+
 const stringOptionsCode = `[
     'The quick brown fox', 
     'jumps over the lazy dog', 
-    'near the bunk of the river'
+    'near the bunk of the river',
+    'and I wonder who cares!'
 ]`;
+
+const disablePredicateCode = `(o: string) => {
+    return o === 'and I wonder who cares!'
+}`;
+const disablePredicateCodeObject = `(o: DropdownObjectOptions) => {
+    return o.value === 'and I wonder who cares!'   
+}`;
 
 const objectOptions = [
     {
@@ -39,10 +50,14 @@ const objectOptions = [
         label: <span className={'color-blue'}>near the bunk of the river</span>,
         value: 'near the bunk of the river',
         icon: GiRiver
+    }, {
+        label: <span className={'color-blue'}>and I wonder who cares!</span>,
+        value: 'and I wonder who cares!',
+        icon: LiaPoopSolid
     }
 ];
 
-const stringOptions = ['The quick brown fox', 'jumps over the lazy dog', 'near the bunk of the river'];
+const stringOptions = ['The quick brown fox', 'jumps over the lazy dog', 'near the bunk of the river', 'and I wonder who cares!'];
 
 const alignOptions = [
     {
@@ -198,9 +213,22 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                           checked={props.disabled} onChange={propsChangeHandler}/>
 
             </div>
+            <div className={'display-flex justify-content-center mt-0p5'}>
+                <Box tight={true} borderColor={themedBoxBorderColor} label={'disablePredicate'} labelPosition={'top-right'}>
+                    <SyntaxHighlighter
+                        codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                        showLineNumbers={true}
+                        language="js"
+                        customStyle={{padding: '0.5rem', margin: 0, border: 'none', borderRadius: 0}}
+                        style={selectedTheme}
+                    >
+                        {options.asObj ? disablePredicateCodeObject : disablePredicateCode}
+                    </SyntaxHighlighter>
+                </Box>
+            </div>
         </Box>
         <Container>
-            <Box label={'Dropdown'} className={'justify-self-center'}
+            <Box width={395} label={'Dropdown'} className={'justify-self-center'}
                  contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
                 <div className="pb-0p5">
                     <Dropdown
@@ -211,11 +239,12 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                         labelAlign={props.labelAlign}
                         labelWidth={props.labelWidth}
                         disabled={props.disabled}
+                        disablePredicate={(o: string|DropdownObjectOptions) => typeof o === 'object' ? o.value === 'and I wonder who cares!'  : o === 'and I wonder who cares!'}
                         onChange={dropdownChangeHandler}
                     />
                 </div>
             </Box>
-            <Box label={'selected'} className={'justify-self-center'}
+            <Box width={395} label={'selected'} className={'justify-self-center'}
                  contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
                 <pre className={'pb-0p5'}>
                     {JSON.stringify(selected, (k, v) => k.startsWith('_') ? undefined : v, 2)}
