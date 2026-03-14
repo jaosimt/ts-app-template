@@ -14,8 +14,7 @@ const root = ReactDOM.createRoot(
 );
 
 const LazyAppRetry = LazyRetry(() => import('./App'));
-const loading = <Loading topText={'Loading application'} bottomText={'Please wait...'}
-                         borderColor={'#00cafd'}/>;
+const loading = <Loading topText={'Loading application'} bottomText={'Please wait...'}/>;
 root.render(
     <React.StrictMode>
         <Provider store={store}>

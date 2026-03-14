@@ -59,18 +59,19 @@ const Spinner = styled.div<{ $color: CSSColors }>`
 `;
 
 const Loading: FC<LoadingProps> = (props) => {
+    const themed = props.theme ? props.theme === ('dark' as any) ? $accentColorDark : $accentColor : undefined;
     const {
-        borderWidth,
-        padding = true,
+        borderWidth = undefined,
+        padding = themed !== undefined,
         boxShadow = false,
         position = 'fixed',
         size = 42,
-        borderColor = props.theme === ('dark' as any) ? $accentColorDark : $accentColor,
-        color = props.theme === ('dark' as any) ? $accentColorDark : $accentColor,
+        borderColor = themed as CSSColors,
+        color = themed as CSSColors,
         topText,
         bottomText,
         children,
-        backgroundColor
+        backgroundColor = 'transparent'
     } = props;
 
     return <Container
@@ -82,10 +83,10 @@ const Loading: FC<LoadingProps> = (props) => {
         $padding={padding}
     >
         <Spinner $color={color}>
-            {topText && <h4 className={'m-0 text-align-center'}>{topText}</h4>}
-            <ReactIcon className={classNames('spin-3', topText && 'mt-1', bottomText && 'mb-1')} size={size}
-                       icon={ImSpinner}/>
-            {bottomText && <h6 className={'m-0 text-align-center'}>{bottomText}</h6>}
+            {topText && <h4 style={{margin: 0, textAlign: 'center'}}>{topText}</h4>}
+            <ReactIcon style={{marginTop: topText ? '1rem' : 0, marginBottom: bottomText ? '1rem' : 0}}
+                       className={'spin-3'} size={size} icon={ImSpinner}/>
+            {bottomText && <h6 style={{margin: 0, textAlign: 'center'}}>{bottomText}</h6>}
         </Spinner>
         {
             children && <>
