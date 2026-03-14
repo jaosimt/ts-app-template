@@ -204,12 +204,11 @@ const Dropdown: FC<DropdownProps> = (props) => {
     }, [width]);
 
     useEffect(() => {
-        if (!show) return;
         updatePos();
-    }, [show]);
+        // eslint-disable-next-line
+    }, [show, listRef.current, wrapperRef.current]);
 
     useEffect(() => {
-        updatePos();
         setSelected(props_selected);
     }, [options, props_selected]);
 
