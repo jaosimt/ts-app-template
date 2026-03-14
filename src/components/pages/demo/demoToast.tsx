@@ -98,7 +98,7 @@ const DemoToast: FC<{theme: ThemeProp}> = ({theme}) => {
         // eslint-disable-next-line
     }, [selectedTheme]);
 
-    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
 
     return <Container data-component={'toast-demo'}>
         <Box className={'justify-self-center'} borderColor={themedBoxBorderColor}>

@@ -27,7 +27,7 @@ const DemoCheckbox: FC<{theme: ThemeProp}> = ({theme}) => {
     };
 
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
-    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
 
     return <div data-component={'checkbox-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
         <Box label={'Checkbox Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>

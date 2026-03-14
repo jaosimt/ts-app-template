@@ -44,7 +44,7 @@ const DemoBox:FC<{theme: ThemeProp}> = ({theme}) => {
         // eslint-disable-next-line
     }, [onLabelClick]);
 
-    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#fff';
+    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
 
     return <div data-component={'tab-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
         <Box label={'Box Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
