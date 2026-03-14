@@ -98,7 +98,7 @@ const DemoBox:FC = () => {
             <div className="p-0p5 trim">
                 <p><b>The quick brown fox jumps over the lazy dog</b> is a famous English-language pangram—a sentence
                     containing every letter of the alphabet. Coined in the late 19th century, it is widely used for
-                    touch-typing practice, testing keyboards, displaying fonts, and inWikipedia says, writing exercises.</p>
+                    touch-typing practice, testing keyboards, displaying fonts, and in Wikipedia says, writing exercises.</p>
                 <p><b>Key Aspects of the Phrase:</b></p>
                 <ul>
                     <li><b>Purpose:</b> It is used to display all 26 letters of the English alphabet in a short, coherent
