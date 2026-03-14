@@ -30,6 +30,7 @@ export interface DropdownProps {
     disabled?: boolean;
     className?: string;
     maxDropdownHeight?: CSSUnit;
+    disablePredicate?: Function;
 }
 
 export type DropdownObjectOptions = {
@@ -152,8 +153,13 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
             border-bottom: 1px solid ${$backgroundColor};
         }
     }
+    
+    &.disabled {
+        opacity: 0.1;
+        pointer-events: none;
+    }
 
-    &:not(.selected) {
+    &:not(.selected):not(.disabled) {
         &.scrolled,
         &:hover {
             color: ${$backgroundColor};
@@ -178,7 +184,8 @@ const Dropdown: FC<DropdownProps> = (props) => {
         labelWidth,
         labelAlign,
         icon,
-        onChange
+        onChange,
+        disablePredicate
     } = props;
 
     const listRef = useRef<any>(null);
@@ -217,6 +224,13 @@ const Dropdown: FC<DropdownProps> = (props) => {
     });
 
     useEffect(() => {
+        if (show) return;
+        if (JSON.stringify(scrolled) !== JSON.stringify(selected))
+            setScrolled(selected);
+        // eslint-disable-next-line
+    }, [show]);
+
+    useEffect(() => {
         if (!show) return;
         setShow(false);
         // eslint-disable-next-line
@@ -246,19 +260,29 @@ const Dropdown: FC<DropdownProps> = (props) => {
                 ? options.findIndex((o: any) => o.value === (scrolled as DropdownObjectOptions).value)
                 : options.findIndex(o => o === scrolled);
 
-            if (selectedIndex !== nextIndex) setSelected(options[nextIndex]);
+            const disabled = disablePredicate && disablePredicate(options[nextIndex]);
+
+            if (selectedIndex !== nextIndex && !disabled) setSelected(options[nextIndex]);
             else setShow(false);
         }
     }
 
     function arrowDownUpHandler(pressed: boolean, key: string) {
+        console.log('arrowDownUpHandler');
+
         if (options.length === 0) return;
+        console.log('xxx');
 
         if (pressed && listRef.current && show) {
+            console.log('key:', key);
             const optionsSize = options.length;
             let nextIndex = isO
                 ? options.findIndex((o: any) => o.value === (scrolled as DropdownObjectOptions).value)
                 : options.findIndex(o => o === scrolled);
+
+            if (nextIndex < 0) nextIndex = 0;
+
+            console.log('nextIndex:', nextIndex);
 
             switch (key) {
                 case 'ArrowDown':
@@ -270,6 +294,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
                 default:
                 // do nothing
             }
+            console.log('nextIndex:', nextIndex);
 
             setScrolled(options[nextIndex]);
         }
@@ -333,7 +358,8 @@ const Dropdown: FC<DropdownProps> = (props) => {
                         key={isO ? o.value : o}
                         className={classNames(
                             _selected === (isO ? o.value : o) && 'selected',
-                            _scrolled === (isO ? o.value : o) && 'scrolled'
+                            _scrolled === (isO ? o.value : o) && 'scrolled',
+                            disablePredicate !== undefined && disablePredicate(o) && 'disabled'
                         )}>
                         {isO && o.icon && <ReactIcon icon={o.icon}/>}
                         {isO ? o.label : o}

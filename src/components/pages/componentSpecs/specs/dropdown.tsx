@@ -77,6 +77,11 @@ const dropdownSpecsData: PropsListProps[] = [
         types: 'boolean',
         values: '',
         description: ['Sets the usability state of the dropdown']
+    }, {
+        name: 'disablePredicate',
+        types: 'Function',
+        values: [<span>{`e.g. (label: string) => option === "thisLabel"`}</span>, <br/>, <span>{`or (option: DropdownObjectOptions) => option.value === "thisValue"`}</span>],
+        description: ['Attaches a predicate method to disable a particular option given the condition is met']
     }
 ];
 
