@@ -47,7 +47,7 @@ const Container = styled.section<{
     border-color: ${props => props.$borderColor};
     border-radius: ${props => props.$borderRadius};
     margin-top: ${props => props.$marginTop};
-    min-width: ${props => `calc(${props.$labelWidth}px + 1rem + (${props.$padding} * 2))`};
+    min-width: ${props => `${props.$labelWidth + 14 + (parseFloat(String(props.$padding)) * 2)}px`};
     width: ${props => props.$width ? `${parseCSSUnit(props.$width as CSSUnit)}` : 'fit-content'};
     position: relative;
 
@@ -144,7 +144,7 @@ const Content = styled.div<{
     })()};
     min-width: fit-content;
     width: 100%;
-    padding-bottom: ${props => `${parseCSSUnit(props.$padding as CSSUnit)}`};
+    ${props => !props.$tight && `padding-bottom: ${parseCSSUnit(props.$padding as CSSUnit)}`};
 
     > :first-child {
         margin-top: 0;
@@ -226,34 +226,36 @@ const Box: FC<BoxProps> = (props) => {
         $width={width}
         $labelWidth={labelWidth}
     >
-        {label && <Label
-            ref={labelRef}
-            onClick={labelClinkHandler}
-            $background={labelBackgroundColor || (theme === 'dark' as any ? $secondaryBackgroundColorDark : $secondaryBackgroundColor)}
-            $borderWidth={border === 'label-only' ? '1px' : 'inherit'}
-            $borderColor={borderColor}
-            $borderRadius={titleBorderRadius}
-            $color={labelColor}
-            $margin={tight ? border === 'label-only' ? '0.1rem' : '0.1rem' : '-0.4rem 0 0 0'}
-            $fontSize={labelSize}
-            $labelPosition={labelPosition}
-            $labelWidth={labelWidth}
-            $tight={tight || false}
-            $onLabelClick={onLabelClick}
-        >{label}</Label>}
-        <Scroller data-name={'content-scroller'} $tight={tight || false} $padding={padding}>
-            <Content
-                data-name={'content'}
-                className={contentClassName}
-                $padding={padding}
+        <div style={{overflow: 'hidden', borderRadius: parseCSSUnit(borderRadius)}}>
+            {label && <Label
+                ref={labelRef}
+                onClick={labelClinkHandler}
+                $background={labelBackgroundColor || (theme === 'dark' as any ? $secondaryBackgroundColorDark : $secondaryBackgroundColor)}
+                $borderWidth={border === 'label-only' ? '1px' : 'inherit'}
+                $borderColor={borderColor}
+                $borderRadius={titleBorderRadius}
+                $color={labelColor}
+                $margin={tight ? border === 'label-only' ? '0.1rem' : '0.1rem' : '-0.4rem 0 0 0'}
+                $fontSize={labelSize}
                 $labelPosition={labelPosition}
+                $labelWidth={labelWidth}
                 $tight={tight || false}
-                $label={label}
-                $labelSize={labelSize}
-            >
-                {children}
-            </Content>
-        </Scroller>
+                $onLabelClick={onLabelClick}
+            >{label}</Label>}
+            <Scroller data-name={'content-scroller'} $tight={tight || false} $padding={padding}>
+                <Content
+                    data-name={'content'}
+                    className={contentClassName}
+                    $padding={padding}
+                    $labelPosition={labelPosition}
+                    $tight={tight || false}
+                    $label={label}
+                    $labelSize={labelSize}
+                >
+                    {children}
+                </Content>
+            </Scroller>
+        </div>
     </Container>;
 };
 

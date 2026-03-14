@@ -14,9 +14,9 @@ import Dropdown, { DropdownObjectOptions, DropdownProps } from '../../partials/d
 import InputField from '../../partials/inputField';
 
 const objectOptionsCode = `[
-    {label: <span className={'color-red'}>...</span>, value: ..., icon: GiFox},
-    {label: <span className={'color-green'}>...</span>, value: ..., icon: FaDog},
-    {label: <span className={'color-blue'}>...</span>, value: ..., icon: GiRiver}
+    {label: <span className={'color-red'}>The quick brown fox</span>, value: 'The quick brown fox', icon: GiFox},
+    {label: <span className={'color-green'}>jumps over the lazy dog</span>, value: 'jumps over the lazy dog', icon: FaDog},
+    {label: <span className={'color-blue'}>near the bunk of the river</span>, value: 'near the bunk of the river', icon: GiRiver}
 ]`;
 const stringOptionsCode = `[
     'The quick brown fox', 
@@ -127,9 +127,27 @@ const DemoDropdown: FC = () => {
     const labelAlignChangeHandler = (value: any) => setProps({...props, labelAlign: value.value});
     const dropdownChangeHandler = (value: any) => setSelected(value);
 
-    return <div data-component={'checkbox-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+    return <div data-component={'checkbox-demo'} className={'display-flex align-items-center flex-direction-column gap-0p5-1'}>
         <Box label={'Dropdown Props'} className={'justify-self-center'}>
             <div className={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
+                <div>
+                    <div className={'display-flex align-items-center gap-0p5'}>
+                        <Checkbox onChange={optionChangeHandler} name={'asObj'} label={'options'}
+                                  checked={options.asObj}/>
+                        <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as DropdownObjectOptions[]</span>
+                    </div>
+                    <Box tight={true} width={420}>
+                        <SyntaxHighlighter
+                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                            showLineNumbers={true}
+                            language="js"
+                            customStyle={{padding: '0.5rem', margin: 0, border: 'none'}}
+                            style={xonokai}
+                        >
+                            {objectOptionsCode}
+                        </SyntaxHighlighter>
+                    </Box>
+                </div>
                 <div>
                     <div className={'display-flex align-items-center gap-0p5'}>
                         <Checkbox onChange={optionChangeHandler} name={'asStr'} label={'options'}
@@ -137,31 +155,17 @@ const DemoDropdown: FC = () => {
                         <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as string[]</span>
                     </div>
 
-                    <SyntaxHighlighter
-                        codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-                        showLineNumbers={true}
-                        language="js"
-                        customStyle={{padding: '0.5rem', margin: 0}}
-                        style={xonokai}
-                    >
-                        {stringOptionsCode}
-                    </SyntaxHighlighter>
-                </div>
-                <div>
-                    <div className={'display-flex align-items-center gap-0p5'}>
-                        <Checkbox onChange={optionChangeHandler} name={'asObj'} label={'options'}
-                                  checked={options.asObj}/>
-                        <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as DropdownObjectOptions[]</span>
-                    </div>
-                    <SyntaxHighlighter
-                        codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-                        showLineNumbers={true}
-                        language="js"
-                        customStyle={{padding: '0.5rem', margin: 0}}
-                        style={xonokai}
-                    >
-                        {objectOptionsCode}
-                    </SyntaxHighlighter>
+                    <Box tight={true} width={420}>
+                        <SyntaxHighlighter
+                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                            showLineNumbers={true}
+                            language="js"
+                            customStyle={{padding: '0.5rem', margin: 0, border: 'none'}}
+                            style={xonokai}
+                        >
+                            {stringOptionsCode}
+                        </SyntaxHighlighter>
+                    </Box>
                 </div>
             </div>
             <div className="display-flex flex-wrap gap-0p5-1 mt-0p5 justify-content-center">
