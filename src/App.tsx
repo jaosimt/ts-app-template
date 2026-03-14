@@ -11,6 +11,7 @@ import { targetUnicode } from './constants';
 import { NavigationMain } from './navs';
 import ContentRouter from './routes';
 import { getError } from './slices/error';
+import { RootState } from './store';
 import { classNames, hashCode } from './utils';
 import './App.scss';
 import './styles/animations.scss';
@@ -114,7 +115,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     </>);
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
     error: getError(state),
     theme: getTheme(state),
 });

@@ -3,6 +3,8 @@ import { ImSpinner } from 'react-icons/im';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { ThemeProp } from '../../../App';
+import { getTheme } from '../../../slices/theme';
+import { RootState } from '../../../store';
 import { $accentColor, $accentColorDark } from '../../../styles/variables';
 import { CSSColors } from '../../../types';
 import { classNames } from '../../../utils';
@@ -97,8 +99,8 @@ const Loading: FC<LoadingProps> = (props) => {
     </Container>;
 };
 
-const mapStateToProps = (state: any) => ({
-    theme: state.theme,
+const mapStateToProps = (state: RootState) => ({
+    theme: getTheme(state)
 })
 
 export default connect(mapStateToProps)(memo(Loading));

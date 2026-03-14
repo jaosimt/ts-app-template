@@ -1,11 +1,14 @@
 import { FC, memo, useEffect, useRef, useState } from 'react';
 import { IconType } from 'react-icons';
 import { FaChevronDown } from 'react-icons/fa6';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
 import { useKeyPress, useOnScroll } from '../../../hooks';
+import { getTheme } from '../../../slices/theme';
+import { RootState } from '../../../store';
 import { CSSUnit } from '../../../types';
-import { classNames, isObject, parseCSSUnit } from '../../../utils';
+import { classNames, isObject, parseCSSUnit, Round } from '../../../utils';
 import { ReactIcon } from '../index';
 import {
     $backgroundColor,
@@ -112,7 +115,6 @@ const List = styled.div<{
     overflow-y: auto;
     z-index: 2;
     user-select: none;
-    width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
     background-color: #fff;
     border: 1px solid ${$buttonDefaultBorderColor};
     border-bottom-left-radius: 0.3rem;
@@ -191,22 +193,34 @@ const Dropdown: FC<DropdownProps> = (props) => {
         width: 'fit-content'
     });
 
-    useOnClickOutside([listRef, wrapperRef], handleClickOutside);
-
     const {width = 0} = useWindowSize();
-
+    useOnClickOutside([listRef, wrapperRef], handleClickOutside);
     useOnScroll(() => !show && setShow(false));
+    useKeyPress('ArrowDown', (pressed: boolean) => arrowDownUpHandler(pressed, 'ArrowDown'));
+    useKeyPress('ArrowUp', (pressed: boolean) => arrowDownUpHandler(pressed, 'ArrowUp'));
+    useKeyPress('Enter', enterKeyHandler);
+
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */ // I KNOW WHAT I AM DOING!!!
+    useEffect(() => {
+        if (!wrapperRef.current || !listRef.current) return;
+
+        const {left, bottom} = wrapperRef.current.getBoundingClientRect();
+        const {width} = listRef.current.getBoundingClientRect();
+
+        if (
+            dropDownPos.top !== Round(bottom, 3)
+            || dropDownPos.left !== Round(left, 3)
+            || dropDownPos.width !== Round(width, 3))
+        {
+            setDropdownPos({left: Round(left, 3), width: Round(width, 3), top: Round(bottom, 3)});
+        }
+    });
 
     useEffect(() => {
         if (!show) return;
         setShow(false);
         // eslint-disable-next-line
     }, [width]);
-
-    useEffect(() => {
-        updatePos();
-        // eslint-disable-next-line
-    }, [show, listRef.current, wrapperRef.current]);
 
     useEffect(() => {
         setSelected(props_selected);
@@ -218,10 +232,6 @@ const Dropdown: FC<DropdownProps> = (props) => {
         onChange && onChange(selected);
         // eslint-disable-next-line
     }, [selected]);
-
-    useKeyPress('ArrowDown', (pressed: boolean) => arrowDownUpHandler(pressed, 'ArrowDown'));
-    useKeyPress('ArrowUp', (pressed: boolean) => arrowDownUpHandler(pressed, 'ArrowUp'));
-    useKeyPress('Enter', enterKeyHandler);
 
     const isO = isObject(options[0]);
 
@@ -268,15 +278,6 @@ const Dropdown: FC<DropdownProps> = (props) => {
     function handleClickOutside() {
         if (!show) return;
         setShow(!show);
-    }
-
-    function updatePos() {
-        if (!wrapperRef.current && !listRef.current) return;
-
-        const {left, bottom} = wrapperRef.current.getBoundingClientRect();
-        const {width} = listRef.current.getBoundingClientRect();
-
-        setDropdownPos({left, width, top: bottom});
     }
 
     const _selected = String(isO ? (selected as DropdownObjectOptions).value : selected);
@@ -343,4 +344,8 @@ const Dropdown: FC<DropdownProps> = (props) => {
     </Container>;
 };
 
-export default memo(Dropdown);
+const mapStateToProps = (state: RootState) => ({
+    theme: getTheme(state)
+});
+
+export default connect(mapStateToProps)(memo(Dropdown));
