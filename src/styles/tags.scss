@@ -129,6 +129,10 @@ body {
     link {
       &:not(.nav-link) {
         color : v.$primaryColorDark;
+        
+        &:hover {
+          text-decoration : underline;
+        }
       }
     }
   }
@@ -142,6 +146,10 @@ body {
     link {
       &:not(.nav-link) {
         color : v.$primaryColor;
+        
+        &:hover {
+          text-decoration : underline;
+        }
       }
     }
   }
