@@ -7,24 +7,24 @@ select {
   background    : v.$baseColor;
   border-color  : v.$borderColorDefault;
   border-radius : 4px;
-
+  
   &:focus {
     outline : none;
   }
-
+  
   &:focus,
   &:hover {
     cursor           : pointer;
     background-color : v.$buttonPrimaryHoverColor;
     color            : v.$buttonPrimaryTextColor;
     border-color     : v.$buttonPrimaryBorderColor;
-
+    
     &:active {
       opacity : 0.3;
       color   : v.$inputTextColor;
     }
   }
-
+  
   &[disabled],
   &.disabled {
     pointer-events : none !important;
@@ -34,13 +34,13 @@ select {
 }
 
 code {
-  font-family      : v.$codeFontFamily;
-  padding          : 0.2rem;
-  display          : block;
-  unicode-bidi     : isolate;
-  white-space      : pre;
-  margin-block     : 1em 1em;
-  font-size        : smaller;
+  font-family  : v.$codeFontFamily;
+  padding      : 0.2rem;
+  display      : block;
+  unicode-bidi : isolate;
+  white-space  : pre;
+  margin-block : 1em 1em;
+  font-size    : smaller;
 }
 
 textarea {
@@ -60,25 +60,25 @@ input {
   min-height    : 33px;
   
   &::placeholder {
-    opacity: 0.3;
+    opacity : 0.3;
   }
   
   &:focus {
     outline      : none;
     border-color : v.$textColor !important;
   }
-
+  
   &.border-error {
     border : 1px solid v.$errorColor !important;
   }
-
+  
   &[disabled],
   &.disabled {
     pointer-events : none !important;
     color          : rgb(172 172 172);
     opacity        : 0.3;
   }
-
+  
   @media (max-width : 768px) {
     min-height : 28px;
     padding    : 0.3rem;
@@ -98,10 +98,10 @@ input {
 ol,
 ul {
   padding-inline-start : 1rem;
-
+  
   > li {
     font-family : inherit;
-
+    
     > ul {
       margin-bottom : 0.3rem;
     }
@@ -113,18 +113,18 @@ link {
   text-decoration : none;
   cursor          : pointer;
   font-weight     : 700;
-
+  
   &.color-inherit {
     color : inherit;
   }
 }
 
-div, body {
-  @include m.customScrollbar();
-}
-
 body {
   &.dark {
+    @include m.customScrollbar(v.$accentColorDark);
+    
+    * { @include m.customScrollbar(v.$accentColorDark); }
+    
     a,
     link {
       &:not(.nav-link) {
@@ -132,8 +132,12 @@ body {
       }
     }
   }
-
+  
   &.light {
+    @include m.customScrollbar(v.$accentColor);
+    
+    * { @include m.customScrollbar(v.$accentColor); }
+    
     a,
     link {
       &:not(.nav-link) {

@@ -11,7 +11,7 @@ import {$secondaryColor, $secondaryColorDark} from "../styles/variables";
 export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
     const navRef = useRef<HTMLElement>(null);
 
-    const location = useLocation();
+    const {pathname} = useLocation();
 
     const [abVisible, setAbVisible] = useState(true);
     const [activeBar, setActiveBar] = useState({
@@ -45,7 +45,7 @@ export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
         (JSON.stringify(nextActiveBar) !== JSON.stringify(activeBar)) && setActiveBar(nextActiveBar);
 
         // eslint-disable-next-line
-    }, [location.pathname, navRef.current, activeBar.transition]);
+    }, [pathname, navRef.current, activeBar.transition]);
 
     return <nav ref={navRef} data-nav={'top'} className={'position-relative'} style={{
         width: '100%',
