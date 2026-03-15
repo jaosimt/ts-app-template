@@ -1,13 +1,14 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { SlReload, SlScreenDesktop } from 'react-icons/sl';
 import styled from 'styled-components';
-import { Theme } from '../../../constants';
+import { beep, Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector, usePrevious } from '../../../hooks';
 import { decrementCounter, getCounter, incrementCounter, resetCounter } from '../../../slices/counter';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
+import { toast } from '../../partials/toast';
 import WindowPortal from '../windowPortal';
 
 const Counter = styled.span`
@@ -22,11 +23,19 @@ const Counter = styled.span`
     font-weight: bold;
 `;
 
-const DemoWindowPortal: FC<{theme: ThemeProp}> = ({theme}) => {
+const DemoWindowPortal: FC<{ theme: ThemeProp }> = ({theme}) => {
     const dispatch = useAppDispatch();
     const ctr = useAppSelector(getCounter);
 
     const [showPortal, setShowPortal] = useState(false);
+    const prev_showPortal = usePrevious(showPortal);
+
+    useEffect(() => {
+        if (prev_showPortal && !showPortal) {
+            beep(2);
+            toast({message: 'Portal is disconnected!', options: {type: 'warning', closeOnPageChange: false}});
+        }
+    }, [showPortal, prev_showPortal]);
 
     const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
 
@@ -45,7 +54,9 @@ const DemoWindowPortal: FC<{theme: ThemeProp}> = ({theme}) => {
             </div>
         </WindowPortal>}
 
-        <Box className={'translate absolute-center'} contentClassName={'display-flex flex-direction-column justify-self-center'} borderColor={themedBoxBorderColor}>
+        <Box className={'translate absolute-center'}
+             contentClassName={'display-flex flex-direction-column justify-self-center'}
+             borderColor={themedBoxBorderColor}>
             <div className={'display-flex justify-content-center align-items-center gap-0p5-1'}>
                 <span>Counter</span>
                 <div className={'display-flex gap-0p5 align-items-center'}>
