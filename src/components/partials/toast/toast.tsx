@@ -100,7 +100,7 @@ const ProgressBar = styled.div<{
 
 const Toast: FC<any> = ({id: elId, toast, zIndex, selectElementOnTop}) => {
     const dispatch = useAppDispatch();
-    const location = useLocation();
+    const {pathname} = useLocation();
 
     const {message, options} = toast;
     const {theme = 'outlined', type = 'info', position = 'top-right', duration = 0, width = 200, omitIcon = false} = options || {};
@@ -124,13 +124,13 @@ const Toast: FC<any> = ({id: elId, toast, zIndex, selectElementOnTop}) => {
     const [top, setTop] = useState<CSSUnit>('-7em');
     const [opacity, setOpacity] = useState<number>(1);
 
-    const prevPathname = usePrevious(location.pathname);
+    const prevPathname = usePrevious(pathname);
 
     useEffect(() => {
         if (isNullOrUndefined(prevPathname) || !closeOnPageChange) return;
-        if (location.pathname !== prevPathname) closeHandler();
+        if (pathname !== prevPathname) closeHandler();
         // eslint-disable-next-line
-    }, [location.pathname]);
+    }, [pathname]);
 
     useEffect(() => {
         setTop(`${toast.top}px`);

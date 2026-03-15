@@ -25,7 +25,7 @@ const WrappingDiv = styled.div`
     align-items: center;
     gap: 0.5rem 1rem;
     justify-content: space-between;
-    width: calc(100% - 4rem);
+    width: 100%;
 
     > :first-child {
         width : 70%;
@@ -120,7 +120,7 @@ const bundledLibs = () => <>
 
 const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
     return <div data-component={'home'}
-                className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-auto'}>
+                className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-auto pb-3'}>
         <div className={'display-flex flex-direction-column gap-1 justify-content-space-between'}>
             <div>
                 <h1 className={'m-0 accent-text'}>Templates are good!</h1>

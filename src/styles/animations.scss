@@ -1,14 +1,24 @@
-@use 'mixins' as m;
+@use "mixins" as m;
+@use "variables" as v;
 
 .spin { @include m.spin(); }
+
 .spin-3 { @include m.spin(3s); }
+
 .spin-7 { @include m.spin(7s); }
+
 .spin-21 { @include m.spin(21s); }
+
 .spin-28 { @include m.spin(28s); }
+
 .spin-35 { @include m.spin(35s); }
+
 .spin-42 { @include m.spin(42s); }
+
 .spin-42 { @include m.spin(49s); }
+
 .spin-70 { @include m.spin(70s); }
+
 .spin-700 { @include m.spin(700s); }
 
 .transition-200 {
@@ -24,16 +34,29 @@
 }
 
 .marquee {
-  position: relative;
-  width: 100vw;
-  max-width: 100%;
-  overflow-x: hidden;
-  height: 35px;
+  position   : fixed;
+  bottom     : 3rem;
+  width      : calc(100% - 4rem);
+  overflow-x : hidden;
+  height     : 35px;
   
   > div {
-    position: absolute;
-    //white-space: nowrap;
-    will-change: transform;
-    animation: marquee 49s linear infinite;
+    position    : absolute;
+    will-change : transform;
+    animation   : marquee 49s linear infinite;
+  }
+}
+
+body {
+  &.dark {
+    .marquee {
+      background-color : v.$baseColorDark;
+    }
+  }
+  
+  &.light {
+    .marquee {
+      background-color : v.$baseColor;
+    }
   }
 }

@@ -3,6 +3,7 @@ import { IoIosMoon } from 'react-icons/io';
 import {IoCloudOffline, IoLogoReact, IoSunny} from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { Link, useLocation } from 'react-router';
+import styled from 'styled-components';
 import { ReactIcon } from './components/partials';
 import CollapsibleLink from './components/partials/collapsibleLink';
 import Modal from './components/partials/modal';
@@ -19,6 +20,12 @@ import './styles/animations.scss';
 import './styles/tippy.scss';
 import {getTheme, toggleTheme} from "./slices/theme";
 import {useAppDispatch} from "./hooks";
+
+const StyledMain = styled.main<{
+    $fixed?: boolean;
+}>`
+    ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
+`;
 
 const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     const dispatch = useAppDispatch();
@@ -104,7 +111,11 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
             <ReactIcon className={'hover-scale'} style={{padding: 0, cursor: 'pointer'}} icon={theme === Theme.DARK ? IoIosMoon : IoSunny}
                        size={28} onClick={() => dispatch(toggleTheme())}/>
         </header>
-        <main>{<ContentRouter theme={theme}/>}</main>
+        <StyledMain $fixed={pathname === '/'}>
+            <div className="content-wrapper">
+                {<ContentRouter theme={theme}/>}
+            </div>
+        </StyledMain>
         <footer className={'display-flex justify-content-space-between align-items-center'}>
             <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
         </footer>
