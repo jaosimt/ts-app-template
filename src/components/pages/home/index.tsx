@@ -149,7 +149,8 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                             <Link className={'white-space-nowrap'} to={{pathname: `/demo/toast`}}>{`<Toast/>`}</Link>
                             <Link className={'white-space-nowrap'}
                                   to={{pathname: `/demo/window-portal`}}>{`<WindowPortal/>`}</Link>
-                            <span>{`<CollapsibleLink/>`}</span>
+                            <Link className={'white-space-nowrap'}
+                                  to={{pathname: `/demo/collapsible-link`}}>{`<CollapsibleLink/>`}</Link>
                             <h4 className={'secondary-text font-weight-normal m-0'}>
                                 Checkout <Link className={'white-space-nowrap'}
                                                to={{pathname: `/specs`}}>ComponentSpecs</Link> and/or <Link

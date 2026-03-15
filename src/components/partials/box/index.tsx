@@ -55,7 +55,7 @@ const Container = styled.section<{
     border-color: ${props => props.$borderColor};
     border-radius: ${props => props.$borderRadius};
     margin-top: ${props => props.$marginTop};
-    min-width: ${props => `${props.$labelWidth + 14 + (parseFloat(String(props.$padding)) * 2)}px`};
+    min-width: ${props => `${props.$labelWidth + 28 + (parseFloat(String(props.$padding)) * 2)}px`};
     width: ${props => props.$width ? `${parseCSSUnit(props.$width as CSSUnit)}` : 'fit-content'};
     position: relative;
 
