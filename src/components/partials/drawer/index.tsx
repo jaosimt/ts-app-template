@@ -2,8 +2,8 @@ import { FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
 import { RiArchiveDrawerFill } from 'react-icons/ri';
 import styled from 'styled-components';
 import { useOnClickOutside } from 'usehooks-ts';
+import { CSSColors, CSSUnit } from '../../../constants/types';
 import { useKeyPress } from '../../../hooks';
-import { CSSColors, CSSUnit } from '../../../types';
 import { isElementOnTop, parseCSSUnit, classNames, isString } from '../../../utils';
 import { ReactIcon } from '../index';
 

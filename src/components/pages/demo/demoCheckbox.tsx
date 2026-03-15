@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ThemeProp } from '../../../App';
 import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
 import Box from '../../partials/box';
 import Checkbox, { CheckboxProps } from '../../partials/checkbox';
 import Dropdown from '../../partials/dropdown';

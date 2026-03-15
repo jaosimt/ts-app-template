@@ -6,7 +6,7 @@ import { FaCircleXmark } from 'react-icons/fa6';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 import '../../../styles/tippy.scss';
-import { CSSColors, CSSUnit } from '../../../types';
+import { CSSColors, CSSUnit } from '../../../constants/types';
 import { classNames, parseCSSUnit } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
 import { ReactIcon } from '../index';

@@ -10,9 +10,9 @@ import {
     TbBoxAlignTopRightFilled
 } from 'react-icons/tb';
 import styled from 'styled-components';
-import { ThemeProp } from '../../../App';
 import { ApplicationError } from '../../../class';
 import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
 import { useAppDispatch } from '../../../hooks';
 import { setError } from '../../../slices/error';
 import { isString } from '../../../utils';

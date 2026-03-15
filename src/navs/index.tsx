@@ -3,10 +3,10 @@ import {NavLink, useLocation} from 'react-router';
 import './index.scss';
 import {useResizeObserver} from 'usehooks-ts';
 import { Theme } from '../constants';
+import { ThemeProp } from '../constants/interfaces';
 import {useOnScroll} from '../hooks';
 import {classNames, getRandStr} from '../utils';
 import {$secondaryColor, $secondaryColorDark} from "../styles/variables";
-import { ThemeProp } from '../App';
 
 export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
     const navRef = useRef<HTMLElement>(null);

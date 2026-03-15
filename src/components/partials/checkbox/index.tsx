@@ -1,6 +1,6 @@
 import { FC, InputHTMLAttributes, memo } from 'react';
 import styled from 'styled-components';
-import { CSSUnit } from '../../../types';
+import { CSSUnit } from '../../../constants/types';
 import { parseCSSUnit } from '../../../utils';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{

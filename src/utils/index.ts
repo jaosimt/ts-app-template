@@ -1,6 +1,6 @@
 import { ColorTranslator } from 'colortranslator';
 import { ComponentType, lazy, SubmitEvent } from 'react';
-import { CSSUnit, HSLString, RGBString } from '../types';
+import { CSSUnit, HSLString, RGBString } from '../constants/types';
 
 export const isNull = (arg: any) => arg === null;
 export const isNullOrUndefined = (arg: any) => isNull(arg) || arg === undefined;

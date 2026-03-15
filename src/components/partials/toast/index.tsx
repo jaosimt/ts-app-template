@@ -1,8 +1,8 @@
 import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { CSSUnit } from '../../../constants/types';
 import { RootState, store } from '../../../store';
-import { CSSUnit } from '../../../types';
 import { addToast, getToasts } from '../slices/toast';
 import Toast from './toast';
 

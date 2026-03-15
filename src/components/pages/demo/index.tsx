@@ -2,12 +2,12 @@ import {FC} from 'react';
 import {NavLink, Outlet, useLocation} from 'react-router';
 import styled from 'styled-components';
 import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
 import {classNames} from '../../../utils';
 import UnderConstruction from '../underConstruction';
 import {
     $primaryColor, $primaryColorDark, $textColor, $textColorDark
 } from '../../../styles/variables';
-import {ThemeProp} from "../../../App";
 
 const Container = styled.div`
     display    : flex;

@@ -4,10 +4,10 @@ import { FaChevronDown } from 'react-icons/fa6';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
+import { CSSUnit } from '../../../constants/types';
 import { useKeyPress, useOnScroll } from '../../../hooks';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
-import { CSSUnit } from '../../../types';
 import { classNames, isObject, parseCSSUnit, Round } from '../../../utils';
 import { ReactIcon } from '../index';
 import {
