@@ -130,8 +130,10 @@ body {
       &:not(.nav-link) {
         color : v.$primaryColorDark;
         
-        &:hover {
-          text-decoration : underline;
+        &:not(.active) {
+          &:hover {
+            text-decoration : underline;
+          }
         }
       }
     }
@@ -147,8 +149,10 @@ body {
       &:not(.nav-link) {
         color : v.$primaryColor;
         
-        &:hover {
-          text-decoration : underline;
+        &:not(.active) {
+          &:hover {
+            text-decoration : underline;
+          }
         }
       }
     }

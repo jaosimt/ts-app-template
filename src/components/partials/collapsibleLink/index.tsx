@@ -1,5 +1,6 @@
-import { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import { FC, HTMLAttributes, RefObject, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useOnClickOutside } from 'usehooks-ts';
 import { CSSUnit } from '../../../constants/types';
 import { hasHorizontalScrollbar, parseCSSUnit } from '../../../utils';
 
@@ -57,6 +58,8 @@ const CollapsibleLink: FC<CollapsibleLinkProps> = (props) => {
     const [height, setHeight] = useState<CSSUnit>('auto');
     const [width, setWidth] = useState<CSSUnit>('auto');
     const [position, setPosition] = useState<'fixed' | 'relative' | 'absolute'>('fixed');
+
+    useOnClickOutside([bRef as RefObject<HTMLElement>, detailRef as RefObject<HTMLElement>], () => height !== 0 && setHeight(0));
 
     useEffect(() => {
         let timeout2: any = null;

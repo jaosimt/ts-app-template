@@ -20,7 +20,7 @@ const DemoCollapsibleLink: FC<{theme: ThemeProp}> = ({theme}) => {
     const [props, setProps] = useState<CollapsibleLinkProps>({
         linkText: 'Collapsible Link',
         details: 'Collapsible Detail',
-        position: positionOptions[0] as any
+        position: positionOptions[1] as any
     });
 
     const [styles] = useState({
