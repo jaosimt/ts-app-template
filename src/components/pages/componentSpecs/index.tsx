@@ -8,6 +8,7 @@ import Tab, { TabItemType } from '../../partials/tab';
 import SpecsBox from './specs/box';
 import SpecsButton from './specs/buttons';
 import SpecsCheckbox from './specs/checkbox';
+import SpecsCollapsibleLink from './specs/collapsibleLink';
 import SpecsDrawer from './specs/drawer';
 import SpecsDropdown from './specs/dropdown';
 import SpecsInputField from './specs/inputFields';
@@ -117,6 +118,9 @@ const ComponentSpecs: FC<{ theme: ThemeProp }> = ({theme}) => {
         }, {
             name: 'Checkbox',
             content: <SpecsCheckbox selectedTheme={selectedTheme} theme={theme}/>
+        }, {
+            name: 'CollapsibleLink',
+            content: <SpecsCollapsibleLink selectedTheme={selectedTheme} theme={theme}/>
         }, {
             name: 'Drawer',
             content: <SpecsDrawer selectedTheme={selectedTheme} theme={theme}/>

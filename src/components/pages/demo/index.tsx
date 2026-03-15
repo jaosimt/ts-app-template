@@ -93,10 +93,12 @@ const Demo: FC<{ theme: ThemeProp }> = ({theme}) => {
         >
             <NavLink to={`/demo/box`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Box</NavLink>
-            <NavLink to={`/demo/checkbox`}
-                     className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Checkbox</NavLink>
             <NavLink to={`/demo/button`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Button</NavLink>
+            <NavLink to={`/demo/checkbox`}
+                     className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Checkbox</NavLink>
+            <NavLink to={`/demo/collapsible-link`}
+                     className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>CollapsibleLink</NavLink>
             <NavLink to={`/demo/drawer`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>Drawer</NavLink>
             <NavLink to={`/demo/dropdown`}

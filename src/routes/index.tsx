@@ -6,6 +6,7 @@ import Demo from '../components/pages/demo';
 import DemoBox from '../components/pages/demo/demoBox';
 import DemoButton from '../components/pages/demo/demoButton';
 import DemoCheckbox from '../components/pages/demo/demoCheckbox';
+import DemoCollapsibleLink from '../components/pages/demo/demoCollapsibleLink';
 import DemoDrawer from '../components/pages/demo/demoDrawer';
 import DemoDropdown from '../components/pages/demo/demoDropdown';
 import DemoInputField from '../components/pages/demo/demoInputField';
@@ -30,6 +31,7 @@ const ContentRouter = ({theme}: { theme: ThemeProp }) => {
                 <Route path={`/demo/dropdown`} element={<DemoDropdown theme={theme}/>}/>
                 <Route path={`/demo/checkbox`} element={<DemoCheckbox theme={theme}/>}/>
                 <Route path={`/demo/button`} element={<DemoButton theme={theme}/>}/>
+                <Route path={`/demo/collapsible-link`} element={<DemoCollapsibleLink theme={theme}/>}/>
                 <Route path={`/demo/input-field`} element={<DemoInputField theme={theme}/>}/>
                 <Route path={`/demo/login`} element={<Login/>}/>
                 <Route path={`/demo/drawer`} element={<DemoDrawer theme={theme}/>}/>
