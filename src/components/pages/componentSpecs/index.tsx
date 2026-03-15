@@ -2,6 +2,7 @@ import { CSSProperties, FC, Fragment } from 'react';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import styled from 'styled-components';
 import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
 import { classNames } from '../../../utils';
 import Tab, { TabItemType } from '../../partials/tab';
 import SpecsBox from './specs/box';
@@ -16,7 +17,6 @@ import SpecsPortalWindow from './specs/windowPortal';
 import SpecsTab from './specs/tab';
 import SpecsToast from './specs/toast';
 import { $secondaryBaseColor, $secondaryBaseColorDark } from '../../../styles/variables';
-import { ThemeProp } from '../../../App';
 
 export interface SelectedThemeProps {
     selectedTheme: string;

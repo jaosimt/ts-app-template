@@ -3,9 +3,9 @@ import './styles.scss';
 import ReactDOM from 'react-dom';
 import { FaCircleXmark } from 'react-icons/fa6';
 import { useOnClickOutside } from 'usehooks-ts';
+import { CSSUnit } from '../../../constants/types';
 import { useKeyPress } from '../../../hooks';
 import { v4 as uuidv4 } from 'uuid';
-import { CSSUnit } from '../../../types';
 import { classNames, isElementOnTop, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
 

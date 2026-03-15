@@ -5,6 +5,7 @@ import {FaCircleInfo, FaReact} from 'react-icons/fa6';
 import {Link} from 'react-router';
 import styled from 'styled-components';
 import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
 import logo from '../../../images/logo.svg';
 import logoDark from '../../../images/logoDark.svg';
 import redux from '../../../images/redux.svg';
@@ -18,7 +19,6 @@ import reactRouter from '../../../images/react-router.png';
 import {createLink} from '../../../utils/ext';
 import {ReactIcon} from '../../partials';
 import './style.scss';
-import {ThemeProp} from "../../../App";
 
 const WrappingDiv = styled.div`
     display: flex;

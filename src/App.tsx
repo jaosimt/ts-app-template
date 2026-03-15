@@ -8,6 +8,7 @@ import CollapsibleLink from './components/partials/collapsibleLink';
 import Modal from './components/partials/modal';
 import ToastContainer, { toast } from './components/partials/toast';
 import { targetUnicode, Theme } from './constants';
+import { ThemeProp } from './constants/interfaces';
 import { NavigationMain } from './navs';
 import ContentRouter from './routes';
 import { getError } from './slices/error';
@@ -18,10 +19,6 @@ import './styles/animations.scss';
 import './styles/tippy.scss';
 import {getTheme, toggleTheme} from "./slices/theme";
 import {useAppDispatch} from "./hooks";
-
-export interface ThemeProp {
-    theme: 'dark' | 'light';
-}
 
 const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     const dispatch = useAppDispatch();

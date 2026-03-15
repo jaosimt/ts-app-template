@@ -16,7 +16,7 @@ import DemoWindowPortal from '../components/pages/demo/demoWindowPortal';
 import DemoLoading from '../components/pages/demo/demoLoading';
 import Home from '../components/pages/home';
 import Login from '../components/pages/login';
-import {ThemeProp} from "../App";
+import { ThemeProp } from '../constants/interfaces';
 
 const ContentRouter = ({theme}: { theme: ThemeProp }) => {
     return <>

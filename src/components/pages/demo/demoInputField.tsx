@@ -3,9 +3,9 @@ import { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 're
 import { useForm } from 'react-hook-form';
 import { TbBrandReact } from 'react-icons/tb';
 import styled from 'styled-components';
-import { ThemeProp } from '../../../App';
 import { Theme } from '../../../constants';
-import { HSLString } from '../../../types';
+import { ThemeProp } from '../../../constants/interfaces';
+import { HSLString } from '../../../constants/types';
 import { generateAnalogousPalette, hslToHex } from '../../../utils';
 import Box from '../../partials/box';
 import Button from '../../partials/button';

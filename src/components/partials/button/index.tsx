@@ -2,7 +2,7 @@ import { FC, HTMLAttributes, memo, useState } from 'react';
 import './styles.scss';
 import { IconType } from 'react-icons';
 import { v4 as uuidv4 } from 'uuid';
-import { CSSUnit } from '../../../types';
+import { CSSUnit } from '../../../constants/types';
 import { parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
 

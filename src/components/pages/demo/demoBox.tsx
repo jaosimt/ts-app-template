@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ThemeProp } from '../../../App';
 import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
 import { isString } from '../../../utils';
 import { createLink } from '../../../utils/ext';
 import Box, { BoxProps } from '../../partials/box';

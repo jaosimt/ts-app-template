@@ -2,12 +2,12 @@ import { FC, HTMLAttributes, memo } from 'react';
 import { ImSpinner } from 'react-icons/im';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { ThemeProp } from '../../../App';
 import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
+import { CSSColors } from '../../../constants/types';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
 import { $accentColor, $accentColorDark } from '../../../styles/variables';
-import { CSSColors } from '../../../types';
 import { classNames } from '../../../utils';
 import { ReactIcon } from '../index';
 

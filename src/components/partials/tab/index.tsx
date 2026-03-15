@@ -2,11 +2,11 @@ import {FC, HTMLAttributes, memo, ReactNode, RefObject, useEffect, useRef, useSt
 import {RxChevronLeft, RxChevronRight} from 'react-icons/rx';
 import {useResizeObserver} from 'usehooks-ts';
 import { Theme } from '../../../constants';
-import {CSSColors, CSSUnit} from '../../../types';
+import { ThemeProp } from '../../../constants/interfaces';
+import { CSSColors, CSSUnit } from '../../../constants/types';
 import {classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase} from '../../../utils';
 import {ReactIcon} from '../index';
 import './styles.scss';
-import {ThemeProp} from "../../../App";
 import {$accentColor, $accentColorDark} from "../../../styles/variables";
 
 export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {

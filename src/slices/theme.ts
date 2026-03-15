@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {ThemeProp} from "../App";
+import { ThemeProp } from '../constants/interfaces';
 import { Theme } from '../constants';
 
 export interface ThemeState {

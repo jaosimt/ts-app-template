@@ -2,16 +2,16 @@ import { FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
+import { CSSColors, CSSUnit } from '../../../constants/types';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
-import { CSSColors, CSSUnit } from '../../../types';
 import { getTextWidth, isString, parseCSSUnit } from '../../../utils';
 import {
     $secondaryBackgroundColor,
     $secondaryBackgroundColorDark,
     $secondaryBaseColor, $secondaryBaseColorDark
 } from '../../../styles/variables';
-import { ThemeProp } from '../../../App';
 
 export type LabelPositionType =
     'top-left'

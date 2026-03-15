@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaRegWindowMaximize } from 'react-icons/fa6';
-import { ThemeProp } from '../../../App';
 import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
 import { isString } from '../../../utils';
 import Box from '../../partials/box';
 import Button from '../../partials/button';

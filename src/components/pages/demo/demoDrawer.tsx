@@ -8,8 +8,8 @@ import {
 } from 'react-icons/md';
 import { RiArchiveDrawerFill } from 'react-icons/ri';
 import { useSearchParams } from 'react-router';
-import { ThemeProp } from '../../../App';
 import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
 import { ReactIcon } from '../../partials';
 import Box from '../../partials/box';
 import Drawer, { DrawerProps } from '../../partials/drawer';

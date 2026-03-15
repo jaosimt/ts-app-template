@@ -8,8 +8,8 @@ import {
 } from 'react-icons/io';
 import { useLocation } from 'react-router';
 import styled from 'styled-components';
+import { CSSUnit } from '../../../constants/types';
 import { useAppDispatch, usePrevious } from '../../../hooks';
-import { CSSUnit } from '../../../types';
 import { isNullOrUndefined, isString, parseCSSUnit } from '../../../utils';
 import { ReactIcon } from '../index';
 import { removeToast } from '../slices/toast';
