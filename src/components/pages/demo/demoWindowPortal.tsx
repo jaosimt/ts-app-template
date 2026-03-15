@@ -22,20 +22,6 @@ const Counter = styled.span`
     font-weight: bold;
 `;
 
-const PortalContainer = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-`;
-
-const Header = styled.h1`
-    color: red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`
-
 const DemoWindowPortal: FC<{theme: ThemeProp}> = ({theme}) => {
     const dispatch = useAppDispatch();
     const ctr = useAppSelector(getCounter);
@@ -49,9 +35,14 @@ const DemoWindowPortal: FC<{theme: ThemeProp}> = ({theme}) => {
             openOnNextScreen={true}
             onClose={() => setShowPortal(false)}
         >
-            <PortalContainer>
-                <Header>Hello ctr <Counter>{ctr}</Counter> viewed in new window!</Header>
-            </PortalContainer>
+            <div className={'translate absolute-center'}>
+                <h1 className={'color-red display-flex flex-direction-column align-items-center'}>
+                    Hello ctr <span
+                    className={'p-2 border display-flex align-items-center justify-content-center font-weight-bold'}
+                    style={{borderRadius: '50%', width: '3rem', height: '3rem',}}
+                >{ctr}</span> viewed in new window!
+                </h1>
+            </div>
         </WindowPortal>}
 
         <Box className={'translate absolute-center'} contentClassName={'display-flex flex-direction-column justify-self-center'} borderColor={themedBoxBorderColor}>
