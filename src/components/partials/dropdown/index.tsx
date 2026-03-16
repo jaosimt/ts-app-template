@@ -11,7 +11,7 @@ import { RootState } from '../../../store';
 import { classNames, isObject, parseCSSUnit, Round } from '../../../utils';
 import { ReactIcon } from '../index';
 import {
-    $backgroundColor,
+    $backgroundColorDefault,
     $buttonPrimaryTextColor,
     $buttonDefaultBorderColor,
     $buttonDefaultHoverColor,
@@ -86,7 +86,7 @@ const Wrapper = styled.div<{
     width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
     border: 1px solid ${$buttonDefaultBorderColor};
     border-radius: 0.3rem;
-    background-color: ${$backgroundColor};
+    background-color: ${$backgroundColorDefault};
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
@@ -146,11 +146,11 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
         background-color: ${$buttonDefaultBorderColor};
 
         &:not(:first-child) {
-            border-top: 1px solid ${$backgroundColor};
+            border-top: 1px solid ${$backgroundColorDefault};
         }
 
         &:not(:last-child) {
-            border-bottom: 1px solid ${$backgroundColor};
+            border-bottom: 1px solid ${$backgroundColorDefault};
         }
     }
     
@@ -162,7 +162,7 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
     &:not(.selected):not(.disabled) {
         &.scrolled,
         &:hover {
-            color: ${$backgroundColor};
+            color: ${$backgroundColorDefault};
             background-color: ${$buttonDefaultHoverColor};
         }
     }

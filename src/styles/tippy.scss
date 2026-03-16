@@ -17,21 +17,56 @@
 }
 
 .custom-tippy {
-  background-color : v.$headerBackgroundColor;
-  color            : #fff;
-  border           : 1px solid #ccc;
-  border-radius    : 4px;
+  border-width  : 1px;
+  border-style  : solid;
+  border-radius : 4px;
+  color         : #fff;
+}
+
+body {
+  &.light {
+    .custom-tippy {
+      background-color : v.$accentColor;
+      border-color     : v.$accentColor;
+      
+      &[data-placement^="top"] .tippy-arrow::before {
+        border-top-color : v.$accentColor;
+      }
+      
+      &[data-placement^="right"] .tippy-arrow::before {
+        border-right-color : v.$accentColor;
+      }
+      
+      &[data-placement^="bottom"] .tippy-arrow::before {
+        border-bottom-color : v.$accentColor;
+      }
+      
+      &[data-placement^="left"] .tippy-arrow::before {
+        border-left-color : v.$accentColor;
+      }
+    }
+  }
   
-  &[data-placement^="top"] .tippy-arrow::before {
-    border-top-color : v.$headerBackgroundColor;
-  }
-  &[data-placement^="right"] .tippy-arrow::before {
-    border-right-color  : v.$headerBackgroundColor;
-  }
-  &[data-placement^="bottom"] .tippy-arrow::before {
-    border-bottom-color : v.$headerBackgroundColor;
-  }
-  &[data-placement^="left"] .tippy-arrow::before {
-    border-left-color : v.$headerBackgroundColor;
+  &.dark {
+    .custom-tippy {
+      background-color : v.$accentColorDark;
+      border-color     : v.$accentColorDark;
+      
+      &[data-placement^="top"] .tippy-arrow::before {
+        border-top-color : v.$accentColorDark;
+      }
+      
+      &[data-placement^="right"] .tippy-arrow::before {
+        border-right-color : v.$accentColorDark;
+      }
+      
+      &[data-placement^="bottom"] .tippy-arrow::before {
+        border-bottom-color : v.$accentColorDark;
+      }
+      
+      &[data-placement^="left"] .tippy-arrow::before {
+        border-left-color : v.$accentColorDark;
+      }
+    }
   }
 }

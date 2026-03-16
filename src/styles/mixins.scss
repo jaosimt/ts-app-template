@@ -17,7 +17,7 @@
   animation : bounceIn 1000ms ease-in-out 3;
 }
 
-@mixin customScrollbar($color: v.$scrollbarColor, $background: v.$scrollbarBackgroundColor) {
+@mixin customScrollbar($color: v.$accentColor, $background: 'transparent') {
   scrollbar-width : thin;
   scrollbar-color : $color $background;
   
@@ -33,7 +33,7 @@
   }
   
   &::-webkit-scrollbar-thumb {
-    border-radius      : v.$scrollbarBorderRadius;
+    border-radius      : 0.4rem;
     background-color   : $color;
     -webkit-box-shadow : 0 0 1px $background;
     outline            : 1px solid $background;
