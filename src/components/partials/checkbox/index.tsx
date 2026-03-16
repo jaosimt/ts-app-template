@@ -1,6 +1,7 @@
 import { FC, InputHTMLAttributes, memo } from 'react';
 import styled from 'styled-components';
 import { CSSUnit } from '../../../constants/types';
+import { $buttonPrimaryColor } from '../../../styles/variables';
 import { parseCSSUnit } from '../../../utils';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{
@@ -44,25 +45,6 @@ const HiddenCheckbox = styled.input.attrs({type: 'checkbox'})`
     width: 1px;
 `;
 
-const StyledCheckbox = styled.div<{
-    checked: boolean | undefined,
-    disabled: boolean
-}>`
-    display: inline-block;
-    width: 21px;
-    height: 21px;
-    border-radius: 4px;
-    border: 1px solid ${props => props.disabled ? 'whitesmoke' : 'gainsboro'};
-    background-color: ${props => props.checked ? 'rgba(0, 123, 255, 0.63)' : 'white'};
-    transition: all 150ms;
-    
-    ${Icon} {
-        visibility: ${props => (props.checked ? 'visible' : 'hidden')}
-    }
-    
-    ${props => props.disabled && 'opacity: 0.7; pointer-events: none;'}
-`;
-
 const Label = styled.label<{disabled: boolean}>`
     cursor: ${props => props.disabled ? 'default' : 'pointer'};
     user-select: none;
@@ -75,10 +57,33 @@ const Label = styled.label<{disabled: boolean}>`
             ${props => !props.disabled && 'opacity: 0.7'};   
         }
     }
+    
+    &[disabled] {
+        > div { opacity: 0.3; }
+    }
 
     @media (max-width: 768px) {
         font-size: small;
     }
+`;
+
+const StyledCheckbox = styled.div<{
+    checked: boolean | undefined,
+    disabled: boolean
+}>`
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    border-radius: 4px;
+    border: 1px solid ${$buttonPrimaryColor};
+    background-color: ${props => props.checked ? $buttonPrimaryColor : 'white'};
+    transition: all 150ms;
+    
+    ${Icon} {
+        visibility: ${props => (props.checked ? 'visible' : 'hidden')}
+    }
+    
+    ${props => props.disabled && 'opacity: 0.7; pointer-events: none;'}
 `;
 
 const Checkbox: FC<CheckboxProps> = (props) => {

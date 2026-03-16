@@ -17,10 +17,10 @@ import Dropdown, { DropdownObjectOptions, DropdownProps } from '../../partials/d
 import InputField from '../../partials/inputField';
 
 const objectOptionsCode = `[
-    {label: <span className={'color-red'}>The quick brown fox</span>, value: 'The quick brown fox', icon: GiFox},
-    {label: <span className={'color-green'}>jumps over the lazy dog</span>, value: 'jumps over the lazy dog', icon: FaDog},
-    {label: <span className={'color-blue'}>near the bunk of the river</span>, value: 'near the bunk of the river', icon: GiRiver},
-    {label: <span className={'color-blue'}>and I wonder who cares!</span>, value: 'and I wonder who cares!', icon: LiaPoopSolid}
+    {label: <span className={'color-cyan'}>The quick brown fox</span>, value: 'The quick brown fox', icon: GiFox},
+    {label: <span className={'color-magenta'}>jumps over the lazy dog</span>, value: 'jumps over the lazy dog', icon: FaDog},
+    {label: <span className={'color-yellow'}>near the bunk of the river</span>, value: 'near the bunk of the river', icon: GiRiver},
+    {label: <span className={'color-black'}>and I wonder who cares!</span>, value: 'and I wonder who cares!', icon: LiaPoopSolid}
 ]`;
 
 const stringOptionsCode = `[
@@ -39,19 +39,19 @@ const disablePredicateCodeObject = `(o: DropdownObjectOptions) => {
 
 const objectOptions = [
     {
-        label: <span className={'color-red'}>The quick brown fox</span>,
+        label: <span className={'color-cyan'}>The quick brown fox</span>,
         value: 'The quick brown fox',
         icon: GiFox
     }, {
-        label: <span className={'color-green'}>jumps over the lazy dog</span>,
+        label: <span className={'color-magenta'}>jumps over the lazy dog</span>,
         value: 'jumps over the lazy dog',
         icon: FaDog
     }, {
-        label: <span className={'color-blue'}>near the bunk of the river</span>,
+        label: <span className={'color-yellow'}>near the bunk of the river</span>,
         value: 'near the bunk of the river',
         icon: GiRiver
     }, {
-        label: <span className={'color-blue'}>and I wonder who cares!</span>,
+        label: <span className={'color-black'}>and I wonder who cares!</span>,
         value: 'and I wonder who cares!',
         icon: LiaPoopSolid
     }

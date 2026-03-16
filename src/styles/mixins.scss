@@ -17,19 +17,19 @@
   animation : bounceIn 1000ms ease-in-out 3;
 }
 
-@mixin customScrollbar($color: v.$accentColor, $background: 'transparent') {
+@mixin customScrollbar($color: v.$accentColor, $background: transparent) {
   scrollbar-width : thin;
   scrollbar-color : $color $background;
   
   &::-webkit-scrollbar {
     -webkit-appearance : none;
     width              : 7px;
-    height             : 4px;
+    height             : 3px;
   }
   
   &::-webkit-scrollbar-track {
     background         : $background;
-    -webkit-box-shadow : inset 0 0 6px $background;
+    -webkit-box-shadow : inset 0 0 7px $background;
   }
   
   &::-webkit-scrollbar-thumb {
