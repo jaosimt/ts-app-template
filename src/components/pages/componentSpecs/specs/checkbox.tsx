@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { Theme } from '../../../../constants';
 import { CSSColors } from '../../../../constants/types';
+import { getPrimaryColor } from '../../../../utils/themeUtils';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
 import v from '../../../../styles/variables.module.scss';
@@ -62,7 +63,7 @@ const SpecsCheckbox: FC<SelectedThemeProps> = ({selectedTheme, theme}) => {
             border={'label-only'}
             tight={true}
             labelBackgroundColor={(theme === Theme.DARK ? v.baseColorDark : v.baseColor) as CSSColors}
-            labelColor={(theme === Theme.DARK ? v.primaryColorDark : v.primaryColor) as CSSColors}
+            labelColor={getPrimaryColor(theme)}
             label={'Demo'}
             labelPosition={'top-right'}
             // backgroundColor={'transparent'}

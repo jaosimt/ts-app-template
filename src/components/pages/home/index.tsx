@@ -4,10 +4,7 @@ import {BiLogoTypescript} from 'react-icons/bi';
 import {FaCircleInfo, FaReact} from 'react-icons/fa6';
 import {Link} from 'react-router';
 import styled from 'styled-components';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
-import logo from '../../../images/logo.svg';
-import logoDark from '../../../images/logoDark.svg';
 import redux from '../../../images/redux.svg';
 import sass from '../../../images/sass.svg';
 import usehooks from '../../../images/usehooks.svg';
@@ -16,7 +13,7 @@ import reactHookForm from '../../../images/react-hook-form.png';
 import tippyjs from '../../../images/tippyjs.png';
 import styledComponents from '../../../images/styled-components.png';
 import reactRouter from '../../../images/react-router.png';
-import {createLink} from '../../../utils/ext';
+import { createLink, themeLogoBase64 } from '../../../utils/ext';
 import {ReactIcon} from '../../partials';
 import './style.scss';
 
@@ -273,7 +270,7 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                     </div>
                 </div>
                 <div className={'display-flex justify-content-right align-items-center'}>
-                    <img width={'100%'} className={'spin-700'} src={theme === Theme.DARK ? logoDark : logo} alt=""/>
+                    <img width={'100%'} className={'spin-700'} src={themeLogoBase64(theme)} alt=""/>
                 </div>
             </WrappingDiv>
 

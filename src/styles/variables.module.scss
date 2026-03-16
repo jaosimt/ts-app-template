@@ -5,6 +5,10 @@ $accentColorReact               : #0099ff;
 $accentColorDark                : #0f0d0c;
 $accentColorInsta               : #c92a90ff;
 
+$linkColorReact                 : #0099ff;
+$linkColorDark                  : #0c3a46;
+$linkColorInsta                 : #d71891;
+
 $textColor                      : #171515;
 $textColorDark                  : #f3f2f2;
 
@@ -16,9 +20,6 @@ $baseColorDark                  : #5c5c5c;
 
 $secondaryBaseColor             : #dddada;
 $secondaryBaseColorDark         : #525252;
-
-$linkColor                      : #0099ff;
-$linkColorDark                  : #072d36ff;
 
 $secondaryColor                 : #ffe500;
 $secondaryColorDark             : #ffc300;
@@ -74,8 +75,7 @@ $buttonDefaultBorderColorInsta  : $buttonDefaultTextColorInsta;
   baseColorDark                  : $baseColorDark;
   secondaryBaseColor             : $secondaryBaseColor;
   secondaryBaseColorDark         : $secondaryBaseColorDark;
-  primaryColor                   : $linkColor;
-  primaryColorDark               : $linkColorDark;
+  
   secondaryColor                 : $secondaryColor;
   secondaryColorDark             : $secondaryColorDark;
   secondaryBackgroundColor       : $secondaryBackgroundColor;
@@ -95,6 +95,10 @@ $buttonDefaultBorderColorInsta  : $buttonDefaultTextColorInsta;
   accentColorReact               : $accentColorReact;
   accentColorDark                : $accentColorDark;
   accentColorInsta               : $accentColorInsta;
+  
+  primaryColorReact              : $linkColorReact;
+  primaryColorDark               : $linkColorDark;
+  primarycolorInsta              : $linkColorInsta;
   
   buttonPrimaryColorReact        : $buttonPrimaryColorReact;
   buttonPrimaryHoverColorReact   : $buttonPrimaryHoverColorReact;

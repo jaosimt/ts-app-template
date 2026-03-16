@@ -19,14 +19,6 @@
       padding       : 0.5rem;
       border        : 1px solid v.$borderColorDefault;
       border-radius : 0.3rem;
-      
-      &[type="text"] {}
-      
-      &[type="submit"] {}
-      
-      &[type="checkbox"] {}
-      
-      &[type="radio"] {}
     }
     
     > .error {
@@ -57,17 +49,7 @@
         min-width     : 30px;
         min-height    : 28px;
         padding       : 0.3rem;
-        
-        &[type="text"] {}
-        
-        &[type="submit"] {}
-        
-        &[type="checkbox"] {}
-        
-        &[type="radio"] {}
       }
-      
-      > .error {}
     }
   }
 }
