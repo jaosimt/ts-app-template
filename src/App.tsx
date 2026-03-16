@@ -76,7 +76,12 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                 message: error?.stack ? <span className={'display-flex flex-direction-column'}>
                     <span>{error?.message || error}</span>
                     <span className="font-size-smaller">
-                        <CollapsibleLink className={'background p-0p3 border-radius-0p2'} linkText={'Details'} details={<pre>{error?.stack}</pre>}/>
+                        <CollapsibleLink
+                            className={'background p-0p3 border-radius-0p2'}
+                            linkText={'Details'}
+                            details={<pre>{error?.stack}</pre>}
+                            position={'relative'}
+                        />
                     </span>
                 </span> : error?.message || error,
                 options: {type: 'error', omitIcon: false, theme: 'filled'}
