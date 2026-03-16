@@ -61,7 +61,7 @@ const Wrapper = styled.div<{
     border-radius: 0.3rem;
     position: relative;
     width: calc(100% - 150px);
-    background-color: ${props => props.$theme === Theme.DARK ? '#221614' : '#f7e9e2'};
+    background-color: ${props => props.$theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor};
     opacity: 0.9;
     min-height: calc(100vh - 9rem);
 
@@ -114,7 +114,7 @@ const Demo: FC<{ theme: ThemeProp }> = ({theme}) => {
             <NavLink to={`/demo/window-portal`}
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>WindowPortal</NavLink>
         </Nav>
-        <Wrapper $theme={theme}>
+        <Wrapper $theme={theme} className={'wrapper'}>
             {pathname === `/demo` && <UnderConstruction/>}
             <InnerWrapper>
                 <Outlet/>
