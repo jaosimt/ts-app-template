@@ -7,7 +7,7 @@ import { CSSColors, CSSUnit } from '../../../constants/types';
 import {classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase} from '../../../utils';
 import {ReactIcon} from '../index';
 import './styles.scss';
-import {$accentColor, $accentColorDark} from "../../../styles/variables";
+import v from '../../../styles/variables.module.scss';
 
 export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
     activeItemColor?: CSSColors;
@@ -43,7 +43,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         contentPadding,
         type = 'plain',
         moveSelectedOnScroll = false,
-        activeItemColor = props.theme === Theme.DARK ? $accentColorDark : $accentColor,
+        activeItemColor = props.theme === Theme.DARK ? v.accentColorDark : v.accentColor,
         minContentHeight,
         onTabChange,
         rememberActiveTab,

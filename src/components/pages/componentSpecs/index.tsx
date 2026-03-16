@@ -17,7 +17,7 @@ import SpecsModal from './specs/modal';
 import SpecsPortalWindow from './specs/windowPortal';
 import SpecsTab from './specs/tab';
 import SpecsToast from './specs/toast';
-import { $secondaryBaseColor, $secondaryBaseColorDark } from '../../../styles/variables';
+import v from '../../../styles/variables.module.scss';
 
 export interface SelectedThemeProps {
     selectedTheme: string;
@@ -61,15 +61,15 @@ const Grid = styled.div<{
 
     > * {
         padding: 0.5rem;
-        border-left: ${props => `1px solid ${props.$theme === Theme.DARK ? $secondaryBaseColorDark : $secondaryBaseColor}`};
-        border-bottom: ${props => `1px solid ${props.$theme === Theme.DARK ? $secondaryBaseColorDark : $secondaryBaseColor}`};
+        border-left: ${props => `1px solid ${props.$theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor}`};
+        border-bottom: ${props => `1px solid ${props.$theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor}`};
 
         &:nth-child(-n+4) {
-            border-top: ${props => `1px solid ${props.$theme === Theme.DARK ? $secondaryBaseColorDark : $secondaryBaseColor}`};
+            border-top: ${props => `1px solid ${props.$theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor}`};
         }
 
         &:nth-child(4n) {
-            border-right: ${props => `1px solid ${props.$theme === Theme.DARK ? $secondaryBaseColorDark : $secondaryBaseColor}`};
+            border-right: ${props => `1px solid ${props.$theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor}`};
         }
 
         .mobile-only {

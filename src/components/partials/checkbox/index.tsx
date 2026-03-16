@@ -1,8 +1,8 @@
 import { FC, InputHTMLAttributes, memo } from 'react';
 import styled from 'styled-components';
 import { CSSUnit } from '../../../constants/types';
-import { $buttonPrimaryColor } from '../../../styles/variables';
 import { parseCSSUnit } from '../../../utils';
+import v from '../../../styles/variables.module.scss';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{
     name: string|undefined;
@@ -75,8 +75,8 @@ const StyledCheckbox = styled.div<{
     width: 21px;
     height: 21px;
     border-radius: 4px;
-    border: 1px solid ${$buttonPrimaryColor};
-    background-color: ${props => props.checked ? $buttonPrimaryColor : 'white'};
+    border: 1px solid ${v.buttonPrimaryColor};
+    background-color: ${props => props.checked ? v.buttonPrimaryColor : 'white'};
     transition: all 150ms;
     
     ${Icon} {

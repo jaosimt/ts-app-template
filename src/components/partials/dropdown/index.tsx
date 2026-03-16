@@ -10,13 +10,7 @@ import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
 import { classNames, isObject, parseCSSUnit, Round } from '../../../utils';
 import { ReactIcon } from '../index';
-import {
-    $backgroundColorDefault,
-    $buttonPrimaryTextColor,
-    $buttonDefaultBorderColor,
-    $buttonDefaultHoverColor,
-    $buttonDefaultTextColor
-} from '../../../styles/variables';
+import v from '../../../styles/variables.module.scss';
 
 export interface DropdownProps {
     options: string[] | DropdownObjectOptions[];
@@ -84,14 +78,14 @@ const Wrapper = styled.div<{
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
-    border: 1px solid ${$buttonDefaultBorderColor};
+    border: 1px solid ${v.buttonDefaultBorderColor};
     border-radius: 0.3rem;
-    background-color: ${$backgroundColorDefault};
+    background-color: ${v.backgroundColorDefault};
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     height: inherit;
-    color: ${$buttonDefaultBorderColor};
+    color: ${v.buttonDefaultBorderColor};
     ${props => props.$show && 'border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent;'}
     ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
 `;
@@ -117,7 +111,7 @@ const List = styled.div<{
     z-index: 2;
     user-select: none;
     background-color: #fff;
-    border: 1px solid ${$buttonDefaultBorderColor};
+    border: 1px solid ${v.buttonDefaultBorderColor};
     border-bottom-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
     white-space: nowrap;
@@ -138,19 +132,19 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
-    color: ${$buttonDefaultTextColor};
+    color: ${v.buttonDefaultTextColor};
 
     &.selected {
         cursor: default;
-        color: ${$buttonPrimaryTextColor};
-        background-color: ${$buttonDefaultBorderColor};
+        color: ${v.buttonPrimaryTextColor};
+        background-color: ${v.buttonDefaultBorderColor};
 
         &:not(:first-child) {
-            border-top: 1px solid ${$backgroundColorDefault};
+            border-top: 1px solid ${v.backgroundColorDefault};
         }
 
         &:not(:last-child) {
-            border-bottom: 1px solid ${$backgroundColorDefault};
+            border-bottom: 1px solid ${v.backgroundColorDefault};
         }
     }
     
@@ -162,8 +156,8 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
     &:not(.selected):not(.disabled) {
         &.scrolled,
         &:hover {
-            color: ${$backgroundColorDefault};
-            background-color: ${$buttonDefaultHoverColor};
+            color: ${v.backgroundColorDefault};
+            background-color: ${v.buttonDefaultHoverColor};
         }
     }
     

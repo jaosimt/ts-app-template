@@ -1,4 +1,4 @@
-@use './variables.scss' as v;
+@use './variables.module.scss' as v;
 @use './keyframes.scss';
 
 @mixin boxShadow($color: #262626, $spread: -1.7px, $blur: 4.2px, $h-offset: -0.2px, $v-offset: 0.5px) {
