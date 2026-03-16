@@ -4,6 +4,8 @@ import { FaChevronDown } from 'react-icons/fa6';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
+import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
 import { CSSUnit } from '../../../constants/types';
 import { useKeyPress, useOnScroll } from '../../../hooks';
 import { getTheme } from '../../../slices/theme';
@@ -25,6 +27,7 @@ export interface DropdownProps {
     className?: string;
     maxDropdownHeight?: CSSUnit;
     disablePredicate?: Function;
+    theme?: ThemeProp;
 }
 
 export type DropdownObjectOptions = {
@@ -71,21 +74,22 @@ const Label = styled.label<{
 `;
 
 const Wrapper = styled.div<{
-    $pos: PosProp
-    $show: boolean,
-    $disabled?: boolean,
+    $pos: PosProp;
+    $show: boolean;
+    $disabled?: boolean;
+    $theme?: ThemeProp;
 }>`
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
-    border: 1px solid ${v.buttonDefaultBorderColor};
+    border: 1px solid ${props => props.$theme === Theme.DARK ? v.buttonDefaultBorderColorDark : v.buttonDefaultBorderColor};
     border-radius: 0.3rem;
     background-color: ${v.backgroundColorDefault};
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     height: inherit;
-    color: ${v.buttonDefaultBorderColor};
+    color: ${props => props.$theme === Theme.DARK ? v.buttonDefaultBorderColorDark : v.buttonDefaultBorderColor};
     ${props => props.$show && 'border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent;'}
     ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
 `;
@@ -105,13 +109,14 @@ const List = styled.div<{
     $show: boolean;
     $pos: PosProp;
     $maxDropdownHeight: CSSUnit;
+    $theme?: ThemeProp;
 }>`
     transition: border 0.2s ease-in-out;
     overflow-y: auto;
     z-index: 2;
     user-select: none;
     background-color: #fff;
-    border: 1px solid ${v.buttonDefaultBorderColor};
+    border: 1px solid ${props => props.$theme === Theme.DARK ? v.buttonDefaultBorderColorDark : v.buttonDefaultBorderColor};
     border-bottom-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
     white-space: nowrap;
@@ -123,7 +128,9 @@ const List = styled.div<{
 `;
 
 // noinspection CssUnusedSymbol
-const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
+const Option = styled.div<{
+    $theme?: ThemeProp;
+}>`
     padding: 0.5rem 0.7rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
@@ -132,12 +139,12 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
-    color: ${v.buttonDefaultTextColor};
+    color: ${props => props.$theme === Theme.DARK ? v.buttonDefaultTextColorDark : v.buttonDefaultTextColor};
 
     &.selected {
         cursor: default;
         color: ${v.buttonPrimaryTextColor};
-        background-color: ${v.buttonDefaultBorderColor};
+        background-color: ${props => props.$theme === Theme.DARK ? v.buttonDefaultBorderColorDark : v.buttonDefaultBorderColor};
 
         &:not(:first-child) {
             border-top: 1px solid ${v.backgroundColorDefault};
@@ -157,7 +164,7 @@ const Option = styled.div<{ $selected?: boolean, $disabled?: boolean }>`
         &.scrolled,
         &:hover {
             color: ${v.backgroundColorDefault};
-            background-color: ${v.buttonDefaultHoverColor};
+            background-color: ${props => props.$theme === Theme.DARK ? v.buttonDefaultHoverColorDark : v.buttonDefaultHoverColor};
         }
     }
     
@@ -179,7 +186,8 @@ const Dropdown: FC<DropdownProps> = (props) => {
         labelAlign,
         icon,
         onChange,
-        disablePredicate
+        disablePredicate,
+        theme
     } = props;
 
     const listRef = useRef<any>(null);
@@ -318,6 +326,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
             ref={wrapperRef}
             $disabled={disabled}
             $show={show}
+            $theme={theme}
             onClick={() => setShow(!show)}
         >
             <div className={'width-100p display-flex align-items-center justify-content-space-between'}>
@@ -345,9 +354,11 @@ const Dropdown: FC<DropdownProps> = (props) => {
                 $show={show}
                 $pos={dropDownPos}
                 $maxDropdownHeight={maxDropdownHeight as CSSUnit}
+                $theme={theme}
             >
                 {
                     options.map((o: any) => <Option
+                        $theme={theme}
                         onClick={() => setSelected(o)}
                         key={isO ? o.value : o}
                         className={classNames(
