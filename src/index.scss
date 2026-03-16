@@ -16,18 +16,6 @@ html {
     -moz-osx-font-smoothing : grayscale;
     min-width               : 375px;
     line-height             : 1.5;
-    
-    &.dark {
-      @include m.customScrollbar(v.$accentColorDark);
-      background-color : v.$baseColorDark;
-      color            : v.$textColorDark;
-    }
-    
-    &.light {
-      @include m.customScrollbar(v.$accentColor);
-      background-color : v.$baseColor;
-      color            : v.$textColor;
-    }
   }
   
 }

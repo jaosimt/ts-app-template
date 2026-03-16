@@ -15,9 +15,9 @@ select {
   &:focus,
   &:hover {
     cursor           : pointer;
-    background-color : v.$buttonPrimaryHoverColor;
+    background-color : v.$buttonPrimaryHoverColorReact;
     color            : v.$buttonPrimaryTextColor;
-    border-color     : v.$buttonPrimaryBorderColor;
+    border-color     : v.$buttonPrimaryBorderColorReact;
     
     &:active {
       opacity : 0.3;
@@ -116,37 +116,5 @@ link {
   
   &.color-inherit {
     color : inherit;
-  }
-}
-
-body {
-  &.dark {
-    a,
-    link {
-      &:not(.nav-link) {
-        color : v.$linkColorDark;
-        
-        &:not(.active) {
-          &:hover {
-            text-decoration : underline;
-          }
-        }
-      }
-    }
-  }
-  
-  &.light {
-    a,
-    link {
-      &:not(.nav-link) {
-        color : v.$linkColor;
-        
-        &:not(.active) {
-          &:hover {
-            text-decoration : underline;
-          }
-        }
-      }
-    }
   }
 }

@@ -17,7 +17,7 @@
   animation : bounceIn 1000ms ease-in-out 3;
 }
 
-@mixin customScrollbar($color: v.$accentColor, $background: transparent) {
+@mixin customScrollbar($color: v.$accentColorReact, $background: transparent) {
   scrollbar-width : thin;
   scrollbar-color : $color $background;
   

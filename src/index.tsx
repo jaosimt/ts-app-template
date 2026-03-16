@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.scss';
 import { LazyRetry } from './utils';
 import { persistor, store } from './store';
+import './styles/theme.scss';
 
 const root = ReactDOM.createRoot(
     document.getElementById('react-ts-template') as HTMLElement

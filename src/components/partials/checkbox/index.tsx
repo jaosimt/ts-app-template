@@ -1,13 +1,12 @@
 import { FC, InputHTMLAttributes, memo } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSUnit } from '../../../constants/types';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
 import { parseCSSUnit } from '../../../utils';
-import v from '../../../styles/variables.module.scss';
+import { getButtonPrimaryColor } from '../../../utils/themeUtils';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{
     name: string|undefined;
@@ -82,8 +81,8 @@ const StyledCheckbox = styled.div<{
     width: 21px;
     height: 21px;
     border-radius: 4px;
-    border: 1px solid ${props => props.$theme === Theme.DARK ? v.buttonPrimaryColorDark : v.buttonPrimaryColor};
-    background-color: ${props => props.$checked ? props.$theme === Theme.DARK ? v.buttonPrimaryColorDark : v.buttonPrimaryColor : 'white'};
+    border: 1px solid ${props => getButtonPrimaryColor(props.$theme)};
+    background-color: ${props => props.$checked ? getButtonPrimaryColor(props.$theme) : 'white'};
     transition: all 150ms;
     
     ${Icon} {

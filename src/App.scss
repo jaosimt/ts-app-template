@@ -49,40 +49,6 @@
   }
 }
 
-body {
-  &.dark {
-    #react-ts-template {
-      header {
-        border-bottom : 10px solid v.$baseColorDark;
-      }
-      
-      footer {
-        border-top : 10px solid v.$baseColorDark;
-      }
-      
-      header, footer {
-        background-color : v.$accentColorDark;
-      }
-    }
-  }
-  
-  &.light {
-    #react-ts-template {
-      header {
-        border-bottom : 10px solid v.$baseColor;
-      }
-      
-      footer {
-        border-top : 10px solid v.$baseColor;
-      }
-      
-      header, footer {
-        background-color : v.$accentColor;
-      }
-    }
-  }
-}
-
 @media (max-width : 768px) {
   #react-ts-template {
     header > a {

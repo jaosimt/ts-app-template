@@ -37,7 +37,7 @@ const DemoCollapsibleLink: FC<{theme: ThemeProp}> = ({theme}) => {
 
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
 
-    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
+    const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
 
     const selectedTheme = theme === Theme.DARK ? oneLight : oneDark;
 

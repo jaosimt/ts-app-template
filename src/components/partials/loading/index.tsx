@@ -2,14 +2,13 @@ import { FC, HTMLAttributes, memo } from 'react';
 import { ImSpinner } from 'react-icons/im';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSColors } from '../../../constants/types';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
 import { classNames } from '../../../utils';
+import { getAccentColor } from '../../../utils/themeUtils';
 import { ReactIcon } from '../index';
-import v from '../../../styles/variables.module.scss';
 
 export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
     borderWidth?: CSSUnit;
@@ -62,7 +61,7 @@ const Spinner = styled.div<{ $color: CSSColors }>`
 `;
 
 const Loading: FC<LoadingProps> = (props) => {
-    const themed = props.theme ? props.theme === Theme.DARK ? v.accentColorDark : v.accentColor : undefined;
+    const themed = props.theme ? getAccentColor(props.theme) : undefined;
     const {
         borderWidth = undefined,
         padding = themed !== undefined,

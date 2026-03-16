@@ -46,17 +46,3 @@
     animation   : marquee 49s linear infinite;
   }
 }
-
-body {
-  &.dark {
-    .marquee {
-      background-color : v.$baseColorDark;
-    }
-  }
-  
-  &.light {
-    .marquee {
-      background-color : v.$baseColor;
-    }
-  }
-}

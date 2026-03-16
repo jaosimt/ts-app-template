@@ -4,13 +4,17 @@ import { FaChevronDown } from 'react-icons/fa6';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSUnit } from '../../../constants/types';
 import { useKeyPress, useOnScroll } from '../../../hooks';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
 import { classNames, isObject, parseCSSUnit, Round } from '../../../utils';
+import {
+    getButtonDefaultBorderColor,
+    getButtonDefaultHoverColor,
+    getButtonDefaultTextColor
+} from '../../../utils/themeUtils';
 import { ReactIcon } from '../index';
 import v from '../../../styles/variables.module.scss';
 
@@ -25,6 +29,7 @@ export interface DropdownProps {
     onChange?: Function,
     disabled?: boolean;
     className?: string;
+    valueClassName?: string;
     maxDropdownHeight?: CSSUnit;
     disablePredicate?: Function;
     theme?: ThemeProp;
@@ -82,14 +87,14 @@ const Wrapper = styled.div<{
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
-    border: 1px solid ${props => props.$theme === Theme.DARK ? v.buttonDefaultBorderColorDark : v.buttonDefaultBorderColor};
+    border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
     border-radius: 0.3rem;
     background-color: ${v.backgroundColorDefault};
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     height: inherit;
-    color: ${props => props.$theme === Theme.DARK ? v.buttonDefaultBorderColorDark : v.buttonDefaultBorderColor};
+    color: ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
     ${props => props.$show && 'border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent;'}
     ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
 `;
@@ -116,7 +121,7 @@ const List = styled.div<{
     z-index: 2;
     user-select: none;
     background-color: #fff;
-    border: 1px solid ${props => props.$theme === Theme.DARK ? v.buttonDefaultBorderColorDark : v.buttonDefaultBorderColor};
+    border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
     border-bottom-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
     white-space: nowrap;
@@ -139,12 +144,12 @@ const Option = styled.div<{
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
-    color: ${props => props.$theme === Theme.DARK ? v.buttonDefaultTextColorDark : v.buttonDefaultTextColor};
+    color: ${props => getButtonDefaultTextColor(props.$theme as ThemeProp)};
 
     &.selected {
         cursor: default;
         color: ${v.buttonPrimaryTextColor};
-        background-color: ${props => props.$theme === Theme.DARK ? v.buttonDefaultBorderColorDark : v.buttonDefaultBorderColor};
+        background-color: ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
 
         &:not(:first-child) {
             border-top: 1px solid ${v.backgroundColorDefault};
@@ -164,7 +169,7 @@ const Option = styled.div<{
         &.scrolled,
         &:hover {
             color: ${v.backgroundColorDefault};
-            background-color: ${props => props.$theme === Theme.DARK ? v.buttonDefaultHoverColorDark : v.buttonDefaultHoverColor};
+            background-color: ${props => getButtonDefaultHoverColor(props.$theme as ThemeProp)};
         }
     }
     
@@ -177,6 +182,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
     const {
         maxDropdownHeight,
         className,
+        valueClassName,
         name,
         disabled,
         label,
@@ -335,6 +341,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
                                           icon={(selected as DropdownObjectOptions).icon as IconType}/>
                 }
                 <Input
+                    className={valueClassName}
                     name={name}
                     $hasIcon={hasIcon as boolean}
                     type={'text'}

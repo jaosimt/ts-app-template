@@ -11,9 +11,9 @@ body {
     }
   }
 
-  &.light {
+  &.react {
     .accent-text {
-      color : v.$accentColor;
+      color : v.$accentColorReact;
     }
 
     .secondary-text {
