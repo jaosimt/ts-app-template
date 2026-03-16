@@ -47,10 +47,8 @@ const CollapsibleLink: FC<CollapsibleLinkProps> = (props) => {
         details,
         className,
         style = {},
-        position: props_position = 'relative'
+        position: props_position = 'fixed'
     } = props;
-
-    console.log('props_position:', props_position);
 
     const bRef = useRef<HTMLElement>(null);
     const detailRef = useRef<HTMLDivElement>(null);

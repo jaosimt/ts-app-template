@@ -1,5 +1,5 @@
 import Tippy from '@tippyjs/react';
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoIosSave } from 'react-icons/io';
 import { Theme } from '../../../constants';
@@ -15,6 +15,8 @@ const alignOptions = ['left', 'center', 'right', 'space-between'];
 
 const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
     const {register} = useForm();
+
+    const buttonTextRef = useRef('');
 
     const [modal, setModal] = useState(false);
     const [icon, setIcon] = useState(false);
@@ -55,20 +57,38 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
                             onChange: propsChangeHandler
                         })}/>
         </Box>
-        <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
+        <Box label={'Primary Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
             <Button
                 icon={icon ? IoIosSave : undefined}
                 disabled={props.disabled || modal}
                 align={props.align}
                 width={props.width}
-                onClick={() => setModal(true)}
+                onClick={() => {
+                    buttonTextRef.current = 'primary';
+                    setModal(true)
+                }}
+            >
+                Save
+            </Button>
+        </Box>
+        <Box label={'Default(Secondary) Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
+            <Button
+                className={'default'}
+                icon={icon ? IoIosSave : undefined}
+                disabled={props.disabled || modal}
+                align={props.align}
+                width={props.width}
+                onClick={() => {
+                    buttonTextRef.current = 'secondary';
+                    setModal(true)
+                }}
             >
                 Save
             </Button>
         </Box>
         {
             modal && <Modal onClose={() => setModal(false)} closeOnEscKey={true} closeOnOutsideClick={true} showClose={true} title={'Hello, world!'}>
-                <h3 className={'m-0 color-orange'}>You clicked the save button!</h3>
+                <h3 className={'m-0 color-orange'}>You clicked the save {buttonTextRef.current} button!</h3>
             </Modal>
         }
     </div>;

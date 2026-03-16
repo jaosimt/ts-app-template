@@ -1,56 +1,48 @@
+$codeFontFamily                 : source-code-pro, Menlo, Monaco, Consolas, "Courier New", "Roboto Mono", monospace;
+
 $textColor                      : #171515;
-$textColorDark                  : #F3F2F2;
+$textColorDark                  : #f3f2f2;
 
-$secondaryTextColor             : #8B7E7E;
-$secondaryTextColorDark         : #B4ADAD;
+$secondaryTextColor             : #8b7e7e;
+$secondaryTextColorDark         : #b4adad;
 
-$baseColor                      : #F3F2F2;
+$baseColor                      : #f3f2f2;
 $baseColorDark                  : #171515;
 
 $secondaryBaseColor             : #dddada;
 $secondaryBaseColorDark         : #2f2b2b;
 
-$accentColor                    : #ff6500;
-$accentColorDark                : #9B3922;
+$accentColor                    : rgb(255, 101, 0);
+$accentColorDark                : rgb(155, 57, 34);
 
-$primaryColor                   : #0099ff;
-$primaryColorDark               : #22859b;
+$primaryColor                   : rgb(0, 153, 255);
+$primaryColorDark               : rgb(34, 133, 155);
 
 $secondaryColor                 : #ffe500;
 $secondaryColorDark             : #ffc300;
 $inputTextColor                 : #252a2b;
 $errorColor                     : #1c2127;
 
-$secondaryBackgroundColor       : #F8F5FA;
-$secondaryBackgroundColorDark   : #34283B;
+$secondaryBackgroundColor       : #f8f5fa;
+$secondaryBackgroundColorDark   : #34283b;
 
-$backgroundColorSelected        : rgba(214, 214, 214, 0.49);
-
-$buttonPrimaryColor             : rgba(0, 123, 255, 0.63);
 $buttonPrimaryTextColor         : #ffffff;
-$buttonPrimaryHoverColor        : rgba(0, 123, 255, 1);
-$buttonPrimaryBorderColor       : $buttonPrimaryHoverColor;
 $buttonPrimaryDisabledTextColor : rgba(255, 255, 255, 0.49);
 
 $buttonDefaultColor             : #ffffff;
-$buttonDefaultTextColor         : #218cd9;
-$buttonDefaultBorderColor       : #218cd9;
-$buttonDefaultHoverColor        : #218cd952;
 $buttonDefaultDisabledTextColor : #beb7b7;
-
-$headerBackgroundColor          : #CE7BD1;
-$footerBackgroundColor          : #CE7BD1;
-$headerBackgroundColorDark      : #963999;
-$footerBackgroundColorDark      : #963999;
-
-$scrollbarColor                 : #963999;
-$scrollbarBackgroundColor       : transparent;
-$scrollbarBorderRadius          : 0.4rem;
-$codeFontFamily                 : source-code-pro, Menlo, Monaco, Consolas, "Courier New", "Roboto Mono", monospace;
 
 $alternatingBackgroundOdd       : rgba(150, 57, 153, 0.07);
 $alternatingBackgroundEven      : rgba(97, 218, 251, 0.07);
 $gridBorderColor                : rgb(212, 167, 212);
 
-$borderColorPrimary             : #00cafd;
 $borderColorDefault             : #e9e9e9;
+$backgroundColorDefault         : #fefcff;
+
+/* ******* BELOW IS DEPENDENT ON THE ACCENT COLOR ******* */
+$buttonPrimaryColor             : $accentColor;
+$buttonPrimaryHoverColor        : rgba($buttonPrimaryColor, 0.3);
+$buttonPrimaryBorderColor       : $buttonPrimaryHoverColor;
+$buttonDefaultHoverColor        : $buttonPrimaryHoverColor;
+$buttonDefaultTextColor         : $buttonPrimaryColor;
+$buttonDefaultBorderColor       : $buttonDefaultTextColor;

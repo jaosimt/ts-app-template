@@ -121,10 +121,6 @@ link {
 
 body {
   &.dark {
-    @include m.customScrollbar(v.$accentColorDark);
-    
-    * { @include m.customScrollbar(v.$accentColorDark); }
-    
     a,
     link {
       &:not(.nav-link) {
@@ -140,10 +136,6 @@ body {
   }
   
   &.light {
-    @include m.customScrollbar(v.$accentColor);
-    
-    * { @include m.customScrollbar(v.$accentColor); }
-    
     a,
     link {
       &:not(.nav-link) {

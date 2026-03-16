@@ -10,23 +10,6 @@ nav[data-nav="top"] {
   }
 }
 
-nav[data-nav="left"] {
-  display        : flex;
-  flex-direction : column;
-  
-  a {
-    border  : 1px solid transparent;
-    color   : inherit;
-    padding : 0.5rem;
-    
-    &.active {
-      border-bottom-color : v.$headerBackgroundColor;
-      border-top-color    : v.$headerBackgroundColor;
-      color               : v.$headerBackgroundColor;
-    }
-  }
-}
-
 @media (max-width : 768px) {
   nav[data-nav="top"] {
     width           : 100%;
