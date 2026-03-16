@@ -135,6 +135,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
             </Link>
             <NavigationMain theme={theme}/>
             <Dropdown
+                className={'-ml-1p5'}
                 valueClassName={'capitalize'}
                 selected={appThemes[0]}
                 options={appThemes}

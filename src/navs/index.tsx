@@ -54,8 +54,7 @@ export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
         <NavLink to={`/`}
                  className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Home</NavLink>
         <NavLink to={`/specs`}
-                 className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Component
-            Specs</NavLink>
+                 className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Specs</NavLink>
         <NavLink to={`/demo`}
                  className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Demo</NavLink>
 
