@@ -359,7 +359,7 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
         minContentHeight={'455'}
         data={tabItems}
         moveSelectedOnScroll={true}
-        activeItemColor={'#963999'}/>;
+    />;
 };
 
 export default DemoInputField;
