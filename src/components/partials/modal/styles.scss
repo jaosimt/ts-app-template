@@ -14,32 +14,14 @@
   justify-content  : center;
   
   &.max-z-index { z-index : 2147483647; }
-  &:not(.max-z-index) { z-index : 777; }
   
-  .header {
-    padding         : 0.5rem;
-    border-bottom   : 1px solid v.$borderColorDefault;
-    display         : flex;
-    align-items     : center;
-    justify-content : space-between;
-    gap             : 0.5rem;
-    
-    > .title {
-      font-weight : 700;
-      white-space : nowrap;
-    }
-    
-    > .btn-close {
-      display     : inline-flex;
-      cursor      : pointer;
-      right       : 3px;
-      
-    }
-  }
+  &:not(.max-z-index) { z-index : 777; }
   
   > [data-component="modal"] {
     @include m.boxShadow();
     
+    border-width : 1px;
+    border-style : solid;
     position         : relative;
     border-radius    : 0.5rem;
     background-color : white;
@@ -47,6 +29,26 @@
     max-height       : calc(100vh - 3rem);
     opacity          : 0;
     transition       : all 150ms ease-in-out;
+    
+    .header {
+      padding         : 0.5rem;
+      display         : flex;
+      align-items     : center;
+      justify-content : space-between;
+      gap             : 0.5rem;
+      
+      > .title {
+        font-weight : 700;
+        white-space : nowrap;
+      }
+      
+      > .btn-close {
+        display : inline-flex;
+        cursor  : pointer;
+        right   : 3px;
+        
+      }
+    }
     
     > .content {
       margin        : 1rem 0 1rem 1rem;
@@ -58,5 +60,41 @@
   
   ~ .modal-overlay {
     background-color : transparent;
+  }
+}
+
+body {
+  &.light {
+    .modal-overlay {
+      > [data-component="modal"] {
+        border-color: v.$accentColor;
+        
+        .header {
+          border-bottom   : 1px solid v.$accentColor;
+          color   : v.$accentColor;
+        }
+        
+        .content {
+          color : v.$textColor;
+        }
+      }
+    }
+  }
+  
+  &.dark {
+    .modal-overlay {
+      > [data-component="modal"] {
+        border-color: v.$accentColorDark;
+        
+        .header {
+          border-bottom   : 1px solid v.$accentColorDark;
+          color   : v.$accentColorDark;
+        }
+        
+        .content {
+          color : v.$textColor;
+        }
+      }
+    }
   }
 }

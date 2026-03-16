@@ -20,10 +20,13 @@ import './styles/animations.scss';
 import './styles/tippy.scss';
 import {getTheme, toggleTheme} from "./slices/theme";
 import {useAppDispatch} from "./hooks";
+import v from './styles/variables.module.scss';
 
 const StyledMain = styled.main<{
     $fixed?: boolean;
+    $theme: ThemeProp;
 }>`
+    background-color: ${props => props.$theme === Theme.DARK ? v.$baseColorDark : v.$baseColor};
     ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
 `;
 
@@ -116,7 +119,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
             <ReactIcon className={'hover-scale'} style={{padding: 0, cursor: 'pointer'}} icon={theme === Theme.DARK ? IoIosMoon : IoSunny}
                        size={28} onClick={() => dispatch(toggleTheme())}/>
         </header>
-        <StyledMain $fixed={pathname === '/'}>
+        <StyledMain $theme={theme} $fixed={pathname === '/'}>
             <div className="content-wrapper">
                 {<ContentRouter theme={theme}/>}
             </div>
