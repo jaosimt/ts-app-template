@@ -1,11 +1,14 @@
-import { FC } from 'react';
+import { connect } from 'react-redux';
+import { ThemeProp } from '../../../constants/interfaces';
+import { getTheme } from '../../../slices/theme';
+import { RootState } from '../../../store';
+import { themeLogoBase64 } from '../../../utils/ext';
 import Button from '../../partials/button';
 import InputField from '../../partials/inputField';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginValidation } from '../../../validations';
 import styles from './styles.module.scss';
-import logo from '../../../images/logo.svg';
 import { classNames } from '../../../utils';
 import { FaLock, FaEnvelope, FaUserLock } from 'react-icons/fa6';
 
@@ -14,7 +17,8 @@ export interface LoginFormInput {
     password: string;
 }
 
-const Login: FC = () => {
+const Login = ({theme} : { theme: ThemeProp}) => {
+
     const {
         register,
         handleSubmit,
@@ -30,7 +34,7 @@ const Login: FC = () => {
     return <div data-component={'login'}>
         <div className={classNames(styles.Login, 'translate absolute-center gap-1')}>
             <div className={classNames(styles.Logo, 'align-content-center')}>
-                <img src={logo} className="m-1" alt="logo" width={150}/>
+                <img src={themeLogoBase64(theme)} className="m-1" alt="logo" width={150}/>
             </div>
             <div className={'display-flex flex-direction-column gap-1 p-1 pl-0'}>
                 <h3 className={'m-0 mb-1'}>Login</h3>
@@ -73,4 +77,8 @@ const Login: FC = () => {
     </div>;
 };
 
-export default Login;
+const mapStateToProps = (state: RootState) => ({
+    theme: getTheme(state),
+});
+
+export default connect(mapStateToProps)(Login);

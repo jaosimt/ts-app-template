@@ -5,6 +5,7 @@
 body {
   &.dark {
     @include m.customScrollbar(v.$accentColorDark);
+    
     background-color : v.$baseColorDark;
     color            : v.$textColorDark;
     
@@ -299,10 +300,32 @@ body {
         }
       }
     }
+    
+    textarea,
+    input {
+      &:not(.dropdown) {
+        color         : v.$inputTextColor;
+        border        : 1px solid v.$borderColorDefault;
+        
+        &:focus {
+          border-color : v.$accentColorDark !important;
+        }
+        
+        &.border-error {
+          border : 1px solid v.$errorColor !important;
+        }
+        
+        &[disabled],
+        &.disabled {
+          color          : #acacacff;
+        }
+      }
+    }
   }
   
   &.react {
     @include m.customScrollbar(v.$accentColorReact);
+    
     background-color : v.$baseColor;
     color            : v.$textColor;
     
@@ -587,7 +610,7 @@ body {
     a,
     link {
       &:not(.nav-link) {
-        color : v.$linkColor;
+        color : v.$linkColorReact;
         
         &:not(.active) {
           &:hover {
@@ -596,10 +619,32 @@ body {
         }
       }
     }
+    
+    textarea,
+    input {
+      &:not(.dropdown) {
+        color         : v.$inputTextColor;
+        border        : 1px solid v.$borderColorDefault;
+        
+        &:focus {
+          border-color : v.$accentColorReact !important;
+        }
+        
+        &.border-error {
+          border : 1px solid v.$errorColor !important;
+        }
+        
+        &[disabled],
+        &.disabled {
+          color          : #acacacff;
+        }
+      }
+    }
   }
   
   &.insta {
     @include m.customScrollbar(v.$accentColorInsta);
+    
     background-color : v.$baseColor;
     color            : v.$textColor;
     
@@ -884,12 +929,33 @@ body {
     a,
     link {
       &:not(.nav-link) {
-        color : v.$linkColor;
+        color : v.$linkColorInsta;
         
         &:not(.active) {
           &:hover {
             text-decoration : underline;
           }
+        }
+      }
+    }
+    
+    textarea,
+    input {
+      &:not(.dropdown) {
+        color         : v.$inputTextColor;
+        border        : 1px solid v.$borderColorDefault;
+        
+        &:focus {
+          border-color : v.$accentColorInsta !important;
+        }
+        
+        &.border-error {
+          border : 1px solid v.$errorColor !important;
+        }
+        
+        &[disabled],
+        &.disabled {
+          color          : #acacacff;
         }
       }
     }

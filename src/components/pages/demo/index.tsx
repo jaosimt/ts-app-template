@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { classNames } from '../../../utils';
+import { getPrimaryColor } from '../../../utils/themeUtils';
 import UnderConstruction from '../underConstruction';
 import v from '../../../styles/variables.module.scss';
 
@@ -32,13 +33,13 @@ const Nav = styled.nav<{
         color: ${props => props.$theme === Theme.DARK ? v.textColorDark : v.textColor} !important;
 
         &:hover {
-            color: ${props => props.$theme === Theme.DARK ? v.primaryColorDark : v.primaryColor} !important;
+            color: ${props => getPrimaryColor(props.$theme)} !important;
         }
 
         &.active {
-            border-bottom-color: ${props => props.$theme === Theme.DARK ? v.primaryColorDark : v.primaryColor};
-            border-top-color: ${props => props.$theme === Theme.DARK ? v.primaryColorDark : v.primaryColor};
-            color: ${props => props.$theme === Theme.DARK ? v.primaryColorDark : v.primaryColor} !important;
+            border-bottom-color: ${props => getPrimaryColor(props.$theme)};
+            border-top-color: ${props => getPrimaryColor(props.$theme)};
+            color: ${props => getPrimaryColor(props.$theme)} !important;
         }
     }
 

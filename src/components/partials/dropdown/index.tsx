@@ -341,7 +341,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
                                           icon={(selected as DropdownObjectOptions).icon as IconType}/>
                 }
                 <Input
-                    className={valueClassName}
+                    className={classNames('dropdown', !hasIcon && 'ml-0p3', valueClassName)}
                     name={name}
                     $hasIcon={hasIcon as boolean}
                     type={'text'}
