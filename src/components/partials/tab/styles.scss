@@ -1,25 +1,15 @@
 @use "../../../styles/common";
 @use "../../../styles/variables.module" as v;
 
-$tabBorderRadius            : 0.2rem;
-$tabAccentColor             : #ff6500;
-$tabAccentColorDark         : #9b3922;
-
-$tabBaseColor               : #f3f2f2;
-$tabBaseColorDark           : #171515;
-
-//$activeTabItemColor         : #00cafd;
-$inactiveTabBackgroundColor : #f1f1f1;
-$inactiveTabBorderColor     : #a6a6a6;
+$tabBorderRadius : 0.2rem;
 
 [data-component="tabs"] {
-  background-color : transparent;
-  border-radius    : $tabBorderRadius;
-  display          : flex;
-  flex-direction   : column;
-  //overflow           : hidden;
-  overflow         : auto;
-  width            : 100%;
+  border-radius  : $tabBorderRadius;
+  border         : none;
+  display        : flex;
+  flex-direction : column;
+  overflow       : auto;
+  width          : 100%;
   
   > .tab-items {
     @extend .disable-select;
@@ -27,8 +17,6 @@ $inactiveTabBorderColor     : #a6a6a6;
     align-items             : center;
     border-width            : 1px;
     border-style            : solid;
-    background-color        : transparent;
-    border-color            : transparent;
     border-bottom           : none;
     border-top-left-radius  : $tabBorderRadius;
     border-top-right-radius : $tabBorderRadius;
@@ -38,18 +26,17 @@ $inactiveTabBorderColor     : #a6a6a6;
     
     > .scroll-btn-left,
     > .scroll-btn-right {
-      align-items      : center;
-      cursor           : pointer;
-      display          : flex;
-      opacity          : 0;
-      transition       : all 200ms ease-in-out;
-      z-index          : 2;
-      justify-content  : center;
-      height           : inherit;
-      padding          : 0.4rem 0;
-      margin-top       : 3px;
-      border-bottom    : none;
-      background-color : transparent;
+      align-items     : center;
+      cursor          : pointer;
+      display         : flex;
+      opacity         : 0;
+      transition      : all 200ms ease-in-out;
+      z-index         : 2;
+      justify-content : center;
+      height          : inherit;
+      padding         : 0.4rem 0;
+      margin-top      : 3px;
+      border-bottom   : none;
       
       > svg {
         border-radius : 50%;
@@ -61,15 +48,16 @@ $inactiveTabBorderColor     : #a6a6a6;
     }
     
     > .tab-items-wrapper {
-      display       : flex;
-      align-items   : flex-end;
-      border-bottom : none;
-      overflow      : hidden;
-      white-space   : nowrap;
-      z-index       : 1;
+      border      : none;
+      display     : flex;
+      align-items : flex-end;
+      overflow    : hidden;
+      white-space : nowrap;
+      z-index     : 1;
       
       > .tab-item {
-        border                  : 1px solid transparent;
+        border-width            : 1px;
+        border-style            : solid;
         border-top-left-radius  : 0.3rem;
         border-top-right-radius : 0.3rem;
         cursor                  : pointer;
@@ -110,6 +98,8 @@ $inactiveTabBorderColor     : #a6a6a6;
   }
   
   > .tab-content {
+    border-width  : 1px;
+    border-style  : solid;
     margin-top    : -1px;
     border-radius : $tabBorderRadius;
     position      : relative;
@@ -118,8 +108,7 @@ $inactiveTabBorderColor     : #a6a6a6;
     > * { animation : fadein 300ms ease-in; }
     
     &:not(.active) {
-      display          : none;
-      background-color : transparent;
+      display : none;
     }
     
     > *:first-child { margin-top : 0; }
@@ -127,42 +116,12 @@ $inactiveTabBorderColor     : #a6a6a6;
     > *:last-child { margin-bottom : 0; }
   }
   
-  // Demo
   &.boxed {
     > .tab-items {
-      background-color : $tabAccentColor;
-      border-color     : $tabAccentColor;
-      
-      > .tab-items-wrapper {
-        > .tab-item {
-          &.active {
-            background-color    : $tabBaseColor;
-            border-color        : $tabAccentColor;
-            border-bottom-color : $tabBaseColor;
-          }
-          
-          &:not(.active) {
-            background-color : transparent;
-            
-            &:hover {
-              color : $tabBaseColor !important;
-            }
-          }
-        }
-      }
-      
-      > .scroll-btn-left,
-      > .scroll-btn-right {
-        > svg {
-          background-color : white;
-          color            : $tabAccentColor;
-        }
-      }
+      padding-top : 0.2rem;
     }
     
     .tab-content {
-      color                   : $tabBaseColorDark;
-      background-color        : $tabBaseColor;
       padding                 : 0.7rem;
       border-top-left-radius  : 0;
       border-top-right-radius : 0;
@@ -171,84 +130,360 @@ $inactiveTabBorderColor     : #a6a6a6;
   
   &.boxed-content {
     > .tab-items {
-      background-color : transparent;
-      border-color     : transparent;
-      
       > .tab-items-wrapper {
         > .tab-item {
           &.active {
-            background-color    : $tabBaseColor;
-            border-color        : $tabAccentColor;
-            border-bottom-color : $tabBaseColor;
             border-bottom-width : 2px;
-          }
-          
-          &:not(.active) {
-            background-color : transparent;
-            border-color     : transparent;
           }
         }
       }
     }
     
     > .tab-content {
-      padding          : 0.7rem;
-      border-radius    : $tabBorderRadius;
-      border           : 1px solid $tabAccentColor;
-      color            : $tabBaseColorDark;
-      background-color : $tabBaseColor;
+      padding       : 0.7rem;
+      border-radius : $tabBorderRadius;
     }
   }
   
   &.boxed-tabs {
     > .tab-items {
-      background-color : transparent;
-      border-color     : transparent;
-      
       > .tab-items-wrapper {
         > .tab-item {
           &.active {
-            background-color    : $tabBaseColor;
-            border-color        : $tabAccentColor;
-            border-bottom-color : $tabBaseColor;
             border-bottom-width : 2px;
-          }
-          
-          &:not(.active) {
-            border-color        : $inactiveTabBorderColor;
-            border-bottom-color : transparent;
           }
         }
       }
     }
     
     > .tab-content {
-      padding          : 0.7rem;
-      border-radius    : $tabBorderRadius;
-      border           : 1px solid $tabAccentColor;
-      color            : $tabBaseColorDark;
-      background-color : $tabBaseColor;
+      padding       : 0.7rem;
+      border-radius : $tabBorderRadius;
     }
   }
   
   &.plain {
-    > .tab-items {
-      background-color : transparent;
-      border-color     : transparent;
-      
-      > .tab-items-wrapper {
-        > .tab-item {
-          background-color : transparent;
-          border-color     : transparent;
-        }
-      }
-    }
-    
     > .tab-content {
       padding          : 0.7rem 0 0 0;
       border-radius    : 0;
       background-color : inherit;
-      border-top       : 1px solid $tabAccentColor;
+    }
+  }
+}
+
+body {
+  &.light {
+    [data-component="tabs"] {
+      &.boxed {
+        > .tab-items {
+          background-color : v.$accentColor;
+          border-color     : v.$accentColor;
+          
+          > .tab-items-wrapper {
+            color : v.$buttonPrimaryTextColor;
+            
+            > .tab-item {
+              &.active {
+                color               : v.$accentColor;
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColor;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color : transparent;
+                border-color     : transparent;
+                
+                &:hover {
+                  color               : v.$accentColor;
+                  background-color    : v.$buttonPrimaryTextColor;
+                  border-color        : v.$accentColor;
+                  border-bottom-color : v.$buttonPrimaryTextColor;
+                  opacity             : 0.7;
+                }
+              }
+            }
+          }
+          
+          > .scroll-btn-left,
+          > .scroll-btn-right {
+            > svg {
+              background-color : white;
+              color            : v.$accentColor;
+            }
+          }
+        }
+        
+        .tab-content {
+          border-color     : v.$accentColor;
+          color            : v.$textColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.boxed-content {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              &.active {
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColor;
+                color               : v.$accentColor;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color : transparent;
+                border-color     : transparent;
+                
+                &:hover {
+                  background-color    : v.$buttonPrimaryTextColor;
+                  border-color        : v.$accentColor;
+                  color               : v.$accentColor;
+                  border-bottom-color : v.$buttonPrimaryTextColor;
+                  opacity             : 0.7;
+                }
+              }
+            }
+          }
+        }
+        
+        > .tab-content {
+          color            : v.$textColor;
+          border           : 1px solid v.$accentColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.boxed-tabs {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              &.active {
+                background-color    : v.$buttonPrimaryTextColor;
+                color               : v.$accentColor;
+                border-color        : v.$accentColor;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColor;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+                opacity             : 0.5;
+                
+                &:hover {
+                  color   : v.$accentColor;
+                  opacity : 0.7;
+                }
+              }
+            }
+          }
+        }
+        
+        > .tab-content {
+          border           : 1px solid v.$accentColor;
+          color            : v.$textColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.plain {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              background-color : transparent;
+              border-color     : transparent;
+              
+              &.active {
+                color : v.$accentColor;
+              }
+              
+              &:not(.active) {
+                &:hover {
+                  color   : v.$accentColor;
+                  opacity : 0.5;
+                }
+              }
+              
+            }
+          }
+        }
+        
+        > .tab-content {
+          color            : v.$textColor;
+          border-color     : transparent;
+          background-color : inherit;
+          border-top       : 1px solid v.$accentColor;
+        }
+      }
+    }
+  }
+  
+  &.dark {
+    [data-component="tabs"] {
+      &.boxed {
+        > .tab-items {
+          background-color : v.$accentColorDark;
+          border-color     : v.$accentColorDark;
+          
+          > .tab-items-wrapper {
+            color : v.$buttonPrimaryTextColor;
+            
+            > .tab-item {
+              &.active {
+                color               : v.$accentColorDark;
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorDark;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color : transparent;
+                border-color     : transparent;
+                
+                &:hover {
+                  color               : v.$accentColorDark;
+                  background-color    : v.$buttonPrimaryTextColor;
+                  border-color        : v.$accentColorDark;
+                  border-bottom-color : v.$buttonPrimaryTextColor;
+                  opacity             : 0.7;
+                }
+              }
+            }
+          }
+          
+          > .scroll-btn-left,
+          > .scroll-btn-right {
+            > svg {
+              background-color : white;
+              color            : v.$accentColorDark;
+            }
+          }
+        }
+        
+        .tab-content {
+          border-color     : v.$accentColorDark;
+          color            : v.$textColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.boxed-content {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              &.active {
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorDark;
+                color               : v.$accentColorDark;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color : transparent;
+                border-color     : transparent;
+                
+                &:hover {
+                  background-color    : v.$buttonPrimaryTextColor;
+                  border-color        : v.$accentColorDark;
+                  color               : v.$accentColorDark;
+                  border-bottom-color : v.$buttonPrimaryTextColor;
+                  opacity             : 0.7;
+                }
+              }
+            }
+          }
+        }
+        
+        > .tab-content {
+          color            : v.$textColor;
+          border           : 1px solid v.$accentColorDark;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.boxed-tabs {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              &.active {
+                background-color    : v.$buttonPrimaryTextColor;
+                color               : v.$accentColorDark;
+                border-color        : v.$accentColorDark;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                color: v.$textColor;
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorDark;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+                opacity             : 0.5;
+                
+                &:hover {
+                  color   : v.$accentColorDark;
+                  opacity : 0.7;
+                }
+              }
+            }
+          }
+        }
+        
+        > .tab-content {
+          border           : 1px solid v.$accentColorDark;
+          color            : v.$textColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.plain {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              background-color : transparent;
+              border-color     : transparent;
+              
+              &.active {
+                color : v.$accentColorDark;
+              }
+              
+              &:not(.active) {
+                &:hover {
+                  color   : v.$accentColorDark;
+                  opacity : 0.5;
+                }
+              }
+              
+            }
+          }
+        }
+        
+        > .tab-content {
+          color            : v.$buttonPrimaryTextColor;
+          border-color     : transparent;
+          background-color : inherit;
+          border-top       : 1px solid v.$accentColorDark;
+        }
+      }
     }
   }
 }

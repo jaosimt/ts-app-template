@@ -1,13 +1,11 @@
 import {FC, HTMLAttributes, memo, ReactNode, RefObject, useEffect, useRef, useState} from 'react';
 import {RxChevronLeft, RxChevronRight} from 'react-icons/rx';
 import {useResizeObserver} from 'usehooks-ts';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSColors, CSSUnit } from '../../../constants/types';
 import {classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase} from '../../../utils';
 import {ReactIcon} from '../index';
 import './styles.scss';
-import v from '../../../styles/variables.module.scss';
 
 export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
     activeItemColor?: CSSColors;
@@ -43,7 +41,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         contentPadding,
         type = 'plain',
         moveSelectedOnScroll = false,
-        activeItemColor = props.theme === Theme.DARK ? v.accentColorDark : v.accentColor,
+        activeItemColor,
         minContentHeight,
         onTabChange,
         rememberActiveTab,
@@ -278,7 +276,7 @@ const Tabs: FC<TabItemProps> = (props) => {
                             onMouseEnter={() => setHoveredItem(itemName)}
                             onMouseLeave={() => setHoveredItem('')}
                             style={{
-                                color: isActive || hoveredItem === itemName ? activeItemColor : ''
+                                color: isActive || hoveredItem === itemName ? activeItemColor ? activeItemColor : '' : '',
                             }}>
                             {t.name}
                         </div>;

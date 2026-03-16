@@ -1,8 +1,8 @@
 $codeFontFamily                 : source-code-pro, Menlo, Monaco, Consolas, "Courier New", "Roboto Mono", monospace;
 
 /* NO RGBA COLOR IN ACCENT's */
-$accentColor                    : rgb(255, 101, 0);
-$accentColorDark                : rgb(155, 57, 34);
+$accentColor                    : green; //rgb(255, 101, 0);
+$accentColorDark                : blue; //rgb(155, 57, 34);
 
 $textColor                      : #171515;
 $textColorDark                  : #f3f2f2;
@@ -16,8 +16,8 @@ $baseColorDark                  : #171515;
 $secondaryBaseColor             : #dddada;
 $secondaryBaseColorDark         : #2f2b2b;
 
-$primaryColor                   : rgb(0, 153, 255);
-$primaryColorDark               : rgb(34, 133, 155);
+$linkColor                      : #0099ff;
+$linkColorDark                  : rgb(34, 133, 155);
 
 $secondaryColor                 : #ffe500;
 $secondaryColorDark             : #ffc300;
@@ -68,8 +68,8 @@ $buttonDefaultBorderColorDark   : $buttonDefaultTextColorDark;
   baseColorDark                  : $baseColorDark;
   secondaryBaseColor             : $secondaryBaseColor;
   secondaryBaseColorDark         : $secondaryBaseColorDark;
-  primaryColor                   : $primaryColor;
-  primaryColorDark               : $primaryColorDark;
+  primaryColor                   : $linkColor;
+  primaryColorDark               : $linkColorDark;
   secondaryColor                 : $secondaryColor;
   secondaryColorDark             : $secondaryColorDark;
   secondaryBackgroundColor       : $secondaryBackgroundColor;
