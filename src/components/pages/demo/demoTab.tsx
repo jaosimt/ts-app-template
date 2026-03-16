@@ -78,7 +78,7 @@ const DemoTabs: FC = () => {
             label={'Tab Type'}
             onChange={(value: string) => setTabType(value)}
         />
-        <Tabs data={tabItems} type={tabType} moveSelectedOnScroll={true} activeItemColor={'#963999'}/>
+        <Tabs data={tabItems} type={tabType} moveSelectedOnScroll={true}/>
     </div>
 };
 
