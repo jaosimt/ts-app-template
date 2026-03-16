@@ -1,9 +1,8 @@
-@use "./styles/variables" as v;
+@use "./styles/variables.module" as v;
 @use "./styles/mixins" as m;
 
 * {
   box-sizing : border-box;
-  @include m.customScrollbar(v.$accentColor);
 }
 
 html {
@@ -19,11 +18,13 @@ html {
     line-height             : 1.5;
     
     &.dark {
+      @include m.customScrollbar(v.$accentColorDark);
       background-color : v.$baseColorDark;
       color            : v.$textColorDark;
     }
     
     &.light {
+      @include m.customScrollbar(v.$accentColor);
       background-color : v.$baseColor;
       color            : v.$textColor;
     }

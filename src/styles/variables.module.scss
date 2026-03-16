@@ -1,0 +1,100 @@
+$codeFontFamily                 : source-code-pro, Menlo, Monaco, Consolas, "Courier New", "Roboto Mono", monospace;
+
+/* NO RGBA COLOR IN ACCENT's */
+$accentColor                    : rgb(255, 101, 0);
+$accentColorDark                : rgb(155, 57, 34);
+
+$textColor                      : #171515;
+$textColorDark                  : #f3f2f2;
+
+$secondaryTextColor             : #8b7e7e;
+$secondaryTextColorDark         : #b4adad;
+
+$baseColor                      : #f3f2f2;
+$baseColorDark                  : #171515;
+
+$secondaryBaseColor             : #dddada;
+$secondaryBaseColorDark         : #2f2b2b;
+
+$primaryColor                   : rgb(0, 153, 255);
+$primaryColorDark               : rgb(34, 133, 155);
+
+$secondaryColor                 : #ffe500;
+$secondaryColorDark             : #ffc300;
+
+$secondaryBackgroundColor       : #f8f5fa;
+$secondaryBackgroundColorDark   : #34283b;
+
+$buttonPrimaryTextColor         : #ffffff;
+$buttonPrimaryDisabledTextColor : rgba(255, 255, 255, 0.49);
+
+$buttonDefaultColor             : #ffffff;
+$buttonDefaultDisabledTextColor : #beb7b7;
+
+$alternatingBackgroundOdd       : rgba(150, 57, 153, 0.07);
+$alternatingBackgroundEven      : rgba(97, 218, 251, 0.07);
+$gridBorderColor                : rgb(212, 167, 212);
+
+$borderColorDefault             : #e9e9e9;
+$backgroundColorDefault         : #fefcff;
+
+$inputTextColor                 : #252a2b;
+$errorColor                     : #1c2127;
+
+/* ******* BELOW IS DEPENDENT ON THE ACCENT COLOR : DO NOT EDIT THEM DIRECTLY ******* */
+$buttonPrimaryColor             : $accentColor;
+$buttonPrimaryHoverColor        : rgba($buttonPrimaryColor, 0.5);
+$buttonPrimaryBorderColor       : $buttonPrimaryHoverColor;
+$buttonDefaultHoverColor        : $buttonPrimaryHoverColor;
+$buttonDefaultTextColor         : $buttonPrimaryColor;
+$buttonDefaultBorderColor       : $buttonDefaultTextColor;
+
+$buttonPrimaryColorDark         : $accentColorDark;
+$buttonPrimaryHoverColorDark    : rgba($buttonPrimaryColorDark, 0.5);
+$buttonPrimaryBorderColorDark   : $buttonPrimaryHoverColorDark;
+$buttonDefaultHoverColorDark    : $buttonPrimaryHoverColorDark;
+$buttonDefaultTextColorDark     : $buttonPrimaryColorDark;
+$buttonDefaultBorderColorDark   : $buttonDefaultTextColorDark;
+
+:export {
+  codeFontFamily                 : $codeFontFamily;
+  accentColor                    : $accentColor;
+  accentColorDark                : $accentColorDark;
+  textColor                      : $textColor;
+  textColorDark                  : $textColorDark;
+  secondaryTextColor             : $secondaryTextColor;
+  secondaryTextColorDark         : $secondaryTextColorDark;
+  baseColor                      : $baseColor;
+  baseColorDark                  : $baseColorDark;
+  secondaryBaseColor             : $secondaryBaseColor;
+  secondaryBaseColorDark         : $secondaryBaseColorDark;
+  primaryColor                   : $primaryColor;
+  primaryColorDark               : $primaryColorDark;
+  secondaryColor                 : $secondaryColor;
+  secondaryColorDark             : $secondaryColorDark;
+  secondaryBackgroundColor       : $secondaryBackgroundColor;
+  secondaryBackgroundColorDark   : $secondaryBackgroundColorDark;
+  buttonPrimaryTextColor         : $buttonPrimaryTextColor;
+  buttonPrimaryDisabledTextColor : $buttonPrimaryDisabledTextColor;
+  buttonDefaultColor             : $buttonDefaultColor;
+  buttonDefaultDisabledTextColor : $buttonDefaultDisabledTextColor;
+  alternatingBackgroundOdd       : $alternatingBackgroundOdd;
+  alternatingBackgroundEven      : $alternatingBackgroundEven;
+  gridBorderColor                : $gridBorderColor;
+  borderColorDefault             : $borderColorDefault;
+  backgroundColorDefault         : $backgroundColorDefault;
+  inputTextColor                 : $inputTextColor;
+  errorColor                     : $errorColor;
+  buttonPrimaryColor             : $buttonPrimaryColor;
+  buttonPrimaryHoverColor        : $buttonPrimaryHoverColor;
+  buttonPrimaryBorderColor       : $buttonPrimaryBorderColor;
+  buttonDefaultHoverColor        : $buttonDefaultHoverColor;
+  buttonDefaultTextColor         : $buttonDefaultTextColor;
+  buttonDefaultBorderColor       : $buttonDefaultBorderColor;
+  buttonPrimaryColorDark         : $buttonPrimaryColorDark;
+  buttonPrimaryHoverColorDark    : $buttonPrimaryHoverColorDark;
+  buttonPrimaryBorderColorDark   : $buttonPrimaryBorderColorDark;
+  buttonDefaultHoverColorDark    : $buttonDefaultHoverColorDark;
+  buttonDefaultTextColorDark     : $buttonDefaultTextColorDark;
+  buttonDefaultBorderColorDark   : $buttonDefaultBorderColorDark;
+}

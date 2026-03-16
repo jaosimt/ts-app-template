@@ -6,7 +6,7 @@ import { Theme } from '../constants';
 import { ThemeProp } from '../constants/interfaces';
 import {useOnScroll} from '../hooks';
 import {classNames, getRandStr} from '../utils';
-import {$secondaryColor, $secondaryColorDark} from "../styles/variables";
+import v from '../styles/variables.module.scss';
 
 export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
     const navRef = useRef<HTMLElement>(null);
@@ -67,7 +67,7 @@ export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
                 width: `${activeBar.width}px`,
                 marginBottom: '-21px',
                 transition: 'all 300ms ease-in-out, opacity 1400ms ease-in-out',
-                backgroundColor: theme === Theme.DARK ? $secondaryColorDark : $secondaryColor,
+                backgroundColor: theme === Theme.DARK ? v.secondaryColorDark : v.secondaryColor,
                 opacity: `${activeBar.opacity}`
             }}></div>
         }

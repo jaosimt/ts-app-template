@@ -7,11 +7,7 @@ import { CSSColors, CSSUnit } from '../../../constants/types';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
 import { getTextWidth, isString, parseCSSUnit } from '../../../utils';
-import {
-    $secondaryBackgroundColor,
-    $secondaryBackgroundColorDark,
-    $secondaryBaseColor, $secondaryBaseColorDark
-} from '../../../styles/variables';
+import v from '../../../styles/variables.module.scss';
 
 export type LabelPositionType =
     'top-left'
@@ -222,8 +218,8 @@ const Box: FC<BoxProps> = (props) => {
         onLabelClick && onLabelClick();
     };
 
-    const themedBorderColor = isString(borderColor, true) ? borderColor as CSSColors : (theme === Theme.DARK ? $secondaryBaseColorDark : $secondaryBaseColor);
-    const themedLabelBackgroundColor = isString(labelBackgroundColor, true) ? labelBackgroundColor as CSSColors : (theme === Theme.DARK ? $secondaryBackgroundColorDark : $secondaryBackgroundColor);
+    const themedBorderColor = (isString(borderColor, true) ? borderColor: theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor) as CSSColors;
+    const themedLabelBackgroundColor = (isString(labelBackgroundColor, true) ? labelBackgroundColor : theme === Theme.DARK ? v.secondaryBackgroundColorDark : v.secondaryBackgroundColor) as CSSColors;
 
     return <Container
         data-component={'box'}
@@ -245,7 +241,7 @@ const Box: FC<BoxProps> = (props) => {
                 $borderWidth={!border ? 0 : '1px'}
                 $borderColor={themedBorderColor}
                 $borderRadius={titleBorderRadius}
-                $color={labelColor || (theme === Theme.DARK ? $secondaryBackgroundColor : $secondaryBackgroundColorDark)}
+                $color={labelColor || (theme === Theme.DARK ? v.secondaryBackgroundColor : v.secondaryBackgroundColorDark) as CSSColors}
                 $margin={tight ? border === 'label-only' ? '0.1rem' : '0.1rem' : '-0.4rem 0 0 0'}
                 $fontSize={labelSize}
                 $labelPosition={labelPosition}

@@ -5,9 +5,7 @@ import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { classNames } from '../../../utils';
 import UnderConstruction from '../underConstruction';
-import {
-    $primaryColor, $primaryColorDark, $textColor, $textColorDark
-} from '../../../styles/variables';
+import v from '../../../styles/variables.module.scss';
 
 const Container = styled.div`
     display: flex;
@@ -31,16 +29,16 @@ const Nav = styled.nav<{
     a {
         border: 1px solid transparent;
         padding: 0.5rem;
-        color: ${props => props.$theme === Theme.DARK ? $textColorDark : $textColor} !important;
+        color: ${props => props.$theme === Theme.DARK ? v.textColorDark : v.textColor} !important;
 
         &:hover {
-            color: ${props => props.$theme === Theme.DARK ? $primaryColorDark : $primaryColor} !important;
+            color: ${props => props.$theme === Theme.DARK ? v.primaryColorDark : v.primaryColor} !important;
         }
 
         &.active {
-            border-bottom-color: ${props => props.$theme === Theme.DARK ? $primaryColorDark : $primaryColor};
-            border-top-color: ${props => props.$theme === Theme.DARK ? $primaryColorDark : $primaryColor};
-            color: ${props => props.$theme === Theme.DARK ? $primaryColorDark : $primaryColor} !important;
+            border-bottom-color: ${props => props.$theme === Theme.DARK ? v.primaryColorDark : v.primaryColor};
+            border-top-color: ${props => props.$theme === Theme.DARK ? v.primaryColorDark : v.primaryColor};
+            color: ${props => props.$theme === Theme.DARK ? v.primaryColorDark : v.primaryColor} !important;
         }
     }
 

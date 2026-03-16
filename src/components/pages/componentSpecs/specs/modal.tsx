@@ -2,9 +2,10 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { Theme } from '../../../../constants';
+import { CSSColors } from '../../../../constants/types';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
-import {$baseColor, $baseColorDark, $primaryColor, $primaryColorDark} from "../../../../styles/variables";
+import v from '../../../../styles/variables.module.scss';
 
 const code = `const [showModal, setShowModal] = useState(false);
 
@@ -65,8 +66,8 @@ const SpecsModal: FC<SelectedThemeProps> = ({selectedTheme, theme}) => {
             width={'100%'}
             border={'label-only'}
             tight={true}
-            labelBackgroundColor={theme === Theme.DARK ? $baseColorDark : $baseColor}
-            labelColor={theme === Theme.DARK ? $primaryColorDark : $primaryColor}
+            labelBackgroundColor={(theme === Theme.DARK ? v.baseColorDark : v.baseColor) as CSSColors}
+            labelColor={(theme === Theme.DARK ? v.primaryColorDark : v.primaryColor) as CSSColors}
             label={'Demo'}
             labelPosition={'top-right'}
             // backgroundColor={'transparent'}

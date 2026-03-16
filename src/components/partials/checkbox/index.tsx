@@ -1,8 +1,13 @@
 import { FC, InputHTMLAttributes, memo } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { Theme } from '../../../constants';
+import { ThemeProp } from '../../../constants/interfaces';
 import { CSSUnit } from '../../../constants/types';
-import { $buttonPrimaryColor } from '../../../styles/variables';
+import { getTheme } from '../../../slices/theme';
+import { RootState } from '../../../store';
 import { parseCSSUnit } from '../../../utils';
+import v from '../../../styles/variables.module.scss';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{
     name: string|undefined;
@@ -12,6 +17,7 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{
     disabled?: boolean;
     className?: string;
     labelPosition?: 'left' | 'right';
+    theme?: ThemeProp;
 }
 
 const CheckboxContainer = styled.div<{disabled: boolean}>`
@@ -68,22 +74,23 @@ const Label = styled.label<{disabled: boolean}>`
 `;
 
 const StyledCheckbox = styled.div<{
-    checked: boolean | undefined,
-    disabled: boolean
+    $checked: boolean | undefined,
+    $disabled: boolean,
+    $theme: ThemeProp,
 }>`
     display: inline-block;
     width: 21px;
     height: 21px;
     border-radius: 4px;
-    border: 1px solid ${$buttonPrimaryColor};
-    background-color: ${props => props.checked ? $buttonPrimaryColor : 'white'};
+    border: 1px solid ${props => props.$theme === Theme.DARK ? v.buttonPrimaryColorDark : v.buttonPrimaryColor};
+    background-color: ${props => props.$checked ? props.$theme === Theme.DARK ? v.buttonPrimaryColorDark : v.buttonPrimaryColor : 'white'};
     transition: all 150ms;
     
     ${Icon} {
-        visibility: ${props => (props.checked ? 'visible' : 'hidden')}
+        visibility: ${props => (props.$checked ? 'visible' : 'hidden')}
     }
     
-    ${props => props.disabled && 'opacity: 0.7; pointer-events: none;'}
+    ${props => props.$disabled && 'opacity: 0.7; pointer-events: none;'}
 `;
 
 const Checkbox: FC<CheckboxProps> = (props) => {
@@ -95,14 +102,15 @@ const Checkbox: FC<CheckboxProps> = (props) => {
         className,
         checked,
         labelPosition,
-        onChange
+        onChange,
+        theme
     } = props;
 
     return <Label disabled={disabled}>
         {label && labelPosition === 'left' && <span style={{minWidth: 'fit-content', width: parseCSSUnit(labelWidth as CSSUnit), marginRight: '0.3rem'}}>{label}</span>}
         <CheckboxContainer disabled={disabled} className={className}>
             <HiddenCheckbox disabled={disabled} name={name} checked={checked} onChange={onChange}/>
-            <StyledCheckbox disabled={disabled} checked={checked}>
+            <StyledCheckbox $theme={theme as ThemeProp} $disabled={disabled} $checked={checked}>
                 <Icon viewBox="0 0 24 24">
                     <polyline points="20 6 9 17 4 12"/>
                 </Icon>
@@ -112,4 +120,8 @@ const Checkbox: FC<CheckboxProps> = (props) => {
     </Label>
 }
 
-export default memo(Checkbox);
+const mapStateToProps = (state: RootState) => ({
+    theme: getTheme(state),
+});
+
+export default connect(mapStateToProps)(memo(Checkbox));

@@ -1,5 +1,5 @@
 @use "mixins" as m;
-@use "variables" as v;
+@use 'variables.module' as v;
 @use "tags";
 
 /* TEXT ****************************************************/
