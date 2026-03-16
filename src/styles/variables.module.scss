@@ -1,8 +1,8 @@
 $codeFontFamily                 : source-code-pro, Menlo, Monaco, Consolas, "Courier New", "Roboto Mono", monospace;
 
-/* NO RGBA COLOR IN ACCENT's */
-$accentColor                    : green; //rgb(255, 101, 0);
-$accentColorDark                : blue; //rgb(155, 57, 34);
+/* DO NOT USE RGBA COLOR IN ACCENT's */
+$accentColor                    : rgb(255, 101, 0);
+$accentColorDark                : rgb(155, 57, 34);
 
 $textColor                      : #171515;
 $textColorDark                  : #f3f2f2;
