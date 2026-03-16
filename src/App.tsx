@@ -105,7 +105,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
 
     return (<>
         {MemoizedConnectionModal}
-        <header className={'grid cols-2'}>
+        <header className={'grid cols-2 color-white'}>
             <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit nav-link'}
                   to={{pathname: `/`}}>
                 <ReactIcon size={35} className={classNames(pathname === `/` && 'spin', 'font-weight-bold')}

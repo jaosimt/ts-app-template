@@ -124,7 +124,7 @@ body {
     a,
     link {
       &:not(.nav-link) {
-        color : v.$primaryColorDark;
+        color : v.$linkColorDark;
         
         &:not(.active) {
           &:hover {
@@ -139,7 +139,7 @@ body {
     a,
     link {
       &:not(.nav-link) {
-        color : v.$primaryColor;
+        color : v.$linkColor;
         
         &:not(.active) {
           &:hover {
