@@ -1,0 +1,897 @@
+@use './variables.module' as v;
+@use './mixins' as m;
+@use './common';
+
+body {
+  &.dark {
+    @include m.customScrollbar(v.$accentColorDark);
+    background-color : v.$baseColorDark;
+    color            : v.$textColorDark;
+    
+    #react-ts-template {
+      header {
+        border-bottom : 10px solid v.$baseColorDark;
+      }
+      
+      footer {
+        border-top : 10px solid v.$baseColorDark;
+      }
+      
+      header, footer {
+        background-color : v.$accentColorDark;
+      }
+    }
+    
+    nav[data-nav="top"] {
+      a {
+        &.active { color : v.$secondaryColorDark; }
+      }
+    }
+    
+    .marquee {
+      background-color : v.$baseColorDark;
+    }
+    
+    .btn-icon,
+    button,
+    [data-component="button"] {
+      @include m.boxShadow(v.$buttonPrimaryBorderColorDark);
+      
+      &.btn-icon {
+        color            : v.$buttonPrimaryColorDark;
+        background-color : v.$buttonPrimaryTextColor;
+        border-color     : v.$buttonPrimaryBorderColorDark;
+      }
+      
+      &:not(.btn-icon) {
+        @extend .border-radius-0p3;
+        
+        &.default {
+          background-color : v.$buttonDefaultColor;
+          border-color     : v.$buttonDefaultBorderColorDark;
+          color            : v.$buttonDefaultTextColorDark;
+        }
+        
+        &:not(.default) {
+          background-color : v.$buttonPrimaryColorDark;
+          border-color     : v.$buttonPrimaryBorderColorDark;
+          color            : v.$buttonPrimaryTextColor;
+        }
+        
+        &.no-padding {
+        }
+      }
+      
+      &:hover {
+        &.btn-icon {
+          color            : v.$buttonPrimaryHoverColorDark;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+        
+        &:not(.btn-icon) {
+          &.default {
+            background-color : v.$buttonDefaultHoverColorDark;
+            color            : v.$buttonDefaultColor;
+          }
+          
+          &:not(.default) {
+            background-color : v.$buttonPrimaryHoverColorDark;
+          }
+        }
+        
+        &:active { }
+      }
+      
+      &[disabled],
+      &.disabled {
+        &.default {
+          border-color : v.$buttonDefaultDisabledTextColor;
+          color        : v.$buttonDefaultDisabledTextColor;
+        }
+        
+        &:not(.default) {
+          border-color : v.$buttonPrimaryDisabledTextColor;
+        }
+      }
+    }
+    
+    .modal-overlay {
+      > [data-component="modal"] {
+        border-color: v.$accentColorDark;
+        
+        .header {
+          border-bottom   : 1px solid v.$accentColorDark;
+          color   : v.$accentColorDark;
+        }
+        
+        .content {
+          color : v.$textColor;
+        }
+      }
+    }
+    
+    [data-component="tabs"] {
+      &.boxed {
+        > .tab-items {
+          background-color : v.$accentColorDark;
+          border-color     : v.$accentColorDark;
+          
+          > .tab-items-wrapper {
+            color : v.$buttonPrimaryTextColor;
+            
+            > .tab-item {
+              &.active {
+                color               : v.$accentColorDark;
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorDark;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color : transparent;
+                border-color     : transparent;
+                
+                &:hover {
+                  color               : v.$accentColorDark;
+                  background-color    : v.$buttonPrimaryTextColor;
+                  border-color        : v.$accentColorDark;
+                  border-bottom-color : v.$buttonPrimaryTextColor;
+                  opacity             : 0.7;
+                }
+              }
+            }
+          }
+          
+          > .scroll-btn-left,
+          > .scroll-btn-right {
+            > svg {
+              background-color : white;
+              color            : v.$accentColorDark;
+            }
+          }
+        }
+        
+        .tab-content {
+          border-color     : v.$accentColorDark;
+          color            : v.$textColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.boxed-content {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              &.active {
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorDark;
+                color               : v.$accentColorDark;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color : transparent;
+                border-color     : transparent;
+                
+                &:hover {
+                  background-color    : v.$buttonPrimaryTextColor;
+                  border-color        : v.$accentColorDark;
+                  color               : v.$accentColorDark;
+                  border-bottom-color : v.$buttonPrimaryTextColor;
+                  opacity             : 0.7;
+                }
+              }
+            }
+          }
+        }
+        
+        > .tab-content {
+          color            : v.$textColor;
+          border           : 1px solid v.$accentColorDark;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.boxed-tabs {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              &.active {
+                background-color    : v.$buttonPrimaryTextColor;
+                color               : v.$accentColorDark;
+                border-color        : v.$accentColorDark;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                color: v.$textColor;
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorDark;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+                opacity             : 0.5;
+                
+                &:hover {
+                  color   : v.$accentColorDark;
+                  opacity : 0.7;
+                }
+              }
+            }
+          }
+        }
+        
+        > .tab-content {
+          border           : 1px solid v.$accentColorDark;
+          color            : v.$textColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.plain {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              background-color : transparent;
+              border-color     : transparent;
+              
+              &.active {
+                color : v.$accentColorDark;
+              }
+              
+              &:not(.active) {
+                &:hover {
+                  color   : v.$accentColorDark;
+                  opacity : 0.5;
+                }
+              }
+              
+            }
+          }
+        }
+        
+        > .tab-content {
+          color            : v.$buttonPrimaryTextColor;
+          border-color     : transparent;
+          background-color : inherit;
+          border-top       : 1px solid v.$accentColorDark;
+        }
+      }
+    }
+    
+    .custom-tippy {
+      background-color : v.$accentColorDark;
+      border-color     : v.$accentColorDark;
+      
+      &[data-placement^="top"] .tippy-arrow::before {
+        border-top-color : v.$accentColorDark;
+      }
+      
+      &[data-placement^="right"] .tippy-arrow::before {
+        border-right-color : v.$accentColorDark;
+      }
+      
+      &[data-placement^="bottom"] .tippy-arrow::before {
+        border-bottom-color : v.$accentColorDark;
+      }
+      
+      &[data-placement^="left"] .tippy-arrow::before {
+        border-left-color : v.$accentColorDark;
+      }
+    }
+    
+    a,
+    link {
+      &:not(.nav-link) {
+        color : v.$linkColorDark;
+        
+        &:not(.active) {
+          &:hover {
+            text-decoration : underline;
+          }
+        }
+      }
+    }
+  }
+  
+  &.react {
+    @include m.customScrollbar(v.$accentColorReact);
+    background-color : v.$baseColor;
+    color            : v.$textColor;
+    
+    #react-ts-template {
+      header {
+        border-bottom : 10px solid v.$baseColor;
+      }
+      
+      footer {
+        border-top : 10px solid v.$baseColor;
+      }
+      
+      header, footer {
+        background-color : v.$accentColorReact;
+      }
+    }
+    
+    nav[data-nav="top"] {
+      a {
+        &.active { color : v.$secondaryColor; }
+      }
+    }
+    
+    .marquee {
+      background-color : v.$baseColor;
+    }
+    
+    .btn-icon,
+    button,
+    [data-component="button"] {
+      @include m.boxShadow(v.$buttonPrimaryBorderColorReact);
+      
+      &.btn-icon {
+        color            : v.$buttonPrimaryColorReact;
+        background-color : v.$buttonPrimaryTextColor;
+        border-color     : v.$buttonPrimaryBorderColorReact;
+      }
+      
+      &:not(.btn-icon) {
+        @extend .border-radius-0p3;
+        
+        &.default {
+          background-color : v.$buttonDefaultColor;
+          border-color     : v.$buttonDefaultBorderColorReact;
+          color            : v.$buttonDefaultTextColorReact;
+        }
+        
+        &:not(.default) {
+          background-color : v.$buttonPrimaryColorReact;
+          border-color     : v.$buttonPrimaryBorderColorReact;
+          color            : v.$buttonPrimaryTextColor;
+        }
+        
+        &.no-padding {
+        }
+      }
+      
+      &:hover {
+        &.btn-icon {
+          color            : v.$buttonPrimaryHoverColorReact;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+        
+        &:not(.btn-icon) {
+          &.default {
+            background-color : v.$buttonDefaultHoverColorReact;
+            color            : v.$buttonDefaultColor
+          }
+          
+          &:not(.default) {
+            background-color : v.$buttonPrimaryHoverColorReact;
+          }
+        }
+        
+        &:active { }
+      }
+      
+      &[disabled],
+      &.disabled {
+        &.default {
+          border-color : v.$buttonDefaultDisabledTextColor;
+          color        : v.$buttonDefaultDisabledTextColor;;
+        }
+        
+        &:not(.default) {
+          border-color : v.$buttonPrimaryDisabledTextColor;
+        }
+      }
+    }
+    
+    .modal-overlay {
+      > [data-component="modal"] {
+        border-color: v.$accentColorReact;
+        
+        .header {
+          border-bottom   : 1px solid v.$accentColorReact;
+          color   : v.$accentColorReact;
+        }
+        
+        .content {
+          color : v.$textColor;
+        }
+      }
+    }
+    
+    [data-component="tabs"] {
+      &.boxed {
+        > .tab-items {
+          background-color : v.$accentColorReact;
+          border-color     : v.$accentColorReact;
+          
+          > .tab-items-wrapper {
+            color : v.$buttonPrimaryTextColor;
+            
+            > .tab-item {
+              &.active {
+                color               : v.$accentColorReact;
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorReact;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color : transparent;
+                border-color     : transparent;
+                
+                &:hover {
+                  color               : v.$accentColorReact;
+                  background-color    : v.$buttonPrimaryTextColor;
+                  border-color        : v.$accentColorReact;
+                  border-bottom-color : v.$buttonPrimaryTextColor;
+                  opacity             : 0.7;
+                }
+              }
+            }
+          }
+          
+          > .scroll-btn-left,
+          > .scroll-btn-right {
+            > svg {
+              background-color : white;
+              color            : v.$accentColorReact;
+            }
+          }
+        }
+        
+        .tab-content {
+          border-color     : v.$accentColorReact;
+          color            : v.$textColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.boxed-content {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              &.active {
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorReact;
+                color               : v.$accentColorReact;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color : transparent;
+                border-color     : transparent;
+                
+                &:hover {
+                  background-color    : v.$buttonPrimaryTextColor;
+                  border-color        : v.$accentColorReact;
+                  color               : v.$accentColorReact;
+                  border-bottom-color : v.$buttonPrimaryTextColor;
+                  opacity             : 0.7;
+                }
+              }
+            }
+          }
+        }
+        
+        > .tab-content {
+          color            : v.$textColor;
+          border           : 1px solid v.$accentColorReact;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.boxed-tabs {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              &.active {
+                background-color    : v.$buttonPrimaryTextColor;
+                color               : v.$accentColorReact;
+                border-color        : v.$accentColorReact;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorReact;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+                opacity             : 0.5;
+                
+                &:hover {
+                  color   : v.$accentColorReact;
+                  opacity : 0.7;
+                }
+              }
+            }
+          }
+        }
+        
+        > .tab-content {
+          border           : 1px solid v.$accentColorReact;
+          color            : v.$textColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.plain {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              background-color : transparent;
+              border-color     : transparent;
+              
+              &.active {
+                color : v.$accentColorReact;
+              }
+              
+              &:not(.active) {
+                &:hover {
+                  color   : v.$accentColorReact;
+                  opacity : 0.5;
+                }
+              }
+              
+            }
+          }
+        }
+        
+        > .tab-content {
+          color            : v.$textColor;
+          border-color     : transparent;
+          background-color : inherit;
+          border-top       : 1px solid v.$accentColorReact;
+        }
+      }
+    }
+    
+    .custom-tippy {
+      background-color : v.$accentColorReact;
+      border-color     : v.$accentColorReact;
+      
+      &[data-placement^="top"] .tippy-arrow::before {
+        border-top-color : v.$accentColorReact;
+      }
+      
+      &[data-placement^="right"] .tippy-arrow::before {
+        border-right-color : v.$accentColorReact;
+      }
+      
+      &[data-placement^="bottom"] .tippy-arrow::before {
+        border-bottom-color : v.$accentColorReact;
+      }
+      
+      &[data-placement^="left"] .tippy-arrow::before {
+        border-left-color : v.$accentColorReact;
+      }
+    }
+    
+    a,
+    link {
+      &:not(.nav-link) {
+        color : v.$linkColor;
+        
+        &:not(.active) {
+          &:hover {
+            text-decoration : underline;
+          }
+        }
+      }
+    }
+  }
+  
+  &.insta {
+    @include m.customScrollbar(v.$accentColorInsta);
+    background-color : v.$baseColor;
+    color            : v.$textColor;
+    
+    #react-ts-template {
+      header {
+        border-bottom : 10px solid v.$baseColor;
+      }
+      
+      footer {
+        border-top : 10px solid v.$baseColor;
+      }
+      
+      header, footer {
+        background-color : v.$accentColorInsta;
+      }
+    }
+    
+    nav[data-nav="top"] {
+      a {
+        &.active { color : v.$secondaryColor; }
+      }
+    }
+    
+    .marquee {
+      background-color : v.$baseColor;
+    }
+    
+    .btn-icon,
+    button,
+    [data-component="button"] {
+      @include m.boxShadow(v.$buttonPrimaryBorderColorInsta);
+      
+      &.btn-icon {
+        color            : v.$buttonPrimaryColorInsta;
+        background-color : v.$buttonPrimaryTextColor;
+        border-color     : v.$buttonPrimaryBorderColorInsta;
+      }
+      
+      &:not(.btn-icon) {
+        @extend .border-radius-0p3;
+        
+        &.default {
+          background-color : v.$buttonDefaultColor;
+          border-color     : v.$buttonDefaultBorderColorInsta;
+          color            : v.$buttonDefaultTextColorInsta;
+        }
+        
+        &:not(.default) {
+          background-color : v.$buttonPrimaryColorInsta;
+          border-color     : v.$buttonPrimaryBorderColorInsta;
+          color            : v.$buttonPrimaryTextColor;
+        }
+        
+        &.no-padding {
+        }
+      }
+      
+      &:hover {
+        &.btn-icon {
+          color            : v.$buttonPrimaryHoverColorInsta;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+        
+        &:not(.btn-icon) {
+          &.default {
+            background-color : v.$buttonDefaultHoverColorInsta;
+            color            : v.$buttonDefaultColor
+          }
+          
+          &:not(.default) {
+            background-color : v.$buttonPrimaryHoverColorInsta;
+          }
+        }
+        
+        &:active { }
+      }
+      
+      &[disabled],
+      &.disabled {
+        &.default {
+          border-color : v.$buttonDefaultDisabledTextColor;
+          color        : v.$buttonDefaultDisabledTextColor;;
+        }
+        
+        &:not(.default) {
+          border-color : v.$buttonPrimaryDisabledTextColor;
+        }
+      }
+    }
+    
+    .modal-overlay {
+      > [data-component="modal"] {
+        border-color: v.$accentColorInsta;
+        
+        .header {
+          border-bottom   : 1px solid v.$accentColorInsta;
+          color   : v.$accentColorInsta;
+        }
+        
+        .content {
+          color : v.$textColor;
+        }
+      }
+    }
+    
+    [data-component="tabs"] {
+      &.boxed {
+        > .tab-items {
+          background-color : v.$accentColorInsta;
+          border-color     : v.$accentColorInsta;
+          
+          > .tab-items-wrapper {
+            color : v.$buttonPrimaryTextColor;
+            
+            > .tab-item {
+              &.active {
+                color               : v.$accentColorInsta;
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorInsta;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color : transparent;
+                border-color     : transparent;
+                
+                &:hover {
+                  color               : v.$accentColorInsta;
+                  background-color    : v.$buttonPrimaryTextColor;
+                  border-color        : v.$accentColorInsta;
+                  border-bottom-color : v.$buttonPrimaryTextColor;
+                  opacity             : 0.7;
+                }
+              }
+            }
+          }
+          
+          > .scroll-btn-left,
+          > .scroll-btn-right {
+            > svg {
+              background-color : white;
+              color            : v.$accentColorInsta;
+            }
+          }
+        }
+        
+        .tab-content {
+          border-color     : v.$accentColorInsta;
+          color            : v.$textColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.boxed-content {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              &.active {
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorInsta;
+                color               : v.$accentColorInsta;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color : transparent;
+                border-color     : transparent;
+                
+                &:hover {
+                  background-color    : v.$buttonPrimaryTextColor;
+                  border-color        : v.$accentColorInsta;
+                  color               : v.$accentColorInsta;
+                  border-bottom-color : v.$buttonPrimaryTextColor;
+                  opacity             : 0.7;
+                }
+              }
+            }
+          }
+        }
+        
+        > .tab-content {
+          color            : v.$textColor;
+          border           : 1px solid v.$accentColorInsta;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.boxed-tabs {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              &.active {
+                background-color    : v.$buttonPrimaryTextColor;
+                color               : v.$accentColorInsta;
+                border-color        : v.$accentColorInsta;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+              }
+              
+              &:not(.active) {
+                background-color    : v.$buttonPrimaryTextColor;
+                border-color        : v.$accentColorInsta;
+                border-bottom-color : v.$buttonPrimaryTextColor;
+                opacity             : 0.5;
+                
+                &:hover {
+                  color   : v.$accentColorInsta;
+                  opacity : 0.7;
+                }
+              }
+            }
+          }
+        }
+        
+        > .tab-content {
+          border           : 1px solid v.$accentColorInsta;
+          color            : v.$textColor;
+          background-color : v.$buttonPrimaryTextColor;
+        }
+      }
+      
+      &.plain {
+        > .tab-items {
+          background-color : transparent;
+          border-color     : transparent;
+          
+          > .tab-items-wrapper {
+            > .tab-item {
+              background-color : transparent;
+              border-color     : transparent;
+              
+              &.active {
+                color : v.$accentColorInsta;
+              }
+              
+              &:not(.active) {
+                &:hover {
+                  color   : v.$accentColorInsta;
+                  opacity : 0.5;
+                }
+              }
+              
+            }
+          }
+        }
+        
+        > .tab-content {
+          color            : v.$textColor;
+          border-color     : transparent;
+          background-color : inherit;
+          border-top       : 1px solid v.$accentColorInsta;
+        }
+      }
+    }
+    
+    .custom-tippy {
+      background-color : v.$accentColorInsta;
+      border-color     : v.$accentColorInsta;
+      
+      &[data-placement^="top"] .tippy-arrow::before {
+        border-top-color : v.$accentColorInsta;
+      }
+      
+      &[data-placement^="right"] .tippy-arrow::before {
+        border-right-color : v.$accentColorInsta;
+      }
+      
+      &[data-placement^="bottom"] .tippy-arrow::before {
+        border-bottom-color : v.$accentColorInsta;
+      }
+      
+      &[data-placement^="left"] .tippy-arrow::before {
+        border-left-color : v.$accentColorInsta;
+      }
+    }
+    
+    a,
+    link {
+      &:not(.nav-link) {
+        color : v.$linkColor;
+        
+        &:not(.active) {
+          &:hover {
+            text-decoration : underline;
+          }
+        }
+      }
+    }
+  }
+}

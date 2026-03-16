@@ -19,21 +19,3 @@ nav[data-nav="top"] {
     gap             : 0.5rem;
   }
 }
-
-body {
-  &.dark {
-    nav[data-nav="top"] {
-      a {
-        &.active { color : v.$secondaryColorDark; }
-      }
-    }
-  }
-
-  &.light {
-    nav[data-nav="top"] {
-      a {
-        &.active { color : v.$secondaryColor; }
-      }
-    }
-  }
-}

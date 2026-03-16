@@ -42,7 +42,7 @@ const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
         return str;
     })();
 
-    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
+    const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
 
     return <div data-component={'modal-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
         {

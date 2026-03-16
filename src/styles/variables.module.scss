@@ -1,8 +1,9 @@
 $codeFontFamily                 : source-code-pro, Menlo, Monaco, Consolas, "Courier New", "Roboto Mono", monospace;
 
 /* DO NOT USE RGBA COLOR IN ACCENT's */
-$accentColor                    : #0099ff;;
+$accentColorReact               : #0099ff;
 $accentColorDark                : #0f0d0c;
+$accentColorInsta               : #c92a90ff;
 
 $textColor                      : #171515;
 $textColorDark                  : #f3f2f2;
@@ -17,7 +18,7 @@ $secondaryBaseColor             : #dddada;
 $secondaryBaseColorDark         : #525252;
 
 $linkColor                      : #0099ff;
-$linkColorDark                  : #072D36FF;
+$linkColorDark                  : #072d36ff;
 
 $secondaryColor                 : #ffe500;
 $secondaryColorDark             : #ffc300;
@@ -42,12 +43,12 @@ $inputTextColor                 : #252a2b;
 $errorColor                     : #1c2127;
 
 /* ******* BELOW IS DEPENDENT ON THE ACCENT COLOR : DO NOT EDIT THEM DIRECTLY ******* */
-$buttonPrimaryColor             : $accentColor;
-$buttonPrimaryHoverColor        : rgba($buttonPrimaryColor, 0.5);
-$buttonPrimaryBorderColor       : $buttonPrimaryHoverColor;
-$buttonDefaultHoverColor        : $buttonPrimaryHoverColor;
-$buttonDefaultTextColor         : $buttonPrimaryColor;
-$buttonDefaultBorderColor       : $buttonDefaultTextColor;
+$buttonPrimaryColorReact        : $accentColorReact;
+$buttonPrimaryHoverColorReact   : rgba($buttonPrimaryColorReact, 0.5);
+$buttonPrimaryBorderColorReact  : $buttonPrimaryHoverColorReact;
+$buttonDefaultHoverColorReact   : $buttonPrimaryHoverColorReact;
+$buttonDefaultTextColorReact    : $buttonPrimaryColorReact;
+$buttonDefaultBorderColorReact  : $buttonDefaultTextColorReact;
 
 $buttonPrimaryColorDark         : $accentColorDark;
 $buttonPrimaryHoverColorDark    : rgba($buttonPrimaryColorDark, 0.5);
@@ -56,10 +57,15 @@ $buttonDefaultHoverColorDark    : $buttonPrimaryHoverColorDark;
 $buttonDefaultTextColorDark     : $buttonPrimaryColorDark;
 $buttonDefaultBorderColorDark   : $buttonDefaultTextColorDark;
 
+$buttonPrimaryColorInsta        : $accentColorInsta;
+$buttonPrimaryHoverColorInsta   : rgba($buttonPrimaryColorInsta, 0.5);
+$buttonPrimaryBorderColorInsta  : $buttonPrimaryHoverColorInsta;
+$buttonDefaultHoverColorInsta   : $buttonPrimaryHoverColorInsta;
+$buttonDefaultTextColorInsta    : $buttonPrimaryColorInsta;
+$buttonDefaultBorderColorInsta  : $buttonDefaultTextColorInsta;
+
 :export {
   codeFontFamily                 : $codeFontFamily;
-  accentColor                    : $accentColor;
-  accentColorDark                : $accentColorDark;
   textColor                      : $textColor;
   textColorDark                  : $textColorDark;
   secondaryTextColor             : $secondaryTextColor;
@@ -85,16 +91,29 @@ $buttonDefaultBorderColorDark   : $buttonDefaultTextColorDark;
   backgroundColorDefault         : $backgroundColorDefault;
   inputTextColor                 : $inputTextColor;
   errorColor                     : $errorColor;
-  buttonPrimaryColor             : $buttonPrimaryColor;
-  buttonPrimaryHoverColor        : $buttonPrimaryHoverColor;
-  buttonPrimaryBorderColor       : $buttonPrimaryBorderColor;
-  buttonDefaultHoverColor        : $buttonDefaultHoverColor;
-  buttonDefaultTextColor         : $buttonDefaultTextColor;
-  buttonDefaultBorderColor       : $buttonDefaultBorderColor;
+  
+  accentColorReact               : $accentColorReact;
+  accentColorDark                : $accentColorDark;
+  accentColorInsta               : $accentColorInsta;
+  
+  buttonPrimaryColorReact        : $buttonPrimaryColorReact;
+  buttonPrimaryHoverColorReact   : $buttonPrimaryHoverColorReact;
+  buttonPrimaryBorderColorReact  : $buttonPrimaryBorderColorReact;
+  buttonDefaultHoverColorReact   : $buttonDefaultHoverColorReact;
+  buttonDefaultTextColorReact    : $buttonDefaultTextColorReact;
+  buttonDefaultBorderColorReact  : $buttonDefaultBorderColorReact;
+  
   buttonPrimaryColorDark         : $buttonPrimaryColorDark;
   buttonPrimaryHoverColorDark    : $buttonPrimaryHoverColorDark;
   buttonPrimaryBorderColorDark   : $buttonPrimaryBorderColorDark;
   buttonDefaultHoverColorDark    : $buttonDefaultHoverColorDark;
   buttonDefaultTextColorDark     : $buttonDefaultTextColorDark;
   buttonDefaultBorderColorDark   : $buttonDefaultBorderColorDark;
+  
+  buttonPrimaryColorInsta        : $buttonPrimaryColorInsta;
+  buttonPrimaryHoverColorInsta   : $buttonPrimaryHoverColorInsta;
+  buttonPrimaryBorderColorInsta  : $buttonPrimaryBorderColorInsta;
+  buttonDefaultHoverColorInsta   : $buttonDefaultHoverColorInsta;
+  buttonDefaultTextColorInsta    : $buttonDefaultTextColorInsta;
+  buttonDefaultBorderColorInsta  : $buttonDefaultBorderColorInsta;
 }

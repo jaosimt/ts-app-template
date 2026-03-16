@@ -570,6 +570,8 @@
   > :last-child { margin-bottom : 0; }
 }
 
+.capitalize { text-transform : capitalize; }
+
 @media(max-width: 768px) {
   .width-fit-100p { width : 100%; }
   

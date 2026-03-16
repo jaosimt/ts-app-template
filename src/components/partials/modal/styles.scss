@@ -62,39 +62,3 @@
     background-color : transparent;
   }
 }
-
-body {
-  &.light {
-    .modal-overlay {
-      > [data-component="modal"] {
-        border-color: v.$accentColor;
-        
-        .header {
-          border-bottom   : 1px solid v.$accentColor;
-          color   : v.$accentColor;
-        }
-        
-        .content {
-          color : v.$textColor;
-        }
-      }
-    }
-  }
-  
-  &.dark {
-    .modal-overlay {
-      > [data-component="modal"] {
-        border-color: v.$accentColorDark;
-        
-        .header {
-          border-bottom   : 1px solid v.$accentColorDark;
-          color   : v.$accentColorDark;
-        }
-        
-        .content {
-          color : v.$textColor;
-        }
-      }
-    }
-  }
-}

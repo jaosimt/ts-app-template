@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
+import { FaInstagram, FaReact } from 'react-icons/fa6';
 import { IoIosMoon } from 'react-icons/io';
-import {IoCloudOffline, IoLogoReact, IoSunny} from 'react-icons/io5';
+import {IoCloudOffline, IoLogoReact} from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { Link, useLocation } from 'react-router';
 import styled from 'styled-components';
 import { ReactIcon } from './components/partials';
 import CollapsibleLink from './components/partials/collapsibleLink';
+import Dropdown, { DropdownObjectOptions } from './components/partials/dropdown';
 import Modal from './components/partials/modal';
 import ToastContainer, { toast } from './components/partials/toast';
 import { targetUnicode, Theme } from './constants';
@@ -14,11 +16,11 @@ import { NavigationMain } from './navs';
 import ContentRouter from './routes';
 import { getError } from './slices/error';
 import { RootState } from './store';
-import { classNames, hashCode } from './utils';
+import { capitalize, classNames, hashCode } from './utils';
 import './App.scss';
 import './styles/animations.scss';
 import './styles/tippy.scss';
-import {getTheme, toggleTheme} from "./slices/theme";
+import {getTheme, setTheme} from "./slices/theme";
 import {useAppDispatch} from "./hooks";
 import v from './styles/variables.module.scss';
 
@@ -26,9 +28,25 @@ const StyledMain = styled.main<{
     $fixed?: boolean;
     $theme: ThemeProp;
 }>`
-    background-color: ${props => props.$theme === Theme.DARK ? v.$baseColorDark : v.$baseColor};
+    background-color: ${props => props.$theme === Theme.DARK ? v.baseColorDark : v.baseColor};
     ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
 `;
+
+const appThemes = [
+    {
+        label: capitalize(Theme.REACT),
+        value: Theme.REACT,
+        icon: FaReact
+    }, {
+        label: capitalize(Theme.DARK),
+        value: Theme.DARK,
+        icon: IoIosMoon
+    }, {
+        label: capitalize(Theme.INSTA),
+        value: Theme.INSTA,
+        icon: FaInstagram
+    }
+];
 
 const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     const dispatch = useAppDispatch();
@@ -116,8 +134,12 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                 <h3 className={'m-0'}>React TypeScript Template</h3>
             </Link>
             <NavigationMain theme={theme}/>
-            <ReactIcon className={'hover-scale'} style={{padding: 0, cursor: 'pointer'}} icon={theme === Theme.DARK ? IoIosMoon : IoSunny}
-                       size={28} onClick={() => dispatch(toggleTheme())}/>
+            <Dropdown
+                valueClassName={'capitalize'}
+                selected={appThemes[0]}
+                options={appThemes}
+                onChange={(theme: DropdownObjectOptions) => dispatch(setTheme(theme.value as any))}
+            />
         </header>
         <StyledMain $theme={theme} $fixed={pathname === '/'}>
             <div className="content-wrapper">

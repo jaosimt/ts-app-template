@@ -144,7 +144,7 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
     const labelAlignChangeHandler = (value: any) => setProps({...props, labelAlign: value.value});
     const dropdownChangeHandler = (value: any) => setSelected(value);
     const selectedTheme = theme === Theme.DARK ? oneLight : oneDark;
-    const themedBoxBorderColor = theme === Theme.LIGHT ? '#000' : '#ccc';
+    const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
 
     return <div data-component={'checkbox-demo'} className={'display-flex align-items-center flex-direction-column gap-0p5-1'}>
         <Box label={'Dropdown Props'} className={'justify-self-center'} borderColor={themedBoxBorderColor}>
