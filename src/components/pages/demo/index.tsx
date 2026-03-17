@@ -5,7 +5,7 @@ import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { classNames } from '../../../utils';
 import { getPrimaryColor } from '../../../utils/themeUtils';
-import UnderConstruction from '../underConstruction';
+import Loading from '../../partials/loading';
 import v from '../../../styles/variables.module.scss';
 
 const Container = styled.div`
@@ -116,7 +116,7 @@ const Demo: FC<{ theme: ThemeProp }> = ({theme}) => {
                      className={({isActive}) => classNames(isActive && 'active', 'transition-200')}>WindowPortal</NavLink>
         </Nav>
         <Wrapper $theme={theme} className={'wrapper'}>
-            {pathname === `/demo` && <UnderConstruction/>}
+            {pathname === `/demo` && <Loading position={'fixed'}/>}
             <InnerWrapper>
                 <Outlet/>
             </InnerWrapper>

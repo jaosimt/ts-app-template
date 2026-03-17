@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
+import { CSSProperties, FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { RiArchiveDrawerFill } from 'react-icons/ri';
 import styled from 'styled-components';
@@ -19,6 +19,7 @@ export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
     onClose?: Function;
     showOnCreate?: boolean;
     theme?: ThemeProp;
+    handleStyle?: CSSProperties;
 }
 
 const Container = styled.div<{
@@ -116,6 +117,7 @@ const Drawer: FC<DrawerProps> = (props) => {
         showOnCreate = false,
         onOpen,
         onClose,
+        handleStyle = {},
         ...restProps
     } = props;
 
@@ -181,7 +183,7 @@ const Drawer: FC<DrawerProps> = (props) => {
                 </div>
             </div>
         </Container>
-        {!show && <Handle onClick={() => setShow(true)} $position={position} $backgroundColor={backgroundColor}>
+        {!show && <Handle onClick={() => setShow(true)} $position={position} $backgroundColor={backgroundColor} style={{...handleStyle}}>
             <ReactIcon icon={RiArchiveDrawerFill}
                        style={{width: '21px', height: '21px', display: 'flex'}}/>
         </Handle>}

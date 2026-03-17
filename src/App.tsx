@@ -28,16 +28,18 @@ import { themedBannerBase64 } from './utils/ext';
 import { getAccentColor } from './utils/themeUtils';
 
 const StyledBanner = styled.div<{
-    $theme: ThemeProp;
+    $footer?: boolean;
 }>`
     position: absolute;
     width: 100%;
-    height: 168px;
-    z-index: 1;
+    height: 154px;
+    z-index: ${props => props.$footer ? 0 : 1};
+    left: 0;
     background-color: transparent;
-    background-position: bottom;
+    background-position: ${props => props.$footer ? 'top' : 'bottom'};
     background-repeat: no-repeat;
     background-size: cover;
+    ${props => props.$footer && `bottom: 0;`}
 `;
 
 const StyledMain = styled.main<{
@@ -159,7 +161,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
 
     return (<>
         {MemoizedConnectionModal}
-        {pathname === '/' && <StyledBanner className={'banner'} $theme={theme} style={{backgroundImage: `url("${themedBannerBase64(theme)}")`}}/>}
+        {pathname === '/' && <StyledBanner className={'banner'} style={{backgroundImage: `url("${themedBannerBase64(theme)}")`}}/>}
         <header className={'grid cols-2 color-white'} style={{...variableHeaderStyle}}>
             <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit nav-link'}
                   to={{pathname: `/`}}>

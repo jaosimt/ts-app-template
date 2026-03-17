@@ -153,7 +153,7 @@ const ComponentSpecs: FC<{ theme: ThemeProp }> = ({theme}) => {
     //     sessionStorage.setItem('rshTheme', value);
     // };
 
-    return <div data-component={'home'} className={'width-100p'}>
+    return <div data-component={'component-specs'} className={'width-100p'}>
         <Header>
             <h1 className={'mt-0 line-height-1'}>Custom Component Specs</h1>
             {/*<Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme}*/}
