@@ -162,7 +162,6 @@ const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
             </Box>
             <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
                 <Button
-                    style={{margin: 'auto auto'}}
                     className={'font-size-large'}
                     align={'space-between'}
                     icon={FaRegWindowMaximize}
