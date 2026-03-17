@@ -124,6 +124,11 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
         </Modal>;
     }, [offline]);
 
+    let selectedTheme;
+    const storedSelectedTheme = JSON.parse(sessionStorage.getItem('theme') as any) as DropdownObjectOptions | null;
+    if (storedSelectedTheme && appThemes.find(t => t.value === storedSelectedTheme?.value)) selectedTheme = storedSelectedTheme;
+    else selectedTheme = appThemes[0];
+
     return (<>
         {MemoizedConnectionModal}
         <header className={'grid cols-2 color-white'}>
@@ -137,9 +142,12 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
             <Dropdown
                 className={'-ml-1p5'}
                 valueClassName={'capitalize'}
-                selected={appThemes[0]}
+                selected={selectedTheme}
                 options={appThemes}
-                onChange={(theme: DropdownObjectOptions) => dispatch(setTheme(theme.value as any))}
+                onChange={(theme: DropdownObjectOptions) => {
+                    dispatch(setTheme(theme.value as any));
+                    sessionStorage.setItem('theme', JSON.stringify(theme));
+                }}
             />
         </header>
         <StyledMain $theme={theme} $fixed={pathname === '/'}>

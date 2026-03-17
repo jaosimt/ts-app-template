@@ -247,7 +247,10 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
             <Box width={395} label={'selected'} className={'justify-self-center'}
                  contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
                 <pre className={'pb-0p5'}>
-                    {JSON.stringify(selected, (k, v) => k.startsWith('_') ? undefined : v, 2)}
+                    {JSON.stringify(selected, (k, v) => {
+                        if (k.startsWith('_')) return undefined;
+                        return v;
+                    }, 2)}
                 </pre>
             </Box>
         </Container>
