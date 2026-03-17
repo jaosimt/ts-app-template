@@ -74,14 +74,6 @@ const DemoDrawer: FC<{theme: ThemeProp}> = ({theme}) => {
                             value: props.backgroundColor,
                             onChange: propsChangeHandler
                         })}/>
-                    <InputField
-                        width={70}
-                        label={'width'}
-                        type={'number'}
-                        fieldRegister={register('width', {
-                            value: props.width,
-                            onChange: propsChangeHandler
-                        })}/>
                     <Dropdown
                         options={positionOptions}
                         selected={position}
@@ -89,6 +81,16 @@ const DemoDrawer: FC<{theme: ThemeProp}> = ({theme}) => {
                         onChange={(value: DropdownObjectOptions) => dropDownChangeHandler(value)}
                     />
                     <InputField
+                        disabled={['top', 'bottom'].includes(position.value)}
+                        width={70}
+                        label={'width'}
+                        type={'number'}
+                        fieldRegister={register('width', {
+                            value: props.width,
+                            onChange: propsChangeHandler
+                        })}/>
+                    <InputField
+                        disabled={['left', 'right'].includes(position.value)}
                         width={70}
                         label={'height'}
                         type={'number'}
@@ -102,7 +104,7 @@ const DemoDrawer: FC<{theme: ThemeProp}> = ({theme}) => {
             </div>
         </Box>
 
-        <Drawer showOnCreate={props.showOnCreate} position={props.position} width={props.width} height={props.height} backgroundColor={props.backgroundColor}>
+        <Drawer theme={theme} showOnCreate={props.showOnCreate} position={props.position} width={props.width} height={props.height} backgroundColor={props.backgroundColor}>
             <Todo className={'translate absolute-center'} style={{width: '95%'}} />
         </Drawer>
     </div>;

@@ -1,10 +1,13 @@
 import { FC, HTMLAttributes, memo, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { RiArchiveDrawerFill } from 'react-icons/ri';
 import styled from 'styled-components';
 import { useOnClickOutside } from 'usehooks-ts';
+import { ThemeProp } from '../../../constants/interfaces';
 import { CSSColors, CSSUnit } from '../../../constants/types';
 import { useKeyPress } from '../../../hooks';
-import { isElementOnTop, parseCSSUnit, classNames, isString } from '../../../utils';
+import { isElementOnTop, parseCSSUnit, classNames } from '../../../utils';
+import { getAccentColor } from '../../../utils/themeUtils';
 import { ReactIcon } from '../index';
 
 export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
@@ -15,6 +18,7 @@ export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
     onOpen?: Function;
     onClose?: Function;
     showOnCreate?: boolean;
+    theme?: ThemeProp;
 }
 
 const Container = styled.div<{
@@ -57,15 +61,14 @@ const Handle = styled.div<{
     width: 1.9rem;
     height: 1.9rem;
     border-radius: 50%;
-    border: 1px solid ${props => props.$backgroundColor};
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: opacity 0.1s ease-in-out;
     opacity: 0.3;
-    background-color: ${props => props.$backgroundColor};
     color: white;
+    ${props => `border: 1px solid ${props.$backgroundColor}; background-color: ${props.$backgroundColor}`};
 
     ${props => {
         switch (props.$position) {
@@ -107,7 +110,7 @@ const Drawer: FC<DrawerProps> = (props) => {
         width = 'auto',
         height = 'auto',
         position = 'left',
-        backgroundColor = '#913794c7',
+        backgroundColor = getAccentColor(props.theme as ThemeProp),
         className,
         style,
         showOnCreate = false,
@@ -116,7 +119,7 @@ const Drawer: FC<DrawerProps> = (props) => {
         ...restProps
     } = props;
 
-    if (!isString(backgroundColor, true)) backgroundColor = '#913794c7';
+    console.log('backgroundColor:', backgroundColor);
 
     const containerRef = useRef<any>(null);
 
@@ -138,7 +141,7 @@ const Drawer: FC<DrawerProps> = (props) => {
             onClose && onClose();
         }
         //eslint-disable-next-line
-    }, [position, show]);
+    }, [position, show, backgroundColor]);
 
     function escKeyPressHandler(pressed: boolean) {
         if (pressed && isElementOnTop(containerRef.current)) {
@@ -146,7 +149,7 @@ const Drawer: FC<DrawerProps> = (props) => {
         }
     }
 
-    return <>
+    return createPortal(<>
         <Container
             data-component={'drawer'}
             ref={containerRef}
@@ -184,7 +187,7 @@ const Drawer: FC<DrawerProps> = (props) => {
             <ReactIcon icon={RiArchiveDrawerFill}
                        style={{width: '21px', height: '21px', display: 'flex'}}/>
         </Handle>}
-    </>;
+    </>, document.body);
 };
 
 export default memo(Drawer);
