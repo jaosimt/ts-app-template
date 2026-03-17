@@ -1,6 +1,6 @@
-@use './variables.module' as v;
-@use './mixins' as m;
-@use './common';
+@use "./variables.module" as v;
+@use "./mixins" as m;
+@use "./common";
 
 body {
   &.dark {
@@ -20,7 +20,7 @@ body {
       
       //header, footer {
       footer {
-         background-color : v.$accentColorDark;
+        background-color : v.$accentColorDark;
       }
     }
     
@@ -97,11 +97,11 @@ body {
     
     .modal-overlay {
       > [data-component="modal"] {
-        border-color: v.$accentColorDark;
+        border-color : v.$accentColorDark;
         
         .header {
-          border-bottom   : 1px solid v.$accentColorDark;
-          color   : v.$accentColorDark;
+          border-bottom : 1px solid v.$accentColorDark;
+          color         : v.$accentColorDark;
         }
         
         .content {
@@ -210,7 +210,7 @@ body {
               }
               
               &:not(.active) {
-                color: v.$textColor;
+                color               : v.$textColor;
                 background-color    : v.$buttonPrimaryTextColor;
                 border-color        : v.$accentColorDark;
                 border-bottom-color : v.$buttonPrimaryTextColor;
@@ -303,8 +303,8 @@ body {
     textarea,
     input {
       &:not(.dropdown) {
-        color         : v.$inputTextColor;
-        border        : 1px solid v.$borderColorDefault;
+        color  : v.$inputTextColor;
+        border : 1px solid v.$borderColorDefault;
         
         &:focus {
           border-color : v.$accentColorDark !important;
@@ -316,7 +316,8 @@ body {
         
         &[disabled],
         &.disabled {
-          color          : #acacacff;
+          color        : #acacacff;
+          border-color : rgba(v.$accentColorDark, 0.3) !important;
         }
       }
     }
@@ -339,7 +340,7 @@ body {
       
       //header, footer {
       footer {
-         background-color : v.$accentColorReact;
+        background-color : v.$accentColorReact;
       }
     }
     
@@ -416,11 +417,11 @@ body {
     
     .modal-overlay {
       > [data-component="modal"] {
-        border-color: v.$accentColorReact;
+        border-color : v.$accentColorReact;
         
         .header {
-          border-bottom   : 1px solid v.$accentColorReact;
-          color   : v.$accentColorReact;
+          border-bottom : 1px solid v.$accentColorReact;
+          color         : v.$accentColorReact;
         }
         
         .content {
@@ -621,8 +622,8 @@ body {
     textarea,
     input {
       &:not(.dropdown) {
-        color         : v.$inputTextColor;
-        border        : 1px solid v.$borderColorDefault;
+        color  : v.$inputTextColor;
+        border : 1px solid v.$borderColorDefault;
         
         &:focus {
           border-color : v.$accentColorReact !important;
@@ -634,7 +635,8 @@ body {
         
         &[disabled],
         &.disabled {
-          color          : #acacacff;
+          color        : #acacacff;
+          border-color : rgba(v.$accentColorReact, 0.3) !important;
         }
       }
     }
@@ -657,7 +659,7 @@ body {
       
       //header, footer {
       footer {
-         background-color : v.$accentColorInsta;
+        background-color : v.$accentColorInsta;
       }
     }
     
@@ -734,11 +736,11 @@ body {
     
     .modal-overlay {
       > [data-component="modal"] {
-        border-color: v.$accentColorInsta;
+        border-color : v.$accentColorInsta;
         
         .header {
-          border-bottom   : 1px solid v.$accentColorInsta;
-          color   : v.$accentColorInsta;
+          border-bottom : 1px solid v.$accentColorInsta;
+          color         : v.$accentColorInsta;
         }
         
         .content {
@@ -939,8 +941,8 @@ body {
     textarea,
     input {
       &:not(.dropdown) {
-        color         : v.$inputTextColor;
-        border        : 1px solid v.$borderColorDefault;
+        color  : v.$inputTextColor;
+        border : 1px solid v.$borderColorDefault;
         
         &:focus {
           border-color : v.$accentColorInsta !important;
@@ -952,7 +954,8 @@ body {
         
         &[disabled],
         &.disabled {
-          color          : #acacacff;
+          color        : #acacacff;
+          border-color : rgba(v.$accentColorInsta, 0.3) !important;
         }
       }
     }
@@ -975,7 +978,7 @@ body {
       
       //header, footer {
       footer {
-         background-color : v.$accentColorTwitch;
+        background-color : v.$accentColorTwitch;
       }
     }
     
@@ -1052,11 +1055,11 @@ body {
     
     .modal-overlay {
       > [data-component="modal"] {
-        border-color: v.$accentColorTwitch;
+        border-color : v.$accentColorTwitch;
         
         .header {
-          border-bottom   : 1px solid v.$accentColorTwitch;
-          color   : v.$accentColorTwitch;
+          border-bottom : 1px solid v.$accentColorTwitch;
+          color         : v.$accentColorTwitch;
         }
         
         .content {
@@ -1257,8 +1260,8 @@ body {
     textarea,
     input {
       &:not(.dropdown) {
-        color         : v.$inputTextColor;
-        border        : 1px solid v.$borderColorDefault;
+        color  : v.$inputTextColor;
+        border : 1px solid v.$borderColorDefault;
         
         &:focus {
           border-color : v.$accentColorTwitch !important;
@@ -1270,7 +1273,8 @@ body {
         
         &[disabled],
         &.disabled {
-          color          : #acacacff;
+          color        : #acacacff;
+          border-color : rgba(v.$accentColorTwitch, 0.3) !important;
         }
       }
     }
