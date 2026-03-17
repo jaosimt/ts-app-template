@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { FaTwitch } from 'react-icons/fa';
 import { FaInstagram, FaReact } from 'react-icons/fa6';
 import { IoIosMoon } from 'react-icons/io';
 import {IoCloudOffline, IoLogoReact} from 'react-icons/io5';
@@ -45,6 +46,10 @@ const appThemes = [
         label: capitalize(Theme.INSTA),
         value: Theme.INSTA,
         icon: FaInstagram
+    }, {
+        label: capitalize(Theme.TWITCH),
+        value: Theme.TWITCH,
+        icon: FaTwitch
     }
 ];
 
@@ -126,7 +131,10 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
 
     let selectedTheme;
     const storedSelectedTheme = JSON.parse(sessionStorage.getItem('theme') as any) as DropdownObjectOptions | null;
-    if (storedSelectedTheme && appThemes.find(t => t.value === storedSelectedTheme?.value)) selectedTheme = storedSelectedTheme;
+    if (storedSelectedTheme) {
+        const match = appThemes.find(t => t.value === storedSelectedTheme?.value)
+        if (match) selectedTheme = match;
+    }
     else selectedTheme = appThemes[0];
 
     return (<>

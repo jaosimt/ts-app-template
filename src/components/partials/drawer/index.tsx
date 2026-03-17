@@ -119,8 +119,6 @@ const Drawer: FC<DrawerProps> = (props) => {
         ...restProps
     } = props;
 
-    console.log('backgroundColor:', backgroundColor);
-
     const containerRef = useRef<any>(null);
 
     const [show, setShow] = useState(showOnCreate);
