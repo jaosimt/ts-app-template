@@ -14,8 +14,8 @@ import tippyjs from '../../../images/tippyjs.png';
 import styledComponents from '../../../images/styled-components.png';
 import reactRouter from '../../../images/react-router.png';
 import { createLink, themedLogoBase64 } from '../../../utils/ext';
+import { getPrimaryColor } from '../../../utils/themeUtils';
 import {ReactIcon} from '../../partials';
-import './style.scss';
 
 const WrappingDiv = styled.div`
     display: flex;
@@ -156,7 +156,7 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                         </pre>
                     </div>
                     <div className={'mt-1'}>
-                        <h4 className={'m-0 accent-text'}>Furthermore, the following bundled libraries are setup more
+                        <h4 className={'m-0'}>Furthermore, the following bundled libraries are setup more
                             than enough i think 😎:</h4>
                         <ul className={'m-0'}>
                             <li>
@@ -166,14 +166,14 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                                         <Tippy className={'custom-tippy'}
                                                content={<span>Located in folder <b>src/store</b></span>}>
                                             <span className={'cursor-pointer'}>store is already configured according to suggested settings <ReactIcon
-                                                className={'accent-text font-size-small'} icon={FaCircleInfo}/></span>
+                                                style={{color: getPrimaryColor(theme)}} className={'accent-text font-size-small'} icon={FaCircleInfo}/></span>
                                         </Tippy>
                                     </li>
                                     <li>
                                         <Tippy className={'custom-tippy'}
                                                content={<span>Located in folder <b>src/slices</b></span>}>
                                             <span className={'cursor-pointer'}>top level reducers <ReactIcon
-                                                className={'accent-text font-size-small'} icon={FaCircleInfo}/></span>
+                                                style={{color: getPrimaryColor(theme)}} className={'accent-text font-size-small'} icon={FaCircleInfo}/></span>
                                         </Tippy>
                                         <ul className="m-0">
                                             <li>
@@ -219,6 +219,7 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                                                         search: 'showOnCreate=true'
                                                     }}>todo</Link></i></b> - currently use in <pre
                                                         className="m-0 display-inline">src/components/pages/demo/todo</pre> <ReactIcon
+                                                        style={{color: getPrimaryColor(theme)}}
                                                         className={'accent-text font-size-small'}
                                                         icon={FaCircleInfo}/></span>
                                                 </Tippy>
@@ -240,6 +241,7 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                                                         className={'cursor-pointer'}><b><i>toast</i></b> - use in <Link
                                                         className={'white-space-nowrap'}
                                                         to={{pathname: `/demo/toast`}}>toast</Link> and <b>MUST NOT be remove</b>! <ReactIcon
+                                                        style={{color: getPrimaryColor(theme)}}
                                                         className={'accent-text font-size-small'}
                                                         icon={FaCircleInfo}/></span>
                                                 </Tippy>
@@ -252,6 +254,7 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                                 <Tippy className={'custom-tippy'} content={
                                     <span>Located in folder <b>src/services</b></span>}>
                                     <span className={'cursor-pointer'}><b>axios</b> <ReactIcon
+                                        style={{color: getPrimaryColor(theme)}}
                                         className={'accent-text font-size-small'}
                                         icon={FaCircleInfo}/></span>
                                 </Tippy>

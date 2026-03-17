@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { Theme } from '../../../../constants';
 import { CSSColors } from '../../../../constants/types';
-import { CssColors } from '../../../../utils/ext';
+import { createLink, CssColors } from '../../../../utils/ext';
 import { getPrimaryColor } from '../../../../utils/themeUtils';
 import Box from '../../../partials/box';
 import { propsList, PropsListProps, SelectedThemeProps, themes } from '../index';
@@ -52,6 +52,11 @@ const drawerSpecsData: PropsListProps[] = [
         types: 'boolean',
         values: ``,
         description: [`Set's the initial state of the drawer`]
+    }, {
+        name: 'handleStyle',
+        types: createLink('CSSProperties', '//www.w3schools.com/cssref/index.php'),
+        values: ``,
+        description: [`Should you need to place the drawer handle somewhere else or change its style`]
     }
 ];
 

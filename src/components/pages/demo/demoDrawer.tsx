@@ -105,7 +105,7 @@ const DemoDrawer: FC<{theme: ThemeProp}> = ({theme}) => {
             </div>
         </Box>
 
-        <Drawer theme={theme} showOnCreate={props.showOnCreate} position={props.position} width={props.width} height={props.height} backgroundColor={props.backgroundColor}>
+        <Drawer handleStyle={{top: 0, opacity: 1}} theme={theme} showOnCreate={props.showOnCreate} position={props.position} width={props.width} height={props.height} backgroundColor={props.backgroundColor}>
             <Todo className={'translate absolute-center'} style={{width: '95%'}} />
         </Drawer>
     </div>;

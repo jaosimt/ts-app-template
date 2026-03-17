@@ -70,7 +70,7 @@ const inputFieldData: PropsListProps[] = [
             content={'Can be opted with bellow alternative props!'}
             placement="right"
             className={'custom-tippy'}>
-            <span className={'cursor-pointer'}>fieldRegister <ReactIcon className={'color-magenta'} icon={FaCircleInfo}/></span>
+            <span className={'cursor-pointer'}>fieldRegister <ReactIcon icon={FaCircleInfo}/></span>
         </Tippy>,
         types: createLink('UseFormRegisterReturn', '//react-hook-form.com/docs/useform/register'),
         values: '',
