@@ -120,7 +120,7 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                 className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-auto pb-3'}>
         <div className={'display-flex flex-direction-column gap-1 justify-content-space-between'}>
             <div>
-                <h1 className={'m-0 accent-text'}>Templates are good!</h1>
+                <h1 className={'m-0 accent-text text-shadow-white'}>Templates are good!</h1>
                 <h5 className={'m-0'}>Why start from scratch? Templates will save a good amount of your time!</h5>
             </div>
             <WrappingDiv>

@@ -132,7 +132,7 @@ const List = styled.div<{
     top: ${props => `${props.$pos.top}px`};
     left: ${props => `${props.$pos.left}px`};
     max-height: ${props => parseCSSUnit(props.$maxDropdownHeight)};
-    ${props => !props.$show && 'opacity: 0; z-index: -777;'}
+    ${props => !props.$show && 'opacity: 0; z-index: -777; pointer-events: none;'}
 `;
 
 // noinspection CssUnusedSymbol
