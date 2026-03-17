@@ -54,10 +54,6 @@ const appThemes = [
         value: Theme.REACT,
         icon: FaReact
     }, {
-        label: capitalize(Theme.DARK),
-        value: Theme.DARK,
-        icon: IoIosMoon
-    }, {
         label: capitalize(Theme.INSTA),
         value: Theme.INSTA,
         icon: FaInstagram
@@ -65,6 +61,10 @@ const appThemes = [
         label: capitalize(Theme.TWITCH),
         value: Theme.TWITCH,
         icon: FaTwitch
+    }, {
+        label: capitalize(Theme.DARK),
+        value: Theme.DARK,
+        icon: IoIosMoon
     }
 ];
 
