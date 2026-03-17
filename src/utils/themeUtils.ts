@@ -5,6 +5,8 @@ import v from '../styles/variables.module.scss';
 
 export const getButtonPrimaryColor = (theme: ThemeProp) => {
     switch (theme) {
+        case Theme.TWITCH:
+            return v.buttonPrimaryColorTwitch as CSSColors;
         case Theme.DARK:
             return v.buttonPrimaryColorDark as CSSColors;
         case Theme.INSTA:
@@ -16,6 +18,8 @@ export const getButtonPrimaryColor = (theme: ThemeProp) => {
 
 export const getButtonDefaultBorderColor = (theme: ThemeProp) => {
     switch (theme) {
+        case Theme.TWITCH:
+            return v.buttonDefaultBorderColorTwitch as CSSColors;
         case Theme.DARK:
             return v.buttonDefaultBorderColorDark as CSSColors;
         case Theme.INSTA:
@@ -27,6 +31,8 @@ export const getButtonDefaultBorderColor = (theme: ThemeProp) => {
 
 export const getButtonDefaultTextColor = (theme: ThemeProp) => {
     switch (theme) {
+        case Theme.TWITCH:
+            return v.buttonDefaultTextColorTwitch as CSSColors;
         case Theme.DARK:
             return v.buttonDefaultTextColorDark as CSSColors;
         case Theme.INSTA:
@@ -38,6 +44,8 @@ export const getButtonDefaultTextColor = (theme: ThemeProp) => {
 
 export const getButtonDefaultHoverColor = (theme: ThemeProp) => {
     switch (theme) {
+        case Theme.TWITCH:
+            return v.buttonDefaultHoverColorTwitch as CSSColors;
         case Theme.DARK:
             return v.buttonDefaultHoverColorDark as CSSColors;
         case Theme.INSTA:
@@ -49,6 +57,8 @@ export const getButtonDefaultHoverColor = (theme: ThemeProp) => {
 
 export const getAccentColor = (theme: ThemeProp) => {
     switch (theme) {
+        case Theme.TWITCH:
+            return v.accentColorTwitch as CSSColors;
         case Theme.DARK:
             return v.accentColorDark as CSSColors;
         case Theme.INSTA:
@@ -60,6 +70,8 @@ export const getAccentColor = (theme: ThemeProp) => {
 
 export const getPrimaryColor = (theme: ThemeProp) => {
     switch (theme) {
+        case Theme.TWITCH:
+            return v.primaryColorTwitch as CSSColors;
         case Theme.DARK:
             return v.primaryColorDark as CSSColors;
         case Theme.INSTA:
