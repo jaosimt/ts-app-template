@@ -37,8 +37,6 @@ body {
     .btn-icon,
     button,
     [data-component="button"] {
-      @include m.boxShadow(v.$buttonPrimaryBorderColorDark);
-      
       &.btn-icon {
         color            : v.$buttonPrimaryColorDark;
         background-color : v.$buttonPrimaryTextColor;
@@ -358,8 +356,6 @@ body {
     .btn-icon,
     button,
     [data-component="button"] {
-      @include m.boxShadow(v.$buttonPrimaryBorderColorReact);
-      
       &.btn-icon {
         color            : v.$buttonPrimaryColorReact;
         background-color : v.$buttonPrimaryTextColor;
@@ -678,8 +674,6 @@ body {
     .btn-icon,
     button,
     [data-component="button"] {
-      @include m.boxShadow(v.$buttonPrimaryBorderColorInsta);
-      
       &.btn-icon {
         color            : v.$buttonPrimaryColorInsta;
         background-color : v.$buttonPrimaryTextColor;
@@ -998,8 +992,6 @@ body {
     .btn-icon,
     button,
     [data-component="button"] {
-      @include m.boxShadow(v.$buttonPrimaryBorderColorTwitch);
-      
       &.btn-icon {
         color            : v.$buttonPrimaryColorTwitch;
         background-color : v.$buttonPrimaryTextColor;

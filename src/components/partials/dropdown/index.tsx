@@ -53,6 +53,7 @@ const Container = styled.div<{}>`
     gap: 0.3rem;
     position: relative;
     height: 33px;
+    margin: 0 0.3rem;
     
     @media (max-width: 768px) {
         height: 28px;
@@ -84,6 +85,7 @@ const Wrapper = styled.div<{
     $disabled?: boolean;
     $theme?: ThemeProp;
 }>`
+    box-shadow: 0 0 7px #fff;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
@@ -116,6 +118,7 @@ const List = styled.div<{
     $maxDropdownHeight: CSSUnit;
     $theme?: ThemeProp;
 }>`
+    box-shadow: 0 0 7px #fff;
     transition: border 0.2s ease-in-out;
     overflow-y: auto;
     z-index: 2;
