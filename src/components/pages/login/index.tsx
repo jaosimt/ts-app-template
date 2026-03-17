@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { ThemeProp } from '../../../constants/interfaces';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
-import { themeLogoBase64 } from '../../../utils/ext';
+import { themedLogoBase64 } from '../../../utils/ext';
 import Button from '../../partials/button';
 import InputField from '../../partials/inputField';
 import { useForm } from 'react-hook-form';
@@ -34,7 +34,7 @@ const Login = ({theme} : { theme: ThemeProp}) => {
     return <div data-component={'login'}>
         <div className={classNames(styles.Login, 'translate absolute-center gap-1')}>
             <div className={classNames(styles.Logo, 'align-content-center')}>
-                <img src={themeLogoBase64(theme)} className="m-1" alt="logo" width={150}/>
+                <img src={themedLogoBase64(theme)} className="m-1" alt="logo" width={150}/>
             </div>
             <div className={'display-flex flex-direction-column gap-1 p-1 pl-0'}>
                 <h3 className={'m-0 mb-1'}>Login</h3>

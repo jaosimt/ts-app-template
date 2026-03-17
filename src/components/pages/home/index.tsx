@@ -13,7 +13,7 @@ import reactHookForm from '../../../images/react-hook-form.png';
 import tippyjs from '../../../images/tippyjs.png';
 import styledComponents from '../../../images/styled-components.png';
 import reactRouter from '../../../images/react-router.png';
-import { createLink, themeLogoBase64 } from '../../../utils/ext';
+import { createLink, themedLogoBase64 } from '../../../utils/ext';
 import {ReactIcon} from '../../partials';
 import './style.scss';
 
@@ -270,7 +270,7 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                     </div>
                 </div>
                 <div className={'display-flex justify-content-right align-items-center'}>
-                    <img width={'100%'} className={'spin-700'} src={themeLogoBase64(theme)} alt=""/>
+                    <img width={'100%'} className={'spin-700'} src={themedLogoBase64(theme)} alt=""/>
                 </div>
             </WrappingDiv>
 

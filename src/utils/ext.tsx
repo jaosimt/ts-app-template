@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { ThemeProp } from '../constants/interfaces';
-import { getPrimaryColor } from './themeUtils';
+import { getAccentColor, getPrimaryColor } from './themeUtils';
 
 export const createLink = (label: string | ReactNode, url: string, className?: string, target?: '_blank' | '_self' | '_parent' | '_top') =>
     <a className={className || ''} target={target || '_blank'} href={url} rel="noreferrer"><b
@@ -20,7 +20,7 @@ export const CssColors = <span>All {createLink(
     '//www.w3schools.com/css/css_colors_rgb.asp'
 )}</span>;
 
-export const themeLogoBase64 = (theme: ThemeProp) => {
+export const themedLogoBase64 = (theme: ThemeProp) => {
     const logoString = `<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
         <g fill="${getPrimaryColor(theme)}" transform="translate(-107.44 -31.278) scale(.6115)">
             <path
@@ -28,9 +28,17 @@ export const themeLogoBase64 = (theme: ThemeProp) => {
             <circle cx="420.9" cy="296.5" r="45.7"/>
             <path d="M520.5 78.1Z"/>
         </g>
-        <path style="fill: #ffe500; stroke: #000; stroke-width: .0128542; stroke-linecap: butt; stroke-linejoin: miter; stroke-dasharray: none; stroke-opacity: 1" d="M133.618 132.828c-1.289 0-2.327.824-2.327 1.85l-.003 4.883-1.017.003c-1.05 0-1.9.877-1.9 1.966v2.967c0 1.088.85 1.958 1.9 1.965l1.017.008.003 9.414c0 7.373 2.325 10.853 8.16 11.172 5.086.276 8.854-.001 8.854-2.564.867 2.275 26.25 7.681 22.906-9.105-3.64-7.817-15.342-4.43-14.98-8.062.555-2.185 7.104-1.715 9.948.246 2.052 1.519 4.46 1.6 4.46-1.101l-.005-3.886c0-1.936-3.339-2.48-5.526-3.025-14.536-3.01-20.109 6.905-15.685 12.958 3.881 5.494 16.948 3.114 13.445 7.082-1.57.776-5.378 1.557-11.235-1.747-1.78-1.209-4.036-.834-3.774 2.102-1.541-3.08-8.397 4.869-8.407-4.186l.01-9.301 6.947-.003a1.895 1.962 0 0 0 1.896-1.968v-2.966c0-1.089-.845-1.965-1.896-1.965h-6.947l-.01-4.888c0-1.024-1.038-1.85-2.327-1.85zm1.57 3.61h.376v4.857c.047.57.006 1.134 1.175 1.73-.75.353-1.084.915-1.175 1.594v12.559c0 4.612 2.453 5.708 4.543 6.284-2.058-.493-4.542-.478-4.918-5.386V144.62c-.086-.605-.306-1.178-1.172-1.594.746-.29 1.137-.868 1.172-1.73zm29.43 6.592 2.164.577v.353zm-11.178 1.51c-3.5 5.504 1.521 7.49 6.32 8.376 8.255 1.054 9.266 4.154 6.911 8.206 1.638-3.925 0-6.897-6.33-7.875-11.664-.94-8.708-6.897-6.9-8.708zm-1.72 17.335c1.03.56 2.425 1.035 3.69 1.49-1.245-.281-2.53-.494-3.69-.917z"/>
+        <path style="fill: ${getAccentColor(theme)}; stroke: #fff; stroke-width: 1; stroke-linecap: butt; stroke-linejoin: miter; stroke-dasharray: none; stroke-opacity: 1" d="M133.618 132.828c-1.289 0-2.327.824-2.327 1.85l-.003 4.883-1.017.003c-1.05 0-1.9.877-1.9 1.966v2.967c0 1.088.85 1.958 1.9 1.965l1.017.008.003 9.414c0 7.373 2.325 10.853 8.16 11.172 5.086.276 8.854-.001 8.854-2.564.867 2.275 26.25 7.681 22.906-9.105-3.64-7.817-15.342-4.43-14.98-8.062.555-2.185 7.104-1.715 9.948.246 2.052 1.519 4.46 1.6 4.46-1.101l-.005-3.886c0-1.936-3.339-2.48-5.526-3.025-14.536-3.01-20.109 6.905-15.685 12.958 3.881 5.494 16.948 3.114 13.445 7.082-1.57.776-5.378 1.557-11.235-1.747-1.78-1.209-4.036-.834-3.774 2.102-1.541-3.08-8.397 4.869-8.407-4.186l.01-9.301 6.947-.003a1.895 1.962 0 0 0 1.896-1.968v-2.966c0-1.089-.845-1.965-1.896-1.965h-6.947l-.01-4.888c0-1.024-1.038-1.85-2.327-1.85zm1.57 3.61h.376v4.857c.047.57.006 1.134 1.175 1.73-.75.353-1.084.915-1.175 1.594v12.559c0 4.612 2.453 5.708 4.543 6.284-2.058-.493-4.542-.478-4.918-5.386V144.62c-.086-.605-.306-1.178-1.172-1.594.746-.29 1.137-.868 1.172-1.73zm29.43 6.592 2.164.577v.353zm-11.178 1.51c-3.5 5.504 1.521 7.49 6.32 8.376 8.255 1.054 9.266 4.154 6.911 8.206 1.638-3.925 0-6.897-6.33-7.875-11.664-.94-8.708-6.897-6.9-8.708zm-1.72 17.335c1.03.56 2.425 1.035 3.69 1.49-1.245-.281-2.53-.494-3.69-.917z"/>
     </svg>`;
 
     return `data:image/svg+xml;utf8,${encodeURIComponent(logoString)}`;
 };
 
+export const themedBannerBase64 = (theme: ThemeProp) => {
+    const bannerString = `<svg width="301mm" height="56mm" viewBox="0 0 301 56" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+        <path style="fill:${getPrimaryColor(theme)};fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" d="m-441.019-147.475-.039 12.205c199.76 44.882 252.647-35.922 399.52 0l.04-12.205c-146.874-35.922-182.408 67.574-399.52 0z" transform="matrix(-.75333 0 0 .75434 -31.262 147.5)"/>
+        <path style="fill:${getAccentColor(theme)};fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" d="M-41.498-147.475c-146.874-35.922-182.408 67.574-399.52 0v-48.06h399.371z" transform="matrix(-.75333 0 0 .75434 -31.262 147.5)"/>
+    </svg>`;
+
+    return `data:image/svg+xml;utf8,${encodeURIComponent(bannerString)}`;
+};

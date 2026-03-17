@@ -2,14 +2,14 @@ $codeFontFamily                 : source-code-pro, Menlo, Monaco, Consolas, "Cou
 
 /* DO NOT USE RGBA COLOR IN ACCENT's */
 $accentColorReact               : #0099ff;
-$accentColorDark                : #0f0d0c;
+$accentColorDark                : #1d1d1d;
 $accentColorInsta               : #c92a90ff;
 $accentColorTwitch              : #8a2be2ff;
 
-$linkColorReact                 : #0099ff;
-$linkColorDark                  : #0c3a46;
-$linkColorInsta                 : #d71891;
-$linkColorTwitch                : #770ed9;
+$linkColorReact                 : rgba($accentColorReact, 0.8);
+$linkColorDark                  : rgba($accentColorDark, 0.8);
+$linkColorInsta                 : rgba($accentColorInsta, 0.8);
+$linkColorTwitch                : rgba($accentColorTwitch, 0.8);
 
 $textColor                      : #171515;
 $textColorDark                  : #f3f2f2;
