@@ -75,7 +75,7 @@ export const getPrimaryColor = (theme: ThemeProp) => {
         case Theme.DARK:
             return v.primaryColorDark as CSSColors;
         case Theme.INSTA:
-            return v.primarycolorInsta as CSSColors;
+            return v.primaryColorInsta as CSSColors;
         default:
             return v.primaryColorReact as CSSColors;
     }

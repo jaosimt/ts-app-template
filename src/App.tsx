@@ -131,7 +131,10 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
 
     let selectedTheme;
     const storedSelectedTheme = JSON.parse(sessionStorage.getItem('theme') as any) as DropdownObjectOptions | null;
-    if (storedSelectedTheme && appThemes.find(t => t.value === storedSelectedTheme?.value)) selectedTheme = storedSelectedTheme;
+    if (storedSelectedTheme) {
+        const match = appThemes.find(t => t.value === storedSelectedTheme?.value)
+        if (match) selectedTheme = match;
+    }
     else selectedTheme = appThemes[0];
 
     return (<>
