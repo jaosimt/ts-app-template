@@ -24,6 +24,21 @@ import './styles/tippy.scss';
 import {getTheme, setTheme} from "./slices/theme";
 import {useAppDispatch} from "./hooks";
 import v from './styles/variables.module.scss';
+import { themedBannerBase64 } from './utils/ext';
+import { getAccentColor } from './utils/themeUtils';
+
+const StyledBanner = styled.div<{
+    $theme: ThemeProp;
+}>`
+    position: absolute;
+    width: 100%;
+    height: 168px;
+    z-index: 1;
+    background-color: transparent;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+`;
 
 const StyledMain = styled.main<{
     $fixed?: boolean;
@@ -137,9 +152,18 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     }
     else selectedTheme = appThemes[0];
 
+    const variableHeaderStyle = pathname !== '/' ? {
+        backgroundColor : `${getAccentColor(theme)}`,
+        borderBottom : `10 px solid ${v.$baseColor}`
+    } : {};
+
+    const themedBanner = themedBannerBase64(theme);
+    console.log('themedBanner:', themedBanner);
+
     return (<>
         {MemoizedConnectionModal}
-        <header className={'grid cols-2 color-white'}>
+        {pathname === '/' && <StyledBanner className={'banner'} $theme={theme} style={{backgroundImage: `url("${themedBanner}")`}}/>}
+        <header className={'grid cols-2 color-white'} style={{...variableHeaderStyle}}>
             <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit nav-link'}
                   to={{pathname: `/`}}>
                 <ReactIcon size={35} className={classNames(pathname === `/` && 'spin', 'font-weight-bold')}
