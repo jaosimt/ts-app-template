@@ -117,7 +117,7 @@ const bundledLibs = () => <>
 
 const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
     return <div data-component={'home'}
-                className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-auto pb-3'}>
+                className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-100p pb-3'}>
         <div className={'display-flex flex-direction-column gap-1 justify-content-space-between'}>
             <div>
                 <h1 className={'m-0 accent-text text-shadow-white'}>Templates are good!</h1>
@@ -276,7 +276,7 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                     <img width={'100%'} className={'spin-700'} src={themedLogoBase64(theme)} alt=""/>
                 </div>
             </WrappingDiv>
-
+            &nbsp;
             <div className="marquee">
                 <div className={'display-flex gap-0p5-2 justify-content-space-between'}>
                     {bundledLibs()}
