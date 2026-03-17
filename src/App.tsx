@@ -157,12 +157,9 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
         borderBottom : `10 px solid ${v.$baseColor}`
     } : {};
 
-    const themedBanner = themedBannerBase64(theme);
-    console.log('themedBanner:', themedBanner);
-
     return (<>
         {MemoizedConnectionModal}
-        {pathname === '/' && <StyledBanner className={'banner'} $theme={theme} style={{backgroundImage: `url("${themedBanner}")`}}/>}
+        {pathname === '/' && <StyledBanner className={'banner'} $theme={theme} style={{backgroundImage: `url("${themedBannerBase64(theme)}")`}}/>}
         <header className={'grid cols-2 color-white'} style={{...variableHeaderStyle}}>
             <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit nav-link'}
                   to={{pathname: `/`}}>
