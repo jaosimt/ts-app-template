@@ -10,6 +10,7 @@ import { RiArchiveDrawerFill } from 'react-icons/ri';
 import { useSearchParams } from 'react-router';
 import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
+import { getAccentColor } from '../../../utils/themeUtils';
 import { ReactIcon } from '../../partials';
 import Box from '../../partials/box';
 import Drawer, { DrawerProps } from '../../partials/drawer';
@@ -99,7 +100,7 @@ const DemoDrawer: FC<{theme: ThemeProp}> = ({theme}) => {
                             onChange: propsChangeHandler
                         })}/>
                 </div>
-                <p className={'flex-wrap display-flex align-items-center mb-0 color-magenta justify-content-center border-top pt-0p5'}>The Drawer's handle <span className={'white-space-nowrap'}>(<ReactIcon className={'-mb-0p2'} icon={RiArchiveDrawerFill}/>)</span> should be centered on the&nbsp;<b>{props.position}</b>&nbsp;of your screen!</p>
+                <p style={{color: getAccentColor(theme)}} className={'flex-wrap display-flex align-items-center mb-0 justify-content-center border-top pt-0p5'}>The Drawer's handle <span className={'white-space-nowrap'}>(<ReactIcon className={'-mb-0p2'} icon={RiArchiveDrawerFill}/>)</span> should be centered on the&nbsp;<b>{props.position}</b>&nbsp;of your screen!</p>
                 <p className={'flex-wrap mt-0p3 font-size-small color-gray text-align-center'}>Once opened, you may close it by pressing the ESC key or clicking outside of it.</p>
             </div>
         </Box>
