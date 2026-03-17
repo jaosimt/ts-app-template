@@ -5,7 +5,8 @@
 .btn-icon,
 button,
 [data-component="button"] {
-  @include m.boxShadow(v.$buttonPrimaryBorderColorReact);
+  box-shadow   : 0 0 7px #fff;
+  margin       : 0 0.3rem;
   
   display      : inline-flex;
   min-width    : fit-content;

@@ -24,7 +24,8 @@ const CheckboxContainer = styled.div<{disabled: boolean}>`
     align-items: center;
     overflow: hidden;
     height: 33px;
-    
+    padding: 0 0.3rem;
+
     @media (max-width: 768px) {
         height: 28px;
     }
@@ -77,6 +78,7 @@ const StyledCheckbox = styled.div<{
     $disabled: boolean,
     $theme: ThemeProp,
 }>`
+    box-shadow: 0 0 7px #fff;
     display: inline-block;
     width: 21px;
     height: 21px;
