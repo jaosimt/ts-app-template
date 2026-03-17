@@ -61,7 +61,7 @@ const Modal: FC<ModalProps> = (props) => {
     const closeButton = <>
         {showClose && <span onClick={closeHandler}
                             className={`btn-icon btn-close ${title ? 'position-relative' : 'position-absolute'}`}
-                            style={{right: `${title ? 0 : 3}px`, top: !title ? '3px' : ''}}><ReactIcon
+                            style={{marginRight: 0, right: `${title ? 0 : 3}px`, top: !title ? '3px' : ''}}><ReactIcon
             icon={FaCircleXmark}/></span>}
     </>;
 
