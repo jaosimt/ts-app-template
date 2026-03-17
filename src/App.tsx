@@ -147,7 +147,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                 {<ContentRouter theme={theme}/>}
             </div>
         </StyledMain>
-        <footer className={'display-flex justify-content-space-between align-items-center'}>
+        <footer className={'display-flex justify-content-space-between align-items-center color-white'}>
             <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
         </footer>
         <ToastContainer/>
