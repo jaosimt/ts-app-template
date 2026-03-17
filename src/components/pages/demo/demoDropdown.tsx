@@ -194,7 +194,7 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                     <Checkbox onChange={propsChangeHandler} name={'icon'} label={'icon'}
                               labelPosition={'left'} checked={!isNullOrUndefined(props.icon)}/>
                     <Tippy content={'react-icons'} placement="top" className={'custom-tippy'}>
-                        <span className={'font-monospace font-size-small color-light-gray'}>(FaReact)</span>
+                        <span className={'font-monospace font-size-small color-gray'}>(FaReact)</span>
                     </Tippy>
                 </div>
                 <InputField label={'labelWidth'} type={'number'} width={60}
