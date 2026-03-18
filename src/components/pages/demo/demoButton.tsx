@@ -53,7 +53,7 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
                         setModal(true)
                     }}
                 >
-                    Save
+                    Primary Button
                 </Button>
                 <Button
                     className={'default'}
@@ -66,7 +66,7 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
                         setModal(true)
                     }}
                 >
-                    Save
+                    Secondary Button
                 </Button>
             </div>
             <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
@@ -115,7 +115,7 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
         </div>
         {
             modal && <Modal onClose={() => setModal(false)} closeOnEscKey={true} closeOnOutsideClick={true} showClose={true} title={'Hello, world!'}>
-                <h3 className={'m-0 color-orange'}>You clicked the save {buttonTextRef.current} button!</h3>
+                <h3 className={'m-0 color-orange'}>You clicked the {buttonTextRef.current} button!</h3>
             </Modal>
         }
     </div>;
