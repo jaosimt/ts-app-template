@@ -3,12 +3,13 @@ import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoIosSave } from 'react-icons/io';
 import { ThemeProp } from '../../../constants/interfaces';
-import { getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
+import { getBorderColor } from '../../../utils/themeUtils';
 import Button, { ButtonProps } from '../../partials/button';
 import Checkbox from '../../partials/checkbox';
 import Dropdown from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
 import Modal from '../../partials/modal';
+import './styles.scss';
 
 const alignOptions = ['left', 'center', 'right', 'space-between'];
 
@@ -33,15 +34,8 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
 
     return <div data-component={'button-demo'} className={'height-100p'}>
-        <div className="display-flex gap-1 height-100p">
-            <div
-                style={{
-                    width: 'calc(100% - 370px)',
-                    overflowY: 'auto',
-                    backgroundColor: getSecondaryBackgroundColor(theme),
-                    borderRadius: '0.4rem',
-                    padding: '1rem 2rem'
-                }}>
+        <div className="demo-section">
+            <div className={'demo-section-left'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Button />`}</h2>
                 <Button
                     icon={icon ? IoIosSave : undefined}
@@ -69,12 +63,7 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
                     Secondary Button
                 </Button>
             </div>
-            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
-                 style={{
-                     width: '370px',
-                     overflowY: 'auto',
-                     paddingRight: '1rem'
-                 }}>
+            <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
                 <Checkbox
                     labelWidth={165}

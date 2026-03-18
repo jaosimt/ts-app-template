@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDebounceCallback } from 'usehooks-ts';
 import { ThemeProp } from '../../../constants/interfaces';
-import { getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
+import { getBorderColor } from '../../../utils/themeUtils';
 import Checkbox from '../../partials/checkbox';
 import Dropdown from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
@@ -43,18 +43,11 @@ const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
     }
 
     return <div data-component={'loading-demo'} className={'height-100p'}>
-        <div className="display-flex gap-1 height-100p">
-            <div
-                style={{
-                    width: 'calc(100% - 370px)',
-                    overflowY: 'auto',
-                    backgroundColor: getSecondaryBackgroundColor(theme),
-                    borderRadius: '0.4rem',
-                    padding: '1rem 2rem'
-                }}>
+        <div className="demo-section">
+            <div className={'demo-section-left with-height-wrapper'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Loading />`}</h2>
 
-                <div className={'position-relative'} style={{height: 'calc(100% - 5rem)'}}>
+                <div className={'position-relative height-wrapper'} style={{height: 'calc(100% - 5rem)'}}>
                     <Loading
                         borderWidth={props.borderWidth}
                         borderColor={props.borderColor}
@@ -69,21 +62,9 @@ const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
                     />
                 </div>
             </div>
-            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
-                 style={{
-                     width: '370px',
-                     overflowY: 'auto',
-                     paddingRight: '1rem'
-                 }}>
+            <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
-                <Dropdown
-                    labelWidth={165}
-                    options={positionOptions}
-                    selected={props.position}
-                    label={'position'}
-                    onChange={(value: string) => debDropdownChange('position', value)}
-                />
                 <InputField
                     labelWidth={165}
                     type={'number'}
@@ -113,6 +94,13 @@ const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
                     labelWidth={165}
                     label={'bottomText'}
                     fieldRegister={register('bottomText', {onChange: propsChangeHandler})}/>
+                <Dropdown
+                    labelWidth={165}
+                    options={positionOptions}
+                    selected={props.position}
+                    label={'position'}
+                    onChange={(value: string) => debDropdownChange('position', value)}
+                />
                 <InputField
                     labelWidth={165}
                     type={'number'}
