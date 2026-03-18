@@ -1,7 +1,7 @@
 import { FC, memo, ReactNode, useEffect, useMemo, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-interface WindowPortalProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface WindowPortalProps extends React.HTMLAttributes<HTMLDivElement> {
     children: ReactNode;
     onClose?: Function;
     openOnNextScreen?: boolean; // IF AVAILABLE!

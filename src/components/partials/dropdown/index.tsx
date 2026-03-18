@@ -67,6 +67,7 @@ const Label = styled.label<{
     $labelAlign?: string;
 }>`
     display: inline-flex;
+    margin-left: -0.3rem;
     gap: 0.5rem;
     justify-content: ${props => props.$labelAlign};
     align-items: center;

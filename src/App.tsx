@@ -1,19 +1,22 @@
-import { useEffect, useMemo, useState } from 'react';
+import { CSSProperties, useEffect, useMemo, useState } from 'react';
 import { FaTwitch } from 'react-icons/fa';
-import { FaInstagram, FaReact } from 'react-icons/fa6';
+import { FaChevronLeft, FaInstagram, FaReact } from 'react-icons/fa6';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoIosMoon } from 'react-icons/io';
-import {IoCloudOffline, IoLogoReact} from 'react-icons/io5';
+import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { Link, useLocation } from 'react-router';
 import styled from 'styled-components';
 import { ReactIcon } from './components/partials';
+import Button from './components/partials/button';
 import CollapsibleLink from './components/partials/collapsibleLink';
 import Dropdown, { DropdownObjectOptions } from './components/partials/dropdown';
 import Modal from './components/partials/modal';
 import ToastContainer, { toast } from './components/partials/toast';
 import { targetUnicode, Theme } from './constants';
 import { ThemeProp } from './constants/interfaces';
-import { NavigationMain } from './navs';
+import NavigationMain from './navs';
+import NavigationDemo from './navs/demoNav';
 import ContentRouter from './routes';
 import { getError } from './slices/error';
 import { RootState } from './store';
@@ -21,11 +24,11 @@ import { capitalize, classNames, hashCode } from './utils';
 import './App.scss';
 import './styles/animations.scss';
 import './styles/tippy.scss';
-import {getTheme, setTheme} from "./slices/theme";
-import {useAppDispatch} from "./hooks";
+import { getTheme, setTheme } from './slices/theme';
+import { useAppDispatch } from './hooks';
 import v from './styles/variables.module.scss';
 import { themedBannerBase64 } from './utils/ext';
-import { getAccentColor } from './utils/themeUtils';
+import { getAccentColor, getBorderColor } from './utils/themeUtils';
 
 const StyledBanner = styled.div<{
     $footer?: boolean;
@@ -42,12 +45,32 @@ const StyledBanner = styled.div<{
     ${props => props.$footer && `bottom: 0;`}
 `;
 
-const StyledMain = styled.main<{
+const Main = styled.main<{
     $fixed?: boolean;
     $theme: ThemeProp;
 }>`
+    min-height: 652px;
     background-color: ${props => props.$theme === Theme.DARK ? v.baseColorDark : v.baseColor};
     ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
+`;
+
+const SidePanel = styled.aside<{
+    $theme: ThemeProp;
+}>`
+    position: relative;
+    overflow: hidden;
+    flex: none;
+    background-color: ${props => getAccentColor(props.$theme)};
+    z-index: 3;
+    transition: all 0.3s ease-in-out;
+    border-left: 1px solid ${props => getBorderColor(props.$theme)};
+    padding: 0;
+
+    @media (max-width: 768px) {
+        position: absolute;
+        right: 0;
+        height: 100%;
+    }
 `;
 
 const appThemes = [
@@ -70,10 +93,13 @@ const appThemes = [
     }
 ];
 
+const panelWidth = 196;
+
 const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     const dispatch = useAppDispatch();
 
     const [offline, setOffline] = useState(false);
+    const [sidePanelWidth, setSidePanelWidth] = useState(panelWidth);
 
     const setConnectionStatus = ({type}: { type: string }) => {
         if (!['online', 'offline'].includes(type)) return;
@@ -88,7 +114,9 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                 id: 'under-construction-toast',
                 message: <>
                     <h4 className="m-0">Welcome to the React + TypeScript started app template!</h4>
-                    <p className={'mb-0'}>However, this site is still <b>Under Construction!</b> So you might be seeing some undesirables especially the color combinations as the theme feature is currently on going!</p>
+                    <p className={'mb-0'}>However, this site is still <b>Under Construction!</b> So you might be seeing
+                        some undesirables especially the color combinations as the theme feature is currently on going!
+                    </p>
                     <p className={'mb-0'}>Please bear with us, Thank you very much!</p>
                     <p className={'m-0'}>&nbsp;</p>
                 </>,
@@ -132,6 +160,8 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
         }
     }, [error]);
 
+    const sidePanelHandler = () => setSidePanelWidth(sidePanelWidth === 0 ? panelWidth : 0);
+
     const MemoizedConnectionModal = useMemo(() => {
         return offline && <Modal closeOnEscKey={false} closeOnOutsideClick={false} showClose={false} maxZIndex={true}>
             <div className={'display-flex gap-1 align-content-center'} style={{width: '15rem'}}>
@@ -149,48 +179,69 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     let selectedTheme;
     const storedSelectedTheme = JSON.parse(sessionStorage.getItem('theme') as any) as DropdownObjectOptions | null;
     if (storedSelectedTheme) {
-        const match = appThemes.find(t => t.value === storedSelectedTheme?.value)
+        const match = appThemes.find(t => t.value === storedSelectedTheme?.value);
         if (match) selectedTheme = match;
-    }
-    else selectedTheme = appThemes[0];
+    } else selectedTheme = appThemes[0];
 
     const variableHeaderStyle = pathname !== '/' ? {
-        backgroundColor : `${getAccentColor(theme)}`,
-        borderBottom : `10 px solid ${v.$baseColor}`
+        backgroundColor: `${getAccentColor(theme)}`,
+        borderBottom: `10 px solid ${v.$baseColor}`
     } : {};
 
-    return (<>
+    const styles: CSSProperties = {width: `${sidePanelWidth}px`};
+    if (sidePanelWidth === 0) styles.border = 'none';
+
+    return <>
         {MemoizedConnectionModal}
-        {pathname === '/' && <StyledBanner className={'banner'} style={{backgroundImage: `url("${themedBannerBase64(theme)}")`}}/>}
-        <header className={'grid cols-2 color-white'} style={{...variableHeaderStyle}}>
-            <Link className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit nav-link'}
-                  to={{pathname: `/`}}>
-                <ReactIcon size={35} className={classNames(pathname === `/` && 'spin', 'font-weight-bold')}
-                           icon={IoLogoReact}/>
-                <h3 className={'m-0'}>React TypeScript Template</h3>
-            </Link>
-            <NavigationMain theme={theme}/>
-            <Dropdown
-                className={classNames(window.innerWidth > 768 ? '-ml-1p5' : '-ml-0p5')}
-                valueClassName={'capitalize'}
-                selected={selectedTheme}
-                options={appThemes}
-                onChange={(theme: DropdownObjectOptions) => {
-                    dispatch(setTheme(theme.value as any));
-                    sessionStorage.setItem('theme', JSON.stringify(theme));
-                }}
-            />
-        </header>
-        <StyledMain $theme={theme} $fixed={pathname === '/'}>
-            <div className="content-wrapper">
-                {<ContentRouter theme={theme}/>}
+        {pathname === '/' &&
+            <StyledBanner className={'banner'} style={{backgroundImage: `url("${themedBannerBase64(theme)}")`}}/>}
+        <div className={'app-container display-flex'}>
+            <div className={'flex-auto width-100p'}>
+                <header className={'grid cols-2 color-white'} style={{...variableHeaderStyle}}>
+                    <Link
+                        className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit nav-link'}
+                        to={{pathname: `/`}}>
+                        <ReactIcon size={35} className={classNames(pathname === `/` && 'spin', 'font-weight-bold')}
+                                   icon={IoLogoReact}/>
+                        <h2 className={'m-0'}>React TypeScript Template</h2>
+                    </Link>
+                    {sidePanelWidth === 0 &&
+                        <Button icon={GiHamburgerMenu} className={'display-none'} onClick={sidePanelHandler}/>}
+                </header>
+                <Main $theme={theme} $fixed={true}>
+                    <div className="content-wrapper">
+                        {<ContentRouter theme={theme}/>}
+                    </div>
+                </Main>
+                <footer className={'display-flex justify-content-space-between align-items-center color-white'}>
+                    <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
+                </footer>
             </div>
-        </StyledMain>
-        <footer className={'display-flex justify-content-space-between align-items-center color-white'}>
-            <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
-        </footer>
+            <SidePanel style={styles} $theme={theme} className="side-panel">
+                <div className={'m-1 display-flex flex-direction-column gap-1 justify-content-space-between'} style={{height: 'calc(100% - 2rem)', marginRight: '1.5rem'}}>
+                    <div>
+                        <div className={'display-flex justify-content-space-between mb-2'}>
+                            <Button icon={FaChevronLeft} className={'display-none'} onClick={sidePanelHandler}/>
+                            <Dropdown
+                                className={'-mr-0p5'}
+                                valueClassName={'capitalize'}
+                                selected={selectedTheme}
+                                options={appThemes}
+                                onChange={(theme: DropdownObjectOptions) => {
+                                    dispatch(setTheme(theme.value as any));
+                                    sessionStorage.setItem('theme', JSON.stringify(theme));
+                                }}
+                            />
+                        </div>
+                        <NavigationMain theme={theme}/>
+                    </div>
+                    {pathname.startsWith('/demo') && <NavigationDemo theme={theme}/>}
+                    &nbsp;
+                </div>
+            </SidePanel>
+        </div>
         <ToastContainer/>
-    </>);
+    </>;
 };
 
 const mapStateToProps = (state: RootState) => ({

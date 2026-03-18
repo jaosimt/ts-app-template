@@ -149,45 +149,53 @@ const Drawer: FC<DrawerProps> = (props) => {
         }
     }
 
-    return createPortal(<>
-        <Container
-            data-component={'drawer'}
-            ref={containerRef}
-            className={classNames(className, 'trim')}
-            style={{...style, ...styles}}
-            $position={position}
-            $width={width as CSSUnit}
-            $height={height as CSSUnit}
-            $backgroundColor={backgroundColor}
-            {...restProps}
-        >
-            <div className={'trim'} style={{
-                border: '1px double gainsboro',
-                width: '100%',
-                height: '100%',
-                overflow: 'hidden',
-                borderRadius: drawer[position].borderRadius
-            }}>
-                <div className={'trim'} style={{
-                    width: 'calc(100% - 1.2rem)',
-                    height: 'calc(100% - 2rem)',
-                    margin: position === 'left' ? '1rem 1rem 1rem 0' : '1rem 0 1rem 1rem',
-                    overflow: 'auto',
-                    paddingRight: position === 'left' ? 0 : '1rem',
-                    paddingLeft: position === 'left' ? '1rem' : 0,
-                    direction: position === 'left' ? 'rtl' : 'ltr'
-                }}>
-                    <div className={'trim'} style={{direction: 'ltr'}}>
-                        {children}
+    console.log('handleStyle:', handleStyle);
+    const _Handle = !show && <Handle data-component={'drawer'} onClick={() => setShow(true)} $position={position} $backgroundColor={backgroundColor} style={{...handleStyle}}>
+        <ReactIcon icon={RiArchiveDrawerFill}
+                   style={{width: '21px', height: '21px', display: 'flex'}}/>
+    </Handle>;
+
+    return <>
+        {handleStyle.position === 'absolute' && _Handle }
+        {
+            createPortal(<>
+                {handleStyle.position !== 'absolute' && _Handle }
+                <Container
+                    data-component={'drawer'}
+                    ref={containerRef}
+                    className={classNames(className, 'trim')}
+                    style={{...style, ...styles}}
+                    $position={position}
+                    $width={width as CSSUnit}
+                    $height={height as CSSUnit}
+                    $backgroundColor={backgroundColor}
+                    {...restProps}
+                >
+                    <div className={'trim'} style={{
+                        border: '1px double gainsboro',
+                        width: '100%',
+                        height: '100%',
+                        overflow: 'hidden',
+                        borderRadius: drawer[position].borderRadius
+                    }}>
+                        <div className={'trim'} style={{
+                            width: 'calc(100% - 1.2rem)',
+                            height: 'calc(100% - 2rem)',
+                            margin: position === 'left' ? '1rem 1rem 1rem 0' : '1rem 0 1rem 1rem',
+                            overflow: 'auto',
+                            paddingRight: position === 'left' ? 0 : '1rem',
+                            paddingLeft: position === 'left' ? '1rem' : 0,
+                            direction: position === 'left' ? 'rtl' : 'ltr'
+                        }}>
+                            <div className={'trim'} style={{direction: 'ltr'}}>
+                                {children}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </Container>
-        {!show && <Handle onClick={() => setShow(true)} $position={position} $backgroundColor={backgroundColor} style={{...handleStyle}}>
-            <ReactIcon icon={RiArchiveDrawerFill}
-                       style={{width: '21px', height: '21px', display: 'flex'}}/>
-        </Handle>}
-    </>, document.body);
+                </Container>
+            </>, document.body)
+        }
+    </>
 };
 
 export default memo(Drawer);

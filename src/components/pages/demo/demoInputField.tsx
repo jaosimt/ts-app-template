@@ -3,19 +3,14 @@ import { ChangeEvent, FC, HTMLAttributes, useEffect, useRef, useState } from 're
 import { useForm } from 'react-hook-form';
 import { TbBrandReact } from 'react-icons/tb';
 import styled from 'styled-components';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { HSLString } from '../../../constants/types';
 import { generateAnalogousPalette, hslToHex } from '../../../utils';
-import Box from '../../partials/box';
+import { getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
 import Button from '../../partials/button';
 import Dropdown from '../../partials/dropdown';
 import InputField, { InputFieldProps } from '../../partials/inputField';
-import Tabs, { TabItemType } from '../../partials/tab';
 import * as z from 'zod';
-import Login from '../login';
-import ToDo from './todo';
-import './styles.scss';
 import { DiCss3, DiHtml5, DiJsBadge } from 'react-icons/di';
 import { SiTypescript } from 'react-icons/si';
 
@@ -54,9 +49,8 @@ const icons = [
 
 const GridContainer = styled.div`
     display: flex;
-    gap: 0.5rem 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
 `;
 
 const Red = styled.div`
@@ -70,14 +64,10 @@ const Size = styled.div`
 const StepShift = styled.div`
 `;
 
-const Note = styled.i`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-    padding-top: 0.3rem;
-    border-top: 1px solid #ccc;
-    grid-area: note;
+const PaletteGrid = styled.div`
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(91px, 1fr));
 `;
 
 const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
@@ -97,11 +87,11 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
     const [icon, setIcon] = useState(icons[0]);
     const [enableIcon, setEnableIcon] = useState(false);
     const [paletteProps, setPaletteProps] = useState({
-        red: 150,
-        green: 200,
-        blue: 255,
-        size: 21,
-        stepShift: 21
+        red: 255,
+        green: 0,
+        blue: 0,
+        size: 35,
+        stepShift: 7
     });
 
     const [palette, setPalette] = useState<any>(generateAnalogousPalette({
@@ -151,182 +141,129 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
         timeoutRef.current = setTimeout(() => inputRefs.current[name]?.focus(), 100);
     };
 
-    const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
+    return <div data-component={'input-field-demo'} className={'height-100p'}>
+        <div className="display-flex gap-1 height-100p">
+            <div
+                style={{
+                    width: '75%',
+                    overflowY: 'auto',
+                    backgroundColor: getSecondaryBackgroundColor(theme),
+                    borderRadius: '0.4rem',
+                    padding: '1rem 2rem'
+                }}>
+                <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<InputField />`}</h2>
 
-    const tabItems: TabItemType[] = [
-        {
-            name: 'Color Palette Generator',
-            content: <>
-                <div className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-                    <Box label={'InputField Props'} borderRadius={7}
-                         className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
-                        <InputField
-                            type={'number'}
-                            label={'width'}
-                            width={70}
-                            min={50}
-                            fieldRegister={register('width', {
-                                valueAsNumber: true,
-                                value: option.width as number,
-                                onChange: optionChangeHandler
-                            })}
-                        />
-                        <InputField
-                            type={'number'}
-                            label={'labelWidth'}
-                            width={70}
-                            fieldRegister={register('labelWidth', {
-                                valueAsNumber: true,
-                                value: option.labelWidth as number,
-                                onChange: optionChangeHandler
-                            })}
-                        />
-                        <InputField
-                            label={'labelColor'}
-                            fieldRegister={register('labelColor', {
-                                value: option.labelColor,
-                                onChange: optionChangeHandler
-                            })}
-                        />
-                        <Dropdown
-                            options={['left', 'right', 'center', 'space-between']}
-                            selected={option.labelAlign}
-                            label={'labelAlign'}
-                            onChange={(value: string) => dropDownChangeHandler('labelAlign', value)}
-                        />
-
-                        <div className={'display-flex gap-0p3 align-items-center'}>
-                            <Button className={'white-space-nowrap'}
-                                    onClick={() => setEnableIcon(!enableIcon)}>{enableIcon ? 'Disable' : 'Enable'} icon</Button>
-                            <Dropdown
-                                disabled={!enableIcon}
-                                options={icons}
-                                selected={icon}
-                                onChange={(value: any) => setIcon(value)}
-                            />
-                        </div>
-                    </Box>
-
-                    <Box label={'InputFields'} borderRadius={7}
-                         className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
-                        <div>
-                            <form noValidate>
-                                <GridContainer className="colored-demo-label">
-                                    <Red>
-                                        <InputField
-                                            icon={enableIcon ? option.icon : undefined}
-                                            showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
-                                            width={option.width}
-                                            labelWidth={option.labelWidth}
-                                            labelAlign={option.labelAlign}
-                                            label={'Red'}
-                                            labelColor={option.labelColor}
-                                            min={0}
-                                            max={255}
-                                            type={'number'}
-                                            fieldRegister={register('red', {
-                                                valueAsNumber: true,
-                                                value: paletteProps.red,
-                                                onChange: paletteChangeHandler
-                                            })}
-                                            error={errors.red?.message}
-                                            setRef={(ref: HTMLElement) => inputRefs.current.red = ref}
-                                        />
-                                    </Red>
-                                    <Green>
-                                        <InputField
-                                            icon={enableIcon ? option.icon : undefined}
-                                            showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
-                                            width={option.width}
-                                            labelWidth={option.labelWidth}
-                                            labelAlign={option.labelAlign}
-                                            label={'Green'}
-                                            labelColor={option.labelColor}
-                                            min={0}
-                                            max={255}
-                                            type={'number'}
-                                            fieldRegister={register('green', {
-                                                valueAsNumber: true,
-                                                value: paletteProps.green,
-                                                onChange: paletteChangeHandler
-                                            })}
-                                            error={errors.green?.message}
-                                            setRef={(ref: HTMLElement) => inputRefs.current.green = ref}
-                                        />
-                                    </Green>
-                                    <Blue>
-                                        <InputField
-                                            icon={enableIcon ? option.icon : undefined}
-                                            showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
-                                            width={option.width}
-                                            labelWidth={option.labelWidth}
-                                            labelAlign={option.labelAlign}
-                                            label={'Blue'}
-                                            labelColor={option.labelColor}
-                                            min={0}
-                                            max={255}
-                                            type={'number'}
-                                            fieldRegister={register('blue', {
-                                                valueAsNumber: true,
-                                                value: paletteProps.blue,
-                                                onChange: paletteChangeHandler
-                                            })}
-                                            error={errors.blue?.message}
-                                            setRef={(ref: HTMLElement) => inputRefs.current.blue = ref}
-                                        />
-                                    </Blue>
-                                    <Size>
-                                        <InputField
-                                            icon={enableIcon ? option.icon : undefined}
-                                            showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
-                                            width={option.width}
-                                            labelWidth={option.labelWidth}
-                                            labelAlign={option.labelAlign}
-                                            label={'Size'}
-                                            labelColor={option.labelColor}
-                                            type={'number'}
-                                            min={1}
-                                            max={56}
-                                            fieldRegister={register('size', {
-                                                valueAsNumber: true,
-                                                value: paletteProps.size,
-                                                onChange: paletteChangeHandler
-                                            })}
-                                            error={errors.size?.message}
-                                            setRef={(ref: HTMLElement) => inputRefs.current.size = ref}
-                                        />
-                                    </Size>
-                                    <StepShift>
-                                        <InputField
-                                            icon={enableIcon ? option.icon : undefined}
-                                            showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
-                                            width={option.width}
-                                            labelWidth={option.labelWidth}
-                                            labelAlign={option.labelAlign}
-                                            label={'Shift degrees'}
-                                            labelColor={option.labelColor}
-                                            min={0}
-                                            max={360}
-                                            type={'number'}
-                                            fieldRegister={register('stepShift', {
-                                                valueAsNumber: true,
-                                                value: paletteProps.stepShift,
-                                                onChange: paletteChangeHandler
-                                            })}
-                                            error={errors.stepShift?.message}
-                                            setRef={(ref: HTMLElement) => inputRefs.current.stepShift = ref}
-                                        />
-                                    </StepShift>
-                                </GridContainer>
-                            </form>
-                            <Note className={'color-red font-size-small pt-0p5 mt-0p5'}>
-                                <span className={'text-align-center'}>* Above label's are background-colored for the purpose of this demo! Otherwise,
-                                filters <b>labelAlign</b> & <b>labelWidth</b> won't make much sense.</span>
-                            </Note>
-                        </div>
-                    </Box>
-                    <div className={'display-inline-flex gap-0p1 flex-wrap'}
-                         style={{maxWidth: '647px', margin: '0 auto'}}>
+                <div className="display-flex flex-direction-column">
+                    <form noValidate>
+                        <GridContainer>
+                            <Red>
+                                <InputField
+                                    icon={enableIcon ? option.icon : undefined}
+                                    showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
+                                    width={option.width}
+                                    labelWidth={option.labelWidth}
+                                    labelAlign={option.labelAlign}
+                                    label={'Red'}
+                                    labelColor={option.labelColor}
+                                    min={0}
+                                    max={255}
+                                    type={'number'}
+                                    fieldRegister={register('red', {
+                                        valueAsNumber: true,
+                                        value: paletteProps.red,
+                                        onChange: paletteChangeHandler
+                                    })}
+                                    error={errors.red?.message}
+                                    setRef={(ref: HTMLElement) => inputRefs.current.red = ref}
+                                />
+                            </Red>
+                            <Green>
+                                <InputField
+                                    icon={enableIcon ? option.icon : undefined}
+                                    showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
+                                    width={option.width}
+                                    labelWidth={option.labelWidth}
+                                    labelAlign={option.labelAlign}
+                                    label={'Green'}
+                                    labelColor={option.labelColor}
+                                    min={0}
+                                    max={255}
+                                    type={'number'}
+                                    fieldRegister={register('green', {
+                                        valueAsNumber: true,
+                                        value: paletteProps.green,
+                                        onChange: paletteChangeHandler
+                                    })}
+                                    error={errors.green?.message}
+                                    setRef={(ref: HTMLElement) => inputRefs.current.green = ref}
+                                />
+                            </Green>
+                            <Blue>
+                                <InputField
+                                    icon={enableIcon ? option.icon : undefined}
+                                    showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
+                                    width={option.width}
+                                    labelWidth={option.labelWidth}
+                                    labelAlign={option.labelAlign}
+                                    label={'Blue'}
+                                    labelColor={option.labelColor}
+                                    min={0}
+                                    max={255}
+                                    type={'number'}
+                                    fieldRegister={register('blue', {
+                                        valueAsNumber: true,
+                                        value: paletteProps.blue,
+                                        onChange: paletteChangeHandler
+                                    })}
+                                    error={errors.blue?.message}
+                                    setRef={(ref: HTMLElement) => inputRefs.current.blue = ref}
+                                />
+                            </Blue>
+                            <Size>
+                                <InputField
+                                    icon={enableIcon ? option.icon : undefined}
+                                    showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
+                                    width={option.width}
+                                    labelWidth={option.labelWidth}
+                                    labelAlign={option.labelAlign}
+                                    label={'Size'}
+                                    labelColor={option.labelColor}
+                                    type={'number'}
+                                    min={1}
+                                    max={56}
+                                    fieldRegister={register('size', {
+                                        valueAsNumber: true,
+                                        value: paletteProps.size,
+                                        onChange: paletteChangeHandler
+                                    })}
+                                    error={errors.size?.message}
+                                    setRef={(ref: HTMLElement) => inputRefs.current.size = ref}
+                                />
+                            </Size>
+                            <StepShift>
+                                <InputField
+                                    icon={enableIcon ? option.icon : undefined}
+                                    showErrorTooltipOnCreate={option.showErrorTooltipOnCreate}
+                                    width={option.width}
+                                    labelWidth={option.labelWidth}
+                                    labelAlign={option.labelAlign}
+                                    label={'Shift degrees'}
+                                    labelColor={option.labelColor}
+                                    min={0}
+                                    max={360}
+                                    type={'number'}
+                                    fieldRegister={register('stepShift', {
+                                        valueAsNumber: true,
+                                        value: paletteProps.stepShift,
+                                        onChange: paletteChangeHandler
+                                    })}
+                                    error={errors.stepShift?.message}
+                                    setRef={(ref: HTMLElement) => inputRefs.current.stepShift = ref}
+                                />
+                            </StepShift>
+                        </GridContainer>
+                    </form>
+                    <PaletteGrid className={'border-top mt-1 pt-1 justify-content-space-between'}>
                         {palette.map((color: HSLString, index: number) => <span
                             key={index}
                             className={'color-box transition-200 display-inline-flex justify-content-center align-items-center'}
@@ -335,31 +272,79 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
                                 width: '91px',
                                 height: '91px'
                             }}>
-                    <b className={'font-size-x-small text-shadow-black'}>{hslToHex(color)}</b>
-                </span>)}
-                    </div>
+                            <b className={'font-size-x-small text-shadow-black'}>{hslToHex(color)}</b>
+                        </span>)}
+                    </PaletteGrid>
                 </div>
-            </>
-        }, {
-            name: 'Login Dialog',
-            content: <Login/>
-        }, {
-            name: 'ToDo',
-            content: <>
-                <ToDo/>
-            </>
-        }
-    ];
 
+            </div>
+            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
+                 style={{
+                     width: '25%',
+                     overflowY: 'auto',
+                     paddingRight: '1rem'
+                 }}>
+                <h2 className={'mt-0 text-align-left'}>Props</h2>
 
-    return <Tabs
-        type={'plain'}
-        width={'100%'}
-        color={'red'}
-        minContentHeight={'455'}
-        data={tabItems}
-        moveSelectedOnScroll={true}
-    />;
+                <InputField
+                    labelWidth={165}
+                    type={'number'}
+                    label={'width'}
+                    width={70}
+                    min={50}
+                    fieldRegister={register('width', {
+                        valueAsNumber: true,
+                        value: option.width as number,
+                        onChange: optionChangeHandler
+                    })}
+                />
+                <InputField
+                    labelWidth={165}
+                    type={'number'}
+                    label={'labelWidth'}
+                    width={70}
+                    fieldRegister={register('labelWidth', {
+                        valueAsNumber: true,
+                        value: option.labelWidth as number,
+                        onChange: optionChangeHandler
+                    })}
+                />
+                <InputField
+                    labelWidth={165}
+                    label={'labelColor'}
+                    fieldRegister={register('labelColor', {
+                        value: option.labelColor,
+                        onChange: optionChangeHandler
+                    })}
+                />
+                <Dropdown
+                    labelWidth={165}
+                    options={['left', 'right', 'center', 'space-between']}
+                    selected={option.labelAlign}
+                    label={'labelAlign'}
+                    onChange={(value: string) => dropDownChangeHandler('labelAlign', value)}
+                />
+
+                <div className={'display-flex gap-0p3 align-items-center'}>
+                    <div style={{width: '165px', marginLeft: '-0.3rem'}}>
+                        <Button
+                            className={'white-space-nowrap'}
+                            onClick={() => setEnableIcon(!enableIcon)}
+                        >
+                            {enableIcon ? 'Disable' : 'Enable'} icon
+                        </Button>
+                    </div>
+
+                    <Dropdown
+                        disabled={!enableIcon}
+                        options={icons}
+                        selected={icon}
+                        onChange={(value: any) => setIcon(value)}
+                    />
+                </div>
+            </div>
+        </div>
+    </div>;
 };
 
 export default DemoInputField;

@@ -34,8 +34,8 @@
 }
 
 .marquee {
-  position   : fixed;
-  bottom     : 3rem;
+  position   : absolute;
+  bottom     : 0;
   width      : calc(100% - 4rem);
   overflow-x : hidden;
   height     : 35px;

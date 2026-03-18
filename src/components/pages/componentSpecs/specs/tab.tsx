@@ -52,10 +52,21 @@ const tabData: PropsListProps[] = [
         values: `e.g. 7|'7px'`,
         description: ['Sets a minimum height for the tab content']
     }, {
+        name: 'width',
+        // eslint-disable-next-line
+        types: 'number|`${number}${string}`',
+        values: `e.g. 300|'300px'|'100%'`,
+        description: ['Sets the overall width of the component']
+    }, {
         name: 'moveSelectedOnScroll',
         types: 'boolean',
         values: '',
         description: ['Changes active tab selection following the left/right tab item nav click.', <ul className="m-0"><li>Only if tab items are longer than the actual tab's width and tab items are scrolled off view!</li></ul>]
+    }, {
+        name: 'rememberActiveTab',
+        types: 'boolean',
+        values: '',
+        description: ['Sets Tabs to remember the selected tab for the session.', <ul className="m-0"><li>You must set the prop <b>id</b> to something unique for this to work</li></ul>]
     }, {
         name: 'type',
         types: 'string',
@@ -75,17 +86,17 @@ const tabData: PropsListProps[] = [
         name: 'onTabChange',
         types: 'Function',
         values: '',
-        description: ['Callback function on tab selection changes']
+        description: ['Callback function on tab selection change']
     }, {
-        name: 'activeTab',
+        name: 'id',
         types: 'string',
         values: '',
-        description: ['Set initial active tab item']
+        description: ['Sets an ID to the Tabs component.', <ul className="m-0"><li>Required if prop <b>rememberActiveTab</b> is use!</li></ul>]
     }
 ];
 
 const SpecsTab: FC<SelectedThemeProps> = ({selectedTheme, theme}) => {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     return <>
         <Box

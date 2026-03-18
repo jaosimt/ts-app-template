@@ -8,11 +8,9 @@ import {
 } from 'react-icons/md';
 import { RiArchiveDrawerFill } from 'react-icons/ri';
 import { useSearchParams } from 'react-router';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
-import { getAccentColor } from '../../../utils/themeUtils';
+import { getAccentColor, getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
 import { ReactIcon } from '../../partials';
-import Box from '../../partials/box';
 import Drawer, { DrawerProps } from '../../partials/drawer';
 import Dropdown, { DropdownObjectOptions } from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
@@ -38,7 +36,7 @@ const positionOptions = [
     }
 ];
 
-const DemoDrawer: FC<{theme: ThemeProp}> = ({theme}) => {
+const DemoDrawer: FC<{ theme: ThemeProp }> = ({theme}) => {
     const {register} = useForm();
     const [searchParams] = useSearchParams();
 
@@ -60,54 +58,85 @@ const DemoDrawer: FC<{theme: ThemeProp}> = ({theme}) => {
     };
 
     const dropDownChangeHandler = (value: DropdownObjectOptions) => setPosition(value);
-    const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
 
-    return <div data-name={'modal-demo'} className={'flex-wrap justify-content-center gap-0p5-1'}>
-        <Box
-            label={'Drawer Props'}
-            className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
-            <div className="pb-05">
-                <div className={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
-                    <InputField
-                        width={100}
-                        label={'backgroundColor'}
-                        fieldRegister={register('backgroundColor', {
-                            value: props.backgroundColor,
-                            onChange: propsChangeHandler
-                        })}/>
-                    <Dropdown
-                        options={positionOptions}
-                        selected={position}
-                        label={'position'}
-                        onChange={(value: DropdownObjectOptions) => dropDownChangeHandler(value)}
-                    />
-                    <InputField
-                        disabled={['top', 'bottom'].includes(position.value)}
-                        width={70}
-                        label={'width'}
-                        type={'number'}
-                        fieldRegister={register('width', {
-                            value: props.width,
-                            onChange: propsChangeHandler
-                        })}/>
-                    <InputField
-                        disabled={['left', 'right'].includes(position.value)}
-                        width={70}
-                        label={'height'}
-                        type={'number'}
-                        fieldRegister={register('height', {
-                            value: props.height,
-                            onChange: propsChangeHandler
-                        })}/>
+    return <div data-name={'drawer-demo'} className={'height-100p'}>
+        <div className="display-flex gap-1 height-100p">
+            <div
+                style={{
+                    width: '75%',
+                    overflowY: 'auto',
+                    backgroundColor: getSecondaryBackgroundColor(theme),
+                    borderRadius: '0.4rem',
+                    padding: '1rem 2rem'
+                }}>
+                <h2 className={'mt-0 pb-0p5 text-align-left'}
+                    style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Drawer />`}</h2>
+
+                <div className={'position-relative'} style={{height: 'calc(100% - 5rem)'}}>
+                    <Drawer
+                        handleStyle={{position: 'absolute'}}
+                        theme={theme}
+                        showOnCreate={props.showOnCreate}
+                        position={props.position}
+                        width={props.width}
+                        height={props.height}
+                        backgroundColor={props.backgroundColor}>
+                        <Todo className={'translate absolute-center'} style={{width: '95%'}}/>
+                    </Drawer>
                 </div>
-                <p style={{color: getAccentColor(theme)}} className={'flex-wrap display-flex align-items-center mb-0 justify-content-center border-top pt-0p5'}>The Drawer's handle <span className={'white-space-nowrap'}>(<ReactIcon className={'-mb-0p2'} icon={RiArchiveDrawerFill}/>)</span> should be centered on the&nbsp;<b>{props.position}</b>&nbsp;of your screen!</p>
-                <p className={'flex-wrap mt-0p3 font-size-small color-gray text-align-center'}>Once opened, you may close it by pressing the ESC key or clicking outside of it.</p>
             </div>
-        </Box>
+            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
+                 style={{
+                     width: '25%',
+                     overflowY: 'auto',
+                     paddingRight: '1rem'
+                 }}>
+                <h2 className={'mt-0 text-align-left'}>Props</h2>
 
-        <Drawer handleStyle={{top: 0, opacity: 1}} theme={theme} showOnCreate={props.showOnCreate} position={props.position} width={props.width} height={props.height} backgroundColor={props.backgroundColor}>
-            <Todo className={'translate absolute-center'} style={{width: '95%'}} />
-        </Drawer>
+                <InputField
+                    labelWidth={165}
+                    width={100}
+                    label={'backgroundColor'}
+                    fieldRegister={register('backgroundColor', {
+                        value: props.backgroundColor,
+                        onChange: propsChangeHandler
+                    })}/>
+                <Dropdown
+                    labelWidth={165}
+                    options={positionOptions}
+                    selected={position}
+                    label={'position'}
+                    onChange={(value: DropdownObjectOptions) => dropDownChangeHandler(value)}
+                />
+                <InputField
+                    labelWidth={165}
+                    disabled={['top', 'bottom'].includes(position.value)}
+                    width={70}
+                    label={'width'}
+                    type={'number'}
+                    fieldRegister={register('width', {
+                        value: props.width,
+                        onChange: propsChangeHandler
+                    })}/>
+                <InputField
+                    labelWidth={165}
+                    disabled={['left', 'right'].includes(position.value)}
+                    width={70}
+                    label={'height'}
+                    type={'number'}
+                    fieldRegister={register('height', {
+                        value: props.height,
+                        onChange: propsChangeHandler
+                    })}/>
+                <p style={{color: getAccentColor(theme)}}
+                   className={'flex-wrap display-flex align-items-center mb-0 justify-content-center border-top pt-0p5'}>The
+                    Drawer's handle <span className={'white-space-nowrap'}>(<ReactIcon className={'-mb-0p2'}
+                                                                                       icon={RiArchiveDrawerFill}/>)</span> should
+                    be centered on the&nbsp;<b>{props.position}</b>!</p>
+                <p className={'flex-wrap mt-0p3 font-size-small text-align-center'}>Once opened, you may close it by
+                    pressing the ESC key or clicking outside of it.</p>
+            </div>
+        </div>
     </div>;
 };
 

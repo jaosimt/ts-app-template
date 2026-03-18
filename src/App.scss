@@ -6,6 +6,7 @@
   overflow       : hidden;
   
   header {
+    transition      : all 0.3s ease-in-out;
     position        : relative;
     height          : 60px;
     display         : flex;
@@ -22,14 +23,14 @@
   
   main {
     position : relative;
-    width    : 100vw;
+    width    : 100%;
     display  : flex;
     padding  : 1rem 0 1rem 2rem;
     
     .content-wrapper {
       width      : 100%;
       height     : 100%;
-      padding    : 0 2rem 0 0;
+      padding    : 0;
       overflow-y : auto;
       overflow-x : hidden;
       z-index    : 1;
@@ -37,6 +38,7 @@
   }
   
   footer {
+    transition  : all 0.3s ease-in-out;
     position    : relative;
     height      : 40px;
     display     : flex;
@@ -69,7 +71,6 @@
       .content-wrapper {
         width      : 100%;
         height     : 100%;
-        padding    : 0 1rem 0 0;
         overflow-y : auto;
         overflow-x : hidden;
       }

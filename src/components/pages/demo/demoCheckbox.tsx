@@ -1,8 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
-import Box from '../../partials/box';
+import { getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
 import Checkbox, { CheckboxProps } from '../../partials/checkbox';
 import Dropdown from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
@@ -15,7 +14,7 @@ const DemoCheckbox: FC<{theme: ThemeProp}> = ({theme}) => {
     const [myCheckbox, setMyCheckbox] = useState(false);
     const [props, setProps] = useState<Partial<CheckboxProps>>({
         name: undefined,
-        label: 'white',
+        label: 'Checkbox',
         labelWidth: undefined,
         disabled: false,
         labelPosition: 'left',
@@ -27,38 +26,67 @@ const DemoCheckbox: FC<{theme: ThemeProp}> = ({theme}) => {
     };
 
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
-    const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
 
-    return <div data-component={'checkbox-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
-        <Box label={'Checkbox Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
-            <InputField label={'label'}
-                        fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
-            <InputField label={'labelWidth'} type={'number'} width={60}
-                        fieldRegister={register('labelWidth', {
-                            value: props.labelWidth,
-                            onChange: propsChangeHandler
-                        })}/>
-            <Checkbox label={'disabled'} labelPosition={'left'} name={'disabled'}
-                      checked={props.disabled} onChange={propsChangeHandler}/>
-            <Dropdown
-                options={positionOptions}
-                selected={props.labelPosition}
-                label={'labelPosition'}
-                onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
-            />
-        </Box>
-        <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
-            <Checkbox
-                name={'myCheckbox'}
-                checked={myCheckbox}
-                label={props.label}
-                labelWidth={props.labelWidth}
-                disabled={props.disabled}
-                className={props.className}
-                labelPosition={props.labelPosition}
-                onChange={(e: any) => setMyCheckbox(e.currentTarget.checked)}
-            />
-        </Box>
+    return <div data-component={'checkbox-demo'} className={'height-100p'}>
+        <div className="display-flex gap-1 height-100p">
+            <div
+                style={{
+                    width: '75%',
+                    overflowY: 'auto',
+                    backgroundColor: getSecondaryBackgroundColor(theme),
+                    borderRadius: '0.4rem',
+                    padding: '1rem 2rem'
+                }}>
+                <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Checkbox />`}</h2>
+
+                <Checkbox
+                    name={'myCheckbox'}
+                    checked={myCheckbox}
+                    label={props.label}
+                    labelWidth={props.labelWidth}
+                    disabled={props.disabled}
+                    className={props.className}
+                    labelPosition={props.labelPosition}
+                    onChange={(e: any) => setMyCheckbox(e.currentTarget.checked)}
+                />
+            </div>
+            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
+                 style={{
+                     width: '25%',
+                     overflowY: 'auto',
+                     paddingRight: '1rem'
+                 }}>
+                <h2 className={'mt-0 text-align-left'}>Props</h2>
+
+                <InputField
+                    labelWidth={165}
+                    label={'label'}
+                    fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
+                <InputField
+                    labelWidth={165}
+                    label={'labelWidth'}
+                    type={'number'}
+                    width={60}
+                    fieldRegister={register('labelWidth', {
+                        value: props.labelWidth,
+                        onChange: propsChangeHandler
+                    })}/>
+                <Checkbox
+                    labelWidth={165}
+                    label={'disabled'}
+                    labelPosition={'left'}
+                    name={'disabled'}
+                    checked={props.disabled}
+                    onChange={propsChangeHandler}/>
+                <Dropdown
+                    labelWidth={165}
+                    options={positionOptions}
+                    selected={props.labelPosition}
+                    label={'labelPosition'}
+                    onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
+                />
+            </div>
+        </div>
     </div>;
 };
 

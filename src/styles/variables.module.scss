@@ -20,14 +20,14 @@ $secondaryTextColorDark         : #dddddd;
 $baseColor                      : #f3f2f2;
 $baseColorDark                  : #5c5c5c;
 
-$secondaryBaseColor             : #ededed;
-$secondaryBaseColorDark         : #5f5f5f;
+$secondaryBaseColor             : #d1d1d1;
+$secondaryBaseColorDark         : #7f7f7f;
 
 $secondaryColor                 : #ffe500;
 $secondaryColorDark             : #ffc300;
 
-$secondaryBackgroundColor       : #f8f5fa;
-$secondaryBackgroundColorDark   : #34283b;
+$secondaryBackgroundColor       : #e6e6e6;
+$secondaryBackgroundColorDark   : #565656;
 
 $buttonPrimaryTextColor         : #ffffff;
 $buttonPrimaryDisabledTextColor : rgba(255, 255, 255, 0.49);
@@ -39,7 +39,9 @@ $alternatingBackgroundOdd       : rgba(150, 57, 153, 0.07);
 $alternatingBackgroundEven      : rgba(97, 218, 251, 0.07);
 $gridBorderColor                : rgb(212, 167, 212);
 
-$borderColorDefault             : #e9e9e9;
+$borderColorDefault             : rgb(206 206 206);
+$borderColorDark                : rgb(150 150 150);
+
 $backgroundColorDefault         : #fefcff;
 
 $inputTextColor                 : #252a2b;
@@ -96,7 +98,10 @@ $buttonDefaultBorderColorTwitch : $buttonDefaultTextColorTwitch;
   alternatingBackgroundOdd       : $alternatingBackgroundOdd;
   alternatingBackgroundEven      : $alternatingBackgroundEven;
   gridBorderColor                : $gridBorderColor;
+  
   borderColorDefault             : $borderColorDefault;
+  borderColorDark                : $borderColorDark;
+  
   backgroundColorDefault         : $backgroundColorDefault;
   inputTextColor                 : $inputTextColor;
   errorColor                     : $errorColor;

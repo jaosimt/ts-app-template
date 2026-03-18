@@ -13,13 +13,15 @@ export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
     data: TabItemType[];
     minContentHeight?: CSSUnit;
     moveSelectedOnScroll?: boolean;
-    type?: 'boxed' | 'boxed-content' | 'boxed-tabs' | 'plain';
+    type?: TabsType;
     onTabChange?: Function,
     width?: CSSUnit;
     rememberActiveTab?: boolean;
     id?: string;
     theme?: ThemeProp;
 }
+
+export type TabsType = 'boxed' | 'boxed-content' | 'boxed-tabs' | 'plain';
 
 export type TabItemType = {
     id?: string;
@@ -268,7 +270,7 @@ const Tabs: FC<TabItemProps> = (props) => {
                         const isActive = selected === itemName;
 
                         return <div
-                            key={`tab-item-${itemName}`}
+                            key={`tab-item-${itemName}-${i}`}
                             data-index={i}
                             data-name={itemName}
                             onClick={tabItemClickHandler}
