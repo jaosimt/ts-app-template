@@ -1,10 +1,9 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaRegWindowMaximize } from 'react-icons/fa6';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { isString } from '../../../utils';
-import Box from '../../partials/box';
+import { getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
 import Button from '../../partials/button';
 import Checkbox from '../../partials/checkbox';
 import InputField from '../../partials/inputField';
@@ -42,9 +41,80 @@ const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
         return str;
     })();
 
-    const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
+    return <div data-component={'modal-demo'} className={'height-100p'}>
+        <div className="display-flex gap-1 height-100p">
+            <div
+                style={{
+                    width: '75%',
+                    overflowY: 'auto',
+                    backgroundColor: getSecondaryBackgroundColor(theme),
+                    borderRadius: '0.4rem',
+                    padding: '1rem 2rem'
+                }}>
+                <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Modal />`}</h2>
 
-    return <div data-component={'modal-demo'} className={'display-flex flex-wrap justify-content-center gap-0p5-1'}>
+                <Button
+                    className={'font-size-large'}
+                    align={'space-between'}
+                    icon={FaRegWindowMaximize}
+                    disabled={showModal}
+                    onClick={() => setShowModal(true)}
+                >
+                    Show Modal
+                </Button>
+            </div>
+            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
+                 style={{
+                     width: '25%',
+                     overflowY: 'auto',
+                     paddingRight: '1rem'
+                 }}>
+                <h2 className={'mt-0 text-align-left'}>Props</h2>
+
+                <Checkbox
+                    labelPosition={'left'}
+                    labelWidth={165}
+                    label={'closeOnEscKey'}
+                    name={'closeOnEscKey'}
+                    checked={props.closeOnEscKey}
+                    onChange={changeHandler}
+                />
+                <Checkbox
+                    labelPosition={'left'}
+                    labelWidth={165}
+                    label={'closeOnOutsideClick'}
+                    name={'closeOnOutsideClick'}
+                    checked={props.closeOnOutsideClick}
+                    onChange={changeHandler}
+                />
+                <Checkbox
+                    labelPosition={'left'}
+                    labelWidth={165}
+                    label={'showClose'}
+                    name={'showClose'}
+                    checked={props.showClose}
+                    onChange={changeHandler}
+                />
+                <InputField
+                    labelWidth={165}
+                    label={'title'}
+                    fieldRegister={register('title', {
+                        value: props.title,
+                        onChange: changeHandler
+                    })}
+                />
+
+                <InputField
+                    labelWidth={165}
+                    type={'number'}
+                    label={'width'}
+                    fieldRegister={register('width', {
+                        value: props.width,
+                        onChange: changeHandler
+                    })}
+                />
+            </div>
+        </div>
         {
             showModal && <Modal
                 width={props.width}
@@ -122,56 +192,6 @@ const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
                 </div>
             </Modal>
         }
-
-        <div className={'display-flex flex-wrap justify-content-center align-items-center gap-0p5-1'}>
-            <Box label={'Modal Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
-                <Checkbox
-                    label={'closeOnEscKey'}
-                    name={'closeOnEscKey'}
-                    checked={props.closeOnEscKey}
-                    onChange={changeHandler}
-                />
-                <Checkbox
-                    label={'closeOnOutsideClick'}
-                    name={'closeOnOutsideClick'}
-                    checked={props.closeOnOutsideClick}
-                    onChange={changeHandler}
-                />
-                <Checkbox
-                    label={'showClose'}
-                    name={'showClose'}
-                    checked={props.showClose}
-                    onChange={changeHandler}
-                />
-                <InputField
-                    label={'title'}
-                    fieldRegister={register('title', {
-                        value: props.title,
-                        onChange: changeHandler
-                    })}
-                />
-
-                <InputField
-                    type={'number'}
-                    label={'width'}
-                    fieldRegister={register('width', {
-                        value: props.width,
-                        onChange: changeHandler
-                    })}
-                />
-            </Box>
-            <Box label={'Button'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
-                <Button
-                    className={'font-size-large'}
-                    align={'space-between'}
-                    icon={FaRegWindowMaximize}
-                    disabled={showModal}
-                    onClick={() => setShowModal(true)}
-                >
-                    Show Modal
-                </Button>
-            </Box>
-        </div>
     </div>;
 };
 

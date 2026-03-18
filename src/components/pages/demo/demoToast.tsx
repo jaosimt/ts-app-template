@@ -9,14 +9,12 @@ import {
     TbBoxAlignTopLeftFilled,
     TbBoxAlignTopRightFilled
 } from 'react-icons/tb';
-import styled from 'styled-components';
 import { ApplicationError } from '../../../class';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { useAppDispatch } from '../../../hooks';
 import { setError } from '../../../slices/error';
 import { isString } from '../../../utils';
-import Box from '../../partials/box';
+import { getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
 import Button from '../../partials/button';
 import Dropdown, { DropdownObjectOptions } from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
@@ -46,19 +44,6 @@ const toastTheme: DropdownObjectOptions[] = [
     {label: 'outlined', value: 'outlined', icon: IoColorFillOutline},
     {label: 'filled', value: 'filled', icon: IoColorFill},
 ];
-
-const Container = styled.div`
-    width: fit-content;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto auto;
-    
-    @media (max-width: 768px) {
-        width: 100%;
-    }
-`;
 
 const DemoToast: FC<{theme: ThemeProp}> = ({theme}) => {
     const dispatch = useAppDispatch();
@@ -98,55 +83,118 @@ const DemoToast: FC<{theme: ThemeProp}> = ({theme}) => {
         // eslint-disable-next-line
     }, [selectedTheme]);
 
-    const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
 
-    return <Container data-component={'toast-demo'}>
-        <Box className={'justify-self-center'} borderColor={themedBoxBorderColor}>
-            <div className="display-flex flex-direction-column justify-content-center flex-wrap gap-0p5-1">
-                <div className={'pb-0p5 display-flex flex-direction-column gap-0p5'}>
-                    <InputField wrapperClassName={'flex-direction-column align-items-top-i'} type={'textarea'} labelWidth={110} width={'100%'} label={'Toast Message'} style={{flexDirection: 'column'}}
-                                value={toastProp.message as string}
-                                onChange={(e) => setToastProp({...toastProp, message: e.currentTarget.value})}/>
+    return <div data-component={'toast-demo'} className={'height-100p'}>
+        <div className="display-flex gap-1 height-100p">
+            <div
+                style={{
+                    width: '75%',
+                    overflowY: 'auto',
+                    backgroundColor: getSecondaryBackgroundColor(theme),
+                    borderRadius: '0.4rem',
+                    padding: '1rem 2rem'
+                }}>
+                <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`toast`}</h2>
 
-                    <h4 className={'m-0 border-bottom pb-0p3'}>Options:</h4>
-                    <Dropdown labelWidth={110} label={'Toast Type'} selected={selectedType} onChange={(value: DropdownObjectOptions) => setSelectedType(value)} options={toastTypes}/>
-                    <Dropdown labelWidth={110} label={'Toast Position'} selected={selectedPosition} onChange={(value: DropdownObjectOptions) => setSelectedPosition(value)} options={toastPosition}/>
-                    <Dropdown labelWidth={110} label={'Toast Theme'} selected={selectedTheme} onChange={(value: DropdownObjectOptions) => setSelectedTheme(value)} options={toastTheme}/>
-                    <div className={'display-flex gap-0p3 align-items-center justify-content-space-between'}>
-                        <div className="display-flex gap-0p3 align-items-center">
-                            <Tippy showOnCreate={false} content={'InputField is readonly.  Use the provided plus/minus buttons!'} className={'custom-tippy'}>
-                                <InputField readOnly={true} disabled={selectedType.value === 'error'} labelWidth={110} label={'Duration'} type={'number'} width={70} step={1000} value={String(toastProp.options?.duration)}
-                                            onChange={(e) => setToastProp({...toastProp, options: {...toastProp.options, duration: Number(e.currentTarget.value)}})}/>
-                            </Tippy>
-                            <Button disabled={toastProp.options?.duration === 0 || selectedType.value === 'error'} icon={FaMinus} onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: (toastProp.options?.duration || 0) - 1000}})}/>
-                            <Button disabled={selectedType.value === 'error'} icon={FaPlus} onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: (toastProp.options?.duration || 0) + 1000}})}/>
-                            <span className="color-gray">milliseconds</span>
-                        </div>
-                        <Button disabled={toastProp.options?.duration === 0} icon={RiResetLeftLine} onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: 0}})}/>
+                <Button
+                    className={'align-self-center'}
+                    disabled={!isString(toastProp.message, true)}
+                    onClick={() => toast(toastProp)}
+                >
+                    Show Toast
+                </Button>
+                <Button
+                    className={'default'}
+                    disabled={!isString(toastProp.message, true)}
+                    onClick={
+                        () => {
+                            toast({
+                                message: <>
+                                    <b>Test</b>
+                                    <p>{toastProp.message}</p>
+                                </>
+                            });
+                        }
+                    }
+                >
+                    Show Non-optioned Toast
+                </Button>
+                <Button
+                    className={'default'}
+                    onClick={() => dispatch(setError(new ApplicationError('Test Error')))}
+                >
+                    Trigger a Test Error
+                </Button>
+            </div>
+            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
+                 style={{
+                     width: '25%',
+                     overflowY: 'auto',
+                     paddingRight: '1rem'
+                 }}>
+                <h2 className={'mt-0 text-align-left'}>Props</h2>
+
+                <InputField
+                    wrapperClassName={'flex-direction-column align-items-top-i'}
+                    type={'textarea'}
+                    labelWidth={165}
+                    width={'100%'}
+                    label={'message'}
+                    style={{flexDirection: 'column'}}
+                    value={toastProp.message as string}
+                    onChange={(e) => setToastProp({...toastProp, message: e.currentTarget.value})}/>
+
+                <p className={'m-0 border-bottom pb-0p3'}>options:</p>
+                <Dropdown
+                    labelWidth={165}
+                    label={'type'}
+                    selected={selectedType}
+                    onChange={(value: DropdownObjectOptions) => setSelectedType(value)} options={toastTypes}/>
+                <Dropdown
+                    labelWidth={165}
+                    label={'position'}
+                    selected={selectedPosition}
+                    onChange={(value: DropdownObjectOptions) => setSelectedPosition(value)} options={toastPosition}/>
+                <Dropdown
+                    labelWidth={165}
+                    label={'theme'}
+                    selected={selectedTheme}
+                    onChange={(value: DropdownObjectOptions) => setSelectedTheme(value)} options={toastTheme}/>
+                <span>duration</span>
+                <div className={'display-flex gap-0p3 align-items-center justify-content-space-between -mt-0p5'}>
+                    <div className={'display-flex align-items-center'}>
+                        <Button
+                            disabled={toastProp.options?.duration === 0 || selectedType.value === 'error'}
+                            icon={FaMinus}
+                            onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: (toastProp.options?.duration || 0) - 1000}})}/>
+                        <Tippy
+                            showOnCreate={false}
+                            content={'InputField is readonly.  Use the provided plus/minus buttons!'}
+                            className={'custom-tippy'}>
+                            <InputField
+                                readOnly={true}
+                                disabled={selectedType.value === 'error'}
+                                labelWidth={165}
+                                type={'number'}
+                                width={70}
+                                step={1000}
+                                value={String(toastProp.options?.duration)}
+                                onChange={(e) => setToastProp({...toastProp, options: {...toastProp.options, duration: Number(e.currentTarget.value)}})}/>
+                        </Tippy>
+                        <Button
+                            disabled={selectedType.value === 'error'}
+                            icon={FaPlus}
+                            onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: (toastProp.options?.duration || 0) + 1000}})}/>
+                        <span className="color-gray">milliseconds</span>
                     </div>
-                </div>
-                <div className="display-flex flex-direction-column gap-0p5 justify-content-center">
-                    <Button className={'align-self-center'} disabled={!isString(toastProp.message, true)} onClick={() => toast(toastProp)}>Show Toast</Button>
-                </div>
-                <div className={'border-top pt-0p5 gap-0p5 display-flex justify-content-center'}>
                     <Button
-                        className={'default'}
-                        disabled={!isString(toastProp.message, true)}
-                        onClick={
-                            () => {
-                                toast({
-                                    message: <>
-                                        <b>Test</b>
-                                        <p>{toastProp.message}</p>
-                                    </>
-                                });
-                            }
-                        }>Show Non-optioned Toast</Button>
-                    <Button className={'default'} onClick={() => dispatch(setError(new ApplicationError('Test Error')))}>Trigger a Test Error</Button>
+                        disabled={toastProp.options?.duration === 0}
+                        icon={RiResetLeftLine}
+                        onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: 0}})}/>
                 </div>
             </div>
-        </Box>
-    </Container>;
+        </div>
+    </div>;
 };
 
 export default DemoToast;

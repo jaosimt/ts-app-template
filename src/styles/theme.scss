@@ -10,23 +10,8 @@ body {
     color            : v.$textColorDark;
     
     #react-ts-template {
-      header {
-        // border-bottom : 10px solid v.$baseColorDark;
-      }
-      
-      footer {
-        border-top : 10px solid v.$baseColorDark;
-      }
-      
-      //header, footer {
       footer {
         background-color : v.$accentColorDark;
-      }
-    }
-    
-    nav[data-nav="top"] {
-      a {
-        &.active { color : v.$secondaryColorDark; }
       }
     }
     
@@ -68,7 +53,7 @@ body {
           background-color : v.$buttonPrimaryTextColor;
         }
         
-        &:not(.btn-icon) {
+        &:not(.btn-icon):not(.no-hover) {
           &.default {
             background-color : v.$buttonDefaultHoverColorDark;
             color            : v.$buttonDefaultColor;
@@ -330,23 +315,8 @@ body {
     color            : v.$textColor;
     
     #react-ts-template {
-      header {
-        // border-bottom : 10px solid v.$baseColor;
-      }
-      
-      footer {
-        border-top : 10px solid v.$baseColor;
-      }
-      
-      //header, footer {
       footer {
         background-color : v.$accentColorReact;
-      }
-    }
-    
-    nav[data-nav="top"] {
-      a {
-        &.active { color : v.$secondaryColor; }
       }
     }
     
@@ -388,7 +358,7 @@ body {
           background-color : v.$buttonPrimaryTextColor;
         }
         
-        &:not(.btn-icon) {
+        &:not(.btn-icon):not(.no-hover) {
           &.default {
             background-color : v.$buttonDefaultHoverColorReact;
             color            : v.$buttonDefaultColor
@@ -649,23 +619,8 @@ body {
     color            : v.$textColor;
     
     #react-ts-template {
-      header {
-        // border-bottom : 10px solid v.$baseColor;
-      }
-      
-      footer {
-        border-top : 10px solid v.$baseColor;
-      }
-      
-      //header, footer {
       footer {
         background-color : v.$accentColorInsta;
-      }
-    }
-    
-    nav[data-nav="top"] {
-      a {
-        &.active { color : v.$secondaryColor; }
       }
     }
     
@@ -707,7 +662,7 @@ body {
           background-color : v.$buttonPrimaryTextColor;
         }
         
-        &:not(.btn-icon) {
+        &:not(.btn-icon):not(.no-hover) {
           &.default {
             background-color : v.$buttonDefaultHoverColorInsta;
             color            : v.$buttonDefaultColor
@@ -968,23 +923,8 @@ body {
     color            : v.$textColor;
     
     #react-ts-template {
-      header {
-        // border-bottom : 10px solid v.$baseColor;
-      }
-      
-      footer {
-        border-top : 10px solid v.$baseColor;
-      }
-      
-      //header, footer {
       footer {
         background-color : v.$accentColorTwitch;
-      }
-    }
-    
-    nav[data-nav="top"] {
-      a {
-        &.active { color : v.$secondaryColor; }
       }
     }
     
@@ -1026,7 +966,7 @@ body {
           background-color : v.$buttonPrimaryTextColor;
         }
         
-        &:not(.btn-icon) {
+        &:not(.btn-icon):not(.no-hover) {
           &.default {
             background-color : v.$buttonDefaultHoverColorTwitch;
             color            : v.$buttonDefaultColor

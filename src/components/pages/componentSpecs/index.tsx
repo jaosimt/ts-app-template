@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { classNames } from '../../../utils';
+import { getSecondaryBaseColor } from '../../../utils/themeUtils';
 import Tab, { TabItemType } from '../../partials/tab';
 import SpecsBox from './specs/box';
 import SpecsButton from './specs/buttons';
@@ -17,7 +18,6 @@ import SpecsModal from './specs/modal';
 import SpecsPortalWindow from './specs/windowPortal';
 import SpecsTab from './specs/tab';
 import SpecsToast from './specs/toast';
-import v from '../../../styles/variables.module.scss';
 
 export interface SelectedThemeProps {
     selectedTheme: string;
@@ -61,15 +61,15 @@ const Grid = styled.div<{
 
     > * {
         padding: 0.5rem;
-        border-left: ${props => `1px solid ${props.$theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor}`};
-        border-bottom: ${props => `1px solid ${props.$theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor}`};
+        border-left: ${props => `1px solid ${getSecondaryBaseColor(props.$theme)}`};
+        border-bottom: ${props => `1px solid ${getSecondaryBaseColor(props.$theme)}`};
 
         &:nth-child(-n+4) {
-            border-top: ${props => `1px solid ${props.$theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor}`};
+            border-top: ${props => `1px solid ${getSecondaryBaseColor(props.$theme)}`};
         }
 
         &:nth-child(4n) {
-            border-right: ${props => `1px solid ${props.$theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor}`};
+            border-right: ${props => `1px solid ${getSecondaryBaseColor(props.$theme)}`};
         }
 
         .mobile-only {
@@ -155,9 +155,8 @@ const ComponentSpecs: FC<{ theme: ThemeProp }> = ({theme}) => {
 
     return <div data-component={'component-specs'} className={'width-100p'}>
         <Header>
-            <h1 className={'mt-0 line-height-1'}>Custom Component Specs</h1>
-            {/*<Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme}*/}
-            {/*          onChange={handleThemeChange}/>*/}
+            <h1 className={'line-height-1'}>Custom Component Specs</h1>
+            {/*<Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme} onChange={handleThemeChange}/>*/}
         </Header>
         <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} moveSelectedOnScroll={true}
              data={tabData} theme={theme}/>
@@ -179,14 +178,15 @@ export const propsList = (props: PropsListProps[], theme: ThemeProp) => {
             'line-height-normal',
             'font-monospace',
             'font-size-smaller',
+            'trim'
         )}
         $theme={theme}
     >
         {
-            props.map(({name, types, values, description}, i) => <Fragment key={i}>
+            props.map(({name, types, values, description}, i) => <Fragment key={`props-${name}-${i}`}>
                 <strong>{name}</strong>
                 <span className={'indent-row'}><span className="mobile-only">Type:</span>{types}</span>
-                <span className={'indent-row'}><span className="mobile-only">Value:</span><i>{values}</i></span>
+                <span className={'indent-row'}><span className="mobile-only">Value:</span><i>{Array.isArray(values) ? values.map((value, i) => <Fragment key={`value-${i}`}>{value}</Fragment>) : values}</i></span>
                 <span className={'description indent-row'}>
                     <span className="mobile-only">Description:</span>
                     {description.map((d, j) => <span key={j} className={'display-block'}>{d}

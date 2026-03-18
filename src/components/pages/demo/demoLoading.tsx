@@ -1,9 +1,8 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDebounceCallback } from 'usehooks-ts';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
-import Box from '../../partials/box';
+import { getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
 import Checkbox from '../../partials/checkbox';
 import Dropdown from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
@@ -43,51 +42,98 @@ const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
         });
     }
 
-    const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
+    return <div data-component={'loading-demo'} className={'height-100p'}>
+        <div className="display-flex gap-1 height-100p">
+            <div
+                style={{
+                    width: '75%',
+                    overflowY: 'auto',
+                    backgroundColor: getSecondaryBackgroundColor(theme),
+                    borderRadius: '0.4rem',
+                    padding: '1rem 2rem'
+                }}>
+                <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Loading />`}</h2>
 
-    return <div data-component={'loading-demo'} className={'display-inline-flex flex-direction-column height-100p gap-0p5 width-100p'}>
-        <Box label={'Modal Props'} className={'justify-self-center'} contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
-            <InputField type={'number'} width={60} label={'borderWidth'}
-                        fieldRegister={register('borderWidth', {
-                            value: props.borderWidth,
-                            onChange: propsChangeHandler
-                        })}/>
-            <InputField label={'borderColor'}
-                        fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
-            <InputField label={'backgroundColor'}
-                        fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
-            <Dropdown
-                options={positionOptions}
-                selected={props.position}
-                label={'position'}
-                onChange={(value: string) => debDropdownChange('position', value)}
-            />
-            <InputField type={'number'} width={60} label={'size'}
-                        fieldRegister={register('size', {value: props.size, onChange: propsChangeHandler})}/>
-            <InputField label={'color'}
-                        fieldRegister={register('color', {onChange: propsChangeHandler})}/>
-            <InputField label={'topText'}
-                        fieldRegister={register('topText', {onChange: propsChangeHandler})}/>
-            <InputField label={'bottomText'}
-                        fieldRegister={register('bottomText', {onChange: propsChangeHandler})}/>
-            <Checkbox label={'padding'} labelPosition={'left'} name={'padding'}
-                      checked={props.padding} onChange={propsChangeHandler}/>
-            <Checkbox label={'boxShadow'} labelPosition={'left'} name={'boxShadow'}
-                      checked={props.boxShadow} onChange={propsChangeHandler}/>
-        </Box>
-        <div className="position-relative border border-radius-0p4 background-light" style={{height: '100%'}}>
-            <Loading
-                borderWidth={props.borderWidth}
-                borderColor={props.borderColor}
-                backgroundColor={props.backgroundColor}
-                padding={props.padding}
-                position={props.position}
-                size={props.size}
-                color={props.color}
-                topText={props.topText}
-                bottomText={props.bottomText}
-                boxShadow={props.boxShadow}
-            />
+                <div className={'position-relative'} style={{height: 'calc(100% - 5rem)'}}>
+                    <Loading
+                        borderWidth={props.borderWidth}
+                        borderColor={props.borderColor}
+                        backgroundColor={props.backgroundColor}
+                        padding={props.padding}
+                        position={props.position}
+                        size={props.size}
+                        color={props.color}
+                        topText={props.topText}
+                        bottomText={props.bottomText}
+                        boxShadow={props.boxShadow}
+                    />
+                </div>
+            </div>
+            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
+                 style={{
+                     width: '25%',
+                     overflowY: 'auto',
+                     paddingRight: '1rem'
+                 }}>
+                <h2 className={'mt-0 text-align-left'}>Props</h2>
+
+                <Dropdown
+                    labelWidth={165}
+                    options={positionOptions}
+                    selected={props.position}
+                    label={'position'}
+                    onChange={(value: string) => debDropdownChange('position', value)}
+                />
+                <InputField
+                    labelWidth={165}
+                    type={'number'}
+                    width={60}
+                    label={'borderWidth'}
+                    fieldRegister={register('borderWidth', {
+                        value: props.borderWidth,
+                        onChange: propsChangeHandler
+                    })}/>
+                <InputField
+                    labelWidth={165}
+                    label={'borderColor'}
+                    fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
+                <InputField
+                    labelWidth={165}
+                    label={'backgroundColor'}
+                    fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
+                <InputField
+                    labelWidth={165}
+                    label={'color'}
+                    fieldRegister={register('color', {onChange: propsChangeHandler})}/>
+                <InputField
+                    labelWidth={165}
+                    label={'topText'}
+                    fieldRegister={register('topText', {onChange: propsChangeHandler})}/>
+                <InputField
+                    labelWidth={165}
+                    label={'bottomText'}
+                    fieldRegister={register('bottomText', {onChange: propsChangeHandler})}/>
+                <InputField
+                    labelWidth={165}
+                    type={'number'}
+                    width={60}
+                    label={'size'}
+                    fieldRegister={register('size', {value: props.size, onChange: propsChangeHandler})}/>
+                <Checkbox
+                    labelWidth={165}
+                    label={'padding'}
+                    labelPosition={'left'}
+                    name={'padding'}
+                    checked={props.padding}
+                    onChange={propsChangeHandler}/>
+                <Checkbox
+                    labelWidth={165}
+                    label={'boxShadow'}
+                    labelPosition={'left'}
+                    name={'boxShadow'}
+                    checked={props.boxShadow}
+                    onChange={propsChangeHandler}/>
+            </div>
         </div>
     </div>;
 };

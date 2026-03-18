@@ -1,76 +1,39 @@
-import {RefObject, useEffect, useRef, useState} from 'react';
-import {NavLink, useLocation} from 'react-router';
-import './index.scss';
-import {useResizeObserver} from 'usehooks-ts';
-import { Theme } from '../constants';
+import { BsBuildingGear } from 'react-icons/bs';
+import { FaHome } from 'react-icons/fa';
+import { VscVmRunning } from 'react-icons/vsc';
+import { useLocation, useNavigate } from 'react-router';
+import Button from '../components/partials/button';
 import { ThemeProp } from '../constants/interfaces';
-import {useOnScroll} from '../hooks';
-import {classNames, getRandStr} from '../utils';
-import v from '../styles/variables.module.scss';
+import {classNames} from '../utils';
+import { getSecondaryBaseColor } from '../utils/themeUtils';
 
-export const NavigationMain = ({theme}: { theme: ThemeProp }) => {
-    const navRef = useRef<HTMLElement>(null);
+const mainNav = [
+    {path: '/', label: 'Home', icon: FaHome},
+    {path: '/specs', label: 'Component Specs', icon: BsBuildingGear},
+    {path: '/demo', label: 'Component Demo', icon: VscVmRunning}
+];
 
+const NavigationMain = ({theme}: { theme: ThemeProp }) => {
     const {pathname} = useLocation();
+    const navigate = useNavigate();
 
-    const [abVisible, setAbVisible] = useState(true);
-    const [activeBar, setActiveBar] = useState({
-        left: 0,
-        width: 0,
-        opacity: 0,
-        transition: 'transition-none'
-    });
-
-    useResizeObserver({
-        ref: navRef as RefObject<HTMLElement>,
-        box: 'content-box',
-        onResize: () => setActiveBar({...activeBar, transition: getRandStr(7)})
-    });
-
-    useOnScroll(() => {
-        if (!navRef.current) return;
-
-        if (navRef.current.getBoundingClientRect().top < 0) setAbVisible(false);
-        else setAbVisible(true);
-    });
-
-    useEffect(() => {
-        if (!navRef.current) return;
-        const activeNav = navRef.current.querySelector('a.active');
-
-        if (!activeNav) return;
-        const {left, width} = activeNav.getBoundingClientRect();
-
-        const nextActiveBar = {left, width, opacity: 1, transition: ''};
-        (JSON.stringify(nextActiveBar) !== JSON.stringify(activeBar)) && setActiveBar(nextActiveBar);
-
-        // eslint-disable-next-line
-    }, [pathname, navRef.current, activeBar.transition]);
-
-    return <nav ref={navRef} data-nav={'top'} className={'position-relative'} style={{
-        width: '100%',
-        justifyContent: 'flex-end'
-    }}>
-        <NavLink to={`/`}
-                 className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Home</NavLink>
-        <NavLink to={`/specs`}
-                 className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Specs</NavLink>
-        <NavLink to={`/demo`}
-                 className={({isActive}) => classNames(isActive && 'active', 'transition-200', 'nav-link')}>Demo</NavLink>
-
-        {abVisible &&
-            <div className={activeBar.transition} style={{
-                position: 'fixed',
-                left: `${activeBar.left}px`,
-                height: '2px',
-                width: `${activeBar.width}px`,
-                marginBottom: '-21px',
-                transition: 'all 300ms ease-in-out, opacity 1400ms ease-in-out',
-                backgroundColor: theme === Theme.DARK ? v.secondaryColorDark : v.secondaryColor,
-                opacity: `${activeBar.opacity}`
-            }}></div>
+    return <div className="display-flex flex-direction-column gap-0p5"
+                style={{color: getSecondaryBaseColor(theme)}}>
+        {
+            mainNav.map((nav, i) => <Button
+                key={`button-nav-${i}`}
+                className={classNames((pathname === nav.path || (nav.path==='/demo' && pathname.startsWith('/demo'))) && 'default no-hover', 'white-space-nowrap')}
+                icon={nav.icon}
+                align={'space-between'}
+                width={'100%'}
+                onClick={() => navigate(nav.path)}
+            >
+                {nav.label}
+            </Button>)
         }
-    </nav>;
+    </div>
 };
+
+export default NavigationMain;
 
 /* https://reactrouter.com/start/framework/navigating#navlink */

@@ -7,10 +7,10 @@ import { LiaPoopSolid } from 'react-icons/lia';
 import { RxSpaceBetweenHorizontally } from 'react-icons/rx';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight, oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import styled from 'styled-components';
 import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { isNullOrUndefined, isString } from '../../../utils';
+import { getAccentColor, getBorderColor, getSecondaryBackgroundColor, getTextColor } from '../../../utils/themeUtils';
 import Box from '../../partials/box';
 import Checkbox from '../../partials/checkbox';
 import Dropdown, { DropdownObjectOptions, DropdownProps } from '../../partials/dropdown';
@@ -30,12 +30,11 @@ const stringOptionsCode = `[
     'and I wonder who cares!'
 ]`;
 
-const disablePredicateCode = `(o: string) => {
-    return o === 'and I wonder who cares!'
-}`;
-const disablePredicateCodeObject = `(o: DropdownObjectOptions) => {
-    return o.value === 'and I wonder who cares!'   
-}`;
+const disablePredicateCode = `(o: string) => 
+o === 'and I wonder who cares!'`;
+
+const disablePredicateCodeObject = `(o: DropdownObjectOptions) => 
+o.value === 'and I wonder who cares!'`;
 
 const objectOptions = [
     {
@@ -78,21 +77,6 @@ const alignOptions = [
         icon: RxSpaceBetweenHorizontally
     }
 ];
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    
-    @media (max-width: 768px) {
-        flex-direction: column;
-        
-        > * {
-            width: 100%;
-        }
-    }
-`;
 
 const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
     const {register} = useForm();
@@ -146,92 +130,21 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
     const selectedTheme = theme === Theme.DARK ? oneLight : oneDark;
     const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
 
-    return <div data-component={'checkbox-demo'} className={'display-flex align-items-center flex-direction-column gap-0p5-1'}>
-        <Box label={'Dropdown Props'} className={'justify-self-center'} borderColor={themedBoxBorderColor}>
-            <div className={'display-flex justify-content-center flex-wrap gap-0p5-1'}>
-                <div>
-                    <div className={'display-flex align-items-center gap-0p5'}>
-                        <Checkbox onChange={optionChangeHandler} name={'asObj'} label={'options'}
-                                  checked={options.asObj}/>
-                        <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as DropdownObjectOptions[]</span>
-                    </div>
-                    <Box tight={true} width={420} borderColor={themedBoxBorderColor}>
-                        <SyntaxHighlighter
-                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-                            showLineNumbers={true}
-                            language="js"
-                            customStyle={{padding: '0.5rem', margin: 0, border: 'none', borderRadius: 0}}
-                            style={selectedTheme}
-                        >
-                            {objectOptionsCode}
-                        </SyntaxHighlighter>
-                    </Box>
-                </div>
-                <div>
-                    <div className={'display-flex align-items-center gap-0p5'}>
-                        <Checkbox onChange={optionChangeHandler} name={'asStr'} label={'options'}
-                                  checked={options.asStr}/>
-                        <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as string[]</span>
-                    </div>
+    return <div data-component={'dropdown-demo'} className={'height-100p'}>
+        <div className="display-flex gap-1 height-100p">
+            <div
+                style={{
+                    width: '75%',
+                    overflowY: 'auto',
+                    backgroundColor: getSecondaryBackgroundColor(theme),
+                    borderRadius: '0.4rem',
+                    padding: '1rem 2rem'
+                }}>
+                <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Dropdown />`}</h2>
 
-                    <Box tight={true} width={420} borderColor={themedBoxBorderColor}>
-                        <SyntaxHighlighter
-                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-                            showLineNumbers={true}
-                            language="js"
-                            customStyle={{padding: '0.5rem', margin: 0, border: 'none', borderRadius: 0}}
-                            style={selectedTheme}
-                        >
-                            {stringOptionsCode}
-                        </SyntaxHighlighter>
-                    </Box>
-                </div>
-            </div>
-            <div className="display-flex flex-wrap gap-0p5-1 mt-0p5 justify-content-center">
-                <InputField label={'label'}
-                            fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
-                <div className={'display-inline-flex gap-0p1 align-items-center'}>
-                    <Checkbox onChange={propsChangeHandler} name={'icon'} label={'icon'}
-                              labelPosition={'left'} checked={!isNullOrUndefined(props.icon)}/>
-                    <Tippy content={'react-icons'} placement="top" className={'custom-tippy'}>
-                        <span className={'font-monospace font-size-small color-gray'}>(FaReact)</span>
-                    </Tippy>
-                </div>
-                <InputField label={'labelWidth'} type={'number'} width={60}
-                            fieldRegister={register('labelWidth', {
-                                value: props.labelWidth,
-                                onChange: propsChangeHandler
-                            })}/>
-                <Dropdown
-                    options={alignOptions}
-                    selected={alignOptions[0]}
-                    label={'labelAlign'}
-                    disabled={!isString(props.label)}
-                    onChange={labelAlignChangeHandler}
-                />
-                <Checkbox label={'disabled'} labelPosition={'left'} name={'disabled'}
-                          checked={props.disabled} onChange={propsChangeHandler}/>
-
-            </div>
-            <div className={'display-flex justify-content-center mt-0p5'}>
-                <Box tight={true} borderColor={themedBoxBorderColor} label={'disablePredicate'} labelPosition={'top-right'}>
-                    <SyntaxHighlighter
-                        codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
-                        showLineNumbers={true}
-                        language="js"
-                        customStyle={{padding: '0.5rem', margin: 0, border: 'none', borderRadius: 0}}
-                        style={selectedTheme}
-                    >
-                        {options.asObj ? disablePredicateCodeObject : disablePredicateCode}
-                    </SyntaxHighlighter>
-                </Box>
-            </div>
-        </Box>
-        <Container>
-            <Box width={395} label={'Dropdown'} className={'justify-self-center'}
-                 contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
-                <div className="pb-0p5">
+                <div className="position-relative" style={{height: '50px'}}>
                     <Dropdown
+                        className={'position-absolute'}
                         options={props.options as string[] | DropdownObjectOptions[]}
                         selected={props.selected}
                         icon={props.icon}
@@ -243,17 +156,146 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                         onChange={dropdownChangeHandler}
                     />
                 </div>
-            </Box>
-            <Box width={395} label={'selected'} className={'justify-self-center'}
-                 contentClassName={'display-flex justify-content-center flex-wrap gap-0p5-1'} borderColor={themedBoxBorderColor}>
-                <pre className={'pb-0p5'}>
-                    {JSON.stringify(selected, (k, v) => {
-                        if (k.startsWith('_')) return undefined;
-                        return v;
-                    }, 2)}
-                </pre>
-            </Box>
-        </Container>
+                <div className="position-relative">
+                    <Box
+                        backgroundColor={theme === Theme.DARK ? '#5e5e5e' : '#ccc'}
+                        className={'position-absolute'}
+                        width={'100%'}
+                        label={'selected'}
+                        labelColor={getTextColor(theme)}
+                        tight={true}
+                        border={'label-only'}
+                        labelBackgroundColor={getAccentColor(theme)}
+                        labelPosition={'top-right'}
+                    >
+                    <pre className={'p-1'}>
+                        {JSON.stringify(selected, (k, v) => {
+                            if (k.startsWith('_')) return undefined;
+                            return v;
+                        }, 2)}
+                    </pre>
+                    </Box>
+                </div>
+            </div>
+            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
+                 style={{
+                     width: '25%',
+                     overflowY: 'auto',
+                     paddingRight: '1rem'
+                 }}>
+                <h2 className={'mt-0 text-align-left'}>Props</h2>
+
+                <InputField
+                    labelWidth={165}
+                    label={'label'}
+                    fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
+                <div className={'display-inline-flex gap-0p1 align-items-center'}>
+                    <Checkbox
+                        labelWidth={165}
+                        onChange={propsChangeHandler}
+                        name={'icon'}
+                        label={'icon'}
+                        labelPosition={'left'}
+                        checked={!isNullOrUndefined(props.icon)}/>
+                    <Tippy content={'react-icons'} placement="top" className={'custom-tippy'}>
+                        <span className={'font-monospace font-size-small color-gray'}>(FaReact)</span>
+                    </Tippy>
+                </div>
+                <InputField
+                    labelWidth={165}
+                    label={'labelWidth'} type={'number'}
+                    width={60}
+                    fieldRegister={register('labelWidth', {
+                        value: props.labelWidth,
+                        onChange: propsChangeHandler
+                    })}/>
+                <Dropdown
+                    labelWidth={165}
+                    options={alignOptions}
+                    selected={alignOptions[0]}
+                    label={'labelAlign'}
+                    disabled={!isString(props.label)}
+                    onChange={labelAlignChangeHandler}
+                />
+                <Checkbox
+                    labelWidth={165}
+                    label={'disabled'}
+                    labelPosition={'left'}
+                    name={'disabled'}
+                    checked={props.disabled}
+                    onChange={propsChangeHandler}/>
+
+                <div>
+                    <div className={'display-flex align-items-center gap-0p5'}>
+                        <Checkbox
+                            onChange={optionChangeHandler}
+                            name={'asObj'}
+                            label={'options'}
+                            checked={options.asObj}/>
+                        <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as DropdownObjectOptions[]</span>
+                    </div>
+                    <Box
+                        tight={true}
+                        width={'330px'}
+                        borderColor={themedBoxBorderColor}>
+                        <SyntaxHighlighter
+                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                            showLineNumbers={true}
+                            language="js"
+                            customStyle={{padding: '0.5rem', margin: 0, border: 'none', borderRadius: 0}}
+                            style={selectedTheme}
+                        >
+                            {objectOptionsCode}
+                        </SyntaxHighlighter>
+                    </Box>
+                </div>
+
+                <div>
+                    <div className={'display-flex align-items-center gap-0p5'}>
+                        <Checkbox
+                            onChange={optionChangeHandler}
+                            name={'asStr'}
+                            label={'options'}
+                            checked={options.asStr}/>
+                        <span className={'font-monospace font-size-small color-magenta mt-0p1'}>as string[]</span>
+                    </div>
+
+                    <Box
+                        tight={true}
+                        width={'330px'}
+                        borderColor={themedBoxBorderColor}
+                    >
+                        <SyntaxHighlighter
+                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                            showLineNumbers={true}
+                            language="js"
+                            customStyle={{padding: '0.5rem', margin: 0, border: 'none', borderRadius: 0}}
+                            style={selectedTheme}
+                        >
+                            {stringOptionsCode}
+                        </SyntaxHighlighter>
+                    </Box>
+
+                    <div className={'mt-0p5'}>
+                        disablePredicate
+                    </div>
+                    <Box
+                        tight={true}
+                        width={'330px'}
+                        borderColor={themedBoxBorderColor}>
+                        <SyntaxHighlighter
+                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                            showLineNumbers={true}
+                            language="js"
+                            customStyle={{padding: '0.5rem', margin: 0, border: 'none', borderRadius: 0}}
+                            style={selectedTheme}
+                        >
+                            {options.asObj ? disablePredicateCodeObject : disablePredicateCode}
+                        </SyntaxHighlighter>
+                    </Box>
+                </div>
+            </div>
+        </div>
     </div>;
 };
 

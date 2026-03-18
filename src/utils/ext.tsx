@@ -36,8 +36,8 @@ export const themedLogoBase64 = (theme: ThemeProp) => {
 
 export const themedBannerBase64 = (theme: ThemeProp) => {
     const bannerString = `<svg width="301mm" height="56mm" viewBox="0 0 301 56" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-        <path style="fill:${getPrimaryColor(theme)};fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" d="m-441.019-147.475-.039 12.205c199.76 44.882 252.647-35.922 399.52 0l.04-12.205c-146.874-35.922-182.408 67.574-399.52 0z" transform="matrix(-.75333 0 0 .75434 -31.262 147.5)"/>
         <path style="fill:${getAccentColor(theme)};fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" d="M-41.498-147.475c-146.874-35.922-182.408 67.574-399.52 0v-48.06h399.371z" transform="matrix(-.75333 0 0 .75434 -31.262 147.5)"/>
+        <path style="fill:${getPrimaryColor(theme)};fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" d="m-441.019-147.475-.039 12.205c199.76 44.882 252.647-35.922 399.52 0l.04-12.205c-146.874-35.922-182.408 67.574-399.52 0z" transform="matrix(-.75333 0 0 .75434 -31.262 147.5)"/>
     </svg>`;
 
     return `data:image/svg+xml;utf8,${encodeURIComponent(bannerString)}`;
@@ -45,8 +45,8 @@ export const themedBannerBase64 = (theme: ThemeProp) => {
 
 export const themedInvertedBannerBase64 = (theme: ThemeProp) => {
     const bannerString = `<svg width="301mm" height="56mm" viewBox="0 0 301 56" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-        <path style="fill:${getPrimaryColor(theme)};fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" d="m-441.019-147.475-.039 12.205c199.76 44.882 252.647-35.922 399.52 0l.04-12.205c-146.874-35.922-182.408 67.574-399.52 0z" transform="matrix(.75333 0 0 -.75434 332.262 -91.5)"/>
         <path style="fill:${getAccentColor(theme)};fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" d="M-41.498-147.475c-146.874-35.922-182.408 67.574-399.52 0v-48.06h399.371z" transform="matrix(.75333 0 0 -.75434 332.262 -91.5)"/>
+        <path style="fill:${getPrimaryColor(theme)};fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" d="m-441.019-147.475-.039 12.205c199.76 44.882 252.647-35.922 399.52 0l.04-12.205c-146.874-35.922-182.408 67.574-399.52 0z" transform="matrix(.75333 0 0 -.75434 332.262 -91.5)"/>
     </svg>`;
 
     return `data:image/svg+xml;utf8,${encodeURIComponent(bannerString)}`;

@@ -8,6 +8,7 @@ import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
 import { getTextWidth, isString, parseCSSUnit } from '../../../utils';
 import v from '../../../styles/variables.module.scss';
+import { getSecondaryBaseColor } from '../../../utils/themeUtils';
 
 export type LabelPositionType =
     'top-left'
@@ -56,6 +57,7 @@ const Container = styled.section<{
     position: relative;
 
     @media (max-width: 768px) {
+        max-width: calc(100vw - 2rem);
         width: ${props => props.$width ? `${parseCSSUnit(props.$width as CSSUnit)}` : '100%'};
     }
 `;
@@ -177,7 +179,8 @@ const Box: FC<BoxProps> = (props) => {
         width,
         padding = '1rem',
         onLabelClick,
-        theme
+        theme,
+        style={}
     } = props;
 
     const labelRef = useRef(null as HTMLInputElement | null);
@@ -218,8 +221,8 @@ const Box: FC<BoxProps> = (props) => {
         onLabelClick && onLabelClick();
     };
 
-    const themedBorderColor = (isString(borderColor, true) ? borderColor: theme === Theme.DARK ? v.secondaryBaseColorDark : v.secondaryBaseColor) as CSSColors;
-    const themedLabelBackgroundColor = (isString(labelBackgroundColor, true) ? labelBackgroundColor : theme === Theme.DARK ? v.secondaryBackgroundColorDark : v.secondaryBackgroundColor) as CSSColors;
+    const themedBorderColor = (isString(borderColor, true) ? borderColor: getSecondaryBaseColor(theme as ThemeProp)) as CSSColors
+    const themedLabelBackgroundColor = (isString(labelBackgroundColor, true) ? labelBackgroundColor : getSecondaryBaseColor(theme as ThemeProp)) as CSSColors;
 
     return <Container
         data-component={'box'}
@@ -232,6 +235,7 @@ const Box: FC<BoxProps> = (props) => {
         $padding={tight ? 0 : padding}
         $width={width}
         $labelWidth={labelWidth}
+        style={{...style}}
     >
         <div style={{overflow: 'hidden', borderRadius: parseCSSUnit(borderRadius)}}>
             {label && <Label

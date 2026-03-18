@@ -81,3 +81,38 @@ export const getPrimaryColor = (theme: ThemeProp) => {
     }
 }
 
+export const getSecondaryBaseColor = (theme: ThemeProp) => {
+    switch (theme) {
+        case Theme.DARK:
+            return v.secondaryBaseColorDark as CSSColors;
+        default: // ALL ELSE
+            return v.secondaryBaseColor as CSSColors;
+    }
+}
+
+export const getSecondaryBackgroundColor = (theme: ThemeProp) => {
+    switch (theme) {
+        case Theme.DARK:
+            return v.secondaryBackgroundColorDark as CSSColors;
+        default: // ALL ELSE
+            return v.secondaryBackgroundColor as CSSColors;
+    }
+}
+
+export const getBorderColor = (theme: ThemeProp) => {
+    switch (theme) {
+        case Theme.DARK:
+            return v.borderColorDark as CSSColors;
+        default: // ALL ELSE
+            return v.borderColorDefault as CSSColors;
+    }
+}
+
+export const getTextColor = (theme: ThemeProp) => {
+    switch (theme) {
+        case Theme.DARK:
+            return v.textColorDark as CSSColors;
+        default: // ALL ELSE
+            return v.textColor as CSSColors;
+    }
+}
