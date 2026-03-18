@@ -117,7 +117,7 @@ const bundledLibs = () => <>
 
 const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
     return <div data-component={'home'}
-                className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-100p pb-3'}>
+                className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-100p pb-3 pr-2'}>
         <div className={'display-flex flex-direction-column gap-1 justify-content-space-between'}>
             <div>
                 <h1 className={'m-0 accent-text text-shadow-white'}>Templates are good!</h1>
