@@ -3,11 +3,12 @@ import { useForm } from 'react-hook-form';
 import { ThemeProp } from '../../../constants/interfaces';
 import { isString } from '../../../utils';
 import { createLink } from '../../../utils/ext';
-import { getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
+import { getBorderColor } from '../../../utils/themeUtils';
 import Box, { BoxProps } from '../../partials/box';
 import Checkbox from '../../partials/checkbox';
 import Dropdown from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
+import './styles.scss';
 
 const borderOptions = ['true', 'false', 'label-only'];
 const labelPositionOptions = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'];
@@ -45,15 +46,8 @@ const DemoBox:FC<{theme: ThemeProp}> = ({theme}) => {
     }, [onLabelClick]);
 
     return <div data-component={'box-demo'} className={'height-100p'}>
-        <div className="display-flex gap-1 height-100p">
-            <div
-                style={{
-                    width: 'calc(100% - 370px)',
-                    overflowY: 'auto',
-                    backgroundColor: getSecondaryBackgroundColor(theme),
-                    borderRadius: '0.4rem',
-                    padding: '1rem 2rem'
-                }}>
+        <div className="demo-section">
+            <div className={'demo-section-left'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Box />`}</h2>
                 <Box
                     backgroundColor={props.backgroundColor}
@@ -94,12 +88,7 @@ const DemoBox:FC<{theme: ThemeProp}> = ({theme}) => {
                     </div>
                 </Box>
             </div>
-            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
-                 style={{
-                     width: '370px',
-                     overflowY: 'auto',
-                     paddingRight: '1rem'
-                 }}>
+            <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
                 <InputField
                     labelWidth={165}

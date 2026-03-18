@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useMemo, useState } from 'react';
+import { CSSProperties, useEffect, useMemo, useState, useRef } from 'react';
 import { FaTwitch } from 'react-icons/fa';
 import { FaChevronLeft, FaInstagram, FaReact } from 'react-icons/fa6';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -7,6 +7,7 @@ import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { Link, useLocation } from 'react-router';
 import styled from 'styled-components';
+import { useOnClickOutside } from 'usehooks-ts';
 import { ReactIcon } from './components/partials';
 import Button from './components/partials/button';
 import CollapsibleLink from './components/partials/collapsibleLink';
@@ -52,6 +53,11 @@ const Main = styled.main<{
     min-height: 652px;
     background-color: ${props => props.$theme === Theme.DARK ? v.baseColorDark : v.baseColor};
     ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
+    
+    @media (max-width: 768px) {
+        height: auto;
+        min-height: calc(100vh - 100px);
+    }
 `;
 
 const SidePanel = styled.aside<{
@@ -67,7 +73,7 @@ const SidePanel = styled.aside<{
     padding: 0;
 
     @media (max-width: 768px) {
-        position: absolute;
+        position: fixed;
         right: 0;
         height: 100%;
     }
@@ -98,6 +104,8 @@ const panelWidth = 196;
 const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     const dispatch = useAppDispatch();
 
+    const sidePanelRef = useRef<any>(null);
+
     const [offline, setOffline] = useState(false);
     const [sidePanelWidth, setSidePanelWidth] = useState(panelWidth);
 
@@ -107,24 +115,9 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     };
 
     const {pathname} = useLocation();
+    useOnClickOutside([sidePanelRef], () => sidePanelWidth !== 0 && setSidePanelWidth(0));
 
     useEffect(() => {
-        if (!sessionStorage.getItem('welcome-uc-shown')) {
-            toast({
-                id: 'under-construction-toast',
-                message: <>
-                    <h4 className="m-0">Welcome to the React + TypeScript started app template!</h4>
-                    <p className={'mb-0'}>However, this site is still <b>Under Construction!</b> So you might be seeing
-                        some undesirables especially the color combinations as the theme feature is currently on going!
-                    </p>
-                    <p className={'mb-0'}>Please bear with us, Thank you very much!</p>
-                    <p className={'m-0'}>&nbsp;</p>
-                </>,
-                options: {theme: 'filled', type: 'info', omitIcon: false, duration: 21000}
-            });
-            sessionStorage.setItem('welcome-uc-shown', 'true');
-        }
-
         window.addEventListener('online', setConnectionStatus);
         window.addEventListener('offline', setConnectionStatus);
 
@@ -217,7 +210,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                     <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
                 </footer>
             </div>
-            <SidePanel style={styles} $theme={theme} className="side-panel">
+            <SidePanel ref={sidePanelRef} style={styles} $theme={theme} className="side-panel">
                 <div className={'m-1 display-flex flex-direction-column gap-1 justify-content-space-between'} style={{height: 'calc(100% - 2rem)', marginRight: '1.5rem'}}>
                     <div>
                         <div className={'display-flex justify-content-space-between mb-2'}>

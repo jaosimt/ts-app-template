@@ -50,7 +50,19 @@ const Container = styled.div<{
             default:
                 return 'opacity:0; top:0; left: -100%; height:100%; border-radius: 0 0.4rem 0.4rem 0;'; //left
         }
-    }}
+    }};
+    
+    @media (max-width: 768px) {
+        ${props => {
+            switch (props.$position) {
+                case 'top':
+                case 'bottom':
+                    return 'max-height: 80%'; //top|bottom
+                default:
+                    return 'max-width: 80%'; //left|right
+            }
+        }}
+    }
 `;
 
 const Handle = styled.div<{

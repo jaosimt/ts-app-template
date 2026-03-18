@@ -3,7 +3,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
-import { getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
+import { getBorderColor } from '../../../utils/themeUtils';
 import Box from '../../partials/box';
 import CollapsibleLink, { CollapsibleLinkProps } from '../../partials/collapsibleLink';
 import Dropdown from '../../partials/dropdown';
@@ -43,15 +43,8 @@ const DemoCollapsibleLink: FC<{theme: ThemeProp}> = ({theme}) => {
     const selectedTheme = theme === Theme.DARK ? oneLight : oneDark;
 
     return <div data-component={'collapsible-link-demo'} className={'height-100p'}>
-        <div className="display-flex gap-1 height-100p">
-            <div
-                style={{
-                    width: 'calc(100% - 370px)',
-                    overflowY: 'auto',
-                    backgroundColor: getSecondaryBackgroundColor(theme),
-                    borderRadius: '0.4rem',
-                    padding: '1rem 2rem'
-                }}>
+        <div className="demo-section">
+            <div className={'demo-section-left'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<CollapsibleLink />`}</h2>
 
                 <div className="display-flex">
@@ -62,12 +55,7 @@ const DemoCollapsibleLink: FC<{theme: ThemeProp}> = ({theme}) => {
                         position={props.position} />
                 </div>
             </div>
-            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
-                 style={{
-                     width: '370px',
-                     overflowY: 'auto',
-                     paddingRight: '1rem'
-                 }}>
+            <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <Dropdown

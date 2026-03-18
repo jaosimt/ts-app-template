@@ -14,7 +14,7 @@ import { ThemeProp } from '../../../constants/interfaces';
 import { useAppDispatch } from '../../../hooks';
 import { setError } from '../../../slices/error';
 import { isString } from '../../../utils';
-import { getBorderColor, getSecondaryBackgroundColor } from '../../../utils/themeUtils';
+import { getBorderColor } from '../../../utils/themeUtils';
 import Button from '../../partials/button';
 import Dropdown, { DropdownObjectOptions } from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
@@ -85,53 +85,43 @@ const DemoToast: FC<{theme: ThemeProp}> = ({theme}) => {
 
 
     return <div data-component={'toast-demo'} className={'height-100p'}>
-        <div className="display-flex gap-1 height-100p">
-            <div
-                style={{
-                    width: 'calc(100% - 370px)',
-                    overflowY: 'auto',
-                    backgroundColor: getSecondaryBackgroundColor(theme),
-                    borderRadius: '0.4rem',
-                    padding: '1rem 2rem'
-                }}>
+        <div className="demo-section">
+            <div className={'demo-section-left'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`toast`}</h2>
 
-                <Button
-                    className={'align-self-center'}
-                    disabled={!isString(toastProp.message, true)}
-                    onClick={() => toast(toastProp)}
-                >
-                    Show Toast
-                </Button>
-                <Button
-                    className={'default'}
-                    disabled={!isString(toastProp.message, true)}
-                    onClick={
-                        () => {
-                            toast({
-                                message: <>
-                                    <b>Test</b>
-                                    <p>{toastProp.message}</p>
-                                </>
-                            });
+                <div className={'display-flex gap-0p5 flex-wrap'}>
+                    <Button
+                        className={'align-self-center'}
+                        disabled={!isString(toastProp.message, true)}
+                        onClick={() => toast(toastProp)}
+                    >
+                        Show Toast
+                    </Button>
+                    <Button
+                        className={'default'}
+                        disabled={!isString(toastProp.message, true)}
+                        onClick={
+                            () => {
+                                toast({
+                                    message: <>
+                                        <b>Test</b>
+                                        <p>{toastProp.message}</p>
+                                    </>
+                                });
+                            }
                         }
-                    }
-                >
-                    Show Non-optioned Toast
-                </Button>
-                <Button
-                    className={'default'}
-                    onClick={() => dispatch(setError(new ApplicationError('Test Error')))}
-                >
-                    Trigger a Test Error
-                </Button>
+                    >
+                        Show Non-optioned Toast
+                    </Button>
+                    <Button
+                        className={'default'}
+                        onClick={() => dispatch(setError(new ApplicationError('Test Error')))}
+                    >
+                        Trigger a Test Error
+                    </Button>
+                </div>
             </div>
-            <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
-                 style={{
-                     width: '370px',
-                     overflowY: 'auto',
-                     paddingRight: '1rem'
-                 }}>
+            <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <InputField
