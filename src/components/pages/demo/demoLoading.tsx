@@ -46,7 +46,7 @@ const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
         <div className="display-flex gap-1 height-100p">
             <div
                 style={{
-                    width: '75%',
+                    width: 'calc(100% - 370px)',
                     overflowY: 'auto',
                     backgroundColor: getSecondaryBackgroundColor(theme),
                     borderRadius: '0.4rem',
@@ -71,7 +71,7 @@ const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
             </div>
             <div className={'display-flex flex-direction-column gap-0p5 pl-0p5'}
                  style={{
-                     width: '25%',
+                     width: '370px',
                      overflowY: 'auto',
                      paddingRight: '1rem'
                  }}>
