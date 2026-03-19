@@ -18,49 +18,55 @@ import { getPrimaryColor } from '../../../utils/themeUtils';
 import { ReactIcon } from '../../partials';
 
 const Container = styled.div`
-    > :first-child { margin-top: 0; }
-
-    > :last-child { margin-bottom: 0; }
-
     display: flex;
-    gap: 0.5rem 1rem;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 3rem;
-    padding-right: 2rem;
     flex-direction: column;
-    
+    gap: 2rem;
+    justify-content: space-between;
+
     @media (max-width: 768px) {
-        padding-right: 1rem;
+        gap: 1rem;
     }
 `;
 
-const WrappingDiv = styled.div`
+const Wrapper = styled.div`
     display: flex;
     align-items: center;
-    gap: 0.5rem 1rem;
+    gap: 2rem;
     justify-content: space-between;
     width: 100%;
 
-    > :first-child {
+    > .text-section {
         width: 70%;
     }
 
-    > :last-child {
+    > .image-section {
         width: 30%;
     }
-    
+
     pre {
         text-wrap: auto;
     }
 
     @media (max-width: 768px) {
         flex-direction: column;
-        > :first-child,
-        > :last-child {
+        gap: 1rem;
+        > .text-section,
+        > .image-section {
             width: 100%;
         }
+    }
+`;
+
+// noinspection CssUnusedSymbol
+const MarqueeWrapper = styled.div`
+    position: relative;
+    height: 35px;
+    width: 100%;
+
+    .marquee {
+        position: absolute;
+        height: 100%;
+        width: 100%;
     }
 `;
 
@@ -144,39 +150,38 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
             <h1 className={'m-0 accent-text text-shadow-white'}>Templates are good!</h1>
             <h5 className={'m-0'}>Why start from scratch? Templates will save a good amount of your time!</h5>
         </div>
-        <WrappingDiv>
-            <div>
+        <Wrapper>
+            <div className={'text-section'}>
                 <div>
                     <h4 className={'m-0 accent-text'}>In addition to the bundled libraries listed below, this app
-                        template also
-                        contains custom components that you might need:</h4>
+                        template also contains custom components that you might need:</h4>
                     <pre className={'display-flex gap-0p3-1 flex-wrap font-weight-bold m-0'}>
-                            <Link className={'white-space-nowrap'} to={{pathname: `/demo/box`}}>{`<Box/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: `/demo/button`}}>{`<Button/>`}</Link>
-                            <Link className={'white-space-nowrap'}
-                                  to={{pathname: `/demo/checkbox`}}>{`<Checkbox/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: `/demo/drawer`}}>{`<Drawer/>`}</Link>
-                            <Link className={'white-space-nowrap'}
-                                  to={{pathname: `/demo/dropdown`}}>{`<Dropdown/>`}</Link>
-                            <Link className={'white-space-nowrap'}
-                                  to={{pathname: `/demo/input-field`}}>{`<InputFied/>`}</Link>
-                            <Link className={'white-space-nowrap'}
-                                  to={{pathname: `/demo/loading`}}>{`<Loading/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: `/demo/modal`}}>{`<Modal/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: `/demo/tabs`}}>{`<Tabs/>`}</Link>
-                            <Link className={'white-space-nowrap'} to={{pathname: `/demo/toast`}}>{`<Toast/>`}</Link>
-                            <Link className={'white-space-nowrap'}
-                                  to={{pathname: `/demo/window-portal`}}>{`<WindowPortal/>`}</Link>
-                            <Link className={'white-space-nowrap'}
-                                  to={{pathname: `/demo/collapsible-link`}}>{`<CollapsibleLink/>`}</Link>
-                            <h4 className={'secondary-text font-weight-normal m-0'}>
-                                Checkout <Link className={'white-space-nowrap'}
-                                               to={{pathname: `/specs`}}>ComponentSpecs</Link> and/or <Link
-                                className={'white-space-nowrap'} to={{pathname: `/demo`}}>Demo</Link> pages for more details.
-                            </h4>
-                        </pre>
+                        <Link className={'white-space-nowrap'} to={{pathname: `/demo/box`}}>{`<Box/>`}</Link>
+                        <Link className={'white-space-nowrap'} to={{pathname: `/demo/button`}}>{`<Button/>`}</Link>
+                        <Link className={'white-space-nowrap'}
+                              to={{pathname: `/demo/checkbox`}}>{`<Checkbox/>`}</Link>
+                        <Link className={'white-space-nowrap'} to={{pathname: `/demo/drawer`}}>{`<Drawer/>`}</Link>
+                        <Link className={'white-space-nowrap'}
+                              to={{pathname: `/demo/dropdown`}}>{`<Dropdown/>`}</Link>
+                        <Link className={'white-space-nowrap'}
+                              to={{pathname: `/demo/input-field`}}>{`<InputFied/>`}</Link>
+                        <Link className={'white-space-nowrap'}
+                              to={{pathname: `/demo/loading`}}>{`<Loading/>`}</Link>
+                        <Link className={'white-space-nowrap'} to={{pathname: `/demo/modal`}}>{`<Modal/>`}</Link>
+                        <Link className={'white-space-nowrap'} to={{pathname: `/demo/tabs`}}>{`<Tabs/>`}</Link>
+                        <Link className={'white-space-nowrap'} to={{pathname: `/demo/toast`}}>{`<Toast/>`}</Link>
+                        <Link className={'white-space-nowrap'}
+                              to={{pathname: `/demo/window-portal`}}>{`<WindowPortal/>`}</Link>
+                        <Link className={'white-space-nowrap'}
+                              to={{pathname: `/demo/collapsible-link`}}>{`<CollapsibleLink/>`}</Link>
+                        <h4 className={'secondary-text font-weight-normal m-0'}>
+                            Checkout <Link className={'white-space-nowrap'}
+                                           to={{pathname: `/specs`}}>ComponentSpecs</Link> and/or <Link
+                            className={'white-space-nowrap'} to={{pathname: `/demo`}}>Demo</Link> pages for more details.
+                        </h4>
+                    </pre>
                 </div>
-                <div className={'mt-1'}>
+                <div>
                     <h4 className={'m-0'}>Furthermore, the following bundled libraries are setup more
                         than enough i think 😎:</h4>
                     <ul className={'m-0'}>
@@ -295,17 +300,18 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                     </ul>
                 </div>
             </div>
-            <div className={'display-flex justify-content-right align-items-center'}>
+            <div className={'image-section display-flex justify-content-right align-items-center'}>
                 <img width={'100%'} className={'spin-700'} src={themedLogoBase64(theme)} alt=""/>
             </div>
-        </WrappingDiv>
-        &nbsp;
-        <div className="marquee">
-            <div className={'display-flex gap-0p5-2 justify-content-space-between'}>
-                {bundledLibs()}
-                {bundledLibs()}
+        </Wrapper>
+        <MarqueeWrapper>
+            <div className={'marquee'}>
+                <div className={'display-flex gap-0p5-2 justify-content-space-between'}>
+                    {bundledLibs()}
+                    {bundledLibs()}
+                </div>
             </div>
-        </div>
+        </MarqueeWrapper>
     </Container>;
 };
 
