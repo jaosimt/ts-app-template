@@ -60,31 +60,34 @@ const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <Checkbox
+                    className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'closeOnEscKey'}
                     name={'closeOnEscKey'}
                     checked={props.closeOnEscKey}
                     onChange={changeHandler}
                 />
                 <Checkbox
+                    className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'closeOnOutsideClick'}
                     name={'closeOnOutsideClick'}
                     checked={props.closeOnOutsideClick}
                     onChange={changeHandler}
                 />
                 <Checkbox
+                    className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'showClose'}
                     name={'showClose'}
                     checked={props.showClose}
                     onChange={changeHandler}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'title'}
                     fieldRegister={register('title', {
                         value: props.title,
@@ -93,7 +96,7 @@ const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
                 />
 
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     type={'number'}
                     label={'width'}
                     fieldRegister={register('width', {

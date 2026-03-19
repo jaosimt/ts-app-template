@@ -9,7 +9,7 @@ import { RxDropdownMenu, RxInput } from 'react-icons/rx';
 import { useLocation, useNavigate } from 'react-router';
 import Button from '../components/partials/button';
 import { ThemeProp } from '../constants/interfaces';
-import {classNames} from '../utils';
+import { classNames, isMobile } from '../utils';
 import { getSecondaryBaseColor } from '../utils/themeUtils';
 
 const demoNav = [
@@ -23,11 +23,12 @@ const demoNav = [
     {path: '/demo/loading', label: 'Loading', icon: FiLoader},
     {path: '/demo/modal', label: 'Modal', icon: FaRegWindowMaximize},
     {path: '/demo/tabs', label: 'Tabs', icon: PiTabsDuotone},
-    {path: '/demo/toast', label: 'Toast', icon: GoReport},
-    {path: '/demo/window-portal', label: 'WindowPortal', icon: BsWindowStack},
+    {path: '/demo/toast', label: 'Toast', icon: GoReport}
 ];
 
-const NavigationDemo = ({theme}: { theme: ThemeProp }) => {
+if (!isMobile()) demoNav.push({path: '/demo/window-portal', label: 'WindowPortal', icon: BsWindowStack});
+
+const NavigationDemo = ({theme, sidePanelHandler}: { theme: ThemeProp, sidePanelHandler: Function }) => {
     const {pathname} = useLocation();
     const navigate = useNavigate();
 
@@ -41,8 +42,8 @@ const NavigationDemo = ({theme}: { theme: ThemeProp }) => {
                 align={'space-between'}
                 width={'100%'}
                 onClick={() => {
-                    console.log('pathname:', pathname, nav.path);
                     navigate(nav.path);
+                    if (isMobile()) sidePanelHandler();
                 }}
             >
                 {nav.label}

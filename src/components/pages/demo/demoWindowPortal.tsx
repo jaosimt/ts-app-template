@@ -155,24 +155,26 @@ const DemoWindowPortal: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'title'}
                     name={'title'}
                     value={props.title}
                     onChange={propsChangeHandler}
                 />
                 <Checkbox
+                    className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'openOnNextScreen'}
                     name={'openOnNextScreen'}
                     checked={props.openOnNextScreen}
                     onChange={propsChangeHandler}
                 />
                 <Checkbox
+                    className={'width-100p'}
                     disabled={showPortal}
                     labelPosition={'left'}
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'onClose'}
                     name={'onClose'}
                     checked={onClose}

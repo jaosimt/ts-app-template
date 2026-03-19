@@ -275,7 +275,7 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <div className={'display-flex gap-0p3 align-items-center'}>
-                    <div style={{width: '165px', marginLeft: '-0.3rem'}}>
+                    <div style={{width: '50%'}}>
                         <Button
                             className={'white-space-nowrap'}
                             onClick={() => setEnableIcon(!enableIcon)}
@@ -292,14 +292,14 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
                     />
                 </div>
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     options={['left', 'right', 'center', 'space-between']}
                     selected={option.labelAlign}
                     label={'labelAlign'}
                     onChange={(value: string) => dropDownChangeHandler('labelAlign', value)}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     type={'number'}
                     label={'width'}
                     width={70}
@@ -311,7 +311,7 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
                     })}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     type={'number'}
                     label={'labelWidth'}
                     width={70}
@@ -322,7 +322,7 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
                     })}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'labelColor'}
                     fieldRegister={register('labelColor', {
                         value: option.labelColor,

@@ -20,7 +20,7 @@ import NavigationDemo from './navs/demoNav';
 import ContentRouter from './routes';
 import { getError } from './slices/error';
 import { RootState } from './store';
-import { capitalize, classNames, hashCode } from './utils';
+import { capitalize, classNames, hashCode, isMobile } from './utils';
 import './App.scss';
 import './styles/animations.scss';
 import './styles/tippy.scss';
@@ -49,8 +49,14 @@ const Main = styled.main<{
     $fixed?: boolean;
     $theme: ThemeProp;
 }>`
+    > * { z-index: 1; }
     background-color: ${props => props.$theme === Theme.DARK ? v.baseColorDark : v.baseColor};
     ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
+    
+    @media (max-width: 768px) {
+        height: auto;
+        min-height: calc(100vh - 100px);
+    }
 `;
 
 const ContentWrapper = styled.div<{
@@ -110,7 +116,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     const dispatch = useAppDispatch();
 
     const [offline, setOffline] = useState(false);
-    const [sidePanelWidth, setSidePanelWidth] = useState(panelWidth);
+    const [sidePanelWidth, setSidePanelWidth] = useState(isMobile() ? 0 : panelWidth);
 
     const setConnectionStatus = ({type}: { type: string }) => {
         if (!['online', 'offline'].includes(type)) return;
@@ -220,7 +226,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                         <div className={'display-flex justify-content-space-between mb-2'}>
                             <Button icon={FaChevronLeft} className={'display-none'} onClick={sidePanelHandler}/>
                             <Dropdown
-                                className={'-mr-0p5'}
+                                className={'-mr-0p3'}
                                 valueClassName={'capitalize'}
                                 selected={selectedTheme}
                                 options={appThemes}
@@ -230,9 +236,9 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                                 }}
                             />
                         </div>
-                        <NavigationMain theme={theme}/>
+                        <NavigationMain sidePanelHandler={sidePanelHandler} theme={theme}/>
                     </div>
-                    {pathname.startsWith('/demo') && <NavigationDemo theme={theme}/>}
+                    {pathname.startsWith('/demo') && <NavigationDemo sidePanelHandler={sidePanelHandler} theme={theme}/>}
                     &nbsp;
                 </div>
             </SidePanel>

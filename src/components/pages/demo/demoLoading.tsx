@@ -66,7 +66,7 @@ const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     type={'number'}
                     width={60}
                     label={'borderWidth'}
@@ -75,47 +75,49 @@ const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
                         onChange: propsChangeHandler
                     })}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'borderColor'}
                     fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'backgroundColor'}
                     fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'color'}
                     fieldRegister={register('color', {onChange: propsChangeHandler})}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'topText'}
                     fieldRegister={register('topText', {onChange: propsChangeHandler})}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'bottomText'}
                     fieldRegister={register('bottomText', {onChange: propsChangeHandler})}/>
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     options={positionOptions}
                     selected={props.position}
                     label={'position'}
                     onChange={(value: string) => debDropdownChange('position', value)}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     type={'number'}
                     width={60}
                     label={'size'}
                     fieldRegister={register('size', {value: props.size, onChange: propsChangeHandler})}/>
                 <Checkbox
-                    labelWidth={165}
+                    className={'width-100p'}
+                    labelWidth={'50%'}
                     label={'padding'}
                     labelPosition={'left'}
                     name={'padding'}
                     checked={props.padding}
                     onChange={propsChangeHandler}/>
                 <Checkbox
-                    labelWidth={165}
+                    className={'width-100p'}
+                    labelWidth={'50%'}
                     label={'boxShadow'}
                     labelPosition={'left'}
                     name={'boxShadow'}

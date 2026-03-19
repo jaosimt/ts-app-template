@@ -1,4 +1,3 @@
-import Tippy from '@tippyjs/react';
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoIosSave } from 'react-icons/io';
@@ -13,7 +12,7 @@ import './styles.scss';
 
 const alignOptions = ['left', 'center', 'right', 'space-between'];
 
-const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
+const DemoButton: FC<{ theme: ThemeProp }> = ({theme}) => {
     const {register} = useForm();
 
     const buttonTextRef = useRef('');
@@ -36,7 +35,8 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
     return <div data-component={'button-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
-                <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Button />`}</h2>
+                <h2 className={'mt-0 pb-0p5 text-align-left'}
+                    style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Button />`}</h2>
                 <Button
                     icon={icon ? IoIosSave : undefined}
                     disabled={props.disabled || modal}
@@ -44,7 +44,7 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
                     width={props.width}
                     onClick={() => {
                         buttonTextRef.current = 'primary';
-                        setModal(true)
+                        setModal(true);
                     }}
                 >
                     Primary Button
@@ -57,7 +57,7 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
                     width={props.width}
                     onClick={() => {
                         buttonTextRef.current = 'secondary';
-                        setModal(true)
+                        setModal(true);
                     }}
                 >
                     Secondary Button
@@ -66,33 +66,30 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
             <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
                 <Checkbox
-                    labelWidth={165}
+                    className={'width-100p'}
+                    labelWidth={'50%'}
                     label={'disabled'}
                     labelPosition={'left'}
                     name={'disabled'}
                     checked={props.disabled}
                     onChange={propsChangeHandler}/>
-                <div className="display-flex gap-0p1 align-items-center">
-                    <Checkbox
-                        labelWidth={165}
-                        label={'icon'}
-                        labelPosition={'left'}
-                        name={'disabled'}
-                        checked={icon}
-                        onChange={(e: any) => setIcon(e.currentTarget.checked)}/>
-                    <Tippy content={'react-icons'} placement="top" className={'custom-tippy'}>
-                        <span className={'font-monospace font-size-small color-light-gray'}>(IoIosSave)</span>
-                    </Tippy>
-                </div>
+                <Checkbox
+                    className={'width-100p'}
+                    labelWidth={'50%'}
+                    label={'icon'}
+                    labelPosition={'left'}
+                    name={'disabled'}
+                    checked={icon}
+                    onChange={(e: any) => setIcon(e.currentTarget.checked)}/>
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     options={alignOptions}
                     selected={props.align}
                     label={'align'}
                     onChange={(value: string) => dropDownChangeHandler('align', value)}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'width'}
                     type={'number'}
                     width={60}
@@ -103,7 +100,9 @@ const DemoButton: FC<{theme: ThemeProp}> = ({theme}) => {
             </div>
         </div>
         {
-            modal && <Modal onClose={() => setModal(false)} closeOnEscKey={true} closeOnOutsideClick={true} showClose={true} title={'Hello, world!'}>
+            modal &&
+            <Modal onClose={() => setModal(false)} closeOnEscKey={true} closeOnOutsideClick={true} showClose={true}
+                   title={'Hello, world!'}>
                 <h3 className={'m-0 color-orange'}>You clicked the {buttonTextRef.current} button!</h3>
             </Modal>
         }

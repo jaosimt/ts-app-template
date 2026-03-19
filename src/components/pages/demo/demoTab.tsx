@@ -215,7 +215,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     className={'mb-0p5'}
                     options={['boxed', 'boxed-content', 'boxed-tabs', 'plain']}
                     selected={props.type}
@@ -223,21 +223,21 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                     onChange={(value: string) => dropDownChangeHandler('type', value)}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'width'}
                     name={'width'}
                     value={props.width}
                     onChange={propsChangeHandler}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'activeItemColor'}
                     name={'activeItemColor'}
                     value={props.activeItemColor}
                     onChange={propsChangeHandler}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     type={'number'}
                     width={70}
                     label={'contentPadding'}
@@ -246,7 +246,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                     onChange={propsChangeHandler}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     type={'number'}
                     min={100}
                     step={100}
@@ -256,16 +256,18 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                     onChange={propsChangeHandler}
                 />
                 <Checkbox
+                    className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'moveSelectedOnScroll'}
                     name={'moveSelectedOnScroll'}
                     checked={props.moveSelectedOnScroll}
                     onChange={propsChangeHandler}
                 />
                 <Checkbox
+                    className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'rememberActiveTab'}
                     name={'rememberActiveTab'}
                     checked={props.rememberActiveTab}
@@ -273,8 +275,9 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                 />
 
                 <Checkbox
+                    className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'onTabChange'}
                     name={'tabChangeCallback'}
                     checked={tabChangeCallback}

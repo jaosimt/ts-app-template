@@ -1,4 +1,3 @@
-import Tippy from '@tippyjs/react';
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaAlignCenter, FaAlignLeft, FaAlignRight, FaDog, FaReact } from 'react-icons/fa6';
@@ -133,7 +132,8 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
     return <div data-component={'dropdown-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
-                <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Dropdown />`}</h2>
+                <h2 className={'mt-0 pb-0p5 text-align-left'}
+                    style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Dropdown />`}</h2>
 
                 <div className="position-relative" style={{height: '50px'}}>
                     <Dropdown
@@ -145,7 +145,7 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                         labelAlign={props.labelAlign}
                         labelWidth={props.labelWidth}
                         disabled={props.disabled}
-                        disablePredicate={(o: string|DropdownObjectOptions) => typeof o === 'object' ? o.value === 'and I wonder who cares!'  : o === 'and I wonder who cares!'}
+                        disablePredicate={(o: string | DropdownObjectOptions) => typeof o === 'object' ? o.value === 'and I wonder who cares!' : o === 'and I wonder who cares!'}
                         onChange={dropdownChangeHandler}
                     />
                 </div>
@@ -174,23 +174,19 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'label'}
                     fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
-                <div className={'display-inline-flex gap-0p1 align-items-center'}>
-                    <Checkbox
-                        labelWidth={165}
-                        onChange={propsChangeHandler}
-                        name={'icon'}
-                        label={'icon'}
-                        labelPosition={'left'}
-                        checked={!isNullOrUndefined(props.icon)}/>
-                    <Tippy content={'react-icons'} placement="top" className={'custom-tippy'}>
-                        <span className={'font-monospace font-size-small color-gray'}>(FaReact)</span>
-                    </Tippy>
-                </div>
+                <Checkbox
+                    className={'width-100p'}
+                    labelWidth={'50%'}
+                    onChange={propsChangeHandler}
+                    name={'icon'}
+                    label={'icon'}
+                    labelPosition={'left'}
+                    checked={!isNullOrUndefined(props.icon)}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'labelWidth'} type={'number'}
                     width={60}
                     fieldRegister={register('labelWidth', {
@@ -198,7 +194,7 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                         onChange: propsChangeHandler
                     })}/>
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     options={alignOptions}
                     selected={alignOptions[0]}
                     label={'labelAlign'}
@@ -206,7 +202,8 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                     onChange={labelAlignChangeHandler}
                 />
                 <Checkbox
-                    labelWidth={165}
+                    className={'width-100p'}
+                    labelWidth={'50%'}
                     label={'disabled'}
                     labelPosition={'left'}
                     name={'disabled'}
@@ -227,7 +224,14 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                         width={'100%'}
                         borderColor={themedBoxBorderColor}>
                         <SyntaxHighlighter
-                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                            codeTagProps={{
+                                style: {
+                                    margin: 0,
+                                    background: 'transparent',
+                                    paddingTop: 0,
+                                    paddingBottom: 0
+                                }
+                            }}
                             showLineNumbers={true}
                             language="js"
                             customStyle={{padding: '0.5rem', margin: 0, border: 'none', borderRadius: 0}}
@@ -254,7 +258,14 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                         borderColor={themedBoxBorderColor}
                     >
                         <SyntaxHighlighter
-                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                            codeTagProps={{
+                                style: {
+                                    margin: 0,
+                                    background: 'transparent',
+                                    paddingTop: 0,
+                                    paddingBottom: 0
+                                }
+                            }}
                             showLineNumbers={true}
                             language="js"
                             customStyle={{padding: '0.5rem', margin: 0, border: 'none', borderRadius: 0}}
@@ -272,7 +283,14 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                         width={'100%'}
                         borderColor={themedBoxBorderColor}>
                         <SyntaxHighlighter
-                            codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
+                            codeTagProps={{
+                                style: {
+                                    margin: 0,
+                                    background: 'transparent',
+                                    paddingTop: 0,
+                                    paddingBottom: 0
+                                }
+                            }}
                             showLineNumbers={true}
                             language="js"
                             customStyle={{padding: '0.5rem', margin: 0, border: 'none', borderRadius: 0}}

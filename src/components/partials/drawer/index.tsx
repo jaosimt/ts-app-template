@@ -161,7 +161,6 @@ const Drawer: FC<DrawerProps> = (props) => {
         }
     }
 
-    console.log('handleStyle:', handleStyle);
     const _Handle = !show && <Handle data-component={'drawer'} onClick={() => setShow(true)} $position={position} $backgroundColor={backgroundColor} style={{...handleStyle}}>
         <ReactIcon icon={RiArchiveDrawerFill}
                    style={{width: '21px', height: '21px', display: 'flex'}}/>

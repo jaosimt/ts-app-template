@@ -91,21 +91,21 @@ const DemoBox:FC<{theme: ThemeProp}> = ({theme}) => {
             <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'label'}
                     fieldRegister={register('label', {onChange: propsChangeHandler})}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     disabled={!isString(props.label, true)}
                     label={'labelColor'}
                     fieldRegister={register('labelColor', {onChange: propsChangeHandler})}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     disabled={!isString(props.label, true)}
                     label={'labelBackgroundColor'}
                     fieldRegister={register('labelBackgroundColor', {onChange: propsChangeHandler})}/>
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     options={labelPositionOptions}
                     selected={props.labelPosition}
                     label={'labelPosition'}
@@ -113,7 +113,7 @@ const DemoBox:FC<{theme: ThemeProp}> = ({theme}) => {
                     onChange={(value: string) => dropDownChangeHandler('labelPosition', value)}
                 />
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     options={labelSizeOptions}
                     selected={props.labelSize}
                     label={'labelSize'}
@@ -121,7 +121,7 @@ const DemoBox:FC<{theme: ThemeProp}> = ({theme}) => {
                     onChange={(value: string) => dropDownChangeHandler('labelSize', value)}
                 />
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     disablePredicate={(option: string) => option === 'label-only' && !isString(props.label, true)}
                     options={borderOptions}
                     selected={props.border as any}
@@ -129,34 +129,35 @@ const DemoBox:FC<{theme: ThemeProp}> = ({theme}) => {
                     onChange={(value: string) => dropDownChangeHandler('border', value)}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     width={50}
                     disabled={props.border === false} label={'borderRadius'}
                     fieldRegister={register('borderRadius', {value: props.borderRadius, onChange: propsChangeHandler})}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     disabled={props.border === false}
                     label={'borderColor'}
                     fieldRegister={register('borderColor', {onChange: propsChangeHandler})}/>
                 <Checkbox
-                    labelWidth={165}
+                    className={'width-100p'}
+                    labelWidth={'50%'}
                     label={'tight'}
                     labelPosition={'left'}
                     name={'tight'}
                     checked={props.tight}
                     onChange={propsChangeHandler}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'backgroundColor'}
                     fieldRegister={register('backgroundColor', {onChange: propsChangeHandler})}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     width={50}
                     label={'width'}
                     fieldRegister={register('width', {onChange: propsChangeHandler})}/>
                 <div className={'display-flex align-items-center'}>
                     <Checkbox
-                        labelWidth={165}
+                        labelWidth={'50%'}
                         disabled={!isString(props.label, true)}
                         label={'onLabelClick'}
                         labelPosition={'left'}
