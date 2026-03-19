@@ -53,7 +53,6 @@ const Container = styled.div<{}>`
     gap: 0.3rem;
     position: relative;
     height: 33px;
-    margin: 0 0.3rem;
     
     @media (max-width: 768px) {
         height: 28px;
@@ -67,7 +66,6 @@ const Label = styled.label<{
     $labelAlign?: string;
 }>`
     display: inline-flex;
-    margin-left: -0.3rem;
     gap: 0.5rem;
     justify-content: ${props => props.$labelAlign};
     align-items: center;

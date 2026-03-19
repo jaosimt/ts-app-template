@@ -4,7 +4,7 @@ import { VscVmRunning } from 'react-icons/vsc';
 import { useLocation, useNavigate } from 'react-router';
 import Button from '../components/partials/button';
 import { ThemeProp } from '../constants/interfaces';
-import {classNames} from '../utils';
+import { classNames, isMobile } from '../utils';
 import { getSecondaryBaseColor } from '../utils/themeUtils';
 
 const mainNav = [
@@ -13,7 +13,7 @@ const mainNav = [
     {path: '/demo', label: 'Component Demo', icon: VscVmRunning}
 ];
 
-const NavigationMain = ({theme}: { theme: ThemeProp }) => {
+const NavigationMain = ({theme, sidePanelHandler}: { theme: ThemeProp, sidePanelHandler: Function }) => {
     const {pathname} = useLocation();
     const navigate = useNavigate();
 
@@ -26,7 +26,10 @@ const NavigationMain = ({theme}: { theme: ThemeProp }) => {
                 icon={nav.icon}
                 align={'space-between'}
                 width={'100%'}
-                onClick={() => navigate(nav.path)}
+                onClick={() => {
+                    navigate(nav.path);
+                    if (isMobile() && nav.path !== '/demo') sidePanelHandler();
+                }}
             >
                 {nav.label}
             </Button>)

@@ -13,6 +13,11 @@ export const filterDuplicates = <T>(array: readonly T[]): T[] =>
 export const classNames = (...args: unknown[]): string =>
     filterDuplicates(Array.from(args).filter((x): x is string => isString(x, true))).join(' ');
 
+export const isMobile = (): boolean => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+    );
+};
 
 export const generateHuePalette = (colorCount = 20, maxHue = 200) => {
     const hues = Array.from({length: colorCount}, (_, i) => Math.floor(i * (maxHue / colorCount)));

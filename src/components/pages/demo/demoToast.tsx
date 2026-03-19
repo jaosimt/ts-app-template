@@ -45,7 +45,7 @@ const toastTheme: DropdownObjectOptions[] = [
     {label: 'filled', value: 'filled', icon: IoColorFill},
 ];
 
-const DemoToast: FC<{theme: ThemeProp}> = ({theme}) => {
+const DemoToast: FC<{ theme: ThemeProp }> = ({theme}) => {
     const dispatch = useAppDispatch();
 
     const [selectedType, setSelectedType] = useState<DropdownObjectOptions>(toastTypes[3]);
@@ -64,21 +64,21 @@ const DemoToast: FC<{theme: ThemeProp}> = ({theme}) => {
 
     useEffect(() => {
         const {options} = toastProp;
-        setToastProp({...toastProp, options: {...options, type: selectedType.value as ToastType}})
+        setToastProp({...toastProp, options: {...options, type: selectedType.value as ToastType}});
 
         // eslint-disable-next-line
     }, [selectedType]);
 
     useEffect(() => {
         const {options} = toastProp;
-        setToastProp({...toastProp, options: {...options, position: selectedPosition.value as ToastPosition}})
+        setToastProp({...toastProp, options: {...options, position: selectedPosition.value as ToastPosition}});
 
         // eslint-disable-next-line
     }, [selectedPosition]);
 
     useEffect(() => {
         const {options} = toastProp;
-        setToastProp({...toastProp, options: {...options, theme: selectedTheme.value as ToastTheme}})
+        setToastProp({...toastProp, options: {...options, theme: selectedTheme.value as ToastTheme}});
 
         // eslint-disable-next-line
     }, [selectedTheme]);
@@ -87,7 +87,8 @@ const DemoToast: FC<{theme: ThemeProp}> = ({theme}) => {
     return <div data-component={'toast-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
-                <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`toast`}</h2>
+                <h2 className={'mt-0 pb-0p5 text-align-left'}
+                    style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`toast`}</h2>
 
                 <div className={'display-flex gap-0p5 flex-wrap'}>
                     <Button
@@ -127,7 +128,7 @@ const DemoToast: FC<{theme: ThemeProp}> = ({theme}) => {
                 <InputField
                     wrapperClassName={'flex-direction-column align-items-top-i'}
                     type={'textarea'}
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     width={'100%'}
                     label={'message'}
                     style={{flexDirection: 'column'}}
@@ -136,51 +137,60 @@ const DemoToast: FC<{theme: ThemeProp}> = ({theme}) => {
 
                 <p className={'m-0 border-bottom pb-0p3'}>options:</p>
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'type'}
                     selected={selectedType}
                     onChange={(value: DropdownObjectOptions) => setSelectedType(value)} options={toastTypes}/>
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'position'}
                     selected={selectedPosition}
                     onChange={(value: DropdownObjectOptions) => setSelectedPosition(value)} options={toastPosition}/>
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'theme'}
                     selected={selectedTheme}
                     onChange={(value: DropdownObjectOptions) => setSelectedTheme(value)} options={toastTheme}/>
-                <span>duration</span>
-                <div className={'display-flex gap-0p3 align-items-center justify-content-space-between -mt-0p5'}>
-                    <div className={'display-flex align-items-center'}>
-                        <Button
-                            disabled={toastProp.options?.duration === 0 || selectedType.value === 'error'}
-                            icon={FaMinus}
-                            onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: (toastProp.options?.duration || 0) - 1000}})}/>
-                        <Tippy
-                            showOnCreate={false}
-                            content={'InputField is readonly.  Use the provided plus/minus buttons!'}
-                            className={'custom-tippy'}>
-                            <InputField
-                                readOnly={true}
+                <div className={'display-flex align-items-center'}>
+                    <span style={{width: '50%'}}>duration</span>
+                    <div style={{width: '50%'}} className={'display-flex justify-content-space-between'}>
+                        <div className={'display-flex align-items-center'}>
+                            <Button
+                                disabled={toastProp.options?.duration === 0 || selectedType.value === 'error'}
+                                icon={FaMinus}
+                                onClick={() => setToastProp({
+                                    ...toastProp,
+                                    options: {...toastProp.options, duration: (toastProp.options?.duration || 0) - 1000}
+                                })}/>
+                            <Tippy
+                                showOnCreate={false}
+                                content={'InputField is readonly.  Use the provided plus/minus buttons!'}
+                                className={'custom-tippy'}>
+                                <InputField
+                                    readOnly={true}
+                                    disabled={selectedType.value === 'error'}
+                                    type={'number'}
+                                    width={70}
+                                    step={1000}
+                                    value={String(toastProp.options?.duration)}
+                                    onChange={(e) => setToastProp({
+                                        ...toastProp,
+                                        options: {...toastProp.options, duration: Number(e.currentTarget.value)}
+                                    })}/>
+                            </Tippy>
+                            <Button
                                 disabled={selectedType.value === 'error'}
-                                labelWidth={165}
-                                type={'number'}
-                                width={70}
-                                step={1000}
-                                value={String(toastProp.options?.duration)}
-                                onChange={(e) => setToastProp({...toastProp, options: {...toastProp.options, duration: Number(e.currentTarget.value)}})}/>
-                        </Tippy>
+                                icon={FaPlus}
+                                onClick={() => setToastProp({
+                                    ...toastProp,
+                                    options: {...toastProp.options, duration: (toastProp.options?.duration || 0) + 1000}
+                                })}/>
+                        </div>
                         <Button
-                            disabled={selectedType.value === 'error'}
-                            icon={FaPlus}
-                            onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: (toastProp.options?.duration || 0) + 1000}})}/>
-                        <span className="color-gray">milliseconds</span>
+                            disabled={toastProp.options?.duration === 0}
+                            icon={RiResetLeftLine}
+                            onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: 0}})}/>
                     </div>
-                    <Button
-                        disabled={toastProp.options?.duration === 0}
-                        icon={RiResetLeftLine}
-                        onClick={() => setToastProp({...toastProp, options: {...toastProp.options, duration: 0}})}/>
                 </div>
             </div>
         </div>

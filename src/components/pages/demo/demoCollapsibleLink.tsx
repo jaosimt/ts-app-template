@@ -59,20 +59,20 @@ const DemoCollapsibleLink: FC<{theme: ThemeProp}> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <Dropdown
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     options={positionOptions}
                     selected={props.position}
                     label={'position'}
                     onChange={(value: string) => dropDownChangeHandler('position', value)}
                 />
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'linkText'}
                     name={'linkText'}
                     value={props.linkText}
                     onChange={propsChangeHandler}/>
                 <InputField
-                    labelWidth={165}
+                    labelWidth={'50%'}
                     label={'details'}
                     name={'details'}
                     value={props.details}
