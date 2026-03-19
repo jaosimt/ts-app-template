@@ -274,6 +274,30 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
             <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
+                <div className={'display-flex gap-0p3 align-items-center'}>
+                    <div style={{width: '165px', marginLeft: '-0.3rem'}}>
+                        <Button
+                            className={'white-space-nowrap'}
+                            onClick={() => setEnableIcon(!enableIcon)}
+                        >
+                            {enableIcon ? 'Disable' : 'Enable'} icon
+                        </Button>
+                    </div>
+
+                    <Dropdown
+                        disabled={!enableIcon}
+                        options={icons}
+                        selected={icon}
+                        onChange={(value: any) => setIcon(value)}
+                    />
+                </div>
+                <Dropdown
+                    labelWidth={165}
+                    options={['left', 'right', 'center', 'space-between']}
+                    selected={option.labelAlign}
+                    label={'labelAlign'}
+                    onChange={(value: string) => dropDownChangeHandler('labelAlign', value)}
+                />
                 <InputField
                     labelWidth={165}
                     type={'number'}
@@ -305,31 +329,6 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
                         onChange: optionChangeHandler
                     })}
                 />
-                <Dropdown
-                    labelWidth={165}
-                    options={['left', 'right', 'center', 'space-between']}
-                    selected={option.labelAlign}
-                    label={'labelAlign'}
-                    onChange={(value: string) => dropDownChangeHandler('labelAlign', value)}
-                />
-
-                <div className={'display-flex gap-0p3 align-items-center'}>
-                    <div style={{width: '165px', marginLeft: '-0.3rem'}}>
-                        <Button
-                            className={'white-space-nowrap'}
-                            onClick={() => setEnableIcon(!enableIcon)}
-                        >
-                            {enableIcon ? 'Disable' : 'Enable'} icon
-                        </Button>
-                    </div>
-
-                    <Dropdown
-                        disabled={!enableIcon}
-                        options={icons}
-                        selected={icon}
-                        onChange={(value: any) => setIcon(value)}
-                    />
-                </div>
             </div>
         </div>
     </div>;
