@@ -2,14 +2,18 @@
 
 .demo-section {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   height: 100%;
   
   > .demo-section-left {
-    width: calc(100% - 370px);
+    width: 63%;
+    overflow-x: hidden;
     overflow-y: auto;
     border-radius: 0.4rem;
-    padding: 1rem 2rem;
+    padding: 2rem;
+    
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
     
     &.with-height-wrapper {
       .height-wrapper {
@@ -22,10 +26,13 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding-left: 0.5rem;
-    width: 370px;
+    width: 37%;
+    overflow-x: hidden;
     overflow-y: auto;
-    padding-right: 1rem;
+    padding-right: 2rem;
+    
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
   }
 }
 

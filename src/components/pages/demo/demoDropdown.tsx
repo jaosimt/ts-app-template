@@ -130,7 +130,7 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
     const selectedTheme = theme === Theme.DARK ? oneLight : oneDark;
     const themedBoxBorderColor = theme === Theme.REACT ? '#000' : '#ccc';
 
-    return <div data-component={'dropdown-demo'} className={'height-100p'}>
+    return <div data-component={'dropdown-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Dropdown />`}</h2>
@@ -224,7 +224,7 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                     </div>
                     <Box
                         tight={true}
-                        width={'330px'}
+                        width={'100%'}
                         borderColor={themedBoxBorderColor}>
                         <SyntaxHighlighter
                             codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}
@@ -250,7 +250,7 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
 
                     <Box
                         tight={true}
-                        width={'330px'}
+                        width={'100%'}
                         borderColor={themedBoxBorderColor}
                     >
                         <SyntaxHighlighter
@@ -269,7 +269,7 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                     </div>
                     <Box
                         tight={true}
-                        width={'330px'}
+                        width={'100%'}
                         borderColor={themedBoxBorderColor}>
                         <SyntaxHighlighter
                             codeTagProps={{style: {margin: 0, background: 'transparent', paddingTop: 0, paddingBottom: 0}}}

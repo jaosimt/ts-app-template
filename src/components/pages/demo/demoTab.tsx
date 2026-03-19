@@ -192,7 +192,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
     const selectedTheme = theme === Theme.DARK ? oneLight : oneDark;
 
-    return <div data-component={'tab-demo'} className={'height-100p'}>
+    return <div data-component={'tab-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'}
@@ -282,7 +282,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                 />
                 <Box
                     className={classNames('-mt-0p5', !tabChangeCallback && 'opacity-0-25')}
-                    width={'330px'}
+                    width={'100%'}
                     tight={true}
                     label={'style'}
                     labelPosition={'top-right'}>
@@ -299,7 +299,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <span>data</span>
                 <Box
                     className={classNames('-mt-0p5')}
-                    width={'330px'}
+                    width={'100%'}
                     tight={true}
                     label={'style'}
                     labelPosition={'top-right'}>

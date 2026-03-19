@@ -27,7 +27,7 @@ const DemoCheckbox: FC<{theme: ThemeProp}> = ({theme}) => {
 
     const dropDownChangeHandler = (name: string, value: string) => setProps({...props, [name]: value});
 
-    return <div data-component={'checkbox-demo'} className={'height-100p'}>
+    return <div data-component={'checkbox-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Checkbox />`}</h2>

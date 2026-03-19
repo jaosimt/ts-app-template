@@ -108,7 +108,7 @@ const Checkbox: FC<CheckboxProps> = (props) => {
     } = props;
 
     return <Label disabled={disabled}>
-        {label && labelPosition === 'left' && <span style={{minWidth: 'fit-content', width: parseCSSUnit(labelWidth as CSSUnit), marginRight: '0.3rem'}}>{label}</span>}
+        {label && labelPosition === 'left' && <span style={{minWidth: 'fit-content', width: parseCSSUnit(labelWidth as CSSUnit)}}>{label}</span>}
         <CheckboxContainer disabled={disabled} className={className}>
             <HiddenCheckbox disabled={disabled} name={name} checked={checked} onChange={onChange}/>
             <StyledCheckbox $theme={theme as ThemeProp} $disabled={disabled} $checked={checked}>

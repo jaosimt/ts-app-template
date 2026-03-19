@@ -9,7 +9,7 @@ import { ThemeProp } from '../../../constants/interfaces';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { decrementCounter, getCounter, incrementCounter, resetCounter } from '../../../slices/counter';
 import { classNames } from '../../../utils';
-import { getBorderColor } from '../../../utils/themeUtils';
+import { getBorderColor, getPrimaryColor } from '../../../utils/themeUtils';
 import Box from '../../partials/box';
 import Button from '../../partials/button';
 import Checkbox from '../../partials/checkbox';
@@ -78,14 +78,6 @@ const DemoWindowPortal: FC<{ theme: ThemeProp }> = ({theme}) => {
         // eslint-disable-next-line
     }, [onClose]);
 
-    // useEffect(() => {
-    //     if (onClose && prev_showPortal) {
-    //         beep(2);
-    //         toast({message: 'Portal is disconnected!', options: {type: 'warning', closeOnPageChange: false}});
-    //     }
-    //     // eslint-disable-next-line
-    // }, [showPortal, prev_showPortal]);
-
     // BELOW MUST BE THE SAME IN ABOVE'S portalContentCode
     const portalContent = <div className={'translate absolute-center'}>
         <h1 className={'color-red display-flex flex-direction-column align-items-center'}>
@@ -104,7 +96,7 @@ const DemoWindowPortal: FC<{ theme: ThemeProp }> = ({theme}) => {
 
     const selectedTheme = theme === Theme.DARK ? oneLight : oneDark;
 
-    return <div data-component={'window-portal-demo'} className={'height-100p'}>
+    return <div data-component={'window-portal-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'}
@@ -188,7 +180,7 @@ const DemoWindowPortal: FC<{ theme: ThemeProp }> = ({theme}) => {
                 />
                 <Box
                     className={classNames('-mt-0p5', !onClose && 'opacity-0-25')}
-                    width={'330px'}
+                    width={'100%'}
                     tight={true}
                     labelPosition={'top-right'}>
                     <SyntaxHighlighter
@@ -203,8 +195,9 @@ const DemoWindowPortal: FC<{ theme: ThemeProp }> = ({theme}) => {
                 </Box>
                 <p className={'m-0'}>children</p>
                 <Box
+                    borderColor={getPrimaryColor(theme)}
                     className={classNames('-mt-0p5')}
-                    width={'330px'}
+                    width={'100%'}
                     tight={true}
                     labelPosition={'top-right'}>
                     <SyntaxHighlighter

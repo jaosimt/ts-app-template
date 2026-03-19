@@ -59,7 +59,7 @@ const DemoDrawer: FC<{ theme: ThemeProp }> = ({theme}) => {
 
     const dropDownChangeHandler = (value: DropdownObjectOptions) => setPosition(value);
 
-    return <div data-name={'drawer-demo'} className={'height-100p'}>
+    return <div data-name={'drawer-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left with-height-wrapper'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'}

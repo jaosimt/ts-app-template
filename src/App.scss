@@ -32,12 +32,9 @@
     .content-wrapper {
       text-wrap  : auto;
       position   : relative;
-      overflow-x : hidden;
-      overflow-y : auto;
       display    : grid;
       width      : 100%;
       height     : auto;
-      padding    : 0 2rem 2rem 0;
       
       > * {
         &:first-child { margin-top: 0; }
@@ -80,9 +77,7 @@
     main {
       padding : 1rem 0 0 1rem;
       
-      .content-wrapper {
-        padding : 0 1rem 1rem 0;
-      }
+      .content-wrapper {}
     }
   }
 }
