@@ -106,7 +106,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     const sidePanelRef = useRef<any>(null);
 
     const [offline, setOffline] = useState(false);
-    const [sidePanelWidth, setSidePanelWidth] = useState(panelWidth);
+    const [sidePanelWidth, setSidePanelWidth] = useState(0);
 
     const setConnectionStatus = ({type}: { type: string }) => {
         if (!['online', 'offline'].includes(type)) return;

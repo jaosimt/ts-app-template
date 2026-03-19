@@ -50,6 +50,10 @@ const WrappingDiv = styled.div`
     > :last-child {
         width: 30%;
     }
+    
+    pre {
+        text-wrap: auto;
+    }
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -165,7 +169,7 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                                   to={{pathname: `/demo/window-portal`}}>{`<WindowPortal/>`}</Link>
                             <Link className={'white-space-nowrap'}
                                   to={{pathname: `/demo/collapsible-link`}}>{`<CollapsibleLink/>`}</Link>
-                            <h4 className={'secondary-text font-weight-normal m-0 display-flex flex-wrap'}>
+                            <h4 className={'secondary-text font-weight-normal m-0'}>
                                 Checkout <Link className={'white-space-nowrap'}
                                                to={{pathname: `/specs`}}>ComponentSpecs</Link> and/or <Link
                                 className={'white-space-nowrap'} to={{pathname: `/demo`}}>Demo</Link> pages for more details.
