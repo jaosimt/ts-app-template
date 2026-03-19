@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useMemo, useState, useRef } from 'react';
+import { CSSProperties, useEffect, useMemo, useState } from 'react';
 import { FaTwitch } from 'react-icons/fa';
 import { FaChevronLeft, FaInstagram, FaReact } from 'react-icons/fa6';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -7,7 +7,6 @@ import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { Link, useLocation } from 'react-router';
 import styled from 'styled-components';
-import { useOnClickOutside } from 'usehooks-ts';
 import { ReactIcon } from './components/partials';
 import Button from './components/partials/button';
 import CollapsibleLink from './components/partials/collapsibleLink';
@@ -103,10 +102,8 @@ const panelWidth = 196;
 const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     const dispatch = useAppDispatch();
 
-    const sidePanelRef = useRef<any>(null);
-
     const [offline, setOffline] = useState(false);
-    const [sidePanelWidth, setSidePanelWidth] = useState(0);
+    const [sidePanelWidth, setSidePanelWidth] = useState(panelWidth);
 
     const setConnectionStatus = ({type}: { type: string }) => {
         if (!['online', 'offline'].includes(type)) return;
@@ -114,7 +111,6 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     };
 
     const {pathname} = useLocation();
-    useOnClickOutside([sidePanelRef], () => sidePanelWidth !== 0 && setSidePanelWidth(0));
 
     useEffect(() => {
         window.addEventListener('online', setConnectionStatus);
@@ -200,7 +196,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                     {sidePanelWidth === 0 &&
                         <Button icon={GiHamburgerMenu} className={'display-none'} onClick={sidePanelHandler}/>}
                 </header>
-                <Main $theme={theme} $fixed={pathname === '/'}>
+                <Main $theme={theme} $fixed={true}>
                     <div className="content-wrapper">
                         {<ContentRouter theme={theme}/>}
                     </div>
@@ -209,7 +205,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                     <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
                 </footer>
             </div>
-            <SidePanel ref={sidePanelRef} style={styles} $theme={theme} className="side-panel">
+            <SidePanel style={styles} $theme={theme} className="side-panel">
                 <div className={'m-1 display-flex flex-direction-column gap-1 justify-content-space-between'} style={{height: 'calc(100% - 2rem)', marginRight: '1.5rem'}}>
                     <div>
                         <div className={'display-flex justify-content-space-between mb-2'}>
