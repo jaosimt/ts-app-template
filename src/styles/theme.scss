@@ -273,6 +273,7 @@ body {
     }
     
     a,
+    .link,
     link {
       &:not(.nav-link) {
         color : v.$linkColorDark;
@@ -577,6 +578,7 @@ body {
     }
     
     a,
+    .link,
     link {
       &:not(.nav-link) {
         color : v.$linkColorReact;
@@ -881,6 +883,7 @@ body {
     }
     
     a,
+    .link,
     link {
       &:not(.nav-link) {
         color : v.$linkColorInsta;
@@ -1185,6 +1188,7 @@ body {
     }
     
     a,
+    .link,
     link {
       &:not(.nav-link) {
         color : v.$linkColorTwitch;

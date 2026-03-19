@@ -5,7 +5,7 @@ import { TbBrandReact } from 'react-icons/tb';
 import styled from 'styled-components';
 import { ThemeProp } from '../../../constants/interfaces';
 import { HSLString } from '../../../constants/types';
-import { generateAnalogousPalette, hslToHex } from '../../../utils';
+import { generateAnalogousPalette, hslToHex, Round, isMobile } from '../../../utils';
 import { getBorderColor } from '../../../utils/themeUtils';
 import Button from '../../partials/button';
 import Dropdown from '../../partials/dropdown';
@@ -64,10 +64,22 @@ const Size = styled.div`
 const StepShift = styled.div`
 `;
 
-const PaletteGrid = styled.div`
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(91px, 1fr));
+const PaletteGrid = styled.div<{
+    $paletteSize: number;
+}>`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fit, minmax(${props => props.$paletteSize}px, 1fr));
+    max-height: 306px;
+    overflow: auto;
+    margin: 1rem -2rem 0 0;
+    padding-right: 1rem;
+    
+    @media (max-width: 768px) {
+        margin: 1rem -1rem 0 0;
+        padding-right: 0.5rem;
+    }
 `;
 
 const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
@@ -83,14 +95,16 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
 
     const timeoutRef = useRef<any>(0);
     const inputRefs = useRef<Record<string, HTMLElement>>({});
+    const paletteRef = useRef<HTMLDivElement>(null);
 
+    const [paletteSize, setPaletteSize] = useState(1);
     const [icon, setIcon] = useState(icons[0]);
     const [enableIcon, setEnableIcon] = useState(false);
     const [paletteProps, setPaletteProps] = useState({
         red: 255,
         green: 0,
         blue: 0,
-        size: 7,
+        size: 3,
         stepShift: 7
     });
 
@@ -108,6 +122,18 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
         labelColor: 'inherit',
         showErrorTooltipOnCreate: true
     } as Partial<InputFieldProps>);
+
+    useEffect(() => {
+        if (!paletteRef.current) return;
+        const _width = Round(paletteRef.current.clientWidth, 0);
+        const size = Math.min(isMobile() ? 3 : 7, paletteProps.size);
+        const gap = Round((size-1) * 14, 0) + 40;
+        const width = Round((_width - gap) / size, 0);
+
+        setPaletteSize(width);
+
+        // eslint-disable-next-line
+    }, [paletteRef.current, paletteProps]);
 
     useEffect(() => {
         setPalette(generateAnalogousPalette({
@@ -147,7 +173,7 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<InputField />`}</h2>
 
                 <div className="display-flex flex-direction-column">
-                    <form noValidate>
+                    <form className={'border-bottom pb-1'} noValidate>
                         <GridContainer>
                             <Red>
                                 <InputField
@@ -256,14 +282,14 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
                             </StepShift>
                         </GridContainer>
                     </form>
-                    <PaletteGrid className={'border-top mt-1 pt-1 justify-content-space-between'}>
+                    <PaletteGrid $paletteSize={paletteSize} ref={paletteRef}>
                         {palette.map((color: HSLString, index: number) => <span
                             key={index}
                             className={'color-box transition-200 display-inline-flex justify-content-center align-items-center'}
                             style={{
                                 backgroundColor: hslToHex(color),
-                                width: '91px',
-                                height: '91px'
+                                width: `${paletteSize}px`,
+                                height: `${Math.min(98, paletteSize)}px`
                             }}>
                             <b className={'font-size-x-small text-shadow-black'}>{hslToHex(color)}</b>
                         </span>)}
