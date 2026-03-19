@@ -92,13 +92,15 @@ const DemoToast: FC<{ theme: ThemeProp }> = ({theme}) => {
 
                 <div className={'display-flex gap-0p5 flex-wrap'}>
                     <Button
+                        width={200}
                         className={'align-self-center'}
                         disabled={!isString(toastProp.message, true)}
                         onClick={() => toast(toastProp)}
                     >
-                        Show Toast
+                        Show Proped Toast
                     </Button>
                     <Button
+                        width={200}
                         className={'default'}
                         disabled={!isString(toastProp.message, true)}
                         onClick={
@@ -112,9 +114,10 @@ const DemoToast: FC<{ theme: ThemeProp }> = ({theme}) => {
                             }
                         }
                     >
-                        Show Non-optioned Toast
+                        Show Non-proped Toast
                     </Button>
                     <Button
+                        width={200}
                         className={'default'}
                         onClick={() => dispatch(setError(new ApplicationError('Test Error')))}
                     >

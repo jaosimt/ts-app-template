@@ -33,7 +33,7 @@ import { getAccentColor, getBorderColor } from './utils/themeUtils';
 const StyledBanner = styled.div<{
     $footer?: boolean;
 }>`
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 154px;
     z-index: ${props => props.$footer ? 0 : 1};
@@ -45,18 +45,35 @@ const StyledBanner = styled.div<{
     ${props => props.$footer && `bottom: 0;`}
 `;
 
+const Header = styled.header<{
+}>`
+    position: fixed;
+`;
+
 const Main = styled.main<{
     $fixed?: boolean;
     $theme: ThemeProp;
 }>`
     > * { z-index: 1; }
+
+    margin: 60px 0 40px;
     background-color: ${props => props.$theme === Theme.DARK ? v.baseColorDark : v.baseColor};
-    ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
-    
+    height: calc(100vh - 100px);
+
+    /*margin   : 0;*/
+    /*${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};*/
+
     @media (max-width: 768px) {
         height: auto;
         min-height: calc(100vh - 100px);
     }
+`;
+
+const Footer = styled.footer<{
+}>`
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
 `;
 
 const ContentWrapper = styled.div<{
@@ -200,7 +217,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
         }
         <div className={'app-container display-flex'}>
             <div className={'flex-auto width-100p'}>
-                <header className={'grid cols-2 color-white'} style={{...variableHeaderStyle}}>
+                <Header className={'grid cols-2 color-white'} style={{...variableHeaderStyle}}>
                     <Link
                         className={'white-space-nowrap display-flex align-items-center gap-0p5 color-inherit nav-link'}
                         to={{pathname: `/`}}>
@@ -210,15 +227,15 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                     </Link>
                     {sidePanelWidth === 0 &&
                         <Button icon={GiHamburgerMenu} className={'display-none'} onClick={sidePanelHandler}/>}
-                </header>
+                </Header>
                 <Main $theme={theme} $fixed={true}>
                     <ContentWrapper $padRight={!pathname.startsWith('/demo')} className="content-wrapper">
                         {<ContentRouter theme={theme}/>}
                     </ContentWrapper>
                 </Main>
-                <footer className={'display-flex justify-content-space-between align-items-center color-white'}>
+                <Footer className={'display-flex justify-content-space-between align-items-center color-white'}>
                     <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
-                </footer>
+                </Footer>
             </div>
             <SidePanel style={styles} $theme={theme} className="side-panel">
                 <div className={'m-1 display-flex flex-direction-column gap-1 justify-content-space-between'} style={{height: 'calc(100% - 2rem)', marginRight: '1.5rem'}}>

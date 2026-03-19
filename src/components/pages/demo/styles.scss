@@ -7,8 +7,7 @@
   
   > .demo-section-left {
     width         : 63%;
-    overflow-x    : hidden;
-    overflow-y    : auto;
+    overflow      : auto;
     border-radius : 0.4rem;
     padding       : 2rem;
     
@@ -28,8 +27,7 @@
     flex-direction : column;
     gap            : 0.5rem;
     width          : 37%;
-    overflow-x     : hidden;
-    overflow-y     : auto;
+    overflow       : auto;
     padding-right  : 2rem;
     
     > :first-child { margin-top : 0; }

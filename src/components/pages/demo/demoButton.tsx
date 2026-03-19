@@ -21,8 +21,8 @@ const DemoButton: FC<{ theme: ThemeProp }> = ({theme}) => {
     const [icon, setIcon] = useState(false);
     const [props, setProps] = useState<Partial<ButtonProps>>({
         disabled: false,
-        align: 'left',
-        width: 100,
+        align: 'center',
+        width: 200,
     });
 
     const propsChangeHandler = (e: ChangeEvent<any>) => {
@@ -35,7 +35,7 @@ const DemoButton: FC<{ theme: ThemeProp }> = ({theme}) => {
     return <div data-component={'button-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
-                <h2 className={'mt-0 pb-0p5 text-align-left'}
+                <h2 className={'mt-0 pb-0p5 text-align-left display-flex gap-1'}
                     style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Button />`}</h2>
                 <Button
                     icon={icon ? IoIosSave : undefined}
@@ -87,6 +87,7 @@ const DemoButton: FC<{ theme: ThemeProp }> = ({theme}) => {
                     selected={props.align}
                     label={'align'}
                     onChange={(value: string) => dropDownChangeHandler('align', value)}
+                    disablePredicate={(option: string) => option === 'space-between' && !icon}
                 />
                 <InputField
                     labelWidth={'50%'}
