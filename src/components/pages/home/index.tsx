@@ -1,8 +1,8 @@
 import Tippy from '@tippyjs/react';
-import {FC} from 'react';
-import {BiLogoTypescript} from 'react-icons/bi';
-import {FaCircleInfo, FaReact} from 'react-icons/fa6';
-import {Link} from 'react-router';
+import { FC } from 'react';
+import { BiLogoTypescript } from 'react-icons/bi';
+import { FaCircleInfo, FaReact } from 'react-icons/fa6';
+import { Link } from 'react-router';
 import styled from 'styled-components';
 import { ThemeProp } from '../../../constants/interfaces';
 import redux from '../../../images/redux.svg';
@@ -15,7 +15,26 @@ import styledComponents from '../../../images/styled-components.png';
 import reactRouter from '../../../images/react-router.png';
 import { createLink, themedLogoBase64 } from '../../../utils/ext';
 import { getPrimaryColor } from '../../../utils/themeUtils';
-import {ReactIcon} from '../../partials';
+import { ReactIcon } from '../../partials';
+
+const Container = styled.div`
+    > :first-child { margin-top: 0; }
+
+    > :last-child { margin-bottom: 0; }
+
+    display: flex;
+    gap: 0.5rem 1rem;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 3rem;
+    padding-right: 2rem;
+    flex-direction: column;
+    
+    @media (max-width: 768px) {
+        padding-right: 1rem;
+    }
+`;
 
 const WrappingDiv = styled.div`
     display: flex;
@@ -25,18 +44,18 @@ const WrappingDiv = styled.div`
     width: 100%;
 
     > :first-child {
-        width : 70%;
+        width: 70%;
     }
 
     > :last-child {
-        width : 30%;
+        width: 30%;
     }
 
-    @media (max-width : 1000px) {
-        flex-direction : column;
+    @media (max-width: 768px) {
+        flex-direction: column;
         > :first-child,
         > :last-child {
-            width : 100%;
+            width: 100%;
         }
     }
 `;
@@ -116,20 +135,18 @@ const bundledLibs = () => <>
 </>;
 
 const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
-    return <div data-component={'home'}
-                className={'trim display-flex gap-0p5-1 justify-content-space-between width-100p height-100p pb-3 pr-2'}>
-        <div className={'display-flex flex-direction-column gap-1 justify-content-space-between'}>
+    return <Container data-component={'home'}>
+        <div>
+            <h1 className={'m-0 accent-text text-shadow-white'}>Templates are good!</h1>
+            <h5 className={'m-0'}>Why start from scratch? Templates will save a good amount of your time!</h5>
+        </div>
+        <WrappingDiv>
             <div>
-                <h1 className={'m-0 accent-text text-shadow-white'}>Templates are good!</h1>
-                <h5 className={'m-0'}>Why start from scratch? Templates will save a good amount of your time!</h5>
-            </div>
-            <WrappingDiv>
                 <div>
-                    <div>
-                        <h4 className={'m-0 accent-text'}>In addition to the bundled libraries listed below, this app
-                            template also
-                            contains custom components that you might need:</h4>
-                        <pre className={'display-flex gap-0p3-1 flex-wrap font-weight-bold m-0'}>
+                    <h4 className={'m-0 accent-text'}>In addition to the bundled libraries listed below, this app
+                        template also
+                        contains custom components that you might need:</h4>
+                    <pre className={'display-flex gap-0p3-1 flex-wrap font-weight-bold m-0'}>
                             <Link className={'white-space-nowrap'} to={{pathname: `/demo/box`}}>{`<Box/>`}</Link>
                             <Link className={'white-space-nowrap'} to={{pathname: `/demo/button`}}>{`<Button/>`}</Link>
                             <Link className={'white-space-nowrap'}
@@ -148,71 +165,73 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                                   to={{pathname: `/demo/window-portal`}}>{`<WindowPortal/>`}</Link>
                             <Link className={'white-space-nowrap'}
                                   to={{pathname: `/demo/collapsible-link`}}>{`<CollapsibleLink/>`}</Link>
-                            <h4 className={'secondary-text font-weight-normal m-0'}>
+                            <h4 className={'secondary-text font-weight-normal m-0 display-flex flex-wrap'}>
                                 Checkout <Link className={'white-space-nowrap'}
                                                to={{pathname: `/specs`}}>ComponentSpecs</Link> and/or <Link
                                 className={'white-space-nowrap'} to={{pathname: `/demo`}}>Demo</Link> pages for more details.
                             </h4>
                         </pre>
-                    </div>
-                    <div className={'mt-1'}>
-                        <h4 className={'m-0'}>Furthermore, the following bundled libraries are setup more
-                            than enough i think 😎:</h4>
-                        <ul className={'m-0'}>
-                            <li>
-                                <b>redux</b>
-                                <ul className="m-0">
-                                    <li>
-                                        <Tippy className={'custom-tippy'}
-                                               content={<span>Located in folder <b>src/store</b></span>}>
+                </div>
+                <div className={'mt-1'}>
+                    <h4 className={'m-0'}>Furthermore, the following bundled libraries are setup more
+                        than enough i think 😎:</h4>
+                    <ul className={'m-0'}>
+                        <li>
+                            <b>redux</b>
+                            <ul className="m-0">
+                                <li>
+                                    <Tippy className={'custom-tippy'}
+                                           content={<span>Located in folder <b>src/store</b></span>}>
                                             <span className={'cursor-pointer'}>store is already configured according to suggested settings <ReactIcon
-                                                style={{color: getPrimaryColor(theme)}} className={'accent-text font-size-small'} icon={FaCircleInfo}/></span>
-                                        </Tippy>
-                                    </li>
-                                    <li>
-                                        <Tippy className={'custom-tippy'}
-                                               content={<span>Located in folder <b>src/slices</b></span>}>
+                                                style={{color: getPrimaryColor(theme)}}
+                                                className={'accent-text font-size-small'} icon={FaCircleInfo}/></span>
+                                    </Tippy>
+                                </li>
+                                <li>
+                                    <Tippy className={'custom-tippy'}
+                                           content={<span>Located in folder <b>src/slices</b></span>}>
                                             <span className={'cursor-pointer'}>top level reducers <ReactIcon
-                                                style={{color: getPrimaryColor(theme)}} className={'accent-text font-size-small'} icon={FaCircleInfo}/></span>
-                                        </Tippy>
-                                        <ul className="m-0">
-                                            <li>
-                                                <b><i>counter</i></b> - currently use in <Link
-                                                className={'white-space-nowrap'} to={{pathname: `/demo/window-portal`}}>windowPortal
-                                                demo</Link>
-                                                <ul className="m-0 font-size-small secondary-text">
-                                                    <li>chances are you're not gonna be needing this and so of course
-                                                        feel free to remove it along with whatever is using it... or
-                                                        not, this won't bother you anyway! 😁
-                                                    </li>
-                                                    <li>if you do, be sure to remove 'counter' as well in
-                                                        combinedReducer's object in <pre
-                                                            className="m-0 display-inline">src/store/index.ts</pre></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <b><i>error</i></b> - use in TSAPI error handler
-                                                <ul className="m-0 font-size-small secondary-text">
-                                                    <li><b>best not to remove</b> as this will be populated with any
-                                                        http error 400 and up from the axios interceptor service!
-                                                    </li>
-                                                    <li>once populated, a top level toast will handle the rest to inform
-                                                        you whatever the error is.
-                                                    </li>
-                                                    <li>however, if you do need to filter the kind of errors to handle,
-                                                        you can proceed and tweak the axios response interceptor in <pre
-                                                            className={'m-0 display-inline'}>lines 52 to 56 of the file src/services/TSAPI.ts</pre>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        component level reducers
-                                        <ul className="m-0">
-                                            <li>
-                                                <Tippy className={'custom-tippy'} content={
-                                                    <span>Located in folder <b>src/components/pages/demo/slices</b></span>}>
+                                                style={{color: getPrimaryColor(theme)}}
+                                                className={'accent-text font-size-small'} icon={FaCircleInfo}/></span>
+                                    </Tippy>
+                                    <ul className="m-0">
+                                        <li>
+                                            <b><i>counter</i></b> - currently use in <Link
+                                            className={'white-space-nowrap'} to={{pathname: `/demo/window-portal`}}>windowPortal
+                                            demo</Link>
+                                            <ul className="m-0 font-size-small secondary-text">
+                                                <li>chances are you're not gonna be needing this and so of course
+                                                    feel free to remove it along with whatever is using it... or
+                                                    not, this won't bother you anyway! 😁
+                                                </li>
+                                                <li>if you do, be sure to remove 'counter' as well in
+                                                    combinedReducer's object in <pre
+                                                        className="m-0 display-inline">src/store/index.ts</pre></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <b><i>error</i></b> - use in TSAPI error handler
+                                            <ul className="m-0 font-size-small secondary-text">
+                                                <li><b>best not to remove</b> as this will be populated with any
+                                                    http error 400 and up from the axios interceptor service!
+                                                </li>
+                                                <li>once populated, a top level toast will handle the rest to inform
+                                                    you whatever the error is.
+                                                </li>
+                                                <li>however, if you do need to filter the kind of errors to handle,
+                                                    you can proceed and tweak the axios response interceptor in <pre
+                                                        className={'m-0 display-inline'}>lines 52 to 56 of the file src/services/TSAPI.ts</pre>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    component level reducers
+                                    <ul className="m-0">
+                                        <li>
+                                            <Tippy className={'custom-tippy'} content={
+                                                <span>Located in folder <b>src/components/pages/demo/slices</b></span>}>
                                                     <span className={'cursor-pointer'}><b><i><Link
                                                         className={'white-space-nowrap'} to={{
                                                         pathname: '/demo/drawer',
@@ -222,21 +241,21 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                                                         style={{color: getPrimaryColor(theme)}}
                                                         className={'accent-text font-size-small'}
                                                         icon={FaCircleInfo}/></span>
-                                                </Tippy>
-                                                <ul className="m-0 font-size-small secondary-text">
-                                                    <li>feel free to remove this including the demo component Todo</li>
-                                                    <li>in <pre className="m-0 display-inline">src/store/index.ts</pre>,
-                                                        make sure to remove 'todo' as well in the following:
-                                                    </li>
-                                                    <ul className="m-0">
-                                                        <li>combinedReducer's object</li>
-                                                        <li>persistConfig's whitelist</li>
-                                                    </ul>
+                                            </Tippy>
+                                            <ul className="m-0 font-size-small secondary-text">
+                                                <li>feel free to remove this including the demo component Todo</li>
+                                                <li>in <pre className="m-0 display-inline">src/store/index.ts</pre>,
+                                                    make sure to remove 'todo' as well in the following:
+                                                </li>
+                                                <ul className="m-0">
+                                                    <li>combinedReducer's object</li>
+                                                    <li>persistConfig's whitelist</li>
                                                 </ul>
-                                            </li>
-                                            <li>
-                                                <Tippy className={'custom-tippy'} content={
-                                                    <span>Located in folder <b>src/components/partials/slices</b></span>}>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <Tippy className={'custom-tippy'} content={
+                                                <span>Located in folder <b>src/components/partials/slices</b></span>}>
                                                     <span
                                                         className={'cursor-pointer'}><b><i>toast</i></b> - use in <Link
                                                         className={'white-space-nowrap'}
@@ -244,47 +263,46 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                                                         style={{color: getPrimaryColor(theme)}}
                                                         className={'accent-text font-size-small'}
                                                         icon={FaCircleInfo}/></span>
-                                                </Tippy>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <Tippy className={'custom-tippy'} content={
-                                    <span>Located in folder <b>src/services</b></span>}>
+                                            </Tippy>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <Tippy className={'custom-tippy'} content={
+                                <span>Located in folder <b>src/services</b></span>}>
                                     <span className={'cursor-pointer'}><b>axios</b> <ReactIcon
                                         style={{color: getPrimaryColor(theme)}}
                                         className={'accent-text font-size-small'}
                                         icon={FaCircleInfo}/></span>
-                                </Tippy>
-                                <ul className="m-0">
-                                    <li>
-                                        <b><i>class User</i></b> - a sample api class showcasing the usage of the
-                                        provided TSAPI, APIService and APIPromise handlers that works for me and might
-                                        work for you <span className="white-space-nowrap">too 😎</span>
-                                        <ul className="m-0 font-size-small secondary-text">
-                                            <li>of course, feel free to modify whatever suits your needs!</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div className={'display-flex justify-content-right align-items-center'}>
-                    <img width={'100%'} className={'spin-700'} src={themedLogoBase64(theme)} alt=""/>
-                </div>
-            </WrappingDiv>
-            &nbsp;
-            <div className="marquee">
-                <div className={'display-flex gap-0p5-2 justify-content-space-between'}>
-                    {bundledLibs()}
-                    {bundledLibs()}
+                            </Tippy>
+                            <ul className="m-0">
+                                <li>
+                                    <b><i>class User</i></b> - a sample api class showcasing the usage of the
+                                    provided TSAPI, APIService and APIPromise handlers that works for me and might
+                                    work for you <span className="white-space-nowrap">too 😎</span>
+                                    <ul className="m-0 font-size-small secondary-text">
+                                        <li>of course, feel free to modify whatever suits your needs!</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <div className={'display-flex justify-content-right align-items-center'}>
+                <img width={'100%'} className={'spin-700'} src={themedLogoBase64(theme)} alt=""/>
+            </div>
+        </WrappingDiv>
+        &nbsp;
+        <div className="marquee">
+            <div className={'display-flex gap-0p5-2 justify-content-space-between'}>
+                {bundledLibs()}
+                {bundledLibs()}
+            </div>
         </div>
-    </div>;
+    </Container>;
 };
 
 export default Home;

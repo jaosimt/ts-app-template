@@ -55,8 +55,7 @@ const Main = styled.main<{
     ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
     
     @media (max-width: 768px) {
-        height: auto;
-        min-height: calc(100vh - 100px);
+        ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
     }
 `;
 
@@ -201,7 +200,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                     {sidePanelWidth === 0 &&
                         <Button icon={GiHamburgerMenu} className={'display-none'} onClick={sidePanelHandler}/>}
                 </header>
-                <Main $theme={theme} $fixed={true}>
+                <Main $theme={theme} $fixed={pathname === '/'}>
                     <div className="content-wrapper">
                         {<ContentRouter theme={theme}/>}
                     </div>
