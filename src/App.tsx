@@ -49,13 +49,8 @@ const Main = styled.main<{
     $fixed?: boolean;
     $theme: ThemeProp;
 }>`
-    min-height: 652px;
     background-color: ${props => props.$theme === Theme.DARK ? v.baseColorDark : v.baseColor};
     ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
-    
-    @media (max-width: 768px) {
-        ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
-    }
 `;
 
 const SidePanel = styled.aside<{
@@ -181,8 +176,10 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
 
     return <>
         {MemoizedConnectionModal}
-        {pathname === '/' &&
-            <StyledBanner className={'banner'} style={{backgroundImage: `url("${themedBannerBase64(theme)}")`}}/>}
+        {
+            pathname === '/' &&
+            <StyledBanner className={'banner'} style={{backgroundImage: `url("${themedBannerBase64(theme)}")`}}/>
+        }
         <div className={'app-container display-flex'}>
             <div className={'flex-auto width-100p'}>
                 <header className={'grid cols-2 color-white'} style={{...variableHeaderStyle}}>

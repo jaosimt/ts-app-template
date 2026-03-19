@@ -34,29 +34,8 @@ export const themes: Record<string, ThemeType> = {
 };
 
 const Container = styled.div`
-    padding-right: 2rem;
-    
-    @media (max-width: 768px) {
-        padding-right: 0.5rem;
-    }
-`;
-
-const Header = styled.div`
-    display         : flex;
-    justify-content : space-between;
-    align-items     : flex-end;
-
-    @media (max-width : 768px) {
-        flex-direction : column;
-        align-items    : flex-start;
-        h1 {
-            font-size     : 1.2rem;
-            margin-bottom : 0.5rem;
-        }
-
-        [data-component="dropdown"] {
-        }
-    }
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
 `;
 
 // noinspection CssUnusedSymbol
@@ -113,7 +92,6 @@ const Grid = styled.div<{
 `;
 
 const ComponentSpecs: FC<{ theme: ThemeProp }> = ({theme}) => {
-    // const [selectedTheme, setSelectedTheme] = useState<string>(sessionStorage.getItem('rshTheme') || 'nightOwl');
     const selectedTheme = theme === Theme.DARK ? 'oneLight' : 'oneDark';
 
     const tabData: TabItemType[] = [
@@ -156,16 +134,8 @@ const ComponentSpecs: FC<{ theme: ThemeProp }> = ({theme}) => {
         }
     ];
 
-    // const handleThemeChange = (value: string) => {
-    //     setSelectedTheme(value);
-    //     sessionStorage.setItem('rshTheme', value);
-    // };
-
     return <Container data-component={'component-specs'} className={'width-100p'}>
-        <Header>
-            <h1 className={'line-height-1'}>Custom Component Specs</h1>
-            {/*<Dropdown maxDropdownHeight={300} options={Object.keys(themes)} selected={selectedTheme} onChange={handleThemeChange}/>*/}
-        </Header>
+        <h1 className={'line-height-1'}>Custom Component Specs</h1>
         <Tab minContentHeight={300} id={'component-specs'} rememberActiveTab={true} moveSelectedOnScroll={true}
              data={tabData} theme={theme}/>
     </Container>;

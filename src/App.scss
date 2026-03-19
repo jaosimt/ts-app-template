@@ -25,15 +25,27 @@
     position : relative;
     width    : 100%;
     display  : flex;
-    padding  : 1rem 0 1rem 2rem;
+    padding  : 2rem 0 0 2rem;
+    margin   : 0;
+    overflow : hidden;
     
     .content-wrapper {
-      width      : 100%;
-      height     : 100%;
-      padding    : 0;
-      overflow-y : auto;
+      text-wrap  : auto;
+      position   : relative;
       overflow-x : hidden;
-      z-index    : 1;
+      overflow-y : auto;
+      display    : grid;
+      width      : 100%;
+      height     : auto;
+      padding    : 0 2rem 2rem 0;
+      
+      > * {
+        &:first-child { margin-top: 0; }
+        &:last-child { margin-bottom: 0; }
+        
+        width      : 100%;
+        height     : 100%;
+      }
     }
   }
   
@@ -66,18 +78,11 @@
     }
     
     main {
-      padding : 0 0 1rem 1rem;
+      padding : 1rem 0 0 1rem;
       
       .content-wrapper {
-        width      : 100%;
-        height     : 100%;
-        overflow-y : auto;
-        overflow-x : hidden;
+        padding : 0 1rem 1rem 0;
       }
-    }
-    
-    .marquee {
-      width : calc(100% - 2rem);
     }
   }
 }
