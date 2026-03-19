@@ -4,12 +4,13 @@ import { FaChevronDown } from 'react-icons/fa6';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
+import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSUnit } from '../../../constants/types';
 import { useKeyPress, useOnScroll } from '../../../hooks';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
-import { classNames, isObject, parseCSSUnit, Round } from '../../../utils';
+import { classNames, getRandStr, isObject, parseCSSUnit, Round } from '../../../utils';
 import {
     getButtonDefaultBorderColor,
     getButtonDefaultHoverColor,
@@ -195,9 +196,10 @@ const Dropdown: FC<DropdownProps> = (props) => {
         icon,
         onChange,
         disablePredicate,
-        theme
+        theme = Theme.TWITCH
     } = props;
 
+    const id = useRef<string>(getRandStr(21));
     const listRef = useRef<any>(null);
     const wrapperRef = useRef<any>(null);
 
@@ -278,21 +280,15 @@ const Dropdown: FC<DropdownProps> = (props) => {
     }
 
     function arrowDownUpHandler(pressed: boolean, key: string) {
-        console.log('arrowDownUpHandler');
-
         if (options.length === 0) return;
-        console.log('xxx');
 
         if (pressed && listRef.current && show) {
-            console.log('key:', key);
             const optionsSize = options.length;
             let nextIndex = isO
                 ? options.findIndex((o: any) => o.value === (scrolled as DropdownObjectOptions).value)
                 : options.findIndex(o => o === scrolled);
 
             if (nextIndex < 0) nextIndex = 0;
-
-            console.log('nextIndex:', nextIndex);
 
             switch (key) {
                 case 'ArrowDown':
@@ -304,7 +300,6 @@ const Dropdown: FC<DropdownProps> = (props) => {
                 default:
                 // do nothing
             }
-            console.log('nextIndex:', nextIndex);
 
             setScrolled(options[nextIndex]);
         }
@@ -324,6 +319,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
         className={className}
     >
         {label && <Label
+            htmlFor={`i-${id}`}
             $labelAlign={labelAlign}
             $labelWidth={labelWidth as any}>
             {icon && <ReactIcon icon={icon}/>}
@@ -343,6 +339,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
                                           icon={(selected as DropdownObjectOptions).icon as IconType}/>
                 }
                 <Input
+                    id={`i-${id}`}
                     className={classNames('dropdown', !hasIcon && 'ml-0p3', valueClassName)}
                     name={name}
                     $hasIcon={hasIcon as boolean}

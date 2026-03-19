@@ -225,6 +225,18 @@ export const parseBooleanString = (value: string): boolean => value === 'true';
 
 export const getTextWidth = (text: string, font: string): number => {
     let canvas = document.querySelector('#app-canvas') as HTMLCanvasElement;
+
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'app-canvas';
+        canvas.style.position = 'absolute';
+        canvas.style.zIndex = '-777';
+        canvas.style.visibility = 'hidden';
+        canvas.style.bottom = '0';
+        canvas.style.right = '0';
+        document.body.appendChild(canvas);
+    }
+
     const context = canvas.getContext('2d');
     if (!context) return 0;
 

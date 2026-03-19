@@ -6,11 +6,11 @@ const config: StorybookConfig = {
     "../src/**/*.mdx",
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
+  "entry": ["./preview.tsx"],
   "addons": [
     "@storybook/preset-create-react-app",
     "@storybook/addon-a11y",
-    "@storybook/addon-docs",
-    "@storybook/addon-onboarding"
+    "@storybook/addon-docs"
   ],
   "framework": "@storybook/react-webpack5",
   "staticDirs": [

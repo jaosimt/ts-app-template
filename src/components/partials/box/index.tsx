@@ -62,7 +62,7 @@ const Container = styled.section<{
     }
 `;
 
-const Label = styled.h5<{
+const Label = styled.label<{
     $labelBackgroundColor: CSSColors,
     $borderWidth: CSSUnit | 'inherit',
     $borderColor: CSSColors,
@@ -96,13 +96,13 @@ const Label = styled.h5<{
             case 'top-right':
                 return `right: ${props.$tight ? 0 : '0.5rem'}`;
             case 'bottom-left':
-                return `left: 0.5rem; bottom: ${props.$tight ? 0 : '-0.4rem'}`;
+                return `left: ${props.$tight ? 0 : '0.5rem'}; bottom: ${props.$tight ? 0 : '-0.4rem'}`;
             case 'bottom-center':
                 return `bottom: ${props.$tight ? 0 : '-0.4rem'}; right: calc(50% - ${props.$labelWidth / 2}px)`;
             case 'bottom-right':
                 return `bottom: ${props.$tight ? 0 : '-0.4rem'}; right: ${props.$tight ? 0 : '0.5rem'}`;
             default:
-                return 'left: 0.5rem';
+                return `left: ${props.$tight ? 0 : '0.5rem'}`;
         }
     })()}
 `;
@@ -183,7 +183,7 @@ const Box: FC<BoxProps> = (props) => {
         style={}
     } = props;
 
-    const labelRef = useRef(null as HTMLInputElement | null);
+    const labelRef = useRef(null as HTMLLabelElement | null);
     const [labelWidth, setLabelWidth] = useState<number>((() => {
         if (!label) return 0;
 
