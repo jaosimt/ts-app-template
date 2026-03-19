@@ -42,7 +42,7 @@ const DemoLoading: FC<{theme: ThemeProp}> = ({theme}) => {
         });
     }
 
-    return <div data-component={'loading-demo'} className={'height-100p'}>
+    return <div data-component={'loading-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left with-height-wrapper'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Loading />`}</h2>

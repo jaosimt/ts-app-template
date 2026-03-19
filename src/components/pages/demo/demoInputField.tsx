@@ -141,7 +141,7 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
         timeoutRef.current = setTimeout(() => inputRefs.current[name]?.focus(), 100);
     };
 
-    return <div data-component={'input-field-demo'} className={'height-100p'}>
+    return <div data-component={'input-field-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<InputField />`}</h2>

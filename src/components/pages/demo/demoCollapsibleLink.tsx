@@ -42,7 +42,7 @@ const DemoCollapsibleLink: FC<{theme: ThemeProp}> = ({theme}) => {
 
     const selectedTheme = theme === Theme.DARK ? oneLight : oneDark;
 
-    return <div data-component={'collapsible-link-demo'} className={'height-100p'}>
+    return <div data-component={'collapsible-link-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
                 <h2 className={'mt-0 pb-0p5 text-align-left'} style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<CollapsibleLink />`}</h2>

@@ -53,6 +53,18 @@ const Main = styled.main<{
     ${props => props.$fixed ? 'height: calc(100vh - 100px)' : 'min-height: calc(100vh - 100px)'};
 `;
 
+const ContentWrapper = styled.div<{
+    $padRight?: boolean;
+}>`
+    overflow-x : ${props => props.$padRight ? 'hidden' : 'hidden'};
+    overflow-y : ${props => props.$padRight ? 'auto' : 'hidden'};
+    padding    : 0 ${props => props.$padRight ? '2rem' : 0} 2rem 0;
+    
+    @media (max-width: 768px) {
+        padding : 0 ${props => props.$padRight ? '1rem' : 0} 1rem 0;
+    }
+`;
+
 const SidePanel = styled.aside<{
     $theme: ThemeProp;
 }>`
@@ -194,9 +206,9 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                         <Button icon={GiHamburgerMenu} className={'display-none'} onClick={sidePanelHandler}/>}
                 </header>
                 <Main $theme={theme} $fixed={true}>
-                    <div className="content-wrapper">
+                    <ContentWrapper $padRight={!pathname.startsWith('/demo')} className="content-wrapper">
                         {<ContentRouter theme={theme}/>}
-                    </div>
+                    </ContentWrapper>
                 </Main>
                 <footer className={'display-flex justify-content-space-between align-items-center color-white'}>
                     <span>&copy; ᜐᜒᜋᜓ {new Date().getFullYear()} {targetUnicode} All rights reserved.</span>
