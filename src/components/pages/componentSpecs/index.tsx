@@ -3,7 +3,7 @@ import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/pris
 import styled from 'styled-components';
 import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
-import { classNames } from '../../../utils';
+import { classNames, isMobile } from '../../../utils';
 import { getSecondaryBaseColor } from '../../../utils/themeUtils';
 import Tab, { TabItemType } from '../../partials/tab';
 import SpecsBox from './specs/box';
@@ -36,6 +36,12 @@ export const themes: Record<string, ThemeType> = {
 const Container = styled.div`
     > :first-child { margin-top: 0; }
     > :last-child { margin-bottom: 0; }
+    
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
 `;
 
 // noinspection CssUnusedSymbol
@@ -128,11 +134,13 @@ const ComponentSpecs: FC<{ theme: ThemeProp }> = ({theme}) => {
         }, {
             name: 'Toast',
             content: <SpecsToast selectedTheme={selectedTheme} theme={theme}/>
-        }, {
-            name: 'WindowPortal',
-            content: <SpecsPortalWindow selectedTheme={selectedTheme} theme={theme}/>
         }
     ];
+
+    if (!isMobile()) tabData.push({
+        name: 'WindowPortal',
+        content: <SpecsPortalWindow selectedTheme={selectedTheme} theme={theme}/>
+    });
 
     return <Container data-component={'component-specs'} className={'width-100p'}>
         <h1 className={'line-height-1'}>Custom Component Specs</h1>

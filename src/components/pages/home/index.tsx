@@ -13,6 +13,7 @@ import reactHookForm from '../../../images/react-hook-form.png';
 import tippyjs from '../../../images/tippyjs.png';
 import styledComponents from '../../../images/styled-components.png';
 import reactRouter from '../../../images/react-router.png';
+import { isMobile } from '../../../utils';
 import { createLink, themedLogoBase64 } from '../../../utils/ext';
 import { getPrimaryColor } from '../../../utils/themeUtils';
 import { ReactIcon } from '../../partials';
@@ -170,8 +171,8 @@ const Home: FC<{ theme: ThemeProp }> = ({theme}) => {
                         <Link className={'white-space-nowrap'} to={{pathname: `/demo/modal`}}>{`<Modal/>`}</Link>
                         <Link className={'white-space-nowrap'} to={{pathname: `/demo/tabs`}}>{`<Tabs/>`}</Link>
                         <Link className={'white-space-nowrap'} to={{pathname: `/demo/toast`}}>{`<Toast/>`}</Link>
-                        <Link className={'white-space-nowrap'}
-                              to={{pathname: `/demo/window-portal`}}>{`<WindowPortal/>`}</Link>
+                        {!isMobile() && <Link className={'white-space-nowrap'}
+                                              to={{pathname: `/demo/window-portal`}}>{`<WindowPortal/>`}</Link>}
                         <Link className={'white-space-nowrap'}
                               to={{pathname: `/demo/collapsible-link`}}>{`<CollapsibleLink/>`}</Link>
                         <h4 className={'secondary-text font-weight-normal m-0'}>

@@ -23,9 +23,10 @@ const demoNav = [
     {path: '/demo/loading', label: 'Loading', icon: FiLoader},
     {path: '/demo/modal', label: 'Modal', icon: FaRegWindowMaximize},
     {path: '/demo/tabs', label: 'Tabs', icon: PiTabsDuotone},
-    {path: '/demo/toast', label: 'Toast', icon: GoReport},
-    {path: '/demo/window-portal', label: 'WindowPortal', icon: BsWindowStack},
+    {path: '/demo/toast', label: 'Toast', icon: GoReport}
 ];
+
+if (!isMobile()) demoNav.push({path: '/demo/window-portal', label: 'WindowPortal', icon: BsWindowStack});
 
 const NavigationDemo = ({theme, sidePanelHandler}: { theme: ThemeProp, sidePanelHandler: Function }) => {
     const {pathname} = useLocation();
