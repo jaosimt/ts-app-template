@@ -15,7 +15,7 @@ const meta = {
         layout: 'centered',
         controls: { exclude: ['children'] },
     },
-    tags: ['autodocs'],
+    // tags: ['autodocs'],
     argTypes: {
         labelPosition: {
             control: 'select',

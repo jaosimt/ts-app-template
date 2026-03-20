@@ -80,7 +80,7 @@ const meta = {
     parameters: {
         controls: { exclude: ['data', 'children', 'id', 'theme', 'rememberActiveTab', 'onTabChange'] },
     },
-    tags: ['autodocs'],
+    // tags: ['autodocs'],
     argTypes: {
         type: {
             control: 'select',
