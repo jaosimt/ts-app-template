@@ -12,10 +12,9 @@ import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
 import { classNames, getRandStr, isObject, parseCSSUnit, Round } from '../../../utils';
 import {
-    getBorderColor,
     getButtonDefaultBorderColor,
     getButtonDefaultHoverColor,
-    getButtonDefaultTextColor
+    getButtonDefaultTextColor, getLightShadow
 } from '../../../utils/themeUtils';
 import { ReactIcon } from '../index';
 import v from '../../../styles/variables.module.scss';
@@ -87,7 +86,7 @@ const Wrapper = styled.div<{
     $disabled?: boolean;
     $theme?: ThemeProp;
 }>`
-    box-shadow: ${props => `0 0 7px ${getBorderColor(props.$theme as ThemeProp)}`};
+    box-shadow: 0 0 7px ${props => getLightShadow(props.$theme as ThemeProp)};
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
@@ -117,7 +116,6 @@ const Input = styled.input<{ $hasIcon: boolean }>`
 const InputWrapper = styled.div<{
     $theme?: ThemeProp;
 }>`
-    box-shadow: 0 0 7px ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
     height: ${v.inputHeight};
     
     @media (max-width: 768px) {
@@ -131,7 +129,7 @@ const List = styled.div<{
     $maxDropdownHeight: CSSUnit;
     $theme?: ThemeProp;
 }>`
-    box-shadow: 0 0 7px ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
+    box-shadow: 0 0 7px ${props => getLightShadow(props.$theme as ThemeProp)};
     transition: border 0.2s ease-in-out;
     overflow-y: auto;
     z-index: 2;

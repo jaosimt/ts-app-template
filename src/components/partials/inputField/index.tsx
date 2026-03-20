@@ -11,7 +11,7 @@ import { useAppSelector } from '../../../hooks';
 import { getTheme } from '../../../slices/theme';
 import { classNames, parseCSSUnit } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
-import { getButtonDefaultBorderColor } from '../../../utils/themeUtils';
+import { getButtonDefaultBorderColor, getLightShadow } from '../../../utils/themeUtils';
 import { ReactIcon } from '../index';
 import styled from 'styled-components';
 import v from '../../../styles/variables.module.scss';
@@ -72,7 +72,7 @@ const InputWrapper = styled.div<{
     display: flex;
     position: relative;
     border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
-    box-shadow: ${props => `0 0 7px ${getButtonDefaultBorderColor(props.$theme as ThemeProp)}`};
+    box-shadow: ${props => `0 0 7px ${getLightShadow(props.$theme as ThemeProp)}`};
     border-radius: ${v.inputBorderRadius};
 
     > input { height: ${v.inputHeight}; }

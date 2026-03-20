@@ -81,6 +81,19 @@ export const getPrimaryColor = (theme: ThemeProp) => {
     }
 }
 
+export const getLightShadow = (theme: ThemeProp) => {
+    switch (theme) {
+        case Theme.TWITCH:
+            return v.lightShadowTwitch as CSSColors;
+        case Theme.DARK:
+            return v.lightShadowDark as CSSColors;
+        case Theme.INSTA:
+            return v.lightShadowInsta as CSSColors;
+        default:
+            return v.lightShadowReact as CSSColors;
+    }
+}
+
 export const getSecondaryBaseColor = (theme: ThemeProp) => {
     switch (theme) {
         case Theme.DARK:
