@@ -173,7 +173,7 @@ const InputField: FC<InputFieldProps> = (props) => {
                 $width={labelWidth}
                 $align={labelAlign}
                 $color={labelColor}
-                htmlFor={idRef.current}
+                htmlFor={`i-${idRef.current}`}
                 className={'display-flex align-items-center gap-0p5'}>
                 {icon && <ReactIcon icon={icon} className={'align-self-center'}/>}
                 {label && label}
@@ -189,8 +189,9 @@ const InputField: FC<InputFieldProps> = (props) => {
                     max={max}
                     placeholder={placeHolder}
                     className={classNames(className && '', error && 'border-error')}
-                    id={idRef.current}
+                    id={`i-${idRef.current}`}
                     ref={(e: any) => {
+                        console.log('e:', e);
                         ref && ref(e);
                         inputRef.current = e;
                     }}
@@ -210,8 +211,9 @@ const InputField: FC<InputFieldProps> = (props) => {
                     rows={rows || 3}
                     placeholder={placeHolder}
                     className={classNames(className && '', error && 'border-error')}
-                    id={idRef.current}
+                    id={`i-${idRef.current}`}
                     ref={(e: any) => {
+                        console.log('e:', e);
                         ref && ref(e);
                         inputRef.current = e;
                     }}

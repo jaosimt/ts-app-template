@@ -148,7 +148,7 @@ const Checkbox: FC<CheckboxProps> = (props) => {
 
     return <Container data-component={'checkbox'} htmlFor={`i-${idRef.current}`} $disabled={disabled}
                       className={className}>
-        {label && labelPosition !== 'right' && <Label $width={labelWidth} $position={labelPosition}>{label}</Label>}
+        {label && labelPosition !== 'right' && <Label $width={labelWidth} $position={'left'}>{label}</Label>}
         <CheckboxContainer $theme={theme} className={'checkbox-container'} $disabled={disabled}>
             <HiddenCheckbox id={`i-${idRef.current}`} disabled={disabled} name={name} checked={checked}
                             onChange={onChange}/>
