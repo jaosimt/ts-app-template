@@ -147,8 +147,6 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
     const paletteChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value, min, max} = e.target as HTMLInputElement;
 
-        console.log('value:', value);
-
         if (!value) return;
 
         if (min && max && (parseFloat(value) >= parseFloat(min) && parseFloat(value) <= parseFloat(max))) {
@@ -179,6 +177,7 @@ const DemoInputField: FC<{theme: ThemeProp}> = ({theme}) => {
                                 max={255}
                                 type={'number'}
                                 fieldRegister={register('red', {
+                                    valueAsNumber: true,
                                     value: paletteProps.red,
                                     onChange: paletteChangeHandler
                                 })}

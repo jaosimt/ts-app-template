@@ -7,6 +7,8 @@ import 'tippy.js/dist/tippy.css'; // optional
 import '../../../styles/tippy.scss';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSColors, CSSUnit } from '../../../constants/types';
+import { useAppSelector } from '../../../hooks';
+import { getTheme } from '../../../slices/theme';
 import { classNames, parseCSSUnit } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
 import { getButtonDefaultBorderColor } from '../../../utils/themeUtils';
@@ -36,7 +38,6 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement | HTMLT
     showErrorTooltipOnCreate?: boolean;
     disabled?: boolean;
     wrapperClassName?: string;
-    theme?: ThemeProp;
 }
 
 const Container = styled.div<{}>`
@@ -132,9 +133,10 @@ const InputField: FC<InputFieldProps> = (props) => {
         style,
         showErrorTooltipOnCreate = true,
         disabled = false,
-        theme,
         ...restProps
     } = props;
+
+    const theme = useAppSelector(getTheme);
 
     const {ref, ...restFieldRegister} = fieldRegister || {};
 
@@ -233,5 +235,16 @@ const InputField: FC<InputFieldProps> = (props) => {
         </InputWrapper>
     </Container>;
 };
+
+/**
+ * SHEESH!!!
+ *
+ * Conflicts between useForm (React Hook Form) and redux-connect (or redux-form) usually arise from competing state
+ * management paradigms. React Hook Form thrives on local, uncontrolled component state for high performance,
+ * while Redux-connect forces form data into a global Redux store. Fix by using useForm locally and mapping dispatch
+ * actions only when necessary, avoiding binding live form inputs to connect
+ *
+ * USE THE F*ING useSelector INSTEAD!!!
+ */
 
 export default memo(InputField);
