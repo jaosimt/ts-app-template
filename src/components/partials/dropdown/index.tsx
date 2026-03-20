@@ -12,6 +12,7 @@ import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
 import { classNames, getRandStr, isObject, parseCSSUnit, Round } from '../../../utils';
 import {
+    getBorderColor,
     getButtonDefaultBorderColor,
     getButtonDefaultHoverColor,
     getButtonDefaultTextColor
@@ -49,15 +50,14 @@ type PosProp = {
 }
 
 const Container = styled.div<{}>`
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.3rem;
     position: relative;
-    height: 33px;
-    
+    gap: ${parseCSSUnit(v.labelPadding as CSSUnit)} 0;
+
     @media (max-width: 768px) {
         height: 28px;
-        gap: 0.1rem;
         font-size: small;
     }
 `;
@@ -66,15 +66,17 @@ const Label = styled.label<{
     $labelWidth?: number | `${number}${string}`
     $labelAlign?: string;
 }>`
+    line-height: 1.2;
     display: inline-flex;
-    gap: 0.5rem;
+    gap: 0 ${parseCSSUnit(v.labelPadding as CSSUnit)};
+    padding-right: ${parseCSSUnit(v.labelPadding as CSSUnit)};
     justify-content: ${props => props.$labelAlign};
     align-items: center;
     min-width: fit-content;
     ${props => props.$labelWidth && `width: ${parseCSSUnit(props.$labelWidth)}`};
-    
+
     @media (max-width: 768px) {
-        gap: 0.1rem;
+        gap: 0 ${parseCSSUnit(v.labelPaddingSmall as CSSUnit)};
     }
 }
 `;
@@ -85,12 +87,12 @@ const Wrapper = styled.div<{
     $disabled?: boolean;
     $theme?: ThemeProp;
 }>`
-    box-shadow: 0 0 7px #fff;
+    box-shadow: ${props => `0 0 7px ${getBorderColor(props.$theme as ThemeProp)}`};
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
     border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
-    border-radius: 0.3rem;
+    border-radius: ${v.inputBorderRadius};
     background-color: ${v.backgroundColorDefault};
     display: inline-flex;
     align-items: center;
@@ -112,13 +114,24 @@ const Input = styled.input<{ $hasIcon: boolean }>`
     ${props => props.$hasIcon && 'text-align: center;'}
 `;
 
+const InputWrapper = styled.div<{
+    $theme?: ThemeProp;
+}>`
+    box-shadow: 0 0 7px ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
+    height: ${v.inputHeight};
+    
+    @media (max-width: 768px) {
+        height: ${v.inputHeightSmall};
+    }
+`;
+
 const List = styled.div<{
     $show: boolean;
     $pos: PosProp;
     $maxDropdownHeight: CSSUnit;
     $theme?: ThemeProp;
 }>`
-    box-shadow: 0 0 7px #fff;
+    box-shadow: 0 0 7px ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
     transition: border 0.2s ease-in-out;
     overflow-y: auto;
     z-index: 2;
@@ -162,7 +175,7 @@ const Option = styled.div<{
             border-bottom: 1px solid ${v.backgroundColorDefault};
         }
     }
-    
+
     &.disabled {
         opacity: 0.1;
         pointer-events: none;
@@ -175,7 +188,7 @@ const Option = styled.div<{
             background-color: ${props => getButtonDefaultHoverColor(props.$theme as ThemeProp)};
         }
     }
-    
+
     @media (max-width: 768px) {
         padding: 0.3rem 0.5rem;
     }
@@ -199,7 +212,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
         theme = Theme.TWITCH
     } = props;
 
-    const id = useRef<string>(getRandStr(21));
+    const idRef = useRef<string>(getRandStr(21));
     const listRef = useRef<any>(null);
     const wrapperRef = useRef<any>(null);
 
@@ -229,8 +242,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
         if (
             dropDownPos.top !== Round(bottom, 3)
             || dropDownPos.left !== Round(left, 3)
-            || dropDownPos.width !== Round(width, 3))
-        {
+            || dropDownPos.width !== Round(width, 3)) {
             setDropdownPos({left: Round(left, 3), width: Round(width, 3), top: Round(bottom, 3)});
         }
     });
@@ -319,7 +331,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
         className={className}
     >
         {label && <Label
-            htmlFor={`i-${id}`}
+            htmlFor={`i-${idRef.current}`}
             $labelAlign={labelAlign}
             $labelWidth={labelWidth as any}>
             {icon && <ReactIcon icon={icon}/>}
@@ -333,13 +345,13 @@ const Dropdown: FC<DropdownProps> = (props) => {
             $theme={theme}
             onClick={() => setShow(!show)}
         >
-            <div className={'width-100p display-flex align-items-center justify-content-space-between'}>
+            <InputWrapper $theme={theme} className={'width-100p display-flex align-items-center justify-content-space-between'}>
                 {
                     hasIcon && <ReactIcon size={21} style={{marginLeft: '0.5rem'}}
                                           icon={(selected as DropdownObjectOptions).icon as IconType}/>
                 }
                 <Input
-                    id={`i-${id}`}
+                    id={`i-${idRef.current}`}
                     className={classNames('dropdown', !hasIcon && 'ml-0p3', valueClassName)}
                     name={name}
                     $hasIcon={hasIcon as boolean}
@@ -354,7 +366,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
                     marginRight: '0.2rem',
                     width: '21px'
                 }}/>
-            </div>
+            </InputWrapper>
             <List
                 ref={listRef}
                 $show={show}

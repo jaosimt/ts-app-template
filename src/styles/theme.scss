@@ -290,7 +290,8 @@ body {
     input {
       &:not(.dropdown) {
         color  : v.$inputTextColor;
-        border : 1px solid v.$borderColorDefault;
+        //border : 1px solid v.$borderColorDefault;
+        border: none;
         
         &:focus {
           border-color : v.$accentColorDark !important;
@@ -595,7 +596,8 @@ body {
     input {
       &:not(.dropdown) {
         color  : v.$inputTextColor;
-        border : 1px solid v.$borderColorDefault;
+        //border : 1px solid v.$borderColorDefault;
+        border: none;
         
         &:focus {
           border-color : v.$accentColorReact !important;
@@ -900,7 +902,8 @@ body {
     input {
       &:not(.dropdown) {
         color  : v.$inputTextColor;
-        border : 1px solid v.$borderColorDefault;
+        //border : 1px solid v.$borderColorDefault;
+        border: none;
         
         &:focus {
           border-color : v.$accentColorInsta !important;
@@ -1205,7 +1208,8 @@ body {
     input {
       &:not(.dropdown) {
         color  : v.$inputTextColor;
-        border : 1px solid v.$borderColorDefault;
+        //border : 1px solid v.$borderColorDefault;
+        border: none;
         
         &:focus {
           border-color : v.$accentColorTwitch !important;

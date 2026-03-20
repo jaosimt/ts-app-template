@@ -35,36 +35,50 @@ const DemoButton: FC<{ theme: ThemeProp }> = ({theme}) => {
     return <div data-component={'button-demo'}>
         <div className="demo-section">
             <div className={'demo-section-left'}>
-                <h2 className={'mt-0 pb-0p5 text-align-left display-flex gap-1'}
-                    style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>{`<Button />`}</h2>
-                <Button
-                    icon={icon ? IoIosSave : undefined}
-                    disabled={props.disabled || modal}
-                    align={props.align}
-                    width={props.width}
-                    onClick={() => {
-                        buttonTextRef.current = 'primary';
-                        setModal(true);
-                    }}
-                >
-                    Primary Button
-                </Button>
-                <Button
-                    className={'default'}
-                    icon={icon ? IoIosSave : undefined}
-                    disabled={props.disabled || modal}
-                    align={props.align}
-                    width={props.width}
-                    onClick={() => {
-                        buttonTextRef.current = 'secondary';
-                        setModal(true);
-                    }}
-                >
-                    Secondary Button
-                </Button>
+                <h2
+                    className={'mt-0 pb-0p5 text-align-left'}
+                    style={{borderBottom: `1px solid ${getBorderColor(theme)}`}}>
+                    {`<Button />`}
+                </h2>
+                <div className={'display-flex gap-1 flex-wrap'}>
+                    <Button
+                        icon={icon ? IoIosSave : undefined}
+                        disabled={props.disabled || modal}
+                        align={props.align}
+                        width={props.width}
+                        onClick={() => {
+                            buttonTextRef.current = 'primary';
+                            setModal(true);
+                        }}
+                    >
+                        Primary Button
+                    </Button>
+                    <Button
+                        className={'default'}
+                        icon={icon ? IoIosSave : undefined}
+                        disabled={props.disabled || modal}
+                        align={props.align}
+                        width={props.width}
+                        onClick={() => {
+                            buttonTextRef.current = 'secondary';
+                            setModal(true);
+                        }}
+                    >
+                        Secondary Button
+                    </Button>
+                </div>
+
             </div>
             <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
+                <Dropdown
+                    labelWidth={'50%'}
+                    options={alignOptions}
+                    selected={props.align}
+                    label={'align'}
+                    onChange={(value: string) => dropDownChangeHandler('align', value)}
+                    disablePredicate={(option: string) => option === 'space-between' && !icon}
+                />
                 <Checkbox
                     className={'width-100p'}
                     labelWidth={'50%'}
@@ -81,14 +95,6 @@ const DemoButton: FC<{ theme: ThemeProp }> = ({theme}) => {
                     name={'disabled'}
                     checked={icon}
                     onChange={(e: any) => setIcon(e.currentTarget.checked)}/>
-                <Dropdown
-                    labelWidth={'50%'}
-                    options={alignOptions}
-                    selected={props.align}
-                    label={'align'}
-                    onChange={(value: string) => dropDownChangeHandler('align', value)}
-                    disablePredicate={(option: string) => option === 'space-between' && !icon}
-                />
                 <InputField
                     labelWidth={'50%'}
                     label={'width'}

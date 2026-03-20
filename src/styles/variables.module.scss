@@ -45,7 +45,7 @@ $borderColorDark                : rgb(150 150 150);
 $backgroundColorDefault         : #fefcff;
 
 $inputTextColor                 : #252a2b;
-$errorColor                     : #1c2127;
+$errorColor                     : red;
 
 /* ******* BELOW IS DEPENDENT ON THE ACCENT COLOR : DO NOT EDIT THEM DIRECTLY ******* */
 $buttonPrimaryColorReact        : $accentColorReact;
@@ -76,7 +76,21 @@ $buttonDefaultHoverColorTwitch  : $buttonPrimaryHoverColorTwitch;
 $buttonDefaultTextColorTwitch   : $buttonPrimaryColorTwitch;
 $buttonDefaultBorderColorTwitch : $buttonDefaultTextColorTwitch;
 
+$labelPadding                   : 0.5rem;
+$labelPaddingSmall              : 0.3rem;
+$inputHeight                    : 33px;
+$inputHeightSmall               : 28px;
+$inputBorderRadius              : 0.3rem;
+$shadowMargin                   : 0 0.3rem;
+
 :export {
+  labelPadding                   : $labelPadding;
+  labelPaddingSmall              : $labelPaddingSmall;
+  inputHeight                    : $inputHeight;
+  inputHeightSmall               : $inputHeightSmall;
+  inputBorderRadius              : $inputBorderRadius;
+  shadowMargin                   : $shadowMargin;
+  
   codeFontFamily                 : $codeFontFamily;
   textColor                      : $textColor;
   textColorDark                  : $textColorDark;
