@@ -169,15 +169,17 @@ const DemoBox: FC<{ theme: ThemeProp }> = ({theme}) => {
                     width={50}
                     label={'width'}
                     fieldRegister={register('width', {onChange: propsChangeHandler})}/>
-                <div className={'display-flex align-items-center'}>
-                    <Checkbox
-                        labelWidth={'50%'}
-                        disabled={!isString(props.label, true)}
-                        label={'onLabelClick'}
-                        labelPosition={'left'}
-                        name={'onLabelClick'}
-                        checked={onLabelClick}
-                        onChange={(e: any) => setOnLabelClick(e.currentTarget.checked)}/>
+                <Checkbox
+                    className={'width-100p'}
+                    labelWidth={'50%'}
+                    disabled={!isString(props.label, true)}
+                    label={'onLabelClick'}
+                    labelPosition={'left'}
+                    name={'onLabelClick'}
+                    checked={onLabelClick}
+                    onChange={(e: any) => setOnLabelClick(e.currentTarget.checked)}/>
+                <div className={'display-flex'}>
+                    <span style={{width: '50%'}}/>
                     <span className={'font-size-small color-light-gray ml-0p5'}>{`() => alert('Hello, world!')`}</span>
                 </div>
             </div>

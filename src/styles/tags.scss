@@ -50,15 +50,17 @@ textarea {
   overflow-y    : auto;
 }
 
+input { height : v.$inputHeight; }
+textarea { min-height : v.$inputHeight; }
+
 textarea,
 input {
   &:not([class*="dropdown"]) {
-    padding : 0.5rem;
+    padding : v.$labelPadding;
   }
   
   min-width     : 50px;
   border-radius : 0.3rem;
-  min-height    : 33px;
   
   &::placeholder {
     opacity : 0.3;
@@ -75,8 +77,9 @@ input {
   }
   
   @media (max-width : 768px) {
-    min-height : 28px;
-    padding    : 0.3rem;
+    input { height : v.$inputHeightSmall; }
+    textarea { min-height : v.$inputHeightSmall; }
+    padding    : v.$labelPaddingSmall
   }
 }
 

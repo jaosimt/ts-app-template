@@ -7,6 +7,7 @@
   
   > .demo-section-left {
     width         : 63%;
+    min-width     : 250px;
     overflow      : auto;
     border-radius : 0.4rem;
     padding       : 2rem;
@@ -27,6 +28,7 @@
     flex-direction : column;
     gap            : 0.5rem;
     width          : 37%;
+    min-width      : 250px;
     overflow       : auto;
     padding-right  : 2rem;
     

@@ -1,16 +1,17 @@
-import { FC, InputHTMLAttributes, memo } from 'react';
+import { FC, InputHTMLAttributes, memo, useRef } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSUnit } from '../../../constants/types';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
-import { parseCSSUnit } from '../../../utils';
-import { getButtonPrimaryColor } from '../../../utils/themeUtils';
+import { getRandStr, parseCSSUnit } from '../../../utils';
+import { getAccentColor, getButtonPrimaryColor } from '../../../utils/themeUtils';
+import v from '../../../styles/variables.module.scss';
 
-export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{
-    name: string|undefined;
-    checked: boolean|undefined;
+export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
+    name: string | undefined;
+    checked: boolean | undefined;
     label?: string;
     labelWidth?: CSSUnit;
     disabled?: boolean;
@@ -19,15 +20,45 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>{
     theme?: ThemeProp;
 }
 
-const CheckboxContainer = styled.div<{disabled: boolean}>`
+const CheckboxContainer = styled.div<{
+    $disabled: boolean,
+    $theme: ThemeProp | undefined,
+}>`
     display: inline-flex;
     align-items: center;
     overflow: hidden;
-    height: 33px;
-    padding: 0 0.3rem;
+    border: 1px solid ${props => getButtonPrimaryColor(props.$theme as ThemeProp)};
+    border-radius: ${v.inputBorderRadius};
+    box-shadow: ${props => `0 0 7px ${getAccentColor(props.$theme as ThemeProp)}`};
+    
+    ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
+`;
+
+const Container = styled.label<{
+    $disabled: boolean
+}>`
+    display: flex;
+    gap: ${parseCSSUnit(v.labelPadding as CSSUnit)} 0;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: ${props => props.$disabled ? 'default' : 'pointer'};
+    user-select: none;
+    width: fit-content;
+    min-height: ${v.inputHeight};
+   
+    &:hover {
+        > ${CheckboxContainer} {
+            ${props => !props.$disabled && 'opacity: 0.7'};
+        }
+    }
+
+    &[disabled=true] {
+        > div { opacity: 0.3; }
+    }
 
     @media (max-width: 768px) {
-        height: 28px;
+        font-size: small;
+        min-height: ${v.inputHeightSmall};
     }
 `;
 
@@ -51,47 +82,53 @@ const HiddenCheckbox = styled.input.attrs({type: 'checkbox'})`
     width: 1px;
 `;
 
-const Label = styled.label<{disabled: boolean}>`
-    cursor: ${props => props.disabled ? 'default' : 'pointer'};
-    user-select: none;
-    display: inline-flex;
-    align-items: center;
-    width: fit-content;
-    
-    &:hover {
-        > ${CheckboxContainer} {
-            ${props => !props.disabled && 'opacity: 0.7'};   
-        }
-    }
-    
-    &[disabled] {
-        > div { opacity: 0.3; }
-    }
-
-    @media (max-width: 768px) {
-        font-size: small;
-    }
-`;
-
 const StyledCheckbox = styled.div<{
     $checked: boolean | undefined,
     $disabled: boolean,
     $theme: ThemeProp,
 }>`
-    box-shadow: 0 0 7px #fff;
     display: inline-block;
     width: 21px;
     height: 21px;
-    border-radius: 4px;
-    border: 1px solid ${props => getButtonPrimaryColor(props.$theme)};
     background-color: ${props => props.$checked ? getButtonPrimaryColor(props.$theme) : 'white'};
     transition: all 150ms;
-    
+
     ${Icon} {
         visibility: ${props => (props.$checked ? 'visible' : 'hidden')}
     }
-    
-    ${props => props.$disabled && 'opacity: 0.7; pointer-events: none;'}
+`;
+
+const Label = styled.span<{
+    $width: CSSUnit | undefined,
+    $position: 'left' | 'right' | undefined,
+}>`
+    line-height: 1.2;
+    min-width: fit-content;
+    ${props => {
+        let styles;
+        switch (props.$position) {
+            case 'left':
+                styles = `padding-right: ${parseCSSUnit(v.labelPadding as CSSUnit)};`;
+                break;
+            default:
+                styles = `padding-left: ${parseCSSUnit(v.labelPadding as CSSUnit)};`;
+        }
+
+        styles += `width: ${parseCSSUnit(props.$width as CSSUnit)};`;
+
+        return styles;
+    }};
+
+    @media (max-width: 768px) {
+        ${props => {
+            switch (props.$position) {
+                case 'left':
+                    return `padding-right: ${parseCSSUnit(v.labelPadding as CSSUnit)};`;
+                default:
+                    return `padding-left: ${parseCSSUnit(v.labelPadding as CSSUnit)};`;
+            }
+        }};
+    }
 `;
 
 const Checkbox: FC<CheckboxProps> = (props) => {
@@ -107,19 +144,23 @@ const Checkbox: FC<CheckboxProps> = (props) => {
         theme
     } = props;
 
-    return <Label disabled={disabled} className={className}>
-        {label && labelPosition === 'left' && <span style={{minWidth: 'fit-content', width: parseCSSUnit(labelWidth as CSSUnit)}}>{label}</span>}
-        <CheckboxContainer disabled={disabled}>
-            <HiddenCheckbox disabled={disabled} name={name} checked={checked} onChange={onChange}/>
+    const idRef = useRef<string>(getRandStr(21));
+
+    return <Container data-component={'checkbox'} htmlFor={`i-${idRef.current}`} $disabled={disabled}
+                      className={className}>
+        {label && labelPosition !== 'right' && <Label $width={labelWidth} $position={labelPosition}>{label}</Label>}
+        <CheckboxContainer $theme={theme} className={'checkbox-container'} $disabled={disabled}>
+            <HiddenCheckbox id={`i-${idRef.current}`} disabled={disabled} name={name} checked={checked}
+                            onChange={onChange}/>
             <StyledCheckbox $theme={theme as ThemeProp} $disabled={disabled} $checked={checked}>
                 <Icon viewBox="0 0 24 24">
                     <polyline points="20 6 9 17 4 12"/>
                 </Icon>
             </StyledCheckbox>
         </CheckboxContainer>
-        {label && labelPosition !== 'left' && <span style={{width: parseCSSUnit(labelWidth as CSSUnit), marginLeft: '0.3rem'}}>{label}</span>}
-    </Label>
-}
+        {label && labelPosition === 'right' && <Label $width={labelWidth} $position={labelPosition}>{label}</Label>}
+    </Container>;
+};
 
 const mapStateToProps = (state: RootState) => ({
     theme: getTheme(state),
