@@ -437,5 +437,4 @@ export const hashCode = (s: any) =>
             return a & a;
         }, 0);
 
-
 export const hasHorizontalScrollbar = (element: HTMLElement) => element.scrollWidth > element.clientWidth;

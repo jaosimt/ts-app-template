@@ -72,15 +72,13 @@ const tabItems: TabItemType[] = [
     }
 ]
 
-// TODO: FIX ME!!!!
-
 const meta = {
     title: 'Custom Components/Tabs',
     component: Tabs,
     parameters: {
         controls: { exclude: ['data', 'children', 'id', 'theme', 'rememberActiveTab', 'onTabChange'] },
     },
-    tags: ['autodocs'],
+    // tags: ['autodocs'],
     argTypes: {
         type: {
             control: 'select',

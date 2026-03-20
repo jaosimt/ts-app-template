@@ -1,3 +1,3 @@
 export interface ThemeProp {
-    theme: 'dark' | 'light';
+    theme: 'dark' | 'react' | 'insta' | 'twitch';
 }
