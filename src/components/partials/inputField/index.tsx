@@ -5,16 +5,11 @@ import { FaCircleXmark } from 'react-icons/fa6';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 import '../../../styles/tippy.scss';
-import { connect } from 'react-redux';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSColors, CSSUnit } from '../../../constants/types';
-import { getTheme } from '../../../slices/theme';
-import { RootState } from '../../../store';
 import { classNames, parseCSSUnit } from '../../../utils';
 import { v4 as uuidv4 } from 'uuid';
-import {
-    getButtonDefaultBorderColor
-} from '../../../utils/themeUtils';
+import { getButtonDefaultBorderColor } from '../../../utils/themeUtils';
 import { ReactIcon } from '../index';
 import styled from 'styled-components';
 import v from '../../../styles/variables.module.scss';
@@ -76,6 +71,7 @@ const InputWrapper = styled.div<{
     display: flex;
     position: relative;
     border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
+    box-shadow: ${props => `0 0 7px ${getButtonDefaultBorderColor(props.$theme as ThemeProp)}`};
     border-radius: ${v.inputBorderRadius};
 
     > input { height: ${v.inputHeight}; }
@@ -85,7 +81,6 @@ const InputWrapper = styled.div<{
     > textarea,
     > input {
         padding: ${v.inputPadding};
-        box-shadow: ${props => `0 0 7px ${getButtonDefaultBorderColor(props.$theme as ThemeProp)}`};
         min-width: 50px;
         border-radius: 0.3rem;
     }
@@ -148,8 +143,6 @@ const InputField: FC<InputFieldProps> = (props) => {
         opacity: 0
     });
 
-    // TODO: FIX ERROR POPPING
-
     const fieldName = fieldRegister?.name || restProps?.name || 'unnamed';
     const idRef = useRef(`${fieldName}-${uuidv4()}`);
     const inputRef = useRef(null as HTMLInputElement | null as HTMLTextAreaElement | null);
@@ -191,7 +184,6 @@ const InputField: FC<InputFieldProps> = (props) => {
                     className={classNames(className && '', error && 'border-error')}
                     id={`i-${idRef.current}`}
                     ref={(e: any) => {
-                        console.log('e:', e);
                         ref && ref(e);
                         inputRef.current = e;
                     }}
@@ -213,7 +205,6 @@ const InputField: FC<InputFieldProps> = (props) => {
                     className={classNames(className && '', error && 'border-error')}
                     id={`i-${idRef.current}`}
                     ref={(e: any) => {
-                        console.log('e:', e);
                         ref && ref(e);
                         inputRef.current = e;
                     }}
@@ -243,8 +234,4 @@ const InputField: FC<InputFieldProps> = (props) => {
     </Container>;
 };
 
-const mapStateToProps = (state: RootState) => ({
-    theme: getTheme(state),
-});
-
-export default connect(mapStateToProps)(memo(InputField));
+export default memo(InputField);
