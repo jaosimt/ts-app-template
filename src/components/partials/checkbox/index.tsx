@@ -6,7 +6,7 @@ import { CSSUnit } from '../../../constants/types';
 import { getTheme } from '../../../slices/theme';
 import { RootState } from '../../../store';
 import { getRandStr, parseCSSUnit } from '../../../utils';
-import { getAccentColor, getButtonPrimaryColor } from '../../../utils/themeUtils';
+import { getButtonPrimaryColor, getLightShadow } from '../../../utils/themeUtils';
 import v from '../../../styles/variables.module.scss';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -29,7 +29,7 @@ const CheckboxContainer = styled.div<{
     overflow: hidden;
     border: 1px solid ${props => getButtonPrimaryColor(props.$theme as ThemeProp)};
     border-radius: ${v.inputBorderRadius};
-    box-shadow: ${props => `0 0 7px ${getAccentColor(props.$theme as ThemeProp)}`};
+    box-shadow: ${props => `0 0 7px ${getLightShadow(props.$theme as ThemeProp)}`};
     
     ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
 `;

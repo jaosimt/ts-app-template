@@ -54,6 +54,7 @@ $buttonPrimaryBorderColorReact  : $buttonPrimaryHoverColorReact;
 $buttonDefaultHoverColorReact   : $buttonPrimaryHoverColorReact;
 $buttonDefaultTextColorReact    : $buttonPrimaryColorReact;
 $buttonDefaultBorderColorReact  : $buttonDefaultTextColorReact;
+$lightShadowReact               : rgba($buttonPrimaryColorReact, 0.3);
 
 $buttonPrimaryColorDark         : $accentColorDark;
 $buttonPrimaryHoverColorDark    : rgba($buttonPrimaryColorDark, 0.5);
@@ -61,6 +62,7 @@ $buttonPrimaryBorderColorDark   : $buttonPrimaryHoverColorDark;
 $buttonDefaultHoverColorDark    : $buttonPrimaryHoverColorDark;
 $buttonDefaultTextColorDark     : $buttonPrimaryColorDark;
 $buttonDefaultBorderColorDark   : $buttonDefaultTextColorDark;
+$lightShadowDark                : rgba($buttonPrimaryColorDark, 0.3);
 
 $buttonPrimaryColorInsta        : $accentColorInsta;
 $buttonPrimaryHoverColorInsta   : rgba($buttonPrimaryColorInsta, 0.5);
@@ -68,6 +70,7 @@ $buttonPrimaryBorderColorInsta  : $buttonPrimaryHoverColorInsta;
 $buttonDefaultHoverColorInsta   : $buttonPrimaryHoverColorInsta;
 $buttonDefaultTextColorInsta    : $buttonPrimaryColorInsta;
 $buttonDefaultBorderColorInsta  : $buttonDefaultTextColorInsta;
+$lightShadowInsta               : rgba($buttonPrimaryColorInsta, 0.3);
 
 $buttonPrimaryColorTwitch       : $accentColorTwitch;
 $buttonPrimaryHoverColorTwitch  : rgba($buttonPrimaryColorTwitch, 0.5);
@@ -75,6 +78,7 @@ $buttonPrimaryBorderColorTwitch : $buttonPrimaryHoverColorTwitch;
 $buttonDefaultHoverColorTwitch  : $buttonPrimaryHoverColorTwitch;
 $buttonDefaultTextColorTwitch   : $buttonPrimaryColorTwitch;
 $buttonDefaultBorderColorTwitch : $buttonDefaultTextColorTwitch;
+$lightShadowTwitch              : rgba($buttonPrimaryColorTwitch, 0.3);
 
 $labelPadding                   : 0.5rem;
 $labelPaddingSmall              : 0.3rem;
@@ -84,6 +88,11 @@ $inputBorderRadius              : 0.3rem;
 $shadowMargin                   : 0 0.3rem;
 
 :export {
+  lightShadowReact               : $lightShadowReact;
+  lightShadowDark                : $lightShadowDark;
+  lightShadowInsta               : $lightShadowInsta;
+  lightShadowTwitch              : $lightShadowTwitch;
+  
   labelPadding                   : $labelPadding;
   labelPaddingSmall              : $labelPaddingSmall;
   inputHeight                    : $inputHeight;

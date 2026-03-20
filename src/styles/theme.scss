@@ -13,6 +13,12 @@ body {
       footer {
         background-color : v.$accentColorDark;
       }
+      
+      @media (max-width : 768px) {
+        header {
+          background-color : v.$accentColorDark;
+        }
+      }
     }
     
     .marquee {
@@ -320,6 +326,12 @@ body {
       footer {
         background-color : v.$accentColorReact;
       }
+      
+      @media (max-width : 768px) {
+        header {
+          background-color : v.$accentColorReact;
+        }
+      }
     }
     
     .marquee {
@@ -626,6 +638,12 @@ body {
       footer {
         background-color : v.$accentColorInsta;
       }
+      
+      @media (max-width : 768px) {
+        header {
+          background-color : v.$accentColorInsta;
+        }
+      }
     }
     
     .marquee {
@@ -931,6 +949,12 @@ body {
     #react-ts-template {
       footer {
         background-color : v.$accentColorTwitch;
+      }
+      
+      @media (max-width : 768px) {
+        header {
+          background-color : v.$accentColorTwitch;
+        }
       }
     }
     
