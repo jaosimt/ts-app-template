@@ -72,8 +72,6 @@ const tabItems: TabItemType[] = [
     }
 ]
 
-// TODO: FIX ME!!!!
-
 const meta = {
     title: 'Custom Components/Tabs',
     component: Tabs,
