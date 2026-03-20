@@ -25,6 +25,10 @@ const meta = {
             control: 'select',
             options: ['small', 'medium', 'large']
         },
+        border: {
+            control: 'select',
+            options: [true, false, 'label-only']
+        }
     }
 } satisfies Meta<BoxProps>;
 
