@@ -13,7 +13,7 @@ const meta = {
     component: Box,
     parameters: {
         layout: 'centered',
-        controls: { exclude: ['children', 'options'] },
+        controls: { exclude: ['children'] },
     },
     tags: ['autodocs'],
     argTypes: {
@@ -35,6 +35,9 @@ export const Default: Story = {
     args: {
         children: <h1>Box</h1>,
     },
+    parameters: {
+        controls: { exclude: ['labelPosition', 'labelSize', 'children'] },
+    }
 };
 
 export const Propped: Story = {

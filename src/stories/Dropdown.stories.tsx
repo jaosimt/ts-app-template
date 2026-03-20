@@ -23,7 +23,6 @@ const meta = {
         // layout: 'centered',
         controls: {exclude: ['children', 'options', 'selected']},
     },
-    // tags: ['autodocs'],
 } satisfies Meta<DropdownProps>;
 
 export default meta;
