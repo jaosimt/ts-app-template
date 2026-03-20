@@ -4,7 +4,6 @@ import { FaChevronDown } from 'react-icons/fa6';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
-import { Theme } from '../../../constants';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSUnit } from '../../../constants/types';
 import { useKeyPress, useOnScroll } from '../../../hooks';
@@ -34,6 +33,7 @@ export interface DropdownProps {
     maxDropdownHeight?: CSSUnit;
     disablePredicate?: Function;
     theme?: ThemeProp;
+    storyTheme?: ThemeProp
 }
 
 export type DropdownObjectOptions = {
@@ -207,8 +207,11 @@ const Dropdown: FC<DropdownProps> = (props) => {
         icon,
         onChange,
         disablePredicate,
-        theme = Theme.TWITCH
+        theme: prop_theme,
+        storyTheme
     } = props;
+
+    const theme = storyTheme || prop_theme;
 
     const idRef = useRef<string>(getRandStr(21));
     const listRef = useRef<any>(null);
@@ -326,6 +329,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
 
     return <Container
         data-component={'dropdown'}
+        data-theme={theme}
         className={className}
     >
         {label && <Label

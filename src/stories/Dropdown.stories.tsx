@@ -13,6 +13,7 @@ import '../styles/common.scss';
 import '../styles/animations.scss';
 import '../styles/theme.scss';
 import '../styles/tippy.scss';
+import { Theme } from '../constants';
 
 const icons = {IoIosArrowDropdown, IoIosArrowDropdownCircle, IoMdArrowDropdown, RiDropdownList, RxDropdownMenu};
 
@@ -80,9 +81,14 @@ export const Propped: Story = {
             options: Object.keys(icons),
             mapping: icons,
             control: { type: 'select' },
+        },
+        storyTheme: {
+            control: 'select',
+            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK]
         }
     },
     args: {
+        storyTheme: Theme.REACT,
         label: 'My Object Dropdown',
         selected: ddOOptions[0],
         options: ddOOptions,
