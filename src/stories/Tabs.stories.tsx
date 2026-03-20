@@ -78,7 +78,7 @@ const meta = {
     title: 'Custom Components/Tabs',
     component: Tabs,
     parameters: {
-        controls: { exclude: ['data', 'children'] },
+        controls: { exclude: ['data', 'children', 'id', 'theme', 'rememberActiveTab', 'onTabChange'] },
     },
     tags: ['autodocs'],
     argTypes: {
@@ -86,6 +86,9 @@ const meta = {
             control: 'select',
             options: ['boxed', 'boxed-content', 'boxed-tabs', 'plain']
         },
+        activeItemColor: {
+            control: 'color'
+        }
     }
 } satisfies Meta<TabItemProps>;
 
@@ -95,10 +98,11 @@ type Story = StoryObj<typeof meta>;
 export const Propped: Story = {
     args: {
         data: tabItems,
-        type: 'boxed',
-        width: 500,
-        activeItemColor: 'red',
+        type: "boxed",
+        width: 700,
+        activeItemColor: 'black',
         moveSelectedOnScroll: true,
         contentPadding: 14,
+        minContentHeight: 250
     },
 };

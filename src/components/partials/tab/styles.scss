@@ -118,7 +118,23 @@ $tabBorderRadius : 0.2rem;
   
   &.boxed {
     > .tab-items {
-      padding-top : 0.2rem;
+      padding-top      : 0.2rem;
+      background-color : gainsboro;
+      
+      .tab-item {
+        &.active {
+          background-color : #fff;
+          border-bottom    : 2px solid #fff;
+        }
+        
+        &:not(.active) {
+          border-color : transparent;
+          
+          &:hover {
+            background-color : rgba(255, 255, 255, 0.6);
+          }
+        }
+      }
     }
     
     .tab-content {
@@ -130,10 +146,20 @@ $tabBorderRadius : 0.2rem;
   
   &.boxed-content {
     > .tab-items {
+      border : none;
+      
       > .tab-items-wrapper {
         > .tab-item {
           &.active {
-            border-bottom-width : 2px;
+            border-bottom : 2px solid #fff;
+          }
+          
+          &:not(.active) {
+            border-color : transparent;
+            
+            &:hover {
+              background-color : rgba(204, 204, 204, 0.11);
+            }
           }
         }
       }
@@ -147,10 +173,18 @@ $tabBorderRadius : 0.2rem;
   
   &.boxed-tabs {
     > .tab-items {
+      border : none;
+      
       > .tab-items-wrapper {
         > .tab-item {
           &.active {
-            border-bottom-width : 2px;
+            border-bottom : 2px solid #fff;
+          }
+          
+          &:not(.active) {
+            &:hover {
+              background-color : rgba(204, 204, 204, 0.11);
+            }
           }
         }
       }
@@ -163,10 +197,33 @@ $tabBorderRadius : 0.2rem;
   }
   
   &.plain {
+    > .tab-items {
+      border : none;
+      
+      > .tab-items-wrapper {
+        > .tab-item {
+          border-color : transparent;
+          
+          &.active {
+            color: #007695;
+          }
+          
+          &:not(.active) {
+            &:hover {
+              color: #007695;
+            }
+          }
+        }
+      }
+    }
+    
     > .tab-content {
       padding          : 0.7rem 0 0 0;
       border-radius    : 0;
       background-color : inherit;
+      border-right     : none;
+      border-bottom    : none;
+      border-left      : none;
     }
   }
 }
