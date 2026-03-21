@@ -56,7 +56,6 @@ const Container = styled.div<{
     gap: ${parseCSSUnit(v.labelPadding as CSSUnit)} 0;
 
     @media (max-width: 768px) {
-        height: 28px;
         font-size: small;
     }
 `;
