@@ -78,7 +78,7 @@ const meta = {
     parameters: {
         controls: { exclude: ['data', 'children', 'id', 'theme', 'rememberActiveTab', 'onTabChange'] },
     },
-    // tags: ['autodocs'],
+    tags: ['autodocs'],
     argTypes: {
         type: {
             control: 'select',
@@ -93,11 +93,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Default: Story = {
+    args: {
+        data: tabItems
+    }
+};
+
 export const Propped: Story = {
     args: {
         data: tabItems,
         type: "boxed",
-        width: 700,
+        width: '100%',
         activeItemColor: 'black',
         moveSelectedOnScroll: true,
         contentPadding: 14,

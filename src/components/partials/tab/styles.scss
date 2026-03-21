@@ -72,6 +72,7 @@ $tabBorderRadius : 0.2rem;
         &.active + .tab-item { border-left-width : 0; }
         
         &.active {
+          border-color      : #000;
           border-left-width : 1px;
           margin-top        : 0;
           z-index           : 1;
@@ -182,6 +183,9 @@ $tabBorderRadius : 0.2rem;
           }
           
           &:not(.active) {
+            border-color        : gainsboro;
+            border-bottom-color : transparent;
+            
             &:hover {
               background-color : rgba(204, 204, 204, 0.11);
             }
@@ -205,12 +209,12 @@ $tabBorderRadius : 0.2rem;
           border-color : transparent;
           
           &.active {
-            color: #007695;
+            color : #007695;
           }
           
           &:not(.active) {
             &:hover {
-              color: #007695;
+              color : #007695;
             }
           }
         }

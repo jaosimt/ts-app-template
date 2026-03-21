@@ -15,7 +15,7 @@ const meta = {
         layout: 'centered',
         controls: { exclude: ['children'] },
     },
-    // tags: ['autodocs'],
+    tags: ['autodocs'],
     argTypes: {
         labelPosition: {
             control: 'select',
@@ -48,10 +48,10 @@ export const Propped: Story = {
     args: {
         children: <h1>Box</h1>,
         label: 'My Box',
-        backgroundColor: 'red',
+        backgroundColor: "#fff",
         borderColor: 'red',
-        labelColor: 'red',
-        labelBackgroundColor: 'white',
+        labelColor: "#fff",
+        labelBackgroundColor: "red",
         borderRadius: 7,
         padding: 14,
         width: 300,
