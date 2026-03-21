@@ -170,7 +170,6 @@ const InputField: FC<InputFieldProps> = (props) => {
 
     return <Container
         data-component={'input-field'}
-        data-theme={theme}
         aria-label={'InputField Component'}
         className={wrapperClassName}>
         {

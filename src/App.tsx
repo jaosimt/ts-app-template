@@ -243,6 +243,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                         <div className={'display-flex justify-content-space-between mb-2'}>
                             <Button icon={FaChevronLeft} className={'display-none'} onClick={sidePanelHandler}/>
                             <Dropdown
+                                dropShadow={'#fff'}
                                 className={'-mr-0p3'}
                                 valueClassName={'capitalize'}
                                 selected={selectedTheme}

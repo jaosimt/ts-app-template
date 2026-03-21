@@ -4,7 +4,7 @@ import { FaChevronDown } from 'react-icons/fa6';
 import styled from 'styled-components';
 import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
 import { ThemeProp } from '../../../constants/interfaces';
-import { CSSUnit } from '../../../constants/types';
+import { CSSColors, CSSUnit } from '../../../constants/types';
 import { useAppSelector, useKeyPress, useOnScroll } from '../../../hooks';
 import { getTheme } from '../../../slices/theme';
 import { classNames, getRandStr, isObject, parseCSSUnit, Round } from '../../../utils';
@@ -31,6 +31,7 @@ export interface DropdownProps {
     maxDropdownHeight?: CSSUnit;
     disablePredicate?: Function;
     theme?: ThemeProp;
+    dropShadow?: CSSColors;
 }
 
 export type DropdownObjectOptions = {
@@ -82,8 +83,9 @@ const Wrapper = styled.div<{
     $show: boolean;
     $disabled?: boolean;
     $theme?: ThemeProp;
+    $dropShadow?: CSSColors;
 }>`
-    box-shadow: 0 0 7px ${props => getLightShadow(props.$theme as ThemeProp)};
+    box-shadow: 0 0 7px ${props => props.$dropShadow || getLightShadow(props.$theme as ThemeProp)};
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
@@ -132,8 +134,9 @@ const List = styled.div<{
     $pos: PosProp;
     $maxDropdownHeight: CSSUnit;
     $theme?: ThemeProp;
+    $dropShadow?: CSSColors;
 }>`
-    box-shadow: 0 0 7px ${props => getLightShadow(props.$theme as ThemeProp)};
+    box-shadow: 0 0 7px ${props => props.$dropShadow || getLightShadow(props.$theme as ThemeProp)};
     transition: border 0.2s ease-in-out;
     overflow-y: auto;
     z-index: 2;
@@ -210,6 +213,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
         icon,
         onChange,
         disablePredicate,
+        dropShadow,
         selected: props_selected,
         theme: props_theme
     } = props;
@@ -335,7 +339,6 @@ const Dropdown: FC<DropdownProps> = (props) => {
 
     return <Container
         data-component={'dropdown'}
-        data-theme={theme}
         aria-label={'Dropdown Component'}
         className={className}
     >
@@ -354,6 +357,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
             $disabled={disabled}
             $show={show}
             $theme={theme}
+            $dropShadow={dropShadow}
             onClick={() => setShow(!show)}
         >
             <InputWrapper $theme={theme}>
@@ -385,6 +389,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
                 $pos={dropDownPos}
                 $maxDropdownHeight={maxDropdownHeight as CSSUnit}
                 $theme={theme}
+                $dropShadow={dropShadow}
             >
                 {
                     options.map((o: any) => <Option
