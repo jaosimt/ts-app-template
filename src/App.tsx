@@ -4,7 +4,6 @@ import { FaChevronLeft, FaInstagram, FaReact } from 'react-icons/fa6';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoIosMoon } from 'react-icons/io';
 import { IoCloudOffline, IoLogoReact } from 'react-icons/io5';
-import { connect } from 'react-redux';
 import { Link, useLocation } from 'react-router';
 import styled from 'styled-components';
 import { ReactIcon } from './components/partials';
@@ -19,13 +18,12 @@ import NavigationMain from './navs';
 import NavigationDemo from './navs/demoNav';
 import ContentRouter from './routes';
 import { getError } from './slices/error';
-import { RootState } from './store';
 import { capitalize, classNames, hashCode, isMobile } from './utils';
 import './App.scss';
 import './styles/animations.scss';
 import './styles/tippy.scss';
 import { getTheme, setTheme } from './slices/theme';
-import { useAppDispatch } from './hooks';
+import { useAppDispatch, useAppSelector } from './hooks';
 import v from './styles/variables.module.scss';
 import { themedBannerBase64 } from './utils/ext';
 import { getAccentColor, getBorderColor } from './utils/themeUtils';
@@ -129,8 +127,11 @@ const appThemes = [
 
 const panelWidth = 196;
 
-const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
+const App = () => {
     const dispatch = useAppDispatch();
+
+    const theme = useAppSelector(getTheme);
+    const error = useAppSelector(getError);
 
     const [offline, setOffline] = useState(false);
     const [sidePanelWidth, setSidePanelWidth] = useState(isMobile() ? 0 : panelWidth);
@@ -226,7 +227,7 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
                         <h2 className={'m-0'}>React TypeScript Template</h2>
                     </Link>
                     {sidePanelWidth === 0 &&
-                        <Button icon={GiHamburgerMenu} className={'display-none'} onClick={sidePanelHandler}/>}
+                        <Button icon={GiHamburgerMenu} onClick={sidePanelHandler}/>}
                 </Header>
                 <Main $theme={theme} $fixed={true}>
                     <ContentWrapper $padRight={!pathname.startsWith('/demo')} className="content-wrapper">
@@ -239,23 +240,21 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
             </div>
             <SidePanel style={styles} $theme={theme} className="side-panel">
                 <div className={'m-1 display-flex flex-direction-column gap-1 justify-content-space-between'} style={{height: 'calc(100% - 2rem)', marginRight: '1.5rem'}}>
-                    <div>
-                        <div className={'display-flex justify-content-space-between mb-2'}>
-                            <Button icon={FaChevronLeft} className={'display-none'} onClick={sidePanelHandler}/>
-                            <Dropdown
-                                dropShadow={'#fff'}
-                                className={'-mr-0p3'}
-                                valueClassName={'capitalize'}
-                                selected={selectedTheme}
-                                options={appThemes}
-                                onChange={(theme: DropdownObjectOptions) => {
-                                    dispatch(setTheme(theme.value as any));
-                                    sessionStorage.setItem('theme', JSON.stringify(theme));
-                                }}
-                            />
-                        </div>
-                        <NavigationMain sidePanelHandler={sidePanelHandler} theme={theme}/>
+                    <div className={'display-flex justify-content-space-between mb-2'}>
+                        <Button icon={FaChevronLeft} onClick={sidePanelHandler}/>
+                        <Dropdown
+                            dropShadow={'#fff'}
+                            className={'-mr-0p3'}
+                            valueClassName={'capitalize'}
+                            selected={selectedTheme}
+                            options={appThemes}
+                            onChange={(theme: DropdownObjectOptions) => {
+                                dispatch(setTheme(theme.value as any));
+                                sessionStorage.setItem('theme', JSON.stringify(theme));
+                            }}
+                        />
                     </div>
+                    <NavigationMain sidePanelHandler={sidePanelHandler} theme={theme}/>
                     {pathname.startsWith('/demo') && <NavigationDemo sidePanelHandler={sidePanelHandler} theme={theme}/>}
                     &nbsp;
                 </div>
@@ -265,9 +264,4 @@ const App = ({error, theme}: { error: any, theme: ThemeProp }) => {
     </>;
 };
 
-const mapStateToProps = (state: RootState) => ({
-    error: getError(state),
-    theme: getTheme(state),
-});
-
-export default connect(mapStateToProps)(App);
+export default App;
