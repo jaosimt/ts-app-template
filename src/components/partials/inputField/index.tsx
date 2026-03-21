@@ -9,8 +9,7 @@ import { ThemeProp } from '../../../constants/interfaces';
 import { CSSColors, CSSUnit } from '../../../constants/types';
 import { useAppSelector } from '../../../hooks';
 import { getTheme } from '../../../slices/theme';
-import { classNames, parseCSSUnit } from '../../../utils';
-import { v4 as uuidv4 } from 'uuid';
+import { classNames, getRandStr, parseCSSUnit } from '../../../utils';
 import { getButtonDefaultBorderColor, getLightShadow } from '../../../utils/themeUtils';
 import { ReactIcon } from '../index';
 import styled from 'styled-components';
@@ -38,6 +37,7 @@ export interface InputFieldProps extends HTMLAttributes<HTMLInputElement | HTMLT
     showErrorTooltipOnCreate?: boolean;
     disabled?: boolean;
     wrapperClassName?: string;
+    theme?: ThemeProp;
 }
 
 const Container = styled.div<{}>`
@@ -68,7 +68,9 @@ const Label = styled.label<{
 
 const InputWrapper = styled.div<{
     $theme?: ThemeProp;
+    $disabled?: boolean;
 }>`
+    ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
     display: flex;
     position: relative;
     border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
@@ -81,6 +83,7 @@ const InputWrapper = styled.div<{
 
     > textarea,
     > input {
+        ${props => props.$disabled && 'opacity: 1 !important;'}
         padding: ${v.inputPadding};
         min-width: 50px;
         border-radius: 0.3rem;
@@ -133,10 +136,12 @@ const InputField: FC<InputFieldProps> = (props) => {
         style,
         showErrorTooltipOnCreate = true,
         disabled = false,
+        theme: props_theme,
         ...restProps
     } = props;
 
-    const theme = useAppSelector(getTheme);
+    const _theme = useAppSelector(getTheme) as ThemeProp;
+    const theme = props_theme || _theme;
 
     const {ref, ...restFieldRegister} = fieldRegister || {};
 
@@ -146,7 +151,8 @@ const InputField: FC<InputFieldProps> = (props) => {
     });
 
     const fieldName = fieldRegister?.name || restProps?.name || 'unnamed';
-    const idRef = useRef(`${fieldName}-${uuidv4()}`);
+    const idRef = useRef(`${fieldName}-${getRandStr(7)}`);
+
     const inputRef = useRef(null as HTMLInputElement | null as HTMLTextAreaElement | null);
 
     useEffect(() => {
@@ -162,19 +168,24 @@ const InputField: FC<InputFieldProps> = (props) => {
         });
     }, [error]);
 
-    return <Container data-component={'input-field'} className={wrapperClassName}>
+    return <Container
+        data-component={'input-field'}
+        aria-label={'InputField Component'}
+        className={wrapperClassName}>
         {
             (icon || label) && <Label
+                htmlFor={idRef.current}
+                data-label={'input-field-label'}
+                aria-label={'InputField Label'}
                 $width={labelWidth}
                 $align={labelAlign}
                 $color={labelColor}
-                htmlFor={`i-${idRef.current}`}
                 className={'display-flex align-items-center gap-0p5'}>
                 {icon && <ReactIcon icon={icon} className={'align-self-center'}/>}
                 {label && label}
             </Label>
         }
-        <InputWrapper $theme={theme} className={'input-wrapper'}>
+        <InputWrapper $theme={theme} $disabled={disabled}>
             {
                 type !== 'textarea' && <input
                     disabled={disabled}
@@ -184,7 +195,7 @@ const InputField: FC<InputFieldProps> = (props) => {
                     max={max}
                     placeholder={placeHolder}
                     className={classNames(className && '', error && 'border-error')}
-                    id={`i-${idRef.current}`}
+                    id={idRef.current}
                     ref={(e: any) => {
                         ref && ref(e);
                         inputRef.current = e;
@@ -205,7 +216,7 @@ const InputField: FC<InputFieldProps> = (props) => {
                     rows={rows || 3}
                     placeholder={placeHolder}
                     className={classNames(className && '', error && 'border-error')}
-                    id={`i-${idRef.current}`}
+                    id={idRef.current}
                     ref={(e: any) => {
                         ref && ref(e);
                         inputRef.current = e;

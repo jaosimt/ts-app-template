@@ -1,10 +1,9 @@
 import { FC, InputHTMLAttributes, memo, useRef } from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSUnit } from '../../../constants/types';
+import { useAppSelector } from '../../../hooks';
 import { getTheme } from '../../../slices/theme';
-import { RootState } from '../../../store';
 import { getRandStr, parseCSSUnit } from '../../../utils';
 import { getButtonPrimaryColor, getLightShadow } from '../../../utils/themeUtils';
 import v from '../../../styles/variables.module.scss';
@@ -141,16 +140,29 @@ const Checkbox: FC<CheckboxProps> = (props) => {
         checked,
         labelPosition,
         onChange,
-        theme
+        theme: props_theme,
     } = props;
 
-    const idRef = useRef<string>(getRandStr(21));
+    const _theme = useAppSelector(getTheme) as ThemeProp;
+    const theme = props_theme || _theme;
 
-    return <Container data-component={'checkbox'} htmlFor={`i-${idRef.current}`} $disabled={disabled}
-                      className={className}>
-        {label && labelPosition !== 'right' && <Label $width={labelWidth} $position={'left'}>{label}</Label>}
+    const fieldName = name || 'unnamed';
+    const idRef = useRef(`${fieldName}-${getRandStr(7)}`);
+
+    return <Container
+        data-component={'checkbox'}
+        aria-label={'Checkbox Component'}
+        htmlFor={idRef.current}
+        $disabled={disabled}
+        className={className}>
+        {label && labelPosition !== 'right' && <Label
+            $width={labelWidth}
+            $position={'left'}
+            data-label={'checkbox-label'}
+            aria-label={'Checkbox Label'}
+        >{label}</Label>}
         <CheckboxContainer $theme={theme} className={'checkbox-container'} $disabled={disabled}>
-            <HiddenCheckbox id={`i-${idRef.current}`} disabled={disabled} name={name} checked={checked}
+            <HiddenCheckbox id={idRef.current} disabled={disabled} name={name} checked={checked}
                             onChange={onChange}/>
             <StyledCheckbox $theme={theme as ThemeProp} $disabled={disabled} $checked={checked}>
                 <Icon viewBox="0 0 24 24">
@@ -158,12 +170,13 @@ const Checkbox: FC<CheckboxProps> = (props) => {
                 </Icon>
             </StyledCheckbox>
         </CheckboxContainer>
-        {label && labelPosition === 'right' && <Label $width={labelWidth} $position={labelPosition}>{label}</Label>}
+        {label && labelPosition === 'right' && <Label
+            $width={labelWidth}
+            $position={labelPosition}
+            data-label={'checkbox-label'}
+            aria-label={'Checkbox Label'}
+        >{label}</Label>}
     </Container>;
 };
 
-const mapStateToProps = (state: RootState) => ({
-    theme: getTheme(state),
-});
-
-export default connect(mapStateToProps)(memo(Checkbox));
+export default memo(Checkbox);

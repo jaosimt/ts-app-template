@@ -82,13 +82,13 @@ export const Propped: Story = {
             mapping: icons,
             control: { type: 'select' },
         },
-        storyTheme: {
+        theme: {
             control: 'select',
             options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK]
         }
     },
     args: {
-        storyTheme: Theme.REACT,
+        theme: Theme.REACT,
         label: 'My Object Dropdown',
         selected: ddOOptions[0],
         options: ddOOptions,

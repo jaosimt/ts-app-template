@@ -1,15 +1,13 @@
 import { FC, memo, useEffect, useRef, useState } from 'react';
 import { IconType } from 'react-icons';
 import { FaChevronDown } from 'react-icons/fa6';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
+import { useOnClickOutside } from 'usehooks-ts';
 import { ThemeProp } from '../../../constants/interfaces';
-import { CSSUnit } from '../../../constants/types';
-import { useKeyPress, useOnScroll } from '../../../hooks';
+import { CSSColors, CSSUnit } from '../../../constants/types';
+import { useAppSelector, useKeyPress } from '../../../hooks';
 import { getTheme } from '../../../slices/theme';
-import { RootState } from '../../../store';
-import { classNames, getRandStr, isObject, parseCSSUnit, Round } from '../../../utils';
+import { classNames, getRandStr, isNumber, isObject, parseCSSUnit, Round } from '../../../utils';
 import {
     getButtonDefaultBorderColor,
     getButtonDefaultHoverColor,
@@ -33,7 +31,7 @@ export interface DropdownProps {
     maxDropdownHeight?: CSSUnit;
     disablePredicate?: Function;
     theme?: ThemeProp;
-    storyTheme?: ThemeProp
+    dropShadow?: CSSColors;
 }
 
 export type DropdownObjectOptions = {
@@ -43,12 +41,14 @@ export type DropdownObjectOptions = {
 }
 
 type PosProp = {
-    left: number;
-    top: number;
+    height: number | string;
     width: number | string;
 }
 
-const Container = styled.div<{}>`
+const Container = styled.div<{
+    $zIndex: number;
+}>`
+    z-index: ${props => props.$zIndex};
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -56,7 +56,6 @@ const Container = styled.div<{}>`
     gap: ${parseCSSUnit(v.labelPadding as CSSUnit)} 0;
 
     @media (max-width: 768px) {
-        height: 28px;
         font-size: small;
     }
 `;
@@ -81,25 +80,32 @@ const Label = styled.label<{
 `;
 
 const Wrapper = styled.div<{
-    $pos: PosProp;
+    $wrapperWidth: CSSUnit;
     $show: boolean;
     $disabled?: boolean;
     $theme?: ThemeProp;
+    $dropShadow?: CSSColors;
 }>`
-    box-shadow: 0 0 7px ${props => getLightShadow(props.$theme as ThemeProp)};
-    transition: all 0.2s ease-in-out;
+    transition: all 700ms ease-in-out;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1 1 auto;
+    box-shadow: 0 0 7px ${props => props.$dropShadow || getLightShadow(props.$theme as ThemeProp)};
     cursor: pointer;
-    width: ${props => parseCSSUnit(props.$pos.width as CSSUnit)};
+    width: ${props => props.$wrapperWidth};
     border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
     border-radius: ${v.inputBorderRadius};
     background-color: ${v.backgroundColorDefault};
-    display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    height: inherit;
     color: ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
-    ${props => props.$show && 'border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent;'}
+
     ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
+    input {
+        ${props => props.$disabled && 'opacity: 0.3;'}
+    }
 `;
 
 const Input = styled.input<{ $hasIcon: boolean }>`
@@ -116,8 +122,12 @@ const Input = styled.input<{ $hasIcon: boolean }>`
 const InputWrapper = styled.div<{
     $theme?: ThemeProp;
 }>`
+    width: 100%;
     height: ${v.inputHeight};
-    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     @media (max-width: 768px) {
         height: ${v.inputHeightSmall};
     }
@@ -128,20 +138,18 @@ const List = styled.div<{
     $pos: PosProp;
     $maxDropdownHeight: CSSUnit;
     $theme?: ThemeProp;
+    $dropShadow?: CSSColors;
 }>`
-    box-shadow: 0 0 7px ${props => getLightShadow(props.$theme as ThemeProp)};
-    transition: border 0.2s ease-in-out;
     overflow-y: auto;
     z-index: 2;
     user-select: none;
     background-color: #fff;
-    border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
-    border-bottom-left-radius: 0.3rem;
-    border-bottom-right-radius: 0.3rem;
     white-space: nowrap;
-    position: fixed;
-    top: ${props => `${props.$pos.top}px`};
-    left: ${props => `${props.$pos.left}px`};
+    top: 100%;
+    left: 0;
+    opacity: ${props => props.$show ? 1 : 0};
+    width: ${props => isNumber(props.$pos.width, true) ? '100%' : parseCSSUnit(props.$pos.width as CSSUnit)};
+    height: ${props => parseCSSUnit(props.$pos.height as CSSUnit)};
     max-height: ${props => parseCSSUnit(props.$maxDropdownHeight)};
     ${props => !props.$show && 'opacity: 0; z-index: -777; pointer-events: none;'}
 `;
@@ -159,6 +167,8 @@ const Option = styled.div<{
     justify-content: space-between;
     gap: 0.5rem;
     color: ${props => getButtonDefaultTextColor(props.$theme as ThemeProp)};
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
 
     &.selected {
         cursor: default;
@@ -200,20 +210,23 @@ const Dropdown: FC<DropdownProps> = (props) => {
         name,
         disabled,
         label,
-        selected: props_selected,
         options,
         labelWidth,
         labelAlign,
         icon,
         onChange,
         disablePredicate,
-        theme: prop_theme,
-        storyTheme
+        dropShadow,
+        selected: props_selected,
+        theme: props_theme
     } = props;
 
-    const theme = storyTheme || prop_theme;
+    const _theme = useAppSelector(getTheme) as ThemeProp;
+    const theme = props_theme || _theme;
 
-    const idRef = useRef<string>(getRandStr(21));
+    const fieldName = name || 'unnamed';
+    const idRef = useRef<string>(`${fieldName}-${getRandStr(7)}`);
+
     const listRef = useRef<any>(null);
     const wrapperRef = useRef<any>(null);
 
@@ -221,45 +234,33 @@ const Dropdown: FC<DropdownProps> = (props) => {
     const [selected, setSelected] = useState<string | DropdownObjectOptions | undefined>(props_selected);
     const [show, setShow] = useState(false);
     const [dropDownPos, setDropdownPos] = useState<PosProp>({
-        left: 0,
-        top: 0,
+        height: 0,
         width: 'fit-content'
     });
 
-    const {width = 0} = useWindowSize();
     useOnClickOutside([listRef, wrapperRef], handleClickOutside);
-    useOnScroll(() => !show && setShow(false));
     useKeyPress('ArrowDown', (pressed: boolean) => arrowDownUpHandler(pressed, 'ArrowDown'));
     useKeyPress('ArrowUp', (pressed: boolean) => arrowDownUpHandler(pressed, 'ArrowUp'));
     useKeyPress('Enter', enterKeyHandler);
 
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */ // I KNOW WHAT I AM DOING!!!
     useEffect(() => {
-        if (!wrapperRef.current || !listRef.current) return;
+        if (!listRef.current || dropDownPos.width !== 'fit-content') return;
+        const width = listRef.current.clientWidth;
+        setDropdownPos({...dropDownPos, width: Round(width, 3)});
+        // eslint-disable-next-line
+    }, [listRef.current]);
 
-        const {left, bottom} = wrapperRef.current.getBoundingClientRect();
-        const {width} = listRef.current.getBoundingClientRect();
-
-        if (
-            dropDownPos.top !== Round(bottom, 3)
-            || dropDownPos.left !== Round(left, 3)
-            || dropDownPos.width !== Round(width, 3)) {
-            setDropdownPos({left: Round(left, 3), width: Round(width, 3), top: Round(bottom, 3)});
+    useEffect(() => {
+        if (show) {
+            setDropdownPos({...dropDownPos, height: 'unset'});
+            return;
         }
-    });
 
-    useEffect(() => {
-        if (show) return;
+        setDropdownPos({...dropDownPos, height: 0});
         if (JSON.stringify(scrolled) !== JSON.stringify(selected))
             setScrolled(selected);
         // eslint-disable-next-line
     }, [show]);
-
-    useEffect(() => {
-        if (!show) return;
-        setShow(false);
-        // eslint-disable-next-line
-    }, [width]);
 
     useEffect(() => {
         setSelected(props_selected);
@@ -271,6 +272,10 @@ const Dropdown: FC<DropdownProps> = (props) => {
         onChange && onChange(selected);
         // eslint-disable-next-line
     }, [selected]);
+
+    useEffect(() => {
+        console.log('dropDownPos:', dropDownPos);
+    }, [dropDownPos]);
 
     const isO = isObject(options[0]);
 
@@ -326,77 +331,86 @@ const Dropdown: FC<DropdownProps> = (props) => {
     const _selected = String(isO ? (selected as DropdownObjectOptions).value : selected);
     const _scrolled = String(isO ? (scrolled as DropdownObjectOptions).value : scrolled);
     const hasIcon = isO && (selected as DropdownObjectOptions) && (selected as DropdownObjectOptions).icon;
+    const wrapperWidth = parseCSSUnit(isNumber(dropDownPos.width, true) ? (+dropDownPos.width + 7) : dropDownPos.width as CSSUnit);
 
     return <Container
+        $zIndex={show ? 1 : 0}
         data-component={'dropdown'}
-        data-theme={theme}
+        aria-label={'Dropdown Component'}
         className={className}
     >
         {label && <Label
-            htmlFor={`i-${idRef.current}`}
+            htmlFor={idRef.current}
+            data-label={'dropdown-label'}
+            aria-label={'Dropdown Label'}
             $labelAlign={labelAlign}
             $labelWidth={labelWidth as any}>
-            {icon && <ReactIcon icon={icon}/>}
+            {icon && <ReactIcon icon={icon} />}
             {label}
         </Label>}
-        <Wrapper
-            $pos={dropDownPos}
-            ref={wrapperRef}
-            $disabled={disabled}
-            $show={show}
-            $theme={theme}
-            onClick={() => setShow(!show)}
-        >
-            <InputWrapper $theme={theme} className={'width-100p display-flex align-items-center justify-content-space-between'}>
-                {
-                    hasIcon && <ReactIcon size={21} style={{marginLeft: '0.5rem'}}
-                                          icon={(selected as DropdownObjectOptions).icon as IconType}/>
-                }
-                <Input
-                    id={`i-${idRef.current}`}
-                    className={classNames('dropdown', !hasIcon && 'ml-0p3', valueClassName)}
-                    name={name}
-                    $hasIcon={hasIcon as boolean}
-                    type={'text'}
-                    readOnly={true}
-                    value={_selected}/>
-                <ReactIcon icon={FaChevronDown} style={{
-                    transition: 'transform 300ms ease-in-out',
-                    transform: `rotate(${show ? -180 : 0}deg)`,
-                    color: 'gba(0, 123, 255, 0.63)',
-                    cursor: 'pointer',
-                    marginRight: '0.2rem',
-                    width: '21px'
-                }}/>
-            </InputWrapper>
-            <List
-                ref={listRef}
+        <div style={{
+            width: wrapperWidth,
+            height: `${v.inputHeight}`
+        }}>
+            <Wrapper
+                ref={wrapperRef}
+                $wrapperWidth={wrapperWidth}
+                $disabled={disabled}
                 $show={show}
-                $pos={dropDownPos}
-                $maxDropdownHeight={maxDropdownHeight as CSSUnit}
                 $theme={theme}
+                $dropShadow={dropShadow}
+                onClick={() => setShow(!show)}
             >
-                {
-                    options.map((o: any) => <Option
-                        $theme={theme}
-                        onClick={() => setSelected(o)}
-                        key={isO ? o.value : o}
-                        className={classNames(
-                            _selected === (isO ? o.value : o) && 'selected',
-                            _scrolled === (isO ? o.value : o) && 'scrolled',
-                            disablePredicate !== undefined && disablePredicate(o) && 'disabled'
-                        )}>
-                        {isO && o.icon && <ReactIcon icon={o.icon}/>}
-                        {isO ? o.label : o}
-                    </Option>)
-                }
-            </List>
-        </Wrapper>
+                <InputWrapper $theme={theme}>
+                    {
+                        hasIcon && <ReactIcon
+                            size={21} style={{marginLeft: '0.5rem'}}
+                            icon={(selected as DropdownObjectOptions).icon as IconType} />
+                    }
+                    <Input
+                        id={idRef.current}
+                        className={classNames('dropdown', !hasIcon && 'ml-0p3', valueClassName)}
+                        name={name}
+                        $hasIcon={hasIcon as boolean}
+                        type={'text'}
+                        readOnly={true}
+                        value={_selected} />
+                    <ReactIcon icon={FaChevronDown} style={{
+                        transition: 'transform 300ms ease-in-out',
+                        transform: `rotate(${show ? -180 : 0}deg)`,
+                        color: 'gba(0, 123, 255, 0.63)',
+                        cursor: 'pointer',
+                        marginRight: '0.3rem',
+                        width: '21px',
+                        height: '21px'
+                    }} />
+                </InputWrapper>
+                <List
+                    ref={listRef}
+                    $show={show}
+                    $pos={dropDownPos}
+                    $maxDropdownHeight={maxDropdownHeight as CSSUnit}
+                    $theme={theme}
+                    $dropShadow={dropShadow}
+                >
+                    {
+                        options.map((o: any) => <Option
+                            $theme={theme}
+                            onClick={() => setSelected(o)}
+                            key={isO ? o.value : o}
+                            className={classNames(
+                                _selected === (isO ? o.value : o) && 'selected',
+                                _scrolled === (isO ? o.value : o) && 'scrolled',
+                                disablePredicate !== undefined && disablePredicate(o) && 'disabled'
+                            )}>
+                            {isO && o.icon && <ReactIcon icon={o.icon} />}
+                            {isO ? o.label : o}
+                        </Option>)
+                    }
+                </List>
+            </Wrapper>
+        </div>
     </Container>;
 };
 
-const mapStateToProps = (state: RootState) => ({
-    theme: getTheme(state)
-});
-
-export default connect(mapStateToProps)(memo(Dropdown));
+export default memo(Dropdown);

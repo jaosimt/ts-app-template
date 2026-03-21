@@ -14,7 +14,6 @@ import Box from '../../partials/box';
 import Checkbox from '../../partials/checkbox';
 import Dropdown, { DropdownObjectOptions, DropdownProps } from '../../partials/dropdown';
 import InputField from '../../partials/inputField';
-import styled from 'styled-components';
 
 const objectOptionsCode = `[
     {label: <span className={'color-cyan'}>The quick brown fox</span>, value: 'The quick brown fox', icon: GiFox},
@@ -77,12 +76,6 @@ const alignOptions = [
         icon: RxSpaceBetweenHorizontally
     }
 ];
-
-const StyledDiv = styled.div`
-    @media (max-width: 768px) {
-        margin-top: 3rem;
-    }
-`;
 
 const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
     const {register} = useForm();
@@ -153,26 +146,24 @@ const DemoDropdown: FC<{ theme: ThemeProp }> = ({theme}) => {
                     disablePredicate={(o: string | DropdownObjectOptions) => typeof o === 'object' ? o.value === 'and I wonder who cares!' : o === 'and I wonder who cares!'}
                     onChange={dropdownChangeHandler}
                 />
-                <StyledDiv>
-                    <Box
-                        className={'mt-1'}
-                        backgroundColor={theme === Theme.DARK ? '#5e5e5e' : '#ccc'}
-                        width={'100%'}
-                        label={'selected'}
-                        labelColor={getTextColor(theme)}
-                        tight={true}
-                        border={'label-only'}
-                        labelBackgroundColor={getAccentColor(theme)}
-                        labelPosition={'top-right'}
-                    >
+                <Box
+                    className={'mt-1'}
+                    backgroundColor={theme === Theme.DARK ? '#5e5e5e' : '#ccc'}
+                    width={'100%'}
+                    label={'selected'}
+                    labelColor={getTextColor(theme)}
+                    tight={true}
+                    border={'label-only'}
+                    labelBackgroundColor={getAccentColor(theme)}
+                    labelPosition={'top-right'}
+                >
                     <pre className={'p-1'}>
                         {JSON.stringify(selected, (k, v) => {
                             if (k.startsWith('_')) return undefined;
                             return v;
                         }, 2)}
                     </pre>
-                    </Box>
-                </StyledDiv>
+                </Box>
             </div>
             <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
