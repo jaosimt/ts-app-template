@@ -240,8 +240,9 @@ const App = () => {
             </div>
             <SidePanel style={styles} $theme={theme} className="side-panel">
                 <div className={'m-1 display-flex flex-direction-column gap-1 justify-content-space-between'} style={{height: 'calc(100% - 2rem)', marginRight: '1.5rem'}}>
+                    <div>
                     <div className={'display-flex justify-content-space-between mb-2'}>
-                        <Button icon={FaChevronLeft} onClick={sidePanelHandler}/>
+                            <Button icon={FaChevronLeft} className={'display-none'} onClick={sidePanelHandler}/>
                         <Dropdown
                             dropShadow={'#fff'}
                             className={'-mr-0p3'}
@@ -255,6 +256,7 @@ const App = () => {
                         />
                     </div>
                     <NavigationMain sidePanelHandler={sidePanelHandler} theme={theme}/>
+                    </div>
                     {pathname.startsWith('/demo') && <NavigationDemo sidePanelHandler={sidePanelHandler} theme={theme}/>}
                     &nbsp;
                 </div>
