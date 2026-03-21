@@ -1,14 +1,12 @@
 import { FC, memo, useEffect, useRef, useState } from 'react';
 import { IconType } from 'react-icons';
 import { FaChevronDown } from 'react-icons/fa6';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useOnClickOutside, useWindowSize } from 'usehooks-ts';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSUnit } from '../../../constants/types';
-import { useKeyPress, useOnScroll } from '../../../hooks';
+import { useAppSelector, useKeyPress, useOnScroll } from '../../../hooks';
 import { getTheme } from '../../../slices/theme';
-import { RootState } from '../../../store';
 import { classNames, getRandStr, isObject, parseCSSUnit, Round } from '../../../utils';
 import {
     getButtonDefaultBorderColor,
@@ -33,7 +31,6 @@ export interface DropdownProps {
     maxDropdownHeight?: CSSUnit;
     disablePredicate?: Function;
     theme?: ThemeProp;
-    storyTheme?: ThemeProp
 }
 
 export type DropdownObjectOptions = {
@@ -98,8 +95,12 @@ const Wrapper = styled.div<{
     justify-content: space-between;
     height: inherit;
     color: ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
+
     ${props => props.$show && 'border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent;'}
     ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}
+    input {
+        ${props => props.$disabled && 'opacity: 0.3;'}
+    }
 `;
 
 const Input = styled.input<{ $hasIcon: boolean }>`
@@ -117,7 +118,10 @@ const InputWrapper = styled.div<{
     $theme?: ThemeProp;
 }>`
     height: ${v.inputHeight};
-    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     @media (max-width: 768px) {
         height: ${v.inputHeightSmall};
     }
@@ -200,20 +204,22 @@ const Dropdown: FC<DropdownProps> = (props) => {
         name,
         disabled,
         label,
-        selected: props_selected,
         options,
         labelWidth,
         labelAlign,
         icon,
         onChange,
         disablePredicate,
-        theme: prop_theme,
-        storyTheme
+        selected: props_selected,
+        theme: props_theme
     } = props;
 
-    const theme = storyTheme || prop_theme;
+    const _theme = useAppSelector(getTheme) as ThemeProp;
+    const theme = props_theme || _theme;
 
-    const idRef = useRef<string>(getRandStr(21));
+    const fieldName = name || 'unnamed';
+    const idRef = useRef<string>(`${fieldName}-${getRandStr(7)}`);
+
     const listRef = useRef<any>(null);
     const wrapperRef = useRef<any>(null);
 
@@ -330,36 +336,40 @@ const Dropdown: FC<DropdownProps> = (props) => {
     return <Container
         data-component={'dropdown'}
         data-theme={theme}
+        aria-label={'Dropdown Component'}
         className={className}
     >
         {label && <Label
-            htmlFor={`i-${idRef.current}`}
+            htmlFor={idRef.current}
+            data-label={'dropdown-label'}
+            aria-label={'Dropdown Label'}
             $labelAlign={labelAlign}
             $labelWidth={labelWidth as any}>
-            {icon && <ReactIcon icon={icon}/>}
+            {icon && <ReactIcon icon={icon} />}
             {label}
         </Label>}
         <Wrapper
-            $pos={dropDownPos}
             ref={wrapperRef}
+            $pos={dropDownPos}
             $disabled={disabled}
             $show={show}
             $theme={theme}
             onClick={() => setShow(!show)}
         >
-            <InputWrapper $theme={theme} className={'width-100p display-flex align-items-center justify-content-space-between'}>
+            <InputWrapper $theme={theme}>
                 {
-                    hasIcon && <ReactIcon size={21} style={{marginLeft: '0.5rem'}}
-                                          icon={(selected as DropdownObjectOptions).icon as IconType}/>
+                    hasIcon && <ReactIcon
+                        size={21} style={{marginLeft: '0.5rem'}}
+                        icon={(selected as DropdownObjectOptions).icon as IconType} />
                 }
                 <Input
-                    id={`i-${idRef.current}`}
+                    id={idRef.current}
                     className={classNames('dropdown', !hasIcon && 'ml-0p3', valueClassName)}
                     name={name}
                     $hasIcon={hasIcon as boolean}
                     type={'text'}
                     readOnly={true}
-                    value={_selected}/>
+                    value={_selected} />
                 <ReactIcon icon={FaChevronDown} style={{
                     transition: 'transform 300ms ease-in-out',
                     transform: `rotate(${show ? -180 : 0}deg)`,
@@ -367,7 +377,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
                     cursor: 'pointer',
                     marginRight: '0.2rem',
                     width: '21px'
-                }}/>
+                }} />
             </InputWrapper>
             <List
                 ref={listRef}
@@ -386,7 +396,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
                             _scrolled === (isO ? o.value : o) && 'scrolled',
                             disablePredicate !== undefined && disablePredicate(o) && 'disabled'
                         )}>
-                        {isO && o.icon && <ReactIcon icon={o.icon}/>}
+                        {isO && o.icon && <ReactIcon icon={o.icon} />}
                         {isO ? o.label : o}
                     </Option>)
                 }
@@ -395,8 +405,4 @@ const Dropdown: FC<DropdownProps> = (props) => {
     </Container>;
 };
 
-const mapStateToProps = (state: RootState) => ({
-    theme: getTheme(state)
-});
-
-export default connect(mapStateToProps)(memo(Dropdown));
+export default memo(Dropdown);
