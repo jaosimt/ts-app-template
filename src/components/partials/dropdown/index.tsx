@@ -273,10 +273,6 @@ const Dropdown: FC<DropdownProps> = (props) => {
         // eslint-disable-next-line
     }, [selected]);
 
-    useEffect(() => {
-        console.log('dropDownPos:', dropDownPos);
-    }, [dropDownPos]);
-
     const isO = isObject(options[0]);
 
     function enterKeyHandler(pressed: boolean) {
