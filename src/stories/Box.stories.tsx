@@ -40,7 +40,7 @@ export const Default: Story = {
         children: <h1>Box</h1>,
     },
     parameters: {
-        controls: { exclude: ['labelPosition', 'labelSize', 'children'] },
+        controls: { exclude: ['labelPosition', 'labelSize', 'children', 'border'] },
     }
 };
 
