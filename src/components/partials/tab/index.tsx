@@ -39,7 +39,9 @@ type TabItemsPos = {
 }
 
 // noinspection CssUnusedSymbol
-const ScrollBtn = styled.div<{}>`
+const ScrollBtn = styled.div<{
+    $theme: ThemeProp;
+}>`
     align-items: center;
     cursor: pointer;
     display: flex;
@@ -53,7 +55,9 @@ const ScrollBtn = styled.div<{}>`
     border-bottom: none;
 
     > svg {
+        background-color: white;
         border-radius: 50%;
+        color: ${props => getAccentColor(props.$theme)};
     }
 
     &.visible {
@@ -90,7 +94,9 @@ const TabItems = styled.div<{}>`
 `;
 
 // noinspection CssUnusedSymbol
-const TabItemsWrapper = styled.div`
+const TabItemsWrapper = styled.div<{
+    $theme: ThemeProp;
+}>`
     border: none;
     display: flex;
     align-items: flex-end;
@@ -116,7 +122,9 @@ const TabItemsWrapper = styled.div`
         &.active + .tab-item { border-left-width: 0; }
 
         &.active {
-            border-color: #000;
+            color: ${props => getAccentColor(props.$theme)};
+            background-color: ${v.buttonPrimaryTextColor};
+            border-bottom-color: ${v.buttonPrimaryTextColor};
             border-left-width: 1px;
             margin-top: 0;
             z-index: 1;
@@ -132,16 +140,20 @@ const TabItemsWrapper = styled.div`
 const TabContent = styled.div<{
     $padding: CSSUnit | undefined;
     $minHeight: CSSUnit | undefined;
+    $theme: ThemeProp;
 }>`
     width: 100%;
     overflow: auto;
     ${props => props.$padding !== undefined && `padding: ${parseCSSUnit(props.$padding)}`};
     ${props => props.$minHeight !== undefined && `min-height: ${parseCSSUnit(props.$minHeight)}`};
 
+    color: ${v.textColor};
+    background-color: ${v.buttonPrimaryTextColor};
     border-width: 1px;
     border-style: solid;
-    margin-top: -1px;
+    border-color: ${props => getAccentColor(props.$theme)};
     border-radius: ${v.borderRadius};
+    margin-top: -1px;
     position: relative;
     z-index: 0;
 
@@ -173,13 +185,6 @@ const Container = styled.div<{
 
             > ${TabItemsWrapper} {
                 > .tab-item {
-                    &.active {
-                        color: ${props => getAccentColor(props.$theme)};
-                        background-color: ${v.buttonPrimaryTextColor};
-                        border-color: ${props => getAccentColor(props.$theme)};
-                        border-bottom-color: ${v.buttonPrimaryTextColor};
-                    }
-
                     &:not(.active) {
                         color: ${v.buttonPrimaryTextColor};
                         background-color: transparent;
@@ -187,29 +192,19 @@ const Container = styled.div<{
 
                         &:hover {
                             color: ${props => getAccentColor(props.$theme)};
-                            background-color: ${v.buttonPrimaryTextColor};
                             border-color: ${props => getAccentColor(props.$theme)};
+                            background-color: ${v.buttonPrimaryTextColor};
                             border-bottom-color: ${v.buttonPrimaryTextColor};
                             opacity: 0.7;
                         }
                     }
                 }
             }
-
-            > ${ScrollBtn} {
-                > svg {
-                    background-color: white;
-                    color: ${props => getAccentColor(props.$theme)};
-                }
-            }
         }
 
         > ${TabContent} {
-            background-color: ${v.buttonPrimaryTextColor};
-            border-color: ${props => getAccentColor(props.$theme)};
             border-top-left-radius: 0;
             border-top-right-radius: 0;
-            color: ${v.textColor};
         }
     }
 
@@ -220,41 +215,21 @@ const Container = styled.div<{
 
             > ${TabItemsWrapper} {
                 > .tab-item {
-                    &.active {
-                        color: ${props => getAccentColor(props.$theme)};
-                        background-color: ${v.buttonPrimaryTextColor};
-                        border-color: ${props => getAccentColor(props.$theme)};
-                        border-bottom-color: ${v.buttonPrimaryTextColor};
-                    }
-
                     &:not(.active) {
                         color: ${v.textColor};
                         background-color: transparent;
                         border-color: transparent;
 
                         &:hover {
-                            color: ${props => getAccentColor(props.$theme)};
-                            background-color: ${v.buttonPrimaryTextColor};
                             border-color: ${props => getAccentColor(props.$theme)};
+                            background-color: ${v.buttonPrimaryTextColor};
                             border-bottom-color: ${v.buttonPrimaryTextColor};
+                            color: ${props => getAccentColor(props.$theme)};
                             opacity: 0.7;
                         }
                     }
                 }
             }
-
-            > ${ScrollBtn} {
-                > svg {
-                    background-color: white;
-                    color: ${props => getAccentColor(props.$theme)};
-                }
-            }
-        }
-
-        > ${TabContent} {
-            background-color: ${v.buttonPrimaryTextColor};
-            border-color: ${props => getAccentColor(props.$theme)};
-            color: ${v.textColor};
         }
     }
 
@@ -265,13 +240,6 @@ const Container = styled.div<{
 
             > ${TabItemsWrapper} {
                 > .tab-item {
-                    &.active {
-                        color: ${props => getAccentColor(props.$theme)};
-                        background-color: ${v.buttonPrimaryTextColor};
-                        border-color: ${props => getAccentColor(props.$theme)};
-                        border-bottom-color: ${v.buttonPrimaryTextColor};
-                    }
-
                     &:not(.active) {
                         color: ${v.textColor};
                         background-color: ${v.buttonPrimaryTextColor};
@@ -280,24 +248,12 @@ const Container = styled.div<{
                         opacity: 0.7;
 
                         &:hover {
+                            border-color: ${props => getAccentColor(props.$theme)};
                             color: ${props => getAccentColor(props.$theme)};
                         }
                     }
                 }
             }
-
-            > ${ScrollBtn} {
-                > svg {
-                    background-color: white;
-                    color: ${props => getAccentColor(props.$theme)};
-                }
-            }
-        }
-
-        > ${TabContent} {
-            background-color: ${v.buttonPrimaryTextColor};
-            border: 1px solid ${props => getAccentColor(props.$theme)};
-            color: ${v.textColor};
         }
     }
 
@@ -311,10 +267,6 @@ const Container = styled.div<{
                     background-color: transparent;
                     border-color: transparent;
 
-                    &.active {
-                        color: ${props => getAccentColor(props.$theme)};
-                    }
-
                     &:not(.active) {
                         color: ${v.textColor};
 
@@ -325,20 +277,14 @@ const Container = styled.div<{
                     }
                 }
             }
-
-            > ${ScrollBtn} {
-                > svg {
-                    background-color: white;
-                    color: ${props => getAccentColor(props.$theme)};
-                }
-            }
         }
 
         > ${TabContent} {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
             background-color: inherit;
             border-color: transparent;
             border-top: 1px solid ${props => getAccentColor(props.$theme)};
-            color: ${v.textColor};
         }
     }
 `;
@@ -579,10 +525,10 @@ const Tabs: FC<TabItemProps> = (props) => {
         $theme={theme}
     >
         <TabItems className={'disable-select'}>
-            <ScrollBtn className={classNames('btn-left', tabOverflow.left && 'visible')}>
+            <ScrollBtn $theme={theme} className={classNames('btn-left', tabOverflow.left && 'visible')}>
                 <ReactIcon size={21} icon={RxChevronLeft} onClick={scrollLeftHandler} />
             </ScrollBtn>
-            <TabItemsWrapper ref={tabItemsWrapper}>
+            <TabItemsWrapper $theme={theme} ref={tabItemsWrapper}>
                 {
                     data.map((t, i) => {
                         const itemName = t.id || snakeCase(inStringNumberToWords(t.name), '-');
@@ -604,13 +550,14 @@ const Tabs: FC<TabItemProps> = (props) => {
                     })
                 }
             </TabItemsWrapper>
-            <ScrollBtn className={classNames('btn-right', tabOverflow.right && 'visible')}>
+            <ScrollBtn $theme={theme} className={classNames('btn-right', tabOverflow.right && 'visible')}>
                 <ReactIcon size={21} icon={RxChevronRight} onClick={scrollRightHandler} />
             </ScrollBtn>
         </TabItems>
         <TabContent
             key={`tab-content-${selectedTab?.name}`}
             data-name={selectedTab?.name}
+            $theme={theme}
             $padding={contentPadding}
             $minHeight={minContentHeight}
             className={classNames('trim', 'tab-content', 'active')}>
