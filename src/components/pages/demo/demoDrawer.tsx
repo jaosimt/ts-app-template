@@ -82,7 +82,7 @@ const DemoDrawer: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     width={100}
                     label={'backgroundColor'}
                     fieldRegister={register('backgroundColor', {
@@ -90,14 +90,14 @@ const DemoDrawer: FC<{ theme: ThemeProp }> = ({theme}) => {
                         onChange: propsChangeHandler
                     })}/>
                 <Dropdown
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     options={positionOptions}
                     selected={position}
                     label={'position'}
                     onChange={(value: DropdownObjectOptions) => dropDownChangeHandler(value)}
                 />
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     disabled={['top', 'bottom'].includes(position.value)}
                     width={70}
                     label={'width'}
@@ -107,7 +107,7 @@ const DemoDrawer: FC<{ theme: ThemeProp }> = ({theme}) => {
                         onChange: propsChangeHandler
                     })}/>
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     disabled={['left', 'right'].includes(position.value)}
                     width={70}
                     label={'height'}

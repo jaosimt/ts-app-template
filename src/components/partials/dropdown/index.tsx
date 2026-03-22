@@ -96,7 +96,7 @@ const Wrapper = styled.div<{
     cursor: pointer;
     width: ${props => props.$wrapperWidth};
     border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
-    border-radius: ${v.inputBorderRadius};
+    border-radius: ${v.borderRadius};
     background-color: ${v.backgroundColorDefault};
     align-items: center;
     justify-content: space-between;
@@ -272,10 +272,6 @@ const Dropdown: FC<DropdownProps> = (props) => {
         onChange && onChange(selected);
         // eslint-disable-next-line
     }, [selected]);
-
-    useEffect(() => {
-        console.log('dropDownPos:', dropDownPos);
-    }, [dropDownPos]);
 
     const isO = isObject(options[0]);
 

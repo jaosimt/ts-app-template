@@ -131,7 +131,7 @@ const DemoToast: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <InputField
                     wrapperClassName={'flex-direction-column align-items-top-i'}
                     type={'textarea'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     width={'100%'}
                     label={'message'}
                     style={{flexDirection: 'column'}}
@@ -140,23 +140,23 @@ const DemoToast: FC<{ theme: ThemeProp }> = ({theme}) => {
 
                 <p className={'m-0 border-bottom pb-0p3'}>options:</p>
                 <Dropdown
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'type'}
                     selected={selectedType}
                     onChange={(value: DropdownObjectOptions) => setSelectedType(value)} options={toastTypes}/>
                 <Dropdown
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'position'}
                     selected={selectedPosition}
                     onChange={(value: DropdownObjectOptions) => setSelectedPosition(value)} options={toastPosition}/>
                 <Dropdown
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'theme'}
                     selected={selectedTheme}
                     onChange={(value: DropdownObjectOptions) => setSelectedTheme(value)} options={toastTheme}/>
                 <div className={'display-flex align-items-center'}>
-                    <span style={{width: '50%'}}>duration</span>
-                    <div style={{width: '50%'}} className={'display-flex justify-content-space-between'}>
+                    <span style={{width: 175}}>duration</span>
+                    <div style={{width: 175}} className={'display-flex justify-content-space-between'}>
                         <div className={'display-flex align-items-center'}>
                             <Button
                                 disabled={toastProp.options?.duration === 0 || selectedType.value === 'error'}

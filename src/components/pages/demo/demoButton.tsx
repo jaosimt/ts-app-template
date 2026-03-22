@@ -72,7 +72,7 @@ const DemoButton: FC<{ theme: ThemeProp }> = ({theme}) => {
             <div className={'demo-section-right'}>
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
                 <Dropdown
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     options={alignOptions}
                     selected={props.align}
                     label={'align'}
@@ -81,7 +81,7 @@ const DemoButton: FC<{ theme: ThemeProp }> = ({theme}) => {
                 />
                 <Checkbox
                     className={'width-100p'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'disabled'}
                     labelPosition={'left'}
                     name={'disabled'}
@@ -89,14 +89,14 @@ const DemoButton: FC<{ theme: ThemeProp }> = ({theme}) => {
                     onChange={propsChangeHandler}/>
                 <Checkbox
                     className={'width-100p'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'icon'}
                     labelPosition={'left'}
                     name={'disabled'}
                     checked={icon}
                     onChange={(e: any) => setIcon(e.currentTarget.checked)}/>
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'width'}
                     type={'number'}
                     width={60}

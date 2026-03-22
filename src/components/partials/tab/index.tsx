@@ -1,11 +1,15 @@
-import {FC, HTMLAttributes, memo, ReactNode, RefObject, useEffect, useRef, useState} from 'react';
-import {RxChevronLeft, RxChevronRight} from 'react-icons/rx';
-import {useResizeObserver} from 'usehooks-ts';
+import { FC, HTMLAttributes, memo, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import { RxChevronLeft, RxChevronRight } from 'react-icons/rx';
+import styled from 'styled-components';
+import { useResizeObserver } from 'usehooks-ts';
 import { ThemeProp } from '../../../constants/interfaces';
 import { CSSColors, CSSUnit } from '../../../constants/types';
-import {classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase} from '../../../utils';
-import {ReactIcon} from '../index';
-import './styles.scss';
+import { useAppSelector } from '../../../hooks';
+import { getTheme } from '../../../slices/theme';
+import { classNames, inStringNumberToWords, isString, parseCSSUnit, Round, snakeCase } from '../../../utils';
+import { getAccentColor } from '../../../utils/themeUtils';
+import { ReactIcon } from '../index';
+import v from '../../../styles/variables.module.scss';
 
 export interface TabItemProps extends HTMLAttributes<HTMLDivElement> {
     activeItemColor?: CSSColors;
@@ -34,6 +38,256 @@ type TabItemsPos = {
     rights: number[];
 }
 
+// noinspection CssUnusedSymbol
+const ScrollBtn = styled.div<{
+    $theme: ThemeProp;
+}>`
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    opacity: 0;
+    transition: all 200ms ease-in-out;
+    z-index: 2;
+    justify-content: center;
+    height: inherit;
+    padding: 0.4rem 0;
+    margin-top: 3px;
+    border-bottom: none;
+
+    > svg {
+        background-color: white;
+        border-radius: 50%;
+        color: ${props => getAccentColor(props.$theme)};
+    }
+
+    &.visible {
+        opacity: 0.3;
+    }
+
+    &.btn-left {
+
+    }
+`;
+
+const TabItems = styled.div<{}>`
+    align-items: center;
+    border-width: 1px;
+    border-style: solid;
+    border-bottom: none;
+    border-top-left-radius: ${v.borderRadius};
+    border-top-right-radius: ${v.borderRadius};
+    display: grid;
+    font-weight: bold;
+    grid-template-columns: 21px auto 21px;
+
+    &:hover {
+        > ${ScrollBtn} {
+            &.visible {
+                opacity: 1;
+
+                &:active {
+                    opacity: 0.3;
+                }
+            }
+        }
+    }
+`;
+
+// noinspection CssUnusedSymbol
+const TabItemsWrapper = styled.div<{
+    $theme: ThemeProp;
+}>`
+    border: none;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 1;
+    color: ${v.buttonPrimaryTextColor};
+
+    > .tab-item {
+        border-width: 1px;
+        border-style: solid;
+        border-top-left-radius: 0.3rem;
+        border-top-right-radius: 0.3rem;
+        cursor: pointer;
+        display: inline-flex;
+        padding: 0.5rem 0.7rem;
+        transition: color, background-color, opacity, width, height, padding 100ms ease-in-out;
+        white-space: nowrap;
+        
+        &:first-child:not(.active),
+        & ~ .tab-item:not(.active):not(:last-child) { border-right-width: 0; }
+
+        &.active + .tab-item { border-left-width: 0; }
+
+        &.active {
+            color: ${props => getAccentColor(props.$theme)};
+            background-color: ${v.buttonPrimaryTextColor};
+            border-bottom-color: ${v.buttonPrimaryTextColor};
+            border-left-width: 1px;
+            margin-top: 0;
+            z-index: 1;
+        }
+
+        &:not(.active) {
+            z-index: -1;
+        }
+    }
+`;
+
+// noinspection CssUnusedSymbol
+const TabContent = styled.div<{
+    $padding: CSSUnit | undefined;
+    $minHeight: CSSUnit | undefined;
+    $theme: ThemeProp;
+}>`
+    width: 100%;
+    overflow: auto;
+    ${props => props.$padding !== undefined && `padding: ${parseCSSUnit(props.$padding)}`};
+    ${props => props.$minHeight !== undefined && `min-height: ${parseCSSUnit(props.$minHeight)}`};
+
+    color: ${v.textColor};
+    background-color: ${v.buttonPrimaryTextColor};
+    border-width: 1px;
+    border-style: solid;
+    border-color: ${props => getAccentColor(props.$theme)};
+    border-radius: ${v.borderRadius};
+    margin-top: -1px;
+    position: relative;
+    z-index: 0;
+
+    > * { animation: fadein 300ms ease-in; }
+`;
+
+// noinspection CssUnusedSymbol
+const Container = styled.div<{
+    $minWidth: CSSUnit;
+    $width: CSSUnit | 'inherit';
+    $theme: ThemeProp;
+}>`
+    min-width: ${props => props.$minWidth};
+    width: ${props => props.$width || '100%'};
+    border-radius: ${v.borderRadius};
+    border: none;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+    &.boxed {
+        > ${TabItems} {
+            background-color: ${props => getAccentColor(props.$theme)};
+            border-color: ${props => getAccentColor(props.$theme)};
+
+            > ${TabItemsWrapper} {
+                > .tab-item {
+                    &:not(.active) {
+                        color: ${v.buttonPrimaryTextColor};
+                        background-color: transparent;
+                        border-color: transparent;
+
+                        &:hover {
+                            color: ${props => getAccentColor(props.$theme)};
+                            border-color: ${props => getAccentColor(props.$theme)};
+                            background-color: ${v.buttonPrimaryTextColor};
+                            border-bottom-color: ${v.buttonPrimaryTextColor};
+                            opacity: 0.7;
+                        }
+                    }
+                }
+            }
+        }
+
+        > ${TabContent} {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    }
+
+    &.boxed-content {
+        > ${TabItems} {
+            background-color: transparent;
+            border-color: transparent;
+
+            > ${TabItemsWrapper} {
+                > .tab-item {
+                    &:not(.active) {
+                        color: ${v.textColor};
+                        background-color: transparent;
+                        border-color: transparent;
+
+                        &:hover {
+                            border-color: ${props => getAccentColor(props.$theme)};
+                            background-color: ${v.buttonPrimaryTextColor};
+                            border-bottom-color: ${v.buttonPrimaryTextColor};
+                            color: ${props => getAccentColor(props.$theme)};
+                            opacity: 0.7;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.boxed-tabs {
+        > ${TabItems} {
+            background-color: transparent;
+            border-color: transparent;
+
+            > ${TabItemsWrapper} {
+                > .tab-item {
+                    &:not(.active) {
+                        color: ${v.textColor};
+                        background-color: ${v.buttonPrimaryTextColor};
+                        border-color: ${v.textColor};
+                        border-bottom-color: ${props => getAccentColor(props.$theme)};
+                        opacity: 0.7;
+
+                        &:hover {
+                            border-color: ${props => getAccentColor(props.$theme)};
+                            color: ${props => getAccentColor(props.$theme)};
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.plain {
+        > ${TabItems} {
+            background-color: transparent;
+            border-color: transparent;
+
+            > ${TabItemsWrapper} {
+                > .tab-item {
+                    &:first-child { padding-left: 0; }
+                    &:last-child { padding-right: 0; }
+                    
+                    background-color: transparent;
+                    border-color: transparent;
+
+                    &:not(.active) {
+                        color: ${v.textColor};
+
+                        &:hover {
+                            color: ${props => getAccentColor(props.$theme)};
+                            opacity: 0.7;
+                        }
+                    }
+                }
+            }
+        }
+
+        > ${TabContent} {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            background-color: inherit;
+            border-color: transparent;
+            border-top: 1px solid ${props => getAccentColor(props.$theme)};
+        }
+    }
+`;
+
 const roundPrecision = 0;
 const shiftOffset = 3;
 
@@ -49,7 +303,11 @@ const Tabs: FC<TabItemProps> = (props) => {
         rememberActiveTab,
         id,
         width,
+        theme: props_theme
     } = props;
+
+    const _theme = useAppSelector(getTheme) as ThemeProp;
+    const theme = props_theme || _theme;
 
     const tabItemsWrapper = useRef<HTMLDivElement>(null);
     const resizeTimeoutRef = useRef<any>(null);
@@ -64,12 +322,12 @@ const Tabs: FC<TabItemProps> = (props) => {
             const saved = getStoredSelection();
             const savedSelection = saved.filter((s: any) => s.id === id)[0];
             const thisSelection = data.filter((d: TabItemType) => {
-                const name = snakeCase(inStringNumberToWords(d.name), '-')
-                return name === savedSelection?.name
+                const name = snakeCase(inStringNumberToWords(d.name), '-');
+                return name === savedSelection?.name;
             });
             if (thisSelection.length) return savedSelection.name;
         }
-        return snakeCase(inStringNumberToWords(data[0].name), '-')
+        return snakeCase(inStringNumberToWords(data[0].name), '-');
     });
 
     const [hoveredItem, setHoveredItem] = useState('');
@@ -110,7 +368,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         if (itemsWrapper) {
             Array.from(itemsWrapper.querySelectorAll('.tab-item')).forEach(t => {
                 maxWidth = Math.max(maxWidth, t.getBoundingClientRect().width);
-            })
+            });
         }
 
         setMinWidth(maxWidth + 42);
@@ -119,7 +377,7 @@ const Tabs: FC<TabItemProps> = (props) => {
 
         return () => {
             clearTimeout(resizeTimeoutRef.current);
-        }
+        };
         // eslint-disable-next-line
     }, []);
 
@@ -161,7 +419,7 @@ const Tabs: FC<TabItemProps> = (props) => {
         if (direction === 'right') return tabItemsPos.filter(l => l > tabRight).shift();
 
         return undefined;
-    }
+    };
 
     const hasHidden = (direction: 'left' | 'right', tabItemsPos: number[]) => getNext(direction, tabItemsPos) !== undefined;
 
@@ -257,13 +515,19 @@ const Tabs: FC<TabItemProps> = (props) => {
 
     const selectedTab = data.find((d: any) => snakeCase(inStringNumberToWords(d.name), '-') === selected);
 
-    return <div data-component={'tabs'} className={type}
-                style={{minWidth: parseCSSUnit(minWidth as CSSUnit), width: width ? parseCSSUnit(width) : 'inherit'}}>
-        <div className={'tab-items'}>
-            <div className={classNames('scroll-btn-left', tabOverflow.left && 'visible')}>
-                <ReactIcon size={21} icon={RxChevronLeft} onClick={scrollLeftHandler}/>
-            </div>
-            <div className={'tab-items-wrapper'} ref={tabItemsWrapper}>
+    return <Container
+        data-component={'tabs'}
+        aria-label={'Tabs Component'}
+        className={type}
+        $minWidth={parseCSSUnit(minWidth as CSSUnit)}
+        $width={width ? parseCSSUnit(width) : 'inherit'}
+        $theme={theme}
+    >
+        <TabItems className={'disable-select'}>
+            <ScrollBtn $theme={theme} className={classNames('btn-left', tabOverflow.left && 'visible')}>
+                <ReactIcon size={21} icon={RxChevronLeft} onClick={scrollLeftHandler} />
+            </ScrollBtn>
+            <TabItemsWrapper $theme={theme} ref={tabItemsWrapper}>
                 {
                     data.map((t, i) => {
                         const itemName = t.id || snakeCase(inStringNumberToWords(t.name), '-');
@@ -284,23 +548,21 @@ const Tabs: FC<TabItemProps> = (props) => {
                         </div>;
                     })
                 }
-            </div>
-            <div className={classNames('scroll-btn-right', tabOverflow.right && 'visible')}>
-                <ReactIcon size={21} icon={RxChevronRight} onClick={scrollRightHandler}/>
-            </div>
-        </div>
-        <div
-            key={`tab-content-${selectedTab?.name}`} data-name={selectedTab?.name}
-            style={{
-                padding: contentPadding && parseCSSUnit(contentPadding),
-                minHeight: minContentHeight && parseCSSUnit(minContentHeight),
-                width: '100%',
-                overflow: 'auto'
-            }}
-            className={classNames('tab-content', 'active')}>
+            </TabItemsWrapper>
+            <ScrollBtn $theme={theme} className={classNames('btn-right', tabOverflow.right && 'visible')}>
+                <ReactIcon size={21} icon={RxChevronRight} onClick={scrollRightHandler} />
+            </ScrollBtn>
+        </TabItems>
+        <TabContent
+            key={`tab-content-${selectedTab?.name}`}
+            data-name={selectedTab?.name}
+            $theme={theme}
+            $padding={contentPadding}
+            $minHeight={minContentHeight}
+            className={classNames('trim')}>
             {selectedTab?.content}
-        </div>
-    </div>;
+        </TabContent>
+    </Container>;
 };
 
 export default memo(Tabs);

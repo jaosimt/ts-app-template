@@ -1,5 +1,4 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
-import '../../partials/tab/styles.scss';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Theme } from '../../../constants';
@@ -161,7 +160,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
         type: (sessionStorage.getItem('tabDemoSelectedTab') || 'boxed') as TabsType,
         width: '100%',
         activeItemColor: '' as CSSColors,
-        contentPadding: '' as CSSUnit,
+        contentPadding: 14 as CSSUnit,
         minContentHeight: '' as CSSUnit,
         moveSelectedOnScroll: true,
         rememberActiveTab: sessionStorage.getItem(`rememberActive-${demoTabId}`) === 'true',
@@ -215,7 +214,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <Dropdown
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     className={'mb-0p5'}
                     options={['boxed', 'boxed-content', 'boxed-tabs', 'plain']}
                     selected={props.type}
@@ -223,21 +222,21 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                     onChange={(value: string) => dropDownChangeHandler('type', value)}
                 />
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'width'}
                     name={'width'}
                     value={props.width}
                     onChange={propsChangeHandler}
                 />
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'activeItemColor'}
                     name={'activeItemColor'}
                     value={props.activeItemColor}
                     onChange={propsChangeHandler}
                 />
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     type={'number'}
                     width={70}
                     label={'contentPadding'}
@@ -246,7 +245,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                     onChange={propsChangeHandler}
                 />
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     type={'number'}
                     min={100}
                     step={100}
@@ -258,7 +257,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <Checkbox
                     className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'moveSelectedOnScroll'}
                     name={'moveSelectedOnScroll'}
                     checked={props.moveSelectedOnScroll}
@@ -267,7 +266,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <Checkbox
                     className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'rememberActiveTab'}
                     name={'rememberActiveTab'}
                     checked={props.rememberActiveTab}
@@ -277,7 +276,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <Checkbox
                     className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'onTabChange'}
                     name={'tabChangeCallback'}
                     checked={tabChangeCallback}

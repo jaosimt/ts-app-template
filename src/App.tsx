@@ -22,6 +22,8 @@ import { capitalize, classNames, hashCode, isMobile } from './utils';
 import './App.scss';
 import './styles/animations.scss';
 import './styles/tippy.scss';
+import './styles/common.scss';
+
 import { getTheme, setTheme } from './slices/theme';
 import { useAppDispatch, useAppSelector } from './hooks';
 import v from './styles/variables.module.scss';

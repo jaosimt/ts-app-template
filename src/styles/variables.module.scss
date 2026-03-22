@@ -84,7 +84,7 @@ $labelPadding                   : 0.5rem;
 $labelPaddingSmall              : 0.3rem;
 $inputHeight                    : 33px;
 $inputHeightSmall               : 28px;
-$inputBorderRadius              : 0.3rem;
+$borderRadius                   : 0.3rem;
 $shadowMargin                   : 0 0.3rem;
 
 :export {
@@ -97,7 +97,7 @@ $shadowMargin                   : 0 0.3rem;
   labelPaddingSmall              : $labelPaddingSmall;
   inputHeight                    : $inputHeight;
   inputHeightSmall               : $inputHeightSmall;
-  inputBorderRadius              : $inputBorderRadius;
+  borderRadius                   : $borderRadius;
   shadowMargin                   : $shadowMargin;
   
   codeFontFamily                 : $codeFontFamily;
