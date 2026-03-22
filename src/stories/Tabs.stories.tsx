@@ -77,7 +77,7 @@ const meta = {
     title: 'Custom Components/Tabs',
     component: Tabs,
     parameters: {
-        controls: { exclude: ['data', 'children', 'id', 'theme', 'rememberActiveTab', 'onTabChange'] },
+        controls: { exclude: ['data', 'children', 'id', 'onTabChange', 'rememberActiveTab'] },
     },
     tags: ['autodocs'],
     argTypes: {
@@ -90,8 +90,11 @@ const meta = {
         },
         theme: {
             control: 'select',
-            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK]
-        }
+            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK],
+        },
+        contentPadding: {control: 'number'},
+        minContentHeight: {control: 'number'},
+        width: {control: 'number'},
     }
 } satisfies Meta<TabItemProps>;
 
@@ -100,7 +103,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
     args: {
-        data: tabItems
+        data: tabItems,
+        theme: Theme.REACT,
     }
 };
 

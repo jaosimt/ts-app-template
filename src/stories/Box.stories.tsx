@@ -17,6 +17,37 @@ const meta = {
     },
     tags: ['autodocs'],
     argTypes: {
+        label: {
+            control: 'text',
+        },
+        backgroundColor: {
+            control: 'color',
+        },
+        borderColor: {
+            control: 'color',
+        },
+        labelColor: {
+            control: 'color',
+        },
+        labelBackgroundColor: {
+            control: 'color',
+        },
+        borderRadius: {
+            control: 'number',
+        },
+        padding: {
+            control: 'number',
+        },
+        width: {
+            control: 'number',
+        },
+        border: {
+            control: 'select',
+            options: [true, false, 'label-only']
+        },
+        tight: {
+            control: 'boolean',
+        },
         labelPosition: {
             control: 'select',
             options: ['top-left', 'top-right', 'bottom-left', 'bottom-right']
@@ -25,10 +56,6 @@ const meta = {
             control: 'select',
             options: ['small', 'medium', 'large']
         },
-        border: {
-            control: 'select',
-            options: [true, false, 'label-only']
-        }
     }
 } satisfies Meta<BoxProps>;
 
@@ -38,9 +65,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     args: {
         children: <h1>Box</h1>,
-    },
-    parameters: {
-        controls: { exclude: ['labelPosition', 'labelSize', 'children', 'border'] },
     }
 };
 
