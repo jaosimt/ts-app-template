@@ -27,7 +27,7 @@ const CheckboxContainer = styled.div<{
     align-items: center;
     overflow: hidden;
     border: 1px solid ${props => getButtonPrimaryColor(props.$theme as ThemeProp)};
-    border-radius: ${v.inputBorderRadius};
+    border-radius: ${v.borderRadius};
     box-shadow: ${props => `0 0 7px ${getLightShadow(props.$theme as ThemeProp)}`};
     
     ${props => props.$disabled && 'opacity: 0.3; pointer-events: none;'}

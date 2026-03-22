@@ -96,7 +96,7 @@ const Wrapper = styled.div<{
     cursor: pointer;
     width: ${props => props.$wrapperWidth};
     border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
-    border-radius: ${v.inputBorderRadius};
+    border-radius: ${v.borderRadius};
     background-color: ${v.backgroundColorDefault};
     align-items: center;
     justify-content: space-between;

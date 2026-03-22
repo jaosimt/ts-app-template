@@ -1,5 +1,4 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
-import '../../partials/tab/styles.scss';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Theme } from '../../../constants';
@@ -161,7 +160,7 @@ const DemoTabs: FC<{ theme: ThemeProp }> = ({theme}) => {
         type: (sessionStorage.getItem('tabDemoSelectedTab') || 'boxed') as TabsType,
         width: '100%',
         activeItemColor: '' as CSSColors,
-        contentPadding: '' as CSSUnit,
+        contentPadding: 14 as CSSUnit,
         minContentHeight: '' as CSSUnit,
         moveSelectedOnScroll: true,
         rememberActiveTab: sessionStorage.getItem(`rememberActive-${demoTabId}`) === 'true',

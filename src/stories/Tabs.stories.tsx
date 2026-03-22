@@ -7,6 +7,7 @@ import '../styles/common.scss';
 import '../styles/animations.scss';
 import '../styles/theme.scss';
 import '../styles/tippy.scss';
+import { Theme } from '../constants';
 
 const tabItems: TabItemType[] = [
     {
@@ -86,6 +87,10 @@ const meta = {
         },
         activeItemColor: {
             control: 'color'
+        },
+        theme: {
+            control: 'select',
+            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK]
         }
     }
 } satisfies Meta<TabItemProps>;
@@ -101,10 +106,11 @@ export const Default: Story = {
 
 export const Propped: Story = {
     args: {
+        theme: Theme.REACT,
         data: tabItems,
         type: "boxed",
         width: '100%',
-        activeItemColor: 'black',
+        activeItemColor: '',
         moveSelectedOnScroll: true,
         contentPadding: 14,
         minContentHeight: 250

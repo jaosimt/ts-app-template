@@ -75,7 +75,7 @@ const InputWrapper = styled.div<{
     position: relative;
     border: 1px solid ${props => getButtonDefaultBorderColor(props.$theme as ThemeProp)};
     box-shadow: ${props => `0 0 7px ${getLightShadow(props.$theme as ThemeProp)}`};
-    border-radius: ${v.inputBorderRadius};
+    border-radius: ${v.borderRadius};
 
     > input { height: ${v.inputHeight}; }
 
