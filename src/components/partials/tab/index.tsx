@@ -222,6 +222,8 @@ const Container = styled.div<{
                             border-bottom-color: ${v.buttonPrimaryTextColor};
                             color: ${props => getAccentColor(props.$theme)};
                             opacity: 0.7;
+
+                            & + .tab-item { border-left: 1px solid ${props => getAccentColor(props.$theme)}; }
                         }
                     }
                 }
