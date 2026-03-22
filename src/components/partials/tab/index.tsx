@@ -158,10 +158,6 @@ const TabContent = styled.div<{
     z-index: 0;
 
     > * { animation: fadein 300ms ease-in; }
-
-    &:not(.active) {
-        display: none;
-    }
 `;
 
 // noinspection CssUnusedSymbol
@@ -560,7 +556,7 @@ const Tabs: FC<TabItemProps> = (props) => {
             $theme={theme}
             $padding={contentPadding}
             $minHeight={minContentHeight}
-            className={classNames('trim', 'tab-content', 'active')}>
+            className={classNames('trim')}>
             {selectedTab?.content}
         </TabContent>
     </Container>;
