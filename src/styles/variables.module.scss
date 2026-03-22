@@ -47,7 +47,7 @@ $backgroundColorDefault         : #fefcff;
 $inputTextColor                 : #252a2b;
 $errorColor                     : red;
 
-/* ******* BELOW IS DEPENDENT ON THE ACCENT COLOR : DO NOT EDIT THEM DIRECTLY ******* */
+/* ******* BELOW ARE DEPENDENT ON THE ACCENT COLOR : DO NOT EDIT THEM DIRECTLY ******* */
 $buttonPrimaryColorReact        : $accentColorReact;
 $buttonPrimaryHoverColorReact   : rgba($buttonPrimaryColorReact, 0.5);
 $buttonPrimaryBorderColorReact  : $buttonPrimaryHoverColorReact;

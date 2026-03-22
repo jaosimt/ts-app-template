@@ -25,67 +25,6 @@ body {
       background-color : v.$baseColorDark;
     }
     
-    .btn-icon,
-    button,
-    [data-component="button"] {
-      &.btn-icon {
-        color            : v.$buttonPrimaryColorDark;
-        background-color : v.$buttonPrimaryTextColor;
-        border-color     : v.$buttonPrimaryBorderColorDark;
-      }
-      
-      &:not(.btn-icon) {
-        @extend .border-radius-0p3;
-        
-        &.default {
-          background-color : v.$buttonDefaultColor;
-          border-color     : v.$buttonDefaultBorderColorDark;
-          color            : v.$buttonDefaultTextColorDark;
-        }
-        
-        &:not(.default) {
-          background-color : v.$buttonPrimaryColorDark;
-          border-color     : v.$buttonPrimaryBorderColorDark;
-          color            : v.$buttonPrimaryTextColor;
-        }
-        
-        &.no-padding {
-        }
-      }
-      
-      &:hover {
-        &.btn-icon {
-          color            : v.$buttonPrimaryHoverColorDark;
-          background-color : v.$buttonPrimaryTextColor;
-        }
-        
-        &:not(.btn-icon):not(.no-hover) {
-          &.default {
-            background-color : v.$buttonDefaultHoverColorDark;
-            color            : v.$buttonDefaultColor;
-          }
-          
-          &:not(.default) {
-            background-color : v.$buttonPrimaryHoverColorDark;
-          }
-        }
-        
-        &:active { }
-      }
-      
-      &[disabled],
-      &.disabled {
-        &.default {
-          border-color : v.$buttonDefaultDisabledTextColor;
-          color        : v.$buttonDefaultDisabledTextColor;
-        }
-        
-        &:not(.default) {
-          border-color : v.$buttonPrimaryDisabledTextColor;
-        }
-      }
-    }
-    
     .modal-overlay {
       > [data-component="modal"] {
         border-color : v.$accentColorDark;
@@ -141,7 +80,7 @@ body {
       &:not(.dropdown) {
         color  : v.$inputTextColor;
         //border : 1px solid v.$borderColorDefault;
-        border: none;
+        border : none;
         
         &:focus {
           border-color : v.$accentColorDark !important;
@@ -180,67 +119,6 @@ body {
     
     .marquee {
       background-color : v.$baseColor;
-    }
-    
-    .btn-icon,
-    button,
-    [data-component="button"] {
-      &.btn-icon {
-        color            : v.$buttonPrimaryColorReact;
-        background-color : v.$buttonPrimaryTextColor;
-        border-color     : v.$buttonPrimaryBorderColorReact;
-      }
-      
-      &:not(.btn-icon) {
-        @extend .border-radius-0p3;
-        
-        &.default {
-          background-color : v.$buttonDefaultColor;
-          border-color     : v.$buttonDefaultBorderColorReact;
-          color            : v.$buttonDefaultTextColorReact;
-        }
-        
-        &:not(.default) {
-          background-color : v.$buttonPrimaryColorReact;
-          border-color     : v.$buttonPrimaryBorderColorReact;
-          color            : v.$buttonPrimaryTextColor;
-        }
-        
-        &.no-padding {
-        }
-      }
-      
-      &:hover {
-        &.btn-icon {
-          color            : v.$buttonPrimaryHoverColorReact;
-          background-color : v.$buttonPrimaryTextColor;
-        }
-        
-        &:not(.btn-icon):not(.no-hover) {
-          &.default {
-            background-color : v.$buttonDefaultHoverColorReact;
-            color            : v.$buttonDefaultColor
-          }
-          
-          &:not(.default) {
-            background-color : v.$buttonPrimaryHoverColorReact;
-          }
-        }
-        
-        &:active { }
-      }
-      
-      &[disabled],
-      &.disabled {
-        &.default {
-          border-color : v.$buttonDefaultDisabledTextColor;
-          color        : v.$buttonDefaultDisabledTextColor;;
-        }
-        
-        &:not(.default) {
-          border-color : v.$buttonPrimaryDisabledTextColor;
-        }
-      }
     }
     
     .modal-overlay {
@@ -298,7 +176,7 @@ body {
       &:not(.dropdown) {
         color  : v.$inputTextColor;
         //border : 1px solid v.$borderColorDefault;
-        border: none;
+        border : none;
         
         &:focus {
           border-color : v.$accentColorReact !important;
@@ -337,67 +215,6 @@ body {
     
     .marquee {
       background-color : v.$baseColor;
-    }
-    
-    .btn-icon,
-    button,
-    [data-component="button"] {
-      &.btn-icon {
-        color            : v.$buttonPrimaryColorInsta;
-        background-color : v.$buttonPrimaryTextColor;
-        border-color     : v.$buttonPrimaryBorderColorInsta;
-      }
-      
-      &:not(.btn-icon) {
-        @extend .border-radius-0p3;
-        
-        &.default {
-          background-color : v.$buttonDefaultColor;
-          border-color     : v.$buttonDefaultBorderColorInsta;
-          color            : v.$buttonDefaultTextColorInsta;
-        }
-        
-        &:not(.default) {
-          background-color : v.$buttonPrimaryColorInsta;
-          border-color     : v.$buttonPrimaryBorderColorInsta;
-          color            : v.$buttonPrimaryTextColor;
-        }
-        
-        &.no-padding {
-        }
-      }
-      
-      &:hover {
-        &.btn-icon {
-          color            : v.$buttonPrimaryHoverColorInsta;
-          background-color : v.$buttonPrimaryTextColor;
-        }
-        
-        &:not(.btn-icon):not(.no-hover) {
-          &.default {
-            background-color : v.$buttonDefaultHoverColorInsta;
-            color            : v.$buttonDefaultColor
-          }
-          
-          &:not(.default) {
-            background-color : v.$buttonPrimaryHoverColorInsta;
-          }
-        }
-        
-        &:active { }
-      }
-      
-      &[disabled],
-      &.disabled {
-        &.default {
-          border-color : v.$buttonDefaultDisabledTextColor;
-          color        : v.$buttonDefaultDisabledTextColor;;
-        }
-        
-        &:not(.default) {
-          border-color : v.$buttonPrimaryDisabledTextColor;
-        }
-      }
     }
     
     .modal-overlay {
@@ -455,7 +272,7 @@ body {
       &:not(.dropdown) {
         color  : v.$inputTextColor;
         //border : 1px solid v.$borderColorDefault;
-        border: none;
+        border : none;
         
         &:focus {
           border-color : v.$accentColorInsta !important;
@@ -494,67 +311,6 @@ body {
     
     .marquee {
       background-color : v.$baseColor;
-    }
-    
-    .btn-icon,
-    button,
-    [data-component="button"] {
-      &.btn-icon {
-        color            : v.$buttonPrimaryColorTwitch;
-        background-color : v.$buttonPrimaryTextColor;
-        border-color     : v.$buttonPrimaryBorderColorTwitch;
-      }
-      
-      &:not(.btn-icon) {
-        @extend .border-radius-0p3;
-        
-        &.default {
-          background-color : v.$buttonDefaultColor;
-          border-color     : v.$buttonDefaultBorderColorTwitch;
-          color            : v.$buttonDefaultTextColorTwitch;
-        }
-        
-        &:not(.default) {
-          background-color : v.$buttonPrimaryColorTwitch;
-          border-color     : v.$buttonPrimaryBorderColorTwitch;
-          color            : v.$buttonPrimaryTextColor;
-        }
-        
-        &.no-padding {
-        }
-      }
-      
-      &:hover {
-        &.btn-icon {
-          color            : v.$buttonPrimaryHoverColorTwitch;
-          background-color : v.$buttonPrimaryTextColor;
-        }
-        
-        &:not(.btn-icon):not(.no-hover) {
-          &.default {
-            background-color : v.$buttonDefaultHoverColorTwitch;
-            color            : v.$buttonDefaultColor
-          }
-          
-          &:not(.default) {
-            background-color : v.$buttonPrimaryHoverColorTwitch;
-          }
-        }
-        
-        &:active { }
-      }
-      
-      &[disabled],
-      &.disabled {
-        &.default {
-          border-color : v.$buttonDefaultDisabledTextColor;
-          color        : v.$buttonDefaultDisabledTextColor;;
-        }
-        
-        &:not(.default) {
-          border-color : v.$buttonPrimaryDisabledTextColor;
-        }
-      }
     }
     
     .modal-overlay {
@@ -612,7 +368,7 @@ body {
       &:not(.dropdown) {
         color  : v.$inputTextColor;
         //border : 1px solid v.$borderColorDefault;
-        border: none;
+        border : none;
         
         &:focus {
           border-color : v.$accentColorTwitch !important;
