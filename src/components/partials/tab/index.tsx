@@ -115,7 +115,7 @@ const TabItemsWrapper = styled.div<{
         padding: 0.5rem 0.7rem;
         transition: color, background-color, opacity, width, height, padding 100ms ease-in-out;
         white-space: nowrap;
-
+        
         &:first-child:not(.active),
         & ~ .tab-item:not(.active):not(:last-child) { border-right-width: 0; }
 
@@ -260,6 +260,9 @@ const Container = styled.div<{
 
             > ${TabItemsWrapper} {
                 > .tab-item {
+                    &:first-child { padding-left: 0; }
+                    &:last-child { padding-right: 0; }
+                    
                     background-color: transparent;
                     border-color: transparent;
 
