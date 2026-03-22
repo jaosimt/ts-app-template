@@ -532,7 +532,10 @@ const Tabs: FC<TabItemProps> = (props) => {
                     data.map((t, i) => {
                         const itemName = t.id || snakeCase(inStringNumberToWords(t.name), '-');
                         const isActive = selected === itemName;
-
+                        const styles = {} as any;
+                        if (isActive || hoveredItem === itemName) {
+                            styles['color'] = activeItemColor;
+                        }
                         return <div
                             key={`tab-item-${itemName}-${i}`}
                             data-index={i}
@@ -541,9 +544,7 @@ const Tabs: FC<TabItemProps> = (props) => {
                             className={classNames('tab-item', isActive && 'active')}
                             onMouseEnter={() => setHoveredItem(itemName)}
                             onMouseLeave={() => setHoveredItem('')}
-                            style={{
-                                color: isActive || hoveredItem === itemName ? activeItemColor ? activeItemColor : '' : '',
-                            }}>
+                            style={styles}>
                             {t.name}
                         </div>;
                     })

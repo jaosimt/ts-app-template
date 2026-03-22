@@ -22,7 +22,28 @@ const meta = {
     component: Dropdown,
     parameters: {
         layout: 'centered',
-        controls: {exclude: ['children', 'options', 'selected']},
+        controls: {exclude: ['children', 'options', 'selected', 'onChange', 'maxDropdownHeight', 'disablePredicate']},
+    },
+    argTypes: {
+        labelWidth: {
+            control: 'number',
+        },
+        labelAlign: {
+            control: 'select',
+            options: ['left', 'right', 'center', 'space-between']
+        },
+        icon: {
+            options: Object.keys(icons),
+            mapping: icons,
+            control: { type: 'select' },
+        },
+        theme: {
+            control: 'select',
+            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK]
+        },
+        dropShadow: {
+            control: 'color'
+        }
     },
     tags: ['autodocs'],
 } satisfies Meta<DropdownProps>;
@@ -60,6 +81,7 @@ const ddOOptions = [
 
 export const StringOptions: Story = {
     args: {
+        theme: Theme.REACT,
         selected: ddOptions[0],
         options: ddOptions
     },
@@ -67,27 +89,13 @@ export const StringOptions: Story = {
 
 export const ObjectOptions: Story = {
     args: {
+        theme: Theme.REACT,
         selected: ddOOptions[0],
         options: ddOOptions
     },
 };
 
 export const Propped: Story = {
-    argTypes: {
-        labelAlign: {
-            control: 'select',
-            options: ['left', 'right', 'center', 'space-between']
-        },
-        icon: {
-            options: Object.keys(icons),
-            mapping: icons,
-            control: { type: 'select' },
-        },
-        theme: {
-            control: 'select',
-            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK]
-        }
-    },
     args: {
         theme: Theme.REACT,
         label: 'My Object Dropdown',
