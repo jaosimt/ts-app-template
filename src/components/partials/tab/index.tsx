@@ -257,8 +257,10 @@ const Tabs: FC<TabItemProps> = (props) => {
 
     const selectedTab = data.find((d: any) => snakeCase(inStringNumberToWords(d.name), '-') === selected);
 
-    return <div data-component={'tabs'} className={type}
-                style={{minWidth: parseCSSUnit(minWidth as CSSUnit), width: width ? parseCSSUnit(width) : 'inherit'}}>
+    return <div
+        data-component={'tabs'}
+        className={type}
+        style={{minWidth: parseCSSUnit(minWidth as CSSUnit), width: width ? parseCSSUnit(width) : 'inherit'}}>
         <div className={'tab-items'}>
             <div className={classNames('scroll-btn-left', tabOverflow.left && 'visible')}>
                 <ReactIcon size={21} icon={RxChevronLeft} onClick={scrollLeftHandler}/>

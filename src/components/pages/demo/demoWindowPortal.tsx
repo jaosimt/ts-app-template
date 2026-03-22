@@ -33,7 +33,7 @@ const portalContentCode = `<div className={'translate absolute-center'}>
     <h1 className={'color-red display-flex flex-direction-column align-items-center'}>
         Hello ctr <span
         className={'p-2 border display-flex align-items-center justify-content-center font-weight-bold'}
-        style={{borderRadius: '50%', width: '3rem', height: '3rem',}}
+        style={{borderRadius: 170, width: '3rem', height: '3rem',}}
     >{ctr}</span> view in new window!
     </h1>
 </div>`;
@@ -83,7 +83,7 @@ const DemoWindowPortal: FC<{ theme: ThemeProp }> = ({theme}) => {
         <h1 className={'color-red display-flex flex-direction-column align-items-center'}>
             Hello ctr <span
             className={'p-2 border display-flex align-items-center justify-content-center font-weight-bold'}
-            style={{borderRadius: '50%', width: '3rem', height: '3rem',}}
+            style={{borderRadius: 170, width: '3rem', height: '3rem',}}
         >{ctr}</span> view in new window!
         </h1>
     </div>;
@@ -155,7 +155,7 @@ const DemoWindowPortal: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'title'}
                     name={'title'}
                     value={props.title}
@@ -164,7 +164,7 @@ const DemoWindowPortal: FC<{ theme: ThemeProp }> = ({theme}) => {
                 <Checkbox
                     className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'openOnNextScreen'}
                     name={'openOnNextScreen'}
                     checked={props.openOnNextScreen}
@@ -174,7 +174,7 @@ const DemoWindowPortal: FC<{ theme: ThemeProp }> = ({theme}) => {
                     className={'width-100p'}
                     disabled={showPortal}
                     labelPosition={'left'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'onClose'}
                     name={'onClose'}
                     checked={onClose}

@@ -47,11 +47,11 @@ const DemoCheckbox: FC<{theme: ThemeProp}> = ({theme}) => {
                 <h2 className={'mt-0 text-align-left'}>Props</h2>
 
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'label'}
                     fieldRegister={register('label', {value: props.label, onChange: propsChangeHandler})}/>
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'labelWidth'}
                     type={'number'}
                     width={60}
@@ -61,14 +61,14 @@ const DemoCheckbox: FC<{theme: ThemeProp}> = ({theme}) => {
                     })}/>
                 <Checkbox
                     className={'width-100p'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'disabled'}
                     labelPosition={'left'}
                     name={'disabled'}
                     checked={props.disabled}
                     onChange={propsChangeHandler}/>
                 <Dropdown
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     options={positionOptions}
                     selected={props.labelPosition}
                     label={'labelPosition'}

@@ -62,7 +62,7 @@ const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
                 <Checkbox
                     className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'closeOnEscKey'}
                     name={'closeOnEscKey'}
                     checked={props.closeOnEscKey}
@@ -71,7 +71,7 @@ const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
                 <Checkbox
                     className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'closeOnOutsideClick'}
                     name={'closeOnOutsideClick'}
                     checked={props.closeOnOutsideClick}
@@ -80,14 +80,14 @@ const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
                 <Checkbox
                     className={'width-100p'}
                     labelPosition={'left'}
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'showClose'}
                     name={'showClose'}
                     checked={props.showClose}
                     onChange={changeHandler}
                 />
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     label={'title'}
                     fieldRegister={register('title', {
                         value: props.title,
@@ -96,7 +96,7 @@ const DemoModal: FC<{theme: ThemeProp}> = ({theme}) => {
                 />
 
                 <InputField
-                    labelWidth={'50%'}
+                    labelWidth={175}
                     type={'number'}
                     label={'width'}
                     fieldRegister={register('width', {
