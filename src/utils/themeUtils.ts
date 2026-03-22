@@ -14,7 +14,7 @@ export const getButtonPrimaryColor = (theme: ThemeProp) => {
         default:
             return v.buttonPrimaryColorReact as CSSColors;
     }
-}
+};
 
 export const getButtonDefaultBorderColor = (theme: ThemeProp) => {
     switch (theme) {
@@ -27,7 +27,20 @@ export const getButtonDefaultBorderColor = (theme: ThemeProp) => {
         default:
             return v.buttonDefaultBorderColorReact as CSSColors;
     }
-}
+};
+
+export const getButtonPrimaryHoverColor = (theme: ThemeProp) => {
+    switch (theme) {
+        case Theme.TWITCH:
+            return v.buttonPrimaryHoverColorTwitch as CSSColors;
+        case Theme.DARK:
+            return v.buttonPrimaryHoverColorDark as CSSColors;
+        case Theme.INSTA:
+            return v.buttonPrimaryHoverColorInsta as CSSColors;
+        default:
+            return v.buttonPrimaryHoverColorReact as CSSColors;
+    }
+};
 
 export const getButtonDefaultTextColor = (theme: ThemeProp) => {
     switch (theme) {
@@ -40,7 +53,7 @@ export const getButtonDefaultTextColor = (theme: ThemeProp) => {
         default:
             return v.buttonDefaultTextColorReact as CSSColors;
     }
-}
+};
 
 export const getButtonDefaultHoverColor = (theme: ThemeProp) => {
     switch (theme) {
@@ -53,7 +66,7 @@ export const getButtonDefaultHoverColor = (theme: ThemeProp) => {
         default:
             return v.buttonDefaultHoverColorReact as CSSColors;
     }
-}
+};
 
 export const getAccentColor = (theme: ThemeProp) => {
     switch (theme) {
@@ -66,7 +79,7 @@ export const getAccentColor = (theme: ThemeProp) => {
         default:
             return v.accentColorReact as CSSColors;
     }
-}
+};
 
 export const getPrimaryColor = (theme: ThemeProp) => {
     switch (theme) {
@@ -79,7 +92,7 @@ export const getPrimaryColor = (theme: ThemeProp) => {
         default:
             return v.primaryColorReact as CSSColors;
     }
-}
+};
 
 export const getLightShadow = (theme: ThemeProp) => {
     switch (theme) {
@@ -92,7 +105,20 @@ export const getLightShadow = (theme: ThemeProp) => {
         default:
             return v.lightShadowReact as CSSColors;
     }
-}
+};
+
+export const getButtonPrimaryBorderColor = (theme: ThemeProp) => {
+    switch (theme) {
+        case Theme.TWITCH:
+            return v.buttonPrimaryBorderColorTwitch as CSSColors;
+        case Theme.DARK:
+            return v.buttonPrimaryBorderColorDark as CSSColors;
+        case Theme.INSTA:
+            return v.buttonPrimaryBorderColorInsta as CSSColors;
+        default:
+            return v.buttonPrimaryBorderColorReact as CSSColors;
+    }
+};
 
 export const getSecondaryBaseColor = (theme: ThemeProp) => {
     switch (theme) {
@@ -101,7 +127,7 @@ export const getSecondaryBaseColor = (theme: ThemeProp) => {
         default: // ALL ELSE
             return v.secondaryBaseColor as CSSColors;
     }
-}
+};
 
 export const getSecondaryBackgroundColor = (theme: ThemeProp) => {
     switch (theme) {
@@ -110,7 +136,7 @@ export const getSecondaryBackgroundColor = (theme: ThemeProp) => {
         default: // ALL ELSE
             return v.secondaryBackgroundColor as CSSColors;
     }
-}
+};
 
 export const getBorderColor = (theme: ThemeProp) => {
     switch (theme) {
@@ -119,7 +145,7 @@ export const getBorderColor = (theme: ThemeProp) => {
         default: // ALL ELSE
             return v.borderColorDefault as CSSColors;
     }
-}
+};
 
 export const getTextColor = (theme: ThemeProp) => {
     switch (theme) {
@@ -128,4 +154,4 @@ export const getTextColor = (theme: ThemeProp) => {
         default: // ALL ELSE
             return v.textColor as CSSColors;
     }
-}
+};
