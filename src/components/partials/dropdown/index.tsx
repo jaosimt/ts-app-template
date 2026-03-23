@@ -158,7 +158,7 @@ const List = styled.div<{
 const Option = styled.div<{
     $theme?: ThemeProp;
 }>`
-    padding: 0.5rem 0.7rem;
+    padding: 0.3rem 0.7rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     font-size: 0.9rem;
