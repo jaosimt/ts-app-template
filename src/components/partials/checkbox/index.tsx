@@ -9,13 +9,13 @@ import { getButtonPrimaryColor, getLightShadow } from '../../../utils/themeUtils
 import v from '../../../styles/variables.module.scss';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-    name: string | undefined;
     checked: boolean | undefined;
-    label?: string;
-    labelWidth?: CSSUnit;
-    disabled?: boolean;
     className?: string;
+    disabled?: boolean;
+    label?: string;
     labelPosition?: 'left' | 'right';
+    labelWidth?: CSSUnit;
+    name: string | undefined;
     theme?: ThemeProp;
 }
 
