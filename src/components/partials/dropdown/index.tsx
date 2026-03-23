@@ -167,8 +167,7 @@ const Option = styled.div<{
     justify-content: space-between;
     gap: 0.5rem;
     color: ${props => getButtonDefaultTextColor(props.$theme as ThemeProp)};
-    border-left: 1px solid #fff;
-    border-right: 1px solid #fff;
+    border: 1px solid #fff;
 
     &.selected {
         cursor: default;
@@ -177,10 +176,12 @@ const Option = styled.div<{
 
         &:not(:first-child) {
             border-top: 1px solid ${v.backgroundColorDefault};
+            border-bottom: 1px solid ${v.backgroundColorDefault};
         }
 
-        &:not(:last-child) {
-            border-bottom: 1px solid ${v.backgroundColorDefault};
+        &:last-child {
+            border-bottom-left-radius: ${v.borderRadius};
+            border-bottom-right-radius: ${v.borderRadius};
         }
     }
 
@@ -194,6 +195,16 @@ const Option = styled.div<{
         &:hover {
             color: ${v.backgroundColorDefault};
             background-color: ${props => getButtonDefaultHoverColor(props.$theme as ThemeProp)};
+
+            &:not(:first-child) {
+                border-top: 1px solid ${v.backgroundColorDefault};
+                border-bottom: 1px solid ${v.backgroundColorDefault};
+            }
+
+            &:last-child {
+                border-bottom-left-radius: ${v.borderRadius};
+                border-bottom-right-radius: ${v.borderRadius};
+            }
         }
     }
 
