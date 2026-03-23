@@ -19,42 +19,54 @@ const meta = {
     argTypes: {
         label: {
             control: 'text',
+            description: 'Adds a label to the box',
         },
         backgroundColor: {
             control: 'color',
+            description: 'Sets the background color of the box',
         },
         borderColor: {
             control: 'color',
+            description: 'Sets the border color of the box',
         },
         labelColor: {
             control: 'color',
+            description: 'Sets the color of the label - if enabled!',
         },
         labelBackgroundColor: {
             control: 'color',
+            description: 'Sets the background color of the label - if enabled!',
         },
         borderRadius: {
             control: 'number',
+            description: 'Adds border radius to box\'s border\n\nAdds border/2 radius to box\'s label - if enabled!',
         },
         padding: {
             control: 'number',
+            description: 'Sets the padding of the box\'s content container',
         },
         width: {
             control: 'number',
+            description: 'Sets the width of the box',
         },
         border: {
             control: 'select',
-            options: [true, false, 'label-only']
+            options: [true, false, 'label-only'],
+            description: 'Sets the border of the box\n\nIf set to "label-only", only the label\'s border will be shown!',
         },
         tight: {
             control: 'boolean',
+            description: 'Creates a padding-less box.\n\nSets the label inside - if enabled!',
         },
         labelPosition: {
             control: 'select',
-            options: ['top-left', 'top-right', 'bottom-left', 'bottom-right']
+            options: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+            description: 'Sets the location of the label - if enabled!',
         },
         labelSize: {
             control: 'select',
-            options: ['small', 'medium', 'large']
+            options: ['small', 'medium', 'large'],
+            description: 'Sets the size of the label - if enabled!',
         },
     }
 } satisfies Meta<BoxProps>;
