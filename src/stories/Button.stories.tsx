@@ -25,27 +25,42 @@ const meta = {
     argTypes: {
         align: {
             control: 'select',
-            options: ['left', 'center', 'right', 'space-between']
+            options: ['left', 'center', 'right', 'space-between'],
+            description: 'Sets the alignment of button icon and label alike',
         },
         type: {
             control: 'select',
-            options: ['button', 'submit', 'reset']
+            options: ['button', 'submit', 'reset'],
+            description: 'Specifies the type of the button',
         },
         disabled: {
             control: 'boolean',
+            description: 'Specifies that a button should be disabled',
         },
         icon: {
             options: Object.keys(icons),
             mapping: icons,
             control: {type: 'select'},
+            description: 'Adds icon to the button'
         },
         theme: {
             control: 'select',
-            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK]
+            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK],
+            description: 'Specifies the theme of the button',
         },
-        width: {control: 'number'},
+        width: {
+            control: 'number',
+            description: 'Sets the width of the button'
+        },
         className: {control: 'text'},
-        children: {control: 'text'}
+        children: {
+            control: 'text',
+            description: 'Sets the button label',
+        },
+        iconClassName: {
+            control: 'text',
+            description: 'CSS classes to be spread to the button element',
+        }
     }
 } satisfies Meta<ButtonProps>;
 

@@ -22,28 +22,45 @@ const meta = {
     component: Dropdown,
     parameters: {
         layout: 'centered',
-        controls: {exclude: ['children', 'options', 'selected', 'onChange', 'maxDropdownHeight', 'disablePredicate']},
+        controls: {exclude: ['children', 'options', 'selected', 'onChange', 'maxDropdownHeight', 'disablePredicate', 'valueClassName', 'className']},
     },
     argTypes: {
         labelWidth: {
             control: 'number',
+            description: 'Sets the width of the label.\n\nUseful for aligning the label with other elements!'
         },
         labelAlign: {
             control: 'select',
-            options: ['left', 'right', 'center', 'space-between']
+            options: ['left', 'right', 'center', 'space-between'],
+            description: 'Sets the position of the label relative to labelWidth'
         },
         icon: {
             options: Object.keys(icons),
             mapping: icons,
             control: { type: 'select' },
+            description: 'Adds icon to the dropdown label'
         },
         theme: {
             control: 'select',
-            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK]
+            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK],
+            description: 'Specifies the theme of the dropdown',
         },
         dropShadow: {
-            control: 'color'
-        }
+            control: 'color',
+            description: 'Set a shadow color around the dropdown component'
+        },
+        name: {
+            control: 'text',
+            description: 'Sets the name of the dropdown element'
+        },
+        label: {
+            control: 'text',
+            description: 'Sets the label of the dropdown'
+        },
+        disabled: {
+            control: 'boolean',
+            description: 'Sets the usability state of the dropdown'
+        },
     },
     tags: ['autodocs'],
 } satisfies Meta<DropdownProps>;
