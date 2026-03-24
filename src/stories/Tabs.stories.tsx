@@ -83,18 +83,34 @@ const meta = {
     argTypes: {
         type: {
             control: 'select',
-            options: ['boxed', 'boxed-content', 'boxed-tabs', 'plain']
+            options: ['boxed', 'boxed-content', 'boxed-tabs', 'plain'],
+            description: 'Set the type of Tab to be rendered.\n\nboxed - Renders Tab with border and background colored tab items.\n\nboxed-content - Bordered content area extending to the active tab item.\n\nplain - No borders. Only a horizontal line separating tab items and content.'
         },
         activeItemColor: {
-            control: 'color'
+            control: 'color',
+            description: 'Sets the color of the active tab item'
         },
         theme: {
             control: 'select',
             options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK],
+            description: 'Specifies the theme of the tab',
         },
-        contentPadding: {control: 'number'},
-        minContentHeight: {control: 'number'},
-        width: {control: 'number'},
+        contentPadding: {
+            control: 'number',
+            description: 'Sets the padding of the tab content'
+        },
+        minContentHeight: {
+            control: 'number',
+            description: 'Sets a minimum height for the tab content'
+        },
+        width: {
+            control: 'number',
+            description: 'Sets the overall width of the component'
+        },
+        moveSelectedOnScroll: {
+            control: 'boolean',
+            description: 'Changes active tab selection following the left/right tab item nav click.\n\nOnly if tab items are longer than the actual tab\'s width and tab items are scrolled off view!'
+        }
     }
 } satisfies Meta<TabItemProps>;
 

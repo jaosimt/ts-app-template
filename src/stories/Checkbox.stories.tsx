@@ -20,21 +20,41 @@ const meta = {
     argTypes: {
         checked: {
             control: 'boolean',
+            description: 'Sets the state of the checkbox'
         },
-        className: {control: 'text'},
+        className: {
+            control: 'text',
+            description: 'Class names to be spread to the checkbox container'
+        },
         disabled: {
             control: 'boolean',
+            description: 'Sets the usability state of the checkbox',
         },
-        label: {control: 'text'},
+        label: {
+            control: 'text',
+            description: 'Sets the label of the checkbox.\n\nDefaults to the required prop name if none is provided!'
+        },
         labelPosition: {
             control: 'select',
-            options: ['left', 'right']
+            options: ['left', 'right'],
+            description: 'Sets the position of the label relative to the checkbox'
         },
-        labelWidth: {control: 'number'},
-        name: {control: 'text'},
+        labelWidth: {
+            control: 'number',
+            description: 'Sets the width of the label.\n\nUseful for aligning the label with other elements!'
+        },
+        name: {
+            control: 'text',
+            description: 'Sets the name of the checkbox'
+        },
         theme: {
             control: 'select',
-            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK]
+            options: [Theme.REACT, Theme.INSTA, Theme.TWITCH, Theme.DARK],
+            description: 'Specifies the theme of the checkbox',
+        },
+        children: {
+            control: 'text',
+            description: 'Sets the button label'
         }
     }
 } satisfies Meta<CheckboxProps>;
